@@ -11,6 +11,10 @@
  */
 require get_template_directory() . '/inc/tls-custom-post-types.php';
 
+/**
+ *  Add Theme Options Page
+ */
+require get_template_directory() . '/inc/tls_theme_options.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -93,13 +97,7 @@ function tls_remove_wp_ver_css_js( $src ) {
 /**
  * Enqueue scripts and styles.
  */
-function tls_scripts_and_styles() {
+// function tls_scripts_and_styles() {
 
-	// Register Styles
-	wp_register_style( 'main-styles' , get_template_directory_uri() . '/style.css' , array() , '', 'all' );
-
-	// Enqueue Styles
-	wp_enqueue_style('main-styles');
-
-}
-add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles' );
+// }
+// add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles' );
