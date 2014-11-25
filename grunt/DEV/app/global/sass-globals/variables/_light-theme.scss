@@ -1,0 +1,45 @@
+// ============================================================
+// LIGHT THEME v0.7
+// ============================================================
+
+	// THEME STYLE
+	// -------------------------------------------------------
+	$theme-style : "light"; // "dark" or "light"
+
+	// FONTS
+	// -------------------------------------------------------
+	$times  : "Times New Roman","Times", serif;
+	$futura : "futura-pt", "Arial", sans-serif;
+
+	// COLOURS
+	// --------------------------------------------------------
+	$theme-bg-colour     : #ffffff;
+	$subtle-light-grey   : #f2f2f2;
+	$light-keyline       : #d9d9d9;
+	$mid-grey            : #84868c;
+	$theme-text-colour   : #000000;
+	$theme-primary-col   : #e7a753;
+	$theme-secondary-col : #aa4f40;
+	$theme-tertiary-col  : #c37a3f;
+
+	//Subtlety
+	$subtlety            : 3%;
+	$theme-subtle-light  : lighten($theme-bg-colour,$subtlety);
+	$theme-subtle-dark   : darken($theme-bg-colour,$subtlety);
+
+	//For loop mapping
+	$theme-colours : (
+		primary    : $theme-primary-col, 
+		secondary  : $theme-secondary-col, 
+		tertiary   : $theme-tertiary-col
+	);
+
+
+	// BREAKPOINTS
+	// --------------------------------------------------------
+
+	$tablet : 840px;
+	$mobile : 450px;
+
+
+// ============================================================

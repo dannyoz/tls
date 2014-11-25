@@ -1,0 +1,77 @@
+<div ng-if="data.type == 'blog'">
+
+	<h3 class="futura">Blog</h3>
+
+	<div class="grid-row padded">
+		
+		<div class="grid-4">
+			<img class="max circular" src="http://placehold.it/120x120"/>
+		</div>
+
+		<div class="grid-7 push-1">
+			<h4>{{data.heading}}</h4>
+			<p>{{data.author}}</p>
+			<p>{{data.subheading}}</p>
+		</div>
+
+	</div>
+	
+</div>
+
+<div ng-if="data.type == 'book'">
+
+	<h3 class="futura">{{data.category}}</h3>
+
+	<div class="grid-row padded">
+		
+		<div class="grid-4">
+			<img class="max circular" src="http://placehold.it/120x120"/>
+		</div>
+
+		<div class="grid-7 push-1">
+			<h4>{{data.heading}}</h4>
+			<p>{{data.author}}</p>
+			<p>{{data.subheading}}</p>
+		</div>
+
+	</div>
+
+</div>
+
+<div ng-if="data.type == 'article'">
+
+	<h3 class="futura">{{data.category}}</h3>
+
+	<img class="max" src="http://placehold.it/380x192">
+
+	<div class="padded">
+
+		<h4>{{data.heading}}</h4>
+		<p>{{data.excerpt}}</p>
+
+	</div>
+
+	<footer>
+		<p class="sub">{{data.subheading}}</p>
+		<p class="futura">{{data.author}}</p>
+	</footer>
+
+</div>
+
+<div ng-if="data.type == 'poem'">
+
+	<h3 class="futura">{{data.category}}</h3>
+
+	<div class="padded">
+
+		<h4>{{data.title}}</h4>
+		<p>{{data.excerpt}}</p>
+
+	</div>
+
+	<footer>
+		<p class="sub">{{data.subheading}}</p>
+		<p class="futura">{{data.author}}</p>
+	</footer>
+
+</div>

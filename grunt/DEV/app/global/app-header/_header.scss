@@ -1,0 +1,135 @@
+#main-header{
+
+	$nav-height:52px;
+	
+	#header-top{
+
+		#brand{
+
+			padding:30px 0;
+
+			#logo{
+
+				display: block;
+				text-indent:-10000px;
+				height: 60px;
+				width: 106px;
+				float: left;
+				margin-right:20px;
+				background-image: url(../images/logo.jpg);
+			}
+
+			.sub{
+
+				margin-top:15px;
+				text-transform:uppercase;
+				font:{
+					weight:bold;
+					size:1.2em;
+				}
+			}
+
+			.strap{
+
+				margin-top:3px;
+				font: {
+					style:italic;
+				}
+			}
+		}
+	}
+
+	nav{
+
+		height: $nav-height;
+
+		@include keyline(top bottom,$light-keyline);
+
+		ul{
+
+			float: left;
+			width:50%;
+
+			@media screen and (max-width:$tablet){
+
+				width:75%;
+			}
+
+			li{
+
+				display: inline-block;
+				float: left;
+				width: 33.3%;
+
+				a{
+					
+					text-align: center;
+					display: block;
+					line-height: $nav-height;
+					font:{
+						weight:bold;
+						size: 0.8em;
+					}
+					text-transform: uppercase;
+					@include keyline(left,$light-keyline);
+				}
+
+				&:last-child a {
+
+					border-right-width:1px;
+				}
+			}
+		}
+
+		.search{
+
+			float: left;
+			width:50%;
+			position:relative;
+			overflow: hidden;
+			background-color:$subtle-light-grey;
+			height: $nav-height;
+
+			@media screen and (max-width:$tablet){
+
+				width:25%;
+			}
+
+			label{
+
+				position: absolute;
+				line-height: $nav-height;
+				text-transform:uppercase;
+				left:20px;
+				font:{
+					size:0.9em;
+					weight:bold;
+				}
+				@extend .futura;
+			}
+
+			input{
+
+				width:100%;
+				border:0;
+				background-color:$subtle-light-grey;
+				padding:16px 0 16px 100px;
+				text-transform:uppercase;
+				font:{
+					size:0.9em;
+				}
+				@include keyline(right,$light-keyline);
+				@extend .futura;
+			}
+
+			&:before{
+
+				height:1px;
+				background-color:$light-keyline;
+				@include fitParent("", 40px,20px,auto,20px);
+				@include afterBefore;
+
+			}
+		}
+	}
+}

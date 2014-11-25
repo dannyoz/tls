@@ -1,0 +1,65 @@
+
+fieldset{
+
+	@include boxSizing(0 0 40px 0);
+	@include stack;
+}
+
+
+textarea{
+
+	
+	font-family:$futura;
+	// width:100%;
+	// max-width:100%;
+	margin:0;
+	outline: none;
+	// padding: $fmPadding;
+	// @include single-transition(all,0.25s,ease);
+	// @include box-sizing(border-box);
+
+	@if $theme-style == "light" {
+		
+		background-color: lighten($theme-bg-colour,3%);
+		border: 1px solid darken($theme-bg-colour,3%);
+		color : lighten($theme-text-colour,5%);
+	
+		&:hover{
+
+			background-color: lighten($theme-bg-colour,5%);
+			border: 1px solid darken($theme-bg-colour,5%);
+			color : $theme-text-colour;
+
+		}
+
+		&:focus{
+
+			background-color: lighten($theme-bg-colour,5%);
+			border: 1px solid darken($theme-bg-colour,10%);
+			color : $theme-primary-col;
+		}
+
+	}
+
+	@if $fmRounding {
+
+		//@include border-radius($fmRounding);
+	}
+}
+
+@if $inputs {
+
+	input{
+	
+		@each $input in $inputs {
+			&[type=#{$input}]{
+				@extend textarea;
+			}
+		}
+
+	}
+
+}
+
+
+

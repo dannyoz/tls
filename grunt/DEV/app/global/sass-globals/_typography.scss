@@ -1,0 +1,31 @@
+.futura {
+
+	letter-spacing:2px;
+	font-family: $futura;
+}
+
+
+.centred-heading{
+
+	letter-spacing:2px;
+	text-transform:uppercase;
+	text-align:center;
+	position: relative;
+	margin:60px 0 50px 0;
+	font:{
+		size:1.5em;
+		family:$futura;
+		weight:700;
+	}
+
+	&:after{
+
+		bottom:-20px;
+		height:5px;
+		width: 70px;
+		background: black;
+		@include afterBefore;
+		@include centre(x);
+	}
+}
+

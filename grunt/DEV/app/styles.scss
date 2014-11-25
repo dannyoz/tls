@@ -1,0 +1,41 @@
+// Import all the sass partials for compilation
+
+// 1. Pre-defined vars and Mixins
+// =====================================================
+@import
+	"compass/css3",
+	
+// Import variables
+	"global/sass-globals/variables/light-theme",     
+	"global/sass-globals/variables/default_settings",
+
+// Import mixins
+	"global/sass-globals/mixins/animations",
+	"global/sass-globals/mixins/grid",
+	"global/sass-globals/mixins/font-face",
+	"global/sass-globals/mixins/forms",
+	"global/sass-globals/mixins/helpers",
+	"global/sass-globals/mixins/layout",
+	"global/sass-globals/mixins/theme",
+	"global/sass-globals/mixins/typography",
+	"global/sass-globals/mixins/core",
+
+// 2. css Outputters
+// =====================================================
+
+// Import global partials
+	"global/sass-globals/core",
+	"global/sass-globals/links",
+	"global/sass-globals/cards",
+	"global/sass-globals/forms",
+	"global/sass-globals/typography",
+
+// Import app section partials
+	"global/app-header/header",
+	"global/app-footer/footer",
+	"templates/home/home",
+
+// Import animation keyframes
+	"global/sass-globals/animations";
+
+// =====================================================

@@ -1,0 +1,51 @@
+@import "compass/reset";
+
+body{
+
+	background:$theme-bg-colour;
+	color:$theme-text-colour;
+	font:{
+		size:18px;
+		family: "Times New Roman","Times", serif;
+	}
+
+}
+
+// ===============================================================
+// CORE STYLES config - see mixins/_core.scss for implementation
+
+	$core-config : (
+
+		container   : $containerWidth,                  // Creates a centralised .container class
+		stack       : true,                    // Creates a stackable element class
+		rounded     : 5px 10px 15px 20px,      // Loop to create rounded element classes
+		borderBox   : true,                    // Adds .border-box class with vendor prefixes
+		transitions : 0.25s 0.5s 0.75s 1s,     // Loop to create transition classes
+		centre      : true,                    // Adds css3 centring classes
+		fadeIn      : true                     // Adds satggering elements for the fadeIn animation
+	);
+
+	@include core($core-config);
+
+// ===============================================================
+
+
+@include grid(12,$gridGuttering,$mobile);
+
+
+.max{
+	max-width:100%;
+}
+
+
+.circular{
+
+	@include border-radius(100%);
+}
+
+
+
+
+
+
+
