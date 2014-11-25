@@ -15,12 +15,35 @@ module.exports = function(grunt) {
         //     }
         // },
 
+        ngtemplates:  {
+            app: {
+                options: {
+                    module: "tls",
+                    bootstrap: function(module, script) {
+                        return '.run(["$templateCache", function($templateCache) {' + script + '}])';
+                    },
+                    htmlmin: {
+                        collapseBooleanAttributes:      true,
+                        collapseWhitespace:             true,
+                        removeAttributeQuotes:          true,
+                        removeEmptyAttributes:          true,
+                        removeRedundantAttributes:      true,
+                        removeScriptTypeAttributes:     true,
+                        removeStyleLinkTypeAttributes:  true
+                    },
+                },
+                src:      'DEV/app/**/**.html',
+                dest:     'DEV/app/templates/templates.js',
+            }
+        },
+
         concat: {
             dist: {
                 src: [
                     'DEV/js/libs/angular.js',
                     'DEV/js/libs/angular-route.js',
                     'DEV/app/app.js',
+                    'DEV/app/templates/templates.js',
                     'DEV/app/global/*.js',
                     'DEV/app/global/*/*.js',
                     'DEV/app/global/*/*/*.js',
@@ -89,7 +112,7 @@ module.exports = function(grunt) {
                     'DEV/app/*/*',
                     'DEV/app/*/*/*',
                     'DEV/app/*/*/*/*'
-                    ],
+                ],
             }
         },
 
@@ -130,11 +153,10 @@ module.exports = function(grunt) {
                 }
             }
         }
-
     });
 
     // PACKAGES
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -144,6 +166,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     // RUN GRUNT 
-    grunt.registerTask('default', ['concat', 'uglify', 'express:dev', 'watch', 'compass', 'copy']);
+    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'express:dev', 'watch', 'compass', 'copy']);
 
 };

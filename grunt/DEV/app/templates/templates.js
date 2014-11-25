@@ -1,0 +1,26 @@
+.run(["$templateCache", function($templateCache) {  'use strict';
+
+  $templateCache.put('DEV/app/global/app-footer/footer.html',
+    "<div class=container><ul><li><a href=#>About</a></li><li><a href=#>Archive</a></li><li><a href=#>Faqs</a></li><li><a href=#>Terms &amp; Conditions</a></li><li><a href=#>How to advertise</a></li><li><a href=#>Classifieds</a></li><li><a href=#>Contact us</a></li><li><a href=#>Facebook</a></li><li><a href=#>Twitter</a></li></ul><p class=copyright>Copyright &copy; The Times Literary Supplement Limited 2014. The Times Literary Supplement Limited: 1 London Bridge Street, London SE1 9GF. Registered in England.<br>Company registration number: 935240. VAT no: GB 243 8054 69.</p></div>"
+  );
+
+
+  $templateCache.put('DEV/app/global/app-header/header.html',
+    "<div id=header-top><div class=container><div id=brand><h1 id=logo>TLS</h1><p class=sub>The times Literary supplement</p><p class=strap>The leading international weekly for literary culture</p></div></div></div><nav><div class=container><div class=grid-row><ul class=futura><li><a href=#>Explore</a></li><li><a href=#>Editions</a></li><li><a href=#>What's New</a></li></ul><div class=search><label>Search:</label><input type=search placeholder=\"Tls archive, blogs and website\"></div></div></div></nav>"
+  );
+
+
+  $templateCache.put('DEV/app/templates/home/home.html',
+    "<section id=home ng-controller=home><div id=banner style=background-image:url(/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div><div class=grid-row id=subscriber><h5 class=centred-heading>Subscriber exclusive</h5><div class=grid-3><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=grid-3><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=grid-3><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=grid-3><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
+  );
+
+
+  $templateCache.put('DEV/app/templates/home/tls-card.html',
+    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura>Blog</h3><div class=\"grid-row padded\"><div class=grid-4><img class=\"max circular\" src=\"http://placehold.it/120x120\"></div><div class=\"grid-7 push-1\"><h4>{{data.heading}}</h4><p>{{data.author}}</p><p>{{data.subheading}}</p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura>{{data.category}}</h3><div class=\"grid-row padded\"><div class=grid-4><img class=\"max circular\" src=\"http://placehold.it/120x120\"></div><div class=\"grid-7 push-1\"><h4>{{data.heading}}</h4><p>{{data.author}}</p><p>{{data.subheading}}</p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura>{{data.category}}</h3><img class=max src=http://placehold.it/380x192><div class=padded><h4>{{data.heading}}</h4><p>{{data.excerpt}}</p></div><footer><p class=sub>{{data.subheading}}</p><p class=futura>{{data.author}}</p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura>{{data.category}}</h3><div class=padded><h4>{{data.title}}</h4><p>{{data.excerpt}}</p></div><footer><p class=sub>{{data.subheading}}</p><p class=futura>{{data.author}}</p></footer></div>"
+  );
+
+
+  $templateCache.put('DEV/app/templates/home/tls-column.html',
+    "{{current}}<div class=grid-row ng-if=\"current == 'desktop'\"><div class=grid-4><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div></div><div class=grid-4><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div></div><div class=grid-4><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'tablet'\"><div class=grid-6><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div><div class=grid-6><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'mobile'\"><div class=grid-12><div class=card ng-repeat=\"card in cards\" tls-card=cards[$index]></div></div></div>"
+  );
+}])

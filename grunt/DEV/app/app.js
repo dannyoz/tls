@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute'])
+var app = angular.module('tls', ['ngRoute'])
 
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	 	
