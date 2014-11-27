@@ -19,11 +19,15 @@
 
 		<div ng-if="columns" tls-columns="columns"></div>
 
-		<div class="grid-row" id="subscriber">
-		
-			<h5 class="centred-heading">Subscriber exclusive</h5>
+	</div>
 
-			<div class="grid-3">
+	<div class="grid-row" id="subscriber" ng-class="{locked:isLocked}">
+
+		<div class="container">
+		
+			<h5 class="centred-heading grid-row">Subscriber exclusive</h5>
+
+			<div class="subscribe-grid">
 				<div class="card">
 					<h3 class="futura">Archive</h3>
 					<img class="max" src="http://placehold.it/380x192">
@@ -33,7 +37,7 @@
 				</div>
 			</div>
 
-			<div class="grid-3">				
+			<div class="subscribe-grid">				
 				<div class="card">
 					<h3 class="futura">Letters to the editor</h3>
 					<img class="max" src="http://placehold.it/380x192">
@@ -43,7 +47,7 @@
 				</div>
 			</div>
 
-			<div class="grid-3">
+			<div class="subscribe-grid">
 				<div class="card">
 					<h3 class="futura">NB</h3>
 					<img class="max" src="http://placehold.it/380x192">
@@ -53,7 +57,7 @@
 				</div>
 			</div>
 
-			<div class="grid-3">
+			<div class="subscribe-grid">
 				<div class="card">
 					<h3 class="futura">Wall street journal</h3>
 					<img class="max" src="http://placehold.it/380x192">
@@ -66,5 +70,7 @@
 		</div>
 
 	</div>
+
+	<div ng-include="'ng-views/edition-preview.html'"></div>
 
 </section>

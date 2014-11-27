@@ -8,8 +8,8 @@
 		link : function(scope,element,attrs){
 
 			// Breakpoint vars
-			var tabletBP = 840,
-				mobileBP = 450;
+			var tabletBP = 784,
+				mobileBP = 420;
 
 			scope.type   = scope.config.type
 			scope.cards  = scope.config.cards 

@@ -45,10 +45,11 @@
 
 }
 
-@mixin circle($size:20px){
+@mixin circle($size:20px,$colour:grey){
 
 	width:$size;
 	height:$size;
+	background-color:$colour;
 	@include border-radius($size);
 }
 

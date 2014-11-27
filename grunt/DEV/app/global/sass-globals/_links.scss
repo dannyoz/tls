@@ -30,70 +30,35 @@ button, .button{
 
 	
 	outline:0;
-	margin-bottom:20px;
+	border:1px solid $primary-orange;
+	padding:10px 18px;
+	background:$primary-orange;
+	color: white;
+	font:{
+		family:$futura;
+		weight:500;
+		size:0.9em; 
+	};
 
-	border-top:1px solid darken($theme-subtle-light,7%);
-	border-left:1px solid darken($theme-subtle-light,7%);
-	border-right:1px solid darken($theme-subtle-light,7%);
-	border-bottom:5px solid darken($theme-subtle-light,7%);
-	background:$theme-subtle-light;
-	color: $theme-text-colour;
-	text-shadow:-1px -1px 0 darken($theme-subtle-light,2%);
-
+	@include border-radius(30px);
+	
 	&:hover, &:focus{
-		border-color:darken($theme-subtle-light,6%);
-		background:lighten($theme-subtle-light,5%);
-		color: lighten($theme-text-colour ,25%);
+
+		background:$primary-hover;
+		border-color:$primary-hover;
 		text-decoration: none;
 	}
 
-	@each $name, $colour in $theme-colours {
+	&.clear{
 
-		&.#{$name}{
+		background:white;
+		color:black;
+		border-color:$light-keyline;
 
-			border-top:1px solid darken($colour,5%);
-			border-left:1px solid darken($colour,5%);
-			border-right:1px solid darken($colour,5%);
-			border-bottom:5px solid darken($colour,5%);
-			background:$colour;
-			color: darken($colour,35%);
-			text-shadow:1px 1px 0 lighten($colour,10%);
+		&:hover, &:focus{
 
-			&:hover, &:focus{
-				border-color:darken($colour,15%);
-				background:lighten(saturate($colour,15%),10%);
-				color: darken($colour,45%);
-			}
+			color:$primary-orange;
 		}
 	}
 
-	&.large{
-
-		padding: 15px 30px;
-		font:{
-			weight:700;
-			size:1em;
-		}
-		@extend .rounded-15px;
-	}
-
-	&.medium{
-
-		padding: 10px 20px;
-		font:{
-			weight:700;
-			size:0.8em;
-		}
-		@extend .rounded-10px;
-	}
-
-	&.small{
-
-		padding: 7px 10px;
-		font:{
-			weight:700;
-			size:0.7em;
-		}
-		@extend .rounded-5px;
-	}
 }

@@ -22547,9 +22547,8 @@ var app = angular.module('tls', ['ngRoute'])
 	 	$routeProvider
 
 	        .when('/', {
-	        	templateUrl: '/ng-views/home.html'
+	        	templateUrl: '/ng-views/search.html'
 	        })
-	        
 
 		$locationProvider.html5Mode(true);
 	}])
@@ -22595,7 +22594,9 @@ var app = angular.module('tls', ['ngRoute'])
 .controller('home',['$scope','api',function ($scope, api){
 
 	api.getCards().then(function(result){
-		$scope.cards = result.cards
+
+		$scope.cards    = result.cards
+		$scope.isLocked = true //class for locking content
 
 		//Config object for tls-columns directive
 		$scope.columns = {
@@ -22627,8 +22628,8 @@ var app = angular.module('tls', ['ngRoute'])
 		link : function(scope,element,attrs){
 
 			// Breakpoint vars
-			var tabletBP = 840,
-				mobileBP = 450;
+			var tabletBP = 784,
+				mobileBP = 420;
 
 			scope.type   = scope.config.type
 			scope.cards  = scope.config.cards 
@@ -22696,3 +22697,12 @@ var app = angular.module('tls', ['ngRoute'])
 		}
 	}
 })
+.controller('search',["$scope", function ($scope) {
+	
+	$scope.results = [
+		{
+			"title" : "lorem"
+		}
+	]
+
+}])

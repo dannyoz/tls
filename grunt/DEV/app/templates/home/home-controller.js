@@ -1,7 +1,9 @@
 .controller('home',['$scope','api',function ($scope, api){
 
 	api.getCards().then(function(result){
-		$scope.cards = result.cards
+
+		$scope.cards    = result.cards
+		$scope.isLocked = true //class for locking content
 
 		//Config object for tls-columns directive
 		$scope.columns = {

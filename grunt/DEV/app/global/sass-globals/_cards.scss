@@ -1,8 +1,11 @@
 .card{
 
 	margin-bottom:30px;
+	position:relative;
+	top:0;
 	@include keyline(top right bottom left,$light-keyline);
 	@include animation(fadeIn,ease,0.3s,10);
+	@extend .transition-1;
 
 	@media screen and (max-width:$tablet){
 
@@ -18,7 +21,7 @@
 	h3{
 
 		text-transform: uppercase;
-		color: $mid-grey;
+		color: $primary-orange;
 		padding:12px 25px 5px 25px;
 		font:{
 			size:0.9em;
@@ -38,11 +41,6 @@
 	.padded{
 
 		padding:20px 25px;
-	}
-
-	p{
-
-		line-height: 1.4em;
 	}
 
 	footer{
@@ -75,6 +73,13 @@
 			position:absolute;
 			@include afterBefore;
 		}
+	}
+
+	&:hover{
+
+		border-color:#ccc;
+		top:-3px;
+		@include box-shadow(0 5px 10px rgba(0,0,0,0.15));
 	}
 }
 

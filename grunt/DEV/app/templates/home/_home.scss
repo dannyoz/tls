@@ -90,4 +90,39 @@
 		}
 	}
 
+	#subscriber{
+
+		@include stack;
+
+		.subscribe-grid{
+
+			@include grid-col(3);
+
+			&:last-child{
+
+				margin-right:0;
+			}
+
+			@media screen and (max-width:$tablet){
+
+				@include grid-col(6);
+
+				&:nth-of-type(even){
+
+					margin-right:0;
+				}
+			}
+		}
+
+		&.locked{
+
+			background-color:$locked-grey;
+
+			.card{
+
+				border-color:#c4c4c4;
+			}
+		}
+	}
+
 }

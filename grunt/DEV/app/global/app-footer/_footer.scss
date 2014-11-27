@@ -26,6 +26,11 @@
 					size:1em;
 					weight:700;
 				}
+
+				&:hover{
+
+					color:$primary-orange;
+				}
 			}
 
 			&:last-child{
