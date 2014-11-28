@@ -8,16 +8,11 @@
  */
 ?>
 
-	</div><!-- #content -->
+	</div>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'tls' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'tls' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'tls' ), 'tls', '<a href="http://underscores.me/" rel="designer">Underscores.me</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<footer class="" role="">
+	</footer>
+</div>
 
 <?php wp_footer(); ?>
 
