@@ -40,6 +40,12 @@
 			size:1.6em;
 			weight:bold;
 		}
+
+		a:hover{
+
+			color: $primary-orange;
+			text-decoration:none;
+		}
 	}
 
 	.padded{

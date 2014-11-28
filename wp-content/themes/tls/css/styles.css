@@ -68,6 +68,8 @@ body {
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 20px;
+}
+.container.relative {
   position: relative;
 }
 
@@ -543,6 +545,10 @@ button.clear:hover, button.clear:focus, .button.clear:hover, .button.clear:focus
   margin-bottom: 10px;
   font-size: 1.6em;
   font-weight: bold;
+}
+.card h4 a:hover {
+  color: #d73f2b;
+  text-decoration: none;
 }
 .card .padded {
   padding: 20px 25px;
@@ -1049,6 +1055,9 @@ blockquote {
 .single-post {
   padding: 30px 0;
 }
+.single-post .container {
+  overflow: hidden;
+}
 .single-post .article-links .next-article {
   width: 12%;
   position: absolute;
@@ -1103,6 +1112,16 @@ blockquote {
   .single-post .article-body img.right {
     margin-right: 0;
   }
+}
+.single-post .article-current.turn {
+  -webkit-animation-name: pageTurn;
+  animation-name: pageTurn;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
 }
 
 /*
@@ -1171,5 +1190,56 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+@-webkit-keyframes pageTurn {
+  10% {
+    -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  25% {
+    -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
+  }
+}
+@-moz-keyframes pageTurn {
+  10% {
+    -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  25% {
+    -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  50% {
+    -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  100% {
+    -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
+  }
+}
+@keyframes pageTurn {
+  10% {
+    transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  25% {
+    transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  50% {
+    transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  100% {
+    transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
   }
 }

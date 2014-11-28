@@ -1,4 +1,4 @@
-var app = angular.module('tls', ['ngRoute'])
+var app = angular.module('tls', ['ngTouch','ngRoute'])
 
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	 	
@@ -8,5 +8,5 @@ var app = angular.module('tls', ['ngRoute'])
 	        	templateUrl: '/ng-views/article.html'
 	        })
 
-		$locationProvider.html5Mode(true);
+		//$locationProvider.html5Mode(true);
 	}])

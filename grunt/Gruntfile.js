@@ -4,17 +4,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // imagemin: {                               
-        //     dynamic: {                            
-        //         files: [{
-        //             expand: true,                  
-        //             cwd: 'DEV/images/',             
-        //             src: ['**/*.{png,jpg,gif}'],   
-        //             dest: 'BUILD/images/'            
-        //         }]
-        //     }
-        // },
-
         ngtemplates:  {
             app: {
                 options: {
@@ -42,6 +31,7 @@ module.exports = function(grunt) {
                 src: [
                     'DEV/js/libs/angular.js',
                     'DEV/js/libs/angular-route.js',
+                    'DEV/js/libs/angular-touch.js',
                     'DEV/app/app.js',
                     'DEV/app/templates/templates.js',
                     'DEV/app/global/*.js',

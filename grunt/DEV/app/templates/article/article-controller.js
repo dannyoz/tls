@@ -1,11 +1,20 @@
 .controller('article',['$scope',function ($scope){
 
 
+	$scope.pageTurn = false
+
 	$scope.chooseArticle = function(dir){
 
 		console.log(dir);
 
-		return false
+		if(dir == 'next'){
+			$scope.pageTurn = true
+		} else {
+
+			$scope.pageTurn = false
+		}
+
+		
 	}
 
 }])
