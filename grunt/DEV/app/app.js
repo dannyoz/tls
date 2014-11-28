@@ -5,7 +5,7 @@ var app = angular.module('tls', ['ngRoute'])
 	 	$routeProvider
 
 	        .when('/', {
-	        	templateUrl: '/ng-views/search.html'
+	        	templateUrl: '/ng-views/article.html'
 	        })
 
 		$locationProvider.html5Mode(true);

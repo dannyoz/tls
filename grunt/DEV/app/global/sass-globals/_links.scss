@@ -16,12 +16,17 @@ a{
 
 	&:hover{
 		color:$theme-text-colour;
-		text-decoration:none;
+		text-decoration:underline;
 	}
 
 	&:active{
 		color:$theme-text-colour;
-		text-decoration:none;
+		text-decoration:underline;
+	}
+
+	&.orange{
+
+		color:$primary-orange;
 	}
 }
 

@@ -1,13 +1,50 @@
+h2{
+
+	margin-bottom:0.5em;
+	font:{
+
+		size:2.2em;
+		weight:bold;
+	}
+}
+
+
 p{
 
 	line-height: 1.4em;
+	margin-bottom:2em;
+
+	&:last-of-type{
+
+		margin-bottom: 0;
+	}
 }
 
+
+blockquote{
+
+	line-height:1.6em;
+	color:$primary-orange;
+	font:{
+		style:italic;
+		size:1.2em;
+	}
+}
 
 .futura {
 
 	letter-spacing:2px;
 	font-family: $futura;
+}
+
+.author{
+
+	margin-bottom:0.6em;
+	letter-spacing:1px;
+	font:{
+		size:1em;
+		family: $futura;
+	}
 }
 
 

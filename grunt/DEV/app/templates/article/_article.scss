@@ -1,0 +1,76 @@
+
+
+.single-post{
+
+	padding:30px 0;
+
+	.article-links{
+
+		.next-article{
+
+			width:12%;
+			@include absolutly(20px,top,left);
+		}
+
+		.prev-article{
+
+			width:12%;
+			text-align:right;
+			@include absolutly(20px,top,right);
+		}
+	}
+
+	.article-body{
+
+		@include shift("push",3);
+		@include grid-col-last(6);
+
+		p{
+
+			text-align:justify;
+		}
+
+		blockquote{
+
+			margin: 0 -13% 1em -13%;
+			text-align:center;
+		}
+
+		img{
+
+			float: left;
+			margin: 0 1em 0 -13%;
+			@extend .max;
+
+			&.right{
+
+				float: right;
+				margin: 0 -13% 0 1em;
+			}
+		}
+
+		@media screen and (max-width:$tablet){
+
+			@include shift("push",1);
+			@include grid-col-last(10);
+
+			blockquote{
+
+				text-align: left;
+				margin-right:0;
+				margin-left:0;
+			}
+
+			img{
+
+				margin-left:0;
+
+				&.right{
+
+					margin-right:0;
+				}
+			}
+		}
+
+	}
+}

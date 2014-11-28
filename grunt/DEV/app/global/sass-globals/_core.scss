@@ -6,7 +6,7 @@ body{
 	color:$theme-text-colour;
 	font:{
 		size:18px;
-		family: "Times New Roman","Times", serif;
+		family: $georgia;
 	}
 
 }
@@ -16,7 +16,7 @@ body{
 
 	$core-config : (
 
-		container   : $containerWidth,                  // Creates a centralised .container class
+		container   : $containerWidth,         // Creates a centralised .container class
 		stack       : true,                    // Creates a stackable element class
 		rounded     : 5px 10px 15px 20px,      // Loop to create rounded element classes
 		borderBox   : true,                    // Adds .border-box class with vendor prefixes

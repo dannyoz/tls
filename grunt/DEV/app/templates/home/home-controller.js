@@ -1,5 +1,7 @@
 .controller('home',['$scope','api',function ($scope, api){
 
+	$scope.cards = ""
+
 	api.getCards().then(function(result){
 
 		$scope.cards    = result.cards
