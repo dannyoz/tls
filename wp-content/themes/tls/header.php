@@ -7,31 +7,62 @@
  * @package tls
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> ng-app="tls">
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?php wp_title( '|', true, 'right' ); ?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
-<?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><?php wp_title( '|', true, 'right' ); ?></title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>" 
+	<script src="//use.typekit.net/zvh7bpe.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'tls' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-		</div><!-- .site-branding -->
+	<header id="main-header">
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="menu" aria-expanded="false"><?php _e( 'Primary Menu', 'tls' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		<div id="header-top" class="grid-row">
+			
+			<div class="container">
+				<div id="brand">
+					<h1 id="logo">TLS</h1>
+					<p class="sub">The times Literary supplement</p>
+					<p class="strap">The leading international weekly for literary culture</p>
+				</div>
 
-	<div id="content" class="site-content">
+				<div id="user" class="centre-y">
+					
+					<button>Subcribe</button>
+					<button class="clear">Login</button>
+
+				</div>
+			</div>
+
+		</div>
+
+		<nav>
+			
+			<div class="container">
+
+				<div class="grid-row">
+				
+					<ul class="futura">
+						<li><a href="#">Expdfe</a></li>
+						<li><a href="#">Editions</a></li>
+						<li><a href="#">What's New</a></li>
+					</ul>
+
+					<div class="search">
+						<?php get_search_form(); ?>
+					</div>
+
+				</div>	
+
+			</div>
+
+		</nav>
+	</header>	

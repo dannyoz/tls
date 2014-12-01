@@ -37,26 +37,60 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @include transKeyframes(fadeIn,0% 100%,scale,0.8 1,fadeIn);
 
 
-@-webkit-keyframes pageTurn {
-  0% {}
-  10% {-webkit-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
-  25% {-webkit-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
-  50% {-webkit-transform:translateX(-25%) rotate3d(0, 1, 0, -60deg)  }
-  100% {-webkit-transform:translateX(-75%) rotate3d(0, 1, 0, -120deg)  }
+
+//PAGE TURNS 
+//##############################################################
+
+$pageShade : #fff;
+
+@-webkit-keyframes pageTurnLeft {
+    0% {background-color:white;}
+    10% {-webkit-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+    25% {-webkit-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+    50% {-webkit-transform:translateX(-25%) rotate3d(0, 1, 0, -60deg)  }
+    100% {-webkit-transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
 }
 
-@-moz-keyframes pageTurn {
-  0% {}
-  10% {-moz-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
-  25% {-moz-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
-  50% {-moz-transform:translateX(-24%) rotate3d(0, 1, 0, -60deg)  }
-  100% {-moz-transform:translateX(-75%) rotate3d(0, 1, 0, -120deg)  }
+@-moz-keyframes pageTurnLeft {
+    0% {background-color:white;}
+    10% {-moz-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+    25% {-moz-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+    50% {-moz-transform:translateX(-24%) rotate3d(0, 1, 0, -60deg)  }
+    100% {-moz-transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
 }
 
-@keyframes pageTurn {
-  0% {}
-  10% {transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
-  25% {transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
-  50% {transform:translateX(-24%) rotate3d(0, 1, 0, -60deg)  }
-  100% {transform:translateX(-75%) rotate3d(0, 1, 0, -120deg)  }
+@keyframes pageTurnLeft {
+	0% {background-color:white;}
+	10% {transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+	25% {transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+	50% {transform:translateX(-24%) rotate3d(0, 1, 0, -60deg)  }
+	100% {transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
+}
+
+
+@-webkit-keyframes pageTurnRight {
+
+	0%   {-webkit-transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
+	50%  {-webkit-transform:translateX(-25%) rotate3d(0, 1, 0, -60deg)  }
+	75%  {-webkit-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+	90%  {-webkit-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+  	100% {-webkit-transform:translateX(0) rotate3d(0, 1, 0, 0deg);background-color:white;}
+}
+
+@-moz-keyframes pageTurnRight {
+
+	0%   {-moz-transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
+	50%  {-moz-transform:translateX(-25%) rotate3d(0, 1, 0, -60deg)  }
+	75%  {-moz-transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+	90%  {-moz-transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+  	100% {-moz-transform:translateX(0) rotate3d(0, 1, 0, 0deg);background-color:white;}
+}
+
+@keyframes pageTurnRight {
+
+	0%   {transform:translateX(-75%) rotate3d(0, 1, 0, -90deg); background-color:$pageShade}
+	50%  {transform:translateX(-25%) rotate3d(0, 1, 0, -60deg)  }
+	75%  {transform:translateX(-6%) rotate3d(0, 1, 0, -30deg)  }
+	90%  {transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
+  	100% {transform:translateX(0) rotate3d(0, 1, 0, 0deg);background-color:white;}
 }

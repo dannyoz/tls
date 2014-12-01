@@ -8,18 +8,33 @@
  */
 ?>
 
-	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'tls' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'tls' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'tls' ), 'tls', '<a href="http://underscores.me/" rel="designer">Underscores.me</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+<footer id="site-footer">
+	<div class="container">
+		<ul>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Archive</a></li>
+			<li><a href="#">Faqs</a></li>
+			<li><a href="#">Terms &amp; Conditions</a></li>
+			<li><a href="#">How to advertise</a></li>
+			<li><a href="#">Classifieds</a></li>
+			<li><a href="#">Contact us</a></li>
+			<li><a href="#">Facebook</a></li>
+			<li><a href="#">Twitter</a></li>
+		</ul>
+
+		<p class="copyright">
+			Copyright &copy; The Times Literary Supplement Limited 2014. The Times Literary Supplement Limited: 1 London Bridge Street, London SE1 9GF. Registered in England.<br />Company registration number: 935240. VAT no: GB 243 8054 69.
+		</p>
+
+	</div>
+</footer><!-- #colophon -->
+
 
 <?php wp_footer(); ?>
+
+<script src="//localhost:35729/livereload.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/main.min.js"></script>
 
 </body>
 </html>

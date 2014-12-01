@@ -1,20 +1,53 @@
-.controller('article',['$scope',function ($scope){
+.controller('article',['$scope','$sce','$location','$timeout','api',function ($scope,$sce,$location,$timeout,api){
 
+	//Get the json response from the api.js factory
+	api.getArticle(window.location.href).then(function (result){
+		$scope.post = result.post
+		$scope.prev = result.previous_url
+		$scope.next = result.next_url
+	})
 
-	$scope.pageTurn = false
+	$scope.chooseArticle = function(dir,path){
 
-	$scope.chooseArticle = function(dir){
+		//Only turn page if path is defined
+		if(path){
 
-		console.log(dir);
+			var duration = 400;
+			$scope.loading = true
 
-		if(dir == 'next'){
-			$scope.pageTurn = true
-		} else {
+			api.getArticle(path).then(function (result){
 
-			$scope.pageTurn = false
+				$scope.loading = false
+
+				if(dir == 'prev'){
+
+					$scope.oldPost  = $scope.post;
+					$scope.post     = result.post
+					$scope.prev     = result.previous_url
+					$scope.next     = result.next_url
+					$scope.dir      = dir
+					$scope.pageTurn = true
+
+					$timeout(function(){
+						$scope.pageTurn = false
+					},duration)
+				}
+
+				if(dir == 'next'){
+
+					$scope.oldPost  = result.post;
+					$scope.dir      = dir
+					$scope.pageTurn = true
+
+					$timeout(function(){
+						$scope.pageTurn = false
+						$scope.post     = result.post
+						$scope.prev     = result.previous_url
+						$scope.next     = result.next_url
+					},duration)
+				}
+			})
 		}
-
-		
 	}
 
 }])

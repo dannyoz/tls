@@ -2,7 +2,7 @@
 
 .single-post{
 
-	padding:30px 0;
+	//padding:30px 0;
 
 	.container{
 
@@ -11,15 +11,20 @@
 
 	.article-links{
 
+		position: relative;
+		z-index: 9999;
+
 		.next-article{
 
 			width:12%;
+			z-index: 999;
 			@include absolutly(20px,top,left);
 		}
 
 		.prev-article{
 
 			width:12%;
+			z-index: 999;
 			text-align:right;
 			@include absolutly(20px,top,right);
 		}
@@ -81,9 +86,49 @@
 
 	.article-current{
 
+		background-color: white;
+
 		&.turn{
 
 			@include animation(pageTurn,linear,0.6s);
 		}
 	}
+
+	.fold{
+
+		display: none;
+		background-color: white;
+		z-index: 999;
+		@include fitParent("",0,20px,0,20px);
+
+		&.turnleft{
+
+			display: block;
+			@include animation(pageTurnLeft,linear,0.4s);
+
+		}
+
+		&.turnright{
+
+			display: block;
+			@include animation(pageTurnRight,linear,0.4s);
+		}
+	}
+
+	.shadow{
+
+		background-color:rgba(0,0,0,0.3);
+		@include fitParent("",0,20px,0,20px);
+
+		&.shad-left{
+
+			opacity:0;
+
+			&.turning{
+
+				opacity: 1;
+			}
+		}
+	}
+
 }

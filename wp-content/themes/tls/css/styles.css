@@ -1052,20 +1052,23 @@ blockquote {
   border-color: #c4c4c4;
 }
 
-.single-post {
-  padding: 30px 0;
-}
 .single-post .container {
   overflow: hidden;
 }
+.single-post .article-links {
+  position: relative;
+  z-index: 9999;
+}
 .single-post .article-links .next-article {
   width: 12%;
+  z-index: 999;
   position: absolute;
   top: 20px;
   left: 20px;
 }
 .single-post .article-links .prev-article {
   width: 12%;
+  z-index: 999;
   text-align: right;
   position: absolute;
   top: 20px;
@@ -1113,6 +1116,9 @@ blockquote {
     margin-right: 0;
   }
 }
+.single-post .article-current {
+  background-color: white;
+}
 .single-post .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1122,6 +1128,52 @@ blockquote {
   animation-timing-function: linear;
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
+}
+.single-post .fold {
+  display: none;
+  background-color: white;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  left: 20px;
+}
+.single-post .fold.turnleft {
+  display: block;
+  -webkit-animation-name: pageTurnLeft;
+  animation-name: pageTurnLeft;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+}
+.single-post .fold.turnright {
+  display: block;
+  -webkit-animation-name: pageTurnRight;
+  animation-name: pageTurnRight;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+}
+.single-post .shadow {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  left: 20px;
+}
+.single-post .shadow.shad-left {
+  opacity: 0;
+}
+.single-post .shadow.shad-left.turning {
+  opacity: 1;
 }
 
 /*
@@ -1192,7 +1244,11 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     opacity: 1;
   }
 }
-@-webkit-keyframes pageTurn {
+@-webkit-keyframes pageTurnLeft {
+  0% {
+    background-color: white;
+  }
+
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
@@ -1206,10 +1262,15 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   }
 
   100% {
-    -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
+    -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
   }
 }
-@-moz-keyframes pageTurn {
+@-moz-keyframes pageTurnLeft {
+  0% {
+    background-color: white;
+  }
+
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
@@ -1223,10 +1284,15 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   }
 
   100% {
-    -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
+    -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
   }
 }
-@keyframes pageTurn {
+@keyframes pageTurnLeft {
+  0% {
+    background-color: white;
+  }
+
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
@@ -1240,6 +1306,76 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   }
 
   100% {
-    transform: translateX(-75%) rotate3d(0, 1, 0, -120deg);
+    transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
+  }
+}
+@-webkit-keyframes pageTurnRight {
+  0% {
+    -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
+  }
+
+  50% {
+    -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  75% {
+    -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  90% {
+    -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  100% {
+    -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
+    background-color: white;
+  }
+}
+@-moz-keyframes pageTurnRight {
+  0% {
+    -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
+  }
+
+  50% {
+    -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  75% {
+    -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  90% {
+    -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  100% {
+    -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
+    background-color: white;
+  }
+}
+@keyframes pageTurnRight {
+  0% {
+    transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
+    background-color: white;
+  }
+
+  50% {
+    transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
+  }
+
+  75% {
+    transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
+  }
+
+  90% {
+    transform: translateX(0) rotate3d(0, 1, 0, -12deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate3d(0, 1, 0, 0deg);
+    background-color: white;
   }
 }

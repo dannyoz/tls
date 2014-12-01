@@ -31,6 +31,7 @@ module.exports = function(grunt) {
                 src: [
                     'DEV/js/libs/angular.js',
                     'DEV/js/libs/angular-route.js',
+                    'DEV/js/libs/angular-sanitize.js',
                     'DEV/js/libs/angular-touch.js',
                     'DEV/app/app.js',
                     'DEV/app/templates/templates.js',
@@ -63,7 +64,8 @@ module.exports = function(grunt) {
                     'DEV/app/global/*/*/*',
                     'DEV/app/templates/*',
                     'DEV/app/templates/*/*',
-                    'DEV/app/templates/*/*/*'
+                    'DEV/app/templates/*/*/*',
+                    '../wp-content/themes/tls/*.php'
                 ],
                 tasks: ['concat', 'uglify'],
                 options: {
@@ -101,7 +103,8 @@ module.exports = function(grunt) {
                     'DEV/app/*',
                     'DEV/app/*/*',
                     'DEV/app/*/*/*',
-                    'DEV/app/*/*/*/*'
+                    'DEV/app/*/*/*/*',
+                    '../wp-content/themes/tls/*.php'
                 ],
             }
         },
@@ -131,18 +134,21 @@ module.exports = function(grunt) {
                 dest: '../wp-content/themes/tls/ng-views/', 
                 filter: 'isFile'
             },
-        },
-
-        express: {
-            options: {
-                // Override defaults here
-            },
-            dev: {
-                options: {
-                    script: 'server.js'
-                }
+            php:{
+                expand: true, 
+                flatten: true,
+                cwd: 'DEV/app/', 
+                src: [
+                    '**.php',
+                    '*/*.php',
+                    '*/*/*.php',
+                    '*/*/*/*.php'
+                    ], 
+                dest: '../wp-content/themes/tls/', 
+                filter: 'isFile'
             }
         }
+
     });
 
     // PACKAGES
@@ -152,10 +158,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     // RUN GRUNT 
-    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'express:dev', 'watch', 'compass', 'copy']);
+    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
 
 };
