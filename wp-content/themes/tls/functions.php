@@ -22,6 +22,13 @@ require get_template_directory() . '/inc/tls-custom-taxonomies.php';
 require get_template_directory() . '/inc/tls-theme-options.php';
 
 /**
+ * PuSHSubscriberWP
+ */
+require get_template_directory() . '/inc/push_subscriber_wp/PuSHSubscriberWP.php';
+$PuSHSubscriberWP = new PuSHSubscriberWP;
+
+
+/**
  * Sets up theme defaults and registers support for various WordPress features.
  */
 function tls_setup() {
