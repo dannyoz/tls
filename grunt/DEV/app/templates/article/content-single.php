@@ -1,4 +1,4 @@
-<article class="single-post" ng-controller="article">
+<article class="single-post" ng-controller="article" ng-cloak>
 
 	<div class="container relative" ng-swipe-left="chooseArticle('prev',prev)" ng-swipe-right="chooseArticle('next',next)">
 
@@ -17,7 +17,7 @@
 
 			<div class="grid-row">
 				
-				<div class="article-body" ng-cloak>
+				<div class="article-body">
 
 					<h2>{{post.title}}</h2>
 					<h4 class="author">{{post.author.name}}</h4>

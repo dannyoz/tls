@@ -7,37 +7,43 @@
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
 
-		<?php if ( have_posts() ) : ?>
+	<section id="search-results" ng-controller="search" ng-cloak>
+		<div class="container">
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'tls' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
+			<div class="grid-row">
+				<div class="grid-4">
+					<h2>Sort by...</h2>
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+					<div class="filter-block">
+						<h3>Content type</h3>
+					</div>
 
-				<?php
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'content', 'search' );
-				?>
+					<div class="filter-block">
+						<h3>Date</h3>
+					</div>
 
-			<?php endwhile; ?>
+					<div class="filter-block">
+						<h3>Category</h3>
+					</div>
+				</div>
+				<div class="grid-8">
+					
+					<h2>{{results.count}} results for: <?php printf( __( '%s', 'tls' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
 
-		<?php else : ?>
+					<div class="card" ng-repeat="post in results.posts">
+						<h3>
+							<a ng-attr-href="{{post.url}}">{{post.title}}</a>
+						</h3>
+						<span ng-if="post.modified" class="post-date">{{format(post.modified)}}</span>
+						<div class="padded" ng-bind-html="post.excerpt"></div>
+					</div>
 
-			<?php get_template_part( 'content', 'none' ); ?>
+				</div>
+			</div>
 
-		<?php endif; ?>
+		</div>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+	</section>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -1161,20 +1161,6 @@ blockquote {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-.single-post .shadow {
-  background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 0;
-  right: 20px;
-  bottom: 0;
-  left: 20px;
-}
-.single-post .shadow.shad-left {
-  opacity: 0;
-}
-.single-post .shadow.shad-left.turning {
-  opacity: 1;
-}
 
 /*
 ##############################################################

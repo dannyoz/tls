@@ -114,21 +114,4 @@
 			@include animation(pageTurnRight,linear,0.4s);
 		}
 	}
-
-	.shadow{
-
-		background-color:rgba(0,0,0,0.3);
-		@include fitParent("",0,20px,0,20px);
-
-		&.shad-left{
-
-			opacity:0;
-
-			&.turning{
-
-				opacity: 1;
-			}
-		}
-	}
-
 }

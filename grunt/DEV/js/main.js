@@ -28273,10 +28273,34 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			})
 
 			return defer.promise
+		},
+		getSearchResults : function(path){
+			var defer = $q.defer(),
+				query = "&json=1";
 
+			$http.get(path+query).success(function (data){
+				defer.resolve(data)
+			})
+
+			return defer.promise
 		}
 	}
 }])
+.factory('niceDate',function(){
+	return{
+		format : function(d){
+
+			var date     = new Date(d),
+				day      = date.getDate(),
+				months   = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+				m        = date.getMonth(),
+				year     = date.getFullYear(),
+				niceDate = day + " " + months[m]+ " " + year;
+
+			return niceDate;
+		}
+	}
+})
 .controller('article',['$scope','$sce','$location','$timeout','api',function ($scope,$sce,$location,$timeout,api){
 
 	//Get the json response from the api.js factory
@@ -28438,12 +28462,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('search',["$scope", function ($scope) {
+.controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 	
-	$scope.results = [
-		{
-			"title" : "lorem"
-		}
-	]
+	api.getSearchResults(window.location.href).then(function (results){
+		$scope.results = results
+		console.log($scope.results)
+	})
+
+
+	$scope.format = function(date){
+		return niceDate.format(date);
+	}
 
 }])

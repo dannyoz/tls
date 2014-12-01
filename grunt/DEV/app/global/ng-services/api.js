@@ -18,7 +18,16 @@
 			})
 
 			return defer.promise
+		},
+		getSearchResults : function(path){
+			var defer = $q.defer(),
+				query = "&json=1";
 
+			$http.get(path+query).success(function (data){
+				defer.resolve(data)
+			})
+
+			return defer.promise
 		}
 	}
 }])

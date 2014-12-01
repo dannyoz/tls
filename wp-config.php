@@ -19,10 +19,10 @@
 define('DB_NAME', 'tlsdev');
 
 /** MySQL database username */
-define('DB_USER', 'root');
+define('DB_USER', 'derp');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'vagrant');
+define('DB_PASSWORD', 'derp');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
