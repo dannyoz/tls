@@ -45,7 +45,7 @@ function tls_custom_post_types() {
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 5,
-		//'menu_icon'           => '',
+		'menu_icon'           => 'dashicons-media-spreadsheet',
 		'can_export'          => true,
 		'has_archive'         => true,
 		'exclude_from_search' => false,
@@ -86,7 +86,7 @@ function tls_custom_post_types() {
 	// Article Post Type Arguments
 	$art_args = array(
 		'label'               => __( 'tls_articles', 'tls' ),
-		'description'         => \__( 'TLS Articles Content Post Type', 'tls' ),
+		'description'         => __( 'TLS Articles Content Post Type', 'tls' ),
 		'labels'              => $art_labels,
 		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes', ),
 		'taxonomies'          => array( 'category' ),
@@ -97,7 +97,7 @@ function tls_custom_post_types() {
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 5,
-		//'menu_icon'           => '',
+		'menu_icon'           => 'dashicons-media-document',
 		'can_export'          => true,
 		'has_archive'         => true,
 		'exclude_from_search' => false,
@@ -113,4 +113,4 @@ function tls_custom_post_types() {
 // Hook into the 'init' action
 add_action( 'init', 'tls_custom_post_types', 0 );
 
-}
+} // end of tls_custom_post_types()

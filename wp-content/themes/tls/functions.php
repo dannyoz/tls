@@ -12,9 +12,14 @@
 require get_template_directory() . '/inc/tls-custom-post-types.php';
 
 /**
+ * Add Custom Taxonomies
+ */
+require get_template_directory() . '/inc/tls-custom-taxonomies.php';
+
+/**
  *  Add Theme Options Page
  */
-require get_template_directory() . '/inc/tls_theme_options.php';
+require get_template_directory() . '/inc/tls-theme-options.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
