@@ -11,7 +11,13 @@
 
 			<div class="grid-row">
 				<div class="grid-6 push-3">
-					<img class="max" src="http://placehold.it/800x392">
+					{{format(post.modified)}}
+				</div>
+			</div>
+
+			<div class="grid-row">
+				<div class="grid-6 push-3">
+					<img class="max" ng-attr-src="{{post.thumbnail_images.full.url}}">
 				</div>
 			</div>
 
@@ -34,7 +40,13 @@
 
 			<div class="grid-row">
 				<div class="grid-6 push-3">
-					<img class="max" src="http://placehold.it/800x392">
+					{{format(oldPost.modified)}}
+				</div>
+			</div>
+
+			<div class="grid-row">
+				<div class="grid-6 push-3">
+					<img class="max" ng-attr-src="{{oldPost.thumbnail_images.full.url}}">
 				</div>
 			</div>
 				

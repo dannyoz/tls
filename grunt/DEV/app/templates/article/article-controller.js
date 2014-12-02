@@ -1,11 +1,17 @@
-.controller('article',['$scope','$sce','$location','$timeout','api',function ($scope,$sce,$location,$timeout,api){
+.controller('article',['$scope','$sce','$location','$timeout','api','niceDate',function ($scope,$sce,$location,$timeout,api,niceDate){
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
 		$scope.post = result.post
 		$scope.prev = result.previous_url
 		$scope.next = result.next_url
+
+		console.log(result)
 	})
+
+	$scope.format = function(date){
+		return niceDate.format(date);
+	}
 
 	$scope.chooseArticle = function(dir,path){
 

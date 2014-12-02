@@ -19,9 +19,9 @@
 
 			return defer.promise
 		},
-		getSearchResults : function(path){
+		getSearchResults : function(path,page){
 			var defer = $q.defer(),
-				query = "&json=1";
+				query = "&json=1&paged="+page;
 
 			$http.get(path+query).success(function (data){
 				defer.resolve(data)

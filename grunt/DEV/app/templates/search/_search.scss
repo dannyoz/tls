@@ -1,3 +1,27 @@
 #search-results{
 
+
+	.pagination{
+
+		margin-bottom:20px;
+		@extend .grid-row;
+
+		li{
+
+			display: inline-block;
+
+			a{
+
+				padding:10px 15px;
+				margin-right:10px;
+				display: inline-block;
+				@include keyline(top right bottom left,$light-keyline);
+			}
+
+			&.current a{
+
+				background-color: $light-keyline;
+			}		
+		}
+	}
 }

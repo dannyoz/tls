@@ -28274,9 +28274,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path){
+		getSearchResults : function(path,page){
 			var defer = $q.defer(),
-				query = "&json=1";
+				query = "&json=1&paged="+page;
 
 			$http.get(path+query).success(function (data){
 				defer.resolve(data)
@@ -28292,7 +28292,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			var date     = new Date(d),
 				day      = date.getDate(),
-				months   = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+				months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
 				m        = date.getMonth(),
 				year     = date.getFullYear(),
 				niceDate = day + " " + months[m]+ " " + year;
@@ -28301,14 +28301,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('article',['$scope','$sce','$location','$timeout','api',function ($scope,$sce,$location,$timeout,api){
+.controller('article',['$scope','$sce','$location','$timeout','api','niceDate',function ($scope,$sce,$location,$timeout,api,niceDate){
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
 		$scope.post = result.post
 		$scope.prev = result.previous_url
 		$scope.next = result.next_url
+
+		console.log(result)
 	})
+
+	$scope.format = function(date){
+		return niceDate.format(date);
+	}
 
 	$scope.chooseArticle = function(dir,path){
 
@@ -28463,10 +28469,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 })
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
-	
-	api.getSearchResults(window.location.href).then(function (results){
+
+	api.getSearchResults(window.location.href,1).then(function (results){
 		$scope.results = results
-		console.log($scope.results)
+		$scope.paginationConfig = {
+			"pageCount"   : results.pages,
+			"currentPage" : 1
+		}
+	})
+
+	//Refresh scope when pagination page is selected
+	$scope.$on('updatePage',function (e,results,curr){
+
+		$scope.paginationConfig.currentPage = curr
+		$scope.results = results
+
 	})
 
 
@@ -28474,4 +28491,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		return niceDate.format(date);
 	}
 
+}])
+.directive('tlsPagination',[ 'api', function (api){
+	return{
+		restrict:"A",
+		templateUrl :  themeUrl + "/ng-views/tls-pagination.html",
+		scope : {
+			config : '=tlsPagination',
+		},
+		link : function(scope){
+
+			//Define an array for the ng-repeat
+			scope.pages = [];
+			for (var i = 0; i<scope.config.pageCount; i++){
+				scope.pages.push(i)
+			}
+
+			scope.switchPage = function(i){
+
+				api.getSearchResults(window.location.href,i).then(function (results){
+					scope.$emit('updatePage',results,i)
+				})
+
+			}
+		}
+	}
 }])

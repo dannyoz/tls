@@ -4,7 +4,7 @@
 
 			var date     = new Date(d),
 				day      = date.getDate(),
-				months   = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+				months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
 				m        = date.getMonth(),
 				year     = date.getFullYear(),
 				niceDate = day + " " + months[m]+ " " + year;

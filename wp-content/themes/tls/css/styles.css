@@ -200,10 +200,10 @@ body {
 /* =========================================*/
 /* GRID STYLES                              */
 /* =========================================*/
-.grid-row {
+.grid-row, #search-results .pagination {
   min-height: 1%;
 }
-.grid-row:after {
+.grid-row:after, #search-results .pagination:after {
   content: "";
   display: table;
   clear: both;
@@ -1160,6 +1160,27 @@ blockquote {
   animation-timing-function: linear;
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
+}
+
+#search-results .pagination {
+  margin-bottom: 20px;
+}
+#search-results .pagination li {
+  display: inline-block;
+}
+#search-results .pagination li a {
+  padding: 10px 15px;
+  margin-right: 10px;
+  display: inline-block;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+}
+#search-results .pagination li.current a {
+  background-color: #d9d9d9;
 }
 
 /*
