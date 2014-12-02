@@ -9,22 +9,22 @@
 /**
  * Add Custom Post Types
  */
-require get_template_directory() . '/inc/tls-custom-post-types.php';
+require_once get_template_directory() . '/inc/tls-custom-post-types.php';
 
 /**
  * Add Custom Taxonomies
  */
-require get_template_directory() . '/inc/tls-custom-taxonomies.php';
+require_once get_template_directory() . '/inc/tls-custom-taxonomies.php';
 
 /**
  *  Add Theme Options Page
  */
-require get_template_directory() . '/inc/tls-theme-options.php';
+require_once get_template_directory() . '/inc/tls-theme-options.php';
 
 /**
  * PuSHSubscriberWP
  */
-require get_template_directory() . '/inc/push_subscriber_wp/PuSHSubscriberWP.php';
+require_once get_template_directory() . '/inc/push_subscriber_wp/PuSHSubscriberWP.php';
 $PuSHSubscriberWP = new PuSHSubscriberWP;
 
 
