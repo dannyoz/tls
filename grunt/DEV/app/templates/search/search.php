@@ -9,27 +9,59 @@ get_header(); ?>
 
 
 	<section id="search-results" ng-controller="search" ng-cloak>
+
 		<div class="container">
 
 			<div class="grid-row">
-				<div class="grid-4">
-					<h2>Sort by...</h2>
+
+				<div id="search-filters" class="transition-1" ng-class="{open:showFilters}">
+					
+					<h2 class="futura">Sort by...</h2>
+
+					<a class="close-filters tablet-show" ng-click="showFilters = false">
+						close
+					</a>
 
 					<div class="filter-block">
-						<h3>Content type</h3>
+						<h3 class="futura uppercase">Content type</h3>
+						<ul class="filters">
+							<li><a ng-click="filterResults('derp')">Derp</a></li>
+							<li><a ng-click="filterResults('articles')">Article</a></li>
+							<li><a href="">Tempora, perspiciatis.</a></li>
+							<li><a href="">Porro, quidem.</a></li>
+							<li><a href="">Eos, consequatur.</a></li>
+						</ul>
 					</div>
 
 					<div class="filter-block">
-						<h3>Date</h3>
+						<h3 class="futura uppercase">Date</h3>
+						<ul class="filters">
+							<li><a href="">Lorem ipsum.</a></li>
+							<li><a href="">Soluta, ea!</a></li>
+							<li><a href="">Tempora, perspiciatis.</a></li>
+							<li><a href="">Porro, quidem.</a></li>
+							<li><a href="">Eos, consequatur.</a></li>
+						</ul>
 					</div>
 
 					<div class="filter-block">
-						<h3>Category</h3>
+						<h3 class="futura uppercase">Category</h3>
+						<ul class="filters">
+							<li><a href="">Lorem ipsum.</a></li>
+							<li><a href="">Soluta, ea!</a></li>
+							<li><a href="">Tempora, perspiciatis.</a></li>
+							<li class="applied"><a href="">Porro, quidem.</a></li>
+							<li><a href="">Eos, consequatur.</a></li>
+						</ul>
 					</div>
+
 				</div>
-				<div class="grid-8">
+
+				<div id="search-results" class="transition-1" ng-class="{shift:showFilters}">
 					
 					<h2>{{results.count_total}} results for: <?php printf( __( '%s', 'tls' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
+
+					<a id="show-filters" class="tablet-show" ng-click="showFilters = true">Show filters</a>
 
 					<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
 

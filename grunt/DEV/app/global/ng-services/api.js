@@ -19,11 +19,13 @@
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page){
+		getSearchResults : function(path,page,filters){
+
 			var defer = $q.defer(),
+				filt  = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
 				query = "&json=1&paged="+page;
 
-			$http.get(path+query).success(function (data){
+			$http.get(path+query+filt).success(function (data){
 				defer.resolve(data)
 			})
 

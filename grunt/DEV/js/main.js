@@ -28274,11 +28274,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page){
+		getSearchResults : function(path,page,filters){
+
 			var defer = $q.defer(),
+				filt  = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
 				query = "&json=1&paged="+page;
 
-			$http.get(path+query).success(function (data){
+			$http.get(path+query+filt).success(function (data){
 				defer.resolve(data)
 			})
 
@@ -28470,21 +28472,51 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 })
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 
-	api.getSearchResults(window.location.href,1).then(function (results){
+	//Set default vars
+	var url = window.location.href;
+	$scope.filters     = []
+	$scope.currentPage = 1
+
+	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
+		
+		$scope.showFilters = false
 		$scope.results = results
 		$scope.paginationConfig = {
 			"pageCount"   : results.pages,
-			"currentPage" : 1
+			"currentPage" : $scope.currentPage,
+			"filters"     : $scope.filters
 		}
+
 	})
 
 	//Refresh scope when pagination page is selected
 	$scope.$on('updatePage',function (e,results,curr){
 
 		$scope.paginationConfig.currentPage = curr
-		$scope.results = results
+		$scope.currentPage = curr
+		$scope.results     = results
 
 	})
+
+	$scope.filterResults = function(term){
+
+		var index = $scope.filters.indexOf(term);
+
+		if(index == -1){
+			$scope.filters.push(term)
+		} else {
+			$scope.filters.splice(index,1)
+		}
+
+		api.getSearchResults(url,1,$scope.filters).then(function (results){
+			$scope.results = results
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : 1,
+				"filters"     : $scope.filters
+			}
+		})
+	}
 
 
 	$scope.format = function(date){
@@ -28509,7 +28541,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			scope.switchPage = function(i){
 
-				api.getSearchResults(window.location.href,i).then(function (results){
+				api.getSearchResults(window.location.href,i,scope.config.filters).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 
