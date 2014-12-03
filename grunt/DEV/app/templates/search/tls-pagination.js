@@ -1,7 +1,7 @@
 .directive('tlsPagination',[ 'api', function (api){
 	return{
 		restrict:"A",
-		templateUrl :  themeUrl + "/ng-views/tls-pagination.html",
+		templateUrl :  "tls-pagination.html",
 		scope : {
 			config : '=tlsPagination',
 		},

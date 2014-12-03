@@ -20,9 +20,13 @@ module.exports = function(grunt) {
                         removeScriptTypeAttributes:     true,
                         removeStyleLinkTypeAttributes:  true
                     },
+                    url : function(path){
+                        var template = path.substr(path.lastIndexOf('/') + 1);
+                        return template
+                    }
                 },
                 src:      'DEV/app/**/**.html',
-                dest:     'DEV/app/templates/templates.js',
+                dest:     'DEV/app/templates/templates.js'
             }
         },
 
@@ -35,12 +39,7 @@ module.exports = function(grunt) {
                     'DEV/js/libs/angular-touch.js',
                     'DEV/app/app.js',
                     'DEV/app/templates/templates.js',
-                    'DEV/app/global/*.js',
-                    'DEV/app/global/*/*.js',
-                    'DEV/app/global/*/*/*.js',
-                    'DEV/app/templates/*.js',
-                    'DEV/app/templates/*/*.js',
-                    'DEV/app/templates/*/*/*.js'
+                    'DEV/app/**/*.js'
                 ],
                 dest: 'DEV/js/main.js',
             }
@@ -58,13 +57,7 @@ module.exports = function(grunt) {
                 files: [
                     'DEV/js/libs/angular.js',
                     'DEV/js/libs/angular-route.js',
-                    'DEV/app/app.js',
-                    'DEV/app/global/*',
-                    'DEV/app/global/*/*',
-                    'DEV/app/global/*/*/*',
-                    'DEV/app/templates/*',
-                    'DEV/app/templates/*/*',
-                    'DEV/app/templates/*/*/*',
+                    'DEV/app/**/*.js',
                     '../wp-content/themes/tls/*.php'
                 ],
                 tasks: ['concat', 'uglify'],
@@ -75,10 +68,7 @@ module.exports = function(grunt) {
 
             css: {
                 files: [
-                    'DEV/app/*.scss',
-                    'DEV/app/*/*.scss',
-                    'DEV/app/*/*/*.scss',
-                    'DEV/app/*/*/*/*.scss'
+                    'DEV/app/**/*.scss'
                 ],
                 tasks: ['compass'],
                 options: {
@@ -88,10 +78,7 @@ module.exports = function(grunt) {
 
             html: {
                 files:[
-                    'DEV/app/*',
-                    'DEV/app/*/*',
-                    'DEV/app/*/*/*',
-                    'DEV/app/*/*/*/*'
+                    'DEV/app/**/*'
                 ],
                 tasks: ['copy']
             },
@@ -100,10 +87,7 @@ module.exports = function(grunt) {
                 options: { livereload: true },
                 files: [
                     '../wp-content/themes/tls/css/*.css',
-                    'DEV/app/*',
-                    'DEV/app/*/*',
-                    'DEV/app/*/*/*',
-                    'DEV/app/*/*/*/*',
+                    'DEV/app/**/*',
                     '../wp-content/themes/tls/*.php'
                 ],
             }
@@ -126,10 +110,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'DEV/app/', 
                 src: [
-                    '**.html',
-                    '*/*.html',
-                    '*/*/*.html',
-                    '*/*/*/*.html'
+                    '**/*.html'
                     ], 
                 dest: '../wp-content/themes/tls/ng-views/', 
                 filter: 'isFile'
@@ -139,10 +120,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: 'DEV/app/', 
                 src: [
-                    '**.php',
-                    '*/*.php',
-                    '*/*/*.php',
-                    '*/*/*/*.php'
+                    '**/*.php'
                     ], 
                 dest: '../wp-content/themes/tls/', 
                 filter: 'isFile'

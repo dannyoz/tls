@@ -1,7 +1,7 @@
 .directive('tlsColumns',function(){
 	return{
 		restrict:"A",
-		templateUrl : themeUrl + "/ng-views/tls-column.html",
+		templateUrl : "tls-column.html",
 		scope : {
 			config : "=tlsColumns"
 		},
