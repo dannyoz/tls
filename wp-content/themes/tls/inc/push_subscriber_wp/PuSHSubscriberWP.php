@@ -1,4 +1,8 @@
-	<?php
+<?php
+
+include_once 'PuSHSubscriber.inc';
+include_once 'pushsubscription.inc';
+include_once 'pushenvironment.inc';
 
 class PuSHSubscriberWP {
 
@@ -8,26 +12,29 @@ class PuSHSubscriberWP {
 	public function __construct() {
 
 		// init Action hook to add PuSH Feed Custom Post Type
-		add_action('init', array($this, 'pushFeedAddPostType'));
+		add_action( 'init', array( $this, 'pushfeed_add_post_type' ) );
 
 		// add_meta_boxes Action hook to add PuSH Feed Meta Boxes
-		add_action( 'add_meta_boxes', array($this, 'pushFeedAddMetaBoxes' ));
+		add_action( 'add_meta_boxes', array( $this, 'pushfeed_add_meta_boxes' ) );
+
+		// save_post Action Hook to save PuSH Feed Meta
+		add_action( 'save_post', array( $this, 'pushfeed_save_post_meta' ) );
 
 		// init Action Hook to add hub callback rewrite rules
-		add_action( 'init', array($this, 'tlsHubCallbackRewrite' ));
+		add_action( 'init', array( $this, 'pushfeed_hub_callback_rewrite' ) );
 
 		// query_vars filter to add subscription_id to the query vars
-		add_filter( 'query_vars', array($this, 'tlsHubCallbackQueryVars' ));
+		add_filter( 'query_vars', array( $this, 'pushfeed_hub_callback_query_vars' ) );
 
 		// parse_request action hook to create the parse request for
 		// hub callback page visits
-		add_action( 'parse_request', array($this, 'tlsHubCallbackParser' ));
+		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
 	}
 
 	/**
 	 * Method to create PuSH Feeds Custom Post Type
 	 */
-	public function pushFeedAddPostType() {
+	public function pushfeed_add_post_type() {
 
 		// PuSH Feeds Labels
 		$labels = array(
@@ -81,11 +88,11 @@ class PuSHSubscriberWP {
 	/**
 	 * Method to add Meta Box/es to the PuSH Feeds Custom Post Type
 	 */
-	public function pushFeedAddMetaBoxes() {
+	public function pushfeed_add_meta_boxes() {
 		add_meta_box(
 			'pushfeed-details-metabox', // HTML 'id' attribute of the edit screen section
 			__('PuSH Feeb Subcription Details', 'tls'), // Title of the edit screen section, visible to user
-			array($this, 'pushFeedDisplayMetaBoxes'), // Function that prints out the HTML for the edit screen section
+			array($this, 'pushfeed_display_meta_boxes'), // Function that prints out the HTML for the edit screen section
 			'push_sub_feeds', // Post Type that Metabox is attached to
 			'normal', // The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side')
 			'high' // The priority within the context where the boxes should show ('high', 'core', 'default' or 'low')
@@ -97,15 +104,61 @@ class PuSHSubscriberWP {
 	 * from PuSH Feeds Custom Post Type
 	 * @return HTML
 	 */
-	public function pushFeedDisplayMetaBoxes() {
-		echo 'Hello Bro';
+	public function pushfeed_display_meta_boxes( $post ) {
+		// Define the nonce for security purposes
+		wp_nonce_field( basename( __FILE__ ), 'pushfeed-nonce-field' );
+
+		// Start the HTML string so that all other strings can be concatenated
+	?>
+		<label for="pushfeed-feed-url"><strong>Feed/Topic URL:</strong></label> <br>
+		<small>This is the URL for the Feed you are subscribing to.</small> <br>
+		<input type="text" name="pushfeed-feed-url" id="pushfeed-feed-url" class="widefat" placeholder="http://www.example.com/feed/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-feed-url', true)); ?>"> <br><br>
+
+		<label for="pushfeed-hub-url"><strong>Hub URL (Optional)</strong></label> <br>
+		<small>If any is provided it will override the url to hub found in the feed.</small> <br>
+		<input type="text" name="pushfeed-hub-url" id="pushfeed-hub-url" class="widefat" placeholder="http://www.hub.com/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-hub-url', true)); ?>"> <br><br>
+
+		<input type="submit" name="pushfeed-subscribe" id="pushfeed-subscribe" class="button-secondary" value="Subcribe">
+		<input type="submit" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" class="button-secondary" value="Unsubscribe">
+
+	<?php
+	}
+
+	/**
+	 * Method to save PuSH Feed Meta
+	 * @param  integer $post_id The ID of current PuSH Feed Post being saved
+	 */
+	public function pushfeed_save_post_meta( $post_id ) {
+		
+		// Bail if we're doing an auto save
+	    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	     
+	    // if our nonce isn't there, or we can't verify it, bail
+    	if( !isset( $_POST['pushfeed-nonce-field'] ) || !wp_verify_nonce( $_POST['pushfeed-nonce-field'], basename( __FILE__ ) ) ) return;
+
+		// If PuSH Feed URL is not empty then save Post meta for it
+		if ( isset( $_POST['pushfeed-feed-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-feed-url'] ) ) ) ) {
+
+			$push_feed_url = wp_strip_all_tags( $_POST['pushfeed-feed-url'] );
+			update_post_meta( $post_id, 'pushfeed-feed-url', $push_feed_url );
+		}
+
+		// If PuSH Hub URL is not empty then save Post meta for it
+		if ( isset( $_POST['pushfeed-hub-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-hub-url'] ) ) ) ) {
+
+			$push_hub_url = wp_strip_all_tags( $_POST['pushfeed-hub-url'] );
+			update_post_meta( $post_id, 'pushfeed-hub-url', $push_hub_url );
+		}
+
+		var_dump($_POST);
+
 	}
 
 	/**
 	 * Method to add PuSH Feed Hub Callback Rewrite Rule
 	 * @return rewrite_rule Adds a new rewrite_rule to WordPress
 	 */
-	public function tlsHubCallbackRewrite() {
+	public function pushfeed_hub_callback_rewrite() {
 		add_rewrite_rule('^pushfeed/([^/]*)/?','index.php?pagename=pushfeed&subscription_id=$matches[1]','top');
 	}
 
@@ -115,7 +168,7 @@ class PuSHSubscriberWP {
 	 * @return array             Returns the new $query_vars 
 	 * with subscription_id added
 	 */
-	public function tlsHubCallbackQueryVars( $query_vars ) {
+	public function pushfeed_hub_callback_query_vars( $query_vars ) {
 	    $query_vars[] = 'subscription_id';
 	    return $query_vars;
 	}
@@ -124,13 +177,19 @@ class PuSHSubscriberWP {
 	 * Method to handle and parse request to PuSH Feed Hub Callbacks
 	 * @param object Pass WordPress Object by reference
 	 */
-	public function tlsHubCallbackParser( &$wp ) {
-		if ($_POST) {
-			var_dump(array($wp->query_vars, $_POST));
-		}
-	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) ) {
-	        include_once get_template_directory() . '/simplexml-feed.php';
-	        exit();
+	public function pushfeed_hub_callback_parser( &$wp ) {
+
+	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
+
+	    	if ( isset( $_POST ) ) {
+	    		var_dump( array( $wp->query_vars, $_POST ) );
+	    		include_once get_template_directory() . '/simplexml-feed.php';
+	        	exit;
+	    	}
+
+	    } elseif ( array_key_exists( 'subscription_id', $wp->query_vars ) && $wp->query_vars['subscription_id'] === 'all' ) {
+	    	echo "Do full feed pull";
+	    	exit;
 	    }
 	    return;
 	}
