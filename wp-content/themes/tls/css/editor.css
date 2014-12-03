@@ -1,5 +1,26 @@
 #tinymce {
   font-size: 18px;
+  padding: 0 12% !important;
+}
+#tinymce p {
+  text-align: justify;
+}
+#tinymce ol, #tinymce ul {
+  margin-bottom: 2em;
+  padding-left: 20px;
+}
+#tinymce ol li, #tinymce ul li {
+  line-height: 1.6em;
+}
+#tinymce ol li {
+  list-style-type: decimal;
+}
+#tinymce ul li {
+  list-style: initial;
+}
+#tinymce blockquote {
+  margin: 0 -10% 1em -10%;
+  text-align: center !important;
 }
 #tinymce h1 {
   margin-bottom: 0.5em;

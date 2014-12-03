@@ -71,7 +71,7 @@
 
 			float: left;
 			margin: 0 1em 0 -13%;
-			@extend .max;
+			max-width: 100%;
 
 			&.right{
 

@@ -401,7 +401,7 @@ body {
   }
 }
 /* =========================================*/
-.max, .single-post .article-body img {
+.max {
   max-width: 100%;
 }
 
@@ -1146,6 +1146,7 @@ em, i {
 .single-post .article-body img {
   float: left;
   margin: 0 1em 0 -13%;
+  max-width: 100%;
 }
 .single-post .article-body img.right {
   float: right;

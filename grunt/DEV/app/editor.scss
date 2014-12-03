@@ -30,6 +30,40 @@
 
 	#tinymce{
 		font-size: 18px;
+		padding: 0 12%!important;
+
+		p{
+
+			text-align:justify;
+		}
+
+		ol,ul{
+
+			margin-bottom:2em;
+			padding-left:20px;
+
+			li{
+
+				line-height: 1.6em;
+			}
+		}
+
+		ol li{
+
+			list-style-type: decimal;
+		}
+
+		ul li{
+
+			list-style: initial;
+		}
+
+		blockquote{
+
+			margin: 0 -10% 1em -10%;
+			text-align:center!important;
+		}
+
 		@import"global/sass-globals/typography";
 	}
 
