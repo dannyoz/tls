@@ -85,6 +85,9 @@ function tls_theme_options_display() {
 		<div id="icon-options-general" class="icon32"></div>
 		<h2>TLS Theme Options</h2>
 
+		<!-- run the settings_errors() function here. -->
+        <?php settings_errors(); ?>
+
 		<form method="post" action="options.php">
 			<?php 
 
