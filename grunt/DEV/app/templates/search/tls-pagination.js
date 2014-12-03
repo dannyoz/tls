@@ -9,9 +9,9 @@
 
 			//Define an array for the ng-repeat
 			scope.pages = [];
-			for (var i = 0; i<scope.config.pageCount; i++){
-				scope.pages.push(i)
-			}
+			angular.forEach(scope.config.pageCount, function(){
+				scope.pages.push($index)
+			})
 
 			scope.switchPage = function(i){
 
