@@ -40,6 +40,27 @@
 			text-align:justify;
 		}
 
+		ol,ul{
+
+			margin-bottom:2em;
+			padding-left:20px;
+
+			li{
+
+				line-height: 1.6em;
+			}
+		}
+
+		ol li{
+
+			list-style-type: decimal;
+		}
+
+		ul li{
+
+			list-style: initial;
+		}
+
 		blockquote{
 
 			margin: 0 -13% 1em -13%;

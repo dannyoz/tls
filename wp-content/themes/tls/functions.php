@@ -105,6 +105,11 @@ function tls_remove_wp_ver_css_js( $src ) {
     return $src;
 }
 
+// Added by Dan to enable editor stylesheet
+function my_theme_add_editor_styles() {
+    add_editor_style();
+}
+add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
 
 /**
  * Enqueue scripts and styles.
