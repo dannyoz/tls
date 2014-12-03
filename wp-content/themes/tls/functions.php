@@ -59,6 +59,9 @@ function tls_setup() {
 		'footer' => __( 'Footer Menu', 'tls' ),
 	) );
 
+	// Added by Dan to enable editor stylesheet
+	add_editor_style();
+
 }
 add_action( 'after_setup_theme', 'tls_setup' );
 
@@ -104,12 +107,6 @@ function tls_remove_wp_ver_css_js( $src ) {
         $src = remove_query_arg( 'ver', $src );
     return $src;
 }
-
-// Added by Dan to enable editor stylesheet
-function my_theme_add_editor_styles() {
-    add_editor_style();
-}
-add_action( 'after_setup_theme', 'my_theme_add_editor_styles' );
 
 /**
  * Enqueue scripts and styles.
