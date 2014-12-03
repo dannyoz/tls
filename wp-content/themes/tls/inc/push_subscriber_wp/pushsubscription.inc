@@ -17,6 +17,24 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
    * Load a subscription.
    */
   public static function load($domain, $subscriber_id) {
+    
+    // WP_Query arguments
+    $args = array (
+      'post_type'              => 'push_sub_feeds',
+      'posts_per_page'         => '1',
+      'meta_query'             => array(
+        array(
+          'key'       => 'pushfeed_subscription_id',
+          'value'     => $subscriber_id,
+          'compare'   => '=',
+          'type'      => 'NUMERIC',
+        ),
+      ),
+    );
+
+    // The Query
+    $pushfeed_query = new WP_Query( $args );
+
     if ($v = db_query("SELECT * FROM {feeds_push_subscriptions} WHERE domain = :domain AND subscriber_id = :sid", array(':domain' => $domain, ':sid' => $subscriber_id))->fetchAssoc()) {
       $v['post_fields'] = unserialize($v['post_fields']);
       return new PuSHSubscription($v['domain'], $v['subscriber_id'], $v['hub'], $v['topic'], $v['secret'], $v['status'], $v['post_fields'], $v['timestamp']);
