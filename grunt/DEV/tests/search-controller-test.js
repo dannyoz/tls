@@ -14,7 +14,19 @@ describe('Unit: search', function() {
     }));
     
     it('should broadcast to scope', function(){
-        rootScope.$broadcast("hello");
+        rootScope.$broadcast();
         expect(rootScope.$broadcast).toHaveBeenCalled()
+    })
+
+    it('should convert wordpress date format', function(){
+
+        var date    = "2014-12-02 10:32:36",
+            test    = scope.format(date),
+            conv    = "2 DECEMBER 2014",
+            match   = (test.indexOf(conv) > -1 && conv.length == test.length) ? true : false;
+
+        expect(typeof test).toBe("string");
+        expect(match).toBe(true);
+        
     })
 })

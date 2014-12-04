@@ -28269,11 +28269,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getArticle : function(path){
-			var defer = $q.defer(),
-				query = "?json=1";
+		getArticle : function(url){
 
-			$http.get(path+query).success(function (data){
+			var path   = this.removeHashFrag(url),
+				defer  = $q.defer(),
+				prefix = this.checkQueries(path),
+				query  = "json=1";
+
+			$http.get(path+prefix+query).success(function (data){
 				defer.resolve(data)
 			})
 
@@ -28281,15 +28284,33 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		},
 		getSearchResults : function(path,page,filters){
 
-			var defer = $q.defer(),
-				filt  = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				query = "&json=1&paged="+page;
+			var defer  = $q.defer(),
+				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix = this.checkQueries(path),
+				query  = "json=1&paged="+page;
 
-			$http.get(path+query+filt).success(function (data){
+			$http.get(path+prefix+query+filt).success(function (data){
 				defer.resolve(data)
 			})
 
 			return defer.promise
+		
+		},
+		checkQueries : function(url){
+			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
+			return prefix
+		},
+		removeHashFrag : function(url){
+
+			var hashIndex = url.indexOf('#'),
+				newPath   = url.slice(0,hashIndex);
+
+			if(hashIndex > -1){
+				return newPath
+			} else{
+				return url
+			}
+			
 		}
 	}
 }])
@@ -28527,6 +28548,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.format = function(date){
 		return niceDate.format(date);
 	}
+
 
 }])
 .directive('tlsPagination',[ 'api', function (api){

@@ -51,4 +51,5 @@
 		return niceDate.format(date);
 	}
 
+
 }])
