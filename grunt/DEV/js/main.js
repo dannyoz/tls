@@ -28271,8 +28271,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		},
 		getArticle : function(url){
 
-			var path   = this.removeHashFrag(url),
-				defer  = $q.defer(),
+			var defer  = $q.defer(),
+				path   = this.removeHashFrag(url),
 				prefix = this.checkQueries(path),
 				query  = "json=1";
 

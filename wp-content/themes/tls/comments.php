@@ -21,50 +21,20 @@ if ( post_password_required() ) {
 <div id="comments" class="container">
 
 	<div class="grid-row">
-		<div class="grid-6 push-3">
+		<div class="comment-wrap" ng-cloak>
 
-			<?php if ( have_comments() ) : ?>
-				<h2 class="comments-title">
-					<?php
-						printf( _nx( '1', '%1$s', get_comments_number(), 'comments title', 'tls' ),
-							number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
-					?>
-				</h2>
+			<h3 class="futura">Comments (<span ng-bind="post.comment_count"></span>)</h3>
 
-				<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-				<nav id="comment-nav-above" class="comment-navigation" role="navigation">
-					<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'tls' ); ?></h1>
-					<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'tls' ) ); ?></div>
-					<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'tls' ) ); ?></div>
-				</nav><!-- #comment-nav-above -->
-				<?php endif; // check for comment navigation ?>
+			<div class="comment" ng-repeat="comment in post.comments">
+				<div class="thumb-wrapper">
+					<img class="max circular" src="http://placehold.it/85x85">
+				</div>
+				<h4 class="futura" ng-bind="comment.name"></h4>
+				<p class="date futura" ng-bind="format(comment.date)"></p>
+				<div ng-bind-html="comment.content"></div>
+			</div>
 
-				<ol class="comment-list">
-					<?php
-						wp_list_comments( array(
-							'style'      => 'ol',
-							'short_ping' => true,
-						) );
-					?>
-				</ol><!-- .comment-list -->
-
-				<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-				<nav id="comment-nav-below" class="comment-navigation" role="navigation">
-					<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'tls' ); ?></h1>
-					<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'tls' ) ); ?></div>
-					<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'tls' ) ); ?></div>
-				</nav><!-- #comment-nav-below -->
-				<?php endif; // check for comment navigation ?>
-
-			<?php endif; // have_comments() ?>
-
-			<?php
-				// If comments are closed and there are comments, let's leave a little note, shall we?
-				if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-			?>
-				<p class="no-comments"><?php _e( 'Comments are closed.', 'tls' ); ?></p>
-			<?php endif; ?>
-
+	
 			<?php comment_form(); ?>
 			
 		</div>
@@ -72,3 +42,5 @@ if ( post_password_required() ) {
 
 	
 </div>
+
+
