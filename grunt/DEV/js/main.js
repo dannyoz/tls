@@ -28282,14 +28282,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters){
+		getSearchResults : function(path,page,filters,ord){
 
 			var defer  = $q.defer(),
 				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
 				prefix = this.checkQueries(path),
+				order  = (!ord)? "" : "&orderby=date&order=" + ord,
 				query  = "json=1&paged="+page;
 
-			$http.get(path+prefix+query+filt).success(function (data){
+			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)
 			})
 
@@ -28502,6 +28503,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	var url = window.location.href;
 	$scope.filters     = []
 	$scope.currentPage = 1
+	$scope.orderName   = "Newest"
+	$scope.order       = "ASC"
+	$scope.showSorter  = false
 
 	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
 		
@@ -28510,7 +28514,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.paginationConfig = {
 			"pageCount"   : results.pages,
 			"currentPage" : $scope.currentPage,
-			"filters"     : $scope.filters
+			"filters"     : $scope.filters,
+			"order"       : $scope.order
 		}
 
 	})
@@ -28534,12 +28539,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.filters.splice(index,1)
 		}
 
-		api.getSearchResults(url,1,$scope.filters).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
 			$scope.results = results
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
 				"currentPage" : 1,
-				"filters"     : $scope.filters
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
+			}
+		})
+	}
+
+	$scope.orderResults = function(order,orderName){
+
+		$scope.order     = order;
+		$scope.orderName = orderName;
+		
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+			$scope.results = results
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : 1,
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
 			}
 		})
 	}
@@ -28568,7 +28590,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			scope.switchPage = function(i){
 
-				api.getSearchResults(window.location.href,i,scope.config.filters).then(function (results){
+				var u = window.location.href,
+					f = scope.config.filters,
+					o = scope.config.order;
+
+				api.getSearchResults(u,i,f,o).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 

@@ -16,7 +16,31 @@ describe('Unit: search', function() {
     it('should broadcast to scope', function(){
         rootScope.$broadcast();
         expect(rootScope.$broadcast).toHaveBeenCalled()
-    })
+    });
+
+    it('should add or remove filters when applied', function(){
+
+        scope.filters = ['articles','blogs'];
+        scope.filterResults('blogs');
+        expect(scope.filters[0]).toBe('articles');
+
+        scope.filters = ['articles','blogs'];
+        scope.filterResults('articles');
+        expect(scope.filters[0]).toBe('blogs');
+
+        scope.filters = ['articles','blogs'];
+        scope.filterResults('test');
+        expect(scope.filters[0]).toBe('articles');
+        expect(scope.filters[1]).toBe('blogs');
+        expect(scope.filters[2]).toBe('test');
+
+    });
+
+    // it('should sort the search order', function(){
+
+    //     var test = scope.orderResults('derp');
+    //     expect(test).toBe('derp');
+    // });
 
     it('should convert wordpress date format', function(){
 

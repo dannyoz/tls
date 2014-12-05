@@ -57,13 +57,32 @@ get_header(); ?>
 
 				</div>
 
-				<div id="search-results" class="transition-1" ng-class="{shift:showFilters}">
+				<div id="results" class="transition-1" ng-class="{shift:showFilters}">
 					
-					<h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
+					<h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . get_search_query() . '"</span>' ); ?></h2>
 
 					<a id="show-filters" class="tablet-show" ng-click="showFilters = true">Show filters</a>
 
-					<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
+					<div class="grid-row">
+						
+						<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
+
+						<div id="sorter">
+							<span>Sort:</span>
+							<div class="selector" ng-mouseenter="showSorter = true" ng-mouseleave="showSorter = false">
+								<ul>
+									<li class="current" ng-bind="orderName"></li>
+									<li ng-if="orderName != 'Newest' && showSorter">
+										<a ng-click="orderResults('DESC','Newest')">Newest</a>
+									</li>
+									<li ng-if="orderName != 'Oldest' && showSorter">
+										<a ng-click="orderResults('ASC','Oldest')">Oldest</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
 
 					<div class="card" ng-repeat="post in results.posts">
 						<h3 class="futura">

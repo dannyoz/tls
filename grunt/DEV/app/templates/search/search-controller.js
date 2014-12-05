@@ -4,6 +4,9 @@
 	var url = window.location.href;
 	$scope.filters     = []
 	$scope.currentPage = 1
+	$scope.orderName   = "Newest"
+	$scope.order       = "ASC"
+	$scope.showSorter  = false
 
 	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
 		
@@ -12,7 +15,8 @@
 		$scope.paginationConfig = {
 			"pageCount"   : results.pages,
 			"currentPage" : $scope.currentPage,
-			"filters"     : $scope.filters
+			"filters"     : $scope.filters,
+			"order"       : $scope.order
 		}
 
 	})
@@ -36,12 +40,29 @@
 			$scope.filters.splice(index,1)
 		}
 
-		api.getSearchResults(url,1,$scope.filters).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
 			$scope.results = results
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
 				"currentPage" : 1,
-				"filters"     : $scope.filters
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
+			}
+		})
+	}
+
+	$scope.orderResults = function(order,orderName){
+
+		$scope.order     = order;
+		$scope.orderName = orderName;
+		
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+			$scope.results = results
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : 1,
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
 			}
 		})
 	}

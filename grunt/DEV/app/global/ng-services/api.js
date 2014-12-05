@@ -22,14 +22,15 @@
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters){
+		getSearchResults : function(path,page,filters,ord){
 
 			var defer  = $q.defer(),
 				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
 				prefix = this.checkQueries(path),
+				order  = (!ord)? "" : "&orderby=date&order=" + ord,
 				query  = "json=1&paged="+page;
 
-			$http.get(path+prefix+query+filt).success(function (data){
+			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)
 			})
 
