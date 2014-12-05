@@ -1,5 +1,7 @@
 #search-results{
 
+	margin-top:60px;
+
 	#search-filters{
 
 		top:auto;
@@ -22,10 +24,26 @@
 			}
 
 		}
+
+		h2{
+
+			margin-bottom: 30px;
+			font:{
+				weight:500;
+				size:1.5em;
+			}
+
+
+		}
 		
 		.filter-block{
 
 			h3{
+
+				font:{
+					weight:500;
+					size:1em;
+				}
 
 				padding-bottom:10px;
 				@include keyline(bottom,$light-keyline);
@@ -47,7 +65,8 @@
 						padding:5px;
 						text-transform:uppercase;
 						font:{
-							size:0.9em;
+							weight:500;
+							size:0.95em;
 							family:$futura;
 						}
 					}
@@ -62,7 +81,24 @@
 		}
 	}
 
-	#search-results{
+	#results{
+
+		h2{
+			
+			letter-spacing: 2px;
+			text-transform:uppercase;
+			font:{
+				size:1.6em;
+				weight:500;
+				family:$futura;
+			}
+
+			.term{
+
+				text-transform: none;
+				color: $mid-grey;
+			}
+		}
 
 		position:relative;
 		left:0;
@@ -86,6 +122,10 @@
 
 			.post-date{
 				
+				font:{
+					weight:500;
+					family:$futura;
+				}
 				@include absolutly(10px,top,right);
 			}
 		}
@@ -95,7 +135,7 @@
 	.pagination{
 
 		margin-bottom:20px;
-		@extend .grid-row;
+		float: left;
 
 		li{
 
@@ -104,6 +144,7 @@
 
 			a{
 
+				font-family: $futura;
 				padding:10px 15px;
 				display: inline-block;
 				@include keyline(top right bottom left,$light-keyline);
@@ -124,6 +165,55 @@
 				background-color: $light-keyline;
 			}		
 		}
+	}
+
+	#sorter{
+
+		float: right;
+
+		span{
+
+			float: left;
+			padding:10px 110px 10px 0;
+		}
+
+		.selector{
+ 
+			right: 0;
+			position:absolute;
+			min-width:100px;
+			z-index: 999;
+			background-color:$subtle-light-grey;
+			@include keyline(top right bottom left,$light-keyline);
+
+			li{
+
+				font:{
+					family:$futura;
+					weight:500;
+				}
+
+				a{
+					display: block;
+					padding:10px 15px;
+					@include keyline(top,$light-keyline);
+
+					&:hover{
+
+						background-color:white;
+						text-decoration:none;
+						@include box-shadow(inset 4px 0 0 $light-keyline,inset 0 4px 0 $light-keyline,inset -4px 0 0 $light-keyline,inset 0 -4px 0 $light-keyline)
+					}
+				}
+
+				&.current{
+
+					padding:10px 15px;
+				}
+			}
+			
+		}
+
 	}
 
 	.tablet-show{

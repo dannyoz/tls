@@ -53,9 +53,9 @@
 				<div class="grid-row">
 				
 					<ul class="futura">
-						<li><a href="#">Expdfe</a></li>
-						<li><a href="#">Editions</a></li>
-						<li><a href="#">What's New</a></li>
+						<li><a href="#">Latest Edition</a></li>
+						<li><a href="#">Discover</a></li>
+						<li><a href="#">Blogs</a></li>
 					</ul>
 
 					<div class="search">

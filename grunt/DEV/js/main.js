@@ -28269,27 +28269,49 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getArticle : function(path){
-			var defer = $q.defer(),
-				query = "?json=1";
+		getArticle : function(url){
 
-			$http.get(path+query).success(function (data){
+			var defer  = $q.defer(),
+				path   = this.removeHashFrag(url),
+				prefix = this.checkQueries(path),
+				query  = "json=1";
+
+			$http.get(path+prefix+query).success(function (data){
 				defer.resolve(data)
 			})
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters){
+		getSearchResults : function(path,page,filters,ord){
 
-			var defer = $q.defer(),
-				filt  = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				query = "&json=1&paged="+page;
+			var defer  = $q.defer(),
+				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix = this.checkQueries(path),
+				order  = (!ord)? "" : "&orderby=date&order=" + ord,
+				query  = "json=1&paged="+page;
 
-			$http.get(path+query+filt).success(function (data){
+			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)
 			})
 
 			return defer.promise
+		
+		},
+		checkQueries : function(url){
+			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
+			return prefix
+		},
+		removeHashFrag : function(url){
+
+			var hashIndex = url.indexOf('#'),
+				newPath   = url.slice(0,hashIndex);
+
+			if(hashIndex > -1){
+				return newPath
+			} else{
+				return url
+			}
+			
 		}
 	}
 }])
@@ -28481,6 +28503,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	var url = window.location.href;
 	$scope.filters     = []
 	$scope.currentPage = 1
+	$scope.orderName   = "Newest"
+	$scope.order       = "ASC"
+	$scope.showSorter  = false
 
 	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
 		
@@ -28489,7 +28514,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.paginationConfig = {
 			"pageCount"   : results.pages,
 			"currentPage" : $scope.currentPage,
-			"filters"     : $scope.filters
+			"filters"     : $scope.filters,
+			"order"       : $scope.order
 		}
 
 	})
@@ -28513,12 +28539,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.filters.splice(index,1)
 		}
 
-		api.getSearchResults(url,1,$scope.filters).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
 			$scope.results = results
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
 				"currentPage" : 1,
-				"filters"     : $scope.filters
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
+			}
+		})
+	}
+
+	$scope.orderResults = function(order,orderName){
+
+		$scope.order     = order;
+		$scope.orderName = orderName;
+		
+		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+			$scope.results = results
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : 1,
+				"filters"     : $scope.filters,
+				"order"       : $scope.order
 			}
 		})
 	}
@@ -28527,6 +28570,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.format = function(date){
 		return niceDate.format(date);
 	}
+
 
 }])
 .directive('tlsPagination',[ 'api', function (api){
@@ -28546,7 +28590,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			scope.switchPage = function(i){
 
-				api.getSearchResults(window.location.href,i,scope.config.filters).then(function (results){
+				var u = window.location.href,
+					f = scope.config.filters,
+					o = scope.config.order;
+
+				api.getSearchResults(u,i,f,o).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 

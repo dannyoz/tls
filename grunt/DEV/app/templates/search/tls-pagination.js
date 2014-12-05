@@ -15,7 +15,11 @@
 
 			scope.switchPage = function(i){
 
-				api.getSearchResults(window.location.href,i,scope.config.filters).then(function (results){
+				var u = window.location.href,
+					f = scope.config.filters,
+					o = scope.config.order;
+
+				api.getSearchResults(u,i,f,o).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 

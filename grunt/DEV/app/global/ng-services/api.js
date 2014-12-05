@@ -9,27 +9,49 @@
 
 			return defer.promise
 		},
-		getArticle : function(path){
-			var defer = $q.defer(),
-				query = "?json=1";
+		getArticle : function(url){
 
-			$http.get(path+query).success(function (data){
+			var defer  = $q.defer(),
+				path   = this.removeHashFrag(url),
+				prefix = this.checkQueries(path),
+				query  = "json=1";
+
+			$http.get(path+prefix+query).success(function (data){
 				defer.resolve(data)
 			})
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters){
+		getSearchResults : function(path,page,filters,ord){
 
-			var defer = $q.defer(),
-				filt  = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				query = "&json=1&paged="+page;
+			var defer  = $q.defer(),
+				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix = this.checkQueries(path),
+				order  = (!ord)? "" : "&orderby=date&order=" + ord,
+				query  = "json=1&paged="+page;
 
-			$http.get(path+query+filt).success(function (data){
+			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)
 			})
 
 			return defer.promise
+		
+		},
+		checkQueries : function(url){
+			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
+			return prefix
+		},
+		removeHashFrag : function(url){
+
+			var hashIndex = url.indexOf('#'),
+				newPath   = url.slice(0,hashIndex);
+
+			if(hashIndex > -1){
+				return newPath
+			} else{
+				return url
+			}
+			
 		}
 	}
 }])
