@@ -24,7 +24,7 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
       'posts_per_page'         => '1',
       'meta_query'             => array(
         array(
-          'key'       => 'pushfeed_subscription_id',
+          'key'       => 'pushfeed-subscription-id',
           'value'     => $subscriber_id,
           'compare'   => '=',
           'type'      => 'NUMERIC',
@@ -34,6 +34,8 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
 
     // The Query
     $pushfeed_query = new WP_Query( $args );
+
+    var_dump($pushfeed_query);
 
     if ($v = db_query("SELECT * FROM {feeds_push_subscriptions} WHERE domain = :domain AND subscriber_id = :sid", array(':domain' => $domain, ':sid' => $subscriber_id))->fetchAssoc()) {
       $v['post_fields'] = unserialize($v['post_fields']);

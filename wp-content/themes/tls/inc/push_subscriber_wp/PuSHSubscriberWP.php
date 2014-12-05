@@ -110,6 +110,8 @@ class PuSHSubscriberWP {
 
 		// Start the HTML string so that all other strings can be concatenated
 	?>
+		<input type="hidden" name="subscription_id" id="subscription_id" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-subscription-id', true)); ?>">
+
 		<label for="pushfeed-feed-url"><strong>Feed/Topic URL:</strong></label> <br>
 		<small>This is the URL for the Feed you are subscribing to.</small> <br>
 		<input type="text" name="pushfeed-feed-url" id="pushfeed-feed-url" class="widefat" placeholder="http://www.example.com/feed/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-feed-url', true)); ?>"> <br><br>
@@ -183,7 +185,7 @@ class PuSHSubscriberWP {
 
 	    	if ( isset( $_POST ) ) {
 	    		var_dump( array( $wp->query_vars, $_POST ) );
-	    		include_once get_template_directory() . '/simplexml-feed.php';
+	    		include_once 'simplexml-feed.php';
 	        	exit;
 	    	}
 
