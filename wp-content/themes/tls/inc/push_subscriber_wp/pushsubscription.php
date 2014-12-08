@@ -51,7 +51,7 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
         $subscription_domain = get_post_meta( $post->ID , 'pushfeed-domain' , true );
         $subscription_id = get_post_meta( $post->ID, 'pushfeed-subscription-id', true );
         $subscription_hub = get_post_meta( $post->ID, 'pushfeed-hub-url', true );
-        $subscription_topic = get_post_meta( $post->ID, 'pushfeed-feed-url' true );
+        $subscription_topic = get_post_meta( $post->ID, 'pushfeed-feed-url', true );
         $subscription_secret = get_post_meta ( $post->ID, 'pushfeed-secret', true );
         $subscription_status = get_post_meta( $post->ID, 'pushfeed-status', true );
         $subscription_post_fields = get_post_meta( $post->ID, 'pushfeed-post-fields' );
@@ -96,6 +96,10 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
       'ID' => $this->post_id,
       'post_title'     => wp_strip_all_tags($this->post_title)
     ));
+
+    update_post_meta( $this->post_id , 'pushfeed-secret' , $this->secret );
+    update_post_meta( $this->post_id , 'pushfeed-status' , $this->status );
+    update_post_meta( $this->post_id , 'pushfeed-post-fields' , $this->post_fields );
 
   }
 

@@ -1,8 +1,8 @@
 <?php
 
-include_once 'PuSHSubscriber.inc';
-include_once 'pushsubscription.inc';
-include_once 'pushenvironment.inc';
+include_once 'PuSHSubscriber.php';
+include_once 'pushsubscription.php';
+include_once 'pushenvironment.php';
 
 class PuSHSubscriberWP {
 
@@ -111,6 +111,8 @@ class PuSHSubscriberWP {
 		// Start the HTML string so that all other strings can be concatenated
 	?>
 		<input type="hidden" name="pushfeed-subscription-id" id="pushfeed-subscription-id" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-subscription-id', true)); ?>">
+		
+		<input type="hidden" name="pushfeed-domain" id="pushfeed-domain" class="widefat" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-domain', true)); ?>">
 
 		<label for="pushfeed-feed-url"><strong>Feed/Topic URL:</strong></label> <br>
 		<small>This is the URL for the Feed you are subscribing to.</small> <br>
@@ -120,8 +122,11 @@ class PuSHSubscriberWP {
 		<small>If any is provided it will override the url to hub found in the feed.</small> <br>
 		<input type="text" name="pushfeed-hub-url" id="pushfeed-hub-url" class="widefat" placeholder="http://www.hub.com/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-hub-url', true)); ?>"> <br><br>
 
-		<input type="submit" name="pushfeed-subscribe" id="pushfeed-subscribe" class="button-secondary" value="Subcribe">
-		<input type="submit" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" class="button-secondary" value="Unsubscribe">
+		<label for="subscription-status"><strong>Subscription Status:</strong></label> <br>
+		<input type="text" name="subscription-status" id="subscription-status" value="<?php echo esc_attr(ucwords(get_post_meta($post->ID, 'subscription-status', true))); ?>" disabled> <br><br>
+
+		<input type="submit" name="pushfeed-subscribe" id="pushfeed-subscribe" class="button-secondary" value="subscribe">
+		<input type="submit" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" class="button-secondary" value="unsubscribe">
 
 	<?php
 	}
@@ -146,6 +151,16 @@ class PuSHSubscriberWP {
 			update_post_meta( $post_id, 'pushfeed-subscription-id', $pushfeed_subscription_id );
 		}
 
+		// If PuSH Feed Domain is empty then save the Site URL as the Domain
+		if ( empty( $_POST['pushfeed-domain'] ) ) {
+			update_post_meta( $post_id, 'pushfeed-domain', site_url() );
+		}
+
+		// If the Subscription status is empty then set default 'unsubscribed'
+		if ( empty( $_POST['subscription-status'] ) ) {
+			update_post_meta( $post_id, 'subscription-status', 'unsubscribed' );
+		}
+
 		// If PuSH Feed URL is not empty then save Post meta for it
 		if ( isset( $_POST['pushfeed-feed-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-feed-url'] ) ) ) ) {
 
@@ -160,7 +175,25 @@ class PuSHSubscriberWP {
 			update_post_meta( $post_id, 'pushfeed-hub-url', $push_hub_url );
 		}
 
-		//var_dump($_POST);
+
+		if ( isset( $_POST['subscribe'] ) || isset( $_POST['unsubscribe'] ) ) {
+
+			$subscription_domain = get_post_meta($post_id, 'pushfeed-domain', true);
+			$subscription_id = get_post_meta($post_id, 'pushfeed-subscription-id', true);
+			$subscription_feed_url = get_post_meta($post_id, 'pushfeed-feed-url', true);
+			$subscription_callback_url = $subscription_domain . "\/pushfeed\/" . $subscription_id;
+
+			$sub = PuSHSubscriber::instance($subscription_domain, $subscription_id, 'pushsubscription', new PuSHEnvironment());
+			
+			if ( $_POST['subscribe'] ) {
+				$sub->subscribe($subscription_feed_url, $subscription_callback_url);
+			} elseif ( $_POST['unsubscribe'] ) {
+				$sub->unsubscribe($subscription_feed_url, $subscription_callback_url);
+			}
+
+		}
+
+		var_dump($_POST);
 
 	}
 
@@ -189,22 +222,63 @@ class PuSHSubscriberWP {
 	 */
 	public function pushfeed_hub_callback_parser( &$wp ) {
 
+	    // if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
+
+	    // 	if ( isset( $_POST ) ) {
+
+			  //   var_dump($pushfeed_query);
+			  //   echo '<br /><br />';
+	    // 		var_dump( array( $wp->query_vars, $_POST ) );
+	    // 		include_once 'simplexml-feed.php';
+	    //     	exit;
+	    // 	}
+
+	    // } elseif ( array_key_exists( 'subscription_id', $wp->query_vars ) && $wp->query_vars['subscription_id'] === 'all' ) {
+	    // 	echo "Do full feed pull";
+	    // 	exit;
+	    // }
+	    // 
 	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
+		    
+		    // WP_Query arguments
+		    $args = array (
+		      'post_type'              => 'push_sub_feeds',
+		      'posts_per_page'         => '1',
+		      'meta_query'             => array(
+		        array(
+		          'key'       => 'pushfeed-subscription-id',
+		          'value'     => $wp->query_vars['subscription_id'],
+		          'compare'   => '=',
+		          'type'      => 'NUMERIC',
+		        ),
+		      ),
+		    );
 
-	    	if ( isset( $_POST ) ) {
+		    // The Query
+		    $pushfeed_query = new WP_Query( $args );
 
-			    var_dump($pushfeed_query);
-			    echo '<br /><br />';
-	    		var_dump( array( $wp->query_vars, $_POST ) );
-	    		include_once 'simplexml-feed.php';
-	        	exit;
-	    	}
+		    if ( $pushfeed_query->have_posts() ) { 
+		      
+				while ( $pushfeed_query->have_posts() ) {
+					$pushfeed_query->the_post();
 
-	    } elseif ( array_key_exists( 'subscription_id', $wp->query_vars ) && $wp->query_vars['subscription_id'] === 'all' ) {
-	    	echo "Do full feed pull";
-	    	exit;
-	    }
+				global $post;
+
+				$subscription_domain = site_url();
+				$subscription_id = get_post_meta($post->ID, 'pushfeed-subscription-id', true);
+
+				$sub = PuSHSubscriber::instance($subscription_domain, $subscription_id, 'pushsubscription', new PuSHEnvironment());
+  				$sub->handleRequest(array($this, 'pushfeed_notification' ));
+
+				}
+		    
+		    }
+		}
 	    return;
+	}
+
+	public function pushfeed_notification($raw, $domain, $subscriber_id) {
+		include_once 'simplexml-feed.php';
 	}
 
 }
