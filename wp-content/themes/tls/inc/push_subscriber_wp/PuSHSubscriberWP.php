@@ -110,7 +110,7 @@ class PuSHSubscriberWP {
 
 		// Start the HTML string so that all other strings can be concatenated
 	?>
-		<input type="hidden" name="subscription_id" id="subscription_id" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-subscription-id', true)); ?>">
+		<input type="hidden" name="pushfeed-subscription-id" id="pushfeed-subscription-id" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-subscription-id', true)); ?>">
 
 		<label for="pushfeed-feed-url"><strong>Feed/Topic URL:</strong></label> <br>
 		<small>This is the URL for the Feed you are subscribing to.</small> <br>
@@ -138,6 +138,14 @@ class PuSHSubscriberWP {
 	    // if our nonce isn't there, or we can't verify it, bail
     	if( !isset( $_POST['pushfeed-nonce-field'] ) || !wp_verify_nonce( $_POST['pushfeed-nonce-field'], basename( __FILE__ ) ) ) return;
 
+    	// If Subsctiption ID is empty, generate a random long number and save it
+		if ( empty( $_POST['pushfeed-subscription-id'] ) ) {
+
+			$random_number = substr(number_format(time() * mt_rand(),0,'',''),0,10);
+			$pushfeed_subscription_id = $random_number . $post_id;
+			update_post_meta( $post_id, 'pushfeed-subscription-id', $pushfeed_subscription_id );
+		}
+
 		// If PuSH Feed URL is not empty then save Post meta for it
 		if ( isset( $_POST['pushfeed-feed-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-feed-url'] ) ) ) ) {
 
@@ -152,7 +160,7 @@ class PuSHSubscriberWP {
 			update_post_meta( $post_id, 'pushfeed-hub-url', $push_hub_url );
 		}
 
-		var_dump($_POST);
+		//var_dump($_POST);
 
 	}
 
@@ -184,6 +192,9 @@ class PuSHSubscriberWP {
 	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
 
 	    	if ( isset( $_POST ) ) {
+
+			    var_dump($pushfeed_query);
+			    echo '<br /><br />';
 	    		var_dump( array( $wp->query_vars, $_POST ) );
 	    		include_once 'simplexml-feed.php';
 	        	exit;

@@ -13,6 +13,10 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
   public $post_fields;
   public $timestamp;
 
+  // Variables to be used with WordPress Posts of the PuSH Feed Post Type
+  protected $post_id;
+  protected $post_title;
+
   /**
    * Load a subscription.
    */
@@ -35,12 +39,39 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
     // The Query
     $pushfeed_query = new WP_Query( $args );
 
-    var_dump($pushfeed_query);
+    if ( $pushfeed_query->have_posts() ) : 
+      
+      while ( $pushfeed_query->have_posts() ) : $pushfeed_query->the_post();
+      
+        global $post;
 
+        $this->post_id = $post->ID;
+        $this->post_title = get_the_title();
+
+        $subscription_domain = get_post_meta( $post->ID , 'pushfeed-domain' , true );
+        $subscription_id = get_post_meta( $post->ID, 'pushfeed-subscription-id', true );
+        $subscription_hub = get_post_meta( $post->ID, 'pushfeed-hub-url', true );
+        $subscription_topic = get_post_meta( $post->ID, 'pushfeed-feed-url' true );
+        $subscription_secret = get_post_meta ( $post->ID, 'pushfeed-secret', true );
+        $subscription_status = get_post_meta( $post->ID, 'pushfeed-status', true );
+        $subscription_post_fields = get_post_meta( $post->ID, 'pushfeed-post-fields' );
+
+        return new PuSHSubscription($subscription_domain, $subscription_id, $subscription_hub, $subscription_topic, $subscription_secret, $subscription_status, $subscription_post_fields);
+
+      endwhile;
+    
+    else:
+
+      exit();
+          
+    endif;
+
+    /*
     if ($v = db_query("SELECT * FROM {feeds_push_subscriptions} WHERE domain = :domain AND subscriber_id = :sid", array(':domain' => $domain, ':sid' => $subscriber_id))->fetchAssoc()) {
       $v['post_fields'] = unserialize($v['post_fields']);
       return new PuSHSubscription($v['domain'], $v['subscriber_id'], $v['hub'], $v['topic'], $v['secret'], $v['status'], $v['post_fields'], $v['timestamp']);
     }
+    */
   }
 
   /**
@@ -60,18 +91,21 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
    * Save a subscription.
    */
   public function save() {
-    $this->timestamp = time();
-    $this->delete($this->domain, $this->subscriber_id);
-    drupal_write_record('feeds_push_subscriptions', $this);
+    
+    wp_update_post(array(
+      'ID' => $this->post_id,
+      'post_title'     => wp_strip_all_tags($this->post_title)
+    ));
+
   }
 
   /**
    * Delete a subscription.
    */
   public function delete() {
-    db_delete('feeds_push_subscriptions')
-      ->condition('domain', $this->domain)
-      ->condition('subscriber_id', $this->subscriber_id)
-      ->execute();
+    
+    wp_delete_post( $this->post_id );
+
   }
+  
 }
