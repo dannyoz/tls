@@ -1218,7 +1218,24 @@ em, i {
   animation-duration: 0.4s;
 }
 
+#related-content #tags li {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+#related-content #tags li a {
+  display: block;
+  padding: 5px;
+  text-transform: uppercase;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+}
+
 #comments {
+  display: none;
   padding-top: 30px;
 }
 #comments .comment-wrap {

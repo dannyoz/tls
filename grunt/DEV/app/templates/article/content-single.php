@@ -25,8 +25,8 @@
 				
 				<div class="article-body">
 
-					<h2>{{post.title}}</h2>
-					<h4 class="author">{{post.author.name}}</h4>
+					<h2 ng-bind-html="post.title"></h2>
+					<h4 class="author" ng-bind="post.author.name"></h4>
 					<div ng-bind-html="post.content"></div>
 
 				</div>
@@ -71,7 +71,33 @@
 		if ( comments_open() || get_comments_number() ) :
 			comments_template();
 		endif;
-	?>
+	?> 
+
+	<div id="related-content" ng-if="post.tags.length > 0">
+
+		<div class="container">
+
+			<div class="grid-row">
+				<ul id="tags">
+					<li ng-repeat="tag in post.tags">
+						<a class="futura" ng-click="refineRelated(tag.title);" ng-bind="tag.title"></a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="grid-row">
+			
+				<div class="card" ng-repeat="relPost in related">
+					<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
+					<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
+					<div class="padded" ng-bind-html="relPost.excerpt"></div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
 
 </article>
 

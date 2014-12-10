@@ -2,12 +2,12 @@ describe('api', function() {
 
     beforeEach(module('tls'));
 
-    it('can get an instance of my factory', inject(function(api) {
+    it('can get an instance of my factory', inject(function (api) {
         expect(api).toBeDefined();
     }));
 
 
-    it('should return a promise', inject(function(api,$rootScope){
+    it('should return a promise', inject(function (api,$rootScope){
 
         var test = api.getSearchResults("http://localhost:80",2,3),
             promise = test.then();
@@ -16,7 +16,19 @@ describe('api', function() {
 
     }));
 
-    it('should return correct query sring prefix', inject(function(api){
+    it('should filter tags correctly', inject(function (api){
+
+        var test1 = api.getRelatedContent(['nick']),
+            test2 = api.getRelatedContent(['cage','is','awesome']);
+            test3 = api.getRelatedContent(['charlie','sheen','is','too']);
+
+            expect(test1.url).toBe('/tag/nick/?json=1');
+            expect(test2.url).toBe('/?tag=cage,is,awesome&json=1');
+            expect(test3.url).toBe('/?tag=charlie,sheen,is,too&json=1');
+
+    }));
+
+    it('should return correct query sring prefix', inject(function (api){
 
         var test1 = api.checkQueries('/url/'),
             test2 = api.checkQueries('/url/?nickcage=awesome');
@@ -28,7 +40,7 @@ describe('api', function() {
 
     }));
 
-    it('should remove hash frags', inject(function(api){
+    it('should remove comment hash frags', inject(function(api){
 
         var test1 = api.removeHashFrag('/url/#'),
             test2 = api.removeHashFrag('/url/'),

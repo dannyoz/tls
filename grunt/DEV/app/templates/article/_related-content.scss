@@ -1,0 +1,20 @@
+#related-content{
+
+	#tags{
+
+		li{
+
+			display: inline-block;
+			margin:0 10px 10px 0;
+
+			a{
+				
+				display: block;
+				padding:5px;
+				text-transform: uppercase;
+				@include keyline(top right bottom left,$light-keyline);
+			}
+
+		}
+	}
+}

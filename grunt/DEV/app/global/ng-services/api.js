@@ -22,6 +22,23 @@
 
 			return defer.promise
 		},
+		getRelatedContent : function(tags){
+
+			var defer  = $q.defer(),
+				parse  = tags.toString(),
+				path1  = "/tag/"+parse+"/?json=1",
+				path2  = "/?tag="+parse+"&json=1",
+				url    = (tags.length == 1)? path1 : path2;
+
+			//expose url for testing
+			defer.promise.url = url
+
+			$http.get(url).success(function (data){
+				defer.resolve(data)
+			})
+
+			return defer.promise
+		},
 		getSearchResults : function(path,page,filters,ord){
 
 			var defer  = $q.defer(),
