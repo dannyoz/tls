@@ -4,9 +4,9 @@
  * Provide environmental functions to the PuSHSubscriber library.
  */
 class PuSHEnvironment implements PuSHSubscriberEnvironmentInterface {
-  // /**
-  //  * Singleton.
-  //  */
+  /**
+   * Singleton.
+   */
   // public static function instance() {
   //   static $env;
   //   if (empty($env)) {
@@ -15,8 +15,8 @@ class PuSHEnvironment implements PuSHSubscriberEnvironmentInterface {
   //   return $env;
   // }
 
-  public static $msg_file = 'logs/messages.log';
-  public static $log_file = 'logs/system.log';
+  public static $msg_file = 'messages.log';
+  public static $log_file = 'system.log';
 
   /**
    * A message to be displayed to the user on the current page load.
@@ -28,7 +28,7 @@ class PuSHEnvironment implements PuSHSubscriberEnvironmentInterface {
    */
   public function msg($msg, $level = 'status') {
     $data = "$level :: $msg\n";
-    file_put_contents(self::$msg_file, $data, FILE_APPEND|LOCK_EX);
+    file_put_contents(self::$msg_file, $data, FILE_APPEND);
   }
 
   /**
@@ -41,6 +41,6 @@ class PuSHEnvironment implements PuSHSubscriberEnvironmentInterface {
    */
   public function log($msg, $level = 'status') {
     $data = "$level :: $msg\n";
-    file_put_contents(self::$log_file, $data, FILE_APPEND|LOCK_EX);
+    file_put_contents(self::$log_file, $data, FILE_APPEND);
   }
 }

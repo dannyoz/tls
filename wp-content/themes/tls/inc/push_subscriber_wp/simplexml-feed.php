@@ -1,7 +1,7 @@
 <?php
 
 // Sanitise URL using WP function esc_url() and assign it to $feedUrl variable
-$feedUrl = esc_url('http://www.tlspushdev.local/feed/atom/');
+$feedUrl = esc_url('http://www.vfwebsolutions.com/showcase/tlspush/feed/atom/');
 
 // Get XML contents from teh feed URL
 $rawFeed = file_get_contents($feedUrl);

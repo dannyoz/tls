@@ -216,6 +216,11 @@ class PuSHSubscriber {
         $this->log('Verified "unsubscribe" request.');
         $verify = TRUE;
       }
+      // Added this for testing. Need to remove
+      elseif ($_GET['hub_mode'] == 'subscribe') {
+        $this->log('Verified "subscribe" request.');
+        $verify = TRUE;
+      }
       if ($verify) {
         header('HTTP/1.1 200 "Found"', NULL, 200);
         print $_GET['hub_challenge'];

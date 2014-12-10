@@ -39,32 +39,21 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
     // The Query
     $pushfeed_query = new WP_Query( $args );
 
-    if ( $pushfeed_query->have_posts() ) : 
-      
-      while ( $pushfeed_query->have_posts() ) : $pushfeed_query->the_post();
-      
-        global $post;
+    $post_id = $pushfeed_query->posts[0]->ID;
+    $post_title = $pushfeed_query->posts[0]->post_title;
 
-        $this->post_id = $post->ID;
-        $this->post_title = get_the_title();
+    $subscription_domain = get_post_meta( $post_id , 'pushfeed-domain' , true );
+    $subscription_id = get_post_meta( $post_id, 'pushfeed-subscription-id', true );
+    $subscription_hub = get_post_meta( $post_id, 'pushfeed-hub-url', true );
+    $subscription_topic = get_post_meta( $post_id, 'pushfeed-feed-url', true );
+    $subscription_secret = get_post_meta ( $post_id, 'pushfeed-secret', true );
+    $subscription_status = get_post_meta( $post_id, 'pushfeed-status', true );
+    $subscription_post_fields = get_post_meta( $post_id, 'pushfeed-post-fields' );
 
-        $subscription_domain = get_post_meta( $post->ID , 'pushfeed-domain' , true );
-        $subscription_id = get_post_meta( $post->ID, 'pushfeed-subscription-id', true );
-        $subscription_hub = get_post_meta( $post->ID, 'pushfeed-hub-url', true );
-        $subscription_topic = get_post_meta( $post->ID, 'pushfeed-feed-url', true );
-        $subscription_secret = get_post_meta ( $post->ID, 'pushfeed-secret', true );
-        $subscription_status = get_post_meta( $post->ID, 'pushfeed-status', true );
-        $subscription_post_fields = get_post_meta( $post->ID, 'pushfeed-post-fields' );
-
-        return new PuSHSubscription($subscription_domain, $subscription_id, $subscription_hub, $subscription_topic, $subscription_secret, $subscription_status, $subscription_post_fields);
-
-      endwhile;
+    $push_sub = new PuSHSubscription($subscription_domain, $subscription_id, $subscription_hub, $subscription_topic, $subscription_secret, $subscription_status, $subscription_post_fields);
     
-    else:
-
-      exit();
-          
-    endif;
+    $push_sub->post_id = $post_id;
+    $push_sub->post_title = $post_title;
 
     /*
     if ($v = db_query("SELECT * FROM {feeds_push_subscriptions} WHERE domain = :domain AND subscriber_id = :sid", array(':domain' => $domain, ':sid' => $subscriber_id))->fetchAssoc()) {
@@ -97,9 +86,9 @@ class PuSHSubscription implements PuSHSubscriptionInterface {
       'post_title'     => wp_strip_all_tags($this->post_title)
     ));
 
-    update_post_meta( $this->post_id , 'pushfeed-secret' , $this->secret );
-    update_post_meta( $this->post_id , 'pushfeed-status' , $this->status );
-    update_post_meta( $this->post_id , 'pushfeed-post-fields' , $this->post_fields );
+    // update_post_meta( $this->post_id , 'pushfeed-secret' , $this->secret );
+    // update_post_meta( $this->post_id , 'pushfeed-status' , $this->status );
+    update_post_meta( $this->post_id , 'pushfeed-post-fields' , $this );
 
   }
 
