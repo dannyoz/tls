@@ -128,7 +128,8 @@ class PuSHSubscriberWP {
 		<label for="subscription-status"><strong>Subscription Status:</strong></label> <br>
 		<input type="text" name="subscription-status" id="subscription-status" value="<?php echo esc_attr(ucwords(get_post_meta($post->ID, 'subscription-status', true))); ?>" disabled> <br><br>
 		
-		<button class="button-secondary" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" type="submit">Unsubscribe</button>
+		<input type="submit" class="button-secondary" name="pushfeed-subscribe" id="pushfeed-subscribe" value="Subscribe">
+		<input type="submit" class="button-secondary" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" value="Unsubscribe">
 
 	<?php
 	}
