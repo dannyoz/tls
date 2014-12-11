@@ -24,4 +24,20 @@ describe('Unit: article', function() {
         
     })
 
+    it('should apply or remove filters on click', function(){
+
+        var test = scope.refineRelated('nick');
+        expect(test).toEqual(['nick']);
+
+        var test = scope.refineRelated('cage');
+        expect(test).toEqual(['nick','cage']);
+
+        var test = scope.refineRelated('nick');
+        expect(test).toEqual(['cage'])
+
+        var test = scope.refineRelated('cage');
+        expect(test).toEqual([]);
+
+    });
+
 })

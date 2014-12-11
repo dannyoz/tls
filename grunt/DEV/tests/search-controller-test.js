@@ -52,5 +52,6 @@ describe('Unit: search', function() {
         expect(typeof test).toBe("string");
         expect(match).toBe(true);
         
-    })
+    });
+    
 })

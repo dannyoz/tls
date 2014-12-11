@@ -28234,13 +28234,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
-  $templateCache.put('home.html',
-    "<section id=home ng-controller=home><div id=banner style=background-image:url(/wp-content/themes/tls/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div></div><div class=grid-row id=subscriber ng-class={locked:isLocked}><div class=container><h5 class=\"centred-heading grid-row\">Subscriber exclusive</h5><div class=subscribe-grid><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
+  $templateCache.put('tls-card.html',
+    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
   );
 
 
-  $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
+  $templateCache.put('home.html',
+    "<section id=home ng-controller=home><div id=banner style=background-image:url(/wp-content/themes/tls/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div></div><div class=grid-row id=subscriber ng-class={locked:isLocked}><div class=container><h5 class=\"centred-heading grid-row\">Subscriber exclusive</h5><div class=subscribe-grid><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
   );
 
 
@@ -28269,14 +28269,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getArticle : function(url){
+		getArticle : function(url,pg){
 
 			var defer  = $q.defer(),
 				path   = this.removeHashFrag(url),
 				prefix = this.checkQueries(path),
+				page   = (pg) ? "&paged=" + pg : "",
 				query  = "json=1";
 
-			$http.get(path+prefix+query).success(function (data){
+			//expose url for testing
+			defer.promise.url = path+prefix+query+page
+
+			$http.get(path+prefix+query+page).success(function (data){
 				defer.resolve(data)
 			})
 
@@ -28301,11 +28305,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		},
 		getSearchResults : function(path,page,filters,ord){
 
-			var defer  = $q.defer(),
-				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				prefix = this.checkQueries(path),
-				order  = (!ord)? "" : "&orderby=date&order=" + ord,
-				query  = "json=1&paged="+page;
+			var defer   = $q.defer(),
+				page    = (!page) ? 1 : page,
+				filters = (!filters) ? [] : filters,
+				filt    = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix  = this.checkQueries(path),
+				order   = (!ord)? "" : "&orderby=date&order=" + ord,
+				query   = "json=1&paged="+page;
+
+			//expose url for testing
+			defer.promise.url = path+prefix+query+filt+order
 
 			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)
@@ -28332,6 +28341,50 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 }])
+.factory('columns',['$q', function ($q){
+	return{
+		divide : function(array){
+
+			var defer = $q.defer(),
+				cols  = {};
+
+			cols.col1 = [];
+			cols.col2 = [[],[]];
+			cols.col3 = [[],[],[]];
+
+			// One column
+			cols.col1.push(array);
+
+			// Two columns
+			for (var i = 0; i<array.length; i++){
+
+				function isOdd(num) { return num % 2;}
+
+				if(isOdd(i)){
+					cols.col2[1].push(array[i])
+				} else {
+					cols.col2[0].push(array[i])
+				}
+			}
+
+			// Three columns
+			for (var i = 0; i<array.length; i+=3){
+				cols.col3[0].push(array[i])
+			}
+			for (var i = 1; i<array.length; i+=3){
+				cols.col3[1].push(array[i])
+			}
+			for (var i = 2; i<array.length; i+=3){
+				cols.col3[2].push(array[i])
+			}
+
+			defer.resolve(cols)
+			defer.promise.result = cols
+
+			return defer.promise
+		}
+	}
+}])
 .factory('niceDate',function(){
 	return{
 		format : function(d){
@@ -28347,7 +28400,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('article',['$scope','$sce','$location','$timeout','api','niceDate',function ($scope,$sce,$location,$timeout,api,niceDate){
+.controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
 	$scope.tags      = [];
 	$scope.firstLoad = true
@@ -28366,9 +28419,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			});
 
 			api.getRelatedContent($scope.tags).then(function (result){
-				$scope.related = result.posts
+				
+				var posts = result.posts;
 
-				console.log(result)
+				columns.divide(posts).then(function (cols){
+					$scope.col1  = cols.col1
+					$scope.col2  = cols.col2
+					$scope.col3  = cols.col3
+				})
 			})
 
 		}
@@ -28427,7 +28485,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				});
 
 				api.getRelatedContent($scope.tags).then(function (result){
-					$scope.related = result.posts
+					var posts = result.posts;
+
+					columns.divide(posts).then(function (cols){
+						$scope.col1  = cols.col1
+						$scope.col2  = cols.col2
+						$scope.col3  = cols.col3
+					})
 				})
 			})
 		}
@@ -28441,14 +28505,120 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.tags = [];
 		}
 
-		$scope.tags.push(tag);
+		// Add or remove tag
+		var index = $scope.tags.indexOf(tag);
+		if(index == -1){
+			$scope.tags.push(tag)
+		} else {
+			$scope.tags.splice(index,1)
+		}
 
 		api.getRelatedContent($scope.tags).then(function (result){
-			$scope.related = result.posts
+			
+			var posts = result.posts;
+
+			columns.divide(posts).then(function (cols){
+				$scope.col1  = cols.col1
+				$scope.col2  = cols.col2
+				$scope.col3  = cols.col3
+			})
 		})
+
+		return $scope.tags
 	}
 
 }])
+.directive('tlsCard',function(){
+	return{
+		restrict:"A",
+		templateUrl : "tls-card.html",
+		scope : {
+			data : "=tlsCard"
+		}
+	}
+})
+.controller('category', ['$scope','$sce','api', 'columns', function ($scope,$sce,api,columns){
+
+	var url = window.location.href;
+
+	$scope.ready = false
+	$scope.page  = 1
+
+	api.getArticle(url).then(function (result){
+
+		var posts = result.posts;
+
+		console.log(result)
+
+		columns.divide(posts).then(function (cols){
+			$scope.col1  = cols.col1
+			$scope.col2  = cols.col2
+			$scope.col3  = cols.col3
+			$scope.ready = true
+			$scope.page ++
+		})
+	})
+
+	$scope.loadMore = function(){
+
+		api.getArticle(url,$scope.page).then(function (result){
+
+			var posts = result.posts;
+
+			console.log(posts)
+
+			columns.divide(posts).then(function (cols){
+
+				$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+				$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+				$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+				$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+				$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+				$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+				$scope.page ++
+			})
+		})
+
+	}
+
+}])
+.directive('tlsWindowSize', function(){
+	return {
+		restrict: "A",
+		scope:{
+			size: "=tlsWindowSize"
+		},
+		link : function(scope){
+
+			// Breakpoint vars
+			var tabletBP  = 840,
+				mobileBP  = 450;
+
+			scope.viewport = function(size){
+
+				if(size>=tabletBP){
+					return 'desktop'
+				} else if(size<tabletBP && size>=mobileBP){
+					return 'tablet'
+				} else if(size<mobileBP){
+					return 'mobile'
+				}
+			}
+
+			scope.size = scope.viewport(window.innerWidth);
+
+			window.onresize = function(event) {
+
+				scope.$apply(function(){
+			    	var width  = window.innerWidth;
+			    	scope.size = scope.viewport(width);
+			    })
+
+			};
+		}
+	}
+})
 .controller('home',['$scope','api',function ($scope, api){
 
 	$scope.cards = ""
@@ -28469,15 +28639,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.image = "hero"
 
 }])
-.directive('tlsCard',function(){
-	return{
-		restrict:"A",
-		templateUrl : "tls-card.html",
-		scope : {
-			data : "=tlsCard"
-		}
-	}
-})
 .directive('tlsColumns',function(){
 	return{
 		restrict:"A",

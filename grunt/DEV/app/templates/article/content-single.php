@@ -1,6 +1,6 @@
 <article class="single-post" ng-controller="article" ng-cloak>
 
-	<div class="container relative" ng-swipe-left="chooseArticle('prev',prev)" ng-swipe-right="chooseArticle('next',next)">
+	<div class="container relative" tls-window-size="size" ng-swipe-left="chooseArticle('prev',prev)" ng-swipe-right="chooseArticle('next',next)">
 
 		<div class="article-links">
 			<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="next-article">Next article</a>
@@ -85,12 +85,36 @@
 				</ul>
 			</div>
 
-			<div class="grid-row">
+			<div class="grid-row" ng-if="size == 'desktop' || size == 'mobile'">
+
+				<div class="grid-4" ng-repeat="column in col3">
 			
-				<div class="card" ng-repeat="relPost in related">
-					<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
-					<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
-					<div class="padded" ng-bind-html="relPost.excerpt"></div>
+					<div class="card" ng-repeat="relPost in column">
+						<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
+						<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
+						<div class="padded" ng-bind-html="relPost.excerpt"></div>
+						<footer>
+							<p class="futura"><a href="#" ng-bind="relPost.author.name"></a></p>
+						</footer>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="grid-row" ng-if="size == 'tablet'">
+
+				<div class="grid-6" ng-repeat="column in col2">
+			
+					<div class="card" ng-repeat="relPost in column">
+						<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
+						<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
+						<div class="padded" ng-bind-html="relPost.excerpt"></div>
+						<footer>
+							<p class="futura"><a href="#" ng-bind="relPost.author.name"></a></p>
+						</footer>
+					</div>
+
 				</div>
 
 			</div>
