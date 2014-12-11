@@ -16,6 +16,30 @@ describe('api', function() {
 
     }));
 
+    it('should format getArticle urls correctly', inject(function (api){
+
+        var test1 = api.getArticle('/url/'),
+            test2 = api.getArticle('/url/',5),
+            test3 = api.getArticle('/url/?preview=true',2);
+
+        expect(test1.url).toBe('/url/?json=1');
+        expect(test2.url).toBe('/url/?json=1&paged=5');
+        expect(test3.url).toBe('/url/?preview=true&json=1&paged=2');
+
+    }));
+
+    it('should format getSearchResults urls correctly', inject(function (api){
+
+        var test1 = api.getSearchResults('/url/',1);
+            test2 = api.getSearchResults('/url/',2,'nick,cage');
+            test3 = api.getSearchResults('/url/',3,'charlie','DESC');
+
+        expect(test1.url).toBe('/url/?json=1&paged=1');
+        expect(test2.url).toBe('/url/?json=1&paged=2&category_name=[nick,cage]');
+        expect(test3.url).toBe('/url/?json=1&paged=3&category_name=[charlie]&orderby=date&order=DESC');
+
+    }));
+
     it('should filter tags correctly', inject(function (api){
 
         var test1 = api.getRelatedContent(['nick']),

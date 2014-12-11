@@ -9,14 +9,18 @@
 
 			return defer.promise
 		},
-		getArticle : function(url){
+		getArticle : function(url,pg){
 
 			var defer  = $q.defer(),
 				path   = this.removeHashFrag(url),
 				prefix = this.checkQueries(path),
+				page   = (pg) ? "&paged=" + pg : "",
 				query  = "json=1";
 
-			$http.get(path+prefix+query).success(function (data){
+			//expose url for testing
+			defer.promise.url = path+prefix+query+page
+
+			$http.get(path+prefix+query+page).success(function (data){
 				defer.resolve(data)
 			})
 
@@ -41,11 +45,16 @@
 		},
 		getSearchResults : function(path,page,filters,ord){
 
-			var defer  = $q.defer(),
-				filt   = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				prefix = this.checkQueries(path),
-				order  = (!ord)? "" : "&orderby=date&order=" + ord,
-				query  = "json=1&paged="+page;
+			var defer   = $q.defer(),
+				page    = (!page) ? 1 : page,
+				filters = (!filters) ? [] : filters,
+				filt    = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix  = this.checkQueries(path),
+				order   = (!ord)? "" : "&orderby=date&order=" + ord,
+				query   = "json=1&paged="+page;
+
+			//expose url for testing
+			defer.promise.url = path+prefix+query+filt+order
 
 			$http.get(path+prefix+query+filt+order).success(function (data){
 				defer.resolve(data)

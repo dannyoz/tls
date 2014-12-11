@@ -92,11 +92,19 @@
 			$scope.tags = [];
 		}
 
-		$scope.tags.push(tag);
+		// Add or remove tag
+		var index = $scope.tags.indexOf(tag);
+		if(index == -1){
+			$scope.tags.push(tag)
+		} else {
+			$scope.tags.splice(index,1)
+		}
 
 		api.getRelatedContent($scope.tags).then(function (result){
 			$scope.related = result.posts
 		})
+
+		return $scope.tags
 	}
 
 }])
