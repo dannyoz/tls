@@ -14,6 +14,31 @@ get_header(); ?>
 
 			<div class="grid-row">
 
+				<div id="" class="transition-1">
+				
+					<h2 class="futura">Vitor Sort by</h2>
+
+					<a class="close-filters tablet-show">
+						close
+					</a>
+
+					<div class="filter-block">
+						<h3 class="futura uppercase">Categories</h3>
+						<ul class="filters">
+							<?php
+								$s = get_search_query();
+								$blogs = new WP_Query( "post_type=post&post_status=publish&posts_per_page=-1&s={$s}" );
+								echo '<li>Blogs (' . $blogs->post_count . ')</li>';
+
+
+								$articles = new WP_Query( "post_type=tls_articles&post_status=publish&posts_per_page=-1&s={$s}" );
+								echo '<li>Articles (' . $articles->post_count . ')</li>';
+							?>
+						</ul>
+					</div>
+
+				</div>
+
 				<div id="search-filters" class="transition-1" ng-class="{open:showFilters}">
 					
 					<h2 class="futura">Sort by...</h2>
