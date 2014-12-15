@@ -17,7 +17,6 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-
 <div id="comments" class="container">
 
 	<div class="grid-row">
@@ -39,7 +38,6 @@ if ( post_password_required() ) {
 			
 		</div>
 	</div>
-
 	
 </div>
 

@@ -68,7 +68,7 @@
 
 	<?php
 		// If comments are open or we have at least one comment, load up the comment template
-		if ( comments_open() || get_comments_number() ) :
+		if ( ('tls_articles' == get_post_type() || 'post' == get_post_type() ) && ( comments_open() || get_comments_number() ) ) :
 			comments_template();
 		endif;
 	?> 

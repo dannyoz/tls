@@ -87,7 +87,7 @@ function tls_custom_post_types() {
 		'label'               => __( 'tls_articles', 'tls' ),
 		'description'         => __( 'TLS Articles Content Post Type', 'tls' ),
 		'labels'              => $art_labels,
-		'supports'            => array( 'title', 'editor' ),
+		'supports'            => array( 'title', 'editor', 'comments' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_ui'             => true,

@@ -28,11 +28,35 @@ get_header(); ?>
 							<?php
 								$s = get_search_query();
 								$blogs = new WP_Query( "post_type=post&post_status=publish&posts_per_page=-1&s={$s}" );
-								echo '<li>Blogs (' . $blogs->post_count . ')</li>';
+								echo '<li>Blogs (' . $blogs->post_count . ')</li>'; wp_reset_postdata();
 
 
 								$articles = new WP_Query( "post_type=tls_articles&post_status=publish&posts_per_page=-1&s={$s}" );
-								echo '<li>Articles (' . $articles->post_count . ')</li>';
+								echo '<li>Articles (' . $articles->post_count . ')</li>'; wp_reset_postdata();
+
+								$args = array(
+									'post_type'	=> array('post', 'tls_articles'),
+									'post_status' => 'publish',
+									's'			=> $s
+								);
+								$search = new WP_Query($args);
+								$categories = array();
+
+								while ($search->have_posts() ) {
+									$search->the_post();
+									$catTerms = wp_get_object_terms( get_the_ID() ,'category' );
+									foreach ($catTerms as $catTerm) {
+										array_push($categories, $catTerm->slug);
+									}
+								}
+								$categoryCount = array_count_values($categories);
+								foreach ($categoryCount as $key => $value) {
+									$json_categories['blog_categories'][] = array(
+											'slug' => $key,
+											'count' => $value
+										);
+								}
+								var_dump($json_categories);
 							?>
 						</ul>
 					</div>
