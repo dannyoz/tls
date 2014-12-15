@@ -1,6 +1,24 @@
 #related-content{
 
+	background-color:$subtle-light-grey;
+
+	.loading{
+
+		opacity: 0.4;
+	}
+
+	h4{
+
+		margin:50px 0 0 0;
+		font:{
+			weight:500;
+			size:1em;
+		}
+	}
+
 	#tags{
+
+		padding: 20px 0;
 
 		li{
 
@@ -12,7 +30,13 @@
 				display: block;
 				padding:5px;
 				text-transform: uppercase;
+				background-color:white;
 				@include keyline(top right bottom left,$light-keyline);
+
+				&.applied {
+
+					background-color:blue;
+				}
 			}
 
 		}

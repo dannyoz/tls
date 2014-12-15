@@ -1,4 +1,7 @@
-.factory('api',['$http','$q', function ($http,$q){
+.factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
+
+	var delay  = 1500;
+
 	return {
 		getCards : function(){
 			var defer = $q.defer();
@@ -21,7 +24,10 @@
 			defer.promise.url = path+prefix+query+page
 
 			$http.get(path+prefix+query+page).success(function (data){
-				defer.resolve(data)
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
 			})
 
 			return defer.promise
@@ -38,7 +44,12 @@
 			defer.promise.url = url
 
 			$http.get(url).success(function (data){
-				defer.resolve(data)
+
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+				
 			})
 
 			return defer.promise
@@ -57,7 +68,10 @@
 			defer.promise.url = path+prefix+query+filt+order
 
 			$http.get(path+prefix+query+filt+order).success(function (data){
-				defer.resolve(data)
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
 			})
 
 			return defer.promise

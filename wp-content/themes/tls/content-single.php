@@ -75,12 +75,13 @@
 
 	<div id="related-content" ng-if="post.tags.length > 0">
 
-		<div class="container">
+		<div class="container transition-3" ng-class="{loadingopacity:loadingTags}">
 
 			<div class="grid-row">
-				<ul id="tags">
+				<h4 class="futura centred">Use the tags to browse related articles</h4>
+				<ul id="tags" class="article-body">
 					<li ng-repeat="tag in post.tags">
-						<a class="futura" ng-click="refineRelated(tag.title);" ng-bind="tag.title"></a>
+						<a ng-class="{applied:activeTags[$index].isApplied}" class="futura" ng-click="refineRelated(tag.title,$index);" ng-bind="tag.title"></a>
 					</li>
 				</ul>
 			</div>

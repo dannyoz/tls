@@ -1,7 +1,8 @@
 .controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
-	$scope.tags      = [];
-	$scope.firstLoad = true
+	$scope.tags       = [];
+	$scope.activeTags = []; 
+	$scope.firstLoad  = true;
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
@@ -12,11 +13,17 @@
 		// Get related content
 		if($scope.post.tags.length > 0){
 
-			angular.forEach($scope.post.tags, function (tag){
-				$scope.tags.push(tag.title)
-			});
+			for (var i = 0; i<$scope.post.tags.length; i++){
+				$scope.tags.push($scope.post.tags[i].title);
+				$scope.activeTags.push({isApplied : false});
+			};
+
+			$scope.orginalList = $scope.tags
+			$scope.loadingTags = true
 
 			api.getRelatedContent($scope.tags).then(function (result){
+
+				$scope.loadingTags = false
 				
 				var posts = result.posts;
 
@@ -77,10 +84,14 @@
 				}
 
 				$scope.tags = [];
+				$scope.activeTags = []; 
 
-				angular.forEach($scope.post.tags, function (tag){
-					$scope.tags.push(tag.title)
-				});
+				for (var i = 0; i<$scope.post.tags.length; i++){
+					$scope.tags.push($scope.post.tags[i].title);
+					$scope.activeTags.push({isApplied : false});
+				};
+
+				$scope.orginalList = $scope.tags
 
 				api.getRelatedContent($scope.tags).then(function (result){
 					var posts = result.posts;
@@ -95,34 +106,49 @@
 		}
 	}
 
-	$scope.refineRelated = function(tag){
+	$scope.refineRelated = function(tag,i){
 
-		// Reset tags variable if no filters have been applied yet
-		if($scope.firstLoad){
-			$scope.firstLoad = false
-			$scope.tags = [];
-		}
+		if(!$scope.loadingTags){
 
-		// Add or remove tag
-		var index = $scope.tags.indexOf(tag);
-		if(index == -1){
-			$scope.tags.push(tag)
-		} else {
-			$scope.tags.splice(index,1)
-		}
+			// Reset tags variable if no filters have been applied yet
+			if($scope.firstLoad || $scope.tags == $scope.orginalList){
+				$scope.firstLoad = false
+				$scope.tags = [];
+			}
 
-		api.getRelatedContent($scope.tags).then(function (result){
-			
-			var posts = result.posts;
+			// Add or remove tag
+			var index = $scope.tags.indexOf(tag);
+			if(index == -1){
+				$scope.tags.push(tag);
+				$scope.activeTags[i].isApplied = true
+			} else {
+				$scope.tags.splice(index,1);
+				$scope.activeTags[i].isApplied = false
+			}
 
-			columns.divide(posts).then(function (cols){
-				$scope.col1  = cols.col1
-				$scope.col2  = cols.col2
-				$scope.col3  = cols.col3
+			if($scope.tags.length == 0){
+				$scope.tags = $scope.orginalList
+			}
+
+			$scope.loadingTags = true
+		
+			api.getRelatedContent($scope.tags).then(function (result){
+
+				$scope.loadingTags = false
+				
+				var posts = result.posts;
+
+				columns.divide(posts).then(function (cols){
+					$scope.col1  = cols.col1
+					$scope.col2  = cols.col2
+					$scope.col3  = cols.col3
+				})
 			})
-		})
 
-		return $scope.tags
+			//console.log($scope.tags)
+
+			return $scope.tags
+		}
 	}
 
 }])

@@ -39,11 +39,12 @@ body{
 
 
 .circular{
-
 	@include border-radius(100%);
 }
 
-
+.loadingopacity{
+	opacity: 0.3;
+} 
 
 
 

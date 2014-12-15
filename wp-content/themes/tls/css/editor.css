@@ -59,6 +59,9 @@
 #tinymce p:last-of-type {
   margin-bottom: 0;
 }
+#tinymce .centred {
+  text-align: center;
+}
 #tinymce blockquote {
   line-height: 1.6em;
   color: #d73f2b;

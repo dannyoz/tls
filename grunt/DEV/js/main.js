@@ -28258,7 +28258,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
     "<ul class=pagination><li ng-if=\"config.currentPage>1\"><a ng-click=switchPage(config.currentPage-1)>Prev</a></li><li ng-if=\"config.currentPage>1\">...</li><li ng-if=\"config.currentPage-2>0\"><a ng-click=switchPage(config.currentPage-2)>{{config.currentPage-2}}</a></li><li ng-if=\"config.currentPage-1>0\"><a ng-click=switchPage(config.currentPage-1)>{{config.currentPage-1}}</a></li><li class=current><a ng-click=switchPage(config.currentPage)>{{config.currentPage}}</a></li><li ng-if=\"(config.currentPage+1) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+1)>{{config.currentPage+1}}</a></li><li ng-if=\"(config.currentPage+2) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+2)>{{config.currentPage+2}}</a></li><li ng-if=\"config.currentPage < config.pageCount\">...</li><li ng-if=\"config.currentPage < config.pageCount\"><a ng-click=switchPage(config.currentPage+1)>Next</a></li></ul>"
   );
 }])
-.factory('api',['$http','$q', function ($http,$q){
+.factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
+
+	var delay  = 1500;
+
 	return {
 		getCards : function(){
 			var defer = $q.defer();
@@ -28281,7 +28284,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			defer.promise.url = path+prefix+query+page
 
 			$http.get(path+prefix+query+page).success(function (data){
-				defer.resolve(data)
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
 			})
 
 			return defer.promise
@@ -28298,7 +28304,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			defer.promise.url = url
 
 			$http.get(url).success(function (data){
-				defer.resolve(data)
+
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+				
 			})
 
 			return defer.promise
@@ -28317,7 +28328,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			defer.promise.url = path+prefix+query+filt+order
 
 			$http.get(path+prefix+query+filt+order).success(function (data){
-				defer.resolve(data)
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
 			})
 
 			return defer.promise
@@ -28402,8 +28416,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 })
 .controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
-	$scope.tags      = [];
-	$scope.firstLoad = true
+	$scope.tags       = [];
+	$scope.activeTags = []; 
+	$scope.firstLoad  = true;
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
@@ -28414,11 +28429,17 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		// Get related content
 		if($scope.post.tags.length > 0){
 
-			angular.forEach($scope.post.tags, function (tag){
-				$scope.tags.push(tag.title)
-			});
+			for (var i = 0; i<$scope.post.tags.length; i++){
+				$scope.tags.push($scope.post.tags[i].title);
+				$scope.activeTags.push({isApplied : false});
+			};
+
+			$scope.orginalList = $scope.tags
+			$scope.loadingTags = true
 
 			api.getRelatedContent($scope.tags).then(function (result){
+
+				$scope.loadingTags = false
 				
 				var posts = result.posts;
 
@@ -28479,10 +28500,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				}
 
 				$scope.tags = [];
+				$scope.activeTags = []; 
 
-				angular.forEach($scope.post.tags, function (tag){
-					$scope.tags.push(tag.title)
-				});
+				for (var i = 0; i<$scope.post.tags.length; i++){
+					$scope.tags.push($scope.post.tags[i].title);
+					$scope.activeTags.push({isApplied : false});
+				};
+
+				$scope.orginalList = $scope.tags
 
 				api.getRelatedContent($scope.tags).then(function (result){
 					var posts = result.posts;
@@ -28497,34 +28522,49 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 
-	$scope.refineRelated = function(tag){
+	$scope.refineRelated = function(tag,i){
 
-		// Reset tags variable if no filters have been applied yet
-		if($scope.firstLoad){
-			$scope.firstLoad = false
-			$scope.tags = [];
-		}
+		if(!$scope.loadingTags){
 
-		// Add or remove tag
-		var index = $scope.tags.indexOf(tag);
-		if(index == -1){
-			$scope.tags.push(tag)
-		} else {
-			$scope.tags.splice(index,1)
-		}
+			// Reset tags variable if no filters have been applied yet
+			if($scope.firstLoad || $scope.tags == $scope.orginalList){
+				$scope.firstLoad = false
+				$scope.tags = [];
+			}
 
-		api.getRelatedContent($scope.tags).then(function (result){
-			
-			var posts = result.posts;
+			// Add or remove tag
+			var index = $scope.tags.indexOf(tag);
+			if(index == -1){
+				$scope.tags.push(tag);
+				$scope.activeTags[i].isApplied = true
+			} else {
+				$scope.tags.splice(index,1);
+				$scope.activeTags[i].isApplied = false
+			}
 
-			columns.divide(posts).then(function (cols){
-				$scope.col1  = cols.col1
-				$scope.col2  = cols.col2
-				$scope.col3  = cols.col3
+			if($scope.tags.length == 0){
+				$scope.tags = $scope.orginalList
+			}
+
+			$scope.loadingTags = true
+		
+			api.getRelatedContent($scope.tags).then(function (result){
+
+				$scope.loadingTags = false
+				
+				var posts = result.posts;
+
+				columns.divide(posts).then(function (cols){
+					$scope.col1  = cols.col1
+					$scope.col2  = cols.col2
+					$scope.col3  = cols.col3
+				})
 			})
-		})
 
-		return $scope.tags
+			//console.log($scope.tags)
+
+			return $scope.tags
+		}
 	}
 
 }])

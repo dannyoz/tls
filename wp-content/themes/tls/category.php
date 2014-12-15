@@ -38,19 +38,6 @@
 
 			</div>
 
-<!-- 			<div class="grid-row" ng-if="size == 'mobile'">
-				
-				<div class="card" ng-repeat="card in col1[0]">
-					<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
-					<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.large.url}}" />
-					<div class="padded" ng-bind-html="card.excerpt"></div>
-					<footer>
-						<p class="futura"><a href="#" ng-bind="card.author.name"></a></p>
-					</footer>
-				</div>
-
-			</div>
- -->
 			<div class="grid-row" ng-click="loadMore();">
 				<button class="clear">Load more</button>
 			</div>

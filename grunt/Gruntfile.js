@@ -114,16 +114,12 @@ module.exports = function(grunt) {
                     ], 
                 dest: '../wp-content/themes/tls/ng-views/', 
                 filter: 'isFile'
-            },
-            php:{
-                expand: true, 
-                flatten: true,
-                cwd: 'DEV/app/', 
-                src: [
-                    '**/*.php'
-                    ], 
-                dest: '../wp-content/themes/tls/', 
-                filter: 'isFile'
+            }
+        },
+
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js'
             }
         }
 
@@ -137,6 +133,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-karma');
 
     // RUN GRUNT 
     grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
