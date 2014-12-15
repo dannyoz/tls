@@ -12,9 +12,9 @@
 require_once get_template_directory() . '/inc/tls-custom-post-types.php';
 
 /**
- * Add Custom Taxonomies
+ * Add Taxonomies
  */
-require_once get_template_directory() . '/inc/tls-custom-taxonomies.php';
+require_once get_template_directory() . '/inc/tls-taxonomies.php';
 
 /**
  *  Add Theme Options Page
