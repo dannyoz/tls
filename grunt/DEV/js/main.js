@@ -28230,7 +28230,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<div id=loading class=\"centre fadeIn\" ng-if=visible><ul><li ng-repeat=\"dot in dots\"></li></ul></div>"
+    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
   );
 
 
@@ -28265,7 +28265,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 6500;
+	var delay  = 1500;
 
 	return {
 		getCards : function(){
@@ -28427,7 +28427,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			visible : '=tlsLoading'
 		},
 		link : function(scope,element){		
-			scope.dots = [1,2,3,4,5,6,7,8];
+			scope.dots = [1,2,3,4,5];
 		}
 	}
 }])

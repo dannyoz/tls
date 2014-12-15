@@ -1,6 +1,8 @@
 #loading{
 
-	$size: 2px;
+	// position:fixed;
+	// width:100%;
+	// z-index:999;
 
 	ul {
 
@@ -9,9 +11,20 @@
 		li{
 
 			display: inline-block;
-			height: $size;
-			width: $size;
-			background: #333;
+			position: relative;
+			height: $loadingOffset;
+			width: $loadingSize;
+			margin: 0 2px;
+
+			b{
+				position:absolute;
+				height:$loadingSize;
+				width:$loadingSize;
+				background: #333;
+				
+				@include border-radius(2px);
+				@include animation(loading,ease,1s,"","",infinite);
+			}
 		}
 	}
 }
