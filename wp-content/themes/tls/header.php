@@ -39,7 +39,7 @@
 				<div id="user" class="centre-y">
 					
 					<button>Subcribe</button>
-					<button class="clear">Login</button>
+					<button class="clear">Login <i class="icon icon-login"></i></button>
 
 				</div>
 			</div>

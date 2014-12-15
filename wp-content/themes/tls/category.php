@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<section id="category" ng-controller="category">
+	<section id="category" ng-controller="category" ng-class="{loading:loading}">
 
 		<div class="container" tls-window-size="size" ng-if="ready">
 
@@ -39,11 +39,13 @@
 			</div>
 
 			<div class="grid-row" ng-click="loadMore();">
-				<button class="clear">Load more</button>
+				<button class="clear">Load more <i class="icon icon-plus"></i></button>
 			</div>
 			
 		</div>
 
+		<div tls-loading="loading"></div>
+		
 	</section>
 
 <?php get_footer();?>

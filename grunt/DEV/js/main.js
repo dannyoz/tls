@@ -28229,6 +28229,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('tls-loading.html',
+    "<div id=loading class=\"centre fadeIn\" ng-if=visible><ul><li ng-repeat=\"dot in dots\"></li></ul></div>"
+  );
+
+
   $templateCache.put('article.html',
     "<article class=single-post ng-controller=article><div class=\"container relative\" ng-swipe-right=\"chooseArticle('prev')\" ng-swipe-left=\"chooseArticle('next')\"><div class=article-links><a href=\"\" ng-click=\"chooseArticle('next')\" class=next-article>Lorem ipsum dolor sit.</a> <a href=\"\" ng-click=\"chooseArticle('prev')\" class=prev-article>Lorem ipsum dolor sit amet.</a></div><div class=article-current ng-class={turn:pageTurn}><div class=grid-row><div class=\"grid-6 push-3\"><img class=max src=http://placehold.it/800x392></div></div><div class=grid-row><div class=article-body><h2>Lorem ipsum dolor sit.</h2><h4 class=author>Lorem ipsum.</h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos neque laudantium nemo hic voluptatum illum saepe culpa asperiores dolores.</blockquote><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><img src=http://placehold.it/368x368><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p></div></div></div></div></article>"
   );
@@ -28260,7 +28265,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 1500;
+	var delay  = 6500;
 
 	return {
 		getCards : function(){
@@ -28414,6 +28419,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.directive('tlsLoading',['$timeout',function ($timeout){
+	return{
+		restrict: "AE",
+		templateUrl : "tls-loading.html",
+		scope : {
+			visible : '=tlsLoading'
+		},
+		link : function(scope,element){		
+			scope.dots = [1,2,3,4,5,6,7,8];
+		}
+	}
+}])
 .controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
 	$scope.tags       = [];
@@ -28583,8 +28600,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.ready = false
 	$scope.page  = 1
+	$scope.loading = true;
 
 	api.getArticle(url).then(function (result){
+
+		$scope.loading = false;
 
 		var posts = result.posts;
 

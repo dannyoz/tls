@@ -33,6 +33,7 @@
 	"global/sass-globals/core",
 	"global/sass-globals/links",
 	"global/sass-globals/forms",
+	"global/sass-globals/icons",
 	"global/sass-globals/typography",
 
 	// 2.2 Global layout Partials
@@ -51,7 +52,11 @@
 	"templates/search/search",
 	"templates/cards/cards",
 
-	// 2.4 Finesse
+	// 2.4 Module Partials
+	// --------------------------------------------
+	"modules/loading/loading",
+
+	// 2.5 Finesse
 	// --------------------------------------------
 	"global/sass-globals/animations";
 

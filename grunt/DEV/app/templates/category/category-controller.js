@@ -4,8 +4,11 @@
 
 	$scope.ready = false
 	$scope.page  = 1
+	$scope.loading = true;
 
 	api.getArticle(url).then(function (result){
+
+		$scope.loading = false;
 
 		var posts = result.posts;
 

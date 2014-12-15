@@ -495,6 +495,78 @@ textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=pass
   color: #d73f2b;
 }
 
+@font-face {
+  font-family: 'icomoon';
+  src: url("/wp-content/themes/tls/fonts/icomoon.eot?-2r7o3");
+  src: url("/wp-content/themes/tls/fonts/icomoon.eot?#iefix-2r7o3") format("embedded-opentype"), url("/wp-content/themes/tls/fonts/icomoon.woff?-2r7o3") format("woff"), url("/wp-content/themes/tls/fonts/icomoon.ttf?-2r7o3") format("truetype"), url("/wp-content/themes/tls/fonts/icomoon.svg?-2r7o3#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cross:before {
+  content: "\e600";
+}
+
+.icon-dropdown:before {
+  content: "\e601";
+}
+
+.icon-email:before {
+  content: "\e602";
+}
+
+.icon-facebook:before {
+  content: "\e603";
+}
+
+.icon-key:before {
+  content: "\e604";
+}
+
+.icon-left-arrow:before {
+  content: "\e605";
+}
+
+.icon-login:before {
+  content: "\e606";
+}
+
+.icon-padlock:before {
+  content: "\e607";
+}
+
+.icon-plus:before {
+  content: "\e608";
+}
+
+.icon-print:before {
+  content: "\e609";
+}
+
+.icon-right-arrow:before {
+  content: "\e60a";
+}
+
+.icon-search:before {
+  content: "\e60b";
+}
+
+.icon-twitter:before {
+  content: "\e60c";
+}
+
 h1 {
   margin-bottom: 0.5em;
   font-size: 2.8em;
@@ -1094,15 +1166,18 @@ em, i {
   animation-duration: 0.4s;
 }
 
+#category {
+  height: auto;
+}
+#category.loading {
+  height: 800px;
+}
 #category button {
   margin: 0 auto;
 }
 
 #related-content {
   background-color: #f2f2f2;
-}
-#related-content .loading {
-  opacity: 0.4;
 }
 #related-content h4 {
   margin: 50px 0 0 0;
@@ -1487,6 +1562,16 @@ em, i {
 }
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
+}
+
+#loading ul {
+  text-align: center;
+}
+#loading ul li {
+  display: inline-block;
+  height: 2px;
+  width: 2px;
+  background: #333;
 }
 
 /*

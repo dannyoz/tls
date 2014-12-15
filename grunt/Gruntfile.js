@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                     'DEV/app/**/*.js',
                     '../wp-content/themes/tls/*.php'
                 ],
-                tasks: ['concat', 'uglify'],
+                tasks: ['ngtemplates','concat', 'uglify'],
                 options: {
                     spawn: false
                 },

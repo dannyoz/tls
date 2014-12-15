@@ -1,0 +1,17 @@
+#loading{
+
+	$size: 2px;
+
+	ul {
+
+		text-align: center;
+
+		li{
+
+			display: inline-block;
+			height: $size;
+			width: $size;
+			background: #333;
+		}
+	}
+}
