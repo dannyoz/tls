@@ -1,8 +1,16 @@
 #category{
 
+	height:auto;
 
-	button{
+	&.loading{
 
-		margin: 0 auto;
+		height:800px;
+	}
+
+	#load-more{
+
+		display: block;
+		position: relative;
+		height:100px;
 	}
 }

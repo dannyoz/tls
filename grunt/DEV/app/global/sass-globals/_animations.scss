@@ -36,6 +36,16 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 
 @include transKeyframes(fadeIn,0% 100%,scale,0.8 1,fadeIn);
 
+//LOADING
+//##############################################################
+
+@include keyframes(loading) {
+    0%   {top:$loadingOffset - $loadingSize;opacity:0}
+    25%  {opacity:0.5}
+	50%  {top:0;opacity:1}
+	75%  {opacity:0.5}
+    100% {top:$loadingOffset - $loadingSize;opacity:1}
+}
 
 
 //PAGE TURNS 

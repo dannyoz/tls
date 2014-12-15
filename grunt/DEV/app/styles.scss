@@ -33,13 +33,13 @@
 	"global/sass-globals/core",
 	"global/sass-globals/links",
 	"global/sass-globals/forms",
+	"global/sass-globals/icons",
 	"global/sass-globals/typography",
 
 	// 2.2 Global layout Partials
 	// --------------------------------------------
 	"global/app-header/header",
 	"global/app-footer/footer",
-	"global/app-edition-preview/edition-preview",
 
 	// 2.3 Template layout Partials
 	// --------------------------------------------
@@ -49,9 +49,14 @@
 	"templates/article/related-content",
 	"templates/comments/comments",
 	"templates/search/search",
-	"templates/cards/cards",
 
-	// 2.4 Finesse
+	// 2.4 Module Partials
+	// --------------------------------------------
+	"modules/cards/cards",
+	"modules/loading/loading",
+	"modules/edition-preview/edition-preview",
+
+	// 2.5 Finesse
 	// --------------------------------------------
 	"global/sass-globals/animations";
 

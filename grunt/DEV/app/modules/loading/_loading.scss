@@ -1,0 +1,30 @@
+#loading{
+
+	// position:fixed;
+	// width:100%;
+	// z-index:999;
+
+	ul {
+
+		text-align: center;
+
+		li{
+
+			display: inline-block;
+			position: relative;
+			height: $loadingOffset;
+			width: $loadingSize;
+			margin: 0 2px;
+
+			b{
+				position:absolute;
+				height:$loadingSize;
+				width:$loadingSize;
+				background: #333;
+				
+				@include border-radius(2px);
+				@include animation(loading,ease,1s,"","",infinite);
+			}
+		}
+	}
+}
