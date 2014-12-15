@@ -1060,8 +1060,10 @@ em, i {
 #category.loading {
   height: 800px;
 }
-#category button {
-  margin: 0 auto;
+#category #load-more {
+  display: block;
+  position: relative;
+  height: 100px;
 }
 
 #related-content {

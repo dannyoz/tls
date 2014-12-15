@@ -28214,11 +28214,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 .run(["$templateCache", function($templateCache) {  'use strict';
 
-  $templateCache.put('edition-preview.html',
-    "<div id=edition-preview><div class=container><div id=this-week><div class=\"preview grid-row\"><div class=top><h3>This<br>week's<br>TLS</h3></div><div class=prevbody><div class=grid-6><h4 class=main>Lorem ipsum dolor sit.</h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam veritatis amet placeat.</p><button>View edition</button></div><div class=grid-6><img class=max src=http://placehold.it/320x400></div></div></div></div><div id=next-week><div class=\"preview grid-row\"><div class=top><h3>In next<br>week's<br>TLS</h3><div class=date><span><u>OUT</u></span><br><span>12th Nov 2014</span></div></div><div class=prevbody><ul><li><h4>Lorem ipsum.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Adipisci, exercitationem.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Ea, corporis.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Animi, perspiciatis?</h4><h5>Lorem ipsum dolor sit amet.</h5></li></ul></div></div></div></div></div>"
-  );
-
-
   $templateCache.put('footer.html',
     "<div class=container><ul><li><a href=#>About</a></li><li><a href=#>Archive</a></li><li><a href=#>Faqs</a></li><li><a href=#>Terms &amp; Conditions</a></li><li><a href=#>How to advertise</a></li><li><a href=#>Classifieds</a></li><li><a href=#>Contact us</a></li><li><a href=#>Facebook</a></li><li><a href=#>Twitter</a></li></ul><p class=copyright>Copyright &copy; The Times Literary Supplement Limited 2014. The Times Literary Supplement Limited: 1 London Bridge Street, London SE1 9GF. Registered in England.<br>Company registration number: 935240. VAT no: GB 243 8054 69.</p></div>"
   );
@@ -28229,6 +28224,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('tls-card.html',
+    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
+  );
+
+
+  $templateCache.put('edition-preview.html',
+    "<div id=edition-preview><div class=container><div id=this-week><div class=\"preview grid-row\"><div class=top><h3>This<br>week's<br>TLS</h3></div><div class=prevbody><div class=grid-6><h4 class=main>Lorem ipsum dolor sit.</h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam veritatis amet placeat.</p><button>View edition</button></div><div class=grid-6><img class=max src=http://placehold.it/320x400></div></div></div></div><div id=next-week><div class=\"preview grid-row\"><div class=top><h3>In next<br>week's<br>TLS</h3><div class=date><span><u>OUT</u></span><br><span>12th Nov 2014</span></div></div><div class=prevbody><ul><li><h4>Lorem ipsum.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Adipisci, exercitationem.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Ea, corporis.</h4><h5>Lorem ipsum dolor sit amet.</h5></li><li><h4>Animi, perspiciatis?</h4><h5>Lorem ipsum dolor sit amet.</h5></li></ul></div></div></div></div></div>"
+  );
+
+
   $templateCache.put('tls-loading.html',
     "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
   );
@@ -28236,11 +28241,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
   $templateCache.put('article.html',
     "<article class=single-post ng-controller=article><div class=\"container relative\" ng-swipe-right=\"chooseArticle('prev')\" ng-swipe-left=\"chooseArticle('next')\"><div class=article-links><a href=\"\" ng-click=\"chooseArticle('next')\" class=next-article>Lorem ipsum dolor sit.</a> <a href=\"\" ng-click=\"chooseArticle('prev')\" class=prev-article>Lorem ipsum dolor sit amet.</a></div><div class=article-current ng-class={turn:pageTurn}><div class=grid-row><div class=\"grid-6 push-3\"><img class=max src=http://placehold.it/800x392></div></div><div class=grid-row><div class=article-body><h2>Lorem ipsum dolor sit.</h2><h4 class=author>Lorem ipsum.</h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos neque laudantium nemo hic voluptatum illum saepe culpa asperiores dolores.</blockquote><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><img src=http://placehold.it/368x368><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p></div></div></div></div></article>"
-  );
-
-
-  $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
   );
 
 
@@ -28419,6 +28419,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.directive('tlsCard',function(){
+	return{
+		restrict:"A",
+		templateUrl : "tls-card.html",
+		scope : {
+			data : "=tlsCard"
+		}
+	}
+})
 .directive('tlsLoading',['$timeout',function ($timeout){
 	return{
 		restrict: "AE",
@@ -28585,26 +28594,26 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 
 }])
-.directive('tlsCard',function(){
-	return{
-		restrict:"A",
-		templateUrl : "tls-card.html",
-		scope : {
-			data : "=tlsCard"
-		}
-	}
-})
-.controller('category', ['$scope','$sce','api', 'columns', function ($scope,$sce,api,columns){
+.controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
 
 	var url = window.location.href;
 
-	$scope.ready = false
-	$scope.page  = 1
-	$scope.loading = true;
+	$scope.ready       = false;
+	$scope.page        = 1;
+	$scope.loading     = true;
+	$scope.scrollState = "off";
+	$scope.infinite    = false;
+	$scope.loadMsg     = "";
+
+	$scope.$on('loadNext',function(){
+		$scope.loadMore();
+	})
 
 	api.getArticle(url).then(function (result){
 
 		$scope.loading = false;
+		$scope.title   = result.category.title
+		$scope.pageCount = result.pages
 
 		var posts = result.posts;
 
@@ -28621,28 +28630,73 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.loadMore = function(){
 
-		api.getArticle(url,$scope.page).then(function (result){
+		$scope.scrollState = "on";
+		$scope.infinite    = true;
+		$scope.infLoading  = true;
 
-			var posts = result.posts;
+		if($scope.pageCount > ($scope.page-1)){
 
-			console.log(posts)
+			api.getArticle(url,$scope.page).then(function (result){
 
-			columns.divide(posts).then(function (cols){
+				var posts = result.posts;
+				$scope.scrollState = "on";
 
-				$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
-				$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
-				$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
-				$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
-				$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
-				$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+				columns.divide(posts).then(function (cols){
 
-				$scope.page ++
+					$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+					$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+					$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+					$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+					$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+					$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+					$scope.page ++
+					$scope.infLoading = false;
+				})
 			})
-		})
+		} else {
+			$scope.scrollState = "off";
+			$scope.infLoading  = false;
 
+			$scope.$apply(function(){
+				$scope.loadMsg = "End of results in " + $scope.title;
+			});
+		}
 	}
 
 }])
+.directive('tlsScroll',function(){
+	return{
+		restrict : "A",
+		scope :{
+			status : "=tlsScroll"
+		},
+		link : function(scope,element){
+
+			scope.$watch('status',function (newVal,oldVal){
+				if(newVal == "on"){
+					scope.scrollable = true
+				} else {
+					scope.scrollable = false
+				}
+			});
+
+			window.onscroll =  function(){
+
+				var wHeight    = (window.innerHeight || document.documentElement.clientHeight),
+		            wYposition = (window.scrollY || window.pageYOffset || document.documentElement.scrollTop), // IE has no support for scrollY
+		            docHeight  = document.body.clientHeight;
+				
+				if(scope.scrollable && wHeight + wYposition >= docHeight){
+					scope.scrollable = false
+					scope.status = "off"
+					scope.$emit('loadNext');
+				}
+
+			}
+		} 
+	}
+})
 .directive('tlsWindowSize', function(){
 	return {
 		restrict: "A",
