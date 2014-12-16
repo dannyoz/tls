@@ -1,4 +1,7 @@
 <?php
+
+require_once get_template_directory() . '/vendor/autoload.php';
+
 include_once 'PuSHSubscriber.php';
 include_once 'PuSHSubscription.php';
 include_once 'PuSHEnvironment.php';

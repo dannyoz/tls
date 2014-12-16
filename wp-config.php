@@ -22,10 +22,10 @@ define('DB_NAME', 'tlsdev');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'vagrant');
+define('DB_PASSWORD', 'brabantia');
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', '10.169.34.9');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
