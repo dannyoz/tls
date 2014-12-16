@@ -28211,12 +28211,12 @@ makeSwipeDirective('ngSwipeRight', 1, 'swiperight');
 })(window, window.angular);
 themeUrl = 'wp-content/themes/tls';
 var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
-	.config(["$locationProvider",function ($locationProvider) {
-  		$locationProvider.html5Mode({
-		  	enabled: true,
-		  	requireBase: false
-		});
-  	}])
+	// .config(["$locationProvider",function ($locationProvider) {
+ //  		$locationProvider.html5Mode({
+	// 	  	enabled: true,
+	// 	  	requireBase: false
+	// 	});
+ //  	}])
 
 .run(["$templateCache", function($templateCache) {  'use strict';
 
@@ -28268,6 +28268,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   $templateCache.put('tls-pagination.html',
     "<ul class=pagination><li ng-if=\"config.currentPage>1\"><a ng-click=switchPage(config.currentPage-1)>Prev</a></li><li ng-if=\"config.currentPage>1\">...</li><li ng-if=\"config.currentPage-2>0\"><a ng-click=switchPage(config.currentPage-2)>{{config.currentPage-2}}</a></li><li ng-if=\"config.currentPage-1>0\"><a ng-click=switchPage(config.currentPage-1)>{{config.currentPage-1}}</a></li><li class=current><a ng-click=switchPage(config.currentPage)>{{config.currentPage}}</a></li><li ng-if=\"(config.currentPage+1) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+1)>{{config.currentPage+1}}</a></li><li ng-if=\"(config.currentPage+2) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+2)>{{config.currentPage+2}}</a></li><li ng-if=\"config.currentPage < config.pageCount\">...</li><li ng-if=\"config.currentPage < config.pageCount\"><a ng-click=switchPage(config.currentPage+1)>Next</a></li></ul>"
   );
+}])
+.controller('header',['$scope', function ($scope){
+
+	$scope.placeholder = "Tls archive, blogs and website";
+	
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
@@ -28512,9 +28517,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 					$scope.dir      = dir
 					$scope.pageTurn = true
 
-					console.log(path.split( '/' ));
+					// console.log(path.split( '/' ));
 
-					$location.path(path.split( '/' )[3]);
+					// $location.path(path.split( '/' )[3]);
 
 					$timeout(function(){
 						$scope.pageTurn = false

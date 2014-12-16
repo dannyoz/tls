@@ -25,41 +25,40 @@
 
 <body <?php body_class(); ?>>
 
-	<header id="main-header">
+	<header id="main-header" ng-controller="header">
 
-		<div id="header-top" class="grid-row">
+		<div id="header-top" class="grid-row" tls-window-size="size">
 			
 			<div class="container">
 				<div id="brand">
-					<h1 id="logo">TLS</h1>
+					<h1 id="logo"><a title="TLS" href="/"><img alt="TLS" src="<?php bloginfo('template_directory'); ?>/images/logo.jpg" /></a></h1>
 					<p class="sub">The times Literary supplement</p>
 					<p class="strap">The leading international weekly for literary culture</p>
 				</div>
 
 				<div id="user" class="centre-y">
-					
+					{{size}}
 					<button>Subcribe</button>
 					<button class="clear">Login <i class="icon icon-login"></i></button>
-
 				</div>
 			</div>
 
 		</div>
 
-		<nav>
+		<nav ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile'}">
 			
 			<div class="container">
 
 				<div class="grid-row">
 				
-					<ul class="futura">
-						<li><a href="#">Latest Edition</a></li>
-						<li><a href="#">Discover</a></li>
-						<li><a href="#">Blogs</a></li>
-					</ul>
+					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 
-					<div class="search">
-						<?php get_search_form(); ?>
+					<div class="search" ng-click="placeholder = ''">
+						<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<label class="screen-reader-text" for="s">Search:</label>
+							<input type="text" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" name="s" id="s" />
+							<input type="submit"/>
+						</form>
 					</div>
 
 				</div>	

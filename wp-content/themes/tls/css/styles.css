@@ -630,7 +630,7 @@ em, i {
   font-style: italic;
 }
 
-.futura, #main-header nav .search label, #main-header nav .search input, .card footer .sub {
+.futura, #main-header nav .search label, #main-header nav .search input[type="text"], .card footer .sub {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
@@ -679,12 +679,10 @@ em, i {
 }
 #main-header #header-top #brand #logo {
   display: block;
-  text-indent: -10000px;
   height: 60px;
   width: 106px;
   float: left;
   margin-right: 20px;
-  background-image: url(../images/logo.jpg);
 }
 #main-header #header-top #brand .sub {
   margin-top: 1px;
@@ -702,6 +700,8 @@ em, i {
 }
 #main-header nav {
   height: 52px;
+  position: relative;
+  display: block;
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-style: solid;
@@ -710,11 +710,6 @@ em, i {
 #main-header nav ul {
   float: left;
   width: 50%;
-}
-@media screen and (max-width: 840px) {
-  #main-header nav ul {
-    width: 75%;
-  }
 }
 #main-header nav ul li {
   display: inline-block;
@@ -726,6 +721,7 @@ em, i {
   display: block;
   line-height: 52px;
   font-weight: 500;
+  font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.85em;
   text-transform: uppercase;
   border-left-width: 1px;
@@ -749,11 +745,6 @@ em, i {
   background-color: #f2f2f2;
   height: 52px;
 }
-@media screen and (max-width: 840px) {
-  #main-header nav .search {
-    width: 25%;
-  }
-}
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
@@ -762,7 +753,7 @@ em, i {
   font-size: 0.9em;
   font-weight: bold;
 }
-#main-header nav .search input {
+#main-header nav .search input[type="text"] {
   width: 100%;
   border: 0;
   background-color: #f2f2f2;
@@ -772,6 +763,11 @@ em, i {
   border-right-width: 1px;
   border-style: solid;
   border-color: #d9d9d9;
+}
+#main-header nav .search input[type="submit"] {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 #main-header nav .search:before {
   height: 1px;

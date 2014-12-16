@@ -64,9 +64,9 @@
 					$scope.dir      = dir
 					$scope.pageTurn = true
 
-					console.log(path.split( '/' ));
+					// console.log(path.split( '/' ));
 
-					$location.path(path.split( '/' )[3]);
+					// $location.path(path.split( '/' )[3]);
 
 					$timeout(function(){
 						$scope.pageTurn = false

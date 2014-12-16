@@ -2,5 +2,6 @@
 	<div>
 		<label class="screen-reader-text" for="s">Search:</label>
 		<input type="text" value="<?php echo get_search_query(); ?>" placeholder="Tls archive, blogs and website" name="s" id="s" />
+		<input type="submit"/>
 	</div>
 </form>
