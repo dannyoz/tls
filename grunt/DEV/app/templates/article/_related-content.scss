@@ -26,11 +26,13 @@
 				padding:5px;
 				text-transform: uppercase;
 				background-color:white;
+				color:$comment-grey;
 				@include keyline(top right bottom left,$light-keyline);
 
 				&.applied {
 
-					background-color:blue;
+					border-color: $primary-orange;
+					color:$primary-orange;
 				}
 			}
 

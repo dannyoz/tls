@@ -64,9 +64,15 @@
 					$scope.dir      = dir
 					$scope.pageTurn = true
 
+					console.log(path.split( '/' ));
+
+					$location.path(path.split( '/' )[3]);
+
 					$timeout(function(){
 						$scope.pageTurn = false
-					},duration)
+					},duration);
+
+					
 				}
 
 				if(dir == 'next'){
@@ -81,6 +87,7 @@
 						$scope.prev     = result.previous_url
 						$scope.next     = result.next_url
 					},duration)
+
 				}
 
 				$scope.tags = [];

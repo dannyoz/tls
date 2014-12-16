@@ -28211,6 +28211,12 @@ makeSwipeDirective('ngSwipeRight', 1, 'swiperight');
 })(window, window.angular);
 themeUrl = 'wp-content/themes/tls';
 var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
+	.config(["$locationProvider",function ($locationProvider) {
+  		$locationProvider.html5Mode({
+		  	enabled: true,
+		  	requireBase: false
+		});
+  	}])
 
 .run(["$templateCache", function($templateCache) {  'use strict';
 
@@ -28265,7 +28271,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 1500;
+	var delay  = 10;
 
 	return {
 		getCards : function(){
@@ -28506,9 +28512,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 					$scope.dir      = dir
 					$scope.pageTurn = true
 
+					console.log(path.split( '/' ));
+
+					$location.path(path.split( '/' )[3]);
+
 					$timeout(function(){
 						$scope.pageTurn = false
-					},duration)
+					},duration);
+
+					
 				}
 
 				if(dir == 'next'){
@@ -28523,6 +28535,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 						$scope.prev     = result.previous_url
 						$scope.next     = result.next_url
 					},duration)
+
 				}
 
 				$scope.tags = [];
