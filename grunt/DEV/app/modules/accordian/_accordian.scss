@@ -1,15 +1,44 @@
 .accordian{
 
+	margin:60px 0;
+
+	.accordian-title{
+
+		cursor: pointer;
+		padding:20px 0 10px 0;
+		@include keyline(bottom,$light-keyline);
+
+		h3{
+
+			text-transform: uppercase;
+			color:$primary-orange;
+			font:{
+				weight:500;
+				size:1.2em;
+			}
+		}
+	}
+
 	.accordian-body{
 
 		overflow: hidden;
+		position:relative;
+		left:100px;
 		height:0;
 		padding:0;
+		opacity:0;
 
 		&.open{
 
 			height: auto;
+			left:0;
 			padding: 30px 0;
+			opacity:1;
+
+			p{
+
+				@include animation(fadeIn,ease,0.4s,20);
+			}
 		}
 	}
 }
