@@ -780,6 +780,12 @@ em, i {
   display: block;
   content: "";
 }
+#main-header nav.tablet ul {
+  width: 75%;
+}
+#main-header nav.tablet .search {
+  width: 25%;
+}
 
 #site-footer {
   background: #000;
