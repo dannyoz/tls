@@ -28230,6 +28230,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('tls-accordian.html',
+    "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index);><h3 ng-bind=item.heading></h3></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
+  );
+
+
   $templateCache.put('tls-card.html',
     "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
   );
@@ -28427,6 +28432,32 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				niceDate = day + " " + months[m]+ " " + year;
 
 			return niceDate;
+		}
+	}
+})
+.directive('tlsAccordian', function () {
+	return {
+		restrict : "A",
+		templateUrl : "tls-accordian.html",
+		scope : {
+			items : "=tlsAccordian"
+		},
+		link : function (scope){
+
+			angular.forEach(scope.items,function(obj,i){
+				var bool = (i == 0)? true : false;
+				obj.isOpen = bool
+			})
+
+			scope.toggleOpen = function (i){
+
+				var newState = (scope.items[i].isOpen == true)? false : true;
+				angular.forEach(scope.items,function(obj){
+					obj.isOpen = false
+				})
+				scope.items[i].isOpen = newState;
+				
+			}
 		}
 	}
 })
@@ -28751,6 +28782,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.controller('footerpages',['$scope','$sce','api','niceDate', function ($scope,$sce,api,niceDate){
+
+	api.getArticle(window.location.href).then(function (result){
+		$scope.page = result.page
+		console.log(result)
+	});
+
+	$scope.format = function(date){
+		return niceDate.format(date);
+	}
+
+}])
 .controller('home',['$scope','api',function ($scope, api){
 
 	$scope.cards = ""

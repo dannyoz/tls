@@ -7,24 +7,20 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main"> <?php echo get_page_template_slug(); ?>
 
-			<?php while ( have_posts() ) : the_post(); ?>
+<article id="accordian-template" class="single-post" ng-controller="footerpages">
+	<div class="container">
+		<div class="grid-row">
 
-				<?php get_template_part( 'content', 'page' ); ?>
+			<div class="article-body">
+				<h1 ng-bind="page.title"></h1>
+				<p class="date" ng-bind="format(page.date);"></p>
+				<div ng-bind-html="page.content"></div>
+				<div ng-if="page.accordion_items.length > 0" tls-accordian="page.accordion_items"></div>
+			</div>
+			
+		</div>
+	</div>
+</article>
 
-				<?php
-					// If comments are open or we have at least one comment, load up the comment template
-					if ( comments_open() || get_comments_number() ) :
-						comments_template();
-					endif;
-				?>
-
-			<?php endwhile; // end of the loop. ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
