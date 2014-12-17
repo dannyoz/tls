@@ -28,11 +28,14 @@ get_header(); ?>
 							<?php
 								$s = get_search_query();
 								$blogs = new WP_Query( "post_type=post&post_status=publish&posts_per_page=-1&s={$s}" );
-								echo '<li>Blogs (' . $blogs->post_count . ')</li>'; wp_reset_postdata();
+								echo '<li>Blogs (' . $blogs->post_count . ')</li>'; wp_reset_query();
 
 
 								$articles = new WP_Query( "post_type=tls_articles&post_status=publish&posts_per_page=-1&s={$s}" );
-								echo '<li>Articles (' . $articles->post_count . ')</li>'; wp_reset_postdata();
+								echo '<li>Articles (' . $articles->post_count . ')</li>'; wp_reset_query();
+
+								$pages = new WP_Query( "post_type=page&post_status=publish&posts_per_page=-1&s={$s}" );
+								echo '<li>Pages (' . $pages->post_count . ')</li>'; wp_reset_query();
 
 								$args = array(
 									'post_type'	=> array('post', 'tls_articles'),

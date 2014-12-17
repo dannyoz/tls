@@ -5,27 +5,40 @@
  * @package tls
  */
 
+//ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
+/**
+ * Define Constants
+ */
+
+define( 'TLS_THEME_DIR', get_template_directory() );
+
+
+/**
+ * Include Plugin Absolute Path
+ */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
  * Add Custom Post Types
  */
-require_once get_template_directory() . '/inc/tls-custom-post-types.php';
+require_once TLS_THEME_DIR . '/inc/tls-custom-post-types.php';
 
 /**
  * Add Taxonomies
  */
-require_once get_template_directory() . '/inc/tls-taxonomies.php';
+require_once TLS_THEME_DIR . '/inc/tls-taxonomies.php';
 
 /**
  *  Add Theme Options Page
  */
-require_once get_template_directory() . '/inc/tls-theme-options.php';
+require_once TLS_THEME_DIR . '/inc/tls-theme-options.php';
 
 /**
  * PuSHSubscriberWP - TLS Custom PubSubHubbub Integration
  */
-require_once get_template_directory() . '/inc/push_subscriber_wp/PuSHSubscriberWP.php';
-$PuSHSubscriberWP = new PuSHSubscriberWP;
+require_once TLS_THEME_DIR . '/inc/push_subscriber_wp/vendor/autoload.php'; // Load Composer Auto load file
+$PuSHSubscriberWP = new PuSHSubscriberWP\PuSHSubscriberWP;
 
 
 /**
@@ -44,7 +57,7 @@ function tls_setup() {
 	 * If you're building a theme based on tls, use a find and replace
 	 * to change 'tls' to the name of your theme in all the template files
 	 */
-	load_theme_textdomain( 'tls', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'tls', TLS_THEME_DIR . '/languages' );
 
 	/*
 	 * Enable support for Post Thumbnails on posts and pages.
@@ -108,6 +121,7 @@ function tls_remove_wp_ver_css_js( $src ) {
     return $src;
 }
 
+
 /**
  * Enqueue scripts and styles.
  */
@@ -115,3 +129,9 @@ function tls_remove_wp_ver_css_js( $src ) {
 
 // }
 // add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles' );
+
+if (is_plugin_active('json-api/json-api.php')) {
+
+	include_once TLS_THEME_DIR . '/inc/tls_json_api_encode.php';
+
+}
