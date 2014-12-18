@@ -34,7 +34,7 @@ function tls_custom_post_types() {
 	// Edition Post Type Arguments
 	$ed_args = array(
 		'label'               => __( 'tls_editions', 'tls' ),
-		'description'         => __( 'TLS Editions Content Post Type', 'tls' ),
+		'description'         => __( 'TLS Editions Custom Content Post Type', 'tls' ),
 		'labels'              => $ed_labels,
 		'supports'            => array( 'title'),
 		'hierarchical'        => false,
@@ -47,7 +47,7 @@ function tls_custom_post_types() {
 		'menu_icon'           => 'dashicons-media-spreadsheet',
 		'can_export'          => true,
 		'has_archive'         => true,
-		'exclude_from_search' => false,
+		'exclude_from_search' => true,
 		'publicly_queryable'  => true,
 		'rewrite'             => $ed_rewrite,
 		'capability_type'     => 'post',
@@ -85,7 +85,7 @@ function tls_custom_post_types() {
 	// Article Post Type Arguments
 	$art_args = array(
 		'label'               => __( 'tls_articles', 'tls' ),
-		'description'         => __( 'TLS Articles Content Post Type', 'tls' ),
+		'description'         => __( 'TLS Articles Custom Content Post Type', 'tls' ),
 		'labels'              => $art_labels,
 		'supports'            => array( 'title', 'editor', 'comments' ),
 		'hierarchical'        => false,
@@ -105,6 +105,57 @@ function tls_custom_post_types() {
 	);
 	// Regist tls_articles Post Type
 	register_post_type( 'tls_articles', $art_args );
+
+
+	/**
+	 *  FAQs Post Type
+	 */
+	// FAQ Post Type Labels
+	$faq_labels = array(
+		'name'                => _x( 'FAQs', 'Post Type General Name', 'tls' ),
+		'singular_name'       => _x( 'FAQ', 'Post Type Singular Name', 'tls' ),
+		'menu_name'           => __( 'FAQs', 'tls' ),
+		'parent_item_colon'   => __( 'Parent FAQ:', 'tls' ),
+		'all_items'           => __( 'All FAQs', 'tls' ),
+		'view_item'           => __( 'View FAQ', 'tls' ),
+		'add_new_item'        => __( 'Add New FAQ', 'tls' ),
+		'add_new'             => __( 'Add FAQ', 'tls' ),
+		'edit_item'           => __( 'Edit FAQ', 'tls' ),
+		'update_item'         => __( 'Update FAQ', 'tls' ),
+		'search_items'        => __( 'Search FAQ', 'tls' ),
+		'not_found'           => __( 'FAQ Not found', 'tls' ),
+		'not_found_in_trash'  => __( 'FAQ Not found in Trash', 'tls' ),
+	);
+	// FAQ Post Type Rewrite Rules
+	$faq_rewrite = array(
+		'slug'                => 'faq',
+		'with_front'          => true,
+		'pages'               => true,
+		'feeds'               => true,
+	);
+	// FAQ Post Type Arguments
+	$faq_args = array(
+		'label'               => __( 'tls_faq', 'tls' ),
+		'description'         => __( 'TLS FAQs Custom Content Post Type', 'tls' ),
+		'labels'              => $faq_labels,
+		'supports'            => array( 'title', 'editor', 'comments' ),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-editor-help',
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'rewrite'             => $faq_rewrite,
+		'capability_type'     => 'post',
+	);
+	// Regist tls_faq Post Type
+	register_post_type( 'tls_faq', $faq_args );
 
 }
 

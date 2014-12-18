@@ -70,6 +70,10 @@ $table_prefix  = '_tls_wp_';
  */
 define('WP_DEBUG', true);
 
+/* Add the following to make VIP Scanner Work */
+define( 'WP_MEMORY_LIMIT', '512M' );
+define( 'WP_MAX_MEMORY_LIMIT', '512M' );
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */

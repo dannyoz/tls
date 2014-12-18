@@ -22,42 +22,56 @@ function tls_json_api_encode($response) {
         die( $return );
     }
 
-    //exclude these fields from the json response data, could't find native way to exlude them so this way :/
-    $excludes = array(
-        'posts' => array(
-            'page' 
-        )
-    );
+    /**
+     * Search Page Specific
+     */
+    if ( is_search() ) {
+    	$s = get_search_query();
+    	$tls_blogs = get_term_by( 'slug', 'tls-blogs', 'category' );
+    	$tls_blogs_id = (int) $tls_blogs->term_id;
+    	$blogs = new WP_Query( "post_type=post&post_status=publish&cat={$tls_blogs_id}&posts_per_page=-1&s={$s}" );
 
-    return $response;
-}
-add_filter('json_api_encode', 'tls_json_api_encode');
+    	$response['blogs'] = array(
+    		'id'			=> $tls_blogs,
+    		'name' 			=> __('TLS Blogs', 'tls'),
+    		'slug' 			=> 'category/tls-blogs',
+    		'search_count' 	=> $blogs->post_count
+    	);
+	}
 
-/**
- * tls_add_page_template_slug_json_api	Add Page Template Slug to pages
- * @param  object $response 	The JSON API Response Object
- * @return object $reposnse		Returns the new JSON API Response Object
- */
-function tls_add_page_template_slug_json_api($response) {
-  if (isset($response['page'])) {
-   $response['page']->page_template_slug = get_page_template_slug($response['page']->id);
-  }
-  return $response;
-}
-add_filter('json_api_encode', 'tls_add_page_template_slug_json_api');
+	/**
+	 *  Single Post Specific
+	 */
+	if ( isset( $response['post'] ) ) {
+		$previous_post = get_previous_post();
+		$next_post = get_next_post();
 
-/**
- * tls_page_accordion_items_json_api	Add Accordion Items to the pages with template-page-with-accordion.php page template only
- * @param  object $response 	The JSON API Response Object
- * @return object $reposnse		Returns the new JSON API Response Object
- */
-function tls_page_accordion_items_json_api($response) {
-	if ( isset( $response['page'] ) ) {
+		if ( !empty( $previous_post ) ) {
+			$response['post']->previous_post_info = array(
+				'url'	=> get_permalink($previous_post->ID),
+				'title'	=> $previous_post->post_title
+			);
+		}
+
+		if ( !empty( $next_post ) ) {
+			$response['post']->next_post_info = array(
+				'url'	=> get_permalink($next_post->ID),
+				'title'	=> $next_post->post_title
+			);
+		}
+	}
+
+	/**
+	 * Add Template Slug to All the single pages + Add accordion items to pages with template template-page-with-accordion.php
+	 */
+	if (isset($response['page'])) {
+		$response['page']->page_template_slug = get_page_template_slug($response['page']->id);
 
 		if ( $response['page']->page_template_slug == 'template-page-with-accordion.php' ) {
 			$response['page']->accordion_items = get_field('accordion', $response['page']->id);
 		}
 	}
+
 	return $response;
 }
-add_filter('json_api_encode', 'tls_page_accordion_items_json_api');
+add_filter('json_api_encode', 'tls_json_api_encode');

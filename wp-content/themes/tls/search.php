@@ -27,7 +27,7 @@ get_header(); ?>
 						<ul class="filters">
 							<?php
 								$s = get_search_query();
-								$blogs = new WP_Query( "post_type=post&post_status=publish&posts_per_page=-1&s={$s}" );
+								$blogs = new WP_Query( "post_type=post&post_status=publish&category_name=[tls-blogs]&posts_per_page=-1&s={$s}" );
 								echo '<li>Blogs (' . $blogs->post_count . ')</li>'; wp_reset_query();
 
 
@@ -38,7 +38,7 @@ get_header(); ?>
 								echo '<li>Pages (' . $pages->post_count . ')</li>'; wp_reset_query();
 
 								$args = array(
-									'post_type'	=> array('post', 'tls_articles'),
+									'post_type'	=> array('post'),
 									'post_status' => 'publish',
 									's'			=> $s
 								);
