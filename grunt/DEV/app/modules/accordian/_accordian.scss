@@ -6,15 +6,45 @@
 
 		cursor: pointer;
 		padding:20px 0 10px 0;
+		position:relative;
 		@include keyline(bottom,$light-keyline);
 
 		h3{
 
+			padding-right:100px;
 			text-transform: uppercase;
 			color:$primary-orange;
 			font:{
 				weight:500;
-				size:1.2em;
+				size:1em;
+			}
+		}
+
+		.toggler{
+
+			position:absolute;
+			top:20px;
+			right: 0;
+
+			span{
+
+				font:{
+
+					family:$futura;
+					size:0.9em;
+					weight:500;
+				}
+			}
+
+			i {
+
+				font-size: 1em;
+				@include transform(rotate(0deg));
+
+				&.open{
+
+					@include transform(rotate(45deg));
+				}
 			}
 		}
 	}
@@ -27,6 +57,14 @@
 		height:0;
 		padding:0;
 		opacity:0;
+
+		hr{
+
+			height: 1px;
+			width: 100%;
+			border:0;
+			background: $light-keyline;
+		}
 
 		&.open{
 

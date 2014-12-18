@@ -12,7 +12,7 @@
 						
 						<div class="card" ng-repeat="card in column">
 							<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
-							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.large.url}}" />
+							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.medium.url}}" />
 							<div class="padded" ng-bind-html="card.excerpt"></div>
 							<footer>
 								<p class="futura"><a href="#" ng-bind="card.author.name"></a></p>
@@ -29,7 +29,7 @@
 						
 						<div class="card" ng-repeat="card in column">
 							<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
-							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.large.url}}" />
+							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.medium.url}}" />
 							<div class="padded" ng-bind-html="card.excerpt"></div>
 							<footer>
 								<p class="futura"><a href="#" ng-bind="card.author.name"></a></p>

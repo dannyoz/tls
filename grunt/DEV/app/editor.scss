@@ -58,6 +58,14 @@
 			list-style: initial;
 		}
 
+		hr{
+
+			height: 1px;
+			width: 100%;
+			border:0;
+			background: $light-keyline;
+		}
+
 		blockquote{
 
 			margin: 0 -10% 1em -10%;

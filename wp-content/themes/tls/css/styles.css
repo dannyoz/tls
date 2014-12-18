@@ -754,7 +754,6 @@ em, i {
   font-weight: bold;
 }
 #main-header nav .search input[type="text"] {
-  width: 100%;
   border: 0;
   background-color: #f2f2f2;
   padding: 16px 0 16px 100px;
@@ -955,6 +954,8 @@ em, i {
   right: 20px;
 }
 .single-post .article-body {
+  -webkit-perspective: 1000;
+  perspective: 1000;
   margin-left: 25.625%;
   float: left;
   position: relative;
@@ -1035,6 +1036,7 @@ em, i {
 }
 .single-post .fold.turnleft {
   display: block;
+  -webkit-transform-style: preserve-3d;
   -webkit-animation-name: pageTurnLeft;
   animation-name: pageTurnLeft;
   -webkit-animation-fill-mode: both;
@@ -1046,6 +1048,7 @@ em, i {
 }
 .single-post .fold.turnright {
   display: block;
+  -webkit-transform-style: preserve-3d;
   -webkit-animation-name: pageTurnRight;
   animation-name: pageTurnRight;
   -webkit-animation-fill-mode: both;
@@ -1464,15 +1467,40 @@ em, i {
 .accordian .accordian-title {
   cursor: pointer;
   padding: 20px 0 10px 0;
+  position: relative;
   border-bottom-width: 1px;
   border-style: solid;
   border-color: #d9d9d9;
 }
 .accordian .accordian-title h3 {
+  padding-right: 100px;
   text-transform: uppercase;
   color: #d73f2b;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1em;
+}
+.accordian .accordian-title .toggler {
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+.accordian .accordian-title .toggler span {
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.accordian .accordian-title .toggler i {
+  font-size: 1em;
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.accordian .accordian-title .toggler i.open {
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 .accordian .accordian-body {
   overflow: hidden;
@@ -1481,6 +1509,12 @@ em, i {
   height: 0;
   padding: 0;
   opacity: 0;
+}
+.accordian .accordian-body hr {
+  height: 1px;
+  width: 100%;
+  border: 0;
+  background: #d9d9d9;
 }
 .accordian .accordian-body.open {
   height: auto;
