@@ -26,17 +26,62 @@ function tls_json_api_encode($response) {
      * Search Page Specific
      */
     if ( is_search() ) {
-    	$s = get_search_query();
+    	$search_query = get_search_query();
+    	
+    	// TLS Blogs Category Term Search Filter Info
     	$tls_blogs = get_term_by( 'slug', 'tls-blogs', 'category' );
     	$tls_blogs_id = (int) $tls_blogs->term_id;
-    	$blogs = new WP_Query( "post_type=post&post_status=publish&cat={$tls_blogs_id}&posts_per_page=-1&s={$s}" );
+    	$blogs = new WP_Query( array(  
+    		'post_type'			=> 'post',
+    		'post_status' 		=> 'publish',
+    		'cat' 				=> $tls_blogs_id,
+    		'posts_per_page' 	=> -1,
+    		's'					=> $search_query
+    	) );
 
-    	$response['blogs'] = array(
-    		'id'			=> $tls_blogs,
-    		'name' 			=> __('TLS Blogs', 'tls'),
-    		'slug' 			=> 'category/tls-blogs',
-    		'search_count' 	=> $blogs->post_count
+    	$response['search_filters']['blogs'] = array(
+    		'name' 				=> __($tls_blogs->name, 'tls'),
+    		'taxonomy'			=> $tls_blogs->taxonomy,
+    		'slug' 				=> $tls_blogs->slug,
+    		'search_count' 		=> $blogs->post_count
     	);
+
+    	// FAQs Post Type Search Filter
+    	$faqs = new WP_Query( array( 
+    		'post_type'			=> 'tls_faq',
+    		'post_status'		=> 'publish',
+    		'posts_per_page'	=> -1,
+    		's'					=> $search_query
+    	) );
+
+    	$response['search_filters']['faqs'] = array(
+    		'name'				=> __('FAQs', 'tls'),
+    		'slug'				=> 'faqs',
+    		'search_count'		=> $faqs->post_count
+    	);
+
+    	// Reviews Articles Tag Search Filter
+    	$reviews_tag = get_term_by( 'slug', 'reviews', 'post_tag' );
+    	$reviews_tag_id = (int) $reviews_tag->term_id;
+    	$reviews = new WP_Query( array(  
+    		'post_type'			=> 'tls_articles',
+    		'post_status'		=> 'publish',
+    		'posts_per_page'	=> -1,
+    		's'					=> $search_query,
+    		'tax_query'			=> array( array (
+    			'taxonomy'		=> 'post_tag',
+    			'field'			=> 'term_id',
+    			'terms'			=> $reviews_tag_id
+    		) )
+    	) );
+
+    	$response['search_filters']['reviews'] = array(
+    		'name'				=> __($reviews_tag->name),
+    		'taxonomy'			=> $reviews_tag->taxonomy,
+    		'slug'				=> $reviews_tag->slug,
+    		'search_count'		=> $reviews->post_count
+    	);
+
 	}
 
 	/**
