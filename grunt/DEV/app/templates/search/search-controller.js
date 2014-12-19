@@ -11,13 +11,16 @@
 	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
 		
 		$scope.showFilters = false
-		$scope.results = results
+		$scope.results     = results
+		$scope.contentType = results.content_type_filters
 		$scope.paginationConfig = {
 			"pageCount"   : results.pages,
 			"currentPage" : $scope.currentPage,
 			"filters"     : $scope.filters,
 			"order"       : $scope.order
 		}
+
+		console.log(results);
 
 	})
 
@@ -30,14 +33,17 @@
 
 	})
 
-	$scope.filterResults = function(term){
+	$scope.filterResults = function(term,key){
+
 
 		var index = $scope.filters.indexOf(term);
 
 		if(index == -1){
 			$scope.filters.push(term)
+			$scope.contentType[key].isApplied = true
 		} else {
 			$scope.filters.splice(index,1)
+			$scope.contentType[key].isApplied = false
 		}
 
 		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
