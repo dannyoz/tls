@@ -6,6 +6,7 @@
  * @return object $reposnse		Returns the new and filtered/modefied JSON API Response Object
  */
 function tls_json_api_encode($response) {
+	global $json_api, $wp_query;
 	//echo $GLOBALS['wp_query']->request;
 
     // enable debug mode and display native json object when debug is set in the url
@@ -29,13 +30,15 @@ function tls_json_api_encode($response) {
     	// Get Search Query to be used in all the queries
     	$search_query = get_search_query();
 
-		// Reviews Articles Tag Search Filter
+		/**
+		 * Reviews Articles Tag Search Filter
+		 */
     	$reviews_tag = get_term_by( 'slug', 'reviews', 'post_tag' );
     	$reviews_tag_id = (int) $reviews_tag->term_id;
     	$reviews = new WP_Query( array(  
     		'post_type'			=> 'tls_articles',
     		'post_status'		=> 'publish',
-    		'posts_per_page'	=> -1,
+    		'posts_per_page'	=> 1,
     		's'					=> $search_query,
     		'tax_query'			=> array( array (
     			'taxonomy'		=> 'post_tag',
@@ -48,16 +51,18 @@ function tls_json_api_encode($response) {
     		'item_label'		=> __('Reviews', 'tls'),
     		'taxonomy'			=> $reviews_tag->taxonomy,
     		'slug'				=> $reviews_tag->slug,
-    		'search_count'		=> $reviews->post_count
+    		'search_count'		=> (int) $reviews->found_posts
     	);
 
-    	// Reviews Articles Tag Search Filter
+    	/**
+    	 * Reviews Articles Tag Search Filter
+    	 */
     	$public_visibility = get_term_by( 'slug', 'public', 'article-visibility' );
     	$public_visibility_id = (int) $public_visibility->term_id;
     	$public_articles = new WP_Query( array(  
     		'post_type'			=> 'tls_articles',
     		'post_status'		=> 'publish',
-    		'posts_per_page'	=> -1,
+    		'posts_per_page'	=> 1,
     		's'					=> $search_query,
     		'tax_query'			=> array( array (
     			'taxonomy'		=> 'article-visibility',
@@ -70,17 +75,19 @@ function tls_json_api_encode($response) {
     		'item_label'		=> __('Free To Non Subscribers', 'tls'),
     		'taxonomy'			=> $public_visibility->taxonomy,
     		'slug'				=> $public_visibility->slug,
-    		'search_count'		=> $public_articles->post_count
+    		'search_count'		=> (int) $public_articles->found_posts
     	);
 
-    	// TLS Blogs Category Term Search Filter Info
+    	/**
+    	 * TLS Blogs Category Term Search Filter Info
+    	 */
     	$tls_blogs = get_term_by( 'slug', 'tls-blogs', 'category' );
     	$tls_blogs_id = (int) $tls_blogs->term_id;
     	$blogs = new WP_Query( array(  
     		'post_type'			=> 'post',
     		'post_status' 		=> 'publish',
     		'cat' 				=> $tls_blogs_id,
-    		'posts_per_page' 	=> -1,
+    		'posts_per_page' 	=> 1,
     		's'					=> $search_query
     	) ); wp_reset_query();
 
@@ -88,23 +95,52 @@ function tls_json_api_encode($response) {
     		'item_label'		=> __('Blogs', 'tls'),
     		'taxonomy'			=> $tls_blogs->taxonomy,
     		'slug' 				=> $tls_blogs->slug,
-    		'search_count' 		=> $blogs->post_count
+    		'search_count' 		=> (int) $blogs->found_posts
     	);
 
-    	// FAQs Post Type Search Filter
+    	/**
+    	 * FAQs Post Type Search Filter
+    	 */
     	$faqs = new WP_Query( array( 
     		'post_type'			=> 'tls_faq',
     		'post_status'		=> 'publish',
-    		'posts_per_page'	=> -1,
+    		'posts_per_page'	=> 1,
     		's'					=> $search_query
     	) ); wp_reset_query();
 
     	$response['content_type_filters']['faqs'] = array(
     		'item_label'		=> __('FAQs', 'tls'),
     		'slug'				=> 'faqs',
-    		'search_count'		=> $faqs->post_count
+    		'search_count'		=> (int) $faqs->found_posts
     	);
 
+
+    	/**
+    	 * Attempt to implement a date_query inside the search page
+    	 */
+    	if ( isset( $_GET['date_filter'] ) && $_GET['date_filter'] != '' ) {
+ 
+ 			$url = parse_url($_SERVER['REQUEST_URI']);
+    		$url_query = wp_parse_args($url['query']);
+
+			$date_posts_archive_args = array(
+    			'post_status'		=> 'publish',
+    			'date_query'		=> array(
+    				array(
+						'column' => 'post_date',
+						'after' => $url_query['date_filter'],
+						'inclusive' => true
+					),
+    			),
+
+    		);
+    		
+    		$date_posts_archive = $json_api->introspector->get_posts($date_posts_archive_args);
+    		$response['count'] = count($date_posts_archive);
+    		$response['count_total'] = (int) $wp_query->found_posts;
+    		$response['pages'] = $wp_query->max_num_pages;
+    		$response['posts'] = $date_posts_archive;
+    	}
 
 	}
 
