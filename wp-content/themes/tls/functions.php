@@ -135,3 +135,16 @@ if (is_plugin_active('json-api/json-api.php')) {
 	include_once TLS_THEME_DIR . '/inc/tls_json_api_encode.php';
 
 }
+ 
+/**
+ * tls_remove_page_from_search	Remove Page Post Type from Search
+ */
+function tls_remove_page_from_search() {
+	global $wp_post_types;
+ 
+	if ( post_type_exists( 'page' ) ) {
+		// exclude from search results
+		$wp_post_types['page']->exclude_from_search = true;
+	}
+}
+add_action( 'init', 'tls_remove_page_from_search', 99 );
