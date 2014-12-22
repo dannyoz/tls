@@ -57,9 +57,10 @@
 						<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="search-wrapper">
 								<label class="screen-reader-text" for="s">Search:</label>
-								<input type="text" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" name="s" id="s" />
+								<input type="search" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" name="s" id="s" />
 							</div>
-							<input type="submit"/>
+							<!-- <input type="submit"/> -->
+							<button type="submit" class="icon icon-search"></button>
 						</form>
 					</div>
 

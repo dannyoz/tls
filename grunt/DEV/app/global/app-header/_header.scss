@@ -98,6 +98,8 @@
 
 		.search{
 
+			$bnt-width : 50px;
+
 			float: left;
 			width:50%;
 			position:relative;
@@ -118,33 +120,43 @@
 				@extend .futura;
 			}
 
-			input[type="text"]{
+			input[type="text"],input[type="search"]{
 				
 				border:0;
 				background-color:$subtle-light-grey;
-				padding:16px 0 16px 100px;
 				text-transform:uppercase;
+				width: 100%;
 				font:{
 					size:0.9em;
 				}
+				@include boxSizing(16px 0 16px 100px);
 				@include keyline(right,$light-keyline);
 				@extend .futura;
 			}
 
-			input[type="submit"]{
+			.search-wrapper{
+
+				@include fitParent("",0,$bnt-width,0,0);
+
+				&:before{
+
+					height:1px;
+					background-color:$light-keyline;
+					@include fitParent("", 40px,20px,auto,20px);
+					@include afterBefore;
+				}
+			}
+
+			button{
 
 				position:absolute;
 				top:0;
 				right:0;
-			}
-
-			&:before{
-
-				height:1px;
-				background-color:$light-keyline;
-				@include fitParent("", 40px,20px,auto,20px);
-				@include afterBefore;
-
+				width:$bnt-width;
+				height:100%;
+				background:none;
+				border:none;
+				@include border-radius(0px);
 			}
 		}
 
@@ -163,7 +175,7 @@
 
 		&.mobile{
 
-			
+
 		}
 	}
 }
