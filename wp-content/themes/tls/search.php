@@ -24,9 +24,9 @@ get_header(); ?>
 
 					<div class="filter-block">
 						<h3 class="futura uppercase">Content type</h3>
-						<ul class="filters">
+						<ul class="filters" ng-cloak>
 							<li ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in contentType">
-								<a ng-click="filterResults(val.slug,name)">{{val.item_label}} ({{val.search_count}})</a>
+								<a ng-click="filterResults(val.slug,name)">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
 							</li>
 						</ul>
 					</div>
@@ -55,7 +55,7 @@ get_header(); ?>
 
 				</div>
 
-				<div id="results" class="transition-1" ng-class="{shift:showFilters}">
+				<div id="results" class="transition-1" ng-class="{shift:showFilters,loading:loadResults}">
 					
 					<h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . get_search_query() . '"</span>' ); ?></h2>
 
@@ -86,11 +86,13 @@ get_header(); ?>
 						<h3 class="futura">
 							<a ng-attr-href="{{post.url}}" ng-bind="post.title"></a>
 						</h3>
-						<span ng-if="post.modified" class="post-date">{{format(post.date)}}</span>
+						<span ng-if="post.modified" class="post-date">{{niceDate.format(post.date)}}</span>
 						<div class="padded" ng-bind-html="post.excerpt"></div>
 					</div>
 
 					<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
+
+					<div tls-loading="loadResults"></div>
 
 				</div>
 			</div>

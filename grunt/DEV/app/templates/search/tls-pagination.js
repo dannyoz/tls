@@ -19,6 +19,8 @@
 					f = scope.config.filters,
 					o = scope.config.order;
 
+				scope.$emit('loading')
+
 				api.getSearchResults(u,i,f,o).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})

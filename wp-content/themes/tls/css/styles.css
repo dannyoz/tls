@@ -1205,6 +1205,15 @@ em, i {
   font-size: 0.95em;
   font-family: "futura-pt", "Arial", sans-serif;
 }
+#search-results #search-filters .filter-block ul li a .icon {
+  display: none;
+  float: right;
+  font-size: 0.7em;
+  margin-top: 2px;
+}
+#search-results #search-filters .filter-block ul li a:hover .icon {
+  display: block;
+}
 #search-results #search-filters .filter-block ul li.applied a {
   background-color: #fbebe9;
 }
@@ -1249,6 +1258,9 @@ em, i {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+#search-results #results.loading {
+  opacity: 0.1;
 }
 #search-results .pagination {
   margin-bottom: 20px;

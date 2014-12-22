@@ -69,6 +69,19 @@
 							size:0.95em;
 							family:$futura;
 						}
+
+						.icon{
+
+							display: none;
+							float: right;
+							font-size: 0.7em;
+							margin-top: 2px;
+						}
+
+						&:hover .icon{
+
+							display: block;
+						}
 					}
 
 					&.applied a{
@@ -128,6 +141,11 @@
 				}
 				@include absolutly(10px,top,right);
 			}
+		}
+
+		&.loading{
+
+			opacity: 0.1;
 		}
 
 	}

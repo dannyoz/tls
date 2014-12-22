@@ -1,6 +1,6 @@
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 10;
+	var delay  = 500;
 
 	return {
 		getCards : function(){

@@ -28281,7 +28281,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 10;
+	var delay  = 500;
 
 	return {
 		getCards : function(){
@@ -28917,10 +28917,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.orderName   = "Newest"
 	$scope.order       = "ASC"
 	$scope.showSorter  = false
+	$scope.loadResults = true
+	$scope.niceDate    = niceDate
 
 	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
 		
 		$scope.showFilters = false
+		$scope.loadResults = false
 		$scope.results     = results
 		$scope.contentType = results.content_type_filters
 		$scope.paginationConfig = {
@@ -28935,8 +28938,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	})
 
 	//Refresh scope when pagination page is selected
+	$scope.$on('loading',function (){
+		$scope.loadResults = true
+	})
+
 	$scope.$on('updatePage',function (e,results,curr){
 
+		$scope.loadResults = false
 		$scope.paginationConfig.currentPage = curr
 		$scope.currentPage = curr
 		$scope.results     = results
@@ -28945,6 +28953,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.filterResults = function(term,key){
 
+		$scope.loadResults = true
 
 		var index = $scope.filters.indexOf(term);
 
@@ -28957,6 +28966,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 
 		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+			
+			$scope.loadResults = false
 			$scope.results = results
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
@@ -28969,10 +28980,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.orderResults = function(order,orderName){
 
+		$scope.loadResults = true
+
 		$scope.order     = order;
 		$scope.orderName = orderName;
 		
 		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+			
+			$scope.loadResults = false
 			$scope.results = results
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
@@ -28982,12 +28997,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			}
 		})
 	}
-
-
-	$scope.format = function(date){
-		return niceDate.format(date);
-	}
-
 
 }])
 .directive('tlsPagination',[ 'api', function (api){
@@ -29010,6 +29019,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				var u = window.location.href,
 					f = scope.config.filters,
 					o = scope.config.order;
+
+				scope.$emit('loading')
 
 				api.getSearchResults(u,i,f,o).then(function (results){
 					scope.$emit('updatePage',results,i)
