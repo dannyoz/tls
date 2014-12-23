@@ -48,6 +48,23 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 }
 
 
+//FLIPS
+//##############################################################
+
+
+@-webkit-keyframes flip-h-next {
+	0%   {-webkit-transform:rotate3d(0, 1, 0, -180deg);background-color:transparent;}
+	50%  {background-color:white;}
+	100% {-webkit-transform:rotate3d(0, 1, 0, 0deg);background-color:white;}
+}
+
+@-webkit-keyframes flip-h-curr {
+	0%   {-webkit-transform:rotate3d(0, 1, 0, 0deg); background-color:white;}
+	50%  {background-color:white;}
+	100% {-webkit-transform:rotate3d(0, 1, 0, 180deg);background-color:transparent;}
+}
+
+
 //PAGE TURNS 
 //##############################################################
 

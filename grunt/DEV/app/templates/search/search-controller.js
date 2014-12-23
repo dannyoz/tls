@@ -11,7 +11,13 @@
 	$scope.loadResults = true
 	$scope.niceDate    = niceDate
 
-	api.getSearchResults(url,$scope.currentPage,$scope.filters,$scope.order,$scope.dateRange)
+	api.getSearchResults(
+			url,
+			$scope.currentPage,
+			$scope.filters,
+			$scope.order,
+			$scope.dateRange
+		)
 		.then(function (results){
 		
 			$scope.showFilters = false
@@ -59,7 +65,13 @@
 			$scope.contentType[key].isApplied = false
 		}
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange)
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				$scope.dateRange
+			)
 			.then(function (results){
 			
 				$scope.loadResults = false
@@ -87,7 +99,13 @@
 		$scope.dateRanges[name].isApplied = !$scope.dateRanges[name].isApplied
 		$scope.loadResults = true
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order,range)
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				range
+			)
 			.then(function (results){
 			
 				$scope.loadResults = false
@@ -109,16 +127,22 @@
 		$scope.order     = order;
 		$scope.orderName = orderName;
 		
-		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange).then(function (results){
-			
-			$scope.loadResults = false
-			$scope.results = results
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : 1,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order,
-				"dateRange"   : $scope.dateRange
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				$scope.dateRange)
+			.then(function (results){
+				
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
 			}
 		})
 	}

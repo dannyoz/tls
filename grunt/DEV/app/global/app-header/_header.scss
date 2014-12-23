@@ -45,6 +45,21 @@
 		#user{
 
 			right:20px;
+
+			&.tablet{
+
+				width:110px;
+
+				button{
+
+					@extend .stack;
+
+					&:first-child{
+
+						margin-bottom: 10px;
+					}
+				}
+			}
 		}
 	}
 
@@ -106,6 +121,7 @@
 			overflow: hidden;
 			background-color:$subtle-light-grey;
 			height: $nav-height;
+			@include box-shadow(inset -1px 0 0 $light-keyline);
 
 			label{
 
@@ -113,6 +129,7 @@
 				line-height: $nav-height;
 				text-transform:uppercase;
 				left:20px;
+				z-index: 999;
 				font:{
 					size:0.9em;
 					weight:bold;
@@ -125,23 +142,30 @@
 				border:0;
 				background-color:$subtle-light-grey;
 				text-transform:uppercase;
+				position:relative;
 				width: 100%;
 				font:{
 					size:0.9em;
 				}
 				@include boxSizing(16px 0 16px 100px);
-				@include keyline(right,$light-keyline);
 				@extend .futura;
+
+				&.tablet {
+
+					padding-left:10px;
+				}
 			}
 
 			.search-wrapper{
 
 				@include fitParent("",0,$bnt-width,0,0);
+				@include keyline(left,$light-keyline);
 
 				&:before{
 
 					height:1px;
 					background-color:$light-keyline;
+					z-index: 999;
 					@include fitParent("", 40px,20px,auto,20px);
 					@include afterBefore;
 				}
@@ -156,6 +180,9 @@
 				height:100%;
 				background:none;
 				border:none;
+				color:black;
+				padding:0;
+				font-size: 1.3em;
 				@include border-radius(0px);
 			}
 		}

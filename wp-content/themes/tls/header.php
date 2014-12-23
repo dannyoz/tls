@@ -36,8 +36,7 @@
 					<p class="strap">The leading international weekly for literary culture</p>
 				</div>
 
-				<div id="user" class="centre-y">
-					{{size}}
+				<div id="user" class="centre-y" ng-class="{tablet:size == 'tablet'}">
 					<button>Subcribe</button>
 					<button class="clear">Login <i class="icon icon-login"></i></button>
 				</div>
@@ -53,11 +52,11 @@
 				
 					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 
-					<div class="search" ng-click="placeholder = ''">
+					<div class="search" ng-click="placeholder = ''; focus = true" ng-class="[size]">
 						<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="search-wrapper">
-								<label class="screen-reader-text" for="s">Search:</label>
-								<input type="search" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" name="s" id="s" />
+								<label class="screen-reader-text" for="s" ng-if="size == 'desktop'">Search:</label>
+								<input type="search" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" ng-class="[size]" name="s" id="s" />
 							</div>
 							<!-- <input type="submit"/> -->
 							<button type="submit" class="icon icon-search"></button>

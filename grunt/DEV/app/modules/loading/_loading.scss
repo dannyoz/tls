@@ -27,4 +27,51 @@
 			}
 		}
 	}
+
+	.flipper{
+
+		position:relative;
+		height:62px;
+		width:42px;
+
+		@include scale(0.5);
+
+		.flip{
+
+			$timing : 0.2s;
+
+			position:absolute;
+			overflow: hidden;
+
+			&.next-flip{
+
+				display: none;
+
+				&.flipping{
+
+					display: block;
+				}
+			}
+
+			&.next-flip.flipping.hori{
+
+				@include animation(flip-h-next,ease,$timing);
+			}
+
+			&.curr-flip.flipping.hori{
+
+				@include animation(flip-h-curr,ease,$timing);
+			}
+
+			&.next-flip.flipping.vert{
+
+				@include animation(flip-h-next,ease,$timing);
+			}
+
+			&.curr-flip.flipping.vert{
+
+				@include animation(flip-h-curr,ease,$timing);
+			}
+		}
+	}
 }

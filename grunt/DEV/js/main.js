@@ -28226,7 +28226,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('header.html',
-    "<div id=header-top class=grid-row><div class=container><div id=brand><h1 id=logo>TLS</h1><p class=sub>The times Literary supplement</p><p class=strap>The leading international weekly for literary culture</p></div><div id=user class=centre-y><button>Subcribe</button> <button class=clear>Login</button></div></div></div><nav><div class=container><div class=grid-row><ul class=futura><li><a href=#>Explore</a></li><li><a href=#>Editions</a></li><li><a href=#>What's New</a></li></ul><div class=search><label>Search:</label><input type=search placeholder=\"Tls archive, blogs and website\"></div></div></div></nav>"
+    "<div id=header-top class=grid-row><div class=container><div id=brand><h1 id=logo>TLS</h1><p class=sub>The times Literary supplement</p><p class=strap>The leading international weekly for literary culture</p></div><div id=user class=centre-y><button>Subcribe</button> <button class=clear>Login</button></div></div></div><nav><div class=container><div class=grid-row><ul class=futura><li><a href=#>Explore</a></li><li><a href=#>Editions</a></li><li><a href=#>What's New</a></li></ul><div class=search><label ng-if=\"size == 'desktop'\">Search:</label><input type=search placeholder=\"Tls archive, blogs and website\"></div></div></div></nav>"
   );
 
 
@@ -28246,23 +28246,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div><!-- <div id=\"loading\" ng-if=\"visible\">\r" +
     "\n" +
     "\t<div class=\"centre\">\r" +
     "\n" +
-    "\t\t<ul class=\"fadeIn\">\r" +
+    "\t\t<div class=\"flipper\">\r" +
     "\n" +
-    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
     "\n" +
-    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
     "\n" +
-    "\t\t\t</li>\r" +
+    "\t\t\t</div>\r" +
     "\n" +
-    "\t\t</ul>\r" +
+    "\t\t\t<div class=\"flip next-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
+    "\n" +
+    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t</div>\r" +
     "\n" +
     "\t</div>\r" +
     "\n" +
-    "</div> --><div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
+    "</div> -->"
   );
 
 
@@ -28504,7 +28510,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.directive('tlsLoading',['$timeout',function ($timeout){
+.directive('tlsLoading',['$timeout','$interval',function ($timeout,$interval){
 	return{
 		restrict: "AE",
 		templateUrl : "tls-loading.html",
@@ -28512,7 +28518,63 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			visible : '=tlsLoading'
 		},
 		link : function(scope,element){		
-			scope.dots = [1,2,3,4,5];
+			
+			scope.dots     = [1,2,3,4,5];
+			
+			var current = 0,
+				next    = 1,
+				delay   = 600,
+				flipDel = 200;
+
+			scope.currChar = "t"
+			scope.nextChar = "l"
+			scope.direction  = 'h'
+
+			scope.sequence = [{
+				character : "t",
+				direction : "h"
+			},{
+				character : "l",
+				direction : "v"
+			},{
+				character : "s",
+				direction : "h"
+			},{
+				character : "t",
+				direction : "v"
+			},{
+				character : "l",
+				direction : "h"
+			},{
+				character : "s",
+				direction : "v"
+			}]
+
+			$interval(function(){
+
+				scope.isFlipping = true
+				$timeout(function(){
+
+					if (current < 5){
+						current ++
+						if(current == 5){
+							next = 0
+						} else {
+							next ++
+						}
+					} else {
+						current = 0
+						next = 1
+					}
+
+					scope.direction = scope.sequence[current].direction
+					scope.currChar  = scope.sequence[current].character
+					scope.nextChar  = scope.sequence[next].character
+
+					scope.isFlipping = false
+				},flipDel);
+			
+			},delay)
 		}
 	}
 }])
@@ -28940,7 +29002,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.loadResults = true
 	$scope.niceDate    = niceDate
 
-	api.getSearchResults(url,$scope.currentPage,$scope.filters,$scope.order,$scope.dateRange)
+	api.getSearchResults(
+			url,
+			$scope.currentPage,
+			$scope.filters,
+			$scope.order,
+			$scope.dateRange
+		)
 		.then(function (results){
 		
 			$scope.showFilters = false
@@ -28988,7 +29056,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.contentType[key].isApplied = false
 		}
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange)
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				$scope.dateRange
+			)
 			.then(function (results){
 			
 				$scope.loadResults = false
@@ -29016,7 +29090,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.dateRanges[name].isApplied = !$scope.dateRanges[name].isApplied
 		$scope.loadResults = true
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order,range)
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				range
+			)
 			.then(function (results){
 			
 				$scope.loadResults = false
@@ -29038,16 +29118,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.order     = order;
 		$scope.orderName = orderName;
 		
-		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange).then(function (results){
-			
-			$scope.loadResults = false
-			$scope.results = results
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : 1,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order,
-				"dateRange"   : $scope.dateRange
+		api.getSearchResults(
+				url,
+				1,
+				$scope.filters,
+				$scope.order,
+				$scope.dateRange)
+			.then(function (results){
+				
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
 			}
 		})
 	}

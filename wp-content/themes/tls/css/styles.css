@@ -73,7 +73,7 @@ body {
   position: relative;
 }
 
-.stack {
+.stack, #main-header #header-top #user.tablet button {
   float: left;
   width: 100%;
   clear: both;
@@ -698,6 +698,12 @@ em, i {
 #main-header #header-top #user {
   right: 20px;
 }
+#main-header #header-top #user.tablet {
+  width: 110px;
+}
+#main-header #header-top #user.tablet button:first-child {
+  margin-bottom: 10px;
+}
 #main-header nav {
   height: 52px;
   position: relative;
@@ -744,12 +750,16 @@ em, i {
   overflow: hidden;
   background-color: #f2f2f2;
   height: 52px;
+  -moz-box-shadow: inset -1px 0 0 #d9d9d9;
+  -webkit-box-shadow: inset -1px 0 0 #d9d9d9;
+  box-shadow: inset -1px 0 0 #d9d9d9;
 }
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
   text-transform: uppercase;
   left: 20px;
+  z-index: 999;
   font-size: 0.9em;
   font-weight: bold;
 }
@@ -757,15 +767,16 @@ em, i {
   border: 0;
   background-color: #f2f2f2;
   text-transform: uppercase;
+  position: relative;
   width: 100%;
   font-size: 0.9em;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
-  border-right-width: 1px;
-  border-style: solid;
-  border-color: #d9d9d9;
+}
+#main-header nav .search input[type="text"].tablet, #main-header nav .search input[type="search"].tablet {
+  padding-left: 10px;
 }
 #main-header nav .search .search-wrapper {
   position: absolute;
@@ -773,10 +784,14 @@ em, i {
   right: 50px;
   bottom: 0;
   left: 0;
+  border-left-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
 }
 #main-header nav .search .search-wrapper:before {
   height: 1px;
   background-color: #d9d9d9;
+  z-index: 999;
   position: absolute;
   top: 40px;
   right: 20px;
@@ -793,6 +808,9 @@ em, i {
   height: 100%;
   background: none;
   border: none;
+  color: black;
+  padding: 0;
+  font-size: 1.3em;
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   border-radius: 0px;
@@ -1672,6 +1690,65 @@ em, i {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
+#loading .flipper {
+  position: relative;
+  height: 62px;
+  width: 42px;
+  -moz-transform: scale(0.5, 0.5);
+  -ms-transform: scale(0.5, 0.5);
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+}
+#loading .flipper .flip {
+  position: absolute;
+  overflow: hidden;
+}
+#loading .flipper .flip.next-flip {
+  display: none;
+}
+#loading .flipper .flip.next-flip.flipping {
+  display: block;
+}
+#loading .flipper .flip.next-flip.flipping.hori {
+  -webkit-animation-name: flip-h-next;
+  animation-name: flip-h-next;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
+#loading .flipper .flip.curr-flip.flipping.hori {
+  -webkit-animation-name: flip-h-curr;
+  animation-name: flip-h-curr;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
+#loading .flipper .flip.next-flip.flipping.vert {
+  -webkit-animation-name: flip-h-next;
+  animation-name: flip-h-next;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
+#loading .flipper .flip.curr-flip.flipping.vert {
+  -webkit-animation-name: flip-h-curr;
+  animation-name: flip-h-curr;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
 
 #edition-preview {
   padding: 20px 0;
@@ -1947,6 +2024,36 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   100% {
     top: 15px;
     opacity: 1;
+  }
+}
+@-webkit-keyframes flip-h-next {
+  0% {
+    -webkit-transform: rotate3d(0, 1, 0, -180deg);
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: white;
+  }
+
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
+    background-color: white;
+  }
+}
+@-webkit-keyframes flip-h-curr {
+  0% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
+    background-color: white;
+  }
+
+  50% {
+    background-color: white;
+  }
+
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 180deg);
+    background-color: transparent;
   }
 }
 @-webkit-keyframes pageTurnLeft {

@@ -6,7 +6,7 @@
 
 
   $templateCache.put('header.html',
-    "<div id=header-top class=grid-row><div class=container><div id=brand><h1 id=logo>TLS</h1><p class=sub>The times Literary supplement</p><p class=strap>The leading international weekly for literary culture</p></div><div id=user class=centre-y><button>Subcribe</button> <button class=clear>Login</button></div></div></div><nav><div class=container><div class=grid-row><ul class=futura><li><a href=#>Explore</a></li><li><a href=#>Editions</a></li><li><a href=#>What's New</a></li></ul><div class=search><label>Search:</label><input type=search placeholder=\"Tls archive, blogs and website\"></div></div></div></nav>"
+    "<div id=header-top class=grid-row><div class=container><div id=brand><h1 id=logo>TLS</h1><p class=sub>The times Literary supplement</p><p class=strap>The leading international weekly for literary culture</p></div><div id=user class=centre-y><button>Subcribe</button> <button class=clear>Login</button></div></div></div><nav><div class=container><div class=grid-row><ul class=futura><li><a href=#>Explore</a></li><li><a href=#>Editions</a></li><li><a href=#>What's New</a></li></ul><div class=search><label ng-if=\"size == 'desktop'\">Search:</label><input type=search placeholder=\"Tls archive, blogs and website\"></div></div></div></nav>"
   );
 
 
@@ -26,23 +26,29 @@
 
 
   $templateCache.put('tls-loading.html',
-    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div><!-- <div id=\"loading\" ng-if=\"visible\">\r" +
     "\n" +
     "\t<div class=\"centre\">\r" +
     "\n" +
-    "\t\t<ul class=\"fadeIn\">\r" +
+    "\t\t<div class=\"flipper\">\r" +
     "\n" +
-    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
     "\n" +
-    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
     "\n" +
-    "\t\t\t</li>\r" +
+    "\t\t\t</div>\r" +
     "\n" +
-    "\t\t</ul>\r" +
+    "\t\t\t<div class=\"flip next-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
+    "\n" +
+    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t</div>\r" +
     "\n" +
     "\t</div>\r" +
     "\n" +
-    "</div> --><div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
+    "</div> -->"
   );
 
 

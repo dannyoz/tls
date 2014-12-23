@@ -44,7 +44,7 @@
 
 					<p class="centred futura">{{loadMsg}}</p>
 					<div tls-loading="infLoading"></div>
-					<button class="clear centre" ng-if="!infinite" ng-click="loadMore();">
+					<button class="clear centre" ng-if="!infinite && pageCount > 1" ng-click="loadMore();">
 						Load more <i class="icon icon-plus"></i>
 					</button>
 				</div>
