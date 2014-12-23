@@ -6,17 +6,18 @@
  * @return object $reposnse		Returns the new and filtered/modefied JSON API Response Object
  */
 function tls_json_api_encode($response) {
-	// Globals to be used with many of the specific searches
-    global $json_api, $wp_query;
-	
-    // URL parsing to use with custom JSON API queries
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $url_query = wp_parse_args($url['query']);
 
     /**
      * Search Page Specific
      */
     if ( is_search() ) {
+        // Globals to be used with many of the specific searches
+        global $json_api, $wp_query;
+        
+        // URL parsing to use with custom JSON API queries
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        $url_query = wp_parse_args($url['query']);
+
     	// Get Search Query to be used in all the queries
     	$search_query = get_search_query();
 
@@ -39,6 +40,7 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['reviews'] = array(
     		'item_label'		=> __('Reviews', 'tls'),
+            'json_query'        => 'tax_filter[post_tag]=reviews',
     		'taxonomy'			=> $reviews_tag->taxonomy,
     		'slug'				=> $reviews_tag->slug,
     		'search_count'		=> (int) $reviews->found_posts
@@ -47,7 +49,7 @@ function tls_json_api_encode($response) {
     	/**
     	 * Reviews Articles Tag Search Filter
     	 */
-    	$public_visibility = get_term_by( 'slug', 'public', 'article-visibility' );
+    	$public_visibility = get_term_by( 'slug', 'public', 'article_visibility' );
     	$public_visibility_id = (int) $public_visibility->term_id;
     	$public_articles = new WP_Query( array(  
     		'post_type'			=> 'tls_articles',
@@ -55,7 +57,7 @@ function tls_json_api_encode($response) {
     		'posts_per_page'	=> 1,
     		's'					=> $search_query,
     		'tax_query'			=> array( array (
-    			'taxonomy'		=> 'article-visibility',
+    			'taxonomy'		=> 'article_visibility',
     			'field'			=> 'term_id',
     			'terms'			=> $public_visibility_id
     		) )
@@ -63,6 +65,8 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['public_articles'] = array(
     		'item_label'		=> __('Free To Non Subscribers', 'tls'),
+            'type'              => 'taxonomy',
+            'json_query'        => 'tax_filter[article_visibility]=public',
     		'taxonomy'			=> $public_visibility->taxonomy,
     		'slug'				=> $public_visibility->slug,
     		'search_count'		=> (int) $public_articles->found_posts
@@ -71,20 +75,17 @@ function tls_json_api_encode($response) {
     	/**
     	 * TLS Blogs Category Term Search Filter Info
     	 */
-    	$tls_blogs = get_term_by( 'slug', 'tls-blogs', 'category' );
-    	$tls_blogs_id = (int) $tls_blogs->term_id;
     	$blogs = new WP_Query( array(  
     		'post_type'			=> 'post',
     		'post_status' 		=> 'publish',
-    		'cat' 				=> $tls_blogs_id,
     		'posts_per_page' 	=> 1,
     		's'					=> $search_query
     	) ); wp_reset_query();
 
     	$response['content_type_filters']['blogs'] = array(
     		'item_label'		=> __('Blogs', 'tls'),
-    		'taxonomy'			=> $tls_blogs->taxonomy,
-    		'slug' 				=> $tls_blogs->slug,
+            'type'              => 'post_type',
+    		'slug' 				=> 'post',
     		'search_count' 		=> (int) $blogs->found_posts
     	);
 
@@ -100,6 +101,7 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['faqs'] = array(
     		'item_label'		=> __('FAQs', 'tls'),
+            'type'              => 'post_type',
     		'slug'				=> 'tls_faq',
     		'search_count'		=> (int) $faqs->found_posts
     	);
@@ -204,22 +206,52 @@ function tls_json_api_encode($response) {
         );
 
         /**
+         * Add Multiple Custom Post Type Search Filtering to
+         * JSON API post_type filter which only works 
+         * with one post type out of the box
+         */
+        if ( isset( $_GET['post_types'] ) ) {
+            $current_query = $wp_query->query;
+
+            $sanatized_post_types = wp_strip_all_tags($_GET['post_types']);
+            $post_types = explode(',', $sanatized_post_types);
+
+            $post_type_search_archive_args = array(
+                'post_type'         => $post_types,
+                'post_status'       => 'publish',
+                's'                 => $search_query
+            );
+            $post_type_search_archive_query = array_merge($current_query, $post_type_search_archive_args);
+            $post_type_search_archive = $json_api->introspector->get_posts($post_type_search_archive_query);
+            $response['count'] = count($post_type_search_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $post_type_search_archive;
+        }
+
+        /**
          * Add Custom post filtering for Custom taxonomy search
          * then return appropriate filtered posts
          */
-        if ( isset( $_GET['taxonomy'] ) ) {
+        if ( isset( $_GET['tax_filter'] ) ) {
+            $tax_query = array(
+                'relation'          => 'OR'
+            );
+
+            foreach ($_GET['tax_filter'] as $tax => $tax_term) {
+                $taxonomy_queries = array(
+                    'taxonomy'      => wp_strip_all_tags($tax),
+                    'field'         => 'slug',
+                    'terms'         => wp_strip_all_tags($tax_term),
+                );
+                array_push($tax_query, $taxonomy_queries);
+            }
 
             $taxonomy_posts_archive_args = array(
                 'post_type'         => array('post', 'tls_articles', 'tls_faq'),
                 'post_status'       => 'publish',
                 's'                 => $search_query,
-                'tax_query'         => array (
-                    array(
-                        'taxonomy'      => $url_query['taxonomy'],
-                        'field'         => 'slug',
-                        'terms'         => $url_query['taxonomy_terms']
-                    ),
-                ),
+                'tax_query'         => $tax_query,
             );
             $taxonomy_posts_archive = $json_api->introspector->get_posts($taxonomy_posts_archive_args);
             $response['count'] = count($taxonomy_posts_archive);
