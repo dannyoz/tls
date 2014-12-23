@@ -1,6 +1,6 @@
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 500;
+	var delay  = 100;
 
 	return {
 		getCards : function(){
@@ -54,25 +54,28 @@
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters,ord){
+		getSearchResults : function(path,page,filters,ord,date){
 
-			var defer   = $q.defer(),
-				page    = (!page) ? 1 : page,
-				filters = (!filters) ? [] : filters,
-				filt    = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				prefix  = this.checkQueries(path),
-				order   = (!ord)? "" : "&orderby=date&order=" + ord,
-				query   = "json=1&paged="+page;
+			var defer     = $q.defer(),
+				page      = (!page) ? 1 : page,
+				filters   = (!filters) ? [] : filters,
+				filt      = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix    = this.checkQueries(path),
+				order     = (!ord)? "" : "&orderby=date&order=" + ord,
+				dateRange = (!date)? "" : "&date_filter=" + date,
+				query     = "json=1&paged="+page;
 
 			//expose url for testing
-			defer.promise.url = path+prefix+query+filt+order
+			defer.promise.url = path+prefix+query+filt+order+dateRange
 
-			$http.get(path+prefix+query+filt+order).success(function (data){
+			$http.get(path+prefix+query+filt+order+dateRange).success(function (data){
 				//simulate server delay
 				$timeout(function(){
 					defer.resolve(data)
 				},delay)
 			})
+
+			console.log(path+prefix+query+filt+order+dateRange)
 
 			return defer.promise
 		

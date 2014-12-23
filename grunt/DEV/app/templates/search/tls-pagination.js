@@ -17,11 +17,12 @@
 
 				var u = window.location.href,
 					f = scope.config.filters,
-					o = scope.config.order;
-
+					o = scope.config.order,
+					d = scope.config.dateRange;
+ 
 				scope.$emit('loading')
 
-				api.getSearchResults(u,i,f,o).then(function (results){
+				api.getSearchResults(u,i,f,o,d).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 

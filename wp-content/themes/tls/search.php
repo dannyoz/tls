@@ -33,12 +33,10 @@ get_header(); ?>
 
 					<div class="filter-block">
 						<h3 class="futura uppercase">Date</h3>
-						<ul class="filters">
-							<li><a href="">Lorem ipsum.</a></li>
-							<li><a href="">Soluta, ea!</a></li>
-							<li><a href="">Tempora, perspiciatis.</a></li>
-							<li><a href="">Porro, quidem.</a></li>
-							<li><a href="">Eos, consequatur.</a></li>
+						<ul class="filters" ng-cloak>
+							<li ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in dateRanges">
+								<a ng-click="dateRangeFilter(val.search_term,name)">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+							</li>
 						</ul>
 					</div>
 
@@ -92,9 +90,10 @@ get_header(); ?>
 
 					<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
 
-					<div tls-loading="loadResults"></div>
-
 				</div>
+
+				<div tls-loading="loadResults"></div>
+
 			</div>
 
 		</div>

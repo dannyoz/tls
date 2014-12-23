@@ -28246,7 +28246,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
+    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "\n" +
+    "\t<div class=\"centre\">\r" +
+    "\n" +
+    "\t\t<ul class=\"fadeIn\">\r" +
+    "\n" +
+    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\n" +
+    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\n" +
+    "\t\t\t</li>\r" +
+    "\n" +
+    "\t\t</ul>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div> --><div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
   );
 
 
@@ -28281,7 +28297,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 500;
+	var delay  = 100;
 
 	return {
 		getCards : function(){
@@ -28335,25 +28351,28 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters,ord){
+		getSearchResults : function(path,page,filters,ord,date){
 
-			var defer   = $q.defer(),
-				page    = (!page) ? 1 : page,
-				filters = (!filters) ? [] : filters,
-				filt    = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
-				prefix  = this.checkQueries(path),
-				order   = (!ord)? "" : "&orderby=date&order=" + ord,
-				query   = "json=1&paged="+page;
+			var defer     = $q.defer(),
+				page      = (!page) ? 1 : page,
+				filters   = (!filters) ? [] : filters,
+				filt      = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				prefix    = this.checkQueries(path),
+				order     = (!ord)? "" : "&orderby=date&order=" + ord,
+				dateRange = (!date)? "" : "&date_filter=" + date,
+				query     = "json=1&paged="+page;
 
 			//expose url for testing
-			defer.promise.url = path+prefix+query+filt+order
+			defer.promise.url = path+prefix+query+filt+order+dateRange
 
-			$http.get(path+prefix+query+filt+order).success(function (data){
+			$http.get(path+prefix+query+filt+order+dateRange).success(function (data){
 				//simulate server delay
 				$timeout(function(){
 					defer.resolve(data)
 				},delay)
 			})
+
+			console.log(path+prefix+query+filt+order+dateRange)
 
 			return defer.promise
 		
@@ -28914,26 +28933,30 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	var url = window.location.href;
 	$scope.filters     = []
 	$scope.currentPage = 1
+	$scope.dateRange   = ""
 	$scope.orderName   = "Newest"
 	$scope.order       = "ASC"
 	$scope.showSorter  = false
 	$scope.loadResults = true
 	$scope.niceDate    = niceDate
 
-	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
+	api.getSearchResults(url,$scope.currentPage,$scope.filters,$scope.order,$scope.dateRange)
+		.then(function (results){
 		
-		$scope.showFilters = false
-		$scope.loadResults = false
-		$scope.results     = results
-		$scope.contentType = results.content_type_filters
-		$scope.paginationConfig = {
-			"pageCount"   : results.pages,
-			"currentPage" : $scope.currentPage,
-			"filters"     : $scope.filters,
-			"order"       : $scope.order
+			$scope.showFilters = false
+			$scope.loadResults = false
+			$scope.results     = results
+			$scope.contentType = results.content_type_filters
+			$scope.dateRanges  = results.date_filters
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : $scope.currentPage,
+				"filters"     : $scope.filters,
+				"order"       : $scope.order,
+				"dateRange"   : $scope.dateRange
 		}
 
-		console.log(results);
+			console.log(results);
 
 	})
 
@@ -28965,15 +28988,45 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.contentType[key].isApplied = false
 		}
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange)
+			.then(function (results){
 			
-			$scope.loadResults = false
-			$scope.results = results
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : 1,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
+			}
+		})
+	}
+
+	$scope.dateRangeFilter = function(range,name){
+
+		$scope.dateRange = range;
+
+		angular.forEach($scope.dateRanges, function (obj,val){
+			if(val != name){
+				obj.isApplied = false
+			}
+		});
+
+		$scope.dateRanges[name].isApplied = !$scope.dateRanges[name].isApplied
+		$scope.loadResults = true
+
+		api.getSearchResults(url,1,$scope.filters,$scope.order,range)
+			.then(function (results){
+			
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
 			}
 		})
 	}
@@ -28985,7 +29038,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.order     = order;
 		$scope.orderName = orderName;
 		
-		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange).then(function (results){
 			
 			$scope.loadResults = false
 			$scope.results = results
@@ -28993,7 +29046,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				"pageCount"   : results.pages,
 				"currentPage" : 1,
 				"filters"     : $scope.filters,
-				"order"       : $scope.order
+				"order"       : $scope.order,
+				"dateRange"   : $scope.dateRange
 			}
 		})
 	}
@@ -29018,11 +29072,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 				var u = window.location.href,
 					f = scope.config.filters,
-					o = scope.config.order;
-
+					o = scope.config.order,
+					d = scope.config.dateRange;
+ 
 				scope.$emit('loading')
 
-				api.getSearchResults(u,i,f,o).then(function (results){
+				api.getSearchResults(u,i,f,o,d).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
 

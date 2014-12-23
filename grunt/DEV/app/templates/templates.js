@@ -26,7 +26,23 @@
 
 
   $templateCache.put('tls-loading.html',
-    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
+    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "\n" +
+    "\t<div class=\"centre\">\r" +
+    "\n" +
+    "\t\t<ul class=\"fadeIn\">\r" +
+    "\n" +
+    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\n" +
+    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\n" +
+    "\t\t\t</li>\r" +
+    "\n" +
+    "\t\t</ul>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div> --><div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div>"
   );
 
 

@@ -4,26 +4,30 @@
 	var url = window.location.href;
 	$scope.filters     = []
 	$scope.currentPage = 1
+	$scope.dateRange   = ""
 	$scope.orderName   = "Newest"
 	$scope.order       = "ASC"
 	$scope.showSorter  = false
 	$scope.loadResults = true
 	$scope.niceDate    = niceDate
 
-	api.getSearchResults(url,$scope.currentPage,$scope.filters).then(function (results){
+	api.getSearchResults(url,$scope.currentPage,$scope.filters,$scope.order,$scope.dateRange)
+		.then(function (results){
 		
-		$scope.showFilters = false
-		$scope.loadResults = false
-		$scope.results     = results
-		$scope.contentType = results.content_type_filters
-		$scope.paginationConfig = {
-			"pageCount"   : results.pages,
-			"currentPage" : $scope.currentPage,
-			"filters"     : $scope.filters,
-			"order"       : $scope.order
+			$scope.showFilters = false
+			$scope.loadResults = false
+			$scope.results     = results
+			$scope.contentType = results.content_type_filters
+			$scope.dateRanges  = results.date_filters
+			$scope.paginationConfig = {
+				"pageCount"   : results.pages,
+				"currentPage" : $scope.currentPage,
+				"filters"     : $scope.filters,
+				"order"       : $scope.order,
+				"dateRange"   : $scope.dateRange
 		}
 
-		console.log(results);
+			console.log(results);
 
 	})
 
@@ -55,15 +59,45 @@
 			$scope.contentType[key].isApplied = false
 		}
 
-		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange)
+			.then(function (results){
 			
-			$scope.loadResults = false
-			$scope.results = results
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : 1,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
+			}
+		})
+	}
+
+	$scope.dateRangeFilter = function(range,name){
+
+		$scope.dateRange = range;
+
+		angular.forEach($scope.dateRanges, function (obj,val){
+			if(val != name){
+				obj.isApplied = false
+			}
+		});
+
+		$scope.dateRanges[name].isApplied = !$scope.dateRanges[name].isApplied
+		$scope.loadResults = true
+
+		api.getSearchResults(url,1,$scope.filters,$scope.order,range)
+			.then(function (results){
+			
+				$scope.loadResults = false
+				$scope.results = results
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : 1,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
 			}
 		})
 	}
@@ -75,7 +109,7 @@
 		$scope.order     = order;
 		$scope.orderName = orderName;
 		
-		api.getSearchResults(url,1,$scope.filters,$scope.order).then(function (results){
+		api.getSearchResults(url,1,$scope.filters,$scope.order,$scope.dateRange).then(function (results){
 			
 			$scope.loadResults = false
 			$scope.results = results
@@ -83,7 +117,8 @@
 				"pageCount"   : results.pages,
 				"currentPage" : 1,
 				"filters"     : $scope.filters,
-				"order"       : $scope.order
+				"order"       : $scope.order,
+				"dateRange"   : $scope.dateRange
 			}
 		})
 	}
