@@ -121,7 +121,7 @@ function tls_json_api_encode($response) {
                 ),
             ),
         ) ); wp_reset_query();
-        $response['date_filters']['past_7_days'] = array(
+        $response['date_filters']['1_past_7_days'] = array(
             'item_label'        => __('Past 7 Days'),
             'search_term'       => '7 days ago',
             'search_count'      => (int) $past_7_days->found_posts
@@ -140,7 +140,7 @@ function tls_json_api_encode($response) {
                 ),
             ),
         ) ); wp_reset_query();
-        $response['date_filters']['past_30_days'] = array(
+        $response['date_filters']['2_past_30_days'] = array(
             'item_label'        => __('Past 30 Days'),
             'search_term'       => '30 days ago',
             'search_count'      => (int) $past_30_days->found_posts
@@ -159,8 +159,8 @@ function tls_json_api_encode($response) {
                 ),
             ),
         ) ); wp_reset_query();
-        $response['date_filters']['past_1_year'] = array(
-            'item_label'        => __('Past 1 Year'),
+        $response['date_filters']['3_past_1_year'] = array(
+            'item_label'        => __('Past Year'),
             'search_term'       => '1 year ago',
             'search_count'      => (int) $past_1_year->found_posts
         );
@@ -178,7 +178,7 @@ function tls_json_api_encode($response) {
                 ),
             ),
         ) ); wp_reset_query();
-        $response['date_filters']['past_5_years'] = array(
+        $response['date_filters']['4_past_5_years'] = array(
             'item_label'        => __('Past 5 Years'),
             'search_term'       => '5 years ago',
             'search_count'      => (int) $past_5_years->found_posts
@@ -197,7 +197,7 @@ function tls_json_api_encode($response) {
                 ),
             ),
         ) ); wp_reset_query();
-        $response['date_filters']['past_10_years'] = array(
+        $response['date_filters']['5_past_10_years'] = array(
             'item_label'        => __('Past 10 Years'),
             'search_term'       => '10 years ago',
             'search_count'      => (int) $past_10_years->found_posts
