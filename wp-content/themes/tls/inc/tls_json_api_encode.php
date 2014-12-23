@@ -6,22 +6,12 @@
  * @return object $reposnse		Returns the new and filtered/modefied JSON API Response Object
  */
 function tls_json_api_encode($response) {
-	global $json_api, $wp_query;
-	//echo $GLOBALS['wp_query']->request;
-
-    // enable debug mode and display native json object when debug is set in the url
-    if (isset($_GET['debug'])) {
-        return $response;
-    }
-
-    // if empty or errpr return 404 Error along with the JSON Object containing error message and status
-    if (empty($response) || $response['status'] == 'error'
-    ) {
-        header("HTTP/1.0 404 Not Found");
-        header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-        $return = json_encode( $response );
-        die( $return );
-    }
+	// Globals to be used with many of the specific searches
+    global $json_api, $wp_query;
+	
+    // URL parsing to use with custom JSON API queries
+    $url = parse_url($_SERVER['REQUEST_URI']);
+    $url_query = wp_parse_args($url['query']);
 
     /**
      * Search Page Specific
@@ -110,21 +100,145 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['faqs'] = array(
     		'item_label'		=> __('FAQs', 'tls'),
-    		'slug'				=> 'faqs',
+    		'slug'				=> 'tls_faq',
     		'search_count'		=> (int) $faqs->found_posts
     	);
 
 
+        /**
+         * Date Filters Options with post count
+         */
+        // Past 7 Days
+        $past_7_days = new WP_Query( array (
+            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+            'post_status'       => 'publish',
+            's'                 => $search_query,
+            'date_query'        => array(
+                array(
+                    'column'    => 'post_date',
+                    'after'     => '7 days ago',
+                    'inclusive' => true
+                ),
+            ),
+        ) ); wp_reset_query();
+        $response['date_filters']['past_7_days'] = array(
+            'item_label'        => __('Past 7 Days'),
+            'search_term'       => '7 days ago',
+            'search_count'      => (int) $past_7_days->found_posts
+        );
+
+        // Past 30 Days
+        $past_30_days = new WP_Query( array (
+            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+            'post_status'       => 'publish',
+            's'                 => $search_query,
+            'date_query'        => array(
+                array(
+                    'column'    => 'post_date',
+                    'after'     => '30 days ago',
+                    'inclusive' => true
+                ),
+            ),
+        ) ); wp_reset_query();
+        $response['date_filters']['past_30_days'] = array(
+            'item_label'        => __('Past 30 Days'),
+            'search_term'       => '30 days ago',
+            'search_count'      => (int) $past_30_days->found_posts
+        );
+
+        // Past 1 Year
+        $past_1_year = new WP_Query( array (
+            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+            'post_status'       => 'publish',
+            's'                 => $search_query,
+            'date_query'        => array(
+                array(
+                    'column'    => 'post_date',
+                    'after'     => '1 year ago',
+                    'inclusive' => true
+                ),
+            ),
+        ) ); wp_reset_query();
+        $response['date_filters']['past_1_year'] = array(
+            'item_label'        => __('Past 1 Year'),
+            'search_term'       => '1 year ago',
+            'search_count'      => (int) $past_1_year->found_posts
+        );
+
+        // Past 5 Years
+        $past_5_years = new WP_Query( array (
+            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+            'post_status'       => 'publish',
+            's'                 => $search_query,
+            'date_query'        => array(
+                array(
+                    'column'    => 'post_date',
+                    'after'     => '5 years ago',
+                    'inclusive' => true
+                ),
+            ),
+        ) ); wp_reset_query();
+        $response['date_filters']['past_5_years'] = array(
+            'item_label'        => __('Past 5 Years'),
+            'search_term'       => '5 years ago',
+            'search_count'      => (int) $past_5_years->found_posts
+        );
+
+        // Past 10 Years
+        $past_10_years = new WP_Query( array (
+            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+            'post_status'       => 'publish',
+            's'                 => $search_query,
+            'date_query'        => array(
+                array(
+                    'column'    => 'post_date',
+                    'after'     => '10 years ago',
+                    'inclusive' => true
+                ),
+            ),
+        ) ); wp_reset_query();
+        $response['date_filters']['past_10_years'] = array(
+            'item_label'        => __('Past 10 Years'),
+            'search_term'       => '10 years ago',
+            'search_count'      => (int) $past_10_years->found_posts
+        );
+
+        /**
+         * Add Custom post filtering for Custom taxonomy search
+         * then return appropriate filtered posts
+         */
+        if ( isset( $_GET['taxonomy'] ) ) {
+
+            $taxonomy_posts_archive_args = array(
+                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+                'post_status'       => 'publish',
+                's'                 => $search_query,
+                'tax_query'         => array (
+                    array(
+                        'taxonomy'      => $url_query['taxonomy'],
+                        'field'         => 'slug',
+                        'terms'         => $url_query['taxonomy_terms']
+                    ),
+                ),
+            );
+            $taxonomy_posts_archive = $json_api->introspector->get_posts($taxonomy_posts_archive_args);
+            $response['count'] = count($taxonomy_posts_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $taxonomy_posts_archive;
+        }
+
+
     	/**
-    	 * Attempt to implement a date_query inside the search page
+    	 * Add Date filtering with custom date_filter option in GET request
+         * then return the new posts with the date filetering
     	 */
     	if ( isset( $_GET['date_filter'] ) && $_GET['date_filter'] != '' ) {
- 
- 			$url = parse_url($_SERVER['REQUEST_URI']);
-    		$url_query = wp_parse_args($url['query']);
 
 			$date_posts_archive_args = array(
+                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
     			'post_status'		=> 'publish',
+                's'                 => $search_query,
     			'date_query'		=> array(
     				array(
 						'column' => 'post_date',
@@ -142,7 +256,7 @@ function tls_json_api_encode($response) {
     		$response['posts'] = $date_posts_archive;
     	}
 
-	}
+	} // END of Search Specific JSON API queries
 
 	/**
 	 *  Single Post Specific
@@ -176,7 +290,7 @@ function tls_json_api_encode($response) {
 			$response['page']->accordion_items = get_field('accordion', $response['page']->id);
 		}
 	}
-
+    $response['query'] = $wp_query->query;
 	return $response;
 }
 add_filter('json_api_encode', 'tls_json_api_encode');
