@@ -14,32 +14,94 @@
 		position: relative;
 		z-index: 9999;
 
+		.article-nav {
+
+			width: 14%;
+
+			.icon {
+				font-weight: bold;
+			}
+			
+			&:hover {
+				text-decoration: none;
+			}	
+		}		
+
+		.icon:before,
+		.icon:after {
+			font-size: 25px;
+			font-weight: normal;
+			position: absolute;	
+			top: -1px;			
+		}
+
 		.next-article{
 
-			width:12%;
 			z-index: 999;
-			@include absolutly(20px,top,left);
+			@include absolutly(20px,top,right);
+
+			.icon {
+				padding-right: 35px;
+			}
+
+			.icon:before {
+				content: "";
+			}
+
+			.icon:after {
+				right: 0;
+				font-size: 25px;
+				content: "\e60a";
+			}
 		}
 
 		.prev-article{
 
-			width:12%;
 			z-index: 999;
 			text-align:right;
-			@include absolutly(20px,top,right);
+			@include absolutly(20px,top,left);	
+
+			.icon {
+				padding-left: 35px;
+			}
+
+			.icon:before {				
+				font-size: 25px;
+				left: 0;				
+			}		
 		}
+	}
+
+	.article-section {
+		color: $primary-orange;
+		padding: 12px 0;		
+	}
+
+	.title-small {
+		font-family: $futura;
+		text-transform: uppercase;
+		font-size: 15px;
+		letter-spacing: 1px;
 	}
 
 	.article-body{
 
 		-webkit-perspective:1000;
 		perspective: 1000;
+		margin-top: 30px;
 		@include shift("push",3);
 		@include grid-col-last(6);
+
+		h2 {
+			font-size: 48px;
+			line-height: 60px;
+		}
 
 		p{
 
 			text-align:justify;
+			font-size: 20px;
+			line-height: 32px;
 		}
 
 		ol,ul{
@@ -79,6 +141,28 @@
 
 				float: right;
 				margin: 0 -13% 0 1em;
+			}
+		}
+
+		.author {
+			font-weight: 500;
+		}
+
+		.article-date {
+			text-align: right;			
+		}
+
+		.article-summary {
+
+			background-color: $subtle-light-grey;
+			font-family: $futura;
+			margin: 20px 0;
+
+			.inner {				
+				padding: 20px 15px;
+				width: 50%;
+				line-height: 30px;
+
 			}
 		}
 
