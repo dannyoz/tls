@@ -6,13 +6,23 @@
  * @return object $reposnse		Returns the new and filtered/modefied JSON API Response Object
  */
 function tls_json_api_encode($response) {
+    // Globals to be used with many of the specific searches
+    global $json_api, $wp_query;
+
+    /**
+     * Home Page Specific
+     */
+    if ( is_home() ) {
+        $front_page_id = get_option('page_on_front');
+        $front_page = $json_api->introspector->get_posts( array( 'page_id' => $front_page_id ) );
+        unset($response['count'], $response['count_total'], $response['pages'], $response['posts']);
+        $response['page'] = $front_page;
+    }
 
     /**
      * Search Page Specific
      */
     if ( is_search() ) {
-        // Globals to be used with many of the specific searches
-        global $json_api, $wp_query;
         
         // URL parsing to use with custom JSON API queries
         $url = parse_url($_SERVER['REQUEST_URI']);
