@@ -1034,7 +1034,8 @@ em, i {
 .single-post .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 40px;
   margin-left: 25.625%;
   float: left;
   position: relative;
@@ -1044,6 +1045,7 @@ em, i {
 .single-post .article-body h2 {
   font-size: 48px;
   line-height: 60px;
+  margin-bottom: 10px;
 }
 .single-post .article-body p {
   text-align: justify;
@@ -1085,7 +1087,7 @@ em, i {
 .single-post .article-body .article-summary {
   background-color: #f2f2f2;
   font-family: "futura-pt", "Arial", sans-serif;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .single-post .article-body .article-summary .inner {
   padding: 20px 15px;
