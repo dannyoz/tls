@@ -81,16 +81,16 @@ module.exports = function(grunt) {
                     'DEV/app/**/*'
                 ],
                 tasks: ['copy']
-            },
+            }//,
 
-            livereload: {
-                options: { livereload: true },
-                files: [
-                    '../wp-content/themes/tls/css/*.css',
-                    'DEV/app/**/*',
-                    '../wp-content/themes/tls/*.php'
-                ],
-            }
+            // livereload: {
+            //     options: { livereload: true },
+            //     files: [
+            //         '../wp-content/themes/tls/css/*.css',
+            //         'DEV/app/**/*',
+            //         '../wp-content/themes/tls/*.php'
+            //     ],
+            // }
         },
 
         compass: {                  
