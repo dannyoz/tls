@@ -4,10 +4,10 @@
 
 		<div class="article-links">
 			<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
-				<span class="icon icon-right-arrow">{{post.next_post_info.title}}</span>
+				<div class="icon icon-right-arrow"><span>{{post.next_post_info.title}}</span></div>
 			</a>
 			<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
-				<span class="icon icon-left-arrow">{{post.previous_post_info.title}}</span>
+				<div class="icon icon-left-arrow"><span>{{post.previous_post_info.title}}</span></div>
 			</a>
 		</div>
 

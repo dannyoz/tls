@@ -24,11 +24,12 @@
 
 		position: relative;
 		z-index: 9999;		
+		min-height: 30px;
 
 		@media (max-width: $tablet) {	
 			overflow: hidden;		
 			border-bottom: 1px solid #ccc;
-			padding: 15px 0;
+			padding: 15px 0;			
 		}
 
 		.article-nav {
@@ -41,6 +42,12 @@
 
 			.icon {
 				font-weight: bold;
+
+				@media (max-width: $mobile) {
+					span {
+						display: none;
+					}					
+				}				
 			}
 			
 			&:hover {
