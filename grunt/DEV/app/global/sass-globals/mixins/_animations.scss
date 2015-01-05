@@ -31,16 +31,16 @@
 
 
 @mixin keyframes($animationName) {
-    @-webkit-keyframes $animationName {
+    @-webkit-keyframes #{$animationName} {
         @content;
     }
-    @-moz-keyframes $animationName {
+    @-moz-keyframes #{$animationName} {
         @content;
     }
-    @-o-keyframes $animationName {
+    @-o-keyframes #{$animationName} {
         @content;
     }
-    @keyframes $animationName {
+    @keyframes #{$animationName} {
         @content;
     }
 }
@@ -581,13 +581,13 @@
 
 @mixin transKeyframes($animationName,$stops:"",$property:"",$vals:"",$opTrans:""){
 
-  @-webkit-keyframes $animationName {
+  @-webkit-keyframes #{$animationName} {
     @include KFstops(-webkit-,$stops,$property,$vals,$opTrans)
     }
-    @-moz-keyframes $animationName {
+    @-moz-keyframes #{$animationName} {
       @include KFstops(-moz-,$stops,$property,$vals,$opTrans)
     }
-    @keyframes $animationName {
+    @keyframes #{$animationName} {
       @include KFstops("",$stops,$property,$vals,$opTrans)
     }
 }

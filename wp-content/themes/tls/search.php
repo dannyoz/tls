@@ -18,9 +18,9 @@ get_header(); ?>
 					
 					<h2 class="futura">Sort by...</h2>
 
-					<a class="close-filters tablet-show" ng-click="showFilters = false">
-						close
-					</a>
+					<button class="close-filters tablet-show clear small" ng-click="showFilters = false">
+						Close Filters <i class="icon icon-cross"></i>
+					</button>
 
 					<div class="filter-block">
 						<h3 class="futura uppercase">Content type</h3>
@@ -54,10 +54,10 @@ get_header(); ?>
 				</div>
 
 				<div id="results" class="transition-1" ng-class="{shift:showFilters,loading:loadResults}">
-					
-					<h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . get_search_query() . '"</span>' ); ?></h2>
 
-					<a id="show-filters" class="tablet-show" ng-click="showFilters = true">Show filters</a>
+					<button id="show-filters" class="tablet-show clear small" ng-click="showFilters = true">Filters <i class="icon icon-plus"></i></button>
+
+					<h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . get_search_query() . '"</span>' ); ?></h2>
 
 					<div class="grid-row">
 						
@@ -81,7 +81,7 @@ get_header(); ?>
 					</div>
 
 					<div class="card" ng-repeat="post in results.posts">
-						<h3 class="futura">
+						<h3 class="futura date">
 							<a ng-attr-href="{{post.url}}" ng-bind="post.title"></a>
 						</h3>
 						<span ng-if="post.modified" class="post-date">{{niceDate.format(post.date)}}</span>
