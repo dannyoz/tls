@@ -14,13 +14,13 @@
 		<div class="article-current">
 
 			<div class="grid-row">
-				<div class="grid-6 push-3 article-section title-small">
+				<div class="col-wide article-section title-small">
 					{{post.taxonomy_article_section[0].title}}
 				</div>
 			</div>
 
 			<div class="grid-row">
-				<div class="grid-6 push-3">
+				<div class="col-wide">
 					<img class="max" ng-attr-src="{{post.custom_fields.hero_image_url[0]}}">
 				</div>
 			</div>

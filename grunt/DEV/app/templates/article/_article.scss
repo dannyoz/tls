@@ -9,14 +9,35 @@
 		overflow: hidden;
 	}
 
+	.col-wide {
+
+		@include shift("push",3);
+		@include grid-col-last(6);
+
+		@media screen and (max-width:$tablet){
+			@include shift("push",1);
+			@include grid-col-last(10);
+		}
+	}
+
 	.article-links{
 
 		position: relative;
-		z-index: 9999;
+		z-index: 9999;		
+
+		@media (max-width: $tablet) {	
+			overflow: hidden;		
+			border-bottom: 1px solid #ccc;
+			padding: 15px 0;
+		}
 
 		.article-nav {
 
 			width: 14%;
+
+			@media (max-width: $tablet) {
+				width: 20%;
+			}
 
 			.icon {
 				font-weight: bold;
@@ -38,10 +59,15 @@
 		.next-article{
 
 			z-index: 999;
+			text-align: right;
+			padding-right: 35px;
 			@include absolutly(20px,top,right);
 
-			.icon {
-				padding-right: 35px;
+			@media (max-width: $tablet) {
+				position: relative;
+				top: auto;
+				right: auto;
+				float: right;
 			}
 
 			.icon:before {
@@ -58,11 +84,16 @@
 		.prev-article{
 
 			z-index: 999;
-			text-align:right;
+			text-align: left;
+			padding-left: 35px;
 			@include absolutly(20px,top,left);	
 
-			.icon {
-				padding-left: 35px;
+			@media (max-width: $tablet) {
+				position: relative;
+				top: auto;
+				right: auto;
+				left: auto;
+				float: left;
 			}
 
 			.icon:before {				
@@ -82,7 +113,7 @@
 		text-transform: uppercase;
 		font-size: 15px;
 		letter-spacing: 1px;
-	}
+	}	
 
 	.article-body{
 
@@ -135,8 +166,6 @@
 
 		img{
 
-			float: left;
-			margin: 0 1em 0 -13%;
 			max-width: 100%;
 
 			&.right{

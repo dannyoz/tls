@@ -970,12 +970,40 @@ em, i {
 .single-post .container {
   overflow: hidden;
 }
+.single-post .col-wide {
+  margin-left: 25.625%;
+  float: left;
+  position: relative;
+  width: 48.75%;
+  margin-right: 0;
+}
+@media screen and (max-width: 840px) {
+  .single-post .col-wide {
+    margin-left: 8.54167%;
+    float: left;
+    position: relative;
+    width: 82.91667%;
+    margin-right: 0;
+  }
+}
 .single-post .article-links {
   position: relative;
   z-index: 9999;
 }
+@media (max-width: 840px) {
+  .single-post .article-links {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+  }
+}
 .single-post .article-links .article-nav {
   width: 14%;
+}
+@media (max-width: 840px) {
+  .single-post .article-links .article-nav {
+    width: 20%;
+  }
 }
 .single-post .article-links .article-nav .icon {
   font-weight: bold;
@@ -992,12 +1020,19 @@ em, i {
 }
 .single-post .article-links .next-article {
   z-index: 999;
+  text-align: right;
+  padding-right: 35px;
   position: absolute;
   top: 20px;
   right: 20px;
 }
-.single-post .article-links .next-article .icon {
-  padding-right: 35px;
+@media (max-width: 840px) {
+  .single-post .article-links .next-article {
+    position: relative;
+    top: auto;
+    right: auto;
+    float: right;
+  }
 }
 .single-post .article-links .next-article .icon:before {
   content: "";
@@ -1009,13 +1044,20 @@ em, i {
 }
 .single-post .article-links .prev-article {
   z-index: 999;
-  text-align: right;
+  text-align: left;
+  padding-left: 35px;
   position: absolute;
   top: 20px;
   left: 20px;
 }
-.single-post .article-links .prev-article .icon {
-  padding-left: 35px;
+@media (max-width: 840px) {
+  .single-post .article-links .prev-article {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    float: left;
+  }
 }
 .single-post .article-links .prev-article .icon:before {
   font-size: 25px;
@@ -1070,8 +1112,6 @@ em, i {
   text-align: center;
 }
 .single-post .article-body img {
-  float: left;
-  margin: 0 1em 0 -13%;
   max-width: 100%;
 }
 .single-post .article-body img.right {
