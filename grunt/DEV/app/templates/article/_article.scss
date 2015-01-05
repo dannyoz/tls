@@ -20,6 +20,27 @@
 		}
 	}
 
+	.folded-corner {
+
+		position: relative;
+
+		&:before, 
+		&:after {
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 0;
+			content: "";
+		}
+
+		&:before {
+			border-top: solid 15px #fff;
+			border-right: solid 15px #fff;
+			border-left: solid 15px transparent;
+			border-bottom: solid 15px transparent;
+		}
+	}
+
 	.article-links{
 
 		position: relative;
@@ -199,8 +220,13 @@
 		.article-summary {
 
 			background-color: $subtle-light-grey;
-			font-family: $futura;
-			margin: 10px 0 20px 0;
+			margin: 10px 0 20px 0;	
+
+			p {
+				font-family: $futura;
+				font-size: 16px;
+				line-height: 26px;			
+			}			
 
 			.inner {				
 				padding: 20px 15px;

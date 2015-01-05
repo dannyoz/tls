@@ -39,7 +39,7 @@
 						<div class="grid-6 article-date title-small">{{format(post.modified)}}</div>
 					</div>
 
-					<div class="grid-12 article-summary">
+					<div class="grid-12 article-summary folded-corner">
 						<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]" ng-if="post.custom_fields.teaser_summary[0]"></div>						
 					</div>
 					
