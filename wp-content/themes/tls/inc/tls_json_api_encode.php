@@ -323,14 +323,31 @@ function tls_json_api_encode($response) {
 	}
 
 	/**
-	 * Add Template Slug to All the single pages + Add accordion items to pages with template template-page-with-accordion.php
+	 * Page Template Specific JSON API Responses
 	 */
-	if (isset($response['page'])) {
-		$response['page']->page_template_slug = get_page_template_slug($response['page']->id);
+	if ( is_page() ) {
+        // Add page template slug to JSON API Response
+		$response['page_template_slug'] = get_page_template_slug($response['page']->id);
 
-		if ( $response['page']->page_template_slug == 'template-page-with-accordion.php' ) {
+
+		if ( $response['page_template_slug'] == 'template-page-with-accordion.php' ) { // If it is template-page-with-accordion.php Page template
 			$response['page']->accordion_items = get_field('accordion', $response['page']->id);
-		}
+		} else if ( $response['page_template_slug'] == 'template-articles-archive.php' ) { // If it is template-articles-archive.php Page template
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $articles_archive_args = array(
+                'post_type'         => array( 'tls_articles' ),
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'paged'             => $paged,
+            );
+
+            $wp_query->query = $articles_archive_args;
+            $articles_archive = $json_api->introspector->get_posts($wp_query->query);
+            $response['count'] = count($articles_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $articles_archive;
+        }
 	}
     $response['query'] = $wp_query->query;
 	return $response;
