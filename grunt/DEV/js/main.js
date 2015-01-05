@@ -29082,7 +29082,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.dateRangeFilter = function(range,name){
 
-		$scope.dateRange = range;
+		var $this = $scope.dateRanges[name]
+
+		if($this.isApplied){
+			$scope.dateRange = "";
+		} else {
+			$scope.dateRange = range;
+		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
 			if(val != name){
@@ -29098,7 +29104,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				1,
 				$scope.filters,
 				$scope.order,
-				range
+				$scope.dateRange
 			)
 			.then(function (results){
 			
