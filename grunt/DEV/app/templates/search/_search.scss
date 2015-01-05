@@ -14,13 +14,14 @@
 			top:0;
 			left:-300px;
 			height: 100%;
-			background-color:$subtle-light-grey;
+			background-color:white;
 			width:300px;
 			overflow: auto;
 
 			&.open{
 
 				left:0;
+				padding:20px;
 			}
 
 		}
@@ -34,6 +35,13 @@
 			}
 
 
+		}
+
+		.close-filters{
+
+			position:absolute;
+			top:10px;
+			right:10px;
 		}
 		
 		.filter-block{
@@ -95,6 +103,11 @@
 	}
 
 	#results{
+
+		#show-filters{
+
+			margin:-40px 0 15px 0;
+		}
 
 		h2{
 			
@@ -162,7 +175,11 @@
 
 			a{
 
-				font-family: $futura;
+				font: {
+					weight:500;
+					family:$futura;
+				};
+				color:$comment-grey;
 				padding:10px 15px;
 				display: inline-block;
 				@include keyline(top right bottom left,$light-keyline);
@@ -181,6 +198,17 @@
 			&.current a{
 
 				background-color: $light-keyline;
+			}
+
+			&.desktop-only{
+
+				display: inline-block;
+
+				@media screen and (max-width:$tablet){
+
+					display: none;
+				}
+
 			}		
 		}
 	}

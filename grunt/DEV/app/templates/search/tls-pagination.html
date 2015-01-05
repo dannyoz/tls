@@ -2,25 +2,25 @@
 	<li ng-if="config.currentPage>1">
 		<a ng-click="switchPage(config.currentPage-1)">Prev</a>
 	</li>
-	<li ng-if="config.currentPage>1">
+	<li class="desktop-only" ng-if="config.currentPage>1">
 		...
 	</li>
-	<li ng-if="config.currentPage-2>0">
+	<li class="desktop-only" ng-if="config.currentPage-2>0">
 		<a ng-click="switchPage(config.currentPage-2)">{{config.currentPage-2}}</a>
 	</li>
-	<li ng-if="config.currentPage-1>0">
+	<li class="desktop-only" ng-if="config.currentPage-1>0">
 		<a ng-click="switchPage(config.currentPage-1)">{{config.currentPage-1}}</a>
 	</li>
 	<li class="current">
 		<a ng-click="switchPage(config.currentPage)">{{config.currentPage}}</a>
 	</li>
-	<li ng-if="(config.currentPage+1) < (config.pageCount+1)">
+	<li class="desktop-only" ng-if="(config.currentPage+1) < (config.pageCount+1)">
 		<a ng-click="switchPage(config.currentPage+1)">{{config.currentPage+1}}</a>
 	</li>
-	<li ng-if="(config.currentPage+2) < (config.pageCount+1)">
+	<li class="desktop-only" ng-if="(config.currentPage+2) < (config.pageCount+1)">
 		<a ng-click="switchPage(config.currentPage+2)">{{config.currentPage+2}}</a>
 	</li>
-	<li ng-if="config.currentPage < config.pageCount">
+	<li class="desktop-only" ng-if="config.currentPage < config.pageCount">
 		...
 	</li>
 	<li ng-if="config.currentPage < config.pageCount">
