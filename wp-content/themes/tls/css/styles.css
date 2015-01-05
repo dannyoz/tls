@@ -415,6 +415,10 @@ body {
   opacity: 0.3;
 }
 
+section, article {
+  min-height: 800px;
+}
+
 a, button, input {
   cursor: pointer;
 }
