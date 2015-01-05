@@ -36,7 +36,7 @@
 					</div>
 
 					<div class="grid-12 article-summary">
-						<div class="inner">
+						<div class="inner" ng-if="post.custom_fields.teaser_summary[0]">
 							{{post.custom_fields.teaser_summary[0]}}
 						</div>						
 					</div>
