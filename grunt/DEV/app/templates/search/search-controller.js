@@ -88,7 +88,13 @@
 
 	$scope.dateRangeFilter = function(range,name){
 
-		$scope.dateRange = range;
+		var $this = $scope.dateRanges[name]
+
+		if($this.isApplied){
+			$scope.dateRange = "";
+		} else {
+			$scope.dateRange = range;
+		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
 			if(val != name){
@@ -104,7 +110,7 @@
 				1,
 				$scope.filters,
 				$scope.order,
-				range
+				$scope.dateRange
 			)
 			.then(function (results){
 			
