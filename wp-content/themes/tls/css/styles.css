@@ -1006,6 +1006,11 @@ em, i {
     padding: 15px 0;
   }
 }
+@media (max-width: 450px) {
+  .single-post .article-links .inner {
+    padding: 0 20px;
+  }
+}
 .single-post .article-links .article-nav {
   width: 14%;
 }

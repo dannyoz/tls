@@ -3,12 +3,16 @@
 	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
 
 		<div class="article-links">
-			<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
-				<div class="icon icon-right-arrow"><span>{{post.next_post_info.title}}</span></div>
-			</a>
-			<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
-				<div class="icon icon-left-arrow"><span>{{post.previous_post_info.title}}</span></div>
-			</a>
+
+			<div class="inner">
+				<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
+					<div class="icon icon-right-arrow"><span>{{post.next_post_info.title}}</span></div>
+				</a>
+				<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
+					<div class="icon icon-left-arrow"><span>{{post.previous_post_info.title}}</span></div>
+				</a>	
+			</div>
+			
 		</div>
 
 		<div class="article-current">
@@ -36,9 +40,7 @@
 					</div>
 
 					<div class="grid-12 article-summary">
-						<div class="inner" ng-if="post.custom_fields.teaser_summary[0]">
-							{{post.custom_fields.teaser_summary[0]}}
-						</div>						
+						<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]" ng-if="post.custom_fields.teaser_summary[0]"></div>						
 					</div>
 					
 					<div ng-bind-html="post.content"></div>
