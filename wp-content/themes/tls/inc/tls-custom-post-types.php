@@ -2,7 +2,6 @@
 
 if ( ! function_exists('tls_custom_post_types') ) {
 
-// Register Custom Post Types
 function tls_custom_post_types() {
 
 	/**
@@ -52,7 +51,7 @@ function tls_custom_post_types() {
 		'rewrite'             => $ed_rewrite,
 		'capability_type'     => 'post',
 	);
-	// Regist tls_editions Post Type
+	// Register tls_editions Post Type
 	register_post_type( 'tls_editions', $ed_args );
 
 
@@ -103,7 +102,7 @@ function tls_custom_post_types() {
 		'rewrite'             => $art_rewrite,
 		'capability_type'     => 'post',
 	);
-	// Regist tls_articles Post Type
+	// Register tls_articles Post Type
 	register_post_type( 'tls_articles', $art_args );
 
 
@@ -128,7 +127,7 @@ function tls_custom_post_types() {
 	);
 	// FAQ Post Type Rewrite Rules
 	$faq_rewrite = array(
-		'slug'                => 'faq',
+		'slug'                => 'faqs',
 		'with_front'          => true,
 		'pages'               => true,
 		'feeds'               => true,
@@ -154,7 +153,7 @@ function tls_custom_post_types() {
 		'rewrite'             => $faq_rewrite,
 		'capability_type'     => 'post',
 	);
-	// Regist tls_faq Post Type
+	// Register tls_faq Post Type
 	register_post_type( 'tls_faq', $faq_args );
 
 }
