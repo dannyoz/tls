@@ -20,14 +20,14 @@ $articles_archive = new WP_Query($articles_archive_args);
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 
-		<?php if ( $articles_archive->have_posts() ) : ?>
+		<?php if ( have_posts() ) : ?>
 
 
 			<?php /* Start the Loop */ ?>
-			<?php while ( $articles_archive->have_posts() ) : $articles_archive->the_post(); ?>
+			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php
-					get_template_part( 'content', 'article-archive' );
+				get_template_part( 'content', 'article-archive' );
 				?>
 
 			<?php endwhile; ?>
