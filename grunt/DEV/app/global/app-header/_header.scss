@@ -82,6 +82,10 @@
 				float: left;
 				width: 33.3%;
 
+				&.current-menu-item a{
+					@include box-shadow(inset 0 -4px 0 $locked-grey);
+				}
+
 				a{
 					
 					text-align: center;
