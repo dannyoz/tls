@@ -14,6 +14,7 @@ function tls_taxonomies() {
 	 * and will add it to the tls_articles only
 	 */
 	$tags_args = array(
+		'public'					=> true,
 		'show_admin_column'          => true,
 	);
     register_taxonomy( 'post_tag', array( 'tls_articles' ), $tags_args );

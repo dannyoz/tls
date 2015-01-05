@@ -12,7 +12,7 @@
  */
 
 get_header(); ?>
-
+blog index
 	<div ng-include="'<?php bloginfo('template_directory'); ?>/ng-views/home.html'"></div>
 	<div ng-include="'<?php bloginfo('template_directory'); ?>/ng-views/edition-preview.html'"></div>
 

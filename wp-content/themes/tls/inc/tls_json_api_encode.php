@@ -12,12 +12,12 @@ function tls_json_api_encode($response) {
     /**
      * Home Page Specific
      */
-    if ( is_home() ) {
-        $front_page_id = get_option('page_on_front');
-        $front_page = $json_api->introspector->get_posts( array( 'page_id' => $front_page_id ) );
-        unset($response['count'], $response['count_total'], $response['pages'], $response['posts']);
-        $response['page'] = $front_page;
-    }
+//    if ( is_home() ) {
+//        $front_page_id = get_option('page_on_front');
+//        $front_page = $json_api->introspector->get_posts( array( 'page_id' => $front_page_id ) );
+//        unset($response['count'], $response['count_total'], $response['pages'], $response['posts']);
+//        $response['page'] = $front_page;
+//    }
 
     /**
      * Search Page Specific
@@ -325,7 +325,7 @@ function tls_json_api_encode($response) {
 	/**
 	 * Page Template Specific JSON API Responses
 	 */
-	if ( is_page() ) {
+	if ( isset( $response['page'] ) ) {
         // Add page template slug to JSON API Response
 		$response['page_template_slug'] = get_page_template_slug($response['page']->id);
 
@@ -347,6 +347,15 @@ function tls_json_api_encode($response) {
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $articles_archive;
+        } else if ( $response['page_template_slug'] == 'template-latest-edition.php' ) {
+            $latest_edition_args = array(
+                'post_type'         => array( 'tls_editions' ),
+                'posts_per_page'    => 1,
+            );
+            $latest_edition_query = new WP_Query($latest_edition_args);
+            $wp_query->query = array( 'post_id' => $latest_edition_query->post->ID );
+            $latest_edition = $json_api->introspector->get_post($wp_query->query);
+            $response['latest_edition'] = $latest_edition;
         }
 	}
     $response['query'] = $wp_query->query;

@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php get_header(); ?>category baby
 
 	<section id="category" ng-controller="category" ng-class="{loading:loading}">
 
