@@ -17,29 +17,67 @@ $articles_archive_args = array(
 $articles_archive = new WP_Query($articles_archive_args);
 ?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+<section id="discover" ng-controller="discover">
 
-		<?php if ( $articles_archive->have_posts() ) : ?>
+	<div class="container">
+		<div class="grid-row">
+			<div class="intro" ng-bind-html="page.content"></div>
+		</div>
+	</div>
 
+	<div tls-scroll="scrollState">
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( $articles_archive->have_posts() ) : $articles_archive->the_post(); ?>
+			<div class="container" tls-window-size="size" ng-if="ready">
 
-				<?php
-					get_template_part( 'content', 'article-archive' );
-				?>
+				<div class="grid-row" ng-if="size == 'desktop' || size == 'mobile'">
+					
+					<div  class="grid-4" ng-repeat="column in col3">
+						
+						<div class="card" ng-repeat="card in column">
+							<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
+							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.medium.url}}" />
+							<div class="padded" ng-bind-html="card.excerpt"></div>
+							<footer>
+								<p class="futura"><a href="#" ng-bind="card.author.name"></a></p>
+							</footer>
+						</div>
 
-			<?php endwhile; ?>
+					</div>
 
-		<?php else : ?>
+				</div>
 
-			<?php get_template_part( 'content', 'none' ); ?>
+				<div class="grid-row" ng-if="size == 'tablet'">
 
-		<?php endif; ?>
+					<div class="grid-6" ng-repeat="column in col2">
+						
+						<div class="card" ng-repeat="card in column">
+							<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
+							<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.medium.url}}" />
+							<div class="padded" ng-bind-html="card.excerpt"></div>
+							<footer>
+								<p class="futura"><a href="#" ng-bind="card.author.name"></a></p>
+							</footer>
+						</div>
 
-	</main><!-- #main -->
-</div><!-- #primary -->
+					</div>
 
-<?php get_sidebar(); ?>
+				</div>
+
+				<div id="load-more" class="grid-row">
+
+					<p class="centred futura">{{loadMsg}}</p>
+					<div tls-loading="infLoading"></div>
+					<button class="clear centre" ng-if="!infinite && pageCount > 1" ng-click="loadMore();">
+						Load more <i class="icon icon-plus"></i>
+					</button>
+				</div>
+				
+			</div>
+
+			<div tls-loading="loading"></div>
+
+		</div>
+
+</section>
+
 <?php get_footer(); ?>

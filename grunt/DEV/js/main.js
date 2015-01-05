@@ -28383,6 +28383,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 		
 		},
+		getArticleList : function(page){
+
+			var defer = $q.defer(),
+				path  = '/api/get_posts/?post_type=tls_articles&page=' + page;
+
+			$http.get(path).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -28881,6 +28896,31 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.controller('discover',['$scope','$sce','api','columns',function ($scope,$sce,api,columns){
+
+	var url = window.location.href;
+
+	$scope.pageCount = 1;
+
+	api.getArticle(url).then(function (result){
+		$scope.page = result.page
+	})
+
+	api.getArticleList($scope.page).then(function (result){
+		var posts = result.posts;
+
+		console.log(result)
+
+		columns.divide(posts).then(function (cols){
+			$scope.col1  = cols.col1
+			$scope.col2  = cols.col2
+			$scope.col3  = cols.col3
+			$scope.ready = true
+			$scope.pageCount ++
+		})
+	})
+
+}])
 .controller('footerpages',['$scope','$sce','api','niceDate', function ($scope,$sce,api,niceDate){
 
 	api.getArticle(window.location.href).then(function (result){

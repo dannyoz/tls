@@ -62,7 +62,7 @@
 
 <?php wp_footer(); ?>
 
-<!--<script src="//localhost:35729/livereload.js"></script>-->
+<script src="//localhost:35729/livereload.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/main.min.js"></script>
 
 </body>
