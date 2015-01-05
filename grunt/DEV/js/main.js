@@ -28346,6 +28346,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			//expose url for testing
 			defer.promise.url = url
 
+			console.log(url)
+
 			$http.get(url).success(function (data){
 
 				//simulate server delay
@@ -28866,7 +28868,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		scope:{
 			size: "=tlsWindowSize"
 		},
-		link : function(scope){
+		link : function(scope,element){
 
 			// Breakpoint vars
 			var tabletBP  = 840,

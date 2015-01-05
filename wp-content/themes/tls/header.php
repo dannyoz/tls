@@ -30,6 +30,7 @@
 		<div id="header-top" class="grid-row" tls-window-size="size">
 			
 			<div class="container">
+				{{size}}
 				<div id="brand">
 					<h1 id="logo"><a title="TLS" href="/"><img alt="TLS" src="<?php bloginfo('template_directory'); ?>/images/logo.jpg" /></a></h1>
 					<p class="sub">The times Literary supplement</p>

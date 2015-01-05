@@ -4,7 +4,7 @@
 		scope:{
 			size: "=tlsWindowSize"
 		},
-		link : function(scope){
+		link : function(scope,element){
 
 			// Breakpoint vars
 			var tabletBP  = 840,

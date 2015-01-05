@@ -43,6 +43,8 @@
 			//expose url for testing
 			defer.promise.url = url
 
+			console.log(url)
+
 			$http.get(url).success(function (data){
 
 				//simulate server delay
