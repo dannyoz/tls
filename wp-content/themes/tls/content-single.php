@@ -3,7 +3,6 @@
 	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
 
 		<div class="article-links">
-
 			<div class="inner">
 				<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
 					<div class="icon icon-right-arrow"><span>{{post.next_post_info.title}}</span></div>
@@ -11,8 +10,7 @@
 				<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
 					<div class="icon icon-left-arrow"><span>{{post.previous_post_info.title}}</span></div>
 				</a>	
-			</div>
-			
+			</div>			
 		</div>
 
 		<div class="article-current">
@@ -35,7 +33,7 @@
 
 					<h2 ng-bind-html="post.title"></h2>
 					<div class="grid-12">
-						<div class="grid-6"><h4 class="author" ng-bind="post.author.name"></h4></div>
+						<div class="grid-6"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
 						<div class="grid-6 article-date title-small">{{format(post.modified)}}</div>
 					</div>
 
