@@ -1,23 +1,27 @@
 <article class="single-post" ng-controller="article" ng-cloak>
 
-	<div class="container relative" tls-window-size="size" ng-swipe-left="chooseArticle('prev',prev)" ng-swipe-right="chooseArticle('next',next)">
+	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
 
 		<div class="article-links">
-			<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="next-article">Next article</a>
-			<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="prev-article">Previous article</a>
+			<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
+				<span class="icon icon-right-arrow">{{post.next_post_info.title}}</span>
+			</a>
+			<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
+				<span class="icon icon-left-arrow">{{post.previous_post_info.title}}</span>
+			</a>
 		</div>
 
 		<div class="article-current">
 
 			<div class="grid-row">
-				<div class="grid-6 push-3">
-					{{format(post.modified)}}
+				<div class="grid-6 push-3 article-section title-small">
+					{{post.taxonomy_article_section[0].title}}
 				</div>
 			</div>
 
 			<div class="grid-row">
 				<div class="grid-6 push-3">
-					<img class="max" ng-attr-src="{{post.thumbnail_images.full.url}}">
+					<img class="max" ng-attr-src="{{post.custom_fields.hero_image_url[0]}}">
 				</div>
 			</div>
 
@@ -26,12 +30,21 @@
 				<div class="article-body">
 
 					<h2 ng-bind-html="post.title"></h2>
-					<h4 class="author" ng-bind="post.author.name"></h4>
+					<div class="grid-12">
+						<div class="grid-6"><h4 class="author" ng-bind="post.author.name"></h4></div>
+						<div class="grid-6 article-date title-small">{{format(post.modified)}}</div>
+					</div>
+
+					<div class="grid-12 article-summary">
+						<div class="inner">
+							{{post.custom_fields.teaser_summary[0]}}
+						</div>						
+					</div>
+					
 					<div ng-bind-html="post.content"></div>
 
 				</div>
-
-			</div>
+			</div>		
 
 		</div>
 
