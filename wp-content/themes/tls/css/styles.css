@@ -1020,12 +1020,6 @@ em, i {
   color: #d73f2b;
   padding: 12px 0;
 }
-.single-post .title-small {
-  font-family: "futura-pt", "Arial", sans-serif;
-  text-transform: uppercase;
-  font-size: 15px;
-  letter-spacing: 1px;
-}
 .single-post .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
@@ -1259,6 +1253,13 @@ em, i {
 .article-links .prev-article .icon:before {
   font-size: 25px;
   left: 0;
+}
+
+.title-small {
+  font-family: "futura-pt", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 #category, #discover {
@@ -1569,11 +1570,29 @@ em, i {
   }
 }
 
+#latest-edition h2 {
+  font-size: 28px;
+}
 #latest-edition .article-links {
   min-height: 75px;
 }
 #latest-edition .article-links .article-nav {
   width: auto;
+}
+#latest-edition .edition-item {
+  padding: 15px 0;
+}
+#latest-edition .edition-item h3 {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #d73f2b;
+}
+#latest-edition .edition-item h4 {
+  font-size: 20px;
+}
+#latest-edition .edition-item .title-small {
+  text-transform: none;
 }
 
 .card {

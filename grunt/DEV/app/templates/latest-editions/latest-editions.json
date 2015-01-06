@@ -29,10 +29,10 @@
 					"section": "Fiction"
 				},
 				{
-				"id": 3,
-				"author": "Natural history",
-				"title": "Butterflies and button boots",
-				"section": "Natural History"
+					"id": 3,
+					"author": "Natural history",
+					"title": "Butterflies and button boots",
+					"section": "Natural History"
 				}
 			]
 		},

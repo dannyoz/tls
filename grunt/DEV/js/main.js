@@ -29127,14 +29127,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			console.log(result);
 			
 			// Edition sections articles				
-			$scope.currentEdition = result.content;
+			$scope.currentEdition = result.content;			
 			// Previous edition
-			$scope.previousEdition = result.next_post_info;
+			$scope.previousEdition = result.next_post_info;			
 			// Next edition
 			$scope.nextEdition = result.previous_post_info;
-
+			
+			// Pagination URLs
 			$scope.prev = $scope.previousEdition.url;
 			$scope.next = $scope.nextEdition.url;
+
+			// Public content
+			$scope.publicObj = $scope.currentEdition.public;
+			// Regulars content
+			$scope.regularsObj = $scope.currentEdition.regulars;
+
 
 		})
 }])
