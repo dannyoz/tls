@@ -1,7 +1,13 @@
 {
-	"next url": "http://tls.localhost/articles/butterflies-and-button-boots/",
-	"previous url": "http://tls.localhost/articles/hello-world-im-updated-a-second-time/",
 	"title": "November 5 2014",
+	"previous_post_info": {
+		"title": "November 11 2014",
+		"url": "http://tls.localhost/articles/butterflies-and-button-boots/"
+	},	
+	"next_post_info": {
+		"title": "December 11 2014",
+		"url": "http://tls.localhost/articles/butterflies-and-button-boots/"
+	},	
 	"content": {
 		"featured": {
 			"issue_no": 8824,
