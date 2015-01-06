@@ -1,0 +1,133 @@
+{
+	"next url": "http://tls.localhost/articles/butterflies-and-button-boots/",
+	"previous url": "http://tls.localhost/articles/hello-world-im-updated-a-second-time/",
+	"title": "November 5 2014",
+	"content": {
+		"featured": {
+			"issue_no": 8824,
+			"image_url": "http://tls.localhost/wp-content/uploads/2015/01/cover.jpg"
+		},	
+		"public": {
+			"title": "Public content",
+			"articles": {
+				"poetry": [
+					{
+						"id": 1,
+						"author": "Bee Wilson",
+						"title": "If home existed"
+					}				
+				],
+				"fiction": [
+					{
+						"id": 2,
+						"author": "David Collard",
+						"title": "Mathias Enard’s grammar of estrangement"
+					}				
+				],
+				"natural history": [
+					{
+						"id": 3,
+						"author": "Natural history",
+						"title": "Butterflies and button boots"
+					}
+				]
+			}
+		},
+		"regulars": {
+			"title": "Regulars",
+			"articles": {
+				"letters to the editor": [
+					{
+						"id": 1,
+						"author": "",
+						"title": "C. K. Scott Moncrieff, Iris Murdoch’s philosophy, Nabokov, etc"
+					}				
+				],
+				"freelance": [
+					{
+						"id": 2,
+						"author": "",
+						"title": "Alan Brownjohn"
+					}				
+				],
+				"then and now": [
+					{
+						"id": 3,
+						"author": "",
+						"title": "Georg Trakl’s spectrum"
+					}
+				],
+				"nb": [
+					{
+						"id": 4,
+						"author": "",
+						"title": "Eliot and the TLS, Iain Crichton Smith, Modiano update"
+					}
+				]
+			}
+		},
+		"subscribers": {
+			"title": "Subscriber Exclusive",
+			"articles": {
+				"arts & commentary": [
+					{
+						"id": 1,
+						"author": "Tim Kendall",
+						"title": "Never out of the storm"
+					},
+					{
+						"id": 2,
+						"author": "Christopher Stace",
+						"title": "Out of Italy"
+					},
+					{
+						"id": 3,
+						"author": "Lindsay Duguid",
+						"title": "Paint what you like"
+					},
+					{
+						"id": 4,
+						"author": "Lindsay Duguid",
+						"title": "Paint what you like"
+					}				
+				],
+				"bibliography": [
+					{
+						"id": 1,
+						"author": "Jeremy Adler",
+						"title": "What a judgment"
+					}				
+				],
+				"history": [
+					{
+						"id": 1,
+						"author": "Natural history",
+						"title": "Butterflies and button boots"
+					}
+				],
+				"literature & poetry": [
+					{
+						"id": 1,
+						"author": "Tim Kendall",
+						"title": "Never out of the storm"
+					},
+					{
+						"id": 2,
+						"author": "Christopher Stace",
+						"title": "Out of Italy"
+					},
+					{
+						"id": 3,
+						"author": "Lindsay Duguid",
+						"title": "Paint what you like"
+					},
+					{
+						"id": 4,
+						"author": "Lindsay Duguid",
+						"title": "Paint what you like"
+					}				
+				]
+			}
+		}
+	}
+}

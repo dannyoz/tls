@@ -99,6 +99,25 @@
 			return defer.promise
 
 		},
+		getLatestEditions : function(){
+
+			var defer  = $q.defer(),
+				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+
+			//expose url for testing
+			defer.promise.url = url
+
+			$http.get(url).success(function (data){
+
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+				
+			})
+
+			return defer.promise
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -114,6 +133,6 @@
 				return url
 			}
 			
-		}
+		}		
 	}
 }])
