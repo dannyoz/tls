@@ -55,8 +55,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  background: #ffffff;
-  color: #000000;
+  background: white;
+  color: black;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -424,19 +424,19 @@ a, button, input {
 }
 
 a:link {
-  color: #000000;
+  color: black;
   text-decoration: none;
 }
 a:visited {
-  color: #000000;
+  color: black;
   text-decoration: none;
 }
 a:hover {
-  color: #000000;
+  color: black;
   text-decoration: underline;
 }
 a:active {
-  color: #000000;
+  color: black;
   text-decoration: underline;
 }
 a.orange {
@@ -494,7 +494,7 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
 textarea:hover, input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=tel]:hover, input[type=search]:hover {
   background-color: white;
   border: 1px solid #f2f2f2;
-  color: #000000;
+  color: black;
 }
 textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=tel]:focus, input[type=search]:focus {
   background-color: white;
@@ -539,6 +539,10 @@ textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=pass
 }
 
 .icon-key:before {
+  content: "\e604";
+}
+
+.icon-key-after:after {
   content: "\e604";
 }
 
@@ -1016,103 +1020,9 @@ em, i {
   border-left: solid 15px transparent;
   border-bottom: solid 15px transparent;
 }
-.single-post .article-links {
-  position: relative;
-  z-index: 9999;
-  min-height: 30px;
-}
-@media (max-width: 840px) {
-  .single-post .article-links {
-    overflow: hidden;
-    border-bottom: 1px solid #ccc;
-    padding: 15px 60px;
-  }
-}
-@media (max-width: 450px) {
-  .single-post .article-links .inner {
-    padding: 0 20px;
-  }
-}
-.single-post .article-links .article-nav {
-  width: 14%;
-}
-@media (max-width: 840px) {
-  .single-post .article-links .article-nav {
-    width: 25%;
-  }
-}
-.single-post .article-links .article-nav .icon {
-  font-weight: bold;
-}
-@media (max-width: 680px) {
-  .single-post .article-links .article-nav .icon span {
-    display: none;
-  }
-}
-.single-post .article-links .article-nav:hover {
-  text-decoration: none;
-}
-.single-post .article-links .icon:before,
-.single-post .article-links .icon:after {
-  font-size: 25px;
-  font-weight: normal;
-  position: absolute;
-  top: -1px;
-}
-.single-post .article-links .next-article {
-  z-index: 999;
-  text-align: right;
-  padding-right: 35px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-@media (max-width: 840px) {
-  .single-post .article-links .next-article {
-    position: relative;
-    top: auto;
-    right: auto;
-    float: right;
-  }
-}
-.single-post .article-links .next-article .icon:before {
-  content: "";
-}
-.single-post .article-links .next-article .icon:after {
-  right: 0;
-  font-size: 25px;
-  content: "\e60a";
-}
-.single-post .article-links .prev-article {
-  z-index: 999;
-  text-align: left;
-  padding-left: 35px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-@media (max-width: 840px) {
-  .single-post .article-links .prev-article {
-    position: relative;
-    top: auto;
-    right: auto;
-    left: auto;
-    float: left;
-  }
-}
-.single-post .article-links .prev-article .icon:before {
-  font-size: 25px;
-  left: 0;
-}
 .single-post .article-section {
   color: #d73f2b;
   padding: 12px 0;
-}
-.single-post .title-small {
-  font-family: "futura-pt", "Arial", sans-serif;
-  text-transform: uppercase;
-  font-size: 15px;
-  letter-spacing: 1px;
 }
 .single-post .article-body {
   -webkit-perspective: 1000;
@@ -1258,6 +1168,102 @@ em, i {
   animation-timing-function: linear;
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
+}
+
+.article-links {
+  position: relative;
+  z-index: 9999;
+  min-height: 30px;
+}
+@media (max-width: 840px) {
+  .article-links {
+    overflow: hidden;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 15px 60px;
+  }
+}
+@media (max-width: 450px) {
+  .article-links .inner {
+    padding: 0 20px;
+  }
+}
+.article-links .article-nav {
+  width: 14%;
+}
+@media (max-width: 840px) {
+  .article-links .article-nav {
+    width: 25%;
+  }
+}
+.article-links .article-nav .icon {
+  font-weight: bold;
+}
+@media (max-width: 680px) {
+  .article-links .article-nav .icon span {
+    display: none;
+  }
+}
+.article-links .article-nav:hover {
+  text-decoration: none;
+}
+.article-links .icon:before,
+.article-links .icon:after {
+  font-size: 25px;
+  font-weight: normal;
+  position: absolute;
+  top: -1px;
+}
+.article-links .next-article {
+  z-index: 999;
+  text-align: right;
+  padding-right: 35px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+@media (max-width: 840px) {
+  .article-links .next-article {
+    position: relative;
+    top: auto;
+    right: auto;
+    float: right;
+  }
+}
+.article-links .next-article .icon:before {
+  content: "";
+}
+.article-links .next-article .icon:after {
+  right: 0;
+  font-size: 25px;
+  content: "\e60a";
+}
+.article-links .prev-article {
+  z-index: 999;
+  text-align: left;
+  padding-left: 35px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+@media (max-width: 840px) {
+  .article-links .prev-article {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    float: left;
+  }
+}
+.article-links .prev-article .icon:before {
+  font-size: 25px;
+  left: 0;
+}
+
+.title-small {
+  font-family: "futura-pt", "Arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 1px;
 }
 
 #category, #discover {
@@ -1568,6 +1574,63 @@ em, i {
   }
 }
 
+#latest-edition h2 {
+  font-size: 28px;
+}
+#latest-edition .article-links {
+  min-height: 75px;
+}
+#latest-edition .article-links .article-nav {
+  width: auto;
+}
+#latest-edition .edition-item {
+  border-top: 1px solid #bfbfbf;
+}
+#latest-edition .edition-item .padded {
+  padding: 30px;
+}
+#latest-edition .edition-item h3 {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #d73f2b;
+  margin-bottom: 5px;
+}
+#latest-edition .edition-item h4 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  line-height: 24px;
+}
+#latest-edition .edition-item .title-small {
+  text-transform: none;
+  margin-bottom: 5px;
+}
+#latest-edition .featured-col .max {
+  border: 1px solid #d9d9d9;
+  padding: 6px;
+  margin-bottom: 10px;
+}
+#latest-edition .featured-col .title-small {
+  font-weight: 400;
+}
+#latest-edition .public-col .edition-item .padded {
+  padding: 20px 0;
+}
+#latest-edition .regular-col .edition-item {
+  background-color: #e6e6e6;
+}
+#latest-edition .regular-col .edition-item h3 {
+  position: relative;
+}
+#latest-edition .regular-col .edition-item h3 .icon {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #706d73;
+  font-size: 28px;
+}
+
 .card {
   background-color: white;
   margin-bottom: 30px;
@@ -1659,15 +1722,28 @@ em, i {
 }
 .card h4 {
   margin-bottom: 10px;
-  font-size: 1.6em;
+  font-size: 1.5em;
   font-weight: bold;
 }
 .card h4 a:hover {
   color: #d73f2b;
   text-decoration: none;
 }
+.card p {
+  font-size: 0.9em;
+}
+.card p.author {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+}
 .card .padded {
   padding: 20px 25px;
+}
+.card .embed {
+  margin-bottom: 20px;
 }
 .card footer {
   padding: 10px 25px;
@@ -2109,6 +2185,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2119,6 +2196,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2129,6 +2207,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2139,16 +2218,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2159,16 +2242,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2179,16 +2266,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2199,16 +2290,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2219,9 +2314,11 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: rotate3d(0, 1, 0, -180deg);
     background-color: transparent;
   }
+
   50% {
     background-color: white;
   }
+
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2232,9 +2329,11 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
+
   50% {
     background-color: white;
   }
+
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 180deg);
     background-color: transparent;
@@ -2244,70 +2343,86 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     background-color: white;
   }
+
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @-moz-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
+
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
+
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @-webkit-keyframes pageTurnRight {
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2316,17 +2431,21 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-moz-keyframes pageTurnRight {
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2335,17 +2454,21 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @keyframes pageTurnRight {
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
