@@ -6,11 +6,11 @@
 		
 		<div class="article-links">
 			<div class="inner">
-				<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next',next)" class="article-nav next-article">
-					<div class="icon icon-right-arrow"><span>{{currentEdition.next_post_info.title}}</span></div>
+				<a href="javascript:;" ng-click="chooseArticle('next',next)" class="article-nav next-article">
+					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
 				</a>
-				<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
-					<div class="icon icon-left-arrow"><span>{{currentEdition.previous_post_info.title}}</span></div>
+				<a href="javascript:;" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
+					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
 				</a>	
 			</div>			
 		</div>
