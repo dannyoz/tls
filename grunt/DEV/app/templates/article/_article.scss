@@ -213,7 +213,7 @@
 
 	@media (max-width: $tablet) {	
 		overflow: hidden;		
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid $light-keyline;
 		padding: 15px 60px;			
 	}
 

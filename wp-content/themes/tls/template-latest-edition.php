@@ -21,6 +21,7 @@
 				
 				<div class="grid-4 featured-col">					
 					<img class="max" ng-attr-src="{{currentEdition.featured.image_url}}">
+					<div class="title-small">No. {{currentEdition.featured.issue_no}}</div>
 				</div>
 				
 				<div class="grid-4 public-col">
@@ -41,7 +42,7 @@
 					<div class="grid-row">
 						<div class="col-12 edition-item" ng-repeat="regular in regularsObj.articles">
 							<div class="padded">
-								<h3 class="futura">{{regular.section}}</h3>
+								<h3 class="futura">{{regular.section}}<i class="icon icon-key-after"></i></h3>								
 								<p class="title-small">{{regular.title}}</p>
 							</div>
 						</div>
