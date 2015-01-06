@@ -28287,6 +28287,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('latest-editions.html',
+    "<section id=latest-edition ng-model=latesteditions></section>"
+  );
+
+
   $templateCache.put('search.html',
     "<section id=search ng-controller=search><div class=container><div class=grid-row><div class=grid-4><h2>Sort by...</h2><div class=filter-block><h3>Content type</h3></div><div class=filter-block><h3>Date</h3></div><div class=filter-block><h3>Category</h3></div></div><div class=grid-8></div></div></div></section>"
   );
@@ -28400,6 +28405,25 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
+		getLatestEditions : function(){
+
+			var defer  = $q.defer(),
+				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+
+			//expose url for testing
+			defer.promise.url = url
+
+			$http.get(url).success(function (data){
+
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+				
+			})
+
+			return defer.promise
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -28415,7 +28439,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				return url
 			}
 			
-		}
+		}		
 	}
 }])
 .factory('columns',['$q', function ($q){
@@ -29080,6 +29104,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.controller('latesteditions',['$scope','$sce','$location','$timeout','api','columns','niceDate',
+
+	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
+
+		api.getLatestEditions().then(function (result){			
+			console.log(result);
+		})
+}])
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 
 	//Set default vars
