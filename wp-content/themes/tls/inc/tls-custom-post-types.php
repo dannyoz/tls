@@ -76,7 +76,7 @@ function tls_custom_post_types() {
 	);
 	// Article Post Type Rewrite Rules
 	$art_rewrite = array(
-		'slug'                => 'articles',
+		'slug'                => 'articles/%article_visibility%',
 		'with_front'          => true,
 		'pages'               => true,
 		'feeds'               => true,
@@ -100,6 +100,7 @@ function tls_custom_post_types() {
 		'exclude_from_search' => false,
 		'publicly_queryable'  => true,
 		'rewrite'             => $art_rewrite,
+		'query_var'			  => true,
 		'capability_type'     => 'post',
 	);
 	// Register tls_articles Post Type
