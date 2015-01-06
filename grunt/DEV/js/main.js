@@ -28287,6 +28287,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('latest-editions.html',
+    "<section id=latest-edition ng-model=latesteditions></section>"
+  );
+
+
   $templateCache.put('search.html',
     "<section id=search ng-controller=search><div class=container><div class=grid-row><div class=grid-4><h2>Sort by...</h2><div class=filter-block><h3>Content type</h3></div><div class=filter-block><h3>Date</h3></div><div class=filter-block><h3>Category</h3></div></div><div class=grid-8></div></div></div></section>"
   );
@@ -28359,7 +28364,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters,ord,date){
+		getSearchResults : function(path,page,filters,ord,date,contentFilters){
 
 			var defer     = $q.defer(),
 				page      = (!page) ? 1 : page,
@@ -28368,12 +28373,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				prefix    = this.checkQueries(path),
 				order     = (!ord)? "" : "&orderby=date&order=" + ord,
 				dateRange = (!date)? "" : "&date_filter=" + date,
-				query     = "json=1&paged="+page;
+				cFilters  = (!contentFilters)? "" : "&post_type["+contentFilters+"]",
+				query     = "json=1&paged="+page,
+				finalPath = path+prefix+query+filt+order+dateRange+cFilters;
 
 			//expose url for testing
-			defer.promise.url = path+prefix+query+filt+order+dateRange
+			defer.promise.url = finalPath
 
-			$http.get(path+prefix+query+filt+order+dateRange).success(function (data){
+			$http.get(finalPath).success(function (data){
 				//simulate server delay
 				$timeout(function(){
 					defer.resolve(data)
@@ -28400,6 +28407,25 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
+		getLatestEditions : function(){
+
+			var defer  = $q.defer(),
+				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+
+			//expose url for testing
+			defer.promise.url = url
+
+			$http.get(url).success(function (data){
+
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+				
+			})
+
+			return defer.promise
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -28415,7 +28441,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				return url
 			}
 			
-		}
+		}		
 	}
 }])
 .factory('columns',['$q', function ($q){
@@ -28761,7 +28787,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
 
-	var url = window.location.href;
+	var url = '/?post_type[post]';
 
 	$scope.ready       = false;
 	$scope.page        = 1;
@@ -28776,8 +28802,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	api.getArticle(url).then(function (result){
 
+		console.log(result)
+
 		$scope.loading = false;
-		$scope.title   = result.category.title
+		$scope.title   = 'blog'
 		$scope.pageCount = result.pages
 
 		var posts = result.posts;
@@ -29080,18 +29108,30 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.controller('latesteditions',['$scope','$sce','$location','$timeout','api','columns','niceDate',
+
+	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
+
+		api.getLatestEditions().then(function (result){			
+						
+			$scope.currentEdition = result;
+			$scope.previousEdition = result.next_post_info;
+			$scope.nextEdition = result.previous_post_info;
+		})
+}])
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 
 	//Set default vars
 	var url = window.location.href;
-	$scope.filters     = []
-	$scope.currentPage = 1
-	$scope.dateRange   = ""
-	$scope.orderName   = "Newest"
-	$scope.order       = "ASC"
-	$scope.showSorter  = false
-	$scope.loadResults = true
-	$scope.niceDate    = niceDate
+	$scope.filters        = []
+	$scope.contentFilters = []
+	$scope.currentPage    = 1
+	$scope.dateRange      = ""
+	$scope.orderName      = "Newest"
+	$scope.order          = "ASC"
+	$scope.showSorter     = false
+	$scope.loadResults    = true
+	$scope.niceDate       = niceDate
 
 	api.getSearchResults(
 			url,
@@ -29166,6 +29206,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 					"dateRange"   : $scope.dateRange
 			}
 		})
+	}
+
+	$scope.contentFilter = function(term,key){
+
 	}
 
 	$scope.dateRangeFilter = function(range,name){

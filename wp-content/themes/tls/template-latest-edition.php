@@ -1,34 +1,22 @@
-<?php
-/**
- * Template Name: Latest Edition Template
- *
- * @package tls
- */
+<?php get_header(); ?>
 
-get_header();
+<section id="latest-edition" ng-controller="latesteditions">
+	
+	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
+		
+		<div class="article-links">
+			<div class="inner">
+				<a href="javascript:;" ng-click="chooseArticle('next',next)" class="article-nav next-article">
+					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
+				</a>
+				<a href="javascript:;" ng-click="chooseArticle('prev',prev)" class="article-nav prev-article">
+					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
+				</a>	
+			</div>			
+		</div>
 
-// Latest Edition WP_Query arguments
-$latest_edition_args = array(
-	'post_type'			=> 'tls_editions',
-	'posts_per_page'	=> 1,
-	'order_by'			=> 'date',
-	'order'				=> 'DESC'
-);
-// Latest Edition new WP_Query
-$latest_edition = new WP_Query($latest_edition_args);
-?>
+	</div>
 
-<section id="latest-edition">
-	<?php
-	// Latest Edition Loop
-	if ( $latest_edition->have_posts() ) :
-		while ( $latest_edition->have_posts() ) : $latest_edition->the_post();
-	?>
-		<h1><?php the_title(); ?></h1>
-
-	<?php
-		endwhile; // End while loop
-	endif; // End if have_posts()
-	?>
 </section>
+
 <?php get_footer(); ?>

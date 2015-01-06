@@ -2,14 +2,15 @@
 
 	//Set default vars
 	var url = window.location.href;
-	$scope.filters     = []
-	$scope.currentPage = 1
-	$scope.dateRange   = ""
-	$scope.orderName   = "Newest"
-	$scope.order       = "ASC"
-	$scope.showSorter  = false
-	$scope.loadResults = true
-	$scope.niceDate    = niceDate
+	$scope.filters        = []
+	$scope.contentFilters = []
+	$scope.currentPage    = 1
+	$scope.dateRange      = ""
+	$scope.orderName      = "Newest"
+	$scope.order          = "ASC"
+	$scope.showSorter     = false
+	$scope.loadResults    = true
+	$scope.niceDate       = niceDate
 
 	api.getSearchResults(
 			url,
@@ -84,6 +85,10 @@
 					"dateRange"   : $scope.dateRange
 			}
 		})
+	}
+
+	$scope.contentFilter = function(term,key){
+
 	}
 
 	$scope.dateRangeFilter = function(range,name){
