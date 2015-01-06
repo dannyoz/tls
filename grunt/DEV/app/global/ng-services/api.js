@@ -12,6 +12,20 @@
 
 			return defer.promise
 		},
+		getHomePage : function(url){
+
+			var defer  = $q.defer();
+
+			$http.get(url).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+
+		},
 		getArticle : function(url,pg){
 
 			var defer  = $q.defer(),

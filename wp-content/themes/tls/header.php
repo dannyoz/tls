@@ -19,6 +19,13 @@
 	
 	<script src="//use.typekit.net/zvh7bpe.js"></script>
 	<script>try{Typekit.load();}catch(e){}</script>
+	<?php if ( is_home() || is_front_page() ) :
+	$front_page_id = get_option('page_on_front');
+	?>
+		<script>
+			var home_page_id = <?php echo $front_page_id; ?>;
+		</script>
+	<?php endif; ?>
 	<?php wp_head(); ?>
 	
 </head>

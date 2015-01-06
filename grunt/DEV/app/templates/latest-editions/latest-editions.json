@@ -15,62 +15,55 @@
 		},	
 		"public": {
 			"title": "Public content",
-			"articles": {
-				"poetry": [
-					{
-						"id": 1,
-						"author": "Bee Wilson",
-						"title": "If home existed"
-					}				
-				],
-				"fiction": [
-					{
-						"id": 2,
-						"author": "David Collard",
-						"title": "Mathias Enard’s grammar of estrangement"
-					}				
-				],
-				"natural history": [
-					{
-						"id": 3,
-						"author": "Natural history",
-						"title": "Butterflies and button boots"
-					}
-				]
-			}
+			"articles": [
+				{
+					"id": 1,
+					"author": "Bee Wilson",
+					"title": "If home existed",
+					"section": "Poetry"
+				},
+				{
+					"id": 2,
+					"author": "David Collard",
+					"title": "Mathias Enard’s grammar of estrangement",
+					"section": "Fiction"
+				},
+				{
+				"id": 3,
+				"author": "Natural history",
+				"title": "Butterflies and button boots",
+				"section": "Natural History"
+				}
+			]
 		},
 		"regulars": {
 			"title": "Regulars",
-			"articles": {
-				"letters to the editor": [
-					{
-						"id": 1,
-						"author": "",
-						"title": "C. K. Scott Moncrieff, Iris Murdoch’s philosophy, Nabokov, etc"
-					}				
-				],
-				"freelance": [
-					{
-						"id": 2,
-						"author": "",
-						"title": "Alan Brownjohn"
-					}				
-				],
-				"then and now": [
-					{
-						"id": 3,
-						"author": "",
-						"title": "Georg Trakl’s spectrum"
-					}
-				],
-				"nb": [
-					{
-						"id": 4,
-						"author": "",
-						"title": "Eliot and the TLS, Iain Crichton Smith, Modiano update"
-					}
-				]
-			}
+			"articles": [
+				{
+					"id": 1,
+					"author": "",
+					"title": "C. K. Scott Moncrieff, Iris Murdoch’s philosophy, Nabokov, etc",
+					"section": "Letters To The Editor"
+				},
+				{
+					"id": 2,
+					"author": "",
+					"title": "Alan Brownjohn",
+					"section": "Freelance"
+				},
+				{
+					"id": 3,
+					"author": "",
+					"title": "Georg Trakl’s spectrum",
+					"section": "Then And Now"
+				},
+				{
+					"id": 4,
+					"author": "",
+					"title": "Eliot and the TLS, Iain Crichton Smith, Modiano update",
+					"section": "NB"
+				}
+			]
 		},
 		"subscribers": {
 			"title": "Subscriber Exclusive",

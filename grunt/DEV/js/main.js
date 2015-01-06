@@ -28320,6 +28320,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
+		getHomePage : function(url){
+
+			var defer  = $q.defer();
+
+			$http.get(url).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+
+		},
 		getArticle : function(url,pg){
 
 			var defer  = $q.defer(),
@@ -28787,7 +28801,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
 
-	var url = window.location.href;
+	var url = '/?post_type[post]';
 
 	$scope.ready       = false;
 	$scope.page        = 1;
@@ -28802,8 +28816,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	api.getArticle(url).then(function (result){
 
+		console.log(result)
+
 		$scope.loading = false;
-		$scope.title   = result.category.title
+		$scope.title   = 'blog'
 		$scope.pageCount = result.pages
 
 		var posts = result.posts;
@@ -29007,22 +29023,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 
 }])
-.controller('home',['$scope','api',function ($scope, api){
+.controller('home',['$scope','api','columns',function ($scope, api, columns){
+
+	var url = '/api/get_page/?id=' + home_page_id
 
 	$scope.cards = ""
 
-	api.getCards().then(function(result){
+	api.getHomePage(url).then(function (result){
 
-		$scope.cards    = result.cards
-		$scope.isLocked = true //class for locking content
-
-		//Config object for tls-columns directive
-		$scope.columns = {
-			"template" : "home",
-			"cards" : $scope.cards
-		}
+		console.log(result)
 
 	})
+
 
 	$scope.image = "hero"
 
