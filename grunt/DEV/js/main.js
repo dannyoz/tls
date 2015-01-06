@@ -28364,7 +28364,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters,ord,date){
+		getSearchResults : function(path,page,filters,ord,date,contentFilters){
 
 			var defer     = $q.defer(),
 				page      = (!page) ? 1 : page,
@@ -28373,12 +28373,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				prefix    = this.checkQueries(path),
 				order     = (!ord)? "" : "&orderby=date&order=" + ord,
 				dateRange = (!date)? "" : "&date_filter=" + date,
-				query     = "json=1&paged="+page;
+				cFilters  = (!contentFilters)? "" : "&post_type["+contentFilters+"]",
+				query     = "json=1&paged="+page,
+				finalPath = path+prefix+query+filt+order+dateRange+cFilters;
 
 			//expose url for testing
-			defer.promise.url = path+prefix+query+filt+order+dateRange
+			defer.promise.url = finalPath
 
-			$http.get(path+prefix+query+filt+order+dateRange).success(function (data){
+			$http.get(finalPath).success(function (data){
 				//simulate server delay
 				$timeout(function(){
 					defer.resolve(data)
@@ -29119,14 +29121,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	//Set default vars
 	var url = window.location.href;
-	$scope.filters     = []
-	$scope.currentPage = 1
-	$scope.dateRange   = ""
-	$scope.orderName   = "Newest"
-	$scope.order       = "ASC"
-	$scope.showSorter  = false
-	$scope.loadResults = true
-	$scope.niceDate    = niceDate
+	$scope.filters        = []
+	$scope.contentFilters = []
+	$scope.currentPage    = 1
+	$scope.dateRange      = ""
+	$scope.orderName      = "Newest"
+	$scope.order          = "ASC"
+	$scope.showSorter     = false
+	$scope.loadResults    = true
+	$scope.niceDate       = niceDate
 
 	api.getSearchResults(
 			url,
@@ -29201,6 +29204,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 					"dateRange"   : $scope.dateRange
 			}
 		})
+	}
+
+	$scope.contentFilter = function(term,key){
+
 	}
 
 	$scope.dateRangeFilter = function(range,name){
