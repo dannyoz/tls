@@ -1,19 +1,15 @@
-.controller('home',['$scope','api',function ($scope, api){
+.controller('home',['$scope','api','columns',function ($scope, api, columns){
+
+	var url = '/api/get_page/?id=' + home_page_id
 
 	$scope.cards = ""
 
-	api.getCards().then(function(result){
+	api.getHomePage(url).then(function (result){
 
-		$scope.cards    = result.cards
-		$scope.isLocked = true //class for locking content
-
-		//Config object for tls-columns directive
-		$scope.columns = {
-			"template" : "home",
-			"cards" : $scope.cards
-		}
+		console.log(result)
 
 	})
+
 
 	$scope.image = "hero"
 

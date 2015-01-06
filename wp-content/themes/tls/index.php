@@ -12,7 +12,6 @@
  */
 
 get_header(); ?>
-blog index
 
 
 <section id="category" ng-controller="category" ng-class="{loading:loading}">
@@ -26,6 +25,11 @@ blog index
 				<div  class="grid-4" ng-repeat="column in col3">
 					
 					<div class="card" ng-repeat="card in column">
+
+						<div class="grid-4">
+							<a href="#"><img class="max circular" src="http://www.placecage.com/c/170/170"/></a>
+						</div>
+						
 						<h3 class="futura"><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h3>
 						<img class="max" ng-if="card.thumbnail_images" ng-attr-src="{{card.thumbnail_images.medium.url}}" />
 						<div class="padded" ng-bind-html="card.excerpt"></div>
