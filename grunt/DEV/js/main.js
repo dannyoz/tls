@@ -28787,7 +28787,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
 
-	var url = window.location.href;
+	var url = '/?post_type[post]';
 
 	$scope.ready       = false;
 	$scope.page        = 1;
@@ -28802,8 +28802,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	api.getArticle(url).then(function (result){
 
+		console.log(result)
+
 		$scope.loading = false;
-		$scope.title   = result.category.title
+		$scope.title   = 'blog'
 		$scope.pageCount = result.pages
 
 		var posts = result.posts;
