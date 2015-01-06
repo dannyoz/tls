@@ -31,12 +31,16 @@ describe('api', function() {
     it('should format getSearchResults urls correctly', inject(function (api){
 
         var test1 = api.getSearchResults('/url/',1);
-            test2 = api.getSearchResults('/url/',2,'nick,cage');
-            test3 = api.getSearchResults('/url/',3,'charlie','DESC');
+            test2 = api.getSearchResults('/url/',2,'cat,subcat');
+            test3 = api.getSearchResults('/url/',3,'cat','DESC');
+            test4 = api.getSearchResults('/url/',4,'cat','DESC','30 days ago');
+            test5 = api.getSearchResults('/url/',5,'cat','DESC','30 days ago','test,anothertest');
 
         expect(test1.url).toBe('/url/?json=1&paged=1');
-        expect(test2.url).toBe('/url/?json=1&paged=2&category_name=[nick,cage]');
-        expect(test3.url).toBe('/url/?json=1&paged=3&category_name=[charlie]&orderby=date&order=DESC');
+        expect(test2.url).toBe('/url/?json=1&paged=2&category_name=[cat,subcat]');
+        expect(test3.url).toBe('/url/?json=1&paged=3&category_name=[cat]&orderby=date&order=DESC');
+        expect(test4.url).toBe('/url/?json=1&paged=4&category_name=[cat]&orderby=date&order=DESC&date_filter=30 days ago');
+        expect(test5.url).toBe('/url/?json=1&paged=5&category_name=[cat]&orderby=date&order=DESC&date_filter=30 days ago&post_type[test,anothertest]');
 
     }));
 

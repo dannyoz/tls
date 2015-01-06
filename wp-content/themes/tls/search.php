@@ -26,7 +26,7 @@ get_header(); ?>
 						<h3 class="futura uppercase">Content type</h3>
 						<ul class="filters" ng-cloak>
 							<li ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in contentType">
-								<a ng-click="filterResults(val.slug,name)">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+								<a ng-click="contentFilter(val.slug,name)">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
 							</li>
 						</ul>
 					</div>

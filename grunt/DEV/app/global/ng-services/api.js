@@ -56,7 +56,7 @@
 
 			return defer.promise
 		},
-		getSearchResults : function(path,page,filters,ord,date){
+		getSearchResults : function(path,page,filters,ord,date,contentFilters){
 
 			var defer     = $q.defer(),
 				page      = (!page) ? 1 : page,
@@ -65,12 +65,14 @@
 				prefix    = this.checkQueries(path),
 				order     = (!ord)? "" : "&orderby=date&order=" + ord,
 				dateRange = (!date)? "" : "&date_filter=" + date,
-				query     = "json=1&paged="+page;
+				cFilters  = (!contentFilters)? "" : "&post_type["+contentFilters+"]",
+				query     = "json=1&paged="+page,
+				finalPath = path+prefix+query+filt+order+dateRange+cFilters;
 
 			//expose url for testing
-			defer.promise.url = path+prefix+query+filt+order+dateRange
+			defer.promise.url = finalPath
 
-			$http.get(path+prefix+query+filt+order+dateRange).success(function (data){
+			$http.get(finalPath).success(function (data){
 				//simulate server delay
 				$timeout(function(){
 					defer.resolve(data)
