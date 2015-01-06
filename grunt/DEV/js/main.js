@@ -29109,7 +29109,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
 
 		api.getLatestEditions().then(function (result){			
+			
 			console.log(result);
+
+			$scope.currentEdition = result.content;
 		})
 }])
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
