@@ -10,16 +10,6 @@ function tls_json_api_encode($response) {
     global $json_api, $wp_query;
 
     /**
-     * Home Page Specific
-     */
-//    if ( is_home() ) {
-//        $front_page_id = get_option('page_on_front');
-//        $front_page = $json_api->introspector->get_posts( array( 'page_id' => $front_page_id ) );
-//        unset($response['count'], $response['count_total'], $response['pages'], $response['posts']);
-//        $response['page'] = $front_page;
-//    }
-
-    /**
      * Search Page Specific
      */
     if ( is_search() ) {
@@ -50,7 +40,7 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['reviews'] = array(
     		'item_label'		=> __('Reviews', 'tls'),
-            'json_query'        => 'tax_filter[post_tag]=reviews',
+            'json_query'        => 'tax_filter[article_tags]=reviews',
     		'taxonomy'			=> $reviews_tag->taxonomy,
     		'slug'				=> $reviews_tag->slug,
     		'search_count'		=> (int) $reviews->found_posts

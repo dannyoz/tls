@@ -148,3 +148,15 @@ function tls_remove_page_from_search() {
 	}
 }
 add_action( 'init', 'tls_remove_page_from_search', 99 );
+
+/**
+ * Remove Default Post Tags Taxonomy from WordPress
+ */
+function tls_unregister_post_tag_taxonomy()
+{
+	global $wp_taxonomies;
+	$taxonomy = 'post_tag';
+	if ( taxonomy_exists($taxonomy) )
+		unset( $wp_taxonomies[$taxonomy] );
+}
+add_action( 'init', 'tls_unregister_post_tag_taxonomy' );

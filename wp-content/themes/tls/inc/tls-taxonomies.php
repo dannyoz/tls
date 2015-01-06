@@ -8,16 +8,36 @@ if ( ! function_exists( 'tls_taxonomies' ) ) {
 function tls_taxonomies() {
 
 	/**
-	 * Tags Taxonomy
-	 *
-	 * This will remove the tags taxonomy from Wordpress native post type
-	 * and will add it to the tls_articles only
+	 * Article Tags Taxonomy
 	 */
-	$tags_args = array(
-		'public'					=> true,
-		'show_admin_column'          => true,
+	$article_tags_labels = array(
+		'name'                       => _x( 'Article Tags', 'Taxonomy General Name', 'tls' ),
+		'singular_name'              => _x( 'Article Tag', 'Taxonomy Singular Name', 'tls' ),
+		'menu_name'                  => __( 'Article Tag', 'tls' ),
+		'all_items'                  => __( 'All Article Tags', 'tls' ),
+		'parent_item'                => __( 'Parent Article Tag', 'tls' ),
+		'parent_item_colon'          => __( 'Parent Article Tag:', 'tls' ),
+		'new_item_name'              => __( 'New Article Tag Name', 'tls' ),
+		'add_new_item'               => __( 'Add Article Tag', 'tls' ),
+		'edit_item'                  => __( 'Edit Article Tag', 'tls' ),
+		'update_item'                => __( 'Update Article Tag', 'tls' ),
+		'separate_items_with_commas' => __( 'Separate Article Tags with commas', 'tls' ),
+		'search_items'               => __( 'Search Article Tags', 'tls' ),
+		'add_or_remove_items'        => __( 'Add or remove Article Tags', 'tls' ),
+		'choose_from_most_used'      => __( 'Choose from the most used Article Tags', 'tls' ),
+		'not_found'                  => __( 'Not Found', 'tls' ),
 	);
-    register_taxonomy( 'post_tag', array( 'tls_articles' ), $tags_args );
+	$article_tags_args = array(
+		'labels'                     => $article_tags_labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+		'rewrite'					 => array( 'slug' => 'tag' )
+	);
+	register_taxonomy( 'article_tags', array('tls_articles'), $article_tags_args );
 
 	/**
 	 * Article Section Taxonomy
