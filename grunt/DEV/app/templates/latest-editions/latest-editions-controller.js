@@ -6,7 +6,9 @@
 				
 			// Full object			
 			$scope.latestEdition = result;	
-			
+
+			console.log($scope.latestEdition);
+						
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
