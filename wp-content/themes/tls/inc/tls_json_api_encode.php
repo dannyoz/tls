@@ -72,10 +72,29 @@ function tls_json_api_encode($response) {
     		'search_count'		=> (int) $public_articles->found_posts
     	);
 
+
+        /**
+         * TLS catagory filters
+         */
+        $sections = get_terms( 'article_section');
+
+        foreach ($sections as $key => $value) {
+           $response['articles_sections'][$value->slug] = array(
+                'item_label'        => $value->name,
+                'type'              => 'taxonomy',
+                'json_query'        => 'tax_filter[article_section]='.$value->slug,
+                'taxonomy'          => $value->taxonomy,
+                'slug'              => $value->slug,
+                'search_count'      => (int) $value->count
+            );
+        }
+
+
+
     	/**
-    	 * TLS Blogs Category Term Search Filter Info
+    	 * TLS Blogs post type
     	 */
-    	$blogs = new WP_Query( array(  
+    	$blogs = new WP_Query( array(
     		'post_type'			=> 'post',
     		'post_status' 		=> 'publish',
     		'posts_per_page' 	=> 1,
@@ -92,7 +111,7 @@ function tls_json_api_encode($response) {
     	/**
     	 * FAQs Post Type Search Filter
     	 */
-    	$faqs = new WP_Query( array( 
+    	$faqs = new WP_Query( array(
     		'post_type'			=> 'tls_faq',
     		'post_status'		=> 'publish',
     		'posts_per_page'	=> 1,
@@ -207,7 +226,7 @@ function tls_json_api_encode($response) {
 
         /**
          * Add Multiple Custom Post Type Search Filtering to
-         * JSON API post_type filter which only works 
+         * JSON API post_type filter which only works
          * with one post type out of the box
          */
         if ( isset( $_GET['post_types'] ) ) {
@@ -280,7 +299,7 @@ function tls_json_api_encode($response) {
     			),
 
     		);
-    		
+
     		$date_posts_archive = $json_api->introspector->get_posts($date_posts_archive_args);
     		$response['count'] = count($date_posts_archive);
     		$response['count_total'] = (int) $wp_query->found_posts;
@@ -363,9 +382,25 @@ function tls_json_api_encode($response) {
             $response['posts'] = $blogs_archive;
 
             // Get Featured Post Details
-            $featured_post = site_url() . '/api/get_post/?id=' . $response['page']->custom_fields->featured_blog_post;
+            $featured_post = get_post($response['page']->custom_fields->featured_blog_post[0]);
 
-            $response['featured_post'] = $featured_post;
+            // Get Post Thumbnail and all it's different sizes as URLs
+            $sizes = get_intermediate_image_sizes();
+            $attachment_id = get_post_thumbnail_id( $featured_post->ID );
+
+            $images = array();
+            foreach ( $sizes as $size ) {
+                $images[$size] = wp_get_attachment_image_src( $attachment_id, $size );
+            }
+            $images['full'] = wp_get_attachment_image_src( $attachment_id, 'full' );
+
+            $response['featured_post'] = array(
+                'id'            => $featured_post->ID,
+                'title'         => $featured_post->post_title,
+                'excerpt'       => substr($featured_post->post_content, 0, 100) . '...',
+                'link'          => get_permalink( $featured_post->ID ),
+                'images'     => $images
+            );
         }
 	}
     $response['query'] = $wp_query->query;
@@ -378,7 +413,6 @@ function tls_home_page_json_api_encode($response) {
     if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-home.php' ) {
         $response['yo'] = 'you';
     }
-
     return $response;
 }
 add_action( 'json_api_encode', 'tls_home_page_json_api_encode' );

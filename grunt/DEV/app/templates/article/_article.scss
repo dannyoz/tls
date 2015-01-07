@@ -260,6 +260,7 @@
 		text-align: right;
 		padding-right: 35px;
 		@include absolutly(20px,top,right);
+		right: 0;
 
 		@media (max-width: $tablet) {
 			position: relative;
@@ -285,6 +286,7 @@
 		text-align: left;
 		padding-left: 35px;
 		@include absolutly(20px,top,left);	
+		left: 0;
 
 		@media (max-width: $tablet) {
 			position: relative;
