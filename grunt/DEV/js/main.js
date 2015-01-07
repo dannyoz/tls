@@ -29137,8 +29137,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			// Full object			
 			$scope.latestEdition = result;	
 
-			console.log($scope.latestEdition);
-						
+			//console.log($scope.latestEdition);
+
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
@@ -29152,6 +29152,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
+
+			// var posts = $scope.subscribersObj.articles;
+			// console.log(posts);
+
+			// columns.divide(posts).then(function (cols) {
+
+			// 	$scope.col1  = cols.col1;
+			// 	$scope.col2  = cols.col2;
+			// 	$scope.col3  = cols.col3;
+			// 	console.log($scope.col3);
+			// 	$scope.ready = true;			
+			// })
 
 		});
 }])
