@@ -70,7 +70,11 @@
 			<div  class="grid-4" ng-repeat="column in col3">
 				
 				<div class="card" ng-repeat="card in column">
-					{{card}}
+					{{card.section}}
+
+					<div ng-repeat="post in card.posts">
+						{{post.title}}
+					</div>
 				</div>
 			
 			</div>
