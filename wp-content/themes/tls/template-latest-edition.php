@@ -65,12 +65,11 @@
 				<h2>{{subscribersObj.title}}</h2>	
 			</div>			
 
-			<div class="grid-row" ng-if="size == 'desktop'">
+			<div class="grid-row" ng-if="size == 'desktop'">				
 				
-				<div  class="grid-4" ng-repeat="column in col3">					
+				<div  class="grid-4" ng-repeat="column in col3">										
 					
-					<div class="card-flat" ng-repeat="card in column">
-						
+					<div class="card-flat" ng-repeat="card in column">						
 						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
@@ -81,9 +80,45 @@
 
 					</div>
 				
-				</div>
-
+				</div>				
 			</div>
+
+			<div class="grid-row" ng-if="size == 'tablet'">				
+				
+				<div  class="grid-6" ng-repeat="column in col2">										
+					
+					<div class="card-flat" ng-repeat="card in column">						
+						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<div class="edition-item" ng-repeat="post in card.posts">
+							<div class="padded">							
+								<p class="title-small">{{post.author}}</p>
+								<h4><a href="#">{{post.title}}</a></h4>
+							</div>								
+						</div>
+
+					</div>
+				
+				</div>				
+			</div>
+
+			<div class="grid-row" ng-if="size == 'mobile'">				
+				
+				<div  class="grid-12" ng-repeat="column in col1">										
+					
+					<div class="card-flat" ng-repeat="card in column">						
+						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<div class="edition-item" ng-repeat="post in card.posts">
+							<div class="padded">							
+								<p class="title-small">{{post.author}}</p>
+								<h4><a href="#">{{post.title}}</a></h4>
+							</div>								
+						</div>
+
+					</div>
+				
+				</div>				
+			</div>
+
 		</div>
 	</div>
 
