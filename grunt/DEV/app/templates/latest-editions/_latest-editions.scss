@@ -4,7 +4,7 @@
 
 #latest-edition {
 
-	@media (max-width: $tablet) {
+	@media screen and (max-width: $tablet) {
 		padding-top: 40px;
 	}
 
@@ -46,6 +46,10 @@
 
 		.padded {
 			padding: 30px;
+
+			@media screen and (max-width: $mobile) {
+				padding: 20px;
+			}
 		}		
 
 		h4 {
@@ -78,6 +82,10 @@
 
 			.title-small {
 				font-weight: 400;
+
+				@media screen and (max-width:$mobile){
+					text-align: center;
+				}
 			}
 		}
 
@@ -91,6 +99,7 @@
 
 			@media screen and (max-width:$mobile){
 				@include grid-col(12);
+				margin-bottom: 40px;
 			}	
 		}
 
@@ -113,6 +122,7 @@
 
 			@media screen and (max-width:$tablet){
 				@include grid-col(12);
+				margin-bottom: 25px;
 			}
 		}
 
@@ -131,6 +141,10 @@
 				
 				.padded {
 					padding: 20px 0;
+
+					@media screen and (max-width: $mobile) {
+						padding: 20px;
+					}
 				}
 			}
 		}
