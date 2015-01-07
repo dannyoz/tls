@@ -28820,12 +28820,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.loadMore();
 	})
 
-	api.getArticle(url).then(function (result){
+	api.getArticle(href).then(function (result){
 
 		$scope.loading   = false;
 		$scope.title     = (result.category)? result.category.title : 'blog'
+		$scope.content   = result
 		$scope.pageCount = result.pages
-		$scope.firstPost = result.posts[0];
+		$scope.firstPost = result.featured_post;
 		var posts        = result.posts;
 
 		console.log(result)

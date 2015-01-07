@@ -10,14 +10,14 @@ get_header(); ?>
 
 <section id="category" ng-controller="category" ng-class="{loading:loading}">
 
-	<div id="banner" ng-attr-style="background-image:url({{firstPost.thumbnail_images.full.url}})">
+	<div id="banner" class="fadeIn" ng-if="firstPost" ng-attr-style="background-image:url({{firstPost.images.full[0]}})">
 
 		<div class="container">
 				
 			<div class="caption">
 				<a ng-href="{{firstPost.url}}">
 					<h2>{{firstPost.title}}</h2>
-					<div class="excerpt" ng-bind-html="firstPost.excerpt"></div>
+					<p class="excerpt">{{firstPost.excerpt}}</p>
 				</a>
 			</div>
 		</div>

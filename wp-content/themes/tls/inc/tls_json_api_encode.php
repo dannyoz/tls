@@ -356,15 +356,6 @@ function tls_json_api_encode($response) {
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $articles_archive;
-        } else if ( $response['page_template_slug'] == 'template-latest-edition.php' ) {
-            $latest_edition_args = array(
-                'post_type'         => array( 'tls_editions' ),
-                'posts_per_page'    => 1,
-            );
-            $latest_edition_query = new WP_Query($latest_edition_args);
-            $wp_query->query = array( 'post_id' => $latest_edition_query->post->ID );
-            $latest_edition = $json_api->introspector->get_post($wp_query->query);
-            $response['latest_edition'] = $latest_edition;
         } else if ( $response['page_template_slug'] == 'template-blogs-archive.php' ) {
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
             $blogs_archive_args = array(
