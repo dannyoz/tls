@@ -23,8 +23,7 @@
 		$scope.title     = (result.category)? result.category.title : 'blog'
 		$scope.pageCount = result.pages
 		$scope.firstPost = result.posts[0];
-		var splicedPosts = result.posts.splice(1,11);
-		var posts        = splicedPosts;
+		var posts        = result.posts;
 
 		console.log(result)
 
@@ -38,9 +37,6 @@
 	})
 
 	$scope.formatEmbed = function(html){
-
-
-		//console.log(html.indexOf("comments=true"))
 
 		return $sce.trustAsHtml(html)
 	}

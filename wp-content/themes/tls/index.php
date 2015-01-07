@@ -59,7 +59,7 @@ get_header(); ?>
 							
 							<div class="grid-7 push-1">
 								<h4><a ng-attr-href="{{card.url}}">{{card.title}}</a></h4>
-								<p class="author futura"><a ng-attr-href="/author/{{card.author.slug}}">{{card.author.name}}</a></p>
+								<p class="author futura"><a ng-href="/author/{{card.author.slug}}">{{card.author.name}}</a></p>
 								<div ng-bind-html="card.excerpt"></div>
 							</div>
 
@@ -100,7 +100,7 @@ get_header(); ?>
 							
 							<div class="grid-7 push-1">
 								<h4><a href="#">{{card.title}}</a></h4>
-								<p class="author futura"><a href="#">{{card.author.name}}</a></p>
+								<p class="author futura"><a ng-href="/author/{{card.author.slug}}">{{card.author.name}}</a></p>
 								<div ng-bind-html="card.excerpt"></div>
 							</div>
 
@@ -141,7 +141,7 @@ get_header(); ?>
 							
 							<div class="grid-7 push-1">
 								<h4><a ng-attr-href="{{card.url}}">{{card.title}}</a></h4>
-								<p class="author futura"><a ng-attr-href="/author/{{card.author.slug}}">{{card.author.name}}</a></p>
+								<p class="author futura"><a ng-href="/author/{{card.author.slug}}">{{card.author.name}}</a></p>
 								<div ng-bind-html="card.excerpt"></div>
 							</div>
 
