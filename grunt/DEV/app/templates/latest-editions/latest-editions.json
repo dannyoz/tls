@@ -80,17 +80,7 @@
 							"id": 2,
 							"author": "Christopher Stace",
 							"title": "Out of Italy"
-						},
-						{
-							"id": 3,
-							"author": "Lindsay Duguid",
-							"title": "Paint what you like"
-						},
-						{
-							"id": 4,
-							"author": "Lindsay Duguid",
-							"title": "Paint what you like"
-						}
+						}						
 					]
 				},
 				{
@@ -100,6 +90,16 @@
 							"id": 1,
 							"author": "Jeremy Adler",
 							"title": "What a judgment"
+						},
+						{
+							"id": 2,
+							"author": "Lindsay Duguid",
+							"title": "Paint what you like"
+						},
+						{
+							"id": 3,
+							"author": "Lindsay Duguid",
+							"title": "Paint what you like"
 						}
 					]
 				},
@@ -110,6 +110,11 @@
 							"id": 1,
 							"author": "Natural history",
 							"title": "Butterflies and button boots"
+						},
+						{
+							"id": 2,
+							"author": "Lindsay Duguid",
+							"title": "Paint what you like"
 						}
 					]
 				},
@@ -128,11 +133,6 @@
 						},
 						{
 							"id": 3,
-							"author": "Lindsay Duguid",
-							"title": "Paint what you like"
-						},
-						{
-							"id": 4,
 							"author": "Lindsay Duguid",
 							"title": "Paint what you like"
 						}
