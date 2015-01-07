@@ -1,5 +1,6 @@
 .controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
+	$scope.sce        = $sce;
 	$scope.tags       = [];
 	$scope.activeTags = []; 
 	$scope.firstLoad  = true;
