@@ -357,25 +357,11 @@ function tls_json_api_encode($response) {
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $articles_archive;
         } else if ( $response['page_template_slug'] == 'template-blogs-archive.php' ) {
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $blogs_archive_args = array(
-                'post_type'         => array( 'post' ),
-                'orderby'           => 'date',
-                'order'             => 'DESC',
-                'paged'             => $paged,
-            );
-
-            $wp_query->query = $blogs_archive_args;
-            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
-            $response['count'] = count($blogs_archive);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $blogs_archive;
 
             // Get Featured Post Details
-            $featured_post = get_post($response['page']->custom_fields->featured_blog_post[0]);
+            $featured_post = get_post( $response['page']->custom_fields->featured_blog_post[0] );
 
-            // Get Post Thumbnail and all it's different sizes as URLs
+            // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
             $sizes = get_intermediate_image_sizes();
             $attachment_id = get_post_thumbnail_id( $featured_post->ID );
 
@@ -392,6 +378,23 @@ function tls_json_api_encode($response) {
                 'link'          => get_permalink( $featured_post->ID ),
                 'images'     => $images
             );
+
+            // Get Blog Archive excluding Featured Blog from list
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $blogs_archive_args = array(
+                'post_type'         => array( 'post' ),
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'paged'             => $paged,
+                'post__not_in'      => array( $featured_post->ID ),
+            );
+
+            $wp_query->query = $blogs_archive_args;
+            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
+            $response['count'] = count($blogs_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $blogs_archive;
         }
 	}
     $response['query'] = $wp_query->query;
