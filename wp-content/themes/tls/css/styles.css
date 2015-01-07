@@ -1747,6 +1747,11 @@ em, i {
   margin: 0;
   line-height: 115px;
 }
+@media (max-width: 450px) {
+  #latest-edition .editions-bottom h2 {
+    font-size: 18px;
+  }
+}
 #latest-edition .editions-bottom .title-icon {
   position: relative;
   height: 125px;
