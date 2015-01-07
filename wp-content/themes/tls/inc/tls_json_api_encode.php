@@ -352,3 +352,13 @@ function tls_json_api_encode($response) {
 	return $response;
 }
 add_filter('json_api_encode', 'tls_json_api_encode');
+
+function tls_home_page_json_api_encode($response) {
+
+    if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-home.php' ) {
+        $response['yo'] = 'you';
+    }
+
+    return $response;
+}
+add_action( 'json_api_encode', 'tls_home_page_json_api_encode' );

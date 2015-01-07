@@ -1,6 +1,10 @@
 .controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
 
-	var url = '/?post_type[post]';
+	var href   = window.location.href,
+		parent = href.indexOf('/blogs/') > -1,
+		url    = (parent) ?  '/?post_type[post]' : href;
+
+	console.log(url)
 
 	$scope.ready       = false;
 	$scope.page        = 1;
@@ -15,10 +19,8 @@
 
 	api.getArticle(url).then(function (result){
 
-		console.log(result)
-
 		$scope.loading = false;
-		$scope.title   = 'blog'
+		$scope.title   = (result.category)? result.category.title : 'blog'
 		$scope.pageCount = result.pages
 
 		var posts = result.posts;
@@ -33,6 +35,14 @@
 			$scope.page ++
 		})
 	})
+
+	$scope.formatEmbed = function(html){
+
+
+		console.log(html.indexOf("comments=true"))
+
+		return $sce.trustAsHtml(html)
+	}
 
 	$scope.loadMore = function(){
 
