@@ -1574,10 +1574,6 @@ em, i {
   }
 }
 
-.menu-header-menu-container {
-  visibility: hidden;
-}
-
 @media (max-width: 840px) {
   #latest-edition {
     padding-top: 40px;
