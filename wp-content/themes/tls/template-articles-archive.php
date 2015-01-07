@@ -30,9 +30,9 @@ $articles_archive = new WP_Query($articles_archive_args);
 			<div class="container" tls-window-size="size" ng-if="ready">
 
 				<div class="grid-row" ng-if="size == 'desktop' || size == 'mobile'">
-					
+
 					<div  class="grid-4" ng-repeat="column in col3">
-						
+
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
 							<h3 class="futura">
 								<a ng-attr-href="{{card.url}}" ng-bind="card.title"></a>
@@ -52,7 +52,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 				<div class="grid-row" ng-if="size == 'tablet'">
 
 					<div class="grid-6" ng-repeat="column in col2">
-						
+
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
 							<h3 class="futura">
 								<a ng-attr-href="{{card.url}}" ng-bind="card.title"></a>
@@ -77,7 +77,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 						Load more <i class="icon icon-plus"></i>
 					</button>
 				</div>
-				
+
 			</div>
 
 			<div tls-loading="loading"></div>

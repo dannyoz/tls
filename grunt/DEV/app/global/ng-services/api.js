@@ -4,6 +4,7 @@
 
 	return {
 		getCards : function(){
+			
 			var defer = $q.defer();
 
 			$http.get(themeUrl + '/apis/cards.json').success(function (data){

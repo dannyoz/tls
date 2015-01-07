@@ -19,11 +19,12 @@
 
 	api.getArticle(url).then(function (result){
 
-		$scope.loading = false;
-		$scope.title   = (result.category)? result.category.title : 'blog'
+		$scope.loading   = false;
+		$scope.title     = (result.category)? result.category.title : 'blog'
 		$scope.pageCount = result.pages
-
-		var posts = result.posts;
+		$scope.firstPost = result.posts[0];
+		var splicedPosts = result.posts.splice(1,11);
+		var posts        = splicedPosts;
 
 		console.log(result)
 
@@ -39,7 +40,7 @@
 	$scope.formatEmbed = function(html){
 
 
-		console.log(html.indexOf("comments=true"))
+		//console.log(html.indexOf("comments=true"))
 
 		return $sce.trustAsHtml(html)
 	}

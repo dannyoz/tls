@@ -164,23 +164,23 @@ add_action( 'init', 'tls_unregister_post_tag_taxonomy' );
 /**
  * Modify Permalink for Articles Post Type
  */
-add_filter('post_link', 'article_visibility_modify_permalink', 10, 3);
-add_filter('post_type_link', 'article_visibility_modify_permalink', 10, 3);
-
-function article_visibility_modify_permalink($permalink, $post_id, $leavename) {
-	if (strpos($permalink, '%article_visibility%') === FALSE) return $permalink;
-
-	// Get post
-	$post = get_post($post_id);
-	if (!$post) return $permalink;
-
-	// Get taxonomy terms
-	$terms = wp_get_object_terms($post->ID, 'article_visibility');
-	if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) {
-		$taxonomy_slug = $terms[0]->slug;
-	} else {
-		$taxonomy_slug = 'public';
-	}
-
-	return str_replace('%article_visibility%', $taxonomy_slug, $permalink);
-}
+//add_filter('post_link', 'article_visibility_modify_permalink', 10, 3);
+//add_filter('post_type_link', 'article_visibility_modify_permalink', 10, 3);
+//
+//function article_visibility_modify_permalink($permalink, $post_id, $leavename) {
+//	if (strpos($permalink, '%article_visibility%') === FALSE) return $permalink;
+//
+//	// Get post
+//	$post = get_post($post_id);
+//	if (!$post) return $permalink;
+//
+//	// Get taxonomy terms
+//	$terms = wp_get_object_terms($post->ID, 'article_visibility');
+//	if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) {
+//		$taxonomy_slug = $terms[0]->slug;
+//	} else {
+//		$taxonomy_slug = 'public';
+//	}
+//
+//	return str_replace('%article_visibility%', $taxonomy_slug, $permalink);
+//}

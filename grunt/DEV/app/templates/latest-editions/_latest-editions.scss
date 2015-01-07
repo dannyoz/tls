@@ -1,6 +1,10 @@
 
 #latest-edition {
 
+	@media (max-width: $tablet) {
+		padding-top: 40px;
+	}
+
 	h1 {
 		font-size: 42px;
 		text-align: center;
@@ -24,7 +28,9 @@
 
 	.edition-current {
 
-		margin-top: -120px;
+		@media(min-width: $tablet + 1) {
+			margin-top: -120px;
+		}
 
 		.edition-item {
 
@@ -55,14 +61,60 @@
 		}
 
 		.featured-col {
-			.max {
+
+			.img-wrapper {
 				border: 1px solid $light-keyline;
 				padding: 6px;
 				margin-bottom: 10px;
-			}
+				text-align: center;
+			}			
 
 			.title-small {
 				font-weight: 400;
+			}
+		}
+
+		.editions-top-left {
+
+			@include grid-col(4);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col(6);
+			}
+
+			@media screen and (max-width:$mobile){
+				@include grid-col(12);
+			}	
+		}
+
+		.editions-top-right {
+
+			@include grid-col-last(8);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col-last(6);
+			}
+
+			@media screen and (max-width:$mobile){
+				@include grid-col(12);
+			}
+		}
+
+		.public-col {
+
+			@include grid-col(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col(12);
+			}
+		}
+
+		.regular-col {
+
+			@include grid-col-last(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col-last(12);
 			}
 		}
 
@@ -84,6 +136,7 @@
 
 				h3 {
 					position: relative;
+					padding-right: 40px;
 
 					.icon {
 						display: block;
@@ -92,6 +145,7 @@
 						top: 0;
 						color: #706d73;
 						font-size: 28px;
+						line-height: 18px;
 					}					
 				}
 			}
@@ -101,7 +155,7 @@
 	.editions-bottom {
 
 		background-color: $locked-grey;	
-		margin-top: 60px;
+		margin-top: 40px;
 
 		h2 {
 			text-align: center;
@@ -110,7 +164,33 @@
 			font-weight: normal;
 			text-transform: uppercase;
 			letter-spacing: 3px;
-			padding: 20px 0;
+			font-weight: 500;
+			padding: 0;
+			margin: 0;
+			line-height: 115px;
+		}
+
+		.title-icon {
+			position: relative;
+			height: 125px;
+			padding: 40px 0;
+		}
+
+		.icon-border {
+			width: 66px;
+			height: 90px;
+			border-bottom: 4px solid black;
+			position: absolute;		
+			left: 50%;
+			margin-left: -33px;
+
+			&:before {
+				font-size: 36px;
+				position: absolute;
+				left: 10px;
+				top: 0;
+				color: #706d73;
+			}
 		}
 	}	
 }

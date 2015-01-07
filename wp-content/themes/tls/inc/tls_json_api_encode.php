@@ -365,6 +365,26 @@ function tls_json_api_encode($response) {
             $wp_query->query = array( 'post_id' => $latest_edition_query->post->ID );
             $latest_edition = $json_api->introspector->get_post($wp_query->query);
             $response['latest_edition'] = $latest_edition;
+        } else if ( $response['page_template_slug'] == 'template-blogs-archive.php' ) {
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $blogs_archive_args = array(
+                'post_type'         => array( 'post' ),
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'paged'             => $paged,
+            );
+
+            $wp_query->query = $blogs_archive_args;
+            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
+            $response['count'] = count($blogs_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $blogs_archive;
+
+            // Get Featured Post Details
+            $featured_post = site_url() . '/api/get_post/?id=' . $response['page']->custom_fields->featured_blog_post;
+
+            $response['featured_post'] = $featured_post;
         }
 	}
     $response['query'] = $wp_query->query;

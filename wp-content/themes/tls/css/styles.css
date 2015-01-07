@@ -55,8 +55,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -419,24 +419,100 @@ section, article {
   min-height: 800px;
 }
 
+#banner {
+  height: 492px;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 30px;
+  position: relative;
+}
+@media screen and (max-width: 840px) {
+  #banner {
+    height: 320px;
+  }
+}
+@media screen and (max-width: 450px) {
+  #banner {
+    height: 200px;
+  }
+}
+#banner .gradient {
+  background-image: url(../images/banner-gradient.png);
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#banner .caption {
+  position: absolute;
+  bottom: 0;
+  z-index: 9999;
+}
+#banner .caption h2, #banner .caption p {
+  color: white;
+}
+#banner .caption .category {
+  float: left;
+  clear: both;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid white;
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-weight: 700;
+}
+#banner .caption h2 {
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: bold;
+  float: left;
+  width: 100%;
+  clear: both;
+}
+#banner .caption .excerpt {
+  margin-bottom: 30px;
+  font-style: italic;
+  font-size: 1.5em;
+  float: left;
+  width: 100%;
+  clear: both;
+}
+@media screen and (max-width: 840px) {
+  #banner .caption {
+    font-size: 0.8em;
+  }
+}
+@media screen and (max-width: 450px) {
+  #banner .caption {
+    font-size: 0.6em;
+  }
+  #banner .caption .excerpt {
+    display: none;
+  }
+}
+
 a, button, input {
   cursor: pointer;
 }
 
 a:link {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 a:visited {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 a:hover {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 a:active {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 a.orange {
@@ -494,7 +570,7 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
 textarea:hover, input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=tel]:hover, input[type=search]:hover {
   background-color: white;
   border: 1px solid #f2f2f2;
-  color: black;
+  color: #000000;
 }
 textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=tel]:focus, input[type=search]:focus {
   background-color: white;
@@ -878,81 +954,6 @@ em, i {
   font-size: 0.7em;
 }
 
-#home #banner {
-  height: 492px;
-  background-size: cover;
-  background-position: 50% 50%;
-  margin-bottom: 30px;
-  position: relative;
-}
-@media screen and (max-width: 840px) {
-  #home #banner {
-    height: 320px;
-  }
-}
-@media screen and (max-width: 450px) {
-  #home #banner {
-    height: 200px;
-  }
-}
-#home #banner .gradient {
-  background-image: url(../images/banner-gradient.png);
-  background-repeat: repeat-x;
-  background-position: bottom left;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-#home #banner .caption {
-  position: absolute;
-  bottom: 0;
-  z-index: 9999;
-}
-#home #banner .caption h2, #home #banner .caption p {
-  color: white;
-}
-#home #banner .caption .category {
-  float: left;
-  clear: both;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid white;
-  font-family: "futura-pt", "Arial", sans-serif;
-  font-weight: 700;
-}
-#home #banner .caption h2 {
-  margin-bottom: 20px;
-  font-size: 2.5em;
-  font-weight: bold;
-  float: left;
-  width: 100%;
-  clear: both;
-}
-#home #banner .caption .excerpt {
-  margin-bottom: 30px;
-  font-style: italic;
-  font-size: 1.5em;
-  float: left;
-  width: 100%;
-  clear: both;
-}
-@media screen and (max-width: 840px) {
-  #home #banner .caption {
-    font-size: 0.8em;
-  }
-}
-@media screen and (max-width: 450px) {
-  #home #banner .caption {
-    font-size: 0.6em;
-  }
-  #home #banner .caption .excerpt {
-    display: none;
-  }
-}
 #home #subscriber {
   float: left;
   width: 100%;
@@ -1269,6 +1270,9 @@ em, i {
 #category, #discover {
   height: auto;
 }
+#category #featured-post, #discover #featured-post {
+  margin-bottom: 20px;
+}
 #category.loading, #discover.loading {
   height: 800px;
 }
@@ -1574,6 +1578,11 @@ em, i {
   }
 }
 
+@media (max-width: 840px) {
+  #latest-edition {
+    padding-top: 40px;
+  }
+}
 #latest-edition h1 {
   font-size: 42px;
   text-align: center;
@@ -1590,8 +1599,10 @@ em, i {
 #latest-edition .article-links .article-nav {
   width: auto;
 }
-#latest-edition .edition-current {
-  margin-top: -120px;
+@media (min-width: 841px) {
+  #latest-edition .edition-current {
+    margin-top: -120px;
+  }
 }
 #latest-edition .edition-current .edition-item {
   border-top: 1px solid #bfbfbf;
@@ -1615,13 +1626,86 @@ em, i {
   text-transform: none;
   margin-bottom: 5px;
 }
-#latest-edition .edition-current .featured-col .max {
+#latest-edition .edition-current .featured-col .img-wrapper {
   border: 1px solid #d9d9d9;
   padding: 6px;
   margin-bottom: 10px;
+  text-align: center;
 }
 #latest-edition .edition-current .featured-col .title-small {
   font-weight: 400;
+}
+#latest-edition .edition-current .editions-top-left {
+  float: left;
+  position: relative;
+  width: 31.66667%;
+  margin-right: 2.5%;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .edition-current .editions-top-left {
+    float: left;
+    position: relative;
+    width: 48.75%;
+    margin-right: 2.5%;
+  }
+}
+@media screen and (max-width: 450px) {
+  #latest-edition .edition-current .editions-top-left {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
+  }
+}
+#latest-edition .edition-current .editions-top-right {
+  float: left;
+  position: relative;
+  width: 65.83333%;
+  margin-right: 0;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .edition-current .editions-top-right {
+    float: left;
+    position: relative;
+    width: 48.75%;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 450px) {
+  #latest-edition .edition-current .editions-top-right {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
+  }
+}
+#latest-edition .edition-current .public-col {
+  float: left;
+  position: relative;
+  width: 48.75%;
+  margin-right: 2.5%;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .edition-current .public-col {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
+  }
+}
+#latest-edition .edition-current .regular-col {
+  float: left;
+  position: relative;
+  width: 48.75%;
+  margin-right: 0;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .edition-current .regular-col {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 0;
+  }
 }
 #latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
@@ -1631,6 +1715,7 @@ em, i {
 }
 #latest-edition .edition-current .regular-col .edition-item h3 {
   position: relative;
+  padding-right: 40px;
 }
 #latest-edition .edition-current .regular-col .edition-item h3 .icon {
   display: block;
@@ -1639,10 +1724,11 @@ em, i {
   top: 0;
   color: #706d73;
   font-size: 28px;
+  line-height: 18px;
 }
 #latest-edition .editions-bottom {
   background-color: #e6e6e6;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 #latest-edition .editions-bottom h2 {
   text-align: center;
@@ -1651,7 +1737,30 @@ em, i {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 3px;
-  padding: 20px 0;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  line-height: 115px;
+}
+#latest-edition .editions-bottom .title-icon {
+  position: relative;
+  height: 125px;
+  padding: 40px 0;
+}
+#latest-edition .editions-bottom .icon-border {
+  width: 66px;
+  height: 90px;
+  border-bottom: 4px solid black;
+  position: absolute;
+  left: 50%;
+  margin-left: -33px;
+}
+#latest-edition .editions-bottom .icon-border:before {
+  font-size: 36px;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  color: #706d73;
 }
 
 .card {
@@ -1763,7 +1872,7 @@ em, i {
   border-color: #d9d9d9;
 }
 .card .padded {
-  padding: 20px 25px;
+  padding: 0 25px 20px 25px;
 }
 .card .embed {
   margin-bottom: 20px;
@@ -2208,7 +2317,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2219,7 +2327,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2230,7 +2337,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2241,20 +2347,16 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
-
   25% {
     opacity: 0.5;
   }
-
   50% {
     top: 0;
     opacity: 1;
   }
-
   75% {
     opacity: 0.5;
   }
-
   100% {
     top: 15px;
     opacity: 1;
@@ -2265,20 +2367,16 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
-
   25% {
     opacity: 0.5;
   }
-
   50% {
     top: 0;
     opacity: 1;
   }
-
   75% {
     opacity: 0.5;
   }
-
   100% {
     top: 15px;
     opacity: 1;
@@ -2289,20 +2387,16 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
-
   25% {
     opacity: 0.5;
   }
-
   50% {
     top: 0;
     opacity: 1;
   }
-
   75% {
     opacity: 0.5;
   }
-
   100% {
     top: 15px;
     opacity: 1;
@@ -2313,20 +2407,16 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
-
   25% {
     opacity: 0.5;
   }
-
   50% {
     top: 0;
     opacity: 1;
   }
-
   75% {
     opacity: 0.5;
   }
-
   100% {
     top: 15px;
     opacity: 1;
@@ -2337,11 +2427,9 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: rotate3d(0, 1, 0, -180deg);
     background-color: transparent;
   }
-
   50% {
     background-color: white;
   }
-
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2352,11 +2440,9 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
-
   50% {
     background-color: white;
   }
-
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 180deg);
     background-color: transparent;
@@ -2366,86 +2452,70 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     background-color: white;
   }
-
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-moz-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-webkit-keyframes pageTurnRight {
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2454,21 +2524,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-moz-keyframes pageTurnRight {
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2477,21 +2543,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @keyframes pageTurnRight {
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
