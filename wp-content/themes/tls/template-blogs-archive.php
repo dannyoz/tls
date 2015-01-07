@@ -15,7 +15,7 @@ get_header(); ?>
 		<div class="container">
 				
 			<div class="caption">
-				<a ng-href="{{firstPost.url}}">
+				<a ng-href="{{firstPost.link}}">
 					<h2>{{firstPost.title}}</h2>
 					<p class="excerpt">{{firstPost.excerpt}}</p>
 				</a>
