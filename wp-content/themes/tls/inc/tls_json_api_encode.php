@@ -72,8 +72,27 @@ function tls_json_api_encode($response) {
     		'search_count'		=> (int) $public_articles->found_posts
     	);
 
+
+        /**
+         * TLS catagory filters
+         */
+        $sections = get_terms( 'article_section');
+
+        foreach ($sections as $key => $value) {
+           $response['articles_sections'][$value->slug] = array(
+                'item_label'        => $value->name,
+                'type'              => 'taxonomy',
+                'json_query'        => 'tax_filter[article_section]='.$value->slug,
+                'taxonomy'          => $value->taxonomy,
+                'slug'              => $value->slug,
+                'search_count'      => (int) $value->count
+            );
+        }
+
+        
+
     	/**
-    	 * TLS Blogs Category Term Search Filter Info
+    	 * TLS Blogs post type
     	 */
     	$blogs = new WP_Query( array(  
     		'post_type'			=> 'post',
@@ -358,7 +377,6 @@ function tls_home_page_json_api_encode($response) {
     if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-home.php' ) {
         $response['yo'] = 'you';
     }
-
     return $response;
 }
 add_action( 'json_api_encode', 'tls_home_page_json_api_encode' );
