@@ -142,3 +142,25 @@
 		margin-right:0;
 	}
 }
+
+.card-flat {
+
+	margin-bottom:30px;
+	position:relative;
+	top:0;
+	@include keyline(top right bottom left,$dark-keyline);
+	@include animation(fadeIn,ease,0.3s,10);
+	@extend .transition-1;
+	padding: 20px 30px;
+
+	@media screen and (max-width:$tablet){
+
+		margin-bottom:20px;
+	}
+
+	@media screen and (max-width:$mobile){
+		
+		margin-bottom:15px;
+		font-size: 0.8em;
+	}
+}

@@ -29154,7 +29154,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
 
-			
+			console.log(posts);
+
 			columns.divide(posts).then(function (cols) {
 
 				$scope.col1  = cols.col1;

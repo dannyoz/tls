@@ -109,7 +109,7 @@ body {
   box-sizing: border-box;
 }
 
-.transition-1, #main-header nav ul li a, .card {
+.transition-1, #main-header nav ul li a, .card, .card-flat {
   -moz-transition: all 0.25s ease;
   -o-transition: all 0.25s ease;
   -webkit-transition: all 0.25s ease;
@@ -1594,6 +1594,15 @@ em, i {
   font-size: 28px;
   margin-bottom: 25px;
 }
+#latest-edition h3 {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+#latest-edition h3 a {
+  color: #d73f2b;
+}
 #latest-edition .article-links {
   min-height: 75px;
   margin-top: 45px;
@@ -1601,34 +1610,25 @@ em, i {
 #latest-edition .article-links .article-nav {
   width: auto;
 }
-@media (min-width: 841px) {
-  #latest-edition .edition-current {
-    margin-top: -120px;
-  }
-}
-#latest-edition .edition-current .edition-item {
+#latest-edition .edition-item {
   border-top: 1px solid #bfbfbf;
 }
-#latest-edition .edition-current .edition-item .padded {
+#latest-edition .edition-item .padded {
   padding: 30px;
 }
-#latest-edition .edition-current .edition-item h3 {
-  text-transform: uppercase;
-  font-size: 0.9em;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-#latest-edition .edition-current .edition-item h3 a {
-  color: #d73f2b;
-}
-#latest-edition .edition-current .edition-item h4 {
+#latest-edition .edition-item h4 {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
 }
-#latest-edition .edition-current .edition-item .title-small {
+#latest-edition .edition-item .title-small {
   text-transform: none;
   margin-bottom: 5px;
+}
+@media (min-width: 841px) {
+  #latest-edition .edition-current {
+    margin-top: -120px;
+  }
 }
 #latest-edition .edition-current .featured-col .img-wrapper {
   border: 1px solid #d9d9d9;
@@ -1733,6 +1733,7 @@ em, i {
 #latest-edition .editions-bottom {
   background-color: #e6e6e6;
   margin-top: 40px;
+  padding-bottom: 40px;
 }
 #latest-edition .editions-bottom h2 {
   text-align: center;
@@ -1749,7 +1750,7 @@ em, i {
 #latest-edition .editions-bottom .title-icon {
   position: relative;
   height: 125px;
-  padding: 40px 0;
+  padding: 30px 0 10px 0;
 }
 #latest-edition .editions-bottom .icon-border {
   width: 66px;
@@ -1765,6 +1766,19 @@ em, i {
   left: 10px;
   top: 0;
   color: #706d73;
+}
+#latest-edition .editions-bottom .edition-item {
+  border-top: none;
+  border-bottom: 1px solid #bfbfbf;
+}
+#latest-edition .editions-bottom .edition-item .padded {
+  padding: 20px 0;
+}
+#latest-edition .editions-bottom .edition-item:last-child {
+  border-bottom: none;
+}
+#latest-edition .editions-bottom .edition-item:last-child .padded {
+  padding-bottom: 0;
 }
 
 .card {
@@ -1926,6 +1940,78 @@ em, i {
 }
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
+}
+
+.card-flat {
+  margin-bottom: 30px;
+  position: relative;
+  top: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-style: solid;
+  border-color: #bfbfbf;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  padding: 20px 30px;
+}
+.card-flat:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+.card-flat:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+.card-flat:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.card-flat:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+.card-flat:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+.card-flat:nth-child(6) {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+.card-flat:nth-child(7) {
+  -webkit-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+.card-flat:nth-child(8) {
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+.card-flat:nth-child(9) {
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+.card-flat:nth-child(10) {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+@media screen and (max-width: 840px) {
+  .card-flat {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .card-flat {
+    margin-bottom: 15px;
+    font-size: 0.8em;
+  }
 }
 
 .accordian {

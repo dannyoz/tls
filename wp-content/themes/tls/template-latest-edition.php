@@ -58,29 +58,33 @@
 	</div>
 
 	<div class="editions-bottom">		
+
 		<div class="container relative" tls-window-size="size">
 			<div class="title-icon icon">
 				<div class="icon-border icon-key"></div>
 				<h2>{{subscribersObj.title}}</h2>	
 			</div>			
-		</div>
 
-		<div class="grid-row" ng-if="size == 'desktop'">
-			
-			<div  class="grid-4" ng-repeat="column in col3">
+			<div class="grid-row" ng-if="size == 'desktop'">
 				
-				<div class="card" ng-repeat="card in column">
-					{{card.section}}
+				<div  class="grid-4" ng-repeat="column in col3">					
+					
+					<div class="card-flat" ng-repeat="card in column">
+						
+						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<div class="edition-item" ng-repeat="post in card.posts">
+							<div class="padded">							
+								<p class="title-small">{{post.author}}</p>
+								<h4><a href="#">{{post.title}}</a></h4>
+							</div>								
+						</div>
 
-					<div ng-repeat="post in card.posts">
-						{{post.title}}
 					</div>
+				
 				</div>
-			
+
 			</div>
-
-		</div>		
-
+		</div>
 	</div>
 
 
