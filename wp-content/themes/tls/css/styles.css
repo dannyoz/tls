@@ -1574,61 +1574,84 @@ em, i {
   }
 }
 
+#latest-edition h1 {
+  font-size: 42px;
+  text-align: center;
+  margin: 45px 0 60px 0;
+}
 #latest-edition h2 {
   font-size: 28px;
+  margin-bottom: 25px;
 }
 #latest-edition .article-links {
   min-height: 75px;
+  margin-top: 45px;
 }
 #latest-edition .article-links .article-nav {
   width: auto;
 }
-#latest-edition .edition-item {
+#latest-edition .edition-current {
+  margin-top: -120px;
+}
+#latest-edition .edition-current .edition-item {
   border-top: 1px solid #bfbfbf;
 }
-#latest-edition .edition-item .padded {
+#latest-edition .edition-current .edition-item .padded {
   padding: 30px;
 }
-#latest-edition .edition-item h3 {
+#latest-edition .edition-current .edition-item h3 {
   text-transform: uppercase;
   font-size: 0.9em;
   font-weight: 500;
   color: #d73f2b;
   margin-bottom: 5px;
 }
-#latest-edition .edition-item h4 {
+#latest-edition .edition-current .edition-item h4 {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
 }
-#latest-edition .edition-item .title-small {
+#latest-edition .edition-current .edition-item .title-small {
   text-transform: none;
   margin-bottom: 5px;
 }
-#latest-edition .featured-col .max {
+#latest-edition .edition-current .featured-col .max {
   border: 1px solid #d9d9d9;
   padding: 6px;
   margin-bottom: 10px;
 }
-#latest-edition .featured-col .title-small {
+#latest-edition .edition-current .featured-col .title-small {
   font-weight: 400;
 }
-#latest-edition .public-col .edition-item .padded {
+#latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
 }
-#latest-edition .regular-col .edition-item {
+#latest-edition .edition-current .regular-col .edition-item {
   background-color: #e6e6e6;
 }
-#latest-edition .regular-col .edition-item h3 {
+#latest-edition .edition-current .regular-col .edition-item h3 {
   position: relative;
 }
-#latest-edition .regular-col .edition-item h3 .icon {
+#latest-edition .edition-current .regular-col .edition-item h3 .icon {
   display: block;
   position: absolute;
   right: 0;
   top: 0;
   color: #706d73;
   font-size: 28px;
+}
+#latest-edition .editions-bottom {
+  background-color: #e6e6e6;
+  margin-top: 60px;
+}
+#latest-edition .editions-bottom h2 {
+  text-align: center;
+  font-size: 24px;
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 20px 0;
 }
 
 .card {

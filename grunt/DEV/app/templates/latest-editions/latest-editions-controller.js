@@ -4,24 +4,21 @@
 
 		api.getLatestEditions().then(function (result){			
 						
-			console.log(result);
+			$scope.latestEdition = result;	
 			
 			// Edition sections articles				
-			$scope.currentEdition = result.content;			
+			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
-			$scope.previousEdition = result.next_post_info;			
+			$scope.previousEdition = $scope.latestEdition.next_post_info;			
 			// Next edition
-			$scope.nextEdition = result.previous_post_info;
-			
-			// Pagination URLs
-			$scope.prev = $scope.previousEdition.url;
-			$scope.next = $scope.nextEdition.url;
+			$scope.nextEdition = $scope.latestEdition.previous_post_info;
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;
 			// Regulars content
 			$scope.regularsObj = $scope.currentEdition.regulars;
+			// Subscribers content
+			$scope.subscribersObj = $scope.currentEdition.subscribers;
 
-
-		})
+		});
 }])
