@@ -419,6 +419,82 @@ section, article {
   min-height: 800px;
 }
 
+#banner {
+  height: 492px;
+  background-size: cover;
+  background-position: 50% 50%;
+  margin-bottom: 30px;
+  position: relative;
+}
+@media screen and (max-width: 840px) {
+  #banner {
+    height: 320px;
+  }
+}
+@media screen and (max-width: 450px) {
+  #banner {
+    height: 200px;
+  }
+}
+#banner .gradient {
+  background-image: url(../images/banner-gradient.png);
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#banner .caption {
+  position: absolute;
+  bottom: 0;
+  z-index: 9999;
+}
+#banner .caption h2, #banner .caption p {
+  color: white;
+}
+#banner .caption .category {
+  float: left;
+  clear: both;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid white;
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-weight: 700;
+}
+#banner .caption h2 {
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  font-weight: bold;
+  float: left;
+  width: 100%;
+  clear: both;
+}
+#banner .caption .excerpt {
+  margin-bottom: 30px;
+  font-style: italic;
+  font-size: 1.5em;
+  float: left;
+  width: 100%;
+  clear: both;
+}
+@media screen and (max-width: 840px) {
+  #banner .caption {
+    font-size: 0.8em;
+  }
+}
+@media screen and (max-width: 450px) {
+  #banner .caption {
+    font-size: 0.6em;
+  }
+  #banner .caption .excerpt {
+    display: none;
+  }
+}
+
 a, button, input {
   cursor: pointer;
 }
@@ -878,81 +954,6 @@ em, i {
   font-size: 0.7em;
 }
 
-#home #banner {
-  height: 492px;
-  background-size: cover;
-  background-position: 50% 50%;
-  margin-bottom: 30px;
-  position: relative;
-}
-@media screen and (max-width: 840px) {
-  #home #banner {
-    height: 320px;
-  }
-}
-@media screen and (max-width: 450px) {
-  #home #banner {
-    height: 200px;
-  }
-}
-#home #banner .gradient {
-  background-image: url(../images/banner-gradient.png);
-  background-repeat: repeat-x;
-  background-position: bottom left;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-#home #banner .caption {
-  position: absolute;
-  bottom: 0;
-  z-index: 9999;
-}
-#home #banner .caption h2, #home #banner .caption p {
-  color: white;
-}
-#home #banner .caption .category {
-  float: left;
-  clear: both;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid white;
-  font-family: "futura-pt", "Arial", sans-serif;
-  font-weight: 700;
-}
-#home #banner .caption h2 {
-  margin-bottom: 20px;
-  font-size: 2.5em;
-  font-weight: bold;
-  float: left;
-  width: 100%;
-  clear: both;
-}
-#home #banner .caption .excerpt {
-  margin-bottom: 30px;
-  font-style: italic;
-  font-size: 1.5em;
-  float: left;
-  width: 100%;
-  clear: both;
-}
-@media screen and (max-width: 840px) {
-  #home #banner .caption {
-    font-size: 0.8em;
-  }
-}
-@media screen and (max-width: 450px) {
-  #home #banner .caption {
-    font-size: 0.6em;
-  }
-  #home #banner .caption .excerpt {
-    display: none;
-  }
-}
 #home #subscriber {
   float: left;
   width: 100%;
@@ -1270,6 +1271,9 @@ em, i {
 
 #category, #discover {
   height: auto;
+}
+#category #featured-post, #discover #featured-post {
+  margin-bottom: 20px;
 }
 #category.loading, #discover.loading {
   height: 800px;
@@ -1872,7 +1876,7 @@ em, i {
   border-color: #d9d9d9;
 }
 .card .padded {
-  padding: 20px 25px;
+  padding: 0 25px 20px 25px;
 }
 .card .embed {
   margin-bottom: 20px;
