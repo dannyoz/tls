@@ -26,29 +26,34 @@
 					<div class="title-small">No. {{currentEdition.featured.issue_no}}</div>
 				</div>
 				
-				<div class="grid-4 public-col">
-					<h2>{{publicObj.title}}</h2>
+				<div class="grid-8">
+
 					<div class="grid-row">
-						<div class="col-12 edition-item" ng-repeat="public in publicObj.articles">
-							<div class="padded">
-								<h3 class="futura">{{public.section}}</h3>
-								<p class="title-small">{{public.author}}</p>
-								<h4>{{public.title}}</h4>
+
+						<div class="top-col public-col">
+							<h2>{{publicObj.title}}</h2>
+							<div class="edition-item" ng-repeat="public in publicObj.articles">
+								<div class="padded">
+									<h3 class="futura">{{public.section}}</h3>
+									<p class="title-small">{{public.author}}</p>
+									<h4>{{public.title}}</h4>
+								</div>								
 							</div>
 						</div>
-					</div>
-				</div>
-				
-				<div class="grid-4 regular-col">					
-					<h2>{{regularsObj.title}}</h2>
-					<div class="grid-row">
-						<div class="col-12 edition-item" ng-repeat="regular in regularsObj.articles">
-							<div class="padded">
-								<h3 class="futura">{{regular.section}}<i class="icon icon-key-after"></i></h3>								
-								<p class="title-small">{{regular.title}}</p>
+
+						<div class="top-col-last regular-col">					
+							<h2>{{regularsObj.title}}</h2>
+							<div class="edition-item" ng-repeat="regular in regularsObj.articles">
+								<div class="padded">
+									<h3 class="futura">{{regular.section}}<i class="icon icon-key-after"></i></h3>								
+									<p class="title-small">{{regular.title}}</p>
+								</div>
 							</div>
 						</div>
+
 					</div>
+
+					
 				</div>
 				
 			</div>
@@ -58,7 +63,11 @@
 	<div class="editions-bottom">
 		
 		<div class="container relative" tls-window-size="size">
-			<h2>{{subscribersObj.title}}</h2>
+			<div class="title-icon icon">
+				<div class="icon-border icon-key"></div>
+				<h2>{{subscribersObj.title}}</h2>	
+			</div>
+			
 		</div>
 
 	</div>

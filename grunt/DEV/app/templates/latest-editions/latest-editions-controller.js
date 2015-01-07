@@ -3,7 +3,8 @@
 	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
 
 		api.getLatestEditions().then(function (result){			
-						
+				
+			// Full object			
 			$scope.latestEdition = result;	
 			
 			// Edition sections articles				

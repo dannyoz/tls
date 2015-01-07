@@ -55,6 +55,7 @@
 		}
 
 		.featured-col {
+
 			.max {
 				border: 1px solid $light-keyline;
 				padding: 6px;
@@ -63,6 +64,24 @@
 
 			.title-small {
 				font-weight: 400;
+			}
+		}
+
+		.top-col {
+
+			@include grid-col(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col(12);
+			}
+		}
+
+		.top-col-last {
+
+			@include grid-col-last(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col-last(12);
 			}
 		}
 
@@ -110,7 +129,33 @@
 			font-weight: normal;
 			text-transform: uppercase;
 			letter-spacing: 3px;
-			padding: 20px 0;
+			font-weight: 500;
+			padding: 0;
+			margin: 0;
+			line-height: 115px;
+		}
+
+		.title-icon {
+			position: relative;
+			height: 125px;
+			padding: 40px 0;
+		}
+
+		.icon-border {
+			width: 66px;
+			height: 90px;
+			border-bottom: 4px solid black;
+			position: absolute;		
+			left: 50%;
+			margin-left: -33px;
+
+			&:before {
+				font-size: 36px;
+				position: absolute;
+				left: 10px;
+				top: 0;
+				color: #706d73;
+			}
 		}
 	}	
 }
