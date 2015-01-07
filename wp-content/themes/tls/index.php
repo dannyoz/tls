@@ -16,6 +16,22 @@ get_header(); ?>
 
 <section id="category" ng-controller="category" ng-class="{loading:loading}">
 
+	<div id="banner" ng-attr-style="background-image:url({{firstPost.thumbnail_images.full.url}})">
+
+		<div class="container">
+				
+			<div class="caption">
+				<a ng-href="{{firstPost.url}}">
+					<h2>{{firstPost.title}}</h2>
+					<div class="excerpt" ng-bind-html="firstPost.excerpt"></div>
+				</a>
+			</div>
+		</div>
+
+		<div class="gradient"></div>
+
+	</div>
+
 	<div tls-scroll="scrollState">
 
 		<div class="container" tls-window-size="size" ng-if="ready">

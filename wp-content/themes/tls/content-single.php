@@ -40,6 +40,10 @@
 					<div class="grid-12 article-summary folded-corner">
 						<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]" ng-if="post.custom_fields.teaser_summary[0]"></div>						
 					</div>
+
+					<div ng-if="post.custom_fields.embed_code[0].length > -1">
+						<div ng-bind-html="sce.trustAsHtml(post.custom_fields.embed_code[0])"></div>
+					</div>
 					
 					<div ng-bind-html="post.content"></div>
 
