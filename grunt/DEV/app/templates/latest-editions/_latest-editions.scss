@@ -1,88 +1,196 @@
 
-
 #latest-edition {
+
+	@media (max-width: $tablet) {
+		padding-top: 40px;
+	}
+
+	h1 {
+		font-size: 42px;
+		text-align: center;
+		margin: 45px 0 60px 0;
+	}
 
 	h2 {
 		font-size: 28px;
+		margin-bottom: 25px;
 	}
 
 	.article-links {
+		
 		min-height: 75px;
+		margin-top: 45px;
 
 		.article-nav {
 			width: auto;
 		}
 	}
 
-	.edition-item {
+	.edition-current {
 
-		border-top: 1px solid $dark-keyline;
-
-		.padded {
-			padding: 30px;
+		@media(min-width: $tablet + 1) {
+			margin-top: -120px;
 		}
-
-		h3 {
-			text-transform: uppercase;
-			font-size: 0.9em;
-			font-weight: 500;
-			color: $primary-orange;
-			margin-bottom: 5px;
-		}
-
-		h4 {
-			font-size: 20px;
-			margin-bottom: 5px;
-			line-height: 24px;
-		}
-
-		.title-small {
-			text-transform: none;
-			margin-bottom: 5px;
-		}
-	}
-
-	.featured-col {
-		.max {
-			border: 1px solid $light-keyline;
-			padding: 6px;
-			margin-bottom: 10px;
-		}
-
-		.title-small {
-			font-weight: 400;
-		}
-	}
-
-	.public-col {
 
 		.edition-item {
-			
+
+			border-top: 1px solid $dark-keyline;
+
 			.padded {
-				padding: 20px 0;
+				padding: 30px;
 			}
-		}
-	}
-
-	.regular-col {
-
-		.edition-item {
-			background-color: $locked-grey;			
 
 			h3 {
-				position: relative;
+				text-transform: uppercase;
+				font-size: 0.9em;
+				font-weight: 500;
+				color: $primary-orange;
+				margin-bottom: 5px;
+			}
 
-				.icon {
-					display: block;
-					position: absolute;
-					right: 0;
-					top: 0;
-					color: #706d73;
-					font-size: 28px;
-				}
+			h4 {
+				font-size: 20px;
+				margin-bottom: 5px;
+				line-height: 24px;
+			}
+
+			.title-small {
+				text-transform: none;
+				margin-bottom: 5px;
+			}
+		}
+
+		.featured-col {
+
+			.img-wrapper {
+				border: 1px solid $light-keyline;
+				padding: 6px;
+				margin-bottom: 10px;
+				text-align: center;
+			}			
+
+			.title-small {
+				font-weight: 400;
+			}
+		}
+
+		.editions-top-left {
+
+			@include grid-col(4);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col(6);
+			}
+
+			@media screen and (max-width:$mobile){
+				@include grid-col(12);
+			}	
+		}
+
+		.editions-top-right {
+
+			@include grid-col-last(8);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col-last(6);
+			}
+
+			@media screen and (max-width:$mobile){
+				@include grid-col(12);
+			}
+		}
+
+		.public-col {
+
+			@include grid-col(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col(12);
+			}
+		}
+
+		.regular-col {
+
+			@include grid-col-last(6);
+
+			@media screen and (max-width:$tablet){
+				@include grid-col-last(12);
+			}
+		}
+
+		.public-col {
+
+			.edition-item {
 				
+				.padded {
+					padding: 20px 0;
+				}
+			}
+		}
+
+		.regular-col {
+
+			.edition-item {
+
+				background-color: $locked-grey;			
+
+				h3 {
+					position: relative;
+					padding-right: 40px;
+
+					.icon {
+						display: block;
+						position: absolute;
+						right: 0;
+						top: 0;
+						color: #706d73;
+						font-size: 28px;
+						line-height: 18px;
+					}					
+				}
 			}
 		}
 	}
 
+	.editions-bottom {
+
+		background-color: $locked-grey;	
+		margin-top: 40px;
+
+		h2 {
+			text-align: center;
+			font-size: 24px;
+			font-family: $futura;
+			font-weight: normal;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			font-weight: 500;
+			padding: 0;
+			margin: 0;
+			line-height: 115px;
+		}
+
+		.title-icon {
+			position: relative;
+			height: 125px;
+			padding: 40px 0;
+		}
+
+		.icon-border {
+			width: 66px;
+			height: 90px;
+			border-bottom: 4px solid black;
+			position: absolute;		
+			left: 50%;
+			margin-left: -33px;
+
+			&:before {
+				font-size: 36px;
+				position: absolute;
+				left: 10px;
+				top: 0;
+				color: #706d73;
+			}
+		}
+	}	
 }

@@ -127,7 +127,7 @@ function tls_custom_post_types() {
 	);
 	// FAQ Post Type Rewrite Rules
 	$faq_rewrite = array(
-		'slug'                => 'faqs',
+		'slug'                => 'faq',
 		'with_front'          => true,
 		'pages'               => true,
 		'feeds'               => true,

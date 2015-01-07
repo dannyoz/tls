@@ -99,6 +99,8 @@ function tls_taxonomies() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'query_var'					 => 'article_visibility',
+		'rewrite'					 => true,
 	);
 	register_taxonomy( 'article_visibility', array('tls_articles'), $article_visibility_args );
 
