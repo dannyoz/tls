@@ -35,6 +35,9 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 */
 
 @include transKeyframes(fadeIn,0% 100%,scale,0.8 1,fadeIn);
+@include transKeyframes(fade,0% 100%,scale,1 1,fadeIn);
+@include transKeyframes(slideUp,0% 100%,translateY,50px 0,fadeIn);
+@include transKeyframes(slideleft,0% 100%,translateX,50px 0,fadeIn);
 
 //LOADING
 //##############################################################
