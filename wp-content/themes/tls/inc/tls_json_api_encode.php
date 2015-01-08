@@ -374,7 +374,7 @@ function tls_json_api_encode($response) {
             $response['featured_post'] = array(
                 'id'            => $featured_post->ID,
                 'title'         => $featured_post->post_title,
-                'excerpt'       => substr($featured_post->post_content, 0, 100) . '...',
+                'excerpt'       => wp_strip_all_tags( substr($featured_post->post_content, 0, 100) ) . '...',
                 'link'          => get_permalink( $featured_post->ID ),
                 'images'     => $images
             );
@@ -409,6 +409,28 @@ function tls_home_page_json_api_encode($response) {
         // Get Home Page ID for this page using Template Home Page Template
         $home_page_id = $response['page']->id;
 
+        // Get Featured Post Details
+        $featured_article = get_field( 'featured_article', $home_page_id );
+
+        // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
+        $sizes = get_intermediate_image_sizes();
+        $attachment_id = get_post_thumbnail_id( $featured_article->ID );
+
+        $images = array(
+            'hero_image'        => get_field( 'hero_image_url', $featured_article->ID ),
+            'full_image'        => get_field( 'full_image_url', $featured_article->ID ),
+            'thumbnail_image'   => get_field( 'thumbnail_image_url', $featured_article->ID )
+        );
+
+        $response['featured_article'] = array(
+            'id'                => $featured_article->ID,
+            'title'             => $featured_article->post_title,
+            'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
+            'text'              => wp_strip_all_tags( substr( $featured_article->post_content, 0, 100 ) ) . '...',
+            'link'              => get_permalink( $featured_article->ID ),
+            'images'            => $images
+        );
+
         /**
          * Home Page Blog Cards (For the 2 first Blog Cards)
          */
@@ -423,7 +445,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => substr( $blog_card->post_content, 0, 50 ) . '...',
+                'text'          => wp_strip_all_tags( substr( $blog_card->post_content, 0, 50 ) ) . '...',
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -449,8 +471,10 @@ function tls_home_page_json_api_encode($response) {
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ( $card_type == 'article' ) {
                 $section = wp_get_post_terms( $card_post->ID, 'article_section' );
+                $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
             } else {
                 $section = wp_get_post_terms( $card_post->ID, 'category' );
+                $thumbnail_image = '';
             }
 
             // Add Cards to the JSON Response in the specific count slot
@@ -465,6 +489,7 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $section[0]->name,
                     'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
                 ),
+                'image'         => $thumbnail_image
             );
 
             // Iterate to next count slot
