@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php get_header();
+
+//var_dump(get_fields());
+ ?>
 
 <section id="latest-edition" ng-controller="latesteditions" ng-cloak>
 	
