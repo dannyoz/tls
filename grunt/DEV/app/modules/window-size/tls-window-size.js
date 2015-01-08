@@ -1,10 +1,10 @@
-.directive('tlsWindowSize', function(){
+.directive('tlsWindowSize', function($rootScope){
 	return {
 		restrict: "A",
 		scope:{
 			size: "=tlsWindowSize"
 		},
-		link : function(scope,element){
+		link : function(scope, element){
 
 			// Breakpoint vars
 			var tabletBP  = 840,
@@ -22,12 +22,14 @@
 			}
 
 			scope.size = scope.viewport(window.innerWidth);
+			scope.$root.size = scope.size;
 
 			window.onresize = function(event) {
 
 				scope.$apply(function(){
 			    	var width  = window.innerWidth;
 			    	scope.size = scope.viewport(width);
+			    	scope.$root.size = scope.size;
 			    })
 
 			};
