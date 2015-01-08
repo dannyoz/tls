@@ -82,6 +82,81 @@ get_header(); ?>
 			</div>
 
 		</div>
+
+		<div id="edition-preview">
+
+			<div class="container">
+				
+				<div id="this-week">
+
+					<div class="preview grid-row">
+
+						<div class="top">
+							<h3>This<br/>week's<br/>TLS</h3>
+						</div>
+
+						<div class="prevbody">
+
+							<div class="grid-6">
+								<h4 class="main">Lorem ipsum dolor sit.</h4>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam veritatis amet placeat.
+								</p>
+								<button>View edition</button>
+							</div>
+
+							<div class="grid-6">
+								<img class="max" src="http://placehold.it/320x400">
+							</div>
+
+						</div>		
+
+					</div>
+					
+				</div>
+
+				<div id="next-week">
+
+					<div class="preview grid-row">
+
+						<div class="top">
+							<h3>In next<br/>week's<br/>TLS</h3>
+							<div class="date">
+								<span><u>OUT</u></span><br/>
+								<span>12th Nov 2014</span>
+							</div>
+						</div>
+
+						<div class="prevbody">
+
+							<ul>
+								<li>
+									<h4>Lorem ipsum.</h4>
+									<h5>Lorem ipsum dolor sit amet.</h5>
+								</li>
+								<li>
+									<h4>Adipisci, exercitationem.</h4>
+									<h5>Lorem ipsum dolor sit amet.</h5>
+								</li>
+								<li>
+									<h4>Ea, corporis.</h4>
+									<h5>Lorem ipsum dolor sit amet.</h5>
+								</li>
+								<li>
+									<h4>Animi, perspiciatis?</h4>
+									<h5>Lorem ipsum dolor sit amet.</h5>
+								</li>
+							</ul>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
 	<?php
 		endwhile; // End while loop
 	endif; // End if have_posts()

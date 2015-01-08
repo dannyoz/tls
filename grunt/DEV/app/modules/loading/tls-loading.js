@@ -7,16 +7,14 @@
 		},
 		link : function(scope,element){		
 			
-			scope.dots     = [1,2,3,4,5];
-			
-			var current = 0,
-				next    = 1,
-				delay   = 2000,
-				flipDel = 500;
+
+		    current = 0,
+			next    = 1,
+			delay   = 500,
+			flipDel = 0;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"
-			scope.direction  = 'h'
 
 			scope.sequence = [{
 				character : "t",
@@ -38,31 +36,34 @@
 				direction : "v"
 			}]
 
-			$interval(function(){
+			scope.$watch("visible",function (newVal,oldVal){
 
-				scope.isFlipping = true
-				$timeout(function(){
+				if(newVal){
 
-					if (current < 5){
-						current ++
-						if(current == 5){
-							next = 0
+					rotate = $interval(function(){
+
+
+						if (current < 5){
+							current ++
+							if(current == 5){
+								next = 0
+							} else {
+								next ++
+							}
 						} else {
-							next ++
+							current = 0
+							next = 1
 						}
-					} else {
-						current = 0
-						next = 1
-					}
+						scope.currChar  = scope.sequence[current].character
+						scope.nextChar  = scope.sequence[next].character
+					
+					},delay)
 
-					scope.direction = scope.sequence[current].direction
-					scope.currChar  = scope.sequence[current].character
-					scope.nextChar  = scope.sequence[next].character
+				} else {
 
-					scope.isFlipping = false
-				},flipDel);
-			
-			},delay)
+					$interval.cancel(rotate)
+				}
+			})
 		}
 	}
 }])

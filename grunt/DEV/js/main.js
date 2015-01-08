@@ -28230,6 +28230,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
+  $templateCache.put('tls-accordian-column.html',
+    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
+  );
+
+
   $templateCache.put('tls-accordian.html',
     "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.heading></h3><div class=toggler><span ng-if=!item.isOpen>Open</span> <span ng-if=item.isOpen>Close</span> <i class=\"icon icon-plus transition-2\" ng-class={open:item.isOpen}></i></div></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
   );
@@ -28246,33 +28251,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
-    "\n" +
-    "\t<div class=\"centre\">\r" +
-    "\n" +
-    "\t\t<ul class=\"fadeIn\">\r" +
-    "\n" +
-    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
-    "\n" +
-    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
-    "\n" +
-    "\t\t\t</li>\r" +
-    "\n" +
-    "\t\t</ul>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div> --><div id=loading ng-if=visible><div class=centre><div class=flipper><!-- \t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t<div class=\"flip next-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div> --><div class=\"flip test\"><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
+    "<div id=loading ng-if=visible><div class=centre><div class=flipper><div class=flip><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
   );
 
 
@@ -28312,7 +28291,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 100;
+	var delay  = 1000;
 
 	return {
 		getCards : function(){
@@ -28388,7 +28367,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			var defer     = $q.defer(),
 				page      = (!page) ? 1 : page,
 				filters   = (!filters) ? [] : filters,
-				filt      = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				converted = filters.toString().replace(/,/g,'&'),
+				filt      = (filters.length == 0) ? "" : "&"+converted,
 				prefix    = this.checkQueries(path),
 				order     = (!ord)? "" : "&orderby=date&order=" + ord,
 				dateRange = (!date)? "" : "&date_filter=" + date,
@@ -28540,6 +28520,27 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.directive('tlsAccordianColumn', function () {
+	return {
+		restrict : "A",
+		templateUrl : "tls-accordian-column.html",
+		scope : {
+			items : "=tlsAccordianColumn"
+		},
+		link : function (scope){
+
+			scope.toggleOpen = function (i){
+
+				var newState = (scope.items[i].isOpen == true)? false : true;
+				angular.forEach(scope.items,function(obj){
+					obj.isOpen = false
+				})
+				scope.items[i].isOpen = newState;
+				
+			}
+		}
+	}
+})
 .directive('tlsAccordian', function () {
 	return {
 		restrict : "A",
@@ -28584,16 +28585,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		},
 		link : function(scope,element){		
 			
-			scope.dots     = [1,2,3,4,5];
-			
-			var current = 0,
-				next    = 1,
-				delay   = 2000,
-				flipDel = 500;
+
+		    current = 0,
+			next    = 1,
+			delay   = 500,
+			flipDel = 0;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"
-			scope.direction  = 'h'
 
 			scope.sequence = [{
 				character : "t",
@@ -28615,31 +28614,34 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				direction : "v"
 			}]
 
-			$interval(function(){
+			scope.$watch("visible",function (newVal,oldVal){
 
-				scope.isFlipping = true
-				$timeout(function(){
+				if(newVal){
 
-					if (current < 5){
-						current ++
-						if(current == 5){
-							next = 0
+					rotate = $interval(function(){
+
+
+						if (current < 5){
+							current ++
+							if(current == 5){
+								next = 0
+							} else {
+								next ++
+							}
 						} else {
-							next ++
+							current = 0
+							next = 1
 						}
-					} else {
-						current = 0
-						next = 1
-					}
+						scope.currChar  = scope.sequence[current].character
+						scope.nextChar  = scope.sequence[next].character
+					
+					},delay)
 
-					scope.direction = scope.sequence[current].direction
-					scope.currChar  = scope.sequence[current].character
-					scope.nextChar  = scope.sequence[next].character
+				} else {
 
-					scope.isFlipping = false
-				},flipDel);
-			
-			},delay)
+					$interval.cancel(rotate)
+				}
+			})
 		}
 	}
 }])
@@ -29140,10 +29142,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
+		$scope.ready   = false;
+		$scope.loading = true;
+
 		api.getLatestEditions().then(function (result){		
 
 			// Full object			
-			$scope.latestEdition = result;	
+			$scope.latestEdition = result;				
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
@@ -29158,6 +29163,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
+
+			$scope.loading   = false;
 
 			
 			// Devide columns for mansory layout
@@ -29175,15 +29182,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	//Set default vars
 	var url = window.location.href;
-	$scope.filters        = []
-	$scope.contentFilters = []
-	$scope.currentPage    = 1
-	$scope.dateRange      = ""
-	$scope.orderName      = "Newest"
-	$scope.order          = "ASC"
-	$scope.showSorter     = false
-	$scope.loadResults    = true
-	$scope.niceDate       = niceDate
+	$scope.filters         = []
+	$scope.taxonomyFilters = []
+	$scope.currentPage     = 1
+	$scope.dateRange       = ""
+	$scope.orderName       = "Newest"
+	$scope.order           = "ASC"
+	$scope.showSorter      = false
+	$scope.loadResults     = true
+	$scope.niceDate        = niceDate
 
 	api.getSearchResults(
 			url,
@@ -29198,6 +29205,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.loadResults = false
 			$scope.results     = results
 			$scope.contentType = results.content_type_filters
+			$scope.sections    = results.articles_sections
 			$scope.dateRanges  = results.date_filters
 			$scope.paginationConfig = {
 				"pageCount"   : results.pages,
@@ -29260,8 +29268,45 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		})
 	}
 
-	$scope.contentFilter = function(term,key){
+	$scope.contentFilter = function(term,query,key,type){
 
+		console.log(term,query,key)
+
+		var list = (type == 'content') ? $scope.contentType : $scope.sections
+
+		if(query){
+
+			var index = $scope.filters.indexOf(query);
+
+			if(index == -1){
+				$scope.filters.push(query)
+				list[key].isApplied = true
+			} else {
+				$scope.filters.splice(index,1)
+				list[key].isApplied = false
+			}
+
+			$scope.loadResults = true
+			api.getSearchResults(
+					url,
+					1,
+					$scope.filters,
+					$scope.order,
+					$scope.dateRange
+				)
+				.then(function (results){
+				
+					$scope.loadResults = false
+					$scope.results = results
+					$scope.paginationConfig = {
+						"pageCount"   : results.pages,
+						"currentPage" : 1,
+						"filters"     : $scope.filters,
+						"order"       : $scope.order,
+						"dateRange"   : $scope.dateRange
+				}
+			})
+		}
 	}
 
 	$scope.dateRangeFilter = function(range,name){

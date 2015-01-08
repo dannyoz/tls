@@ -1,6 +1,6 @@
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 100;
+	var delay  = 1000;
 
 	return {
 		getCards : function(){
@@ -76,7 +76,8 @@
 			var defer     = $q.defer(),
 				page      = (!page) ? 1 : page,
 				filters   = (!filters) ? [] : filters,
-				filt      = (filters.length == 0) ? "" : "&category_name=["+filters+"]",
+				converted = filters.toString().replace(/,/g,'&'),
+				filt      = (filters.length == 0) ? "" : "&"+converted,
 				prefix    = this.checkQueries(path),
 				order     = (!ord)? "" : "&orderby=date&order=" + ord,
 				dateRange = (!date)? "" : "&date_filter=" + date,

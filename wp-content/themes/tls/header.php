@@ -36,7 +36,6 @@
 		<div id="header-top" class="grid-row">
 			
 			<div class="container">
-				{{size}}
 				<div id="brand">
 					<h1 id="logo"><a title="TLS" href="/"><img alt="TLS" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.jpg" /></a></h1>
 					<p class="sub">The times Literary supplement</p>

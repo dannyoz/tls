@@ -2,10 +2,13 @@
 
 	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
+		$scope.ready   = false;
+		$scope.loading = true;
+
 		api.getLatestEditions().then(function (result){		
 
 			// Full object			
-			$scope.latestEdition = result;	
+			$scope.latestEdition = result;				
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
@@ -20,6 +23,8 @@
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
+
+			$scope.loading   = false;
 
 			
 			// Devide columns for mansory layout
