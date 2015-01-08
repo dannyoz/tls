@@ -1271,7 +1271,7 @@ p.author {
 .article-links .next-article .icon:after {
   right: 0;
   font-size: 25px;
-  content: "\e60a";
+  content: "\e60b";
 }
 .article-links .prev-article {
   z-index: 999;
