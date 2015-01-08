@@ -1,9 +1,9 @@
-.controller('latesteditions',['$scope','$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
 
-	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
-		api.getLatestEditions().then(function (result){			
-				
+		api.getLatestEditions().then(function (result){		
+
 			// Full object			
 			$scope.latestEdition = result;	
 			// Edition sections articles				
@@ -21,8 +21,8 @@
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
 
-			console.log(posts);
-
+			
+			// Devide columns for mansory layout
 			columns.divide(posts).then(function (cols) {
 
 				$scope.col1  = cols.col1;

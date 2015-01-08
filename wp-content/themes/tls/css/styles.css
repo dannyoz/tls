@@ -420,11 +420,20 @@ section, article {
 }
 
 #banner {
+  background-color: grey;
   height: 492px;
   background-size: cover;
   background-position: 50% 50%;
   margin-bottom: 30px;
   position: relative;
+  -webkit-animation-name: fade;
+  animation-name: fade;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
 }
 @media screen and (max-width: 840px) {
   #banner {
@@ -453,6 +462,24 @@ section, article {
 }
 #banner .caption h2, #banner .caption p {
   color: white;
+  -webkit-animation-name: slideUp;
+  animation-name: slideUp;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-iteration-count: 0.7s;
+  animation-iteration-count: 0.7s;
+}
+#banner .caption h2:nth-child(1), #banner .caption p:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+#banner .caption h2:nth-child(2), #banner .caption p:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
 }
 #banner .caption .category {
   float: left;
@@ -726,7 +753,7 @@ em, i {
   text-transform: uppercase;
 }
 
-.author {
+p.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
   font-size: 1em;
@@ -1580,13 +1607,13 @@ em, i {
   }
 }
 
-@media (max-width: 840px) {
+@media screen and (max-width: 840px) {
   #latest-edition {
     padding-top: 40px;
   }
 }
 #latest-edition h1 {
-  font-size: 42px;
+  font-size: 40px;
   text-align: center;
   margin: 45px 0 60px 0;
 }
@@ -1616,6 +1643,11 @@ em, i {
 #latest-edition .edition-item .padded {
   padding: 30px;
 }
+@media screen and (max-width: 450px) {
+  #latest-edition .edition-item .padded {
+    padding: 20px;
+  }
+}
 #latest-edition .edition-item h4 {
   font-size: 20px;
   margin-bottom: 5px;
@@ -1630,6 +1662,10 @@ em, i {
     margin-top: -120px;
   }
 }
+#latest-edition .edition-current .featured-col h1 {
+  font-size: 28px;
+  margin: 0;
+}
 #latest-edition .edition-current .featured-col .img-wrapper {
   border: 1px solid #d9d9d9;
   padding: 6px;
@@ -1637,7 +1673,17 @@ em, i {
   text-align: center;
 }
 #latest-edition .edition-current .featured-col .title-small {
-  font-weight: 400;
+  font-weight: 500;
+}
+@media screen and (max-width: 450px) {
+  #latest-edition .edition-current .featured-col .title-small {
+    text-align: center;
+  }
+}
+#latest-edition .edition-current .featured-col .article-links {
+  margin: 20px 0;
+  min-height: inherit;
+  border-bottom: none;
 }
 #latest-edition .edition-current .editions-top-left {
   float: left;
@@ -1659,6 +1705,7 @@ em, i {
     position: relative;
     width: 100%;
     margin-right: 2.5%;
+    margin-bottom: 40px;
   }
 }
 #latest-edition .edition-current .editions-top-right {
@@ -1695,6 +1742,7 @@ em, i {
     position: relative;
     width: 100%;
     margin-right: 2.5%;
+    margin-bottom: 25px;
   }
 }
 #latest-edition .edition-current .regular-col {
@@ -1713,6 +1761,11 @@ em, i {
 }
 #latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
+}
+@media screen and (max-width: 450px) {
+  #latest-edition .edition-current .public-col .edition-item .padded {
+    padding: 20px;
+  }
 }
 #latest-edition .edition-current .regular-col .edition-item {
   background-color: #e6e6e6;
@@ -1746,6 +1799,11 @@ em, i {
   padding: 0;
   margin: 0;
   line-height: 115px;
+}
+@media (max-width: 450px) {
+  #latest-edition .editions-bottom h2 {
+    font-size: 18px;
+  }
 }
 #latest-edition .editions-bottom .title-icon {
   position: relative;
@@ -2207,9 +2265,36 @@ em, i {
 #loading .flipper .flip {
   position: absolute;
   overflow: hidden;
+  width: 100px;
+  height: 100px;
+}
+#loading .flipper .flip img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#loading .flipper .flip.test {
+  background: #d73f2b;
+  -webkit-animation-name: flips;
+  animation-name: flips;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+#loading .flipper .flip.curr-flip {
+  background: red;
 }
 #loading .flipper .flip.next-flip {
-  display: none;
+  background: blue;
 }
 #loading .flipper .flip.next-flip.flipping {
   display: block;
@@ -2221,8 +2306,8 @@ em, i {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.curr-flip.flipping.hori {
   -webkit-animation-name: flip-h-curr;
@@ -2231,8 +2316,8 @@ em, i {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.next-flip.flipping.vert {
   -webkit-animation-name: flip-h-next;
@@ -2241,8 +2326,8 @@ em, i {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.curr-flip.flipping.vert {
   -webkit-animation-name: flip-h-curr;
@@ -2251,8 +2336,8 @@ em, i {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 
 #edition-preview {
@@ -2432,6 +2517,96 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     opacity: 1;
   }
 }
+@-webkit-keyframes fade {
+  0% {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade {
+  0% {
+    -moz-transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    -moz-transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-moz-keyframes slideUp {
+  0% {
+    -moz-transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -moz-transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slideleft {
+  0% {
+    -webkit-transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    opacity: 1;
+  }
+}
+@-moz-keyframes slideleft {
+  0% {
+    -moz-transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -moz-transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideleft {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 @-webkit-keyframes loading {
   0% {
     top: 15px;
@@ -2515,27 +2690,37 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-webkit-keyframes flip-h-next {
   0% {
     -webkit-transform: rotate3d(0, 1, 0, -180deg);
-    background-color: transparent;
   }
   50% {
     background-color: white;
   }
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
-    background-color: white;
   }
 }
 @-webkit-keyframes flip-h-curr {
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
-    background-color: white;
   }
   50% {
     background-color: white;
   }
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 180deg);
-    background-color: transparent;
+  }
+}
+@-webkit-keyframes flips {
+  0% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
+  }
+  33% {
+    -webkit-transform: rotate3d(0, 1, 0, 180deg);
+  }
+  66% {
+    -webkit-transform: rotate3d(0, 1, 1, 360deg);
+  }
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
   }
 }
 @-webkit-keyframes pageTurnLeft {

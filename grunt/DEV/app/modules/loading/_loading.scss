@@ -38,14 +38,34 @@
 
 		.flip{
 
-			$timing : 0.2s;
+			$timing : 0.5s;
+			$ize    : 100px;
 
 			position:absolute;
 			overflow: hidden;
+			width: $ize;
+			height: $ize;
+
+			img{
+				@include centre;
+			}
+
+			&.test{
+
+				background:$primary-orange;
+				@include animation(flips,ease,2s,"","",infinite);
+			}
+
+			&.curr-flip{
+
+				background:red;
+			}
 
 			&.next-flip{
 
-				display: none;
+				//display: none;
+
+				background:blue;
 
 				&.flipping{
 

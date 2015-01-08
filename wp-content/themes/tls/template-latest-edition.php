@@ -5,8 +5,9 @@
 
 <section id="latest-edition" ng-controller="latesteditions" ng-cloak>
 	
-	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
+	<div class="container relative" ng-swipe-right="chooseEdition('prev',prev)" ng-swipe-left="chooseEdition('next',next)">
 		
+		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
 				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
@@ -22,9 +23,24 @@
 
 			<h1 ng-if="size == 'desktop'">{{latestEdition.title}}</h1>
 			
+			<!-- Latest Edition Top Section -->
 			<div class="editions-top grid-row">		
 
 				<div class="editions-top-left featured-col">		
+
+					<!-- Tablet / Mobile Pagination -->
+					<h1 ng-if="size != 'desktop'">{{latestEdition.title}}</h1>					
+					<div class="article-links" ng-if="size != 'desktop'">						
+						<div class="inner">
+							<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
+								<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
+							</a>
+							<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',prev)" class="article-nav prev-article">
+								<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
+							</a>	
+						</div>			
+					</div>
+
 					<div class="img-wrapper">
 						<img class="max" ng-attr-src="{{currentEdition.featured.image_url}}">	
 					</div>								
@@ -33,6 +49,7 @@
 				
 				<div class="editions-top-right">
 					<div class="grid-row">
+						<!--Public content -->
 						<div class="public-col">
 							<h2>{{publicObj.title}}</h2>
 							<div class="edition-item" ng-repeat="public in publicObj.articles">
@@ -43,7 +60,7 @@
 								</div>								
 							</div>
 						</div>
-
+						<!--Regular content -->
 						<div class="regular-col">					
 							<h2>{{regularsObj.title}}</h2>
 							<div class="edition-item" ng-repeat="regular in regularsObj.articles">
@@ -60,20 +77,20 @@
 		</div>
 	</div>
 
+	<!-- Latest Edition Bottom Section -->
 	<div class="editions-bottom">		
 
-		<div class="container relative" tls-window-size="size">
+		<div class="container relative" ng-if="ready">
 			<div class="title-icon icon">
 				<div class="icon-border icon-key"></div>
 				<h2>{{subscribersObj.title}}</h2>	
 			</div>			
 
-			<div class="grid-row" ng-if="size == 'desktop'">
+			<div class="grid-row" ng-if="size == 'desktop'">				
 				
-				<div  class="grid-4" ng-repeat="column in col3">					
+				<div  class="grid-4" ng-repeat="column in col3">										
 					
-					<div class="card-flat" ng-repeat="card in column">
-						
+					<div class="card-flat" ng-repeat="card in column">						
 						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
@@ -84,12 +101,47 @@
 
 					</div>
 				
-				</div>
-
+				</div>				
 			</div>
+
+			<div class="grid-row" ng-if="size == 'tablet'">				
+				
+				<div  class="grid-6" ng-repeat="column in col2">										
+					
+					<div class="card-flat" ng-repeat="card in column">						
+						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<div class="edition-item" ng-repeat="post in card.posts">
+							<div class="padded">							
+								<p class="title-small">{{post.author}}</p>
+								<h4><a href="#">{{post.title}}</a></h4>
+							</div>								
+						</div>
+
+					</div>
+				
+				</div>				
+			</div>
+
+			<div class="grid-row" ng-if="size == 'mobile'">				
+				
+				<div  class="grid-12" ng-repeat="column in col1">										
+					
+					<div class="card-flat" ng-repeat="card in column">						
+						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<div class="edition-item" ng-repeat="post in card.posts">
+							<div class="padded">							
+								<p class="title-small">{{post.author}}</p>
+								<h4><a href="#">{{post.title}}</a></h4>
+							</div>								
+						</div>
+
+					</div>
+				
+				</div>				
+			</div>
+
 		</div>
 	</div>
-
 
 </section>
 

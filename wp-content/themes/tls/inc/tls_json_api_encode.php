@@ -357,25 +357,11 @@ function tls_json_api_encode($response) {
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $articles_archive;
         } else if ( $response['page_template_slug'] == 'template-blogs-archive.php' ) {
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $blogs_archive_args = array(
-                'post_type'         => array( 'post' ),
-                'orderby'           => 'date',
-                'order'             => 'DESC',
-                'paged'             => $paged,
-            );
-
-            $wp_query->query = $blogs_archive_args;
-            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
-            $response['count'] = count($blogs_archive);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $blogs_archive;
 
             // Get Featured Post Details
-            $featured_post = get_post($response['page']->custom_fields->featured_blog_post[0]);
+            $featured_post = get_post( $response['page']->custom_fields->featured_blog_post[0] );
 
-            // Get Post Thumbnail and all it's different sizes as URLs
+            // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
             $sizes = get_intermediate_image_sizes();
             $attachment_id = get_post_thumbnail_id( $featured_post->ID );
 
@@ -392,6 +378,23 @@ function tls_json_api_encode($response) {
                 'link'          => get_permalink( $featured_post->ID ),
                 'images'     => $images
             );
+
+            // Get Blog Archive excluding Featured Blog from list
+            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+            $blogs_archive_args = array(
+                'post_type'         => array( 'post' ),
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'paged'             => $paged,
+                'post__not_in'      => array( $featured_post->ID ),
+            );
+
+            $wp_query->query = $blogs_archive_args;
+            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
+            $response['count'] = count($blogs_archive);
+            $response['count_total'] = (int) $wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $blogs_archive;
         }
 	}
     $response['query'] = $wp_query->query;
@@ -401,8 +404,73 @@ add_filter('json_api_encode', 'tls_json_api_encode');
 
 function tls_home_page_json_api_encode($response) {
 
-    if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-home.php' ) {
-        $response['yo'] = 'you';
+    if ( isset( $response['page'] ) && $response['page_template_slug'] == 'template-home.php' ) {
+
+        // Get Home Page ID for this page using Template Home Page Template
+        $home_page_id = $response['page']->id;
+
+        /**
+         * Home Page Blog Cards (For the 2 first Blog Cards)
+         */
+        $blog_cards = get_field('blogs_cards', $home_page_id);
+        foreach ( (array)$blog_cards as $blog_card) {
+            // Get the categories for the Blog Post
+            $categories = wp_get_post_terms( $blog_card->ID, 'category' );
+
+            // Add Blog Post Cards to JSON Response in the first card slot
+            $response['home_page_cards']['card_0'][] = array(
+                'type'          => 'blog',
+                'id'            => $blog_card->ID,
+                'title'         => $blog_card->post_title,
+                'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
+                'text'          => substr( $blog_card->post_content, 0, 50 ) . '...',
+                'link'          => get_permalink( $blog_card->ID ),
+                'section'       => array(
+                    'name'      => $categories[0]->name,
+                    'link'      => site_url() . '/' . $categories[0]->taxonomy . '/' . $categories[0]->slug
+                ),
+            );
+        }
+
+        /**
+         * Home Page Cards (For the rest of the home page cards)
+         */
+        $home_page_cards = get_field('home_page_cards', $home_page_id);
+
+        // Start the Cards at 1 since the Home Page Blog Cards already took the place 0
+        $home_page_card_count = 1;
+        foreach ((array)$home_page_cards as $home_page_card) {
+
+            // Variable that grabs Card Type
+            $card_type = $home_page_card['card_type'];
+            // Variable that gets the post for the Card Type
+            $card_post = $home_page_card[$card_type . '_post'];
+
+            // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
+            if ( $card_type == 'article' ) {
+                $section = wp_get_post_terms( $card_post->ID, 'article_section' );
+            } else {
+                $section = wp_get_post_terms( $card_post->ID, 'category' );
+            }
+
+            // Add Cards to the JSON Response in the specific count slot
+            $response['home_page_cards']['card_' . $home_page_card_count] = array(
+                'type'          => $card_type,
+                'id'            => $card_post->ID,
+                'title'         => $card_post->post_title,
+                'author'        => get_the_author_meta( 'display_name', $card_post->post_author ),
+                'text'          => substr( $card_post->post_content, 0, 50 ) . '...',
+                'link'          => get_permalink( $card_post->ID ),
+                'section'       => array(
+                    'name'      => $section[0]->name,
+                    'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
+                ),
+            );
+
+            // Iterate to next count slot
+            $home_page_card_count++;
+        }
+
     }
     return $response;
 }

@@ -28246,13 +28246,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div><!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
     "\n" +
     "\t<div class=\"centre\">\r" +
     "\n" +
-    "\t\t<div class=\"flipper\">\r" +
+    "\t\t<ul class=\"fadeIn\">\r" +
     "\n" +
-    "\t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
+    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\n" +
+    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\n" +
+    "\t\t\t</li>\r" +
+    "\n" +
+    "\t\t</ul>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div> --><div id=loading ng-if=visible><div class=centre><div class=flipper><!-- \t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
     "\n" +
     "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
     "\n" +
@@ -28262,13 +28272,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
     "\n" +
     "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
     "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div> -->"
+    "\t\t\t</div> --><div class=\"flip test\"><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
   );
 
 
@@ -28584,8 +28588,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			
 			var current = 0,
 				next    = 1,
-				delay   = 600,
-				flipDel = 200;
+				delay   = 2000,
+				flipDel = 500;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"
@@ -28639,6 +28643,44 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 }])
+.directive('tlsWindowSize', function(){
+	return {
+		restrict: "A",
+		scope:{
+			size: "=tlsWindowSize"
+		},
+		link : function(scope, element){
+
+			// Breakpoint vars
+			var tabletBP  = 840,
+				mobileBP  = 450;
+
+			scope.viewport = function(size){
+
+				if(size>tabletBP){
+					return 'desktop'
+				} else if(size<=tabletBP && size>mobileBP){
+					return 'tablet'
+				} else if(size<=mobileBP){
+					return 'mobile'
+				}
+			}
+
+			scope.size = scope.viewport(window.innerWidth);
+			scope.$root.size = scope.size;
+
+			window.onresize = function(event) {
+
+				scope.$apply(function(){
+			    	var width  = window.innerWidth;
+			    	scope.size = scope.viewport(width);
+			    	scope.$root.size = scope.size;
+			    })
+
+			};
+		}
+	}
+})
 .controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
 
 	$scope.sce        = $sce;
@@ -28820,12 +28862,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.loadMore();
 	})
 
-	api.getArticle(url).then(function (result){
+	api.getArticle(href).then(function (result){
 
 		$scope.loading   = false;
 		$scope.title     = (result.category)? result.category.title : 'blog'
+		$scope.content   = result
 		$scope.pageCount = result.pages
-		$scope.firstPost = result.posts[0];
+		$scope.firstPost = result.featured_post;
 		var posts        = result.posts;
 
 		console.log(result)
@@ -28913,45 +28956,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		} 
 	}
 })
-.directive('tlsWindowSize', function(){
-	return {
-		restrict: "A",
-		scope:{
-			size: "=tlsWindowSize"
-		},
-		link : function(scope,element){
-
-			// Breakpoint vars
-			var tabletBP  = 840,
-				mobileBP  = 450;
-
-			scope.viewport = function(size){
-
-				if(size>=tabletBP){
-					return 'desktop'
-				} else if(size<tabletBP && size>=mobileBP){
-					return 'tablet'
-				} else if(size<mobileBP){
-					return 'mobile'
-				}
-			}
-
-			scope.size = scope.viewport(window.innerWidth);
-
-			window.onresize = function(event) {
-
-				scope.$apply(function(){
-			    	var width  = window.innerWidth;
-			    	scope.size = scope.viewport(width);
-			    })
-
-			};
-		}
-	}
-})
 .controller('discover',['$scope','$sce','api','columns',function ($scope,$sce,api,columns){
 
 	var url = window.location.href;
+
+	$scope.test = true
 
 	$scope.ready       = false;
 	$scope.pageNumber  = 1;
@@ -29127,12 +29136,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('latesteditions',['$scope','$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
 
-	function ($scope,$sce,$location,$timeout,api,columns,niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
-		api.getLatestEditions().then(function (result){			
-				
+		api.getLatestEditions().then(function (result){		
+
 			// Full object			
 			$scope.latestEdition = result;	
 			// Edition sections articles				
@@ -29150,8 +29159,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
 
-			console.log(posts);
-
+			
+			// Devide columns for mansory layout
 			columns.divide(posts).then(function (cols) {
 
 				$scope.col1  = cols.col1;

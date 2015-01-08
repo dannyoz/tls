@@ -2,6 +2,8 @@
 
 	var url = window.location.href;
 
+	$scope.test = true
+
 	$scope.ready       = false;
 	$scope.pageNumber  = 1;
 	$scope.loading     = true;
