@@ -1,6 +1,6 @@
 <article class="single-post" ng-controller="article" ng-cloak>
 
-	<div class="container relative" tls-window-size="size" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
+	<div class="container relative" ng-swipe-right="chooseArticle('prev',prev)" ng-swipe-left="chooseArticle('next',next)">
 
 		<div class="article-links">
 			<div class="inner">

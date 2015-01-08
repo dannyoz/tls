@@ -28643,7 +28643,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 }])
-.directive('tlsWindowSize', function($rootScope){
+.directive('tlsWindowSize', function(){
 	return {
 		restrict: "A",
 		scope:{
@@ -28657,11 +28657,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			scope.viewport = function(size){
 
-				if(size>=tabletBP){
+				if(size>tabletBP){
 					return 'desktop'
-				} else if(size<tabletBP && size>=mobileBP){
+				} else if(size<=tabletBP && size>mobileBP){
 					return 'tablet'
-				} else if(size<mobileBP){
+				} else if(size<=mobileBP){
 					return 'mobile'
 				}
 			}
@@ -29136,9 +29136,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('latesteditions',['$scope', '$rootScope', '$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
 
-	function ($scope, $rootScope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
 		api.getLatestEditions().then(function (result){		
 
