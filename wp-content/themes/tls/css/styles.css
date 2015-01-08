@@ -1267,7 +1267,7 @@ p.author {
 .article-links .next-article .icon:after {
   right: 0;
   font-size: 25px;
-  content: "\e60a";
+  content: "\e60b";
 }
 .article-links .prev-article {
   z-index: 999;
@@ -2276,10 +2276,6 @@ p.author {
 }
 .accordian-column .accordian-title .toggler i {
   font-size: 1em;
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
 }
 .accordian-column .accordian-body {
   overflow: hidden;

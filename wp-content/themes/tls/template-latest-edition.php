@@ -5,7 +5,7 @@
 
 <section id="latest-edition" ng-controller="latesteditions" ng-cloak>
 	
-	<div class="container relative" ng-swipe-right="chooseEdition('prev',prev)" ng-swipe-left="chooseEdition('next',next)">
+	<div class="container relative" ng-if="ready" ng-swipe-right="chooseEdition('prev',prev)" ng-swipe-left="chooseEdition('next',next)">
 		
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
@@ -132,6 +132,8 @@
 
 		</div>
 	</div>
+
+	<div tls-loading="loading"></div>
 
 </section>
 
