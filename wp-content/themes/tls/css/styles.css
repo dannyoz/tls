@@ -669,10 +669,6 @@ textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=pass
   content: "\e609";
 }
 
-.icon-minus:before {
-  content: "\ea0b";
-}
-
 .icon-print:before {
   content: "\e60a";
 }
@@ -1627,7 +1623,6 @@ p.author {
   font-size: 40px;
   text-align: center;
   margin: 45px 0 60px 0;
-  font-family: "Times New Roman", "Times", serif;
 }
 #latest-edition h2 {
   font-size: 28px;
