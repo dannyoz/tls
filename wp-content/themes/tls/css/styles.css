@@ -55,8 +55,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -527,19 +527,19 @@ a, button, input {
 }
 
 a:link {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 a:visited {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 a:hover {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 a:active {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 a.orange {
@@ -597,7 +597,7 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
 textarea:hover, input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=tel]:hover, input[type=search]:hover {
   background-color: white;
   border: 1px solid #f2f2f2;
-  color: black;
+  color: #000000;
 }
 textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=tel]:focus, input[type=search]:focus {
   background-color: white;
@@ -1207,6 +1207,9 @@ p.author {
   z-index: 9999;
   min-height: 30px;
 }
+.article-links a {
+  font-family: "Times New Roman", "Times", serif;
+}
 @media (max-width: 840px) {
   .article-links {
     overflow: hidden;
@@ -1617,7 +1620,7 @@ p.author {
   }
 }
 #latest-edition h1 {
-  font-size: 42px;
+  font-size: 40px;
   text-align: center;
   margin: 45px 0 60px 0;
 }
@@ -1649,8 +1652,27 @@ p.author {
   min-height: 75px;
   margin-top: 45px;
 }
+@media screen and (max-width: 840px) {
+  #latest-edition .article-links {
+    padding: 0;
+  }
+}
 #latest-edition .article-links .article-nav {
   width: auto;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .article-links .article-nav {
+    width: 90px;
+  }
+}
+@media screen and (max-width: 665px) {
+  #latest-edition .article-links .article-nav {
+    width: 75px;
+    font-size: 14px;
+  }
+}
+#latest-edition .article-links .article-nav .icon span {
+  display: block;
 }
 #latest-edition .edition-item {
   border-top: 1px solid #bfbfbf;
@@ -1672,7 +1694,7 @@ p.author {
   text-transform: none;
   margin-bottom: 5px;
 }
-@media (min-width: 841px) {
+@media screen and (min-width: 841px) {
   #latest-edition .edition-current {
     margin-top: -120px;
   }
@@ -1714,7 +1736,7 @@ p.author {
     margin-right: 2.5%;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .editions-top-left {
     float: left;
     position: relative;
@@ -1737,7 +1759,7 @@ p.author {
     margin-right: 0;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .editions-top-right {
     float: left;
     position: relative;
@@ -2593,7 +2615,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2604,7 +2625,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2615,7 +2635,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2626,7 +2645,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(1);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2637,7 +2655,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(1);
     opacity: 0;
   }
-
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2648,7 +2665,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(1);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2659,7 +2675,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: translateY(0);
     opacity: 1;
@@ -2670,7 +2685,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     -moz-transform: translateY(0);
     opacity: 1;
@@ -2681,7 +2695,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -2692,7 +2705,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: translateX(0);
     opacity: 1;
@@ -2703,7 +2715,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     -moz-transform: translateX(0);
     opacity: 1;
@@ -2714,7 +2725,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -2724,51 +2734,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -2777,51 +2775,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -2830,51 +2816,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -2883,51 +2857,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -2936,86 +2898,70 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     background-color: white;
   }
-
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-moz-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-webkit-keyframes pageTurnRight {
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -3024,21 +2970,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-moz-keyframes pageTurnRight {
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -3047,21 +2989,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @keyframes pageTurnRight {
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
