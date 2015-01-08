@@ -374,7 +374,7 @@ function tls_json_api_encode($response) {
             $response['featured_post'] = array(
                 'id'            => $featured_post->ID,
                 'title'         => $featured_post->post_title,
-                'excerpt'       => substr($featured_post->post_content, 0, 100) . '...',
+                'excerpt'       => wp_strip_all_tags( substr($featured_post->post_content, 0, 100) ) . '...',
                 'link'          => get_permalink( $featured_post->ID ),
                 'images'     => $images
             );
@@ -409,6 +409,28 @@ function tls_home_page_json_api_encode($response) {
         // Get Home Page ID for this page using Template Home Page Template
         $home_page_id = $response['page']->id;
 
+        // Get Featured Post Details
+        $featured_article = get_field( 'featured_article', $home_page_id );
+
+        // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
+        $sizes = get_intermediate_image_sizes();
+        $attachment_id = get_post_thumbnail_id( $featured_article->ID );
+
+        $images = array(
+            'hero_image'        => get_field( 'hero_image_url', $featured_article->ID ),
+            'full_image'        => get_field( 'full_image_url', $featured_article->ID ),
+            'thumbnail_image'   => get_field( 'thumbnail_image_url', $featured_article->ID )
+        );
+
+        $response['featured_article'] = array(
+            'id'                => $featured_article->ID,
+            'title'             => $featured_article->post_title,
+            'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
+            'text'              => wp_strip_all_tags( substr( $featured_article->post_content, 0, 100 ) ) . '...',
+            'link'              => get_permalink( $featured_article->ID ),
+            'images'            => $images
+        );
+
         /**
          * Home Page Blog Cards (For the 2 first Blog Cards)
          */
@@ -423,7 +445,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => substr( $blog_card->post_content, 0, 50 ) . '...',
+                'text'          => wp_strip_all_tags( substr( $blog_card->post_content, 0, 50 ) ) . '...',
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -449,8 +471,10 @@ function tls_home_page_json_api_encode($response) {
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ( $card_type == 'article' ) {
                 $section = wp_get_post_terms( $card_post->ID, 'article_section' );
+                $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
             } else {
                 $section = wp_get_post_terms( $card_post->ID, 'category' );
+                $thumbnail_image = '';
             }
 
             // Add Cards to the JSON Response in the specific count slot
@@ -465,6 +489,7 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $section[0]->name,
                     'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
                 ),
+                'image'         => $thumbnail_image
             );
 
             // Iterate to next count slot
@@ -475,3 +500,97 @@ function tls_home_page_json_api_encode($response) {
     return $response;
 }
 add_action( 'json_api_encode', 'tls_home_page_json_api_encode' );
+
+
+function tls_latest_edition_page_json_api_encode($response) {
+
+    if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-latest-edition.php' ) {
+        
+        $latest_edition = new WP_Query( array(  
+            'post_type'         => 'tls_editions',
+            'post_status'       => 'publish',
+            'posts_per_page'    => 1,
+            'orderby '          => 'date'
+        ) ); wp_reset_query();
+        $latest_edition = $latest_edition->posts[0];
+
+        $response['latest_edition'] = array(
+                'id'        => $latest_edition->ID,
+                'title'     => $latest_edition->post_title,
+                'url'       => get_permalink($latest_edition->ID),
+                
+            );
+
+        $previousPost = get_previous_post($latest_edition->ID); 
+        $response['latest_edition']['previous_post_info'] = array(
+                'id'        => $previousPost->ID,
+                'title'     => $previousPost->post_title,
+                'url'       => get_permalink($previousPost->ID),
+                
+            );
+
+        $nextPost = get_next_post($latest_edition->ID);
+        $response['latest_edition']['next_post_info'] = array(
+                'id'        => $nextPost->ID,
+                'title'     => $nextPost->post_title,
+                'url'       => get_permalink($nextPost->ID),
+                
+            );
+
+        $latest_edition_articles = get_fields($latest_edition->ID);
+        //$response['latest_edition']['test_content'] =  $latest_edition_articles;
+         
+        $response['latest_edition']['content']['public']['title'] = 'Public content';
+
+        foreach ($latest_edition_articles['public_articles'] as $key => $value) {
+            $section = get_the_terms($value->ID,'article_section');
+            foreach ($section as $key => $value) { $section = $value->name; }
+            $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
+                'id'        => $value->ID,
+                'author'    => $value->post_author,
+                'title'     => $value->post_title,
+                'section'   => $section,
+                'url'       => get_permalink($value->ID),
+                
+            );
+        }
+        
+        $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
+        foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
+            $section = get_the_terms($value->ID,'article_section');
+            foreach ($section as $key => $value) { $section = $value->name; }
+            $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
+                'id'        => $value->ID,
+                'author'    => $value->post_author,
+                'title'     => $value->post_title,
+                'section'   => $section,
+                'url'       => get_permalink($value->ID),
+                
+            );
+        }   
+
+
+        $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
+        foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
+            $section = get_the_terms($value->ID,'article_section');
+            foreach ($section as $key => $value) { $section = $value->name; }
+            $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
+                'id'        => $value->ID,
+                'author'    => $value->post_author,
+                'title'     => $value->post_title,
+                'section'   => $section,
+                'url'       => get_permalink($value->ID),
+                
+            );
+        }  
+
+        //$response['latest_edition']['content'] = get_the_terms('2433','article_section');
+        
+
+
+
+
+    }
+    return $response;
+}
+add_action( 'json_api_encode', 'tls_latest_edition_page_json_api_encode' );

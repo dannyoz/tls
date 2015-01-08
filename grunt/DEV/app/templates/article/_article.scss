@@ -211,6 +211,11 @@
 	z-index: 9999;		
 	min-height: 30px;
 
+	a {
+		font-family: $times;
+	}
+
+
 	@media (max-width: $tablet) {	
 		overflow: hidden;		
 		border-bottom: 1px solid $light-keyline;

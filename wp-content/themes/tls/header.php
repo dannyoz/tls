@@ -2,7 +2,7 @@
 /**
  * The header for our theme.
  *
- * Displays all of the <head> section and everything up till <div id="content">
+ * Displays all of the <head> of the theme
  *
  * @package tls
  */
@@ -15,19 +15,18 @@
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url'); ?>"/> 
-	
-	<script src="//use.typekit.net/zvh7bpe.js"></script>
+
+	<?php wp_head(); ?>
+
 	<script>try{Typekit.load();}catch(e){}</script>
 	<?php if ( is_home() || is_front_page() ) :
-	$front_page_id = get_option('page_on_front');
-	?>
+		$front_page_id = get_option('page_on_front');
+		?>
 		<script>
 			var home_page_id = <?php echo $front_page_id; ?>;
 		</script>
 	<?php endif; ?>
-	<?php wp_head(); ?>
-	
+
 </head>
 
 <body <?php body_class(); ?> tls-window-size="size">
@@ -39,7 +38,7 @@
 			<div class="container">
 				{{size}}
 				<div id="brand">
-					<h1 id="logo"><a title="TLS" href="/"><img alt="TLS" src="<?php bloginfo('template_directory'); ?>/images/logo.jpg" /></a></h1>
+					<h1 id="logo"><a title="TLS" href="/"><img alt="TLS" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo.jpg" /></a></h1>
 					<p class="sub">The times Literary supplement</p>
 					<p class="strap">The leading international weekly for literary culture</p>
 				</div>
