@@ -28246,13 +28246,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<div id=loading ng-if=visible><div class=centre><ul class=fadeIn><li ng-repeat=\"dot in dots\"><b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b></li></ul></div></div><!-- <div id=\"loading\" ng-if=\"visible\">\r" +
+    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
     "\n" +
     "\t<div class=\"centre\">\r" +
     "\n" +
-    "\t\t<div class=\"flipper\">\r" +
+    "\t\t<ul class=\"fadeIn\">\r" +
     "\n" +
-    "\t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
+    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
+    "\n" +
+    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
+    "\n" +
+    "\t\t\t</li>\r" +
+    "\n" +
+    "\t\t</ul>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div> --><div id=loading ng-if=visible><div class=centre><div class=flipper><!-- \t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
     "\n" +
     "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
     "\n" +
@@ -28262,13 +28272,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
     "\n" +
     "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
     "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div> -->"
+    "\t\t\t</div> --><div class=\"flip test\"><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
   );
 
 
@@ -28584,8 +28588,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			
 			var current = 0,
 				next    = 1,
-				delay   = 600,
-				flipDel = 200;
+				delay   = 2000,
+				flipDel = 500;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"
@@ -28953,6 +28957,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 .controller('discover',['$scope','$sce','api','columns',function ($scope,$sce,api,columns){
 
 	var url = window.location.href;
+
+	$scope.test = true
 
 	$scope.ready       = false;
 	$scope.pageNumber  = 1;

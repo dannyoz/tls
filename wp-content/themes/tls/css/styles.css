@@ -55,8 +55,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  background: #ffffff;
-  color: #000000;
+  background: white;
+  color: black;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -527,19 +527,19 @@ a, button, input {
 }
 
 a:link {
-  color: #000000;
+  color: black;
   text-decoration: none;
 }
 a:visited {
-  color: #000000;
+  color: black;
   text-decoration: none;
 }
 a:hover {
-  color: #000000;
+  color: black;
   text-decoration: underline;
 }
 a:active {
-  color: #000000;
+  color: black;
   text-decoration: underline;
 }
 a.orange {
@@ -597,7 +597,7 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
 textarea:hover, input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=tel]:hover, input[type=search]:hover {
   background-color: white;
   border: 1px solid #f2f2f2;
-  color: #000000;
+  color: black;
 }
 textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=tel]:focus, input[type=search]:focus {
   background-color: white;
@@ -2256,9 +2256,36 @@ p.author {
 #loading .flipper .flip {
   position: absolute;
   overflow: hidden;
+  width: 100px;
+  height: 100px;
+}
+#loading .flipper .flip img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#loading .flipper .flip.test {
+  background: #d73f2b;
+  -webkit-animation-name: flips;
+  animation-name: flips;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+#loading .flipper .flip.curr-flip {
+  background: red;
 }
 #loading .flipper .flip.next-flip {
-  display: none;
+  background: blue;
 }
 #loading .flipper .flip.next-flip.flipping {
   display: block;
@@ -2270,8 +2297,8 @@ p.author {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.curr-flip.flipping.hori {
   -webkit-animation-name: flip-h-curr;
@@ -2280,8 +2307,8 @@ p.author {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.next-flip.flipping.vert {
   -webkit-animation-name: flip-h-next;
@@ -2290,8 +2317,8 @@ p.author {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 #loading .flipper .flip.curr-flip.flipping.vert {
   -webkit-animation-name: flip-h-curr;
@@ -2300,8 +2327,8 @@ p.author {
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
   animation-timing-function: ease;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
 }
 
 #edition-preview {
@@ -2456,6 +2483,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2466,6 +2494,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2476,6 +2505,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2585,16 +2615,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2605,16 +2639,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2625,16 +2663,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2645,16 +2687,20 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     top: 15px;
     opacity: 0;
   }
+
   25% {
     opacity: 0.5;
   }
+
   50% {
     top: 0;
     opacity: 1;
   }
+
   75% {
     opacity: 0.5;
   }
+
   100% {
     top: 15px;
     opacity: 1;
@@ -2663,97 +2709,130 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-webkit-keyframes flip-h-next {
   0% {
     -webkit-transform: rotate3d(0, 1, 0, -180deg);
-    background-color: transparent;
   }
+
   50% {
     background-color: white;
   }
+
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
-    background-color: white;
   }
 }
 @-webkit-keyframes flip-h-curr {
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
-    background-color: white;
   }
+
   50% {
     background-color: white;
   }
+
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 180deg);
-    background-color: transparent;
+  }
+}
+@-webkit-keyframes flips {
+  0% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
+  }
+
+  33% {
+    -webkit-transform: rotate3d(0, 1, 0, 180deg);
+  }
+
+  66% {
+    -webkit-transform: rotate3d(0, 1, 1, 360deg);
+  }
+
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
   }
 }
 @-webkit-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
+
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @-moz-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
+
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
+
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
+
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
 }
 @-webkit-keyframes pageTurnRight {
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2762,17 +2841,21 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-moz-keyframes pageTurnRight {
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -2781,17 +2864,21 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @keyframes pageTurnRight {
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: #fff;
+    background-color: white;
   }
+
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
+
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
+
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
+
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;

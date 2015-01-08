@@ -1,4 +1,4 @@
-<div id="loading" ng-if="visible">
+<!-- <div id="loading" ng-if="visible">
 	<div class="centre">
 		<ul class="fadeIn">
 			<li ng-repeat="dot in dots">
@@ -6,17 +6,22 @@
 			</li>
 		</ul>
 	</div>
-</div>
+</div> -->
 
-<!-- <div id="loading" ng-if="visible">
+<div id="loading" ng-if="visible">
 	<div class="centre">
 		<div class="flipper">
-			<div class="flip curr-flip" ng-class="{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}">
+<!-- 			<div class="flip curr-flip" ng-class="{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}">
 				<img ng-attr-src="/wp-content/themes/tls/images/{{currChar}}.png" />
 			</div>
 			<div class="flip next-flip" ng-class="{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}">
 				<img ng-attr-src="/wp-content/themes/tls/images/{{nextChar}}.png" />
+			</div> -->
+
+			<div class="flip test">
+				<img ng-attr-src="/wp-content/themes/tls/images/{{currChar}}.png" />
 			</div>
+			
 		</div>
 	</div>
-</div> -->
+</div>
