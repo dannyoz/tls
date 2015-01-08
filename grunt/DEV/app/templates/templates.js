@@ -26,33 +26,7 @@
 
 
   $templateCache.put('tls-loading.html',
-    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
-    "\n" +
-    "\t<div class=\"centre\">\r" +
-    "\n" +
-    "\t\t<ul class=\"fadeIn\">\r" +
-    "\n" +
-    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
-    "\n" +
-    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
-    "\n" +
-    "\t\t\t</li>\r" +
-    "\n" +
-    "\t\t</ul>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div> --><div id=loading ng-if=visible><div class=centre><div class=flipper><!-- \t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t<div class=\"flip next-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div> --><div class=\"flip test\"><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
+    "<div id=loading ng-if=visible><div class=centre><div class=flipper><div class=flip><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
   );
 
 

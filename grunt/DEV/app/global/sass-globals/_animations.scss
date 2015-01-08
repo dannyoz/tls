@@ -39,39 +39,73 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @include transKeyframes(slideUp,0% 100%,translateY,50px 0,fadeIn);
 @include transKeyframes(slideleft,0% 100%,translateX,50px 0,fadeIn);
 
-//LOADING
-//##############################################################
-
-@include keyframes(loading) {
-    0%   {top:$loadingOffset - $loadingSize;opacity:0}
-    25%  {opacity:0.5}
-	50%  {top:0;opacity:1}
-	75%  {opacity:0.5}
-    100% {top:$loadingOffset - $loadingSize;opacity:1}
-}
-
 
 //FLIPS
 //##############################################################
 
 
-@-webkit-keyframes flip-h-next {
-	0%   {-webkit-transform:rotate3d(0, 1, 0, -180deg);}
-	50%  {background-color:white;}
-	100% {-webkit-transform:rotate3d(0, 1, 0, 0deg);}
-}
-
-@-webkit-keyframes flip-h-curr {
-	0%   {-webkit-transform:rotate3d(0, 1, 0, 0deg);}
-	50%  {background-color:white;}
-	100% {-webkit-transform:rotate3d(0, 1, 0, 180deg);}
-}
-
 @-webkit-keyframes flips {
-	0%   {-webkit-transform:rotate3d(0, 1, 0, 0deg);}
-	33% {-webkit-transform:rotate3d(0, 1, 0, 180deg);}
-	66% {-webkit-transform:rotate3d(0, 1, 1, 360deg);}
-	100%   {-webkit-transform:rotate3d(0, 1, 0, 0deg);}
+	0%    {-webkit-transform:rotate3d(0, 1, 0, 90deg);  }//
+	8.3%  {-webkit-transform:rotate3d(0, 1, 1, 0deg);   }
+	16.6% {-webkit-transform:rotate3d(1, 0, 0, 90deg);  }//
+	24.9% {-webkit-transform:rotate3d(0, 1, 1, 360deg); }
+	33%   {-webkit-transform:rotate3d(0, 1, 0, 90deg);  }//
+	41.3% {-webkit-transform:rotate3d(0, 1, 1, 360deg); }
+	49.9% {-webkit-transform:rotate3d(1, 0, 0, 90deg);  }//
+	58.2% {-webkit-transform:rotate3d(0, 1, 1, 360deg); }
+	66.6% {-webkit-transform:rotate3d(0, 1, 0, 90deg);  }//
+	74.8% {-webkit-transform:rotate3d(0, 1, 1, 360deg); }
+	83.2% {-webkit-transform:rotate3d(1, 0, 0, 90deg);  }//
+	91.4% {-webkit-transform:rotate3d(0, 1, 1, 0deg);   }
+	100%  {-webkit-transform:rotate3d(0, 1, 0, 90deg);  }//
+}
+
+@-moz-keyframes flips {
+	0%    {-moz-transform:rotate3d(0, 1, 0, 90deg);  }//
+	8.3%  {-moz-transform:rotate3d(0, 1, 1, 0deg);   }
+	16.6% {-moz-transform:rotate3d(1, 0, 0, 90deg);  }//
+	24.9% {-moz-transform:rotate3d(0, 1, 1, 360deg); }
+	33%   {-moz-transform:rotate3d(0, 1, 0, 90deg);  }//
+	41.3% {-moz-transform:rotate3d(0, 1, 1, 360deg); }
+	49.9% {-moz-transform:rotate3d(1, 0, 0, 90deg);  }//
+	58.2% {-moz-transform:rotate3d(0, 1, 1, 360deg); }
+	66.6% {-moz-transform:rotate3d(0, 1, 0, 90deg);  }//
+	74.8% {-moz-transform:rotate3d(0, 1, 1, 360deg); }
+	83.2% {-moz-transform:rotate3d(1, 0, 0, 90deg);  }//
+	91.4% {-moz-transform:rotate3d(0, 1, 1, 0deg);   }
+	100%  {-moz-transform:rotate3d(0, 1, 0, 90deg);  }//
+}
+
+@-ms-keyframes flips {
+	0%    {-ms-transform:rotate3d(0, 1, 0, 90deg);  }//
+	8.3%  {-ms-transform:rotate3d(0, 1, 1, 0deg);   }
+	16.6% {-ms-transform:rotate3d(1, 0, 0, 90deg);  }//
+	24.9% {-ms-transform:rotate3d(0, 1, 1, 360deg); }
+	33%   {-ms-transform:rotate3d(0, 1, 0, 90deg);  }//
+	41.3% {-ms-transform:rotate3d(0, 1, 1, 360deg); }
+	49.9% {-ms-transform:rotate3d(1, 0, 0, 90deg);  }//
+	58.2% {-ms-transform:rotate3d(0, 1, 1, 360deg); }
+	66.6% {-ms-transform:rotate3d(0, 1, 0, 90deg);  }//
+	74.8% {-ms-transform:rotate3d(0, 1, 1, 360deg); }
+	83.2% {-ms-transform:rotate3d(1, 0, 0, 90deg);  }//
+	91.4% {-ms-transform:rotate3d(0, 1, 1, 0deg);   }
+	100%  {-ms-transform:rotate3d(0, 1, 0, 90deg);  }//
+}
+
+@keyframes flips {
+	0%    {transform:rotate3d(0, 1, 0, 90deg);  }//
+	8.3%  {transform:rotate3d(0, 1, 1, 0deg);   }
+	16.6% {transform:rotate3d(1, 0, 0, 90deg);  }//
+	24.9% {transform:rotate3d(0, 1, 1, 360deg); }
+	33%   {transform:rotate3d(0, 1, 0, 90deg);  }//
+	41.3% {transform:rotate3d(0, 1, 1, 360deg); }
+	49.9% {transform:rotate3d(1, 0, 0, 90deg);  }//
+	58.2% {transform:rotate3d(0, 1, 1, 360deg); }
+	66.6% {transform:rotate3d(0, 1, 0, 90deg);  }//
+	74.8% {transform:rotate3d(0, 1, 1, 360deg); }
+	83.2% {transform:rotate3d(1, 0, 0, 90deg);  }//
+	91.4% {transform:rotate3d(0, 1, 1, 0deg);   }
+	100%  {transform:rotate3d(0, 1, 0, 90deg);  }//
 }
 
 
