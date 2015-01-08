@@ -1,4 +1,4 @@
-.directive('tlsWindowSize', function($rootScope){
+.directive('tlsWindowSize', function(){
 	return {
 		restrict: "A",
 		scope:{

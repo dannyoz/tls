@@ -30,11 +30,11 @@
 	
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> tls-window-size="size">
 
 	<header id="main-header" ng-controller="header">
 
-		<div id="header-top" class="grid-row" tls-window-size="size">
+		<div id="header-top" class="grid-row">
 			
 			<div class="container">
 				{{size}}
