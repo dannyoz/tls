@@ -19,12 +19,6 @@ $articles_archive = new WP_Query($articles_archive_args);
 
 
 
-<section ng-controller="discover">
-	<div tls-loading="test"></div>
-
-</section>
-
-<!-- 
 <section id="discover" ng-controller="discover">
 
 	<div class="container">
@@ -92,6 +86,6 @@ $articles_archive = new WP_Query($articles_archive_args);
 
 		</div>
 
-</section> -->
+</section>
 
 <?php get_footer(); ?>

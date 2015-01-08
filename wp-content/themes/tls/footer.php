@@ -16,7 +16,6 @@
 		<?php 
 		   /**
 			* Displays a navigation menu
-			* @param array Arguments
 			*/
 			wp_nav_menu( array( 
 				'theme_location' => 'footer', // Menu theme location
@@ -30,7 +29,6 @@
 			 * Social Media Links
 			 * Check if the Social Media links in Theme Options have been 
 			 * filled in and then display them
-			 * @var string
 			 */
 			$social_media_options = get_option( 'social_media_options' );
 			if ( $social_media_options ) {
@@ -60,10 +58,10 @@
 </footer>
 
 
-<?php wp_footer(); ?>
+
 
 <!--<script src="//localhost:35729/livereload.js"></script>-->
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/main.min.js"></script>
+<?php wp_footer(); ?>
 
 </body>
 </html>

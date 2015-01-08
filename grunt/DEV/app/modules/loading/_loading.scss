@@ -34,12 +34,10 @@
 		height:62px;
 		width:42px;
 
-		@include scale(0.5);
-
 		.flip{
 
 			$timing : 0.5s;
-			$ize    : 100px;
+			$ize    : 40px;
 
 			position:absolute;
 			overflow: hidden;
@@ -47,51 +45,14 @@
 			height: $ize;
 
 			img{
+
+				max-height: 50%;
 				@include centre;
 			}
 
-			&.test{
+			background:$light-keyline;
+			@include animation(flips,ease,3s,"","",infinite);
 
-				background:$primary-orange;
-				@include animation(flips,ease,2s,"","",infinite);
-			}
-
-			&.curr-flip{
-
-				background:red;
-			}
-
-			&.next-flip{
-
-				//display: none;
-
-				background:blue;
-
-				&.flipping{
-
-					display: block;
-				}
-			}
-
-			&.next-flip.flipping.hori{
-
-				@include animation(flip-h-next,ease,$timing);
-			}
-
-			&.curr-flip.flipping.hori{
-
-				@include animation(flip-h-curr,ease,$timing);
-			}
-
-			&.next-flip.flipping.vert{
-
-				@include animation(flip-h-next,ease,$timing);
-			}
-
-			&.curr-flip.flipping.vert{
-
-				@include animation(flip-h-curr,ease,$timing);
-			}
 		}
 	}
 }

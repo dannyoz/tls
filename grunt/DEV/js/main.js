@@ -28251,33 +28251,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-loading.html',
-    "<!-- <div id=\"loading\" ng-if=\"visible\">\r" +
-    "\n" +
-    "\t<div class=\"centre\">\r" +
-    "\n" +
-    "\t\t<ul class=\"fadeIn\">\r" +
-    "\n" +
-    "\t\t\t<li ng-repeat=\"dot in dots\">\r" +
-    "\n" +
-    "\t\t\t\t<b ng-attr-style=\"-webkit-animation-delay : {{$index*0.1}}s\"></b>\r" +
-    "\n" +
-    "\t\t\t</li>\r" +
-    "\n" +
-    "\t\t</ul>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "</div> --><div id=loading ng-if=visible><div class=centre><div class=flipper><!-- \t\t\t<div class=\"flip curr-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div>\r" +
-    "\n" +
-    "\t\t\t<div class=\"flip next-flip\" ng-class=\"{flipping : isFlipping,hori : direction == 'h', vert : direction == 'v'}\">\r" +
-    "\n" +
-    "\t\t\t\t<img ng-attr-src=\"/wp-content/themes/tls/images/{{nextChar}}.png\" />\r" +
-    "\n" +
-    "\t\t\t</div> --><div class=\"flip test\"><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
+    "<div id=loading ng-if=visible><div class=centre><div class=flipper><div class=flip><img ng-attr-src=\"/wp-content/themes/tls/images/{{currChar}}.png\"></div></div></div></div>"
   );
 
 
@@ -28317,7 +28291,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 100;
+	var delay  = 1000;
 
 	return {
 		getCards : function(){
@@ -28610,16 +28584,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		},
 		link : function(scope,element){		
 			
-			scope.dots     = [1,2,3,4,5];
-			
-			var current = 0,
-				next    = 1,
-				delay   = 2000,
-				flipDel = 500;
+
+		    current = 0,
+			next    = 1,
+			delay   = 500,
+			flipDel = 0;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"
-			scope.direction  = 'h'
 
 			scope.sequence = [{
 				character : "t",
@@ -28641,31 +28613,34 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				direction : "v"
 			}]
 
-			$interval(function(){
+			scope.$watch("visible",function (newVal,oldVal){
 
-				scope.isFlipping = true
-				$timeout(function(){
+				if(newVal){
 
-					if (current < 5){
-						current ++
-						if(current == 5){
-							next = 0
+					rotate = $interval(function(){
+
+
+						if (current < 5){
+							current ++
+							if(current == 5){
+								next = 0
+							} else {
+								next ++
+							}
 						} else {
-							next ++
+							current = 0
+							next = 1
 						}
-					} else {
-						current = 0
-						next = 1
-					}
+						scope.currChar  = scope.sequence[current].character
+						scope.nextChar  = scope.sequence[next].character
+					
+					},delay)
 
-					scope.direction = scope.sequence[current].direction
-					scope.currChar  = scope.sequence[current].character
-					scope.nextChar  = scope.sequence[next].character
+				} else {
 
-					scope.isFlipping = false
-				},flipDel);
-			
-			},delay)
+					$interval.cancel(rotate)
+				}
+			})
 		}
 	}
 }])
