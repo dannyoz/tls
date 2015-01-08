@@ -1635,6 +1635,10 @@ p.author {
     margin-top: -120px;
   }
 }
+#latest-edition .edition-current .featured-col h1 {
+  font-size: 28px;
+  margin: 0;
+}
 #latest-edition .edition-current .featured-col .img-wrapper {
   border: 1px solid #d9d9d9;
   padding: 6px;
@@ -1642,12 +1646,17 @@ p.author {
   text-align: center;
 }
 #latest-edition .edition-current .featured-col .title-small {
-  font-weight: 400;
+  font-weight: 500;
 }
 @media screen and (max-width: 450px) {
   #latest-edition .edition-current .featured-col .title-small {
     text-align: center;
   }
+}
+#latest-edition .edition-current .featured-col .article-links {
+  margin: 20px 0;
+  min-height: inherit;
+  border-bottom: none;
 }
 #latest-edition .edition-current .editions-top-left {
   float: left;
