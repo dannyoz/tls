@@ -79,16 +79,24 @@ function tls_json_api_encode($response) {
         $sections = get_terms( 'article_section');
 
         foreach ($sections as $key => $value) {
+            $section_count = 0;
+            foreach ($response['posts'] as $postkey => $postvalue) {
+
+                $post_section = wp_get_post_terms($postvalue->id,'article_section');
+
+                if ($value->slug == $post_section[0]->slug) { $section_count++; }
+               
+            }
+
            $response['articles_sections'][$value->slug] = array(
                 'item_label'        => $value->name,
                 'type'              => 'taxonomy',
                 'json_query'        => 'tax_filter[article_section]='.$value->slug,
                 'taxonomy'          => $value->taxonomy,
                 'slug'              => $value->slug,
-                'search_count'      => (int) $value->count
+                'search_count'      => (int) $section_count
             );
         }
-
 
 
     	/**
