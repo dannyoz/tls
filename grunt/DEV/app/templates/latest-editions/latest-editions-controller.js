@@ -28,6 +28,7 @@
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
 				$scope.col3  = cols.col3;
+				console.log($scope.col3);
 				$scope.ready = true;			
 			});
 
