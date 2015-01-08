@@ -28231,7 +28231,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-accordian-column.html',
-    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-class={iconminus:item.isOpen}></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
+    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
   );
 
 
@@ -29141,10 +29141,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
 
+		$scope.ready   = false;
+		$scope.loading = true;
+
 		api.getLatestEditions().then(function (result){		
 
 			// Full object			
-			$scope.latestEdition = result;	
+			$scope.latestEdition = result;				
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
@@ -29160,6 +29163,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
 			var posts = $scope.subscribersObj.articles;
 
+			$scope.loading   = false;
+
 			
 			// Devide columns for mansory layout
 			columns.divide(posts).then(function (cols) {
@@ -29167,7 +29172,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
 				$scope.col3  = cols.col3;
-				console.log($scope.col3);
 				$scope.ready = true;			
 			});
 
