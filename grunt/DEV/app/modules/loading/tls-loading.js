@@ -11,8 +11,8 @@
 			
 			var current = 0,
 				next    = 1,
-				delay   = 600,
-				flipDel = 200;
+				delay   = 2000,
+				flipDel = 500;
 
 			scope.currChar = "t"
 			scope.nextChar = "l"

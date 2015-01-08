@@ -54,12 +54,14 @@ section, article{
 
 #banner{
 
-	//background:grey;
+	background-color:grey;
 	height: 492px;
 	background-size: cover;
 	background-position: 50% 50%;
 	margin-bottom:30px;
 	position: relative;
+
+	@include animation(fade,ease,1.5s);
 
 	@media screen and (max-width:$tablet){
 
@@ -88,6 +90,7 @@ section, article{
 		h2,p{
 
 			color:white;
+			@include animation(slideUp,ease,1s,2,"",0.7s);
 		}
 
 		.category{
