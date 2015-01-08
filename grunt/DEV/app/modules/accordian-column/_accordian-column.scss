@@ -29,10 +29,9 @@
 				font-size: 1em;
 				@include transform(rotate(0deg));
 
-				&.open{
-
-					@include transform(rotate(45deg));
-				}
+				// &.open {
+				// 	@include transform(rotate(45deg));
+				// }
 			}
 		}
 	}

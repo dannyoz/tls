@@ -2285,12 +2285,6 @@ p.author {
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
 }
-.accordian-column .accordian-title .toggler i.open {
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 .accordian-column .accordian-body {
   overflow: hidden;
   position: relative;

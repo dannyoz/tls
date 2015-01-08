@@ -28231,7 +28231,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-accordian-column.html',
-    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon transition-2 icon-minus\" ng-class={open:item.isOpen}></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
+    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-class={iconminus:item.isOpen}></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
   );
 
 
