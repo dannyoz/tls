@@ -1203,6 +1203,9 @@ p.author {
   z-index: 9999;
   min-height: 30px;
 }
+.article-links a {
+  font-family: "Times New Roman", "Times", serif;
+}
 @media (max-width: 840px) {
   .article-links {
     overflow: hidden;
@@ -1616,6 +1619,7 @@ p.author {
   font-size: 40px;
   text-align: center;
   margin: 45px 0 60px 0;
+  font-family: "Times New Roman", "Times", serif;
 }
 #latest-edition h2 {
   font-size: 28px;
@@ -1634,8 +1638,27 @@ p.author {
   min-height: 75px;
   margin-top: 45px;
 }
+@media screen and (max-width: 840px) {
+  #latest-edition .article-links {
+    padding: 0;
+  }
+}
 #latest-edition .article-links .article-nav {
   width: auto;
+}
+@media screen and (max-width: 840px) {
+  #latest-edition .article-links .article-nav {
+    width: 90px;
+  }
+}
+@media screen and (max-width: 665px) {
+  #latest-edition .article-links .article-nav {
+    width: 75px;
+    font-size: 14px;
+  }
+}
+#latest-edition .article-links .article-nav .icon span {
+  display: block;
 }
 #latest-edition .edition-item {
   border-top: 1px solid #bfbfbf;
@@ -1657,7 +1680,7 @@ p.author {
   text-transform: none;
   margin-bottom: 5px;
 }
-@media (min-width: 841px) {
+@media screen and (min-width: 841px) {
   #latest-edition .edition-current {
     margin-top: -120px;
   }
@@ -1699,7 +1722,7 @@ p.author {
     margin-right: 2.5%;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .editions-top-left {
     float: left;
     position: relative;
@@ -1722,7 +1745,7 @@ p.author {
     margin-right: 0;
   }
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .editions-top-right {
     float: left;
     position: relative;

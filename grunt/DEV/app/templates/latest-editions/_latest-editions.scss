@@ -9,6 +9,7 @@
 		font-size: 40px;
 		text-align: center;
 		margin: 45px 0 60px 0;
+		font-family: $times;
 	}
 
 	h2 {
@@ -32,8 +33,25 @@
 		min-height: 75px;
 		margin-top: 45px;
 
+		@media screen and (max-width: $tablet) {
+			padding: 0;
+		}		
+
 		.article-nav {
 			width: auto;
+
+			@media screen and (max-width: $tablet) {
+				width: 90px;
+			}
+
+			@media screen and (max-width: 665px) {
+				width: 75px;
+				font-size: 14px;
+			}
+
+			.icon span {
+				display: block;
+			}
 		}
 	}
 
@@ -64,7 +82,7 @@
 
 	.edition-current {
 
-		@media(min-width: $tablet + 1) {
+		@media screen and (min-width: $tablet + 1) {
 			margin-top: -120px;
 		}
 
@@ -105,7 +123,7 @@
 				@include grid-col(6);
 			}
 
-			@media screen and (max-width:$mobile){
+			@media screen and (max-width: 525px){
 				@include grid-col(12);
 				margin-bottom: 40px;
 			}	
@@ -119,7 +137,7 @@
 				@include grid-col-last(6);
 			}
 
-			@media screen and (max-width:$mobile){
+			@media screen and (max-width: 525px){
 				@include grid-col(12);
 			}
 		}
