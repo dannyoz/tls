@@ -10,7 +10,7 @@
 
 		<div tls-scroll="scrollState">
 
-		<div class="container" tls-window-size="size" ng-if="ready">
+		<div class="container" ng-if="ready">
 
 			<div class="grid-row" ng-if="size == 'desktop'">
 				
