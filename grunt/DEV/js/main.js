@@ -28406,25 +28406,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
-		getLatestEditions : function(page){
-
-			var defer  = $q.defer(),
-				url    = page;
-
-			//expose url for testing
-			defer.promise.url = url
-
-			$http.get(url).success(function (data){
-
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-				
-			})
-
-			return defer.promise
-		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -29164,8 +29145,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
-		//var path = window.location.href;
+		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
+		var path = window.location.href;
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
@@ -29173,8 +29154,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			// Full object			
 			$scope.latestEdition = obj;			
 			// Edition sections articles				
-			//$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
-			$scope.currentEdition = $scope.latestEdition.content;	
+			$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
 			// Previous edition
 			$scope.nextEdition = $scope.latestEdition.next_post_info;			
 			// // Next edition

@@ -4,8 +4,8 @@
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
-		//var path = window.location.href;
+		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
+		var path = window.location.href;
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
@@ -13,8 +13,7 @@
 			// Full object			
 			$scope.latestEdition = obj;			
 			// Edition sections articles				
-			//$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
-			$scope.currentEdition = $scope.latestEdition.content;	
+			$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
 			// Previous edition
 			$scope.nextEdition = $scope.latestEdition.next_post_info;			
 			// // Next edition

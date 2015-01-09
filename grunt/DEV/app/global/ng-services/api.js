@@ -115,25 +115,6 @@
 			return defer.promise
 
 		},
-		getLatestEditions : function(page){
-
-			var defer  = $q.defer(),
-				url    = page;
-
-			//expose url for testing
-			defer.promise.url = url
-
-			$http.get(url).success(function (data){
-
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-				
-			})
-
-			return defer.promise
-		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
