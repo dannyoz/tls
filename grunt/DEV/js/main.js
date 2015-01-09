@@ -28406,10 +28406,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
-		getLatestEditions : function(){
+		getLatestEditions : function(page){
 
 			var defer  = $q.defer(),
-				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+				url    = page;
 
 			//expose url for testing
 			defer.promise.url = url
@@ -28963,7 +28963,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	var url = window.location.href;
 
 	$scope.test = true
-
 	$scope.ready       = false;
 	$scope.pageNumber  = 1;
 	$scope.loading     = true;
@@ -28981,18 +28980,31 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.loading   = false;
 		$scope.pageCount = result.pages
 
-		var posts = result.posts;
+		columns.divide(result.top_articles).then(function (cols){
+			$scope.topCol1  = cols.col1
+			$scope.topCol2  = cols.col2
+			$scope.topCol3  = cols.col3
+		})
 
-		console.log(result)
 
-		columns.divide(posts).then(function (cols){
+		columns.divide(result.posts).then(function (cols){
 			$scope.col1  = cols.col1
 			$scope.col2  = cols.col2
 			$scope.col3  = cols.col3
 			$scope.ready = true
-			$scope.pageNumber ++
 		})
+
+		console.log(result)
+
 	})
+
+	$scope.truncate = function(str){
+
+		var trunc    = str.substring(0,200),
+			combined = trunc + " [...]"
+
+		return combined
+	}
 
 	$scope.loadMore = function(){
 
@@ -29002,24 +29014,32 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		if($scope.pageCount > ($scope.pageNumber-1)){
 
-			api.getArticleList($scope.pageNumber).then(function (result){
+			if($scope.pageNumber == 1){
 
-				var posts = result.posts;
-				$scope.scrollState = "on";
+				$scope.pageNumber ++
 
-				columns.divide(posts).then(function (cols){
+			} else {
 
-					$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
-					$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
-					$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
-					$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
-					$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
-					$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+				api.getArticleList($scope.pageNumber).then(function (result){
 
-					$scope.pageNumber ++
-					$scope.infLoading = false;
+					var posts = result.posts;
+					$scope.scrollState = "on";
+
+					columns.divide(posts).then(function (cols){
+
+						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+						$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+						$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+						$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+						$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+						$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+						$scope.pageNumber ++
+						$scope.infLoading = false;
+					})
 				})
-			})
+			}
+
 		} else {
 			$scope.scrollState = "off";
 			$scope.infLoading  = false;
@@ -29144,17 +29164,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		$scope.ready   = false;
 		$scope.loading = true;
+		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
+		//var path = window.location.href;
 
-		api.getLatestEditions().then(function (result){		
+		// Set scope variables of Current Edition
+		$scope.setCurrentEditionObj = function(obj) {
 
 			// Full object			
-			$scope.latestEdition = result;				
+			$scope.latestEdition = obj;			
 			// Edition sections articles				
-			$scope.currentEdition = $scope.latestEdition.content;			
+			//$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
+			$scope.currentEdition = $scope.latestEdition.content;	
 			// Previous edition
-			$scope.previousEdition = $scope.latestEdition.next_post_info;			
-			// Next edition
-			$scope.nextEdition = $scope.latestEdition.previous_post_info;
+			$scope.nextEdition = $scope.latestEdition.next_post_info;			
+			// // Next edition
+			$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;
@@ -29162,20 +29186,60 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var posts = $scope.subscribersObj.articles;
+			var subcriberPosts = $scope.subscribersObj.articles;
 
 			$scope.loading   = false;
 			
 			// Devide columns for mansory layout
-			columns.divide(posts).then(function (cols) {
+			columns.divide(subcriberPosts).then(function (cols) {
 
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
 				$scope.col3  = cols.col3;
 				$scope.ready = true;			
 			});
+		}
 
+		// API request
+		api.getArticle(path).then(function (result) {		
+			$scope.setCurrentEditionObj(result);			
 		});
+
+		$scope.chooseEdition = function(dir, path){
+
+			//Only turn page if path is defined
+			if (path) {
+
+				var duration = 400;
+				$scope.loading = true;
+
+				api.getArticle(path).then(function (result){
+
+					$scope.loading = false;
+					$scope.dir = dir;
+					$scope.pageTurn = true;
+
+					if (dir == "prev") {
+						
+						$scope.oldPost  = $scope.currentEdition;
+						$scope.setCurrentEditionObj(result);						
+
+						$timeout(function(){
+							$scope.pageTurn = false;
+						},duration);
+
+					} else {
+
+						$scope.oldPost  = result;						
+						$timeout(function(){
+							$scope.pageTurn = false;
+							$scope.setCurrentEditionObj(result);
+						},duration);
+					}					
+
+				})
+			}
+		}
 }])
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 

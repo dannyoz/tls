@@ -115,10 +115,10 @@
 			return defer.promise
 
 		},
-		getLatestEditions : function(){
+		getLatestEditions : function(page){
 
 			var defer  = $q.defer(),
-				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+				url    = page;
 
 			//expose url for testing
 			defer.promise.url = url
