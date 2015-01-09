@@ -1055,6 +1055,12 @@ p.author {
 .single-post .article-section {
   color: #d73f2b;
   padding: 12px 0;
+  font-weight: 500;
+}
+@media (max-width: 840px) {
+  .single-post .article-section {
+    border-top: 1px solid #d9d9d9;
+  }
 }
 .single-post .article-body {
   -webkit-perspective: 1000;
@@ -1213,7 +1219,6 @@ p.author {
 @media (max-width: 840px) {
   .article-links {
     overflow: hidden;
-    border-bottom: 1px solid #d9d9d9;
     padding: 15px 60px;
   }
 }
