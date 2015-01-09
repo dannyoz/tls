@@ -86,7 +86,7 @@ function tls_json_api_encode($response) {
             foreach ($response['posts'] as $postkey => $postvalue) {
 
                 $post_section = wp_get_post_terms($postvalue->id,'article_section');
-
+                $response['debug'] = $value->slug;
                 if ($value->slug == $post_section[0]->slug) { $section_count++; }
                
             }
@@ -490,6 +490,11 @@ function tls_latest_edition_page_json_api_encode($response) {
             'orderby '          => 'date'
         ) ); wp_reset_query();
         $latest_edition = $latest_edition->posts[0];
+        
+        global $post;
+        $oldGlobal = $post;
+        $post = get_post( $latest_edition->ID );
+        // $response['debug'] = get_previous_post();
 
         $response['latest_edition'] = array(
                 'id'        => $latest_edition->ID,
@@ -498,7 +503,7 @@ function tls_latest_edition_page_json_api_encode($response) {
                 
             );
 
-        $previousPost = get_previous_post($latest_edition->ID); 
+        $previousPost = get_previous_post(); 
         $response['latest_edition']['previous_post_info'] = array(
                 'id'        => $previousPost->ID,
                 'title'     => $previousPost->post_title,
@@ -506,7 +511,7 @@ function tls_latest_edition_page_json_api_encode($response) {
                 
             );
 
-        $nextPost = get_next_post($latest_edition->ID);
+        $nextPost = get_next_post();
         $response['latest_edition']['next_post_info'] = array(
                 'id'        => $nextPost->ID,
                 'title'     => $nextPost->post_title,
@@ -533,7 +538,7 @@ function tls_latest_edition_page_json_api_encode($response) {
 
 
             foreach ($section as $termkey => $termvalue) { 
-                $section = $value->name;
+                $section = $termvalue->name;
              }
 
             $postAuthor = get_fields($value->ID);
@@ -550,7 +555,9 @@ function tls_latest_edition_page_json_api_encode($response) {
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
             $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $termkey => $termvalue) { $section = $value->name; }
+            foreach ($section as $termkey => $termvalue) {
+                $section = $termvalue->name; 
+            }
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
@@ -568,6 +575,7 @@ function tls_latest_edition_page_json_api_encode($response) {
             $section = get_the_terms($value->ID,'article_section');
             foreach ($section as $termkey => $termvalue) {
                 $section = $termvalue->name; 
+
             }
             
             $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
