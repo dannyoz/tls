@@ -4,6 +4,7 @@
 	$scope.tags       = [];
 	$scope.activeTags = []; 
 	$scope.firstLoad  = true;
+	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){

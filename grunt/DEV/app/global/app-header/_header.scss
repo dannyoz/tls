@@ -12,6 +12,7 @@
 		#brand{
 
 			padding:30px 0;
+			min-height: 50px;
 
 			#logo{
 
@@ -29,7 +30,8 @@
 				padding-right:130px;
 				text-transform:uppercase;
 				font:{
-					weight:bold;
+					family:$times;
+					weight:500;
 					size:1.2em;
 				}
 			}
@@ -39,7 +41,29 @@
 				margin-top:3px;
 				padding-right:130px;
 				font: {
+					family:$times;
 					style:italic;
+				}
+			}
+
+			@media screen and(max-width:700px){
+
+				.sub{
+					font-size: 1em;
+				}
+
+				.strap{
+
+					font-size: 0.8em
+				}
+
+			}
+
+			@media screen and(max-width:620px){
+				
+				.sub,.strap{
+
+					display: none;
 				}
 			}
 		}

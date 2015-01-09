@@ -40,16 +40,6 @@
   );
 
 
-  $templateCache.put('home.html',
-    "<section id=home ng-controller=home><div id=banner style=background-image:url(/wp-content/themes/tls/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div></div><div class=grid-row id=subscriber ng-class={locked:isLocked}><div class=container><h5 class=\"centred-heading grid-row\">Subscriber exclusive</h5><div class=subscribe-grid><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
-  );
-
-
-  $templateCache.put('tls-column.html',
-    "<div class=grid-row ng-if=\"current == 'desktop'\"><div class=grid-4><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div></div><div class=grid-4><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div></div><div class=grid-4><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'tablet'\"><div class=grid-6><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div><div class=grid-6><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'mobile'\"><div class=grid-12><div class=card ng-repeat=\"card in cards\" tls-card=cards[$index]></div></div></div>"
-  );
-
-
   $templateCache.put('latest-editions.html',
     "<section id=latest-edition ng-model=latesteditions></section>"
   );

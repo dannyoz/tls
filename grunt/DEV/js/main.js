@@ -28260,16 +28260,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
   );
 
 
-  $templateCache.put('home.html',
-    "<section id=home ng-controller=home><div id=banner style=background-image:url(/wp-content/themes/tls/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div></div><div class=grid-row id=subscriber ng-class={locked:isLocked}><div class=container><h5 class=\"centred-heading grid-row\">Subscriber exclusive</h5><div class=subscribe-grid><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
-  );
-
-
-  $templateCache.put('tls-column.html',
-    "<div class=grid-row ng-if=\"current == 'desktop'\"><div class=grid-4><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div></div><div class=grid-4><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div></div><div class=grid-4><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'tablet'\"><div class=grid-6><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div><div class=grid-6><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'mobile'\"><div class=grid-12><div class=card ng-repeat=\"card in cards\" tls-card=cards[$index]></div></div></div>"
-  );
-
-
   $templateCache.put('latest-editions.html',
     "<section id=latest-edition ng-model=latesteditions></section>"
   );
@@ -28689,6 +28679,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.tags       = [];
 	$scope.activeTags = []; 
 	$scope.firstLoad  = true;
+	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
@@ -29073,91 +29064,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		console.log(result)
 
+		$scope.page     = result.page
+		$scope.featured = result.featured_article
+
+		columns.divide(result.home_page_cards).then(function (cols){
+
+			$scope.col1  = cols.col1
+			$scope.col2  = cols.col2
+			$scope.col3  = cols.col3
+
+		})
+
+		console.log($scope.col3)
+
 	})
 
-
-	$scope.image = "hero"
-
 }])
-.directive('tlsColumns',function(){
-	return{
-		restrict:"A",
-		templateUrl : "tls-column.html",
-		scope : {
-			config : "=tlsColumns"
-		},
-		link : function(scope,element,attrs){
-
-			// Breakpoint vars
-			var tabletBP = 784,
-				mobileBP = 420;
-
-			scope.type   = scope.config.type
-			scope.cards  = scope.config.cards 
-			scope.width  = element[0].offsetWidth
-
-			//Bind the viewport calculations to the resize event
-			window.onresize = function(event) {
-
-				scope.$apply(function(){
-			    	scope.width = element[0].offsetWidth
-			    	scope.current = scope.viewport();
-			    })
-
-			};
-
-			//Calculate optimum viewport based on breakpoints
-			scope.viewport = function(){
-
-				if(scope.width>=tabletBP){
-					return 'desktop'
-				} else if(scope.width<tabletBP && scope.width>=mobileBP){
-					return 'tablet'
-				} else if(scope.width<mobileBP){
-					return 'mobile'
-				}
-			}
-
-			scope.sortCards = function(){
-
-				var maxColumns = 3;
-
-				function columnArrs(i){
-
-					if(i>1){
-						//console.log("column",i)
-						scope.columns = {};
-						scope.columns[i] = {}
-
-						for (var k=0;k<i+1;k++){
-							
-							scope.columns[i][k] = []
-
-
-						}
-
-						for(var j = 0;j<scope.cards.length;j++){
-
-
-							console.log(j)
-						}
-
-						console.log(scope.columns)
-					}	
-				}
-
-				columnArrs(2);
-
-				// for (var i = maxColumns; i >= 1; i--) {
-				// 	columnArrs(i);
-				// };
-			}
-
-			scope.sortCards();
-			scope.current = scope.viewport();
-		}
-	}
-})
 .controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
 
 	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {

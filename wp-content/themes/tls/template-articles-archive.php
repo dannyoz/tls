@@ -35,7 +35,11 @@ $articles_archive = new WP_Query($articles_archive_args);
 
 				<div class="grid-row" ng-if="size == 'desktop'">
 
-					<div  class="grid-4" ng-repeat="column in topCol3">
+					<div class="grid-4" ng-repeat="column in topCol3">
+
+						<div class="card">
+							<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+						</div>
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
 							<h3 class="futura">
