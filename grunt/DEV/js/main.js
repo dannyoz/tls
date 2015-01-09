@@ -28486,6 +28486,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.factory('objToArr',function(){
+	return{
+		
+		convert: function(o) {
+
+			var result = [];
+			
+			for (var k in o) {
+				var ob = o[k];
+				result.push(ob);
+			}
+
+			return result;
+		}
+	}
+})
 .factory('tealium',function(){
 	return{
 		test : function(val1,val2,val3,val4){
@@ -29139,26 +29155,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
 
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
 		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
-
-		// Convert an object to array
-		$scope.objectToArray = function(obj) {
-			
-			var result = [];
-			
-			for (var k in obj) {
-				var o = obj[k];
-				result.push(o);
-			}
-			return result;
-		}
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
@@ -29178,11 +29182,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var subcriberPosts = $scope.objectToArray($scope.subscribersObj.articles);
+			var subcriberPosts = objToArr.convert($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
 
-			console.log(subcriberPosts);			
 			
 			// Devide columns for mansory layout
 			columns.divide(subcriberPosts).then(function (cols) {
@@ -29199,6 +29202,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.setCurrentEditionObj(result);			
 		});
 
+
 		$scope.chooseEdition = function(dir, path){
 
 			//Only turn page if path is defined
@@ -29207,7 +29211,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getArticle(path).then(function (result){
+				api.getArticle(path).then(function (result) {
 
 					$scope.loading = false;
 					$scope.dir = dir;
