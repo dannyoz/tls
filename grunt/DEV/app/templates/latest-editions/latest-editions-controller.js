@@ -26,12 +26,12 @@
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var posts = $scope.subscribersObj.articles;
+			var subcriberPosts = $scope.subscribersObj.articles;
 
 			$scope.loading   = false;
 			
 			// Devide columns for mansory layout
-			columns.divide(posts).then(function (cols) {
+			columns.divide(subcriberPosts).then(function (cols) {
 
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
@@ -53,10 +53,29 @@
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getLatestEditions(path).then(function (result){
+				api.getArticle(path).then(function (result){
 
 					$scope.loading = false;
-					$scope.setCurrentEditionObj(result);
+					$scope.dir = dir;
+					$scope.pageTurn = true;
+
+					if (dir == "prev") {
+						
+						$scope.oldPost  = $scope.currentEdition;
+						$scope.setCurrentEditionObj(result);						
+
+						$timeout(function(){
+							$scope.pageTurn = false;
+						},duration);
+
+					} else {
+
+						$scope.oldPost  = result;						
+						$timeout(function(){
+							$scope.pageTurn = false;
+							$scope.setCurrentEditionObj(result);
+						},duration);
+					}					
 
 				})
 			}
