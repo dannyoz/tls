@@ -528,11 +528,18 @@ function tls_latest_edition_page_json_api_encode($response) {
         $response['latest_edition']['content']['public']['title'] = 'Public content';
 
         foreach ($latest_edition_articles['public_articles'] as $key => $value) {
-            $section = get_the_terms($value->id,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+
+            $section = get_the_terms($value->ID,'article_section');
+
+
+            foreach ($section as $termkey => $termvalue) { 
+                $section = $value->name;
+             }
+
+            $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
-                'author'    => $value->post_author,
+                'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
                 'section'   => $section,
                 'url'       => get_permalink($value->ID),
@@ -542,8 +549,8 @@ function tls_latest_edition_page_json_api_encode($response) {
         
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
-            $section = get_the_terms($value->id,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+            $section = get_the_terms($value->ID,'article_section');
+            foreach ($section as $termkey => $termvalue) { $section = $value->name; }
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
@@ -557,8 +564,12 @@ function tls_latest_edition_page_json_api_encode($response) {
 
         $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
         foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
-            $section = get_the_terms($value->id,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+            
+            $section = get_the_terms($value->ID,'article_section');
+            foreach ($section as $termkey => $termvalue) {
+                $section = $termvalue->name; 
+            }
+            
             $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
