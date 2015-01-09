@@ -1808,7 +1808,7 @@ p.author {
 #latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .public-col .edition-item .padded {
     padding: 20px;
   }
