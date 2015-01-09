@@ -78,7 +78,7 @@ get_header(); ?>
 
 					</div>
 
-					<div class="card" ng-repeat="post in results.posts">
+					<div class="card" ng-repeat="post in results.posts" ng-class="{private:post.taxonomy_article_visibility[0].slug == 'private'}">
 						<h3 class="futura date">
 							<a ng-attr-href="{{post.url}}" ng-bind="post.title"></a>
 						</h3>

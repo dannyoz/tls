@@ -7,7 +7,7 @@
 	$scope.currentPage     = 1
 	$scope.dateRange       = ""
 	$scope.orderName       = "Newest"
-	$scope.order           = "ASC"
+	$scope.order           = "DESC"
 	$scope.showSorter      = false
 	$scope.loadResults     = true
 	$scope.niceDate        = niceDate

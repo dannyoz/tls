@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Articles Archive Template
+ * Template Name: Discover Articles Archive Template
  *
  * @package tls
  */
