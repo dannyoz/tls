@@ -10,10 +10,10 @@
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
-				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
+				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
 					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
 				</a>
-				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',prev)" class="article-nav prev-article">
+				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
 					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
 				</a>	
 			</div>			

@@ -28406,10 +28406,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
-		getLatestEditions : function(){
+		getLatestEditions : function(page){
 
 			var defer  = $q.defer(),
-				url    = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json'
+				url    = page;
 
 			//expose url for testing
 			defer.promise.url = url
@@ -29144,17 +29144,19 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		$scope.ready   = false;
 		$scope.loading = true;
+		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 
-		api.getLatestEditions().then(function (result){		
+		// Set scope variables of Current Edition
+		$scope.setCurrentEditionObj = function(obj) {
 
 			// Full object			
-			$scope.latestEdition = result;				
+			$scope.latestEdition = obj;			
 			// Edition sections articles				
 			$scope.currentEdition = $scope.latestEdition.content;			
 			// Previous edition
-			$scope.previousEdition = $scope.latestEdition.next_post_info;			
+			$scope.nextEdition = $scope.latestEdition.next_post_info;			
 			// Next edition
-			$scope.nextEdition = $scope.latestEdition.previous_post_info;
+			$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;
@@ -29174,8 +29176,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				$scope.col3  = cols.col3;
 				$scope.ready = true;			
 			});
+		}
 
+		// API request
+		api.getLatestEditions(path).then(function (result) {		
+			$scope.setCurrentEditionObj(result);			
 		});
+
+		$scope.chooseEdition = function(dir, path){
+
+			//Only turn page if path is defined
+			if (path) {
+
+				var duration = 400;
+				$scope.loading = true;
+
+				api.getLatestEditions(path).then(function (result){
+
+					$scope.loading = false;
+					$scope.setCurrentEditionObj(result);
+
+				})
+			}
+		}
 }])
 .controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
 
