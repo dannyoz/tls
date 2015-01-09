@@ -515,12 +515,20 @@ function tls_latest_edition_page_json_api_encode($response) {
             );
 
         $latest_edition_articles = get_fields($latest_edition->ID);
-        //$response['latest_edition']['test_content'] =  $latest_edition_articles;
+        //$response['latest_edition']['test_content'] =  $latest_edition_articles['edition_number'];
          
+        $response['latest_edition']['content']['featured'] = array(
+                'issue_no'  => $latest_edition_articles['edition_number'],
+                'image_url' => $latest_edition_articles['feautured_image']['url']
+                
+                
+            );
+
+
         $response['latest_edition']['content']['public']['title'] = 'Public content';
 
         foreach ($latest_edition_articles['public_articles'] as $key => $value) {
-            $section = get_the_terms($value->ID,'article_section');
+            $section = get_the_terms($value->id,'article_section');
             foreach ($section as $key => $value) { $section = $value->name; }
             $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
@@ -534,7 +542,7 @@ function tls_latest_edition_page_json_api_encode($response) {
         
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
-            $section = get_the_terms($value->ID,'article_section');
+            $section = get_the_terms($value->id,'article_section');
             foreach ($section as $key => $value) { $section = $value->name; }
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
@@ -549,7 +557,7 @@ function tls_latest_edition_page_json_api_encode($response) {
 
         $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
         foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
-            $section = get_the_terms($value->ID,'article_section');
+            $section = get_the_terms($value->id,'article_section');
             foreach ($section as $key => $value) { $section = $value->name; }
             $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
                 'id'        => $value->ID,

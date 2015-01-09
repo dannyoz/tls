@@ -118,6 +118,7 @@
 
 		.author {
 			font-weight: 500;
+			margin-bottom: 0;
 		}
 
 		.article-date {
@@ -128,10 +129,14 @@
 			
 		}
 
+		.article-meta {
+			margin-bottom: 20px;
+		}
+
 		.article-summary {
 
 			background-color: $subtle-light-grey;
-			margin: 10px 0 20px 0;	
+			margin-bottom: 20px;				
 
 			p {
 				font-family: $futura;

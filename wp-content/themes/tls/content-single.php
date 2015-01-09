@@ -32,13 +32,13 @@
 				<div class="article-body">
 
 					<h2 ng-bind-html="post.title"></h2>
-					<div class="grid-12">
+					<div class="article-meta grid-12">
 						<div class="grid-6"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
 						<div class="grid-6 article-date title-small">{{format(post.modified)}}</div>
 					</div>
 
-					<div class="grid-12 article-summary folded-corner">
-						<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]" ng-if="post.custom_fields.teaser_summary[0]"></div>						
+					<div class="grid-12 article-summary folded-corner" ng-if="post.custom_fields.teaser_summary[0]">
+						<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]"></div>						
 					</div>
 
 					<div ng-if="post.custom_fields.embed_code[0].length > -1">

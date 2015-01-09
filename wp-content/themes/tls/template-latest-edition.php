@@ -10,10 +10,10 @@
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
-				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
+				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
 					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
 				</a>
-				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',prev)" class="article-nav prev-article">
+				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
 					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
 				</a>	
 			</div>			
@@ -44,7 +44,7 @@
 					<div class="img-wrapper">
 						<img class="max" ng-attr-src="{{currentEdition.featured.image_url}}">	
 					</div>								
-					<div class="title-small">No. {{currentEdition.featured.issue_no}}</div>
+					<div class="title-small">{{currentEdition.featured.issue_no}}</div>
 				</div>
 				
 				<div class="editions-top-right">
@@ -56,7 +56,7 @@
 								<div class="padded">
 									<h3 class="futura"><a href="#">{{public.section}}</a></h3>
 									<p class="title-small">{{public.author}}</p>
-									<h4><a href="#">{{public.title}}</a></h4>
+									<h4><a href="{{public.url}}">{{public.title}}</a></h4>
 								</div>								
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 							<div class="edition-item" ng-repeat="regular in regularsObj.articles">
 								<div class="padded">
 									<h3 class="futura"><a href="#">{{regular.section}}</a><i class="icon icon-key-after"></i></h3>								
-									<p class="title-small"><a href="#">{{regular.title}}</a></p>
+									<p class="title-small"><a href="{{regular.url}}">{{regular.title}}</a></p>
 								</div>
 							</div>
 						</div>
