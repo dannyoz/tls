@@ -86,7 +86,7 @@ function tls_json_api_encode($response) {
             foreach ($response['posts'] as $postkey => $postvalue) {
 
                 $post_section = wp_get_post_terms($postvalue->id,'article_section');
-
+                $response['debug'] = $value->slug;
                 if ($value->slug == $post_section[0]->slug) { $section_count++; }
                
             }
@@ -246,8 +246,12 @@ function tls_json_api_encode($response) {
             $post_types = array();
 
             foreach ( $_GET['post_types'] as $post_type_key => $post_type_value ) {
-                $post_types[] = wp_strip_all_tags( $post_type_key );
+                if ( $post_type_key != 'tls_articles' ) {
+                    $post_types[] = wp_strip_all_tags($post_type_key);
+                }
             }
+
+            $current_query['post_type'] = $post_types;
 
             $post_type_search_archive_args = array(
                 'post_type'         => $post_types,
@@ -268,6 +272,11 @@ function tls_json_api_encode($response) {
          * then return appropriate filtered posts
          */
         if ( isset( $_GET['tax_filter'] ) ) {
+
+            $current_query['posts_per_page'] = -1;
+            $current_archive = get_posts($current_query);
+            $response['current_query_posts'] = $current_archive;
+
             $tax_query = array(
                 'relation'          => 'OR'
             );
@@ -281,22 +290,41 @@ function tls_json_api_encode($response) {
                 array_push($tax_query, $taxonomy_queries);
             }
 
-            $current_archive = $json_api->introspector->get_posts($current_query);
-
             $taxonomy_posts_archive_args = array(
-                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+                'post_type'         => array( 'tls_articles' ),
                 'post_status'       => 'publish',
                 's'                 => $search_query,
                 'tax_query'         => $tax_query,
+                'posts_per_page'    => -1
             );
 
-            $taxonomy_posts_archive = $json_api->introspector->get_posts($taxonomy_posts_archive_args);
-            $results_archive = array_merge( $current_archive, $taxonomy_posts_archive );
-            $response['count'] = count($taxonomy_posts_archive);
+            $taxonomy_posts_archive = new WP_Query($taxonomy_posts_archive_args);
+
+            $results_archive = array_merge( $current_archive, $taxonomy_posts_archive->posts );
+
+            $results_post_ids = array();
+            foreach ($results_archive as $result) {
+                $results_post_ids[]=$result->ID;
+            }
+
+            $final_post_ids = array_unique($results_post_ids);
+            $final_archive_args = array(
+                'post_type'     => array( 'post', 'tls_faq', 'tls_articles' ),
+                'post__in'      => $final_post_ids,
+                'post_status'   => 'publish'
+            );
+
+            $final_archive = new WP_Query($final_archive_args);
+
+            $results = $json_api->introspector->get_posts($final_archive);
+
+            $wp_query = $final_archive;
+            $response['wp_query'] = $wp_query;
+            $response['count'] = count($results);
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $taxonomy_posts_archive;
-            $response['current_query'] = $current_query;
+            $response['posts'] = $results;
+
 
         }
 
@@ -364,6 +392,7 @@ function tls_json_api_encode($response) {
 			$response['page']->accordion_items = get_field('accordion', $response['page']->id);
 		}
 	}
+
     $response['query'] = $wp_query->query;
     $response['json_query'] = $json_api->query;
 	return $response;
@@ -490,6 +519,11 @@ function tls_latest_edition_page_json_api_encode($response) {
             'orderby '          => 'date'
         ) ); wp_reset_query();
         $latest_edition = $latest_edition->posts[0];
+        
+        global $post;
+        $oldGlobal = $post;
+        $post = get_post( $latest_edition->ID );
+        // $response['debug'] = get_previous_post();
 
         $response['latest_edition'] = array(
                 'id'        => $latest_edition->ID,
@@ -498,7 +532,7 @@ function tls_latest_edition_page_json_api_encode($response) {
                 
             );
 
-        $previousPost = get_previous_post($latest_edition->ID); 
+        $previousPost = get_previous_post(); 
         $response['latest_edition']['previous_post_info'] = array(
                 'id'        => $previousPost->ID,
                 'title'     => $previousPost->post_title,
@@ -506,7 +540,7 @@ function tls_latest_edition_page_json_api_encode($response) {
                 
             );
 
-        $nextPost = get_next_post($latest_edition->ID);
+        $nextPost = get_next_post();
         $response['latest_edition']['next_post_info'] = array(
                 'id'        => $nextPost->ID,
                 'title'     => $nextPost->post_title,
@@ -533,7 +567,7 @@ function tls_latest_edition_page_json_api_encode($response) {
 
 
             foreach ($section as $termkey => $termvalue) { 
-                $section = $value->name;
+                $section = $termvalue->name;
              }
 
             $postAuthor = get_fields($value->ID);
@@ -550,7 +584,9 @@ function tls_latest_edition_page_json_api_encode($response) {
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
             $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $termkey => $termvalue) { $section = $value->name; }
+            foreach ($section as $termkey => $termvalue) {
+                $section = $termvalue->name; 
+            }
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
@@ -568,6 +604,7 @@ function tls_latest_edition_page_json_api_encode($response) {
             $section = get_the_terms($value->ID,'article_section');
             foreach ($section as $termkey => $termvalue) {
                 $section = $termvalue->name; 
+
             }
             
             $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
@@ -644,9 +681,10 @@ function tls_discover_json_api_encode($response) {
                 'id'                            => $top_section_article->ID,
                 'url'                           => get_permalink( $top_section_article->ID ),
                 'title'                         => $top_section_article->post_title,
-                'content'                       => wp_strip_all_tags( $top_section_article->post_content ),
+                'excerpt'                       => str_replace( '[...]', '', apply_filters( 'the_excerpt', $top_section_article->post_excerpt ) ),
                 'author'                        => array(
-                    'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author )
+                    'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author ),
+                    'slug'                      => get_the_author_meta( 'slug', $top_section_article->post_author ),
                 ),
                 'custom_fields'                 => array(
                     'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID )
