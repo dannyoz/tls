@@ -77,18 +77,27 @@ function tls_json_api_encode($response) {
 
 
         /**
-         * TLS Category filters
+         * TLS catagory filters
          */
         $sections = get_terms( 'article_section' );
 
         foreach ($sections as $key => $value) {
+            $section_count = 0;
+            foreach ($response['posts'] as $postkey => $postvalue) {
+
+                $post_section = wp_get_post_terms($postvalue->id,'article_section');
+
+                if ($value->slug == $post_section[0]->slug) { $section_count++; }
+               
+            }
+
            $response['articles_sections'][$value->slug] = array(
                 'item_label'        => $value->name,
-                //'type'              => 'taxonomy',
+                'type'              => 'taxonomy',
                 'json_query'        => 'tax_filter[article_section]='.$value->slug,
-                //'taxonomy'          => $value->taxonomy,
-                //'slug'              => $value->slug,
-                'search_count'      => (int) $value->count
+                'taxonomy'          => $value->taxonomy,
+                'slug'              => $value->slug,
+                'search_count'      => (int) $section_count
             );
         }
 
@@ -535,16 +544,31 @@ function tls_latest_edition_page_json_api_encode($response) {
             );
 
         $latest_edition_articles = get_fields($latest_edition->ID);
-        //$response['latest_edition']['test_content'] =  $latest_edition_articles;
+        //$response['latest_edition']['test_content'] =  $latest_edition_articles['edition_number'];
          
+        $response['latest_edition']['content']['featured'] = array(
+                'issue_no'  => $latest_edition_articles['edition_number'],
+                'image_url' => $latest_edition_articles['feautured_image']['url']
+                
+                
+            );
+
+
         $response['latest_edition']['content']['public']['title'] = 'Public content';
 
         foreach ($latest_edition_articles['public_articles'] as $key => $value) {
+
             $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+
+
+            foreach ($section as $termkey => $termvalue) { 
+                $section = $value->name;
+             }
+
+            $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
-                'author'    => $value->post_author,
+                'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
                 'section'   => $section,
                 'url'       => get_permalink($value->ID),
@@ -555,7 +579,7 @@ function tls_latest_edition_page_json_api_encode($response) {
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
             $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+            foreach ($section as $termkey => $termvalue) { $section = $value->name; }
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
@@ -569,8 +593,12 @@ function tls_latest_edition_page_json_api_encode($response) {
 
         $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
         foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
+            
             $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $key => $value) { $section = $value->name; }
+            foreach ($section as $termkey => $termvalue) {
+                $section = $termvalue->name; 
+            }
+            
             $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,

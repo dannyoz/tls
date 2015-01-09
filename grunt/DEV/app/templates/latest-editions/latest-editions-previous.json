@@ -1,17 +1,17 @@
 {
-	"title": "November 5 2014",
+	"title": "October 11 2014",
 	"previous_post_info": {
-		"title": "October 11 2014",
-		"url": "http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions-previous.json"
+		"title": "",
+		"url": ""
 	},	
 	"next_post_info": {
-		"title": "December 11 2014",
-		"url": "http://tls.localhost/editions/11-december-2014/"
+		"title": "November 5 2014",
+		"url": "http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json"
 	},	
 	"content": {
 		"featured": {
 			"issue_no": 8824,
-			"image_url": "http://tls.localhost/wp-content/uploads/2015/01/cover.jpg"
+			"image_url": "http://tls.localhost/wp-content/uploads/2015/01/cover2.jpg"
 		},	
 		"public": {
 			"title": "Public content",
@@ -27,12 +27,6 @@
 					"author": "David Collard",
 					"title": "Mathias Enard’s grammar of estrangement",
 					"section": "Fiction"
-				},
-				{
-					"id": 3,
-					"author": "Natural history",
-					"title": "Butterflies and button boots",
-					"section": "Natural History"
 				}
 			]
 		},
@@ -50,18 +44,6 @@
 					"author": "",
 					"title": "Alan Brownjohn",
 					"section": "Freelance"
-				},
-				{
-					"id": 3,
-					"author": "",
-					"title": "Georg Trakl’s spectrum",
-					"section": "Then And Now"
-				},
-				{
-					"id": 4,
-					"author": "",
-					"title": "Eliot and the TLS, Iain Crichton Smith, Modiano update",
-					"section": "NB"
 				}
 			]
 		},
@@ -75,12 +57,7 @@
 							"id": 1,
 							"author": "Tim Kendall",
 							"title": "Never out of the storm"
-						},
-						{
-							"id": 2,
-							"author": "Christopher Stace",
-							"title": "Out of Italy"
-						}						
+						}					
 					]
 				},
 				{
@@ -93,11 +70,6 @@
 						},
 						{
 							"id": 2,
-							"author": "Lindsay Duguid",
-							"title": "Paint what you like"
-						},
-						{
-							"id": 3,
 							"author": "Lindsay Duguid",
 							"title": "Paint what you like"
 						}
