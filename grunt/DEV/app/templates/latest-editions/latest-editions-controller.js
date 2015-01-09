@@ -7,13 +7,25 @@
 		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
 
+		// Convert an object to array
+		$scope.objectToArray = function(obj) {
+			
+			var result = [];
+			
+			for (var k in obj) {
+				var o = obj[k];
+				result.push(o);
+			}
+			return result;
+		}
+
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
 			// Full object			
-			$scope.latestEdition = obj;			
+			$scope.latestEdition = obj.latest_edition;			
 			// Edition sections articles				
-			$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
+			$scope.currentEdition = $scope.latestEdition.content;	
 			// Previous edition
 			$scope.nextEdition = $scope.latestEdition.next_post_info;			
 			// // Next edition
@@ -25,9 +37,11 @@
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var subcriberPosts = $scope.subscribersObj.articles;
+			var subcriberPosts = $scope.objectToArray($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
+
+			console.log(subcriberPosts);			
 			
 			// Devide columns for mansory layout
 			columns.divide(subcriberPosts).then(function (cols) {
