@@ -43,7 +43,12 @@
 	
 	.article-section {
 		color: $primary-orange;
-		padding: 12px 0;		
+		padding: 12px 0;	
+		font-weight: 500;
+
+		@media (max-width: $tablet) {	
+			border-top: 1px solid $light-keyline;
+		}	
 	}	
 
 	.article-body{
@@ -217,8 +222,7 @@
 
 
 	@media (max-width: $tablet) {	
-		overflow: hidden;		
-		border-bottom: 1px solid $light-keyline;
+		overflow: hidden;				
 		padding: 15px 60px;			
 	}
 

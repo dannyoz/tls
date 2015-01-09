@@ -25,7 +25,6 @@
 			var posts = $scope.subscribersObj.articles;
 
 			$scope.loading   = false;
-
 			
 			// Devide columns for mansory layout
 			columns.divide(posts).then(function (cols) {
