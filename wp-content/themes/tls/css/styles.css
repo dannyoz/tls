@@ -1698,6 +1698,7 @@ p.author {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
+  word-wrap: break-word;
 }
 #latest-edition .edition-item .title-small {
   text-transform: none;
