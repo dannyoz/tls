@@ -587,9 +587,10 @@ function tls_latest_edition_page_json_api_encode($response) {
             foreach ($section as $termkey => $termvalue) {
                 $section = $termvalue->name; 
             }
+            $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
-                'author'    => $value->post_author,
+                'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
                 'section'   => $section,
                 'url'       => get_permalink($value->ID),
@@ -606,11 +607,11 @@ function tls_latest_edition_page_json_api_encode($response) {
                 $section = $termvalue->name; 
 
             }
-
+            $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['subscribers']['articles'][$section]['section'] = $section;
             $response['latest_edition']['content']['subscribers']['articles'][$section]['posts'][$value->post_name] = array(
                 'id'        => $value->ID,
-                'author'    => $value->post_author,
+                'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
                 'section'   => $section,
                 'url'       => get_permalink($value->ID),
