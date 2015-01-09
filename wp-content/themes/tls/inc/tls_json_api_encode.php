@@ -606,8 +606,9 @@ function tls_latest_edition_page_json_api_encode($response) {
                 $section = $termvalue->name; 
 
             }
-            
-            $response['latest_edition']['content']['subscribers']['articles'][$section][$value->post_name] = array(
+
+            $response['latest_edition']['content']['subscribers']['articles'][$section]['section'] = $section;
+            $response['latest_edition']['content']['subscribers']['articles'][$section]['posts'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $value->post_author,
                 'title'     => $value->post_title,
