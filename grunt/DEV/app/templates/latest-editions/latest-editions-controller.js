@@ -1,19 +1,18 @@
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
 
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
-		//var path = window.location.href;
+		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
+		var path = window.location.href;
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
 			// Full object			
-			$scope.latestEdition = obj;			
+			$scope.latestEdition = obj.latest_edition;			
 			// Edition sections articles				
-			//$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
 			$scope.currentEdition = $scope.latestEdition.content;	
 			// Previous edition
 			$scope.nextEdition = $scope.latestEdition.next_post_info;			
@@ -26,12 +25,13 @@
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var posts = $scope.subscribersObj.articles;
+			var subcriberPosts = objToArr.convert($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
+
 			
 			// Devide columns for mansory layout
-			columns.divide(posts).then(function (cols) {
+			columns.divide(subcriberPosts).then(function (cols) {
 
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
@@ -45,6 +45,7 @@
 			$scope.setCurrentEditionObj(result);			
 		});
 
+
 		$scope.chooseEdition = function(dir, path){
 
 			//Only turn page if path is defined
@@ -53,10 +54,29 @@
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getLatestEditions(path).then(function (result){
+				api.getArticle(path).then(function (result) {
 
 					$scope.loading = false;
-					$scope.setCurrentEditionObj(result);
+					$scope.dir = dir;
+					$scope.pageTurn = true;
+
+					if (dir == "prev") {
+						
+						$scope.oldPost  = $scope.currentEdition;
+						$scope.setCurrentEditionObj(result);						
+
+						$timeout(function(){
+							$scope.pageTurn = false;
+						},duration);
+
+					} else {
+
+						$scope.oldPost  = result;						
+						$timeout(function(){
+							$scope.pageTurn = false;
+							$scope.setCurrentEditionObj(result);
+						},duration);
+					}					
 
 				})
 			}

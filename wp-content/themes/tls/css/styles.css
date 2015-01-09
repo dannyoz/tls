@@ -1714,6 +1714,7 @@ p.author {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
+  word-wrap: break-word;
 }
 #latest-edition .edition-item .title-small {
   text-transform: none;
@@ -1824,7 +1825,7 @@ p.author {
 #latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 525px) {
   #latest-edition .edition-current .public-col .edition-item .padded {
     padding: 20px;
   }
