@@ -649,6 +649,10 @@ textarea:focus, input[type=text]:focus, input[type=email]:focus, input[type=pass
   content: "\e605";
 }
 
+.icon-key-after:after {
+  content: "\e605";
+}
+
 .icon-left-arrow:before {
   content: "\e606";
 }
