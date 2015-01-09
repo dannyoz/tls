@@ -21,10 +21,13 @@ function tls_json_api_encode($response) {
     	// Get Search Query to be used in all the queries
     	$search_query = get_search_query();
 
+        // Get Current WP Query;
+        $current_query = $wp_query->query;
+
 		/**
 		 * Reviews Articles Tag Search Filter
 		 */
-    	$reviews_tag = get_term_by( 'slug', 'reviews', 'post_tag' );
+    	$reviews_tag = get_term_by( 'slug', 'reviews', 'article_tags' );
     	$reviews_tag_id = (int) $reviews_tag->term_id;
     	$reviews = new WP_Query( array(  
     		'post_type'			=> 'tls_articles',
@@ -32,7 +35,7 @@ function tls_json_api_encode($response) {
     		'posts_per_page'	=> 1,
     		's'					=> $search_query,
     		'tax_query'			=> array( array (
-    			'taxonomy'		=> 'post_tag',
+    			'taxonomy'		=> 'article_tags',
     			'field'			=> 'term_id',
     			'terms'			=> $reviews_tag_id
     		) )
@@ -40,9 +43,9 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['reviews'] = array(
     		'item_label'		=> __('Reviews', 'tls'),
-            'json_query'        => 'tax_filter[article_tags]=reviews',
-    		'taxonomy'			=> $reviews_tag->taxonomy,
-    		'slug'				=> $reviews_tag->slug,
+            'json_query'        => 'post_types[tls_articles]&tax_filter[article_tags]=reviews',
+    		//'taxonomy'			=> $reviews_tag->taxonomy,
+    		//'slug'				=> $reviews_tag->slug,
     		'search_count'		=> (int) $reviews->found_posts
     	);
 
@@ -65,10 +68,10 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['public_articles'] = array(
     		'item_label'		=> __('Free To Non Subscribers', 'tls'),
-            'type'              => 'taxonomy',
-            'json_query'        => 'tax_filter[article_visibility]=public',
-    		'taxonomy'			=> $public_visibility->taxonomy,
-    		'slug'				=> $public_visibility->slug,
+            //'type'              => 'taxonomy',
+            'json_query'        => 'post_types[tls_articles]&tax_filter[article_visibility]=public',
+    		//'taxonomy'			=> $public_visibility->taxonomy,
+    		//'slug'				=> $public_visibility->slug,
     		'search_count'		=> (int) $public_articles->found_posts
     	);
 
@@ -76,7 +79,7 @@ function tls_json_api_encode($response) {
         /**
          * TLS catagory filters
          */
-        $sections = get_terms( 'article_section');
+        $sections = get_terms( 'article_section' );
 
         foreach ($sections as $key => $value) {
             $section_count = 0;
@@ -98,7 +101,6 @@ function tls_json_api_encode($response) {
             );
         }
 
-
     	/**
     	 * TLS Blogs post type
     	 */
@@ -111,8 +113,9 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['blogs'] = array(
     		'item_label'		=> __('Blogs', 'tls'),
-            'type'              => 'post_type',
-    		'slug' 				=> 'post',
+            //'type'              => 'post_type',
+    		//'slug' 				=> 'post',
+            'json_query'        => 'post_types[post]',
     		'search_count' 		=> (int) $blogs->found_posts
     	);
 
@@ -128,8 +131,9 @@ function tls_json_api_encode($response) {
 
     	$response['content_type_filters']['faqs'] = array(
     		'item_label'		=> __('FAQs', 'tls'),
-            'type'              => 'post_type',
-    		'slug'				=> 'tls_faq',
+            'json_query'        => 'post_types[tls_faq]',
+            //'type'              => 'post_type',
+    		//'slug'				=> 'tls_faq',
     		'search_count'		=> (int) $faqs->found_posts
     	);
 
@@ -238,16 +242,19 @@ function tls_json_api_encode($response) {
          * with one post type out of the box
          */
         if ( isset( $_GET['post_types'] ) ) {
-            $current_query = $wp_query->query;
 
-            $sanatized_post_types = wp_strip_all_tags($_GET['post_types']);
-            $post_types = explode(',', $sanatized_post_types);
+            $post_types = array();
+
+            foreach ( $_GET['post_types'] as $post_type_key => $post_type_value ) {
+                $post_types[] = wp_strip_all_tags( $post_type_key );
+            }
 
             $post_type_search_archive_args = array(
                 'post_type'         => $post_types,
                 'post_status'       => 'publish',
                 's'                 => $search_query
             );
+
             $post_type_search_archive_query = array_merge($current_query, $post_type_search_archive_args);
             $post_type_search_archive = $json_api->introspector->get_posts($post_type_search_archive_query);
             $response['count'] = count($post_type_search_archive);
@@ -274,17 +281,23 @@ function tls_json_api_encode($response) {
                 array_push($tax_query, $taxonomy_queries);
             }
 
+            $current_archive = $json_api->introspector->get_posts($current_query);
+
             $taxonomy_posts_archive_args = array(
                 'post_type'         => array('post', 'tls_articles', 'tls_faq'),
                 'post_status'       => 'publish',
                 's'                 => $search_query,
                 'tax_query'         => $tax_query,
             );
+
             $taxonomy_posts_archive = $json_api->introspector->get_posts($taxonomy_posts_archive_args);
+            $results_archive = array_merge( $current_archive, $taxonomy_posts_archive );
             $response['count'] = count($taxonomy_posts_archive);
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $taxonomy_posts_archive;
+            $response['current_query'] = $current_query;
+
         }
 
 
@@ -349,73 +362,45 @@ function tls_json_api_encode($response) {
 
 		if ( $response['page_template_slug'] == 'template-page-with-accordion.php' ) { // If it is template-page-with-accordion.php Page template
 			$response['page']->accordion_items = get_field('accordion', $response['page']->id);
-		} else if ( $response['page_template_slug'] == 'template-articles-archive.php' ) { // If it is template-articles-archive.php Page template
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $articles_archive_args = array(
-                'post_type'         => array( 'tls_articles' ),
-                'orderby'           => 'date',
-                'order'             => 'DESC',
-                'paged'             => $paged,
-            );
-
-            $wp_query->query = $articles_archive_args;
-            $articles_archive = $json_api->introspector->get_posts($wp_query->query);
-            $response['count'] = count($articles_archive);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $articles_archive;
-        } else if ( $response['page_template_slug'] == 'template-blogs-archive.php' ) {
-
-            // Get Featured Post Details
-            $featured_post = get_post( $response['page']->custom_fields->featured_blog_post[0] );
-
-            // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
-            $sizes = get_intermediate_image_sizes();
-            $attachment_id = get_post_thumbnail_id( $featured_post->ID );
-
-            $images = array();
-            foreach ( $sizes as $size ) {
-                $images[$size] = wp_get_attachment_image_src( $attachment_id, $size );
-            }
-            $images['full'] = wp_get_attachment_image_src( $attachment_id, 'full' );
-
-            $response['featured_post'] = array(
-                'id'            => $featured_post->ID,
-                'title'         => $featured_post->post_title,
-                'excerpt'       => substr($featured_post->post_content, 0, 100) . '...',
-                'link'          => get_permalink( $featured_post->ID ),
-                'images'     => $images
-            );
-
-            // Get Blog Archive excluding Featured Blog from list
-            $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-            $blogs_archive_args = array(
-                'post_type'         => array( 'post' ),
-                'orderby'           => 'date',
-                'order'             => 'DESC',
-                'paged'             => $paged,
-                'post__not_in'      => array( $featured_post->ID ),
-            );
-
-            $wp_query->query = $blogs_archive_args;
-            $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
-            $response['count'] = count($blogs_archive);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $blogs_archive;
-        }
+		}
 	}
     $response['query'] = $wp_query->query;
+    $response['json_query'] = $json_api->query;
 	return $response;
 }
-add_filter('json_api_encode', 'tls_json_api_encode');
+add_filter( 'json_api_encode', 'tls_json_api_encode' );
 
+
+/**
+ * Home Page Template JSON API Response Modifications
+ *
+ * @param $response     JSON API Response Object
+ * @return Object       Updated JSON API Response Object
+ */
 function tls_home_page_json_api_encode($response) {
 
     if ( isset( $response['page'] ) && $response['page_template_slug'] == 'template-home.php' ) {
 
         // Get Home Page ID for this page using Template Home Page Template
         $home_page_id = $response['page']->id;
+
+        // Get Featured Post Details
+        $featured_article = get_field( 'featured_article', $home_page_id );
+
+        $images = array(
+            'hero_image'        => get_field( 'hero_image_url', $featured_article->ID ),
+            'full_image'        => get_field( 'full_image_url', $featured_article->ID ),
+            'thumbnail_image'   => get_field( 'thumbnail_image_url', $featured_article->ID )
+        );
+
+        $response['featured_article'] = array(
+            'id'                => $featured_article->ID,
+            'title'             => $featured_article->post_title,
+            'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
+            'text'              => wp_strip_all_tags( substr( $featured_article->post_content, 0, 100 ) ) . '...',
+            'link'              => get_permalink( $featured_article->ID ),
+            'images'            => $images
+        );
 
         /**
          * Home Page Blog Cards (For the 2 first Blog Cards)
@@ -431,7 +416,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => substr( $blog_card->post_content, 0, 50 ) . '...',
+                'text'          => wp_strip_all_tags( substr( $blog_card->post_content, 0, 50 ) ) . '...',
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -457,8 +442,10 @@ function tls_home_page_json_api_encode($response) {
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ( $card_type == 'article' ) {
                 $section = wp_get_post_terms( $card_post->ID, 'article_section' );
+                $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
             } else {
                 $section = wp_get_post_terms( $card_post->ID, 'category' );
+                $thumbnail_image = '';
             }
 
             // Add Cards to the JSON Response in the specific count slot
@@ -473,6 +460,7 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $section[0]->name,
                     'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
                 ),
+                'image'         => $thumbnail_image
             );
 
             // Iterate to next count slot
@@ -482,9 +470,15 @@ function tls_home_page_json_api_encode($response) {
     }
     return $response;
 }
-add_action( 'json_api_encode', 'tls_home_page_json_api_encode' );
+add_filter( 'json_api_encode', 'tls_home_page_json_api_encode' );
 
 
+/**
+ * Latest Edition Page Template JSON API Response Modifications
+ *
+ * @param $response     The JSON API Response Object
+ * @return $response    Update JSON API Response Object
+ */
 function tls_latest_edition_page_json_api_encode($response) {
 
     if ( isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-latest-edition.php' ) {
@@ -568,12 +562,196 @@ function tls_latest_edition_page_json_api_encode($response) {
         }  
 
         //$response['latest_edition']['content'] = get_the_terms('2433','article_section');
-        
-
-
-
 
     }
+
     return $response;
 }
-add_action( 'json_api_encode', 'tls_latest_edition_page_json_api_encode' );
+add_filter( 'json_api_encode', 'tls_latest_edition_page_json_api_encode' );
+
+
+/**
+ * Discover Articles Archive Page Template JSON API Response Modifications
+ *
+ * @param $response     The JSON API Response Object
+ * @return $response    Update JSON API Response Object
+ */
+function tls_discover_json_api_encode($response) {
+
+    if ( isset( $response['page'] ) &&  $response['page_template_slug'] == 'template-articles-archive.php' ) {
+        // Globals to be used with many of the specific searches
+        global $json_api, $wp_query;
+
+        /**
+         * Top Article from each Article Section
+         */
+
+        // Variable to store Top Articles IDs to later on remove from the second list of articles
+        $top_section_articles = array();
+
+        // Get all the terms from Article Section Taxonomy
+        $article_sections_args = array(
+            'hide_empty'    => false
+        );
+        $article_sections = get_terms( 'article_section', $article_sections_args );
+
+        // Loop through each of the sections to make a WP_Query
+        foreach ($article_sections as $section) {
+
+            // Arguments for the WP_Query
+            $top_section_article_args = array(
+                'post_type'         => 'tls_articles',
+                'posts_per_page'    => 1,
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+                'tax_query'         => array( array(
+                    'taxonomy'      => 'article_section',
+                    'field'         => 'term_id',
+                    'terms'         => $section->term_id
+                ) )
+            );
+
+            // WP_Query for the Top Article in current section term
+            $top_section_article_query = new WP_Query($top_section_article_args);
+
+            // Get the first article returned from Query
+            $top_section_article = $top_section_article_query->posts[0];
+
+            // Add Article ID into the top_section_articles array
+            $top_section_articles[] = $top_section_article->ID;
+
+            // Add this article into top_articles array from the JSON Response Object
+            $response['top_articles'][] = array(
+                'id'                            => $top_section_article->ID,
+                'url'                           => get_permalink( $top_section_article->ID ),
+                'title'                         => $top_section_article->post_title,
+                'content'                       => wp_strip_all_tags( $top_section_article->post_content ),
+                'author'                        => array(
+                    'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author )
+                ),
+                'custom_fields'                 => array(
+                    'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID )
+                ),
+                'taxonomy_article_section'      => wp_get_post_terms( $top_section_article->ID, 'article_section' ),
+                'taxonomy_article_visibility'   => wp_get_post_terms( $top_section_article->ID, 'article_visibility' ),
+            );
+
+        } // END Loop of top Articles from each Article Section
+
+        /**
+         * All articles excluding the ones in the Top Articles Section
+         */
+
+        // Set up paged variable for the query
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        // WP_Query Arguments
+        $articles_archive_args = array(
+            'post_type'         => array( 'tls_articles' ),
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'paged'             => $paged,
+            'post__not_in'      => $top_section_articles // Array of ID's of Top Articles to remove
+        );
+
+        // Override query inside the $wp_query global to be able to use the JSON API get_posts
+        $wp_query->query = $articles_archive_args;
+        $articles_archive = $json_api->introspector->get_posts($wp_query->query);
+
+        // Update JSON Response Object for the main Articles Archive
+        $response['count'] = count($articles_archive);
+        $response['count_total'] = (int) $wp_query->found_posts;
+        $response['pages'] = $wp_query->max_num_pages;
+        $response['posts'] = $articles_archive;
+
+    }
+
+    return $response;
+}
+add_filter( 'json_api_encode', 'tls_discover_json_api_encode' );
+
+
+/**
+ * Blogs Archive Page Template JSON API Response Modifications
+ *
+ * @param $response     The JSON API Response Object
+ * @return $response    Update JSON API Response Object
+ */
+function tls_blogs_archive_json_api_encode($response) {
+
+    if ( isset( $response['page'] ) && $response['page_template_slug'] == 'template-blogs-archive.php' ) {
+        // Globals to be used with many of the specific searches
+        global $json_api, $wp_query;
+
+        // Get Featured Post Details
+        $featured_post = get_post( $response['page']->custom_fields->featured_blog_post[0] );
+
+        // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
+        $sizes = get_intermediate_image_sizes();
+        $attachment_id = get_post_thumbnail_id( $featured_post->ID );
+
+        $images = array();
+        foreach ( $sizes as $size ) {
+            $images[$size] = wp_get_attachment_image_src( $attachment_id, $size );
+        }
+        $images['full'] = wp_get_attachment_image_src( $attachment_id, 'full' );
+
+        $response['featured_post'] = array(
+            'id'            => $featured_post->ID,
+            'title'         => $featured_post->post_title,
+            'excerpt'       => wp_strip_all_tags( substr($featured_post->post_content, 0, 100) ) . '...',
+            'link'          => get_permalink( $featured_post->ID ),
+            'images'     => $images
+        );
+
+        // Get Blog Archive excluding Featured Blog from list
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+        $blogs_archive_args = array(
+            'post_type'         => array( 'post' ),
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'paged'             => $paged,
+            'post__not_in'      => array( $featured_post->ID ),
+        );
+
+        $wp_query->query = $blogs_archive_args;
+        $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
+        $response['count'] = count($blogs_archive);
+        $response['count_total'] = (int) $wp_query->found_posts;
+        $response['pages'] = $wp_query->max_num_pages;
+        $response['posts'] = $blogs_archive;
+    }
+
+    return $response;
+}
+add_filter( 'json_api_encode', 'tls_blogs_archive_json_api_encode' );
+
+
+/**
+ * FAQs Page Template JSON API Response Modifications
+ *
+ * @param $response     The JSON API Response Object
+ * @return $response    Update JSON API Response Object
+ */
+function tls_faqs_json_api_encode($response) {
+
+    if ( isset( $response['page'] ) && $response['page_template_slug'] == 'template-faqs.php' ) {
+
+        $faqs_query = new WP_Query( array(
+            'post_type'         => array( 'tls_faq' ),
+            'posts_per_page'    => -1
+        ) );
+        $faqs_posts = $faqs_query->posts;
+
+        foreach ($faqs_posts as $faq) {
+            $response['faqs'][] = array(
+                'title'         => $faq->post_title,
+                'content'       => $faq->post_content
+            );
+        }
+
+    }
+
+    return $response;
+}
+add_filter( 'json_api_encode', 'tls_faqs_json_api_encode' );

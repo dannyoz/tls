@@ -29165,7 +29165,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			var posts = $scope.subscribersObj.articles;
 
 			$scope.loading   = false;
-
 			
 			// Devide columns for mansory layout
 			columns.divide(posts).then(function (cols) {
@@ -29187,7 +29186,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.currentPage     = 1
 	$scope.dateRange       = ""
 	$scope.orderName       = "Newest"
-	$scope.order           = "ASC"
+	$scope.order           = "DESC"
 	$scope.showSorter      = false
 	$scope.loadResults     = true
 	$scope.niceDate        = niceDate
