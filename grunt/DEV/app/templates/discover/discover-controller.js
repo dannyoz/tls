@@ -3,7 +3,6 @@
 	var url = window.location.href;
 
 	$scope.test = true
-
 	$scope.ready       = false;
 	$scope.pageNumber  = 1;
 	$scope.loading     = true;
@@ -21,18 +20,31 @@
 		$scope.loading   = false;
 		$scope.pageCount = result.pages
 
-		var posts = result.posts;
+		columns.divide(result.top_articles).then(function (cols){
+			$scope.topCol1  = cols.col1
+			$scope.topCol2  = cols.col2
+			$scope.topCol3  = cols.col3
+		})
 
-		console.log(result)
 
-		columns.divide(posts).then(function (cols){
+		columns.divide(result.posts).then(function (cols){
 			$scope.col1  = cols.col1
 			$scope.col2  = cols.col2
 			$scope.col3  = cols.col3
 			$scope.ready = true
-			$scope.pageNumber ++
 		})
+
+		console.log(result)
+
 	})
+
+	$scope.truncate = function(str){
+
+		var trunc    = str.substring(0,200),
+			combined = trunc + " [...]"
+
+		return combined
+	}
 
 	$scope.loadMore = function(){
 
@@ -42,24 +54,32 @@
 
 		if($scope.pageCount > ($scope.pageNumber-1)){
 
-			api.getArticleList($scope.pageNumber).then(function (result){
+			if($scope.pageNumber == 1){
 
-				var posts = result.posts;
-				$scope.scrollState = "on";
+				$scope.pageNumber ++
 
-				columns.divide(posts).then(function (cols){
+			} else {
 
-					$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
-					$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
-					$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
-					$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
-					$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
-					$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+				api.getArticleList($scope.pageNumber).then(function (result){
 
-					$scope.pageNumber ++
-					$scope.infLoading = false;
+					var posts = result.posts;
+					$scope.scrollState = "on";
+
+					columns.divide(posts).then(function (cols){
+
+						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+						$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+						$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+						$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+						$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+						$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+						$scope.pageNumber ++
+						$scope.infLoading = false;
+					})
 				})
-			})
+			}
+
 		} else {
 			$scope.scrollState = "off";
 			$scope.infLoading  = false;
