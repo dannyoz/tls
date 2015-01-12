@@ -1069,6 +1069,14 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
+@media screen and (max-width: 450px) {
+  #home #subscriber .subscribe-grid {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
+  }
+}
 #home #subscriber.locked {
   background-color: #e6e6e6;
 }

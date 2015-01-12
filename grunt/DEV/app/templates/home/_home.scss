@@ -65,6 +65,11 @@
 					margin-right:0;
 				}
 			}
+
+			@media screen and (max-width:$mobile){
+
+				@include grid-col(12);
+			}
 		}
 
 		&.locked{
