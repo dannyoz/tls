@@ -753,7 +753,7 @@ em, i {
   font-style: italic;
 }
 
-.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #latest-edition .editions-bottom h2 {
+.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #home #subscriber h2, #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
@@ -1010,6 +1010,24 @@ p.author, h4.author {
   float: left;
   width: 100%;
   clear: both;
+  background-color: #e6e6e6;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+#home #subscriber h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  line-height: 115px;
+}
+@media (max-width: 450px) {
+  #home #subscriber h2 {
+    font-size: 18px;
+  }
 }
 #home #subscriber .title-icon {
   position: relative;
@@ -1049,6 +1067,14 @@ p.author, h4.author {
   }
   #home #subscriber .subscribe-grid:nth-of-type(even) {
     margin-right: 0;
+  }
+}
+@media screen and (max-width: 450px) {
+  #home #subscriber .subscribe-grid {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
   }
 }
 #home #subscriber.locked {
@@ -2595,7 +2621,7 @@ p.author, h4.author {
 }
 
 #edition-preview {
-  padding: 20px 0;
+  padding: 40px 0;
   float: left;
   width: 100%;
   clear: both;

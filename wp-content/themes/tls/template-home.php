@@ -79,7 +79,6 @@ get_header(); ?>
 
 				<div class="title-icon icon">
 					<div class="icon-border icon-key"></div>
-<!--					<h2>{{subscribersObj.title}}</h2>-->
 					<h2><?php _e( 'Subscriber exclusive', 'tls' ); ?></h2>
 				</div>
 
@@ -115,8 +114,6 @@ get_header(); ?>
 						</div>
 					<?php endwhile; ?>
 				<?php endif; ?>
-
-
 
 			</div>
 
