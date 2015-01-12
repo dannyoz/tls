@@ -45,6 +45,34 @@
 		return niceDate.format(date);
 	}
 
+	$scope.emailLink = function(){
+
+		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
+			emailBody = $scope.post.url,
+			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+
+		return emailPath
+	}
+
+	$scope.socialLink = function(path,platform){
+
+		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+			twLink = "https://twitter.com/home?status=" + path,
+			link   = (platform == 'fb') ? fbLink : twLink,
+			width  = 500,
+			height = 300,
+			params =   "scrollbars=no,
+						toolbar=no,
+						location=no,
+						menubar=no,
+						left=200,
+						top=200,
+						height="+height+",
+						width="+width;
+
+		window.open(link,"_blank",params);
+	}
+
 	$scope.chooseArticle = function(dir,path){
 
 		//Only turn page if path is defined
@@ -95,8 +123,8 @@
 				$scope.tags = [];
 				$scope.activeTags = []; 
 
-				for (var i = 0; i<$scope.post.tags.length; i++){
-					$scope.tags.push($scope.post.tags[i].title);
+				for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+					$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 					$scope.activeTags.push({isApplied : false});
 				};
 

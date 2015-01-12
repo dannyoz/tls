@@ -53,7 +53,7 @@
 				parse  = tags.toString(),
 				path1  = "/tag/"+parse+"/?json=1",
 				path2  = "/?tag="+parse+"&json=1",
-				url    = (tags.length == 1)? path1 : path2;
+				url    = "/api/get_posts/?article_tags=" + parse;
 
 			//expose url for testing
 			defer.promise.url = url

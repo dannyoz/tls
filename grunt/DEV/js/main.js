@@ -28334,7 +28334,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				parse  = tags.toString(),
 				path1  = "/tag/"+parse+"/?json=1",
 				path2  = "/?tag="+parse+"&json=1",
-				url    = (tags.length == 1)? path1 : path2;
+				url    = "/api/get_posts/?article_tags=" + parse;
 
 			//expose url for testing
 			defer.promise.url = url
@@ -28729,6 +28729,34 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		return niceDate.format(date);
 	}
 
+	$scope.emailLink = function(){
+
+		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
+			emailBody = $scope.post.url,
+			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+
+		return emailPath
+	}
+
+	$scope.socialLink = function(path,platform){
+
+		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+			twLink = "https://twitter.com/home?status=" + path,
+			link   = (platform == 'fb') ? fbLink : twLink,
+			width  = 500,
+			height = 300,
+			params =   "scrollbars=no,
+						toolbar=no,
+						location=no,
+						menubar=no,
+						left=200,
+						top=200,
+						height="+height+",
+						width="+width;
+
+		window.open(link,"_blank",params);
+	}
+
 	$scope.chooseArticle = function(dir,path){
 
 		//Only turn page if path is defined
@@ -28779,8 +28807,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				$scope.tags = [];
 				$scope.activeTags = []; 
 
-				for (var i = 0; i<$scope.post.tags.length; i++){
-					$scope.tags.push($scope.post.tags[i].title);
+				for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+					$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 					$scope.activeTags.push({isApplied : false});
 				};
 
@@ -29005,10 +29033,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.truncate = function(str){
 
-		var trunc    = str.substring(0,200),
-			combined = trunc + " [...]"
+		if (!! str) {
+			var trunc    = str.substring(0,200),
+				combined = trunc + " [...]"
 
-		return combined
+			return combined
+		}
+		
 	}
 
 	$scope.loadMore = function(){

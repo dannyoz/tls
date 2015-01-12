@@ -87,7 +87,7 @@
 #tinymce .uppercase {
   text-transform: uppercase;
 }
-#tinymce p.author {
+#tinymce p.author, #tinymce h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
   font-size: 1em;
