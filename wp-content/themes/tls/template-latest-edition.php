@@ -25,7 +25,7 @@
 			<!-- Latest Edition Top Section -->
 			<div class="editions-top grid-row">		
 
-				<div class="editions-top-left featured-col">		
+				<div class="editions-top-left featured-col fadeIn">		
 
 					<!-- Tablet / Mobile Pagination -->
 					<h1 ng-if="size != 'desktop'">{{latestEdition.title}}</h1>					
@@ -46,7 +46,7 @@
 					<div class="title-small">{{currentEdition.featured.issue_no}}</div>
 				</div>
 				
-				<div class="editions-top-right">
+				<div class="editions-top-right fadeIn">
 					<div class="grid-row">
 						<!--Public content -->
 						<div class="public-col">
@@ -77,7 +77,7 @@
 	</div>
 
 	<!-- Latest Edition Bottom Section -->
-	<div class="editions-bottom">		
+	<div class="editions-bottom fadeIn">		
 
 		<div class="container relative" ng-if="ready">
 			<div class="title-icon icon">
