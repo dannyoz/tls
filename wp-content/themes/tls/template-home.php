@@ -79,7 +79,7 @@ get_header(); ?>
 
 				<div class="title-icon icon">
 					<div class="icon-border icon-key"></div>
-					<h2>{{subscribersObj.title}}</h2>	
+					<h2>Subscriber exclusive</h2>	
 				</div>	
 
 				<div class="subscribe-grid">
