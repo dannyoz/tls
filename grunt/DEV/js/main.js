@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>derp</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>derp</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=\"grid-4 author-avatar\"><a href=#><img class=\"max circular\" src=\"http://tls.localhost/wp-content/uploads/2015/01/whale.jpg\"></a></div><div class=\"grid-7 push-1\"><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p>{{blog.text}}</p></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div><footer><p class=sub><a href=#>derp</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div></div>"
   );
 
 
@@ -28562,7 +28562,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			data : "=tlsCard"
 		},
 		link : function(scope){
-			console.log(scope.data)
+			
+			console.log(scope.data);
+			
+			// Type of card (Object or Array)
+			var cardType = Object.prototype.toString.call(scope.data);
+
+			// Card is array, must be blog items
+			if(cardType === '[object Array]' && cardType.length > 0) {
+				scope.data.type = 'blog';
+			} 
 		}
 	}
 })
@@ -29059,7 +29068,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 
 }])
-.controller('home',['$scope','api','columns','objToArr',function ($scope, api, columns, objToArr){
+.controller('home',['$scope', '$sce', 'api','columns','objToArr',function ($scope, $sce, api, columns, objToArr){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -29067,7 +29076,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	api.getHomePage(url).then(function (result){
 
-		console.log(result)
+		console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
@@ -29082,9 +29091,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		})
 
-		console.log($scope.col3)
+	});
 
-	})
+	$scope.formatEmbed = function(html) {
+		return $sce.trustAsHtml(html);
+	}
 
 }])
 .controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
@@ -29098,6 +29109,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
+
+			console.log(obj);
 
 			// Full object			
 			$scope.latestEdition = obj.latest_edition;			

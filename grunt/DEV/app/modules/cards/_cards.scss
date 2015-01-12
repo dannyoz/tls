@@ -22,7 +22,7 @@
 	h3{
 
 		text-transform: uppercase;
-		padding:12px 25px 5px 25px;
+		padding:12px 20px 5px 20px;
 		font:{
 			size:0.9em;
 			weight:500;
@@ -50,9 +50,11 @@
 	h4{
 
 		margin-bottom:10px;
+		word-wrap: break-word;
 		font:{
 			size:1.5em;
 			weight:bold;
+			family: $times;
 		}
 
 		a:hover{
@@ -81,7 +83,7 @@
 
 	.padded{
 
-		padding:0 25px 20px 25px;
+		padding:0 20px 20px 20px;
 	}
 
 	.embed{
@@ -91,7 +93,7 @@
 
 	footer{
 		
-		padding:10px 25px;
+		padding:10px 20px;
 		background-color:$subtle-light-grey;
 		position: relative;
 
@@ -180,5 +182,28 @@
 		
 		margin-bottom:15px;
 		font-size: 0.8em;
+	}
+}
+
+.blog-item {
+	
+	&.card {
+
+		h4 {
+			margin-bottom: 2px;
+		}
+		
+		p.futura {
+			border-bottom: 1px solid $light-keyline;
+			padding-bottom: 10px;
+			margin-bottom: 8px;
+		}
+
+		.author-avatar {
+			img {
+				width: 90px;
+				height: 90px;
+			}
+		}
 	}
 }
