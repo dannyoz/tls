@@ -77,7 +77,11 @@ get_header(); ?>
 
 			<div class="container">
 
-				<h5 class="centred-heading grid-row"><?php _e( 'Subscriber exclusive', 'tls' ); ?></h5>
+				<div class="title-icon icon">
+					<div class="icon-border icon-key"></div>
+<!--					<h2>{{subscribersObj.title}}</h2>-->
+					<h2><?php _e( 'Subscriber exclusive', 'tls' ); ?></h2>
+				</div>
 
 				<?php if( have_rows('subscriber_exclusive_items') ): ?>
 					<?php while ( have_rows('subscriber_exclusive_items') ) : the_row(); ?>
@@ -111,6 +115,8 @@ get_header(); ?>
 						</div>
 					<?php endwhile; ?>
 				<?php endif; ?>
+
+
 
 			</div>
 

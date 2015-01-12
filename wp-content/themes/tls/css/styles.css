@@ -69,6 +69,11 @@ body {
   max-width: 1200px;
   padding: 0 20px;
 }
+@media screen and (max-width: 450px) {
+  .container {
+    padding: 0 15px;
+  }
+}
 .container.relative {
   position: relative;
 }
@@ -748,7 +753,7 @@ em, i {
   font-style: italic;
 }
 
-.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], .card footer .sub {
+.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
@@ -757,7 +762,7 @@ em, i {
   text-transform: uppercase;
 }
 
-p.author {
+p.author, h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
   font-size: 1em;
@@ -1006,6 +1011,26 @@ p.author {
   width: 100%;
   clear: both;
 }
+#home #subscriber .title-icon {
+  position: relative;
+  height: 125px;
+  padding: 30px 0 10px 0;
+}
+#home #subscriber .icon-border {
+  width: 66px;
+  height: 90px;
+  border-bottom: 4px solid black;
+  position: absolute;
+  left: 50%;
+  margin-left: -33px;
+}
+#home #subscriber .icon-border:before {
+  font-size: 36px;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  color: #706d73;
+}
 #home #subscriber .subscribe-grid {
   float: left;
   position: relative;
@@ -1035,6 +1060,16 @@ p.author {
 
 .single-post .container {
   overflow: hidden;
+}
+.single-post .share-bar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.single-post .share-bar a {
+  margin-left: 10px;
+}
+.single-post .share-bar a:first-child {
+  margin-left: 0;
 }
 .single-post .col-wide {
   margin-left: 25.625%;
@@ -1385,7 +1420,6 @@ p.author {
 }
 
 #comments {
-  display: none;
   padding-top: 30px;
 }
 #comments .comment-wrap {
@@ -1854,10 +1888,8 @@ p.author {
 #latest-edition .editions-bottom h2 {
   text-align: center;
   font-size: 24px;
-  font-family: "futura-pt", "Arial", sans-serif;
   font-weight: normal;
   text-transform: uppercase;
-  letter-spacing: 3px;
   font-weight: 500;
   padding: 0;
   margin: 0;
@@ -2028,9 +2060,13 @@ p.author {
 }
 .card footer .sub {
   color: #706d73;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   font-size: 0.9em;
   font-weight: 500;
+  font-family: "futura-pt", "Arial", sans-serif;
+}
+.card footer .sub a {
+  color: #706d73;
 }
 .card footer:after {
   height: 0;
@@ -2043,6 +2079,9 @@ p.author {
   position: absolute;
   display: block;
   content: "";
+}
+.card footer p {
+  letter-spacing: 0;
 }
 .card:hover {
   border-color: #ccc;
@@ -2155,17 +2194,60 @@ p.author {
   }
 }
 
+@media screen and (max-width: 450px) {
+  .blog-item.card {
+    padding: 20px;
+  }
+}
 .blog-item.card h4 {
   margin-bottom: 2px;
 }
-.blog-item.card p.futura, .blog-item.card footer p.sub {
+@media screen and (max-width: 450px) {
+  .blog-item.card h3 {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}
+.blog-item.card p.futura {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
-.blog-item.card .author-avatar img {
-  width: 90px;
-  height: 90px;
+@media screen and (max-width: 450px) {
+  .blog-item.card .padded {
+    padding: 0;
+  }
+}
+.blog-item.card .blog-avatar {
+  float: left;
+  position: relative;
+  width: 31.66667%;
+  margin-right: 2.5%;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card .blog-avatar {
+    float: left;
+    position: relative;
+    width: 23.125%;
+    margin-right: 2.5%;
+  }
+}
+.blog-item.card .blog-data {
+  float: left;
+  position: relative;
+  width: 65.83333%;
+  margin-right: 0;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card .blog-data {
+    float: left;
+    position: relative;
+    width: 74.375%;
+    margin-right: 0;
+  }
+}
+.blog-item.card .blog-data .inner {
+  padding-left: 5px;
 }
 
 .accordian {

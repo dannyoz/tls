@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=\"grid-4 author-avatar\"><a href=#><img class=\"max circular\" src=\"http://tls.localhost/wp-content/uploads/2015/01/whale.jpg\"></a></div><div class=\"grid-7 push-1\"><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p>{{blog.text}}</p></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div><footer><p class=sub><a href=#>derp</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p>{{blog.text}}</p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded ng-click=test()><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=formatEmbed(data.text)></p></div></div>"
   );
 
 
@@ -28334,7 +28334,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				parse  = tags.toString(),
 				path1  = "/tag/"+parse+"/?json=1",
 				path2  = "/?tag="+parse+"&json=1",
-				url    = (tags.length == 1)? path1 : path2;
+				url    = "/api/get_posts/?article_tags=" + parse;
 
 			//expose url for testing
 			defer.promise.url = url
@@ -28697,7 +28697,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.taxonomy_article_tags.length > 0){
+		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
 
 			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
 				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
@@ -28727,6 +28727,32 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.format = function(date){
 		return niceDate.format(date);
+	}
+
+	$scope.emailLink = function(){
+
+		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
+			emailBody = $scope.post.url,
+			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+
+		return emailPath
+	}
+
+	$scope.socialLink = function(path,platform){
+
+		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+			twLink = "https://twitter.com/home?status=" + path,
+			link   = (platform == 'fb') ? fbLink : twLink,
+			params =   "scrollbars=no,
+						toolbar=no,
+						location=no,
+						menubar=no,
+						left=200,
+						top=200,
+						height=300,
+						width=500";
+
+		window.open(link,"_blank",params);
 	}
 
 	$scope.chooseArticle = function(dir,path){
@@ -28777,24 +28803,28 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				}
 
 				$scope.tags = [];
-				$scope.activeTags = []; 
+				$scope.activeTags = [];
 
-				for (var i = 0; i<$scope.post.tags.length; i++){
-					$scope.tags.push($scope.post.tags[i].title);
-					$scope.activeTags.push({isApplied : false});
-				};
+				if($scope.post.taxonomy_article_tags){ 
 
-				$scope.orginalList = $scope.tags
+					for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+						$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+						$scope.activeTags.push({isApplied : false});
+					};
 
-				api.getRelatedContent($scope.tags).then(function (result){
-					var posts = result.posts;
+					$scope.orginalList = $scope.tags
 
-					columns.divide(posts).then(function (cols){
-						$scope.col1  = cols.col1
-						$scope.col2  = cols.col2
-						$scope.col3  = cols.col3
+					api.getRelatedContent($scope.tags).then(function (result){
+						var posts = result.posts;
+
+						columns.divide(posts).then(function (cols){
+							$scope.col1  = cols.col1
+							$scope.col2  = cols.col2
+							$scope.col3  = cols.col3
+						})
 					})
-				})
+
+				}
 			})
 		}
 	}
@@ -29005,10 +29035,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.truncate = function(str){
 
-		var trunc    = str.substring(0,200),
-			combined = trunc + " [...]"
+		if (!! str) {
+			var trunc    = str.substring(0,200),
+				combined = trunc + " [...]"
 
-		return combined
+			return combined
+		}
+		
 	}
 
 	$scope.loadMore = function(){

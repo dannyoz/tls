@@ -9,6 +9,22 @@
 		overflow: hidden;
 	}
 
+	.share-bar{
+
+		margin-top: 20px;
+		margin-bottom: 20px;
+
+		a{
+
+			margin-left:10px;
+
+			&:first-child{
+
+				margin-left:0;
+			}
+		}
+	}
+
 	.col-wide {
 
 		@include shift("push",3);
