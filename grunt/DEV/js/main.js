@@ -28749,8 +28749,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 						menubar=no,
 						left=200,
 						top=200,
-						height=500,
-						width=300";
+						height=300,
+						width=500";
 
 		window.open(link,"_blank",params);
 	}
