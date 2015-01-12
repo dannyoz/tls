@@ -4,6 +4,9 @@
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard"
+		},
+		link : function(scope){
+			console.log(scope.data)
 		}
 	}
 })

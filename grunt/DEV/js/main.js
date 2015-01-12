@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
+    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>derp</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>derp</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
   );
 
 
@@ -28396,25 +28396,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			return defer.promise
 
 		},
-		getLatestEditions : function(page){
-
-			var defer  = $q.defer(),
-				url    = page;
-
-			//expose url for testing
-			defer.promise.url = url
-
-			$http.get(url).success(function (data){
-
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-				
-			})
-
-			return defer.promise
-		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -28495,6 +28476,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.factory('objToArr',function(){
+	return{
+		
+		convert: function(o) {
+
+			var result = [];
+			
+			for (var k in o) {
+				var ob = o[k];
+				result.push(ob);
+			}
+
+			return result;
+		}
+	}
+})
 .factory('tealium',function(){
 	return{
 		test : function(val1,val2,val3,val4){
@@ -28563,6 +28560,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard"
+		},
+		link : function(scope){
+			console.log(scope.data)
 		}
 	}
 })
@@ -29054,7 +29054,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 
 }])
-.controller('home',['$scope','api','columns',function ($scope, api, columns){
+.controller('home',['$scope','api','columns','objToArr',function ($scope, api, columns, objToArr){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -29067,7 +29067,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
 
-		columns.divide(result.home_page_cards).then(function (cols){
+		var cards = objToArr.convert(result.home_page_cards);
+
+		columns.divide(cards).then(function (cols){
 
 			$scope.col1  = cols.col1
 			$scope.col2  = cols.col2
@@ -29080,22 +29082,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	})
 
 }])
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
 
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
-		//var path = window.location.href;
+		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
+		var path = window.location.href;
 
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
 			// Full object			
-			$scope.latestEdition = obj;			
+			$scope.latestEdition = obj.latest_edition;			
 			// Edition sections articles				
-			//$scope.currentEdition = $scope.latestEdition.latest_edition.content;	
 			$scope.currentEdition = $scope.latestEdition.content;	
 			// Previous edition
 			$scope.nextEdition = $scope.latestEdition.next_post_info;			
@@ -29108,12 +29109,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var posts = $scope.subscribersObj.articles;
+			var subcriberPosts = objToArr.convert($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
+
 			
 			// Devide columns for mansory layout
-			columns.divide(posts).then(function (cols) {
+			columns.divide(subcriberPosts).then(function (cols) {
 
 				$scope.col1  = cols.col1;
 				$scope.col2  = cols.col2;
@@ -29127,6 +29129,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.setCurrentEditionObj(result);			
 		});
 
+
 		$scope.chooseEdition = function(dir, path){
 
 			//Only turn page if path is defined
@@ -29135,10 +29138,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getLatestEditions(path).then(function (result){
+				api.getArticle(path).then(function (result) {
 
 					$scope.loading = false;
-					$scope.setCurrentEditionObj(result);
+					$scope.dir = dir;
+					$scope.pageTurn = true;
+
+					if (dir == "prev") {
+						
+						$scope.oldPost  = $scope.currentEdition;
+						$scope.setCurrentEditionObj(result);						
+
+						$timeout(function(){
+							$scope.pageTurn = false;
+						},duration);
+
+					} else {
+
+						$scope.oldPost  = result;						
+						$timeout(function(){
+							$scope.pageTurn = false;
+							$scope.setCurrentEditionObj(result);
+						},duration);
+					}					
 
 				})
 			}

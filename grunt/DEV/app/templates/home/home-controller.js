@@ -1,4 +1,4 @@
-.controller('home',['$scope','api','columns',function ($scope, api, columns){
+.controller('home',['$scope','api','columns','objToArr',function ($scope, api, columns, objToArr){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -11,7 +11,9 @@
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
 
-		columns.divide(result.home_page_cards).then(function (cols){
+		var cards = objToArr.convert(result.home_page_cards);
+
+		columns.divide(cards).then(function (cols){
 
 			$scope.col1  = cols.col1
 			$scope.col2  = cols.col2
