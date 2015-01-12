@@ -2057,6 +2057,21 @@ p.author {
 .card.private footer:after {
   border-right-color: #e6e6e6;
 }
+.card .mpu {
+  overflow: hidden;
+  min-height: 300px;
+  position: relative;
+}
+.card .mpu img {
+  max-width: 100% !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 
 .tls-mansonry {
   float: left;

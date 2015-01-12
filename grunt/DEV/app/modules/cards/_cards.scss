@@ -138,6 +138,19 @@
 			border-right-color: $locked-grey;
 		}
 	}
+
+	.mpu{
+
+		overflow: hidden;
+		min-height: 300px;
+		position: relative;
+
+		img{
+		
+			max-width: 100%!important;
+			@include centre;
+		}
+	}
 }
 
 .tls-mansonry{

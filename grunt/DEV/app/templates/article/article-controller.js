@@ -13,10 +13,10 @@
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.tags.length > 0){
+		if($scope.post.taxonomy_article_tags.length > 0){
 
-			for (var i = 0; i<$scope.post.tags.length; i++){
-				$scope.tags.push($scope.post.tags[i].title);
+			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 				$scope.activeTags.push({isApplied : false});
 			};
 

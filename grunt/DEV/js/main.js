@@ -28697,10 +28697,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.tags.length > 0){
+		if($scope.post.taxonomy_article_tags.length > 0){
 
-			for (var i = 0; i<$scope.post.tags.length; i++){
-				$scope.tags.push($scope.post.tags[i].title);
+			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 				$scope.activeTags.push({isApplied : false});
 			};
 
@@ -28969,6 +28969,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.scrollState = "off";
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
+	$scope.mpuPosition = 4;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();
@@ -28980,10 +28981,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.loading   = false;
 		$scope.pageCount = result.pages
 
+		result.top_articles.splice(4,0,{"mpu" : true});
+
 		columns.divide(result.top_articles).then(function (cols){
 			$scope.topCol1  = cols.col1
 			$scope.topCol2  = cols.col2
 			$scope.topCol3  = cols.col3
+
+			console.log($scope.topCol3)
 		})
 
 

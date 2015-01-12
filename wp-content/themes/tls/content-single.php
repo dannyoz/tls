@@ -90,14 +90,21 @@
 		endif;
 	?> 
 
-	<div id="related-content" ng-if="post.tags.length > 0">
+	<?php
+		// If comments are open or we have at least one comment, load up the comment template
+		// if ( ('tls_articles' == get_post_type() || 'post' == get_post_type() ) && ( comments_open() || get_comments_number() ) ) :
+		// 	comments_template();
+		// endif;
+	?> 
+
+	<div id="related-content" ng-if="post.taxonomy_article_tags.length > 0">
 
 		<div class="container transition-3" ng-class="{loadingopacity:loadingTags}">
 
 			<div class="grid-row">
 				<h4 class="futura centred">Use the tags to browse related articles</h4>
 				<ul id="tags" class="article-body">
-					<li ng-repeat="tag in post.tags">
+					<li ng-repeat="tag in post.taxonomy_article_tags">
 						<a ng-class="{applied:activeTags[$index].isApplied}" class="futura" ng-click="refineRelated(tag.title,$index);" ng-bind="tag.title"></a>
 					</li>
 				</ul>
