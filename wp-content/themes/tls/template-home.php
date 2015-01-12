@@ -77,47 +77,40 @@ get_header(); ?>
 
 			<div class="container">
 
-				<h5 class="centred-heading grid-row">Subscriber exclusive</h5>
+				<h5 class="centred-heading grid-row"><?php _e( 'Subscriber exclusive', 'tls' ); ?></h5>
 
-				<div class="subscribe-grid">
-					<div class="card">
-						<h3 class="futura">Archive</h3>
-						<img class="max" src="http://placehold.it/380x192">
-						<p class="padded">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						</p>
-					</div>
-				</div>
+				<?php if( have_rows('subscriber_exclusive_items') ): ?>
+					<?php while ( have_rows('subscriber_exclusive_items') ) : the_row(); ?>
+						<?php
+							$subItemTitle = get_sub_field( 'title' );
+							$subItemImage = get_sub_field( 'image' );
+							$subItemDesc = get_sub_field( 'description' );
+							$subItemUrl = get_sub_field( 'url_link' );
+						?>
+						<div class="subscribe-grid">
+							<div class="card">
+								<?php if ( $subItemUrl ) : ?>
+									<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>" target="_self">
+										<h3 class="futura"><?php echo $subItemTitle; ?></h3>
+									</a>
+								<?php else : ?>
+									<h3 class="futura"><?php echo $subItemTitle ?></h3>
+								<?php endif; ?>
 
-				<div class="subscribe-grid">
-					<div class="card">
-						<h3 class="futura">Letters to the editor</h3>
-						<img class="max" src="http://placehold.it/380x192">
-						<p class="padded">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						</p>
-					</div>
-				</div>
-
-				<div class="subscribe-grid">
-					<div class="card">
-						<h3 class="futura">NB</h3>
-						<img class="max" src="http://placehold.it/380x192">
-						<p class="padded">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						</p>
-					</div>
-				</div>
-
-				<div class="subscribe-grid">
-					<div class="card">
-						<h3 class="futura">Wall street journal</h3>
-						<img class="max" src="http://placehold.it/380x192">
-						<p class="padded">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-						</p>
-					</div>
-				</div>
+								<?php if ( $subItemUrl ) : ?>
+									<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>">
+										<img class="max" src="<?php echo $subItemImage['url'] ?>" alt="<?php echo $subItemImage['alt']; ?>"/>
+									</a>
+								<?php else : ?>
+									<img class="max" src="<?php echo $subItemImage['url'] ?>" alt="<?php echo $subItemImage['alt']; ?>"/>
+								<?php endif; ?>
+								<p class="padded">
+									<?php echo $subItemDesc; ?>
+								</p>
+							</div>
+						</div>
+					<?php endwhile; ?>
+				<?php endif; ?>
 
 			</div>
 
@@ -132,21 +125,30 @@ get_header(); ?>
 					<div class="preview grid-row">
 
 						<div class="top">
-							<h3>This<br/>week's<br/>TLS</h3>
+							<h3><?php _e( 'This <br> week\'s <br> TLS', 'tls' ); ?></h3>
 						</div>
 
 						<div class="prevbody">
 
 							<div class="grid-6">
-								<h4 class="main">Lorem ipsum dolor sit.</h4>
+								<h4 class="main"><?php the_field( 'this_weeks_heading' ); ?></h4>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam veritatis amet placeat.
+									<?php the_field( 'this_weeks_text' ); ?>
 								</p>
-								<button>View edition</button>
+								<a href="<?php the_field( 'this_weeks_link_to_page' ) ?>"><button><?php _e( 'View edition', 'tls'); ?></button></a>
 							</div>
 
 							<div class="grid-6">
-								<img class="max" src="http://placehold.it/320x400">
+								<?php
+
+									$image = get_field('this_weeks_edition_image');
+
+									if( !empty($image) ):
+								?>
+
+										<img class="max" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+
+								<?php endif; ?>
 							</div>
 
 						</div>		
@@ -160,33 +162,30 @@ get_header(); ?>
 					<div class="preview grid-row">
 
 						<div class="top">
-							<h3>In next<br/>week's<br/>TLS</h3>
+							<h3><?php _e( 'In next <br/> week\'s <br/> TLS', 'tls') ?></h3>
 							<div class="date">
-								<span><u>OUT</u></span><br/>
-								<span>12th Nov 2014</span>
+								<span><u><?php _e( 'OUT', 'tls'); ?></u></span><br/>
+								<span>
+									<?php
+									$nextWeeksDate = DateTime::createFromFormat('Ymd', get_field('next_weeks_date'));
+									echo $nextWeeksDate->format( 'j M Y' );
+									?>
+								</span>
 							</div>
 						</div>
 
 						<div class="prevbody">
 
-							<ul>
-								<li>
-									<h4>Lorem ipsum.</h4>
-									<h5>Lorem ipsum dolor sit amet.</h5>
-								</li>
-								<li>
-									<h4>Adipisci, exercitationem.</h4>
-									<h5>Lorem ipsum dolor sit amet.</h5>
-								</li>
-								<li>
-									<h4>Ea, corporis.</h4>
-									<h5>Lorem ipsum dolor sit amet.</h5>
-								</li>
-								<li>
-									<h4>Animi, perspiciatis?</h4>
-									<h5>Lorem ipsum dolor sit amet.</h5>
-								</li>
-							</ul>
+							<?php if( have_rows('next_weeks_articles') ): ?>
+								<ul>
+							<?php while ( have_rows('next_weeks_articles') ) : the_row(); ?>
+									<li>
+										<h4><?php the_sub_field( 'author' ); ?></h4>
+										<h5><?php the_sub_field( 'title' ); ?></h5>
+									</li>
+							<?php endwhile; ?>
+								</ul>
+							<?php endif; ?>
 
 						</div>
 
