@@ -1,4 +1,4 @@
-.controller('home',['$scope','api','columns','objToArr',function ($scope, api, columns, objToArr){
+.controller('home',['$scope', '$sce', 'api','columns','objToArr',function ($scope, $sce, api, columns, objToArr){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -23,6 +23,10 @@
 
 		console.log($scope.col3)
 
-	})
+	});
+
+	$scope.formatEmbed = function(html) {
+		return $sce.trustAsHtml(html);
+	}
 
 }])

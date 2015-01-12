@@ -50,9 +50,11 @@
 	h4{
 
 		margin-bottom:10px;
+		word-wrap: break-word;
 		font:{
 			size:1.5em;
 			weight:bold;
+			family: $times;
 		}
 
 		a:hover{
@@ -167,5 +169,15 @@
 		
 		margin-bottom:15px;
 		font-size: 0.8em;
+	}
+}
+
+.blog-item {
+	
+	&.card {
+		
+		.futura {
+			margin-bottom: 5px;
+		}
 	}
 }
