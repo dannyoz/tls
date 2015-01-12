@@ -6,16 +6,18 @@
 
 		<div class="grid-row padded">
 			
-			<div class="grid-4 author-avatar">
+			<div class="blog-avatar">
 				<a href="#">
-					<img class="max circular" src="http://tls.localhost/wp-content/uploads/2015/01/whale.jpg"/>
+					<img class="max circular" src="http://placehold.it/90x90"/>
 				</a>
 			</div>
 
-			<div class="grid-7 push-1">
-				<h4><a href="{{blog.link}}">{{blog.title}}</a></h4>
-				<p class="futura"><a href="#">{{blog.author}}</a></p>
-				<p>{{blog.text}}</p>
+			<div class="blog-data">
+				<div class="inner">
+					<h4><a href="{{blog.link}}">{{blog.title}}</a></h4>
+					<p class="futura"><a href="#">{{blog.author}}</a></p>
+					<p>{{blog.text}}</p>
+				</div>				
 			</div>
 
 		</div>	
@@ -30,7 +32,7 @@
 
 	<a href="#"><img class="max" src="http://placehold.it/380x192"></a>
 
-	<div class="padded">
+	<div class="padded" ng-click="test()">
 
 		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>
 		<p ng-bind-html="formatEmbed(data.text)"></p>
@@ -38,7 +40,7 @@
 	</div>
 
 	<footer>
-		<p class="sub"><a href="#">derp</a></p>
+		<p class="sub"><a href="#">Of Green Leaf, Bird, And Flower</a></p>
 		<p class="futura"><a href="#">{{data.author}}</a></p>
 	</footer>
 
