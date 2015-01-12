@@ -100,12 +100,16 @@
 		.sub{
 
 			color: #706d73;
-			margin-bottom:5px;
+			margin-bottom: 0;
 			font: {
 				size:0.9em;
 				weight:500;
+				family: $futura;				
 			}
-			@extend .futura;
+			
+			a {
+				color: #706d73;
+			}
 		}
 
 		&:after{
@@ -120,6 +124,10 @@
 			right:0;
 			position:absolute;
 			@include afterBefore;
+		}
+
+		p {
+			letter-spacing: 0;
 		}
 	}
 
@@ -189,8 +197,19 @@
 	
 	&.card {
 
+		@media screen and (max-width: $mobile) {
+			padding: 20px;
+		}
+
 		h4 {
 			margin-bottom: 2px;
+		}
+
+		h3 {
+			@media screen and (max-width: $mobile) {
+				padding: 0;	
+				margin-bottom: 10px;
+			}
 		}
 		
 		p.futura {
@@ -199,10 +218,32 @@
 			margin-bottom: 8px;
 		}
 
-		.author-avatar {
-			img {
-				width: 90px;
-				height: 90px;
+		.padded {
+			@media screen and (max-width: $mobile) {
+				padding: 0;	
+			}
+		}
+
+		.blog-avatar {
+
+			@include grid-col(4);
+
+			@media screen and (max-width: $mobile) {
+				
+				@include grid-col(3);
+			}			
+		}
+
+		.blog-data {
+			
+			@include grid-col-last(8);
+
+			@media screen and (max-width: $mobile) {
+				@include grid-col-last(9);				
+			}
+
+			.inner {
+				padding-left: 5px;
 			}
 		}
 	}
