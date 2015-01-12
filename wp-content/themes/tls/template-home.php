@@ -47,7 +47,7 @@ get_header(); ?>
 				
 				<div  class="grid-6" ng-repeat="column in col2">
 					
-					<div class="card" ng-repeat="card in column">
+					<div ng-repeat="card in column">
 
 						<div tls-card="card"></div>
 
@@ -61,7 +61,7 @@ get_header(); ?>
 				
 				<div  class="grid-12" ng-repeat="column in col1">
 					
-					<div class="card" ng-repeat="card in column">
+					<div ng-repeat="card in column">
 
 						<div tls-card="card"></div>
 
