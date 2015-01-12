@@ -1400,7 +1400,6 @@ p.author, h4.author {
 }
 
 #comments {
-  display: none;
   padding-top: 30px;
 }
 #comments .comment-wrap {
