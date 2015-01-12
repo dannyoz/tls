@@ -6,7 +6,7 @@
 
 	api.getHomePage(url).then(function (result){
 
-		console.log(result)
+		console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
@@ -20,8 +20,6 @@
 			$scope.col3  = cols.col3
 
 		})
-
-		console.log($scope.col3)
 
 	});
 

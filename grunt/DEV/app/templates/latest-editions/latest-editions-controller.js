@@ -10,6 +10,8 @@
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
+			console.log(obj);
+
 			// Full object			
 			$scope.latestEdition = obj.latest_edition;			
 			// Edition sections articles				
