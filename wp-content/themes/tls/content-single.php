@@ -145,13 +145,6 @@
 		endif;
 	?> 
 
-	<?php
-		// If comments are open or we have at least one comment, load up the comment template
-		// if ( ('tls_articles' == get_post_type() || 'post' == get_post_type() ) && ( comments_open() || get_comments_number() ) ) :
-		// 	comments_template();
-		// endif;
-	?> 
-
 	<div id="related-content" ng-if="post.taxonomy_article_tags.length > 0">
 
 		<div class="container transition-3" ng-class="{loadingopacity:loadingTags}">

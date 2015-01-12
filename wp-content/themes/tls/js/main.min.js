@@ -28697,7 +28697,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.taxonomy_article_tags.length > 0){
+		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
 
 			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
 				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
@@ -28743,16 +28743,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
 			link   = (platform == 'fb') ? fbLink : twLink,
-			width  = 500,
-			height = 300,
 			params =   "scrollbars=no,
 						toolbar=no,
 						location=no,
 						menubar=no,
 						left=200,
 						top=200,
-						height="+height+",
-						width="+width;
+						height=500,
+						width=300";
 
 		window.open(link,"_blank",params);
 	}
@@ -28805,24 +28803,28 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				}
 
 				$scope.tags = [];
-				$scope.activeTags = []; 
+				$scope.activeTags = [];
 
-				for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
-					$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
-					$scope.activeTags.push({isApplied : false});
-				};
+				if($scope.post.taxonomy_article_tags){ 
 
-				$scope.orginalList = $scope.tags
+					for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+						$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+						$scope.activeTags.push({isApplied : false});
+					};
 
-				api.getRelatedContent($scope.tags).then(function (result){
-					var posts = result.posts;
+					$scope.orginalList = $scope.tags
 
-					columns.divide(posts).then(function (cols){
-						$scope.col1  = cols.col1
-						$scope.col2  = cols.col2
-						$scope.col3  = cols.col3
+					api.getRelatedContent($scope.tags).then(function (result){
+						var posts = result.posts;
+
+						columns.divide(posts).then(function (cols){
+							$scope.col1  = cols.col1
+							$scope.col2  = cols.col2
+							$scope.col3  = cols.col3
+						})
 					})
-				})
+
+				}
 			})
 		}
 	}

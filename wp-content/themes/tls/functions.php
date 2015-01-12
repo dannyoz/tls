@@ -194,3 +194,5 @@ add_action( 'init', 'tls_unregister_post_tag_taxonomy' );
 //
 //	return str_replace('%article_visibility%', $taxonomy_slug, $permalink);
 //}
+
+
