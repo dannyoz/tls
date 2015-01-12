@@ -40,10 +40,13 @@
 
 	$scope.truncate = function(str){
 
-		var trunc    = str.substring(0,200),
-			combined = trunc + " [...]"
+		if (!! str) {
+			var trunc    = str.substring(0,200),
+				combined = trunc + " [...]"
 
-		return combined
+			return combined
+		}
+		
 	}
 
 	$scope.loadMore = function(){

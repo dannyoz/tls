@@ -1975,7 +1975,7 @@ p.author {
 }
 .card h3 {
   text-transform: uppercase;
-  padding: 12px 25px 5px 25px;
+  padding: 12px 20px 5px 20px;
   font-size: 0.9em;
   font-weight: 500;
 }
@@ -2016,13 +2016,13 @@ p.author {
   margin-bottom: 20px;
 }
 .card .padded {
-  padding: 0 25px 20px 25px;
+  padding: 0 20px 20px 20px;
 }
 .card .embed {
   margin-bottom: 20px;
 }
 .card footer {
-  padding: 10px 25px;
+  padding: 10px 20px;
   background-color: #f2f2f2;
   position: relative;
 }
@@ -2140,8 +2140,17 @@ p.author {
   }
 }
 
-.blog-item.card .futura, .blog-item.card #main-header nav .search label, #main-header nav .search .blog-item.card label, .blog-item.card #main-header nav .search input[type="text"], #main-header nav .search .blog-item.card input[type="text"], .blog-item.card #main-header nav .search input[type="search"], #main-header nav .search .blog-item.card input[type="search"], .blog-item.card footer .sub {
-  margin-bottom: 5px;
+.blog-item.card h4 {
+  margin-bottom: 2px;
+}
+.blog-item.card p.futura, .blog-item.card footer p.sub {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+.blog-item.card .author-avatar img {
+  width: 90px;
+  height: 90px;
 }
 
 .accordian {

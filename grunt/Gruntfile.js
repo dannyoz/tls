@@ -41,7 +41,8 @@ module.exports = function(grunt) {
                     'DEV/app/templates/templates.js',
                     'DEV/app/**/*.js'
                 ],
-                dest: 'DEV/js/main.js',
+                //dest: 'DEV/js/main.js',
+                dest: '../wp-content/themes/tls/js/main.min.js'
             }
         },
 
@@ -60,7 +61,8 @@ module.exports = function(grunt) {
                     'DEV/app/**/*.js',
                     '../wp-content/themes/tls/*.php'
                 ],
-                tasks: ['ngtemplates','concat', 'uglify'],
+                //tasks: ['ngtemplates','concat', 'uglify'],
+                tasks: ['ngtemplates','concat'],
                 options: {
                     spawn: false
                 },
@@ -136,6 +138,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
 
     // RUN GRUNT 
-    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
+    //grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
+    grunt.registerTask('default', ['ngtemplates','concat', 'watch', 'compass', 'copy']);
 
 };
