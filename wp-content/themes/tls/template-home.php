@@ -77,7 +77,10 @@ get_header(); ?>
 
 			<div class="container">
 
-				<h5 class="centred-heading grid-row">Subscriber exclusive</h5>
+				<div class="title-icon icon">
+					<div class="icon-border icon-key"></div>
+					<h2>{{subscribersObj.title}}</h2>	
+				</div>	
 
 				<div class="subscribe-grid">
 					<div class="card">
