@@ -1,11 +1,13 @@
 #comments{
 
-	padding-top:30px;
+	padding-top:20px;
+	padding-bottom:50px;
 
 	.comment-wrap{
 
 		@include shift("push",3);
 		@include grid-col-last(6);
+		@include keyline(top,$light-keyline);
 
 		@media screen and (max-width:$tablet){
 
@@ -16,6 +18,8 @@
 		h3{
 
 			text-transform:uppercase;
+			margin-bottom:20px;
+			margin-top:30px;
 			font:{
 				weight:500;
 				size:1em;
