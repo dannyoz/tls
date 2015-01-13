@@ -196,6 +196,18 @@ function ajaxify_comments( $comment_ID, $comment_status ){
 }
 add_action( 'comment_post', 'ajaxify_comments', 20, 2 );
 
+function tls_make_post_excerpt( $post, $word_length = 55 ){
+	$text = $post->post_content;
+	$text = strip_shortcodes( $text );
+	$text = apply_filters( 'the_content', $text );
+	$text = str_replace( ']]>', ']]>', $text );
+
+	$excerpt_length = apply_filters( 'excerpt_length', $word_length );
+	$excerpt_more   = apply_filters( 'excerpt_more', ' ' . '[...]' );
+	$text           = wp_trim_words( $text, $excerpt_length, '' );
+	return $text . $excerpt_more;
+}
+
 /**
  * Modify Permalink for Articles Post Type
  */
