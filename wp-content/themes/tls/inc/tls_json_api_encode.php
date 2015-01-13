@@ -79,17 +79,27 @@ function tls_json_api_encode($response) {
         /**
          * TLS catagory filters
          */
+        
         $sections = get_terms( 'article_section' );
-
         foreach ($sections as $key => $value) {
-            $section_count = 0;
-            foreach ($response['posts'] as $postkey => $postvalue) {
+            
+            $sections_count_args = array(
+                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+                'post_status'       => 'publish',
+                's'                 => $search_query,
+                'tax_query'         =>  array(
+                                            'relation' => 'OR',
+                                            array(
+                                                'taxonomy' => 'article_section',
+                                                'field'    => 'term_id',
+                                                'terms'    => $value->term_id,
+                                            )
+                                        ),
+                );
 
-                $post_section = wp_get_post_terms($postvalue->id,'article_section');
-                $response['debug'] = $value->slug;
-                if ($value->slug == $post_section[0]->slug) { $section_count++; }
-               
-            }
+            $sections_count = new WP_Query($sections_count_args);
+            wp_reset_query();
+
 
            $response['articles_sections'][$value->slug] = array(
                 'item_label'        => $value->name,
@@ -97,8 +107,11 @@ function tls_json_api_encode($response) {
                 'json_query'        => 'tax_filter[article_section]='.$value->slug,
                 'taxonomy'          => $value->taxonomy,
                 'slug'              => $value->slug,
-                'search_count'      => (int) $section_count
+                'search_count'      => $sections_count->found_posts
             );
+
+           
+           
         }
 
     	/**
@@ -265,6 +278,8 @@ function tls_json_api_encode($response) {
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $post_type_search_archive;
+
+            $response['debug'] = (int) $wp_query->found_posts;
         }
 
         /**
