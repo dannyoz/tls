@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p>{{blog.text}}</p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded ng-click=test()><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p>{{data.text}}</p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p>{{data.text}}</p></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=data.soundcloud></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.text\"></p> --></div></div>"
   );
 
 
@@ -28554,7 +28554,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.directive('tlsCard',function(){
+.directive('tlsCard',['$sce',function ($sce) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -28574,7 +28574,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			} 
 		}
 	}
-})
+}])
 .directive('tlsLoading',['$timeout','$interval',function ($timeout,$interval){
 	return{
 		restrict: "AE",
@@ -29123,7 +29123,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.col3  = cols.col3
 
 		})
-
 	});
 
 	$scope.formatEmbed = function(html) {
@@ -29137,7 +29136,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
 
 		// Set scope variables of Current Edition

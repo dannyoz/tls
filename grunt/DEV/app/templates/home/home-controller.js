@@ -20,7 +20,6 @@
 			$scope.col3  = cols.col3
 
 		})
-
 	});
 
 	$scope.formatEmbed = function(html) {

@@ -1083,6 +1083,61 @@ p.author, h4.author {
 #home #subscriber.locked .card {
   border-color: #c4c4c4;
 }
+@media screen and (max-width: 450px) {
+  #home .blog-item.card {
+    padding: 20px;
+  }
+}
+#home .blog-item.card h4 {
+  margin-bottom: 2px;
+}
+@media screen and (max-width: 450px) {
+  #home .blog-item.card h3 {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}
+#home .blog-item.card p.futura {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+@media screen and (max-width: 450px) {
+  #home .blog-item.card .padded {
+    padding: 0;
+  }
+}
+#home .blog-item.card .blog-avatar {
+  float: left;
+  position: relative;
+  width: 31.66667%;
+  margin-right: 2.5%;
+}
+@media screen and (max-width: 450px) {
+  #home .blog-item.card .blog-avatar {
+    float: left;
+    position: relative;
+    width: 23.125%;
+    margin-right: 2.5%;
+  }
+}
+#home .blog-item.card .blog-data {
+  float: left;
+  position: relative;
+  width: 65.83333%;
+  margin-right: 0;
+}
+@media screen and (max-width: 450px) {
+  #home .blog-item.card .blog-data {
+    float: left;
+    position: relative;
+    width: 74.375%;
+    margin-right: 0;
+  }
+}
+#home .blog-item.card .blog-data .inner {
+  padding-left: 5px;
+}
 
 .single-post .container {
   overflow: hidden;
@@ -2218,62 +2273,6 @@ p.author, h4.author {
     margin-bottom: 15px;
     font-size: 0.8em;
   }
-}
-
-@media screen and (max-width: 450px) {
-  .blog-item.card {
-    padding: 20px;
-  }
-}
-.blog-item.card h4 {
-  margin-bottom: 2px;
-}
-@media screen and (max-width: 450px) {
-  .blog-item.card h3 {
-    padding: 0;
-    margin-bottom: 10px;
-  }
-}
-.blog-item.card p.futura {
-  border-bottom: 1px solid #d9d9d9;
-  padding-bottom: 10px;
-  margin-bottom: 8px;
-}
-@media screen and (max-width: 450px) {
-  .blog-item.card .padded {
-    padding: 0;
-  }
-}
-.blog-item.card .blog-avatar {
-  float: left;
-  position: relative;
-  width: 31.66667%;
-  margin-right: 2.5%;
-}
-@media screen and (max-width: 450px) {
-  .blog-item.card .blog-avatar {
-    float: left;
-    position: relative;
-    width: 23.125%;
-    margin-right: 2.5%;
-  }
-}
-.blog-item.card .blog-data {
-  float: left;
-  position: relative;
-  width: 65.83333%;
-  margin-right: 0;
-}
-@media screen and (max-width: 450px) {
-  .blog-item.card .blog-data {
-    float: left;
-    position: relative;
-    width: 74.375%;
-    margin-right: 0;
-  }
-}
-.blog-item.card .blog-data .inner {
-  padding-left: 5px;
 }
 
 .accordian {
