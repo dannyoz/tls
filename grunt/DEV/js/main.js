@@ -28461,6 +28461,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 }])
+.factory('commentApi',['$http','$q', function ($http,$q){
+	return {
+
+		post : function (path,formData){
+
+			$http.post(path,formData)
+				.success(function (data){
+
+					console.log('success', data);
+				})
+				.error(function (data){
+
+					console.log('error', data);
+				})
+		}
+	}
+}])
 .factory('niceDate',function(){
 	return{
 		format : function(d){
@@ -28682,7 +28699,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
-.controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
+.controller('article',[
+	'$scope',
+	'$sce',
+	'$location',
+	'$timeout',
+	'api',
+	'commentApi',
+	'columns',
+	'niceDate',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate){
 
 	$scope.sce        = $sce;
 	$scope.tags       = [];
@@ -28692,6 +28718,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
+
 		$scope.post = result.post
 		$scope.prev = result.previous_url
 		$scope.next = result.next_url
@@ -28723,6 +28750,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 
 		console.log(result)
+
 	})
 
 	$scope.format = function(date){
@@ -28736,6 +28764,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
 
 		return emailPath
+
 	}
 
 	$scope.socialLink = function(path,platform){
@@ -28753,6 +28782,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 						width=500";
 
 		window.open(link,"_blank",params);
+
 	}
 
 	$scope.chooseArticle = function(dir,path){
@@ -28823,7 +28853,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 							$scope.col3  = cols.col3
 						})
 					})
-
 				}
 			})
 		}
@@ -28872,6 +28901,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 			return $scope.tags
 		}
+	}
+
+	$scope.addComment = function(){
+
+		console.log('/wp-comments-post.php')
+
+		commentApi.post('/wp-comments-post.php', 'test data')
 	}
 
 }])

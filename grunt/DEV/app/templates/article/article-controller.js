@@ -1,4 +1,13 @@
-.controller('article',['$scope','$sce','$location','$timeout','api','columns','niceDate',function ($scope,$sce,$location,$timeout,api,columns,niceDate){
+.controller('article',[
+	'$scope',
+	'$sce',
+	'$location',
+	'$timeout',
+	'api',
+	'commentApi',
+	'columns',
+	'niceDate',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate){
 
 	$scope.sce        = $sce;
 	$scope.tags       = [];
@@ -8,6 +17,7 @@
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
+
 		$scope.post = result.post
 		$scope.prev = result.previous_url
 		$scope.next = result.next_url
@@ -39,6 +49,7 @@
 		}
 
 		console.log(result)
+
 	})
 
 	$scope.format = function(date){
@@ -52,6 +63,7 @@
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
 
 		return emailPath
+
 	}
 
 	$scope.socialLink = function(path,platform){
@@ -69,6 +81,7 @@
 						width=500";
 
 		window.open(link,"_blank",params);
+
 	}
 
 	$scope.chooseArticle = function(dir,path){
@@ -139,7 +152,6 @@
 							$scope.col3  = cols.col3
 						})
 					})
-
 				}
 			})
 		}
@@ -188,6 +200,13 @@
 
 			return $scope.tags
 		}
+	}
+
+	$scope.addComment = function(){
+
+		console.log('/wp-comments-post.php')
+
+		commentApi.post('/wp-comments-post.php', 'test data')
 	}
 
 }])
