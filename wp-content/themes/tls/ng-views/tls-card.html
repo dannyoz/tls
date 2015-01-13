@@ -30,12 +30,12 @@
 
 	<h3 class="futura"><a href="#">{{data.section.name}}</a></h3>
 
-	<a href="#"><img class="max" src="http://placehold.it/380x192"></a>
+	<a href="#"><img class="max" ng-src="{{data.image}}"></a>
 
 	<div class="padded" ng-click="test()">
 
 		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>
-		<p ng-bind-html="formatEmbed(data.text)"></p>
+		<p>{{data.text}}</p>
 
 	</div>
 
@@ -56,7 +56,7 @@
 	<div class="padded">
 
 		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>
-		<p ng-bind-html="formatEmbed(data.text)"></p>
+		<p>{{data.text}}</p>
 
 	</div>
 
