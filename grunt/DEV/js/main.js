@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://www.placecage.com/c/170/170\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'book'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=\"grid-row padded\"><div class=grid-4><a href=#><img class=\"max circular\" src=\"http://placehold.it/120x120\"></a></div><div class=\"grid-7 push-1\"><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.author}}</a></p><p><a href=#>{{data.subheading}}</a></p></div></div></div><div ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a href=#>{{data.heading}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div ng-if=\"data.type == 'poem'\"><h3 class=futura><a href=#>{{data.category}}</a></h3><div class=padded><h4><a href=#>{{data.title}}</a></h4><p><a href=#>{{data.excerpt}}</a></p></div><footer><p class=sub><a href=#>{{data.subheading}}</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p>{{blog.text}}</p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded ng-click=test()><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p>{{data.text}}</p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max src=http://placehold.it/380x192></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p>{{data.text}}</p></div></div>"
   );
 
 
@@ -28257,16 +28257,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
   $templateCache.put('article.html',
     "<article class=single-post ng-controller=article><div class=\"container relative\" ng-swipe-right=\"chooseArticle('prev')\" ng-swipe-left=\"chooseArticle('next')\"><div class=article-links><a href=\"\" ng-click=\"chooseArticle('next')\" class=next-article>Lorem ipsum dolor sit.</a> <a href=\"\" ng-click=\"chooseArticle('prev')\" class=prev-article>Lorem ipsum dolor sit amet.</a></div><div class=article-current ng-class={turn:pageTurn}><div class=grid-row><div class=\"grid-6 push-3\"><img class=max src=http://placehold.it/800x392></div></div><div class=grid-row><div class=article-body><h2>Lorem ipsum dolor sit.</h2><h4 class=author>Lorem ipsum.</h4><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><blockquote>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos neque laudantium nemo hic voluptatum illum saepe culpa asperiores dolores.</blockquote><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><img src=http://placehold.it/368x368><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis impedit, in nihil recusandae error inventore tenetur. Aliquid quaerat sequi harum obcaecati dolorum illum non dolore esse, expedita perferendis numquam repellendus ipsa molestiae tempore laborum tenetur unde, iusto veniam suscipit?</p></div></div></div></div></article>"
-  );
-
-
-  $templateCache.put('home.html',
-    "<section id=home ng-controller=home><div id=banner style=background-image:url(/wp-content/themes/tls/images/hero.jpg)><div class=container><div class=caption><p class=category>Memoir</p><h2>The soldier poets</h2><p class=excerpt>Does poetry carry more weight than history in the legacy of the First World War?</p></div></div><div class=gradient></div></div><div class=container><div ng-if=columns tls-columns=columns></div></div><div class=grid-row id=subscriber ng-class={locked:isLocked}><div class=container><h5 class=\"centred-heading grid-row\">Subscriber exclusive</h5><div class=subscribe-grid><div class=card><h3 class=futura>Archive</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Letters to the editor</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>NB</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div><div class=subscribe-grid><div class=card><h3 class=futura>Wall street journal</h3><img class=max src=http://placehold.it/380x192><p class=padded>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p></div></div></div></div></section>"
-  );
-
-
-  $templateCache.put('tls-column.html',
-    "<div class=grid-row ng-if=\"current == 'desktop'\"><div class=grid-4><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div></div><div class=grid-4><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div></div><div class=grid-4><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'tablet'\"><div class=grid-6><div class=card tls-card=cards[0]></div><div class=card tls-card=cards[1]></div><div class=card tls-card=cards[4]></div><div class=card tls-card=cards[6]></div><div class=card tls-card=cards[4]></div></div><div class=grid-6><div class=card tls-card=cards[2]></div><div class=card tls-card=cards[3]></div><div class=card tls-card=cards[5]></div><div class=card tls-card=cards[4]></div></div></div><div class=grid-row ng-if=\"current == 'mobile'\"><div class=grid-12><div class=card ng-repeat=\"card in cards\" tls-card=cards[$index]></div></div></div>"
   );
 
 
@@ -28344,7 +28334,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				parse  = tags.toString(),
 				path1  = "/tag/"+parse+"/?json=1",
 				path2  = "/?tag="+parse+"&json=1",
-				url    = (tags.length == 1)? path1 : path2;
+				url    = "/api/get_posts/?article_tags=" + parse;
 
 			//expose url for testing
 			defer.promise.url = url
@@ -28486,6 +28476,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		}
 	}
 })
+.factory('objToArr',function(){
+	return{
+		
+		convert: function(o) {
+
+			var result = [];
+			
+			for (var k in o) {
+				var ob = o[k];
+				result.push(ob);
+			}
+
+			return result;
+		}
+	}
+})
 .factory('tealium',function(){
 	return{
 		test : function(val1,val2,val3,val4){
@@ -28554,6 +28560,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard"
+		},
+		link : function(scope){
+			
+			console.log(scope.data);
+			
+			// Type of card (Object or Array)
+			var cardType = Object.prototype.toString.call(scope.data);
+
+			// Card is array, must be blog items
+			if(cardType === '[object Array]' && cardType.length > 0) {
+				scope.data.type = 'blog';
+			} 
 		}
 	}
 })
@@ -28670,6 +28688,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.tags       = [];
 	$scope.activeTags = []; 
 	$scope.firstLoad  = true;
+	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
@@ -28678,10 +28697,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.tags.length > 0){
+		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
 
-			for (var i = 0; i<$scope.post.tags.length; i++){
-				$scope.tags.push($scope.post.tags[i].title);
+			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 				$scope.activeTags.push({isApplied : false});
 			};
 
@@ -28708,6 +28727,32 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.format = function(date){
 		return niceDate.format(date);
+	}
+
+	$scope.emailLink = function(){
+
+		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
+			emailBody = $scope.post.url,
+			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+
+		return emailPath
+	}
+
+	$scope.socialLink = function(path,platform){
+
+		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+			twLink = "https://twitter.com/home?status=" + path,
+			link   = (platform == 'fb') ? fbLink : twLink,
+			params =   "scrollbars=no,
+						toolbar=no,
+						location=no,
+						menubar=no,
+						left=200,
+						top=200,
+						height=300,
+						width=500";
+
+		window.open(link,"_blank",params);
 	}
 
 	$scope.chooseArticle = function(dir,path){
@@ -28758,24 +28803,28 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				}
 
 				$scope.tags = [];
-				$scope.activeTags = []; 
+				$scope.activeTags = [];
 
-				for (var i = 0; i<$scope.post.tags.length; i++){
-					$scope.tags.push($scope.post.tags[i].title);
-					$scope.activeTags.push({isApplied : false});
-				};
+				if($scope.post.taxonomy_article_tags){ 
 
-				$scope.orginalList = $scope.tags
+					for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+						$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+						$scope.activeTags.push({isApplied : false});
+					};
 
-				api.getRelatedContent($scope.tags).then(function (result){
-					var posts = result.posts;
+					$scope.orginalList = $scope.tags
 
-					columns.divide(posts).then(function (cols){
-						$scope.col1  = cols.col1
-						$scope.col2  = cols.col2
-						$scope.col3  = cols.col3
+					api.getRelatedContent($scope.tags).then(function (result){
+						var posts = result.posts;
+
+						columns.divide(posts).then(function (cols){
+							$scope.col1  = cols.col1
+							$scope.col2  = cols.col2
+							$scope.col3  = cols.col3
+						})
 					})
-				})
+
+				}
 			})
 		}
 	}
@@ -28950,6 +28999,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.scrollState = "off";
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
+	$scope.mpuPosition = 4;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();
@@ -28961,10 +29011,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.loading   = false;
 		$scope.pageCount = result.pages
 
+		result.top_articles.splice(4,0,{"mpu" : true});
+
 		columns.divide(result.top_articles).then(function (cols){
 			$scope.topCol1  = cols.col1
 			$scope.topCol2  = cols.col2
 			$scope.topCol3  = cols.col3
+
+			console.log($scope.topCol3)
 		})
 
 
@@ -28981,10 +29035,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	$scope.truncate = function(str){
 
-		var trunc    = str.substring(0,200),
-			combined = trunc + " [...]"
+		if (!! str) {
+			var trunc    = str.substring(0,200),
+				combined = trunc + " [...]"
 
-		return combined
+			return combined
+		}
+		
 	}
 
 	$scope.loadMore = function(){
@@ -29044,7 +29101,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	}
 
 }])
-.controller('home',['$scope','api','columns',function ($scope, api, columns){
+.controller('home',['$scope', '$sce', 'api','columns','objToArr',function ($scope, $sce, api, columns, objToArr){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -29052,116 +29109,41 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 	api.getHomePage(url).then(function (result){
 
-		console.log(result)
+		console.log(result);	
 
-	})
+		$scope.page     = result.page
+		$scope.featured = result.featured_article
 
+		var cards = objToArr.convert(result.home_page_cards);
 
-	$scope.image = "hero"
+		columns.divide(cards).then(function (cols){
+
+			$scope.col1  = cols.col1
+			$scope.col2  = cols.col2
+			$scope.col3  = cols.col3
+
+		})
+
+	});
+
+	$scope.formatEmbed = function(html) {
+		return $sce.trustAsHtml(html);
+	}
 
 }])
-.directive('tlsColumns',function(){
-	return{
-		restrict:"A",
-		templateUrl : "tls-column.html",
-		scope : {
-			config : "=tlsColumns"
-		},
-		link : function(scope,element,attrs){
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
 
-			// Breakpoint vars
-			var tabletBP = 784,
-				mobileBP = 420;
-
-			scope.type   = scope.config.type
-			scope.cards  = scope.config.cards 
-			scope.width  = element[0].offsetWidth
-
-			//Bind the viewport calculations to the resize event
-			window.onresize = function(event) {
-
-				scope.$apply(function(){
-			    	scope.width = element[0].offsetWidth
-			    	scope.current = scope.viewport();
-			    })
-
-			};
-
-			//Calculate optimum viewport based on breakpoints
-			scope.viewport = function(){
-
-				if(scope.width>=tabletBP){
-					return 'desktop'
-				} else if(scope.width<tabletBP && scope.width>=mobileBP){
-					return 'tablet'
-				} else if(scope.width<mobileBP){
-					return 'mobile'
-				}
-			}
-
-			scope.sortCards = function(){
-
-				var maxColumns = 3;
-
-				function columnArrs(i){
-
-					if(i>1){
-						//console.log("column",i)
-						scope.columns = {};
-						scope.columns[i] = {}
-
-						for (var k=0;k<i+1;k++){
-							
-							scope.columns[i][k] = []
-
-
-						}
-
-						for(var j = 0;j<scope.cards.length;j++){
-
-
-							console.log(j)
-						}
-
-						console.log(scope.columns)
-					}	
-				}
-
-				columnArrs(2);
-
-				// for (var i = maxColumns; i >= 1; i--) {
-				// 	columnArrs(i);
-				// };
-			}
-
-			scope.sortCards();
-			scope.current = scope.viewport();
-		}
-	}
-})
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
-
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
 		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
 
-		// Convert an object to array
-		$scope.objectToArray = function(obj) {
-			
-			var result = [];
-			
-			for (var k in obj) {
-				var o = obj[k];
-				result.push(o);
-			}
-			return result;
-		}
-
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
+
+			console.log(obj);
 
 			// Full object			
 			$scope.latestEdition = obj.latest_edition;			
@@ -29178,11 +29160,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var subcriberPosts = $scope.objectToArray($scope.subscribersObj.articles);
+			var subcriberPosts = objToArr.convert($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
 
-			console.log(subcriberPosts);			
 			
 			// Devide columns for mansory layout
 			columns.divide(subcriberPosts).then(function (cols) {
@@ -29199,6 +29180,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			$scope.setCurrentEditionObj(result);			
 		});
 
+
 		$scope.chooseEdition = function(dir, path){
 
 			//Only turn page if path is defined
@@ -29207,7 +29189,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getArticle(path).then(function (result){
+				api.getArticle(path).then(function (result) {
 
 					$scope.loading = false;
 					$scope.dir = dir;

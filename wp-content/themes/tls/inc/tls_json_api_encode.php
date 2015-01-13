@@ -504,7 +504,8 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $section[0]->name,
                     'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
                 ),
-                'image'         => $thumbnail_image
+                'image'         => $thumbnail_image,
+                'soundcloud'    => get_field( 'soundcloud_embed_code', $card_post->ID )
             );
 
             // Iterate to next count slot

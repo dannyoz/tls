@@ -25,6 +25,10 @@
 			max-width:$container;
 			padding:0 20px;
 
+			@media screen and (max-width: $mobile) {
+				padding:0 15px;				
+			}
+
 			&.relative{
 				position: relative;
 			}

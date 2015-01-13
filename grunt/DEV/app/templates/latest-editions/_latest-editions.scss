@@ -81,6 +81,7 @@
 			font-size: 20px;
 			margin-bottom: 5px;
 			line-height: 24px;
+			word-wrap: break-word;
 		}
 
 		.title-small {
@@ -218,14 +219,13 @@
 		h2 {
 			text-align: center;
 			font-size: 24px;
-			font-family: $futura;
 			font-weight: normal;
 			text-transform: uppercase;
-			letter-spacing: 3px;
 			font-weight: 500;
 			padding: 0;
 			margin: 0;
 			line-height: 115px;
+			@extend .futura;
 
 			@media (max-width: $mobile) {
 				font-size: 18px;

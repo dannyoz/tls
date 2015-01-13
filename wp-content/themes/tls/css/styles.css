@@ -69,6 +69,11 @@ body {
   max-width: 1200px;
   padding: 0 20px;
 }
+@media screen and (max-width: 450px) {
+  .container {
+    padding: 0 15px;
+  }
+}
 .container.relative {
   position: relative;
 }
@@ -748,7 +753,7 @@ em, i {
   font-style: italic;
 }
 
-.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], .card footer .sub {
+.futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #home #subscriber h2, #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
@@ -757,7 +762,7 @@ em, i {
   text-transform: uppercase;
 }
 
-p.author {
+p.author, h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
   font-size: 1em;
@@ -794,6 +799,7 @@ p.author {
 }
 #main-header #header-top #brand {
   padding: 30px 0;
+  min-height: 50px;
 }
 #main-header #header-top #brand #logo {
   display: block;
@@ -807,13 +813,28 @@ p.author {
   margin-bottom: 0;
   padding-right: 130px;
   text-transform: uppercase;
-  font-weight: bold;
+  font-family: "Times New Roman", "Times", serif;
+  font-weight: 500;
   font-size: 1.2em;
 }
 #main-header #header-top #brand .strap {
   margin-top: 3px;
   padding-right: 130px;
+  font-family: "Times New Roman", "Times", serif;
   font-style: italic;
+}
+@media screen and (max-width: 700px) {
+  #main-header #header-top #brand .sub {
+    font-size: 1em;
+  }
+  #main-header #header-top #brand .strap {
+    font-size: 0.8em;
+  }
+}
+@media screen and (max-width: 620px) {
+  #main-header #header-top #brand .sub, #main-header #header-top #brand .strap {
+    display: none;
+  }
 }
 #main-header #header-top #user {
   right: 20px;
@@ -989,6 +1010,44 @@ p.author {
   float: left;
   width: 100%;
   clear: both;
+  background-color: #e6e6e6;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+#home #subscriber h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  line-height: 115px;
+}
+@media (max-width: 450px) {
+  #home #subscriber h2 {
+    font-size: 18px;
+  }
+}
+#home #subscriber .title-icon {
+  position: relative;
+  height: 125px;
+  padding: 30px 0 10px 0;
+}
+#home #subscriber .icon-border {
+  width: 66px;
+  height: 90px;
+  border-bottom: 4px solid black;
+  position: absolute;
+  left: 50%;
+  margin-left: -33px;
+}
+#home #subscriber .icon-border:before {
+  font-size: 36px;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  color: #706d73;
 }
 #home #subscriber .subscribe-grid {
   float: left;
@@ -1010,6 +1069,14 @@ p.author {
     margin-right: 0;
   }
 }
+@media screen and (max-width: 450px) {
+  #home #subscriber .subscribe-grid {
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 2.5%;
+  }
+}
 #home #subscriber.locked {
   background-color: #e6e6e6;
 }
@@ -1019,6 +1086,16 @@ p.author {
 
 .single-post .container {
   overflow: hidden;
+}
+.single-post .share-bar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.single-post .share-bar a {
+  margin-left: 10px;
+}
+.single-post .share-bar a:first-child {
+  margin-left: 0;
 }
 .single-post .col-wide {
   margin-left: 25.625%;
@@ -1369,7 +1446,6 @@ p.author {
 }
 
 #comments {
-  display: none;
   padding-top: 30px;
 }
 #comments .comment-wrap {
@@ -1698,6 +1774,7 @@ p.author {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
+  word-wrap: break-word;
 }
 #latest-edition .edition-item .title-small {
   text-transform: none;
@@ -1837,10 +1914,8 @@ p.author {
 #latest-edition .editions-bottom h2 {
   text-align: center;
   font-size: 24px;
-  font-family: "futura-pt", "Arial", sans-serif;
   font-weight: normal;
   text-transform: uppercase;
-  letter-spacing: 3px;
   font-weight: 500;
   padding: 0;
   margin: 0;
@@ -1958,7 +2033,7 @@ p.author {
 }
 .card h3 {
   text-transform: uppercase;
-  padding: 12px 25px 5px 25px;
+  padding: 12px 20px 5px 20px;
   font-size: 0.9em;
   font-weight: 500;
 }
@@ -1976,8 +2051,10 @@ p.author {
 }
 .card h4 {
   margin-bottom: 10px;
+  word-wrap: break-word;
   font-size: 1.5em;
   font-weight: bold;
+  font-family: "Times New Roman", "Times", serif;
 }
 .card h4 a:hover {
   color: #d73f2b;
@@ -1997,21 +2074,25 @@ p.author {
   margin-bottom: 20px;
 }
 .card .padded {
-  padding: 0 25px 20px 25px;
+  padding: 0 20px 20px 20px;
 }
 .card .embed {
   margin-bottom: 20px;
 }
 .card footer {
-  padding: 10px 25px;
+  padding: 10px 20px;
   background-color: #f2f2f2;
   position: relative;
 }
 .card footer .sub {
   color: #706d73;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   font-size: 0.9em;
   font-weight: 500;
+  font-family: "futura-pt", "Arial", sans-serif;
+}
+.card footer .sub a {
+  color: #706d73;
 }
 .card footer:after {
   height: 0;
@@ -2025,6 +2106,9 @@ p.author {
   display: block;
   content: "";
 }
+.card footer p {
+  letter-spacing: 0;
+}
 .card:hover {
   border-color: #ccc;
   top: -3px;
@@ -2037,6 +2121,21 @@ p.author {
 }
 .card.private footer:after {
   border-right-color: #e6e6e6;
+}
+.card .mpu {
+  overflow: hidden;
+  min-height: 300px;
+  position: relative;
+}
+.card .mpu img {
+  max-width: 100% !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .tls-mansonry {
@@ -2119,6 +2218,62 @@ p.author {
     margin-bottom: 15px;
     font-size: 0.8em;
   }
+}
+
+@media screen and (max-width: 450px) {
+  .blog-item.card {
+    padding: 20px;
+  }
+}
+.blog-item.card h4 {
+  margin-bottom: 2px;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card h3 {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}
+.blog-item.card p.futura {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card .padded {
+    padding: 0;
+  }
+}
+.blog-item.card .blog-avatar {
+  float: left;
+  position: relative;
+  width: 31.66667%;
+  margin-right: 2.5%;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card .blog-avatar {
+    float: left;
+    position: relative;
+    width: 23.125%;
+    margin-right: 2.5%;
+  }
+}
+.blog-item.card .blog-data {
+  float: left;
+  position: relative;
+  width: 65.83333%;
+  margin-right: 0;
+}
+@media screen and (max-width: 450px) {
+  .blog-item.card .blog-data {
+    float: left;
+    position: relative;
+    width: 74.375%;
+    margin-right: 0;
+  }
+}
+.blog-item.card .blog-data .inner {
+  padding-left: 5px;
 }
 
 .accordian {
@@ -2466,7 +2621,7 @@ p.author {
 }
 
 #edition-preview {
-  padding: 20px 0;
+  padding: 40px 0;
   float: left;
   width: 100%;
   clear: both;

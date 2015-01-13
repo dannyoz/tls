@@ -4,6 +4,7 @@
 	$scope.tags       = [];
 	$scope.activeTags = []; 
 	$scope.firstLoad  = true;
+	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
@@ -12,10 +13,10 @@
 		$scope.next = result.next_url
 
 		// Get related content
-		if($scope.post.tags.length > 0){
+		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
 
-			for (var i = 0; i<$scope.post.tags.length; i++){
-				$scope.tags.push($scope.post.tags[i].title);
+			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
 				$scope.activeTags.push({isApplied : false});
 			};
 
@@ -42,6 +43,32 @@
 
 	$scope.format = function(date){
 		return niceDate.format(date);
+	}
+
+	$scope.emailLink = function(){
+
+		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
+			emailBody = $scope.post.url,
+			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+
+		return emailPath
+	}
+
+	$scope.socialLink = function(path,platform){
+
+		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+			twLink = "https://twitter.com/home?status=" + path,
+			link   = (platform == 'fb') ? fbLink : twLink,
+			params =   "scrollbars=no,
+						toolbar=no,
+						location=no,
+						menubar=no,
+						left=200,
+						top=200,
+						height=300,
+						width=500";
+
+		window.open(link,"_blank",params);
 	}
 
 	$scope.chooseArticle = function(dir,path){
@@ -92,24 +119,28 @@
 				}
 
 				$scope.tags = [];
-				$scope.activeTags = []; 
+				$scope.activeTags = [];
 
-				for (var i = 0; i<$scope.post.tags.length; i++){
-					$scope.tags.push($scope.post.tags[i].title);
-					$scope.activeTags.push({isApplied : false});
-				};
+				if($scope.post.taxonomy_article_tags){ 
 
-				$scope.orginalList = $scope.tags
+					for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+						$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+						$scope.activeTags.push({isApplied : false});
+					};
 
-				api.getRelatedContent($scope.tags).then(function (result){
-					var posts = result.posts;
+					$scope.orginalList = $scope.tags
 
-					columns.divide(posts).then(function (cols){
-						$scope.col1  = cols.col1
-						$scope.col2  = cols.col2
-						$scope.col3  = cols.col3
+					api.getRelatedContent($scope.tags).then(function (result){
+						var posts = result.posts;
+
+						columns.divide(posts).then(function (cols){
+							$scope.col1  = cols.col1
+							$scope.col2  = cols.col2
+							$scope.col3  = cols.col3
+						})
 					})
-				})
+
+				}
 			})
 		}
 	}

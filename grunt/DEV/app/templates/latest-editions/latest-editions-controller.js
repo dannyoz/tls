@@ -1,26 +1,16 @@
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate',
+.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
 
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate) {
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
 		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
 
-		// Convert an object to array
-		$scope.objectToArray = function(obj) {
-			
-			var result = [];
-			
-			for (var k in obj) {
-				var o = obj[k];
-				result.push(o);
-			}
-			return result;
-		}
-
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
+
+			console.log(obj);
 
 			// Full object			
 			$scope.latestEdition = obj.latest_edition;			
@@ -37,11 +27,10 @@
 			$scope.regularsObj = $scope.currentEdition.regulars;
 			// Subscribers content
 			$scope.subscribersObj = $scope.currentEdition.subscribers;
-			var subcriberPosts = $scope.objectToArray($scope.subscribersObj.articles);
+			var subcriberPosts = objToArr.convert($scope.subscribersObj.articles);
 
 			$scope.loading   = false;
 
-			console.log(subcriberPosts);			
 			
 			// Devide columns for mansory layout
 			columns.divide(subcriberPosts).then(function (cols) {
@@ -58,6 +47,7 @@
 			$scope.setCurrentEditionObj(result);			
 		});
 
+
 		$scope.chooseEdition = function(dir, path){
 
 			//Only turn page if path is defined
@@ -66,7 +56,7 @@
 				var duration = 400;
 				$scope.loading = true;
 
-				api.getArticle(path).then(function (result){
+				api.getArticle(path).then(function (result) {
 
 					$scope.loading = false;
 					$scope.dir = dir;

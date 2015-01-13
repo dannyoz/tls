@@ -35,21 +35,29 @@ $articles_archive = new WP_Query($articles_archive_args);
 
 				<div class="grid-row" ng-if="size == 'desktop'">
 
-					<div  class="grid-4" ng-repeat="column in topCol3">
+					<div class="grid-4" ng-repeat="column in topCol3">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<p ng-bind-html="truncate(card.content)"></p>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
@@ -61,18 +69,26 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in topCol2">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<p ng-bind-html="truncate(card.content)"></p>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
@@ -84,18 +100,26 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in topCol1">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<p ng-bind-html="truncate(card.content)"></p>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
@@ -113,18 +137,26 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div  class="grid-4" ng-repeat="column in col3">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<div ng-bind-html="card.excerpt"></div>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
@@ -136,18 +168,26 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in col2">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<div ng-bind-html="card.excerpt"></div>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
@@ -159,18 +199,26 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in col1">
 
 						<div class="card" ng-repeat="card in column" ng-class="{private:card.taxonomy_article_visibility[0].slug == 'private'}">
-							<h3 class="futura">
-								<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
-								<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
-							</h3>
-							<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
-							<div class="padded">
-								<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-								<div ng-bind-html="card.excerpt"></div>
+							
+							<div ng-if="!card.mpu">
+								<h3 class="futura">
+									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
+								</h3>
+								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
+								<div class="padded">
+									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
+									<div ng-bind-html="card.excerpt"></div>
+								</div>
+								<footer>
+									<p class="futura" ng-bind="card.author.name"></p>
+								</footer>
 							</div>
-							<footer>
-								<p class="futura" ng-bind="card.author.name"></p>
-							</footer>
+
+							<div class="mpu" ng-if="card.mpu">
+								<script type="text/javascript" src="http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?"></script>
+							</div>
+
 						</div>
 
 					</div>
