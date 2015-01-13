@@ -37,9 +37,7 @@ get_header(); ?>
 					<div class="card" ng-repeat="card in column">
 
 						<h3 class="futura">
-							<a href="/category/a-dons-life/" ng-if="card.categories[0].slug == 'a-dons-life'">A don's life</a>
-							<a href="/category/listen/" ng-if="card.categories[0].slug == 'listen'">Listen</a>
-							<a href="/category/tls-blogs/" ng-if="card.categories[0].slug != 'a-dons-life' && card.categories[0].slug != 'listen'">TLS blog</a>
+							<a ng-attr-href="{{card.category_url}}">{{card.categories[0].title}}</a>
 						</h3>
 
 						<div class="grid-row padded" ng-if="card.categories[0].slug != 'listen'">
@@ -78,9 +76,7 @@ get_header(); ?>
 					<div class="card" ng-repeat="card in column">
 
 						<h3 class="futura">
-							<a href="/category/a-dons-life/" ng-if="card.categories[0].slug == 'a-dons-life'">A don's life</a>
-							<a href="/category/listen/" ng-if="card.categories[0].slug == 'listen'">Listen</a>
-							<a href="/category/tls-blogs/" ng-if="card.categories[0].slug != 'a-dons-life' && card.categories[0].slug != 'listen'">TLS blog</a>
+							<a ng-attr-href="{{card.category_url}}">{{card.categories[0].title}}</a>
 						</h3>
 
 						<div class="grid-row padded" ng-if="card.categories[0].slug != 'listen'">
@@ -119,9 +115,7 @@ get_header(); ?>
 					<div class="card" ng-repeat="card in column">
 
 						<h3 class="futura">
-							<a href="/category/a-dons-life/" ng-if="card.categories[0].slug == 'a-dons-life'">A don's life</a>
-							<a href="/category/listen/" ng-if="card.categories[0].slug == 'listen'">Listen</a>
-							<a href="/category/tls-blogs/" ng-if="card.categories[0].slug != 'a-dons-life' && card.categories[0].slug != 'listen'">TLS blog</a>
+							<a ng-attr-href="{{card.category_url}}">{{card.categories[0].title}}</a>
 						</h3>
 
 						<div class="grid-row padded" ng-if="card.categories[0].slug != 'listen'">
