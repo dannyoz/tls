@@ -1,4 +1,4 @@
-.directive('tlsCard',function(){
+.directive('tlsCard',['$sce',function ($sce) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -18,4 +18,4 @@
 			} 
 		}
 	}
-})
+}])
