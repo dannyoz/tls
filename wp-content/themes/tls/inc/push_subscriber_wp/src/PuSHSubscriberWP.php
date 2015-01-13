@@ -234,8 +234,9 @@ class PuSHSubscriberWP {
 
 	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
 
-	    	// echo $_REQUEST['hub_challenge'];
-	    	// exit();
+			if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
+				include_once 'simplexml-feed.php';
+			}
 
 	    	$domain = site_url();
 		    $subscriber_id = $wp->query_vars['subscription_id'];
@@ -250,9 +251,7 @@ class PuSHSubscriberWP {
 	}
 
 	public function pushfeed_notification($raw = '', $domain = '', $subscriber_id ='') {
-		var_dump($_REQUEST);
-		exit();
-		//include_once 'simplexml-feed.php';
+		include_once 'simplexml-feed.php';
 	}
 
 }

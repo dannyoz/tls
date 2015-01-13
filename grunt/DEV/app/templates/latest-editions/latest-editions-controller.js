@@ -4,7 +4,6 @@
 
 		$scope.ready   = false;
 		$scope.loading = true;
-		//var path = 'http://tls.localhost/grunt/DEV/app/templates/latest-editions/latest-editions.json';
 		var path = window.location.href;
 
 		// Set scope variables of Current Edition

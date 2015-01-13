@@ -41,7 +41,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
@@ -72,7 +72,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
@@ -103,7 +103,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind-html="card.taxonomy_article_section[0].name"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
@@ -140,7 +140,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind="card.taxonomy_article_section[0].title"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
@@ -171,7 +171,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind="card.taxonomy_article_section[0].title"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />
@@ -202,7 +202,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 							
 							<div ng-if="!card.mpu">
 								<h3 class="futura">
-									<a ng-attr-href="/article_section/{{card.taxonomy_article_section[0].slug}}" ng-bind="card.taxonomy_article_section[0].title"></a>
+									<a ng-attr-href="{{card.taxonomy_article_section_url}}" ng-bind="card.taxonomy_article_section[0].title"></a>
 									<i ng-if="card.taxonomy_article_visibility[0].slug == 'private'" class="icon icon-key"></i>
 								</h3>
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url[0].length > 0" ng-attr-src="{{card.custom_fields.thumbnail_image_url[0]}}" />

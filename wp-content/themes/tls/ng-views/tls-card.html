@@ -3,7 +3,7 @@
 	<div class="blog-item card" ng-repeat="blog in data">
 		
 		<h3 class="futura"><a href="#">Blog</a></h3>
-
+		
 		<div class="grid-row padded">
 			
 			<div class="blog-avatar">
@@ -16,7 +16,7 @@
 				<div class="inner">
 					<h4><a href="{{blog.link}}">{{blog.title}}</a></h4>
 					<p class="futura"><a href="#">{{blog.author}}</a></p>
-					<p>{{blog.text}}</p>
+					<p ng-bind-html="blog.text"></p>
 				</div>				
 			</div>
 
@@ -30,12 +30,12 @@
 
 	<h3 class="futura"><a href="#">{{data.section.name}}</a></h3>
 
-	<a href="#"><img class="max" src="http://placehold.it/380x192"></a>
+	<a href="#"><img class="max" ng-src="{{data.image}}"></a>
 
-	<div class="padded" ng-click="test()">
+	<div class="padded">
 
 		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>
-		<p ng-bind-html="formatEmbed(data.text)"></p>
+		<p ng-bind-html="data.text"></p>
 
 	</div>
 
@@ -51,12 +51,11 @@
 
 	<h3 class="futura"><a href="#">{{data.section.name}}</a></h3>
 
-	<a href="#"><img class="max" src="http://placehold.it/380x192"></a>
-
 	<div class="padded">
 
-		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>
-		<p ng-bind-html="formatEmbed(data.text)"></p>
+		<!-- <div class="embed" ng-bind-html="data.soundcloud"></div> -->
+		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>		
+		<p ng-bind-html="data.text"></p>
 
 	</div>
 

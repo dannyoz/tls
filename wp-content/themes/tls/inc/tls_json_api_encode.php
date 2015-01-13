@@ -79,17 +79,27 @@ function tls_json_api_encode($response) {
         /**
          * TLS catagory filters
          */
+        
         $sections = get_terms( 'article_section' );
-
         foreach ($sections as $key => $value) {
-            $section_count = 0;
-            foreach ($response['posts'] as $postkey => $postvalue) {
+            
+            $sections_count_args = array(
+                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
+                'post_status'       => 'publish',
+                's'                 => $search_query,
+                'tax_query'         =>  array(
+                                            'relation' => 'OR',
+                                            array(
+                                                'taxonomy' => 'article_section',
+                                                'field'    => 'term_id',
+                                                'terms'    => $value->term_id,
+                                            )
+                                        ),
+                );
 
-                $post_section = wp_get_post_terms($postvalue->id,'article_section');
-                $response['debug'] = $value->slug;
-                if ($value->slug == $post_section[0]->slug) { $section_count++; }
-               
-            }
+            $sections_count = new WP_Query($sections_count_args);
+            wp_reset_query();
+
 
            $response['articles_sections'][$value->slug] = array(
                 'item_label'        => $value->name,
@@ -97,8 +107,11 @@ function tls_json_api_encode($response) {
                 'json_query'        => 'tax_filter[article_section]='.$value->slug,
                 'taxonomy'          => $value->taxonomy,
                 'slug'              => $value->slug,
-                'search_count'      => (int) $section_count
+                'search_count'      => $sections_count->found_posts
             );
+
+           
+           
         }
 
     	/**
@@ -265,6 +278,8 @@ function tls_json_api_encode($response) {
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
             $response['posts'] = $post_type_search_archive;
+
+            $response['debug'] = (int) $wp_query->found_posts;
         }
 
         /**
@@ -426,7 +441,7 @@ function tls_home_page_json_api_encode($response) {
             'id'                => $featured_article->ID,
             'title'             => $featured_article->post_title,
             'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
-            'text'              => wp_strip_all_tags( substr( $featured_article->post_content, 0, 100 ) ) . '...',
+            'text'              => $featured_article->post_excerpt,
             'link'              => get_permalink( $featured_article->ID ),
             'images'            => $images
         );
@@ -445,11 +460,11 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => wp_strip_all_tags( substr( $blog_card->post_content, 0, 50 ) ) . '...',
+                'text'          => $blog_card->post_excerpt,
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
-                    'link'      => site_url() . '/' . $categories[0]->taxonomy . '/' . $categories[0]->slug
+                    'link'      => get_term_link( $categories[0]->term_id, $categories[0]->taxonomy )
                 ),
             );
         }
@@ -477,20 +492,25 @@ function tls_home_page_json_api_encode($response) {
                 $thumbnail_image = '';
             }
 
+            // Get Soundcloud Embed Code Custom Field Value using WP get_post_custom to return correct HTML output
+            // because ACF get_field in the JSON API was returning all the tags with HTML stripped and encoded
+            $card_post_custom_fields = get_post_custom( $card_post->ID );
+            $card_post_soundcloud_custom_field = $card_post_custom_fields['soundcloud_embed_code'];
+
             // Add Cards to the JSON Response in the specific count slot
             $response['home_page_cards']['card_' . $home_page_card_count] = array(
                 'type'          => $card_type,
                 'id'            => $card_post->ID,
                 'title'         => $card_post->post_title,
                 'author'        => get_the_author_meta( 'display_name', $card_post->post_author ),
-                'text'          => substr( $card_post->post_content, 0, 50 ) . '...',
+                'text'          => $card_post->post_excerpt,
                 'link'          => get_permalink( $card_post->ID ),
                 'section'       => array(
                     'name'      => $section[0]->name,
-                    'link'      => site_url() . '/' . $section[0]->taxonomy . '/' . $section[0]->slug
+                    'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
                 ),
                 'image'         => $thumbnail_image,
-                'soundcloud'    => get_field( 'soundcloud_embed_code', $card_post->ID )
+                'soundcloud'    => $card_post_soundcloud_custom_field[0]
             );
 
             // Iterate to next count slot
@@ -679,12 +699,16 @@ function tls_discover_json_api_encode($response) {
             // Add Article ID into the top_section_articles array
             $top_section_articles[] = $top_section_article->ID;
 
+            // Get Taxonomies
+            $top_section_article_section = wp_get_post_terms( $top_section_article->ID, 'article_section' );
+            $top_section_article_visibility = wp_get_post_terms( $top_section_article->ID, 'article_visibility' );
+
             // Add this article into top_articles array from the JSON Response Object
             $response['top_articles'][] = array(
                 'id'                            => $top_section_article->ID,
                 'url'                           => get_permalink( $top_section_article->ID ),
                 'title'                         => $top_section_article->post_title,
-                'excerpt'                       => str_replace( '[...]', '', apply_filters( 'the_excerpt', $top_section_article->post_excerpt ) ),
+                'excerpt'                       => $top_section_article->post_excerpt,
                 'author'                        => array(
                     'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author ),
                     'slug'                      => get_the_author_meta( 'slug', $top_section_article->post_author ),
@@ -692,8 +716,9 @@ function tls_discover_json_api_encode($response) {
                 'custom_fields'                 => array(
                     'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID )
                 ),
-                'taxonomy_article_section'      => wp_get_post_terms( $top_section_article->ID, 'article_section' ),
-                'taxonomy_article_visibility'   => wp_get_post_terms( $top_section_article->ID, 'article_visibility' ),
+                'taxonomy_article_section'      => $top_section_article_section,
+                'taxonomy_article_section_url'  => get_term_link( $top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
+                'taxonomy_article_visibility'   => $top_section_article_visibility,
             );
 
         } // END Loop of top Articles from each Article Section
@@ -717,6 +742,12 @@ function tls_discover_json_api_encode($response) {
         // Override query inside the $wp_query global to be able to use the JSON API get_posts
         $wp_query->query = $articles_archive_args;
         $articles_archive = $json_api->introspector->get_posts($wp_query->query);
+
+        foreach ( $articles_archive as $article_post ) {
+            $article_section_terms = wp_get_post_terms( $article_post->id, 'article_section' );
+
+            $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
+        }
 
         // Update JSON Response Object for the main Articles Archive
         $response['count'] = count($articles_archive);
@@ -776,6 +807,13 @@ function tls_blogs_archive_json_api_encode($response) {
 
         $wp_query->query = $blogs_archive_args;
         $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
+
+        foreach ( $blogs_archive as $blog_post ) {
+            $categories = wp_get_post_terms( $blog_post->id, 'category' );
+
+            $blog_post->category_url = get_term_link( $categories[0]->term_id, $categories[0]->taxonomy );
+        }
+
         $response['count'] = count($blogs_archive);
         $response['count_total'] = (int) $wp_query->found_posts;
         $response['pages'] = $wp_query->max_num_pages;

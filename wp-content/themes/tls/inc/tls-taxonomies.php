@@ -67,6 +67,7 @@ function tls_taxonomies() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'rewrite'					 => array( 'slug' => 'article-section' )
 	);
 	register_taxonomy( 'article_section', array('tls_articles'), $article_section_args );
 
