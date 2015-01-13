@@ -441,7 +441,7 @@ function tls_home_page_json_api_encode($response) {
             'id'                => $featured_article->ID,
             'title'             => $featured_article->post_title,
             'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
-            'text'              => wp_strip_all_tags( substr( $featured_article->post_content, 0, 100 ) ) . '...',
+            'text'              => $featured_article->post_excerpt,
             'link'              => get_permalink( $featured_article->ID ),
             'images'            => $images
         );
@@ -460,7 +460,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => wp_strip_all_tags( substr( $blog_card->post_content, 0, 50 ) ) . '...',
+                'text'          => $blog_card->post_excerpt,
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -498,7 +498,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $card_post->ID,
                 'title'         => $card_post->post_title,
                 'author'        => get_the_author_meta( 'display_name', $card_post->post_author ),
-                'text'          => substr( $card_post->post_content, 0, 50 ) . '...',
+                'text'          => $card_post->post_excerpt,
                 'link'          => get_permalink( $card_post->ID ),
                 'section'       => array(
                     'name'      => $section[0]->name,
