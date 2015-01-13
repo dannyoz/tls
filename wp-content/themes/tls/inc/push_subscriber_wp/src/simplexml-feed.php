@@ -1,7 +1,11 @@
 <?php
 
-// Sanitise URL using WP function esc_url() and assign it to $feedUrl variable
-$feedUrl = esc_url('http://www.vfwebsolutions.com/showcase/tlspush/feed/atom/');
+$feedUrl = false;
+
+if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
+	// Sanitise URL using WP function esc_url() and assign it to $feedUrl variable
+	$feedUrl = esc_url( wp_strip_all_tags( $_GET['pull_url'] ) );
+}
 
 // Get XML contents from teh feed URL
 $rawFeed = file_get_contents($feedUrl);
