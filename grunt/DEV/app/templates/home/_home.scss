@@ -1,5 +1,22 @@
 #home {
 
+	.container {
+
+		@media screen and (max-width: $mobile) {
+
+			p.excerpt {
+				
+				&.mobile {
+					font-family: $times;
+					margin-bottom: 15px;
+					font-size: 17px;
+					font-style: italic;
+					line-height: 22px;
+				}
+			}
+		}
+	}
+
 	#subscriber {
 
 		@include stack;

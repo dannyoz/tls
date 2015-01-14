@@ -27,6 +27,10 @@ get_header(); ?>
 		</div>
 
 		<div class="container">
+
+			<p class="excerpt mobile" ng-if="size == 'mobile'">
+				<a ng-attr-href="{{featued.link}}" ng-bind="featured.text"></a>
+			</p>
 			
 			<div class="grid-row" ng-if="size == 'desktop'">
 				
