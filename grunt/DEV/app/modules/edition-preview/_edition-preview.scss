@@ -31,7 +31,7 @@
 		.top{
 			
 			background-color: $subtle-light-grey;
-			padding:20px;
+			padding:30px;
 			position:relative;
 
 			h3{
@@ -43,13 +43,14 @@
 					size:1.5em;
 					weight:500;
 				}
+				margin-bottom: 0;
 			}
 
 			.date{
 
 				text-align:center;
 				@include boxSizing(10px);
-				@include absolutly(10px,top,right);
+				@include absolutly(20px,top,right);
 				@include circle(90px,$primary-orange);
 
 				span{
@@ -75,21 +76,31 @@
 
 		.prevbody{
 
-			padding:20px;
+			padding:30px;
 
 			img{
 
 				position:relative;
-				margin-top:-90px;
+				margin-top:-140px;
 				margin-bottom: 30px;
+
+				@media screen and (max-width: $mobile) {
+					margin-top: auto;
+				}
 			}
 
 			.main{
 
 				margin-bottom: 10px;
 				font:{
-					size:1.6em;
+					size:1.556em;
 					weight:bold;	
+				}
+			}
+
+			p {				
+				@media screen and (max-width: $mobile) {
+					font-size: 0.889em;
 				}
 			}
 
@@ -108,18 +119,27 @@
 
 					h4{
 
-						margin-bottom: 2px;
+						margin-bottom: 5px;
 						font:{
-							size:0.9em;
+							size:0.889em;
 							family:$futura;
+							weight: normal;
 						}
 					}
 
 					h5{
 
+						margin-bottom: 5px;
+						line-height: 24px;
+						word-wrap: break-word;
+
 						font:{
-							size:1.1em;
+							size: 1.111em;
 							weight:bold;
+						}
+
+						@media screen and (max-width: $mobile) {
+							font-size: 0.889em;
 						}
 					}
 

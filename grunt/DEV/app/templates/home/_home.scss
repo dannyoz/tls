@@ -1,4 +1,21 @@
-#home{
+#home {
+
+	.container {
+
+		@media screen and (max-width: $mobile) {
+
+			p.excerpt {
+				
+				&.mobile {
+					font-family: $times;
+					margin-bottom: 15px;
+					font-size: 17px;
+					font-style: italic;
+					line-height: 22px;
+				}
+			}
+		}
+	}
 
 	#subscriber {
 
@@ -7,6 +24,10 @@
 		background-color: $locked-grey;	
 		margin-top: 40px;
 		padding-bottom: 40px;
+
+		.container {
+			overflow: hidden;
+		}
 
 		h2 {
 			text-align: center;
@@ -84,6 +105,16 @@
 			.card{
 
 				border-color:#c4c4c4;
+			}
+		}
+
+		.cta-buttons {
+			clear: both;
+			overflow: hidden;
+			text-align: center;
+
+			.subscribe {
+				margin-right: 10px;
 			}
 		}
 	}

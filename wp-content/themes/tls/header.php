@@ -43,14 +43,14 @@
 				</div>
 
 				<div id="user" class="centre-y" ng-class="{tablet:size == 'tablet'}">
-					<button>Subcribe</button>
-					<button class="clear">Login <i class="icon icon-login"></i></button>
+					<button class="button subscribe">Subcribe</button>
+					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
 				</div>
 			</div>
 
 		</div>
 
-		<nav ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile'}">
+		<nav class="transition-1" ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile', hinting : hint}">
 			
 			<div class="container">
 
@@ -58,15 +58,20 @@
 				
 					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 
-					<div class="search" ng-click="placeholder = ''; focus = true" ng-class="[size]">
+					<div class="search transition-1" ng-click="searchFocus();" ng-class="[size];{open : searchOpen}">
 						<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="search-wrapper">
-								<label class="screen-reader-text" for="s" ng-if="size == 'desktop'">Search:</label>
-								<input type="search" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" ng-class="[size]" name="s" id="s" />
+								<label class="screen-reader-text" for="s" ng-if="size == 'desktop' || searchOpen">Search:</label>
+								<input ng-if="ready" tls-focus="searchOpen" type="search" value="<?php echo get_search_query(); ?>" ng-attr-placeholder="{{placeholder}}" ng-class="[size]" name="s" id="s" />
 							</div>
 							<!-- <input type="submit"/> -->
 							<button type="submit" class="icon icon-search"></button>
+							<div ng-click="showSearch();" ng-if="size == 'tablet' || size == 'mobile'" ng-hide="searchOpen" class="open-search"></div>
 						</form>
+
+						<div class="hint">
+							<p class="futura">Search by author, title, reviewer or keyword</p>
+						</div>
 					</div>
 
 				</div>	

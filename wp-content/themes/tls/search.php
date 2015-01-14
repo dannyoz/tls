@@ -23,7 +23,10 @@ get_header(); ?>
 					</button>
 
 					<div class="filter-block">
-						<h3 class="futura uppercase">Content type</h3>
+						<h3 class="futura uppercase">
+							Content type 
+							<span class="clear" ng-if="filters.length > 0" ng-click="clearFilters()">Clear</span>
+						</h3>
 						<ul class="filters" ng-cloak>
 							<li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in contentType">
 								<a ng-click="contentFilter(val.slug,val.json_query,name,'content')">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
@@ -41,7 +44,9 @@ get_header(); ?>
 					</div>
 
 					<div class="filter-block">
-						<h3 class="futura uppercase">Category</h3>
+						<h3 class="futura uppercase">
+							Category
+						</h3>
 						<ul class="filters">
 							<li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in sections">
 								<a ng-click="contentFilter(val.slug,val.json_query,name,'category')">{{val.item_label}} ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>

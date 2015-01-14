@@ -55,6 +55,14 @@
 
 				padding-bottom:10px;
 				@include keyline(bottom,$light-keyline);
+
+				.clear{
+
+					float: right;
+					cursor: pointer;
+					text-transform:none;
+				}
+
 			}
 
 			ul{
@@ -99,6 +107,7 @@
 
 				}
 			}
+
 		}
 	}
 
