@@ -218,6 +218,11 @@ function ajaxify_comments( $comment_ID, $comment_status ){
 add_action( 'comment_post', 'ajaxify_comments', 20, 2 );
 
 function tls_make_post_excerpt( $post, $word_length = 55 ){
+
+	if ($word_length < 0) {
+		$word_length = 55;
+	}
+
 	$text = $post->post_content;
 	$text = strip_shortcodes( $text );
 	$text = apply_filters( 'the_content', $text );

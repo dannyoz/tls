@@ -59,7 +59,7 @@ function tls_discover_json_api_encode($response) {
                 'id'                            => $top_section_article->ID,
                 'url'                           => get_permalink( $top_section_article->ID ),
                 'title'                         => $top_section_article->post_title,
-                'excerpt'                       => $top_section_article->post_excerpt,
+                'excerpt'                       => tls_make_post_excerpt( $top_section_article ),
                 'author'                        => array(
                     'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author ),
                     'slug'                      => get_the_author_meta( 'slug', $top_section_article->post_author ),
@@ -97,6 +97,7 @@ function tls_discover_json_api_encode($response) {
         foreach ( $articles_archive as $article_post ) {
             $article_section_terms = wp_get_post_terms( $article_post->id, 'article_section' );
 
+            $article_post->excerpt = tls_make_post_excerpt( $article_post );
             $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
         }
 
