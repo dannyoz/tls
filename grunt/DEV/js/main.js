@@ -28241,7 +28241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=data.soundcloud></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.text\"></p> --></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><!-- <div class=\"embed\" ng-bind-html=\"data.soundcloud\"></div> --><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div>"
   );
 
 
@@ -28281,7 +28281,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 1000;
+	var delay  = 1;
 
 	return {
 		getCards : function(){
@@ -28907,7 +28907,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'test data')
+		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
 	}
 
 }])
@@ -29265,32 +29265,38 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 	$scope.loadResults     = true
 	$scope.niceDate        = niceDate
 
-	api.getSearchResults(
+
+	$scope.request = function(){
+
+		$scope.loadResults = true
+
+		api.getSearchResults(
 			url,
 			$scope.currentPage,
 			$scope.filters,
 			$scope.order,
 			$scope.dateRange
-		)
-		.then(function (results){
-		
-			$scope.showFilters = false
-			$scope.loadResults = false
-			$scope.results     = results
-			$scope.contentType = results.content_type_filters
-			$scope.sections    = results.articles_sections
-			$scope.dateRanges  = results.date_filters
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : $scope.currentPage,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order,
-				"dateRange"   : $scope.dateRange
-		}
+			)
+			.then(function (results){
+			
+				$scope.showFilters = false
+				$scope.loadResults = false
+				$scope.results     = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : $scope.currentPage,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
+			}
 
-			console.log(results);
+				console.log(results);
 
-	})
+		})
+	}	
 
 	//Refresh scope when pagination page is selected
 	$scope.$on('loading',function (){
@@ -29305,41 +29311,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		$scope.results     = results
 
 	})
-
-	$scope.filterResults = function(term,key){
-
-		$scope.loadResults = true
-
-		var index = $scope.filters.indexOf(term);
-
-		if(index == -1){
-			$scope.filters.push(term)
-			$scope.contentType[key].isApplied = true
-		} else {
-			$scope.filters.splice(index,1)
-			$scope.contentType[key].isApplied = false
-		}
-
-		api.getSearchResults(
-				url,
-				1,
-				$scope.filters,
-				$scope.order,
-				$scope.dateRange
-			)
-			.then(function (results){
-			
-				$scope.loadResults = false
-				$scope.results = results
-				$scope.paginationConfig = {
-					"pageCount"   : results.pages,
-					"currentPage" : 1,
-					"filters"     : $scope.filters,
-					"order"       : $scope.order,
-					"dateRange"   : $scope.dateRange
-			}
-		})
-	}
 
 	$scope.contentFilter = function(term,query,key,type){
 
@@ -29448,6 +29419,32 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			}
 		})
 	}
+
+	$scope.clearFilters = function(filters){
+
+		$scope.filters         = []
+		$scope.taxonomyFilters = []
+		$scope.currentPage     = 1
+		$scope.dateRange       = ""
+
+
+		angular.forEach($scope.contentType, function (obj){
+			obj.isApplied = false
+		});
+
+		angular.forEach($scope.dateRanges, function (obj){
+			obj.isApplied = false
+		});
+
+		angular.forEach($scope.sections, function (obj){
+			obj.isApplied = false
+		});
+
+		$scope.request();
+
+	}
+
+	$scope.request();
 
 }])
 .directive('tlsPagination',[ 'api', function (api){

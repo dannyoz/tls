@@ -206,7 +206,7 @@
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'test data')
+		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
 	}
 
 }])

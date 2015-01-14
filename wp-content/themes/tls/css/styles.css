@@ -1584,6 +1584,11 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+#search-results #search-filters .filter-block h3 .clear {
+  float: right;
+  cursor: pointer;
+  text-transform: none;
+}
 #search-results #search-filters .filter-block ul {
   margin-top: 10px;
   margin-bottom: 20px;
