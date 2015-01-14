@@ -28603,7 +28603,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		link : function(scope){
 			
 			console.log(scope.data);
-			scope.sce = $sce
+			scope.sce = $sce;
 			
 			// Type of card (Object or Array)
 			var cardType = Object.prototype.toString.call(scope.data);
