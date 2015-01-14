@@ -23,7 +23,6 @@
 	});
 
 	$scope.formatEmbed = function(html) {
-		console.log(html);
 		return $sce.trustAsHtml(html);
 	}
 
