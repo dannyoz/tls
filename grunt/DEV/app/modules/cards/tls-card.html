@@ -44,7 +44,7 @@
 	<h3 class="futura"><a href="#">{{data.section.name}}</a></h3>
 
 	<div class="padded">
-		<div class="embed" ng-bind-html="data.soundcloud"></div>
+		<div class="embed" ng-bind-html="sce.trustAsHtml(data.soundcloud);"></div>
 		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>		
 		<p ng-bind-html="data.text"></p>
 
