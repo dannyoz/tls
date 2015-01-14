@@ -28,7 +28,7 @@ function tls_blogs_archive_json_api_encode($response) {
         $response['featured_post'] = array(
             'id'            => $featured_post->ID,
             'title'         => $featured_post->post_title,
-            'excerpt'       => wp_strip_all_tags( substr($featured_post->post_content, 0, 100) ) . '...',
+            'excerpt'       => tls_make_post_excerpt( $featured_post ),
             'link'          => get_permalink( $featured_post->ID ),
             'images'     => $images
         );
@@ -49,6 +49,7 @@ function tls_blogs_archive_json_api_encode($response) {
         foreach ( $blogs_archive as $blog_post ) {
             $categories = wp_get_post_terms( $blog_post->id, 'category' );
 
+            $blog_post->excerpt = tls_make_post_excerpt( $blog_post );
             $blog_post->category_url = get_term_link( $categories[0]->term_id, $categories[0]->taxonomy );
         }
 

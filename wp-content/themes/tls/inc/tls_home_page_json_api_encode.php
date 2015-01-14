@@ -45,7 +45,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => $blog_card->post_excerpt,
+                'text'          => tls_make_post_excerpt( $blog_card ),
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -88,7 +88,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $card_post->ID,
                 'title'         => $card_post->post_title,
                 'author'        => get_the_author_meta( 'display_name', $card_post->post_author ),
-                'text'          => $card_post->post_excerpt,
+                'text'          => tls_make_post_excerpt( $card_post ),
                 'link'          => get_permalink( $card_post->ID ),
                 'section'       => array(
                     'name'      => $section[0]->name,
