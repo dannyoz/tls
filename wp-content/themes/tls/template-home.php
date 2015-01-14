@@ -17,7 +17,6 @@ get_header(); ?>
 			<div class="container">
 
 				<div class="caption">
-					<p class="category">Memoir</p>
 					<h2><a ng-attr-href="{{featued.link}}" ng-bind="featured.title"></a></h2>
 					<p class="excerpt"><a ng-attr-href="{{featued.link}}" ng-bind="featured.text"></a></p>
 				</div>

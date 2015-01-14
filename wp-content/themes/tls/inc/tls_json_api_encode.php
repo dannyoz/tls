@@ -441,7 +441,7 @@ function tls_home_page_json_api_encode($response) {
             'id'                => $featured_article->ID,
             'title'             => $featured_article->post_title,
             'author'            => get_the_author_meta( 'display_name', $featured_article->post_author ),
-            'text'              => $featured_article->post_excerpt,
+            'text'              => tls_make_post_excerpt( $featured_article, 15 ),
             'link'              => get_permalink( $featured_article->ID ),
             'images'            => $images
         );
