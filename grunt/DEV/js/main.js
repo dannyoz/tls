@@ -28277,6 +28277,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 .controller('header',['$scope', function ($scope){
 
 	$scope.ready       = true
+	$scope.hint        = false
 	$scope.placeholder = "Tls archive, blogs and website";
 	$scope.searchOpen  = false
 
@@ -28284,6 +28285,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 
 		$scope.placeholder = "";
 		$scope.searchOpen  = true;
+	}
+
+	$scope.searchFocus = function(){
+
+		$scope.hint = true
+		$scope.placeholder = ''; 
+		$scope.focus = true
 	}
 	
 }])
@@ -28297,6 +28305,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 			scope.$watch("bool", function(value) {
 		        if(value){
 		        	element[0].focus();
+		        	scope.placeholder = "";
 		        }
 		    });
 		}

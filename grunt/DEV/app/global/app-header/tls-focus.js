@@ -8,6 +8,7 @@
 			scope.$watch("bool", function(value) {
 		        if(value){
 		        	element[0].focus();
+		        	scope.placeholder = "";
 		        }
 		    });
 		}

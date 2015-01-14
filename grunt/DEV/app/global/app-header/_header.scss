@@ -1,7 +1,8 @@
 #main-header{
 
-	$nav-height:52px;
-	$bnt-width : 50px;
+	$nav-height  : 52px;
+	$hint-height : 95px;
+	$bnt-width   : 50px;
 	
 	#header-top{
 
@@ -210,7 +211,7 @@
 				top:0;
 				right:0;
 				width:$bnt-width;
-				height:100%;
+				height:$bnt-width;
 				background:none;
 				border:none;
 				color:black;
@@ -219,10 +220,21 @@
 				@include border-radius(0px);
 			}
 
+			.hint{
+
+				@include fitParent("",$nav-height,0,0,0);
+
+				p{
+
+					padding: 0 70px 0 20px;
+					font-size: 0.9em;
+					letter-spacing: 0;
+				}
+			}
+
 			.open-search{
 
 				z-index: 9999;
-				//background:red;
 				cursor: pointer;
 				@include fitParent;
 			}
@@ -269,6 +281,27 @@
 
 					width:100%;
 				}
+			}
+		}
+
+		&.hinting{
+
+			height: $hint-height;
+
+			ul li {
+
+				height: $hint-height;
+
+				a{
+
+					height: $hint-height;
+				}
+
+			}
+
+			.search{
+
+				height: $hint-height;
 			}
 		}
 	}
