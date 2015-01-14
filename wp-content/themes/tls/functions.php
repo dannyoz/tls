@@ -143,10 +143,31 @@ function tls_remove_wp_ver_css_js( $src ) {
  }
  add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles' );
 
-
+/**
+ * JSON API Response Modifications to work with Angularjs Front End
+ */
 if (is_plugin_active('json-api/json-api.php')) {
 
+	// Generic/Misc JSON API Modifications (for smaller changes that are not overly complicated or long)
 	include_once TLS_TEMPLATE_DIR . '/inc/tls_json_api_encode.php';
+
+	// Home Page Template JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_home_page_json_api_encode.php';
+
+	// Discover Archive Page Template JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_discover_json_api_encode.php';
+
+	// Blogs Archive Page Template JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_blogs_archive_json_api_encode.php';
+
+	// FAQs Page JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_faqs_json_api_encode.php';
+
+	// Latest Edition Page Template JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_latest_edition_page_json_api_encode.php';
+
+	// Search Results Page Template JSON API Modifications
+	include_once TLS_TEMPLATE_DIR . '/inc/tls_search_results_json_api_encode.php';
 
 }
  
@@ -197,6 +218,11 @@ function ajaxify_comments( $comment_ID, $comment_status ){
 add_action( 'comment_post', 'ajaxify_comments', 20, 2 );
 
 function tls_make_post_excerpt( $post, $word_length = 55 ){
+
+	if ($word_length < 0) {
+		$word_length = 55;
+	}
+
 	$text = $post->post_content;
 	$text = strip_shortcodes( $text );
 	$text = apply_filters( 'the_content', $text );

@@ -27,6 +27,10 @@ get_header(); ?>
 		</div>
 
 		<div class="container">
+
+			<p class="excerpt mobile" ng-if="size == 'mobile'">
+				<a ng-attr-href="{{featued.link}}" ng-bind="featured.text"></a>
+			</p>
 			
 			<div class="grid-row" ng-if="size == 'desktop'">
 				
@@ -82,37 +86,47 @@ get_header(); ?>
 				</div>
 
 				<?php if( have_rows('subscriber_exclusive_items') ): ?>
-					<?php while ( have_rows('subscriber_exclusive_items') ) : the_row(); ?>
-						<?php
-							$subItemTitle = get_sub_field( 'title' );
-							$subItemImage = get_sub_field( 'image' );
-							$subItemDesc = get_sub_field( 'description' );
-							$subItemUrl = get_sub_field( 'url_link' );
-						?>
-						<div class="subscribe-grid">
-							<div class="card">
-								<?php if ( $subItemUrl ) : ?>
-									<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>" target="_self">
-										<h3 class="futura"><?php echo $subItemTitle; ?></h3>
-									</a>
-								<?php else : ?>
-									<h3 class="futura"><?php echo $subItemTitle ?></h3>
-								<?php endif; ?>
 
-								<?php if ( $subItemUrl ) : ?>
-									<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>">
+					<div class="subscriber-grid-wrapper">					
+					
+						<?php while ( have_rows('subscriber_exclusive_items') ) : the_row(); ?>
+							<?php
+								$subItemTitle = get_sub_field( 'title' );
+								$subItemImage = get_sub_field( 'image' );
+								$subItemDesc = get_sub_field( 'description' );
+								$subItemUrl = get_sub_field( 'url_link' );
+							?>
+							<div class="subscribe-grid">
+								<div class="card">
+									<?php if ( $subItemUrl ) : ?>
+										<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>" target="_self">
+											<h3 class="futura"><?php echo $subItemTitle; ?></h3>
+										</a>
+									<?php else : ?>
+										<h3 class="futura"><?php echo $subItemTitle ?></h3>
+									<?php endif; ?>
+
+									<?php if ( $subItemUrl ) : ?>
+										<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>">
+											<img class="max" src="<?php echo $subItemImage['url'] ?>" alt="<?php echo $subItemImage['alt']; ?>"/>
+										</a>
+									<?php else : ?>
 										<img class="max" src="<?php echo $subItemImage['url'] ?>" alt="<?php echo $subItemImage['alt']; ?>"/>
-									</a>
-								<?php else : ?>
-									<img class="max" src="<?php echo $subItemImage['url'] ?>" alt="<?php echo $subItemImage['alt']; ?>"/>
-								<?php endif; ?>
-								<p class="padded">
-									<?php echo $subItemDesc; ?>
-								</p>
+									<?php endif; ?>
+									<p class="padded">
+										<?php echo $subItemDesc; ?>
+									</p>
+								</div>
 							</div>
-						</div>
-					<?php endwhile; ?>
+						<?php endwhile; ?>
+					</div>
+
 				<?php endif; ?>
+
+				<div class="cta-buttons">
+					<button class="button subscribe">Subcribe</button>
+					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
+				</div>
 
 			</div>
 
@@ -193,7 +207,7 @@ get_header(); ?>
 
 					</div>
 
-				</div>
+				</div>			
 
 			</div>
 

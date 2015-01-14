@@ -61,6 +61,11 @@ section, article{
 	margin-bottom:30px;
 	position: relative;
 
+	a:hover {
+		text-decoration: none;
+		color: $primary-orange;
+	}
+
 	@include animation(fade,ease,1.5s);
 
 	@media screen and (max-width:$tablet){
@@ -71,6 +76,7 @@ section, article{
 	@media screen and (max-width:$mobile){
 		
 		height: 200px;
+		margin-bottom: 15px;
 	}
 
 	.gradient{

@@ -98,7 +98,7 @@ module.exports = function(grunt) {
                 options: {          
                     sassDir: 'DEV/app',
                     cssDir: '../wp-content/themes/tls/css',
-                    noLineComments : true,
+                    noLineComments : false,
                     environment: 'development'
                 }
             }

@@ -31,7 +31,7 @@
 		.top{
 			
 			background-color: $subtle-light-grey;
-			padding:20px;
+			padding:30px;
 			position:relative;
 
 			h3{
@@ -43,6 +43,7 @@
 					size:1.5em;
 					weight:500;
 				}
+				margin-bottom: 0;
 			}
 
 			.date{
@@ -75,13 +76,17 @@
 
 		.prevbody{
 
-			padding:20px;
+			padding:30px;
 
 			img{
 
 				position:relative;
-				margin-top:-90px;
+				margin-top:-140px;
 				margin-bottom: 30px;
+
+				@media screen and (max-width: $mobile) {
+					margin-top: auto;
+				}
 			}
 
 			.main{
