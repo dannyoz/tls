@@ -47,7 +47,7 @@
 			}
 		}
 
-		.subscribe-grid{
+		.subscribe-grid {
 
 			@include grid-col(3);
 
@@ -69,6 +69,11 @@
 			@media screen and (max-width:$mobile){
 
 				@include grid-col(12);
+			}
+
+			.card {
+				background-color: transparent;
+				border-color: $dark-keyline;
 			}
 		}
 
