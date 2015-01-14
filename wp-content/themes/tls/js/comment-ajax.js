@@ -3,7 +3,7 @@ jQuery('document').ready(function($){
     commentform.prepend('<div id="comment-status" ></div>'); // add info panel before the form to provide feedback or errors
     var statusdiv=$('#comment-status'); // define the infopanel
 
-    commentform.submit(function(){
+    $('#commentform').submit(function(){
         //serialize and store form data in a variable
         var formdata=commentform.serialize();
         //Add a status message
@@ -28,7 +28,7 @@ jQuery('document').ready(function($){
                 }
             }
         });
-        //console.log(formdata);
+        console.log(formdata);
         return false;
     });
 });

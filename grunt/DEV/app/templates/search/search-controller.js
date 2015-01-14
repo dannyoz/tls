@@ -12,32 +12,38 @@
 	$scope.loadResults     = true
 	$scope.niceDate        = niceDate
 
-	api.getSearchResults(
+
+	$scope.request = function(){
+
+		$scope.loadResults = true
+
+		api.getSearchResults(
 			url,
 			$scope.currentPage,
 			$scope.filters,
 			$scope.order,
 			$scope.dateRange
-		)
-		.then(function (results){
-		
-			$scope.showFilters = false
-			$scope.loadResults = false
-			$scope.results     = results
-			$scope.contentType = results.content_type_filters
-			$scope.sections    = results.articles_sections
-			$scope.dateRanges  = results.date_filters
-			$scope.paginationConfig = {
-				"pageCount"   : results.pages,
-				"currentPage" : $scope.currentPage,
-				"filters"     : $scope.filters,
-				"order"       : $scope.order,
-				"dateRange"   : $scope.dateRange
-		}
+			)
+			.then(function (results){
+			
+				$scope.showFilters = false
+				$scope.loadResults = false
+				$scope.results     = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
+				$scope.paginationConfig = {
+					"pageCount"   : results.pages,
+					"currentPage" : $scope.currentPage,
+					"filters"     : $scope.filters,
+					"order"       : $scope.order,
+					"dateRange"   : $scope.dateRange
+			}
 
-			console.log(results);
+				console.log(results);
 
-	})
+		})
+	}	
 
 	//Refresh scope when pagination page is selected
 	$scope.$on('loading',function (){
@@ -52,41 +58,6 @@
 		$scope.results     = results
 
 	})
-
-	$scope.filterResults = function(term,key){
-
-		$scope.loadResults = true
-
-		var index = $scope.filters.indexOf(term);
-
-		if(index == -1){
-			$scope.filters.push(term)
-			$scope.contentType[key].isApplied = true
-		} else {
-			$scope.filters.splice(index,1)
-			$scope.contentType[key].isApplied = false
-		}
-
-		api.getSearchResults(
-				url,
-				1,
-				$scope.filters,
-				$scope.order,
-				$scope.dateRange
-			)
-			.then(function (results){
-			
-				$scope.loadResults = false
-				$scope.results = results
-				$scope.paginationConfig = {
-					"pageCount"   : results.pages,
-					"currentPage" : 1,
-					"filters"     : $scope.filters,
-					"order"       : $scope.order,
-					"dateRange"   : $scope.dateRange
-			}
-		})
-	}
 
 	$scope.contentFilter = function(term,query,key,type){
 
@@ -195,5 +166,31 @@
 			}
 		})
 	}
+
+	$scope.clearFilters = function(filters){
+
+		$scope.filters         = []
+		$scope.taxonomyFilters = []
+		$scope.currentPage     = 1
+		$scope.dateRange       = ""
+
+
+		angular.forEach($scope.contentType, function (obj){
+			obj.isApplied = false
+		});
+
+		angular.forEach($scope.dateRanges, function (obj){
+			obj.isApplied = false
+		});
+
+		angular.forEach($scope.sections, function (obj){
+			obj.isApplied = false
+		});
+
+		$scope.request();
+
+	}
+
+	$scope.request();
 
 }])

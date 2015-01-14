@@ -71,14 +71,7 @@
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
 			link   = (platform == 'fb') ? fbLink : twLink,
-			params =   "scrollbars=no,
-						toolbar=no,
-						location=no,
-						menubar=no,
-						left=200,
-						top=200,
-						height=300,
-						width=500";
+			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
 
@@ -206,7 +199,7 @@
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'test data')
+		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
 	}
 
 }])

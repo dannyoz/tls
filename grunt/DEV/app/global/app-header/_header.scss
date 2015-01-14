@@ -1,6 +1,8 @@
 #main-header{
 
-	$nav-height:52px;
+	$nav-height  : 52px;
+	$hint-height : 95px;
+	$bnt-width   : 50px;
 	
 	#header-top{
 
@@ -111,6 +113,12 @@
 
 		@include keyline(top bottom,$light-keyline);
 
+		.grid-row{
+
+			position:relative;
+			background-color:$subtle-light-grey;
+		}
+
 		ul{
 
 			float: left;
@@ -121,6 +129,9 @@
 				display: inline-block;
 				float: left;
 				width: 33.3%;
+				background-color:white;
+				height:$nav-height;
+				overflow: hidden;
 
 				&.current-menu-item a{
 					@include box-shadow(inset 0 -4px 0 $locked-grey);
@@ -157,8 +168,6 @@
 
 		.search{
 
-			$bnt-width : 50px;
-
 			float: left;
 			width:50%;
 			position:relative;
@@ -194,16 +203,11 @@
 				@include boxSizing(16px 0 16px 100px);
 				@extend .futura;
 
-				&.tablet {
-
-					padding-left:10px;
-				}
 			}
 
 			.search-wrapper{
 
 				@include fitParent("",0,$bnt-width,0,0);
-				@include keyline(left,$light-keyline);
 
 				&:before{
 
@@ -221,7 +225,7 @@
 				top:0;
 				right:0;
 				width:$bnt-width;
-				height:100%;
+				height:$bnt-width;
 				background:none;
 				border:none;
 				color:black;
@@ -229,24 +233,90 @@
 				font-size: 1.3em;
 				@include border-radius(0px);
 			}
+
+			.hint{
+
+				@include fitParent("",$nav-height,0,0,0);
+
+				p{
+
+					padding: 0 70px 0 20px;
+					font-size: 0.9em;
+					letter-spacing: 0;
+				}
+			}
+
+			.open-search{
+
+				z-index: 9999;
+				cursor: pointer;
+				@include fitParent;
+			}
 		}
 
 		&.tablet{
 
 			ul{
 
-				width:75%;
+				width:82%;
 			}
+
 
 			.search{
 
-				width: 25%;
+				position: absolute;
+				right:0;
+				width: 18%;
+				left:82%;
+
+				&.open{
+
+					left:1px;
+					right: 0;
+					width: auto;
+				}
 			}
 		}
 
 		&.mobile{
 
+			ul{
+				width: auto;
+				@include fitParent("",0,$bnt-width,0,0);
+			}
 
+			.search{
+
+				position: absolute;
+				right:0;
+				width: $bnt-width;
+
+				&.open{
+
+					width:100%;
+				}
+			}
+		}
+
+		&.hinting{
+
+			height: $hint-height;
+
+			ul li {
+
+				height: $hint-height;
+
+				a{
+
+					height: $hint-height;
+				}
+
+			}
+
+			.search{
+
+				height: $hint-height;
+			}
 		}
 	}
 }

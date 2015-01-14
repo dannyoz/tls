@@ -47,7 +47,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
 								<div class="padded">
 									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-									<div ng-bind-html="card.excerpt"></div>
+									<p ng-bind-html="card.excerpt"></p>
 								</div>
 								<footer>
 									<p class="futura" ng-bind="card.author.name"></p>
@@ -78,7 +78,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
 								<div class="padded">
 									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-									<div ng-bind-html="card.excerpt"></div>
+									<p ng-bind-html="card.excerpt"></p>
 								</div>
 								<footer>
 									<p class="futura" ng-bind="card.author.name"></p>
@@ -109,7 +109,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 								<img class="max" ng-if="card.custom_fields.thumbnail_image_url" ng-attr-src="{{card.custom_fields.thumbnail_image_url}}" />
 								<div class="padded">
 									<h4><a ng-attr-href="{{card.url}}" ng-bind="card.title"></a></h4>
-									<div ng-bind-html="card.excerpt"></div>
+									<p ng-bind-html="card.excerpt"></p>
 								</div>
 								<footer>
 									<p class="futura" ng-bind="card.author.name"></p>
