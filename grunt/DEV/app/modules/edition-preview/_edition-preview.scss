@@ -50,7 +50,7 @@
 
 				text-align:center;
 				@include boxSizing(10px);
-				@include absolutly(10px,top,right);
+				@include absolutly(20px,top,right);
 				@include circle(90px,$primary-orange);
 
 				span{
@@ -113,17 +113,22 @@
 
 					h4{
 
-						margin-bottom: 2px;
+						margin-bottom: 5px;
 						font:{
-							size:0.9em;
+							size:0.889em;
 							family:$futura;
+							weight: normal;
 						}
 					}
 
 					h5{
 
+						margin-bottom: 5px;
+						line-height: 24px;
+						word-wrap: break-word;
+
 						font:{
-							size:1.1em;
+							size: 1.111em;
 							weight:bold;
 						}
 					}
