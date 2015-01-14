@@ -46,13 +46,12 @@ describe('api', function() {
 
     it('should filter tags correctly', inject(function (api){
 
-        var test1 = api.getRelatedContent(['nick']),
-            test2 = api.getRelatedContent(['cage','is','awesome']);
-            test3 = api.getRelatedContent(['charlie','sheen','is','too']);
+        var test1 = api.getRelatedContent(['tag']),
+            test2 = api.getRelatedContent(['tag','tag2','tag3']);
 
-            expect(test1.url).toBe('/tag/nick/?json=1');
-            expect(test2.url).toBe('/?tag=cage,is,awesome&json=1');
-            expect(test3.url).toBe('/?tag=charlie,sheen,is,too&json=1');
+            expect(test1.url).toBe('/api/get_posts/?article_tags=tag');
+            expect(test2.url).toBe('/api/get_posts/?article_tags=tag,tag2,tag3');
+
 
     }));
 

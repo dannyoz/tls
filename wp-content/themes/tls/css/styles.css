@@ -842,6 +842,10 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+#main-header nav .grid-row {
+  position: relative;
+  background-color: #f2f2f2;
+}
 #main-header nav ul {
   float: left;
   width: 50%;
@@ -850,6 +854,9 @@ p.author, h4.author {
   display: inline-block;
   float: left;
   width: 33.3%;
+  background-color: white;
+  height: 52px;
+  overflow: hidden;
 }
 #main-header nav ul li.current-menu-item a {
   -moz-box-shadow: inset 0 -4px 0 #e6e6e6;
@@ -909,18 +916,12 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
-#main-header nav .search input[type="text"].tablet, #main-header nav .search input[type="search"].tablet {
-  padding-left: 10px;
-}
 #main-header nav .search .search-wrapper {
   position: absolute;
   top: 0;
   right: 50px;
   bottom: 0;
   left: 0;
-  border-left-width: 1px;
-  border-style: solid;
-  border-color: #d9d9d9;
 }
 #main-header nav .search .search-wrapper:before {
   height: 1px;
@@ -949,11 +950,44 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
+#main-header nav .search .open-search {
+  z-index: 9999;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 #main-header nav.tablet ul {
-  width: 75%;
+  width: 82%;
 }
 #main-header nav.tablet .search {
-  width: 25%;
+  position: absolute;
+  right: 0;
+  width: 18%;
+  left: 82%;
+}
+#main-header nav.tablet .search.open {
+  left: 1px;
+  right: 0;
+  width: auto;
+}
+#main-header nav.mobile ul {
+  width: auto;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  bottom: 0;
+  left: 0;
+}
+#main-header nav.mobile .search {
+  position: absolute;
+  right: 0;
+  width: 50px;
+}
+#main-header nav.mobile .search.open {
+  width: 100%;
 }
 
 #site-footer {

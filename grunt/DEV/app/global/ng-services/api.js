@@ -3,16 +3,6 @@
 	var delay  = 1;
 
 	return {
-		getCards : function(){
-			
-			var defer = $q.defer();
-
-			$http.get(themeUrl + '/apis/cards.json').success(function (data){
-				defer.resolve(data)
-			})
-
-			return defer.promise
-		},
 		getHomePage : function(url){
 
 			var defer  = $q.defer();

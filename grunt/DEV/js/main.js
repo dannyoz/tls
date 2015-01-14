@@ -28276,24 +28276,37 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 }])
 .controller('header',['$scope', function ($scope){
 
+	$scope.ready       = true
 	$scope.placeholder = "Tls archive, blogs and website";
+	$scope.searchOpen  = false
+
+	$scope.showSearch  = function(){
+
+		$scope.placeholder = "";
+		$scope.searchOpen  = true;
+	}
 	
 }])
+.directive('tlsFocus', function(){
+	return{
+		restrict: "A",
+		scope : {
+			bool : '=tlsFocus'
+		},
+		link : function(scope,element){
+			scope.$watch("bool", function(value) {
+		        if(value){
+		        	element[0].focus();
+		        }
+		    });
+		}
+	}
+})
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
 	var delay  = 1;
 
 	return {
-		getCards : function(){
-			
-			var defer = $q.defer();
-
-			$http.get(themeUrl + '/apis/cards.json').success(function (data){
-				defer.resolve(data)
-			})
-
-			return defer.promise
-		},
 		getHomePage : function(url){
 
 			var defer  = $q.defer();
@@ -28772,14 +28785,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize'])
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
 			link   = (platform == 'fb') ? fbLink : twLink,
-			params =   "scrollbars=no,
-						toolbar=no,
-						location=no,
-						menubar=no,
-						left=200,
-						top=200,
-						height=300,
-						width=500";
+			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
 

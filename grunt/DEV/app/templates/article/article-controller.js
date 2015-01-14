@@ -71,14 +71,7 @@
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
 			link   = (platform == 'fb') ? fbLink : twLink,
-			params =   "scrollbars=no,
-						toolbar=no,
-						location=no,
-						menubar=no,
-						left=200,
-						top=200,
-						height=300,
-						width=500";
+			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
 
