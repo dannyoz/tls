@@ -2621,9 +2621,16 @@ p.author, h4.author {
 }
 /* line 67, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card p {
-  font-size: 0.9em;
+  font-size: 0.889em;
+  line-height: 1.5em;
 }
-/* line 71, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+@media screen and (max-width: 450px) {
+  /* line 67, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  .card p {
+    font-size: 1.1em;
+  }
+}
+/* line 76, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card p.author {
   padding-bottom: 10px;
   margin-bottom: 10px;
@@ -2631,25 +2638,25 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 79, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 84, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card img {
   margin-bottom: 20px;
 }
-/* line 84, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 89, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .padded {
   padding: 0 20px 20px 20px;
 }
-/* line 89, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 94, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .embed {
   margin-bottom: 20px;
 }
-/* line 94, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 99, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer {
   padding: 10px 20px;
   background-color: #f2f2f2;
   position: relative;
 }
-/* line 100, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 105, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub {
   color: #706d73;
   margin-bottom: 0;
@@ -2657,11 +2664,11 @@ p.author, h4.author {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
 }
-/* line 110, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 115, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub a {
   color: #706d73;
 }
-/* line 115, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 120, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer:after {
   height: 0;
   width: 0;
@@ -2674,11 +2681,11 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 129, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 134, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer p {
   letter-spacing: 0;
 }
-/* line 134, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 139, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card:hover {
   border-color: #ccc;
   top: -3px;
@@ -2686,21 +2693,21 @@ p.author, h4.author {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
-/* line 141, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 146, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private {
   background-color: #e6e6e6;
 }
-/* line 145, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 150, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private footer:after {
   border-right-color: #e6e6e6;
 }
-/* line 150, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 155, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .mpu {
   overflow: hidden;
   min-height: 300px;
   position: relative;
 }
-/* line 156, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 161, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .mpu img {
   max-width: 100% !important;
   position: absolute;
@@ -2712,19 +2719,19 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
-/* line 164, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 169, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry {
   float: left;
   position: relative;
   width: 31.66667%;
   margin-right: 2.5%;
 }
-/* line 168, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 173, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
 }
 
-/* line 174, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -2796,13 +2803,13 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
-  /* line 174, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 174, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 15px;
     font-size: 0.8em;
@@ -3326,27 +3333,33 @@ p.author, h4.author {
 /* line 92, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody .main {
   margin-bottom: 10px;
-  font-size: 1.6em;
+  font-size: 1.556em;
   font-weight: bold;
 }
-/* line 101, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+@media screen and (max-width: 450px) {
+  /* line 101, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+  #edition-preview .preview .prevbody p {
+    font-size: 0.889em;
+  }
+}
+/* line 107, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody button {
   margin: 20px 0;
 }
-/* line 108, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+/* line 114, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li {
   border-bottom: 1px solid black;
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
-/* line 114, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+/* line 120, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li h4 {
   margin-bottom: 5px;
   font-size: 0.889em;
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: normal;
 }
-/* line 124, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+/* line 130, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li h5 {
   margin-bottom: 5px;
   line-height: 24px;
@@ -3354,7 +3367,13 @@ p.author, h4.author {
   font-size: 1.111em;
   font-weight: bold;
 }
-/* line 136, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+@media screen and (max-width: 450px) {
+  /* line 130, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+  #edition-preview .preview .prevbody ul li h5 {
+    font-size: 0.889em;
+  }
+}
+/* line 146, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li:last-child {
   border: none;
   margin-bottom: 0;

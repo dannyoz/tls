@@ -93,8 +93,14 @@
 
 				margin-bottom: 10px;
 				font:{
-					size:1.6em;
+					size:1.556em;
 					weight:bold;	
+				}
+			}
+
+			p {				
+				@media screen and (max-width: $mobile) {
+					font-size: 0.889em;
 				}
 			}
 
@@ -130,6 +136,10 @@
 						font:{
 							size: 1.111em;
 							weight:bold;
+						}
+
+						@media screen and (max-width: $mobile) {
+							font-size: 0.889em;
 						}
 					}
 
