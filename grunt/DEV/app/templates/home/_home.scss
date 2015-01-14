@@ -1,4 +1,4 @@
-#home{
+#home {
 
 	#subscriber {
 
@@ -91,17 +91,13 @@
 			}
 		}
 
-		.subscriber-grid-wrapper {
-			overflow: hidden;
-		}
-
 		.cta-buttons {
 			clear: both;
 			overflow: hidden;
 			text-align: center;
 
-			a {
-				display: inline-block;
+			.subscribe {
+				margin-right: 10px;
 			}
 		}
 	}

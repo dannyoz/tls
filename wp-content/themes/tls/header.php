@@ -43,8 +43,8 @@
 				</div>
 
 				<div id="user" class="centre-y" ng-class="{tablet:size == 'tablet'}">
-					<button>Subcribe</button>
-					<button class="clear"><i class="icon icon-login"></i> Login</button>
+					<button class="button subscribe">Subcribe</button>
+					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
 				</div>
 			</div>
 

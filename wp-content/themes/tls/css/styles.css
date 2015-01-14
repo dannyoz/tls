@@ -1078,16 +1078,13 @@ p.author, h4.author {
 #home #subscriber.locked .card {
   border-color: #c4c4c4;
 }
-#home #subscriber .subscriber-grid-wrapper {
-  overflow: hidden;
-}
 #home #subscriber .cta-buttons {
   clear: both;
   overflow: hidden;
   text-align: center;
 }
-#home #subscriber .cta-buttons a {
-  display: inline-block;
+#home #subscriber .cta-buttons .subscribe {
+  margin-right: 10px;
 }
 @media screen and (max-width: 450px) {
   #home .blog-item.card {
@@ -2671,7 +2668,7 @@ p.author, h4.author {
 }
 #edition-preview .preview .top {
   background-color: #f2f2f2;
-  padding: 20px;
+  padding: 30px;
   position: relative;
 }
 #edition-preview .preview .top h3 {
@@ -2680,6 +2677,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 1.5em;
   font-weight: 500;
+  margin-bottom: 0;
 }
 #edition-preview .preview .top .date {
   text-align: center;
@@ -2708,12 +2706,17 @@ p.author, h4.author {
   font-size: 1.1em;
 }
 #edition-preview .preview .prevbody {
-  padding: 20px;
+  padding: 30px;
 }
 #edition-preview .preview .prevbody img {
   position: relative;
-  margin-top: -90px;
+  margin-top: -140px;
   margin-bottom: 30px;
+}
+@media screen and (max-width: 450px) {
+  #edition-preview .preview .prevbody img {
+    margin-top: auto;
+  }
 }
 #edition-preview .preview .prevbody .main {
   margin-bottom: 10px;
