@@ -65,7 +65,8 @@ function tls_discover_json_api_encode($response) {
                     'slug'                      => get_the_author_meta( 'slug', $top_section_article->post_author ),
                 ),
                 'custom_fields'                 => array(
-                    'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID )
+                    'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID ),
+                    'teaser_summary'            => get_field( 'teaser_summary', $top_section_article->ID ),
                 ),
                 'taxonomy_article_section'      => $top_section_article_section,
                 'taxonomy_article_section_url'  => get_term_link( $top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),

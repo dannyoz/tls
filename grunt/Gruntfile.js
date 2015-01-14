@@ -90,6 +90,11 @@ module.exports = function(grunt) {
                     'DEV/app/**/*',
                     '../wp-content/themes/tls/*.php'
                 ],
+            },
+
+            tests: {
+                files: ['../wp-content/themes/tls/tests/tlstests/**/*Test.php'],
+                tasks: ['phpunit']
             }
         },
 
@@ -121,6 +126,13 @@ module.exports = function(grunt) {
             unit: {
                 configFile: 'karma.conf.js'
             }
+        },
+
+        phpunit: {
+            tlstests: {
+                cmd: 'phpunit',
+                args: ['-c', '../wp-content/themes/tls/tests/phpunit.xml']
+            }
         }
 
     });
@@ -134,8 +146,20 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-phpunit');
 
     // RUN GRUNT 
     grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
+
+    // RUN GRUNT PHPUnit
+    // Testing tasks.
+    grunt.registerMultiTask('phpunit', function() {
+        grunt.util.spawn({
+            cmd: this.data.cmd,
+            args: this.data.args,
+            opts: {stdio: 'inherit'}
+        }, this.async());
+    });
+    grunt.registerTask( 'php', ['watch','phpunit:tlstests'] );
 
 };
