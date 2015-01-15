@@ -1,24 +1,34 @@
 <?php namespace TlsHubSubscriber;
 
-use PuSHSubscriberWP\PuSHSubscriber as PuSHSubscriber;
-use PuSHSubscriberWP\PuSHSubscription as PuSHSubscription;
-use PuSHSubscriberWP\PuSHEnvironment as PuSHEnvironment;
+use TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
+use TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
+use TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
 
 class TlsHubSubscriberWP {
+
+	// Name of the array
+	protected $option_name = 'tls_hub_sub';
+
+	// Default values
+	protected $data = array(
+		'subscription_id'		=> null,
+		'topic_url'				=> null,
+		'log_messages'			=> null,
+		'error_messages'		=> null,
+		'subscription_status'	=> null
+	);
+
 
 	/**
 	 * [__construct Start PuSHSubscriberWP actions, hooks, etc.]
 	 */
 	public function __construct() {
 
-		// init Action hook to add PuSH Feed Custom Post Type
-		add_action( 'init', array( $this, 'pushfeed_add_post_type' ) );
+		// Add TLS Hub Subscriber Setting Menu to Admin Menu
+		add_action( 'admin_menu', array( $this, 'tls_hub_subscriber_settings' ) );
 
-		// add_meta_boxes Action hook to add PuSH Feed Meta Boxes
-		add_action( 'add_meta_boxes', array( $this, 'pushfeed_add_meta_boxes' ) );
-
-		// save_post Action Hook to save PuSH Feed Meta
-		add_action( 'save_post', array( $this, 'pushfeed_save_post_meta' ) );
+		// Start TLS Hub Subscriber Settings
+		add_action( 'admin_init', array( $this, 'tls_hub_subscriber_settings_init' ) );
 
 		// admin head edit.php action hook for PuSH Feed
 		// Subscribe and Unsubscribe
@@ -35,170 +45,125 @@ class TlsHubSubscriberWP {
 		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
 	}
 
-	/**
-	 * Method to create PuSH Feeds Custom Post Type
-	 */
-	public function pushfeed_add_post_type() {
+	public function tls_hub_subscriber_settings_init() {
 
-		// PuSH Feeds Labels
-		$labels = array(
-			'name'                => _x( 'PuSH Feeds', 'Post Type General Name', 'tls' ),
-			'singular_name'       => _x( 'PuSH Feed', 'Post Type Singular Name', 'tls' ),
-			'menu_name'           => __( 'PuSH Feeds', 'tls' ),
-			'parent_item_colon'   => __( 'Parent PuSH Feed:', 'tls' ),
-			'all_items'           => __( 'All PuSH Feeds', 'tls' ),
-			'view_item'           => __( 'View PuSH Feed', 'tls' ),
-			'add_new_item'        => __( 'Add New PuSH Feed', 'tls' ),
-			'add_new'             => __( 'Add PuSH Feed', 'tls' ),
-			'edit_item'           => __( 'Edit PuSH Feed', 'tls' ),
-			'update_item'         => __( 'Update PuSH Feed', 'tls' ),
-			'search_items'        => __( 'Search PuSH Feed', 'tls' ),
-			'not_found'           => __( 'PuSH Feed Not found', 'tls' ),
-			'not_found_in_trash'  => __( 'PuSH Feed Not found in Trash', 'tls' ),
-		);
-		// PuSH Feeds Post Type Rewrite Rules
-		$rewrite = array(
-			'slug'                => 'pushfeed',
-			'with_front'          => true,
-			'pages'               => true,
-			'feeds'               => false,
+		register_setting(
+			'tls_hub_subscriber_options',
+			$this->option_name,
+			array($this, 'tls_hub_sub_validate')
 		);
 
-		// PuSH Feeds Post Type Arguments
-		$args = array(
-			'label'               => __( 'push_feeds', 'tls' ),
-			'description'         => __( 'PuSH Subcriber Feeds', 'tls' ),
-			'labels'              => $labels,
-			'supports'            => array( 'title', 'custom-fields'),
-			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
-			'show_in_nav_menus'   => true,
-			'show_in_admin_bar'   => true,
-			'menu_icon'           => 'dashicons-rss',
-			'can_export'          => true,
-			'has_archive'         => true,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
-			'rewrite'             => $rewrite,
-			'capability_type'     => 'post',
-		);
-
-		// Register tls_editions Post Type
-		register_post_type( 'push_sub_feeds', $args );
 	}
 
-	/**
-	 * Method to add Meta Box/es to the PuSH Feeds Custom Post Type
-	 */
-	public function pushfeed_add_meta_boxes() {
-		add_meta_box(
-			'pushfeed-details-metabox', // HTML 'id' attribute of the edit screen section
-			__('PuSH Feeb Subcription Details', 'tls'), // Title of the edit screen section, visible to user
-			array($this, 'pushfeed_display_meta_boxes'), // Function that prints out the HTML for the edit screen section
-			'push_sub_feeds', // Post Type that Metabox is attached to
-			'normal', // The part of the page where the edit screen section should be shown ('normal', 'advanced', or 'side')
-			'high' // The priority within the context where the boxes should show ('high', 'core', 'default' or 'low')
+	public function tls_hub_subscriber_settings() {
+		add_menu_page(
+			'TLS Hub Subscriber',									// Text displayed in the browser title bar
+			'Hub Subscriber', 										// Text used for the menu item
+			'manage_options', 										// Minimum required capability of users to access this menu
+			'tls-hub-subscriber', 									// Slug used to access this menu item
+			array( $this, 'render_tls_hub_subscriber_settings'), 	// Name of the function used to display the page content
+			'dashicons-rss' 										// Icon to display in the admin menu
 		);
 	}
 
-	/**
-	 * Method to display the HTML elements in the Meta Box/es
-	 * from PuSH Feeds Custom Post Type
-	 * @return HTML
-	 */
-	public function pushfeed_display_meta_boxes( $post ) {
-		// Define the nonce for security purposes
-		wp_nonce_field( basename( __FILE__ ), 'pushfeed-nonce-field' );
+	public function render_tls_hub_subscriber_settings(){
+		$options = get_option($this->option_name);
+		?>
+		<div class="wrap">
+			<h2>TLS Hub Subscriber Settings</h2>
+			<form method="post" action="options.php">
+				<div class="poststuff">
+					<!-- run the settings_errors() function here. -->
+					<?php settings_errors(); ?>
+					<?php settings_fields('tls_hub_subscriber_options'); ?>
+					<div id="post-body" class="metabox-holder">
+						<div id="postbox-container-1" class="postbox-container">
+							<div class="postbox">
+								<div class="inside">
 
-		// Start the HTML string so that all other strings can be concatenated
-	?>
-		<input type="hidden" name="pushfeed-subscription-id" id="pushfeed-subscription-id" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-subscription-id', true)); ?>">
-		
-		<input type="hidden" name="pushfeed-domain" id="pushfeed-domain" class="widefat" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-domain', true)); ?>">
+									<table class="form-table">
 
-		<label for="pushfeed-feed-url"><strong>Feed/Topic URL:</strong></label> <br>
-		<small>This is the URL for the Feed you are subscribing to.</small> <br>
-		<input type="text" name="pushfeed-feed-url" id="pushfeed-feed-url" class="widefat" placeholder="http://www.example.com/feed/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-feed-url', true)); ?>"> <br><br>
+										<tr valign="top"><th scope="row">Topic URL:</th>
+											<td>
+												<input type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo $options['topic_url']; ?>" />
+											</td>
+										</tr>
 
-		<label for="pushfeed-hub-url"><strong>Hub URL (Optional)</strong></label> <br>
-		<small>If any is provided it will override the url to hub found in the feed.</small> <br>
-		<input type="text" name="pushfeed-hub-url" id="pushfeed-hub-url" class="widefat" placeholder="http://www.hub.com/" value="<?php echo esc_attr(get_post_meta($post->ID, 'pushfeed-hub-url', true)); ?>"> <br><br>
+										<tr valign="top"><th scope="row">Subscription Status:</th>
+											<td>
+												<input type="text" name="<?php echo $this->option_name?>[subscription_status]" value="<?php echo $options['subscription_status']; ?>" disabled />
+											</td>
+										</tr>
 
-		<label for="subscription-status"><strong>Subscription Status:</strong></label> <br>
-		<input type="text" name="subscription-status" id="subscription-status" value="<?php echo esc_attr(ucwords(get_post_meta($post->ID, 'subscription-status', true))); ?>" disabled> <br><br>
-		
-		<input type="submit" class="button-secondary" name="pushfeed-subscribe" id="pushfeed-subscribe" value="Subscribe">
-		<input type="submit" class="button-secondary" name="pushfeed-unsubscribe" id="pushfeed-unsubscribe" value="Unsubscribe">
+										<tr valign="top"><th scope="row">Log Messages:</th>
+											<td>
+												<textarea name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo $options['log_messages']; ?></textarea>
+											</td>
+										</tr>
 
-	<?php
-	}
+										<tr valign="top"><th scope="row">Error Messages:</th>
+											<td>
+												<textarea name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo $options['error_messages']; ?></textarea>
+											</td>
+										</tr>
 
-	/**
-	 * Method to save PuSH Feed Meta
-	 * @param  integer $post_id The ID of current PuSH Feed Post being saved
-	 */
-	public function pushfeed_save_post_meta( $post_id ) {
-		
-		// Bail if we're doing an auto save
-	    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	     
-	    // if our nonce isn't there, or we can't verify it, bail
-    	if( !isset( $_POST['pushfeed-nonce-field'] ) || !wp_verify_nonce( $_POST['pushfeed-nonce-field'], basename( __FILE__ ) ) ) return;
+									</table>
 
-    	// If Subsctiption ID is empty, generate a random long number and save it
-		if ( empty( $_POST['pushfeed-subscription-id'] ) ) {
+									<p class="submit">
+										<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+									</p>
 
-			$random_number = substr(number_format(time() * mt_rand(),0,'',''),0,10);
-			$pushfeed_subscription_id = $random_number . $post_id;
-			update_post_meta( $post_id, 'pushfeed-subscription-id', $pushfeed_subscription_id );
-		}
-
-		// If PuSH Feed Domain is empty then save the Site URL as the Domain
-		if ( empty( $_POST['pushfeed-domain'] ) ) {
-			update_post_meta( $post_id, 'pushfeed-domain', site_url() );
-		}
-
-		// If the Subscription status is empty then set default 'unsubscribed'
-		if ( empty( $_POST['subscription-status'] ) ) {
-			update_post_meta( $post_id, 'subscription-status', 'unsubscribed' );
-		}
-
-		// If PuSH Feed URL is not empty then save Post meta for it
-		if ( isset( $_POST['pushfeed-feed-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-feed-url'] ) ) ) ) {
-
-			$push_feed_url = wp_strip_all_tags( $_POST['pushfeed-feed-url'] );
-			update_post_meta( $post_id, 'pushfeed-feed-url', $push_feed_url );
-		}
-
-		// If PuSH Hub URL is not empty then save Post meta for it
-		if ( isset( $_POST['pushfeed-hub-url'] ) && 0 < count( strlen( trim( $_POST['pushfeed-hub-url'] ) ) ) ) {
-
-			$push_hub_url = wp_strip_all_tags( $_POST['pushfeed-hub-url'] );
-			update_post_meta( $post_id, 'pushfeed-hub-url', $push_hub_url );
-		}
-
-
-		if ( isset( $_POST['pushfeed-subscribe'] ) || isset( $_POST['pushfeed-unsubscribe'] ) ) {
-
-			$subscription_domain = get_post_meta($post_id, 'pushfeed-domain', true);
-			$subscription_id = get_post_meta($post_id, 'pushfeed-subscription-id', true);
-			$subscription_feed_url = get_post_meta($post_id, 'pushfeed-feed-url', true);
-			$subscription_callback_url = $subscription_domain . '/pushfeed/' . $subscription_id;
-
-
-			$sub = PuSHSubscriber::instance($subscription_domain, $subscription_id, 'PuSHSubscription', new PuSHEnvironment());
-
-			if ( isset( $_POST['pushfeed-subscribe'] ) ) {
-				$sub->subscribe($subscription_feed_url, $subscription_callback_url);
-			} elseif ( isset( $_POST['pushfeed-unsubscribe'] ) ) {
-				$sub->unsubscribe($subscription_feed_url, $subscription_callback_url);
-			}
-
-		}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<?php
 
 	}
+
+
+	public function tls_hub_sub_validate($input) {
+		//die( var_dump($input) );
+		$valid = array();
+		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
+		$valid['subscription_status'] = sanitize_text_field($input['subscription_status']);
+		$valid['log_messages'] = sanitize_text_field($input['log_messages']);
+		$valid['error_messages'] = sanitize_text_field($input['error_messages']);
+
+		/**
+		 * URL Validation Reg Ex
+		 * https://mathiasbynens.be/demo/url-regex
+		 */
+		$urlRegEx = '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS';
+
+		if ( !preg_match( $urlRegEx, $valid['topic_url'] ) ) {
+			add_settings_error(
+				'topic_url', 												// Setting Title
+				'topic_url_error',											// Error ID
+				'Please enter a valid URL',									// Error Message
+				'error'														// Type of Message
+			);
+
+			$valid['topic_url'] = $this->data['topic_url'];
+		}
+
+//		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
+//			add_settings_error(
+//				'subscription_status',										// Setting Title
+//				'subscription_status_error',								// Error ID
+//				'Please do not manually change the Subscription Status',	// Error Message
+//				'error'														// Type of Message
+//			);
+//
+//			$valid['subscription_status'] = $this->data['subscription_status'];
+//		}
+
+		return $valid;
+	}
+
 
 	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
 
@@ -213,6 +178,8 @@ class TlsHubSubscriberWP {
 	 */
 	public function pushfeed_hub_callback_rewrite() {
 		add_rewrite_rule('^pushfeed/([^/]*)/?','index.php?pagename=pushfeed&subscription_id=$matches[1]','top');
+
+		flush_rewrite_rules();
 	}
 
 	/**
