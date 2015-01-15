@@ -87,7 +87,9 @@ get_header(); ?>
 						<h3 class="futura date">
 							<a ng-attr-href="{{post.url}}" ng-bind="post.title"></a>
 						</h3>
-						<span ng-if="post.modified" class="post-date">{{niceDate.format(post.date)}} <i class="icon icon-key"></i></span>
+						<span ng-if="post.modified" class="post-date">{{niceDate.format(post.date)}} 
+							<i class="icon icon-key" ng-if="post.taxonomy_article_visibility[0].slug == 'private'"></i>
+						</span>
 						<div class="padded" ng-bind-html="post.excerpt"></div>
 					</div>
 

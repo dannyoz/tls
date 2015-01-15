@@ -28547,53 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><h3 class=futura><a ng-attr-href=# ng-if=data.section.name>{{data.section.name}}</a> <a ng-attr-href={{data.taxonomy_article_section_url}} ng-bind-html=data.taxonomy_article_section[0].name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"> <img class=max ng-if=data.custom_fields.thumbnail_image_url ng-attr-src=\"{{data.custom_fields.thumbnail_image_url}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p class=futura ng-bind=data.author.name></p></footer></div><!-- <div class=\"card\" ng-repeat=\"card in column\" ng-class=\"{private:card.taxonomy_article_visibility[0].slug == 'private'}\">\r" +
-    "\n" +
-    "\t\r" +
-    "\n" +
-    "\t<div ng-if=\"!card.mpu\">\r" +
-    "\n" +
-    "\t\t<h3 class=\"futura\">\r" +
-    "\n" +
-    "\t\t\t<a ng-attr-href=\"{{card.taxonomy_article_section_url}}\" ng-bind-html=\"card.taxonomy_article_section[0].name\"></a>\r" +
-    "\n" +
-    "\t\t\t<i ng-if=\"card.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i>\r" +
-    "\n" +
-    "\t\t</h3>\r" +
-    "\n" +
-    "\t\t<img class=\"max\" ng-if=\"card.custom_fields.thumbnail_image_url\" ng-attr-src=\"{{card.custom_fields.thumbnail_image_url}}\" />\r" +
-    "\n" +
-    "\t\t<div class=\"padded\">\r" +
-    "\n" +
-    "\t\t\t<h4><a ng-attr-href=\"{{card.url}}\" ng-bind=\"card.title\"></a></h4>\r" +
-    "\n" +
-    "\t\t\t<p ng-bind-html=\"card.excerpt\"></p>\r" +
-    "\n" +
-    "\t\t</div>\r" +
-    "\n" +
-    "\t\t<footer>\r" +
-    "\n" +
-    "\t\t\t<p class=\"futura\" ng-bind=\"card.author.name\"></p>\r" +
-    "\n" +
-    "\t\t</footer>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "\t<div class=\"mpu\" ng-if=\"card.mpu\">\r" +
-    "\n" +
-    "\t\t<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>\r" +
-    "\n" +
-    "\t</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "</div> --><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><h3 class=futura><a ng-attr-href=# ng-if=data.section.name>{{data.section.name}}</a> <a ng-attr-href={{data.taxonomy_article_section_url}} ng-bind-html=data.taxonomy_article_section[0].name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"> <img class=max ng-if=data.custom_fields.thumbnail_image_url ng-attr-src=\"{{data.custom_fields.thumbnail_image_url}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author.name class=futura ng-bind=data.author.name></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
   );
 
 
@@ -28841,9 +28795,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		post : function (path,formData){
 
 			$http.post(path,formData)
-				.success(function (data){
+				.success(function (data, textStatus){
 
-					console.log('success', data);
+					console.log('success', data, textStatus);
 				})
 				.error(function (data){
 
@@ -29104,7 +29058,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.sce        = $sce;
 	$scope.tags       = [];
-	$scope.activeTags = []; 
+	$scope.activeTags = [];
+	$scope.pageTurn   = false; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
@@ -29172,8 +29127,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.chooseArticle = function(dir,path){
 
-		//Only turn page if path is defined
-		if(path){
+		console.log(path)
+
+		//Only turn page if path is defined an pageTurn var is set to true
+		if(path && $scope.pageTurn){
 
 			var duration = 400;
 			$scope.loading = true
@@ -29240,6 +29197,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					})
 				}
 			})
+		} else if (path && !$scope.pageTurn){
+			location.replace(path);
 		}
 	}
 
@@ -29292,7 +29251,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
+		commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
 	}
 
 }])
