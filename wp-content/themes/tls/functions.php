@@ -35,8 +35,8 @@ require_once TLS_TEMPLATE_DIR . '/inc/tls-theme-options.php';
 /**
  * PuSHSubscriberWP - TLS Custom PubSubHubbub Integration
  */
-require_once TLS_TEMPLATE_DIR . '/inc/push_subscriber_wp/vendor/autoload.php'; // Load Composer Auto load file
-$PuSHSubscriberWP = new PuSHSubscriberWP\PuSHSubscriberWP;
+require_once TLS_TEMPLATE_DIR . '/inc/tls_hub_subscriber/vendor/autoload.php'; // Load Composer Auto load file
+$TlsHubSubscriberWP = new TlsHubSubscriber\TlsHubSubscriberWP;
 
 
 /**

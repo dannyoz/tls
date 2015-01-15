@@ -50,7 +50,7 @@
 
 		</div>
 
-		<nav class="transition-1" ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile', hinting : hint}">
+		<nav class="transition-1" ng-mouseleave="hint = false" ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile', hinting : hint}">
 			
 			<div class="container">
 

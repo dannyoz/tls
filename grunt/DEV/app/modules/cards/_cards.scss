@@ -5,7 +5,7 @@
 	position:relative;
 	top:0;
 	@include keyline(top right bottom left,$light-keyline);
-	@include animation(fadeIn,ease,0.3s,10);
+	@include animation(fadeIn,ease,0.3s);
 	@extend .transition-1;
 
 	@media screen and (max-width:$tablet){
@@ -35,7 +35,7 @@
 
 		&.date{
 
-			padding-right:170px;
+			padding-right:190px;
 		}
 
 		.icon-key{
@@ -62,6 +62,11 @@
 			color: $primary-orange;
 			text-decoration:none;
 		}
+	}
+
+	.post-date{
+
+		color:$comment-grey;
 	}
 
 	p{
