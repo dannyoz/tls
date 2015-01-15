@@ -1507,14 +1507,17 @@ p.author, h4.author {
   color: #d73f2b;
   padding: 12px 0;
   font-weight: 500;
+  border-top-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
 }
-@media (max-width: 840px) {
-  /* line 60, ../../../../grunt/DEV/app/templates/article/_article.scss */
-  .single-post .article-section {
-    border-top: 1px solid #d9d9d9;
-  }
+/* line 68, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post .article-date {
+  text-align: right;
+  float: right;
+  color: #706d73;
 }
-/* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 75, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
@@ -1526,96 +1529,89 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 0;
 }
-/* line 79, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 84, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body h2 {
   font-size: 48px;
   line-height: 60px;
   margin-bottom: 10px;
 }
 @media (max-width: 450px) {
-  /* line 79, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 84, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body h2 {
     font-size: 22px;
     line-height: 27px;
   }
 }
-/* line 90, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 95, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body p {
-  text-align: justify;
   font-size: 20px;
   line-height: 32px;
 }
-/* line 97, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 101, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol, .single-post .article-body ul {
   margin-bottom: 2em;
   padding-left: 20px;
 }
-/* line 102, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 106, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li, .single-post .article-body ul li {
   line-height: 1.6em;
 }
-/* line 108, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 112, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li {
   list-style-type: decimal;
 }
-/* line 113, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 117, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ul li {
   list-style: initial;
 }
-/* line 118, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 122, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body blockquote {
   margin: 0 -13% 1em -13%;
   text-align: center;
 }
-/* line 124, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 128, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img {
   max-width: 100%;
 }
-/* line 128, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 132, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img.right {
   float: right;
   margin: 0 -13% 0 1em;
 }
-/* line 135, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .author {
   font-weight: 500;
   margin-bottom: 0;
 }
-@media (min-width: 451px) {
-  /* line 140, ../../../../grunt/DEV/app/templates/article/_article.scss */
-  .single-post .article-body .article-date {
-    text-align: right;
-  }
-}
-/* line 148, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 144, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-meta {
   margin-bottom: 20px;
 }
-/* line 152, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 148, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary {
   background-color: #f2f2f2;
   margin-bottom: 20px;
 }
-/* line 157, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 153, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary p {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 16px;
   line-height: 26px;
 }
-/* line 163, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 159, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary .inner {
   padding: 20px 15px;
   width: 50%;
   line-height: 30px;
 }
 @media (max-width: 450px) {
-  /* line 163, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 159, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body .article-summary .inner {
     width: 80%;
   }
 }
 @media screen and (max-width: 840px) {
-  /* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 75, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body {
     margin-left: 8.54167%;
     float: left;
@@ -1623,26 +1619,26 @@ p.author, h4.author {
     width: 82.91667%;
     margin-right: 0;
   }
-  /* line 180, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 176, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body blockquote {
     text-align: left;
     margin-right: 0;
     margin-left: 0;
   }
-  /* line 187, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 183, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img {
     margin-left: 0;
   }
-  /* line 191, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 187, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img.right {
     margin-right: 0;
   }
 }
-/* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 196, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current {
   background-color: white;
 }
-/* line 204, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1653,7 +1649,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
 }
-/* line 210, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 206, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold {
   display: none;
   background-color: white;
@@ -1664,7 +1660,7 @@ p.author, h4.author {
   bottom: 0;
   left: 20px;
 }
-/* line 217, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 213, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnleft {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1677,7 +1673,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 225, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 221, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnright {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1691,54 +1687,54 @@ p.author, h4.author {
   animation-duration: 0.4s;
 }
 
-/* line 234, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 230, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links {
   position: relative;
   z-index: 9999;
   min-height: 30px;
 }
-/* line 240, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 236, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links a {
   font-family: "Times New Roman", "Times", serif;
 }
 @media (max-width: 840px) {
-  /* line 234, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 230, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links {
     overflow: hidden;
     padding: 15px 60px;
   }
 }
 @media (max-width: 450px) {
-  /* line 250, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 246, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .inner {
     padding: 0 20px;
   }
 }
-/* line 256, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 252, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav {
   width: 14%;
 }
 @media (max-width: 840px) {
-  /* line 256, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 252, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav {
     width: 25%;
   }
 }
-/* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 260, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav .icon {
   font-weight: bold;
 }
 @media (max-width: 680px) {
-  /* line 268, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav .icon span {
     display: none;
   }
 }
-/* line 274, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 270, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav:hover {
   text-decoration: none;
 }
-/* line 279, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 275, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .icon:before,
 .article-links .icon:after {
   font-size: 25px;
@@ -1746,7 +1742,7 @@ p.author, h4.author {
   position: absolute;
   top: -1px;
 }
-/* line 287, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 283, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article {
   z-index: 999;
   text-align: right;
@@ -1757,7 +1753,7 @@ p.author, h4.author {
   right: 0;
 }
 @media (max-width: 840px) {
-  /* line 287, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 283, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .next-article {
     position: relative;
     top: auto;
@@ -1765,17 +1761,17 @@ p.author, h4.author {
     float: right;
   }
 }
-/* line 302, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 298, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
-/* line 306, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 302, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
   font-size: 25px;
   content: "\e60b";
 }
-/* line 313, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 309, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -1786,7 +1782,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 840px) {
-  /* line 313, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 309, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -1795,13 +1791,13 @@ p.author, h4.author {
     float: left;
   }
 }
-/* line 329, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 325, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 25px;
   left: 0;
 }
 
-/* line 336, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 332, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
@@ -1844,7 +1840,7 @@ p.author, h4.author {
 }
 /* line 5, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content h4 {
-  margin: 50px 0 0 0;
+  padding: 50px 0 0 0;
   font-weight: 500;
   font-size: 1em;
 }

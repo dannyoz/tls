@@ -56,15 +56,20 @@
 			border-bottom: solid 15px transparent;
 		}
 	}
-	
+
 	.article-section {
 		color: $primary-orange;
 		padding: 12px 0;	
 		font-weight: 500;
 
-		@media (max-width: $tablet) {	
-			border-top: 1px solid $light-keyline;
-		}	
+		@include keyline(top,$light-keyline);	
+	}
+
+	.article-date {
+
+		text-align: right;
+		float: right;	
+		color:$comment-grey;
 	}	
 
 	.article-body{
@@ -89,7 +94,6 @@
 
 		p{
 
-			text-align:justify;
 			font-size: 20px;
 			line-height: 32px;
 		}
@@ -135,14 +139,6 @@
 		.author {
 			font-weight: 500;
 			margin-bottom: 0;
-		}
-
-		.article-date {
-
-			@media (min-width: $mobile + 1) {
-				text-align: right;	
-			}
-			
 		}
 
 		.article-meta {
