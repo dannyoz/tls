@@ -71,10 +71,8 @@ function tls_home_page_json_api_encode($response) {
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ( $card_type == 'article' ) {
                 $section = wp_get_post_terms( $card_post->ID, 'article_section' );
-                $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
             } else {
                 $section = wp_get_post_terms( $card_post->ID, 'category' );
-                $thumbnail_image = '';
             }
 
             // Get Custom Field Value using WP get_post_custom to return correct HTML output
@@ -82,6 +80,7 @@ function tls_home_page_json_api_encode($response) {
             $card_post_custom_fields = get_post_custom( $card_post->ID );
             $card_post_soundcloud_custom_field = $card_post_custom_fields['soundcloud_embed_code'];
             $teaserSummary = $card_post_custom_fields['teaser_summary'];
+            $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
 
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;
