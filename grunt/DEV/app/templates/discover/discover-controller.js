@@ -21,8 +21,6 @@
 		$scope.loading   = false;
 		$scope.pageCount = result.pages
 
-		result.top_articles.splice(4,0,{"mpu" : true});
-
 		columns.divide(result.top_articles).then(function (cols){
 			$scope.topCol1  = cols.col1
 			$scope.topCol2  = cols.col2
