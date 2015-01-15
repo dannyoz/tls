@@ -48,6 +48,11 @@
 								card.visibility = card.taxonomy_article_visibility[0]['slug'];
 							}
 						}
+						
+						// Author name
+						if (typeof card.author == 'object') {
+							card.author = card.author.name;
+						}
 
 						// Thumbnail image
 						if (!isUndefined(card.custom_fields)) {
@@ -90,18 +95,18 @@
 						if (!isUndefined(card.image)) {
 
 							// It's a string
-							if (Object.prototype.toString.call(card.image) == '[object String]') {
+							if (typeof card.image == 'string') {
 								card.image_url = card.image;
 							}
 							// It's an Array
-							if (Object.prototype.toString.call(card.image) == '[object Array]') {
+							if (typeof card.image == 'object') {
 								if (!isUndefined(card.image[0])) {
 									card.image_url = card.image[0];
 								}								
 							}
 						}	
 
-						console.log(card)					
+						//console.log(card);
 
 					break;
 				}		
