@@ -19,6 +19,9 @@ function tls_blogs_archive_json_api_encode($response) {
         $sizes = get_intermediate_image_sizes();
         $attachment_id = get_post_thumbnail_id( $featured_post->ID );
 
+        // Get Featured Post Category
+        $featured_post_category = wp_get_post_terms( $featured_post->ID, 'category' );
+
         $images = array();
         foreach ( $sizes as $size ) {
             $images[$size] = wp_get_attachment_image_src( $attachment_id, $size );
@@ -26,6 +29,7 @@ function tls_blogs_archive_json_api_encode($response) {
         $images['full'] = wp_get_attachment_image_src( $attachment_id, 'full' );
 
         $response['featured_post'] = array(
+            'type'          => ( $featured_post_category[0]->slug == 'a-dons-life' || $featured_post_category[0]->slug == 'dons-life' ) ? 'dons_life_blog' : str_replace( '-', '_', $featured_post_category[0]->slug ) . '_blog',
             'id'            => $featured_post->ID,
             'title'         => $featured_post->post_title,
             'excerpt'       => tls_make_post_excerpt( $featured_post ),
@@ -51,6 +55,11 @@ function tls_blogs_archive_json_api_encode($response) {
 
             $blog_post->excerpt = tls_make_post_excerpt( $blog_post );
             $blog_post->category_url = get_term_link( $categories[0]->term_id, $categories[0]->taxonomy );
+            if ( $categories[0]->slug == 'a-dons-life' || $categories[0]->slug == 'dons-life' ) {
+                $blog_post->type = 'dons_life_blog';
+            } else {
+                $blog_post->type = str_replace( '-', '_', $categories[0]->slug ) . '_blog';
+            }
         }
 
         $response['count'] = count($blogs_archive);
