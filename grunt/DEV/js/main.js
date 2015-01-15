@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><h3 class=futura><a ng-attr-href=# ng-if=data.section.name>{{data.section.name}}</a> <a ng-attr-href={{data.taxonomy_article_section_url}} ng-bind-html=data.taxonomy_article_section[0].name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"> <img class=max ng-if=data.custom_fields.thumbnail_image_url ng-attr-src=\"{{data.custom_fields.thumbnail_image_url}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author.name class=futura ng-bind=data.author.name></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><div ng-if=!data.mpu><h3 class=futura><a ng-attr-href=# ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author.name class=futura ng-bind=data.author.name></p></footer></div><div class=mpu ng-if=data.mpu><script src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script></div></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
   );
 
 
@@ -28924,17 +28924,49 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			data : "=tlsCard"
 		},
 		link : function(scope){
-			
-			console.log(scope.data);
+						
 			scope.sce = $sce;
-			
+			var card = scope.data;				
+
 			// Type of card (Object or Array)
-			var cardType = Object.prototype.toString.call(scope.data);
+			var cardObjType = Object.prototype.toString.call(card);
 
 			// Card is array, must be blog items
-			if(cardType === '[object Array]' && cardType.length > 0) {
-				scope.data.type = 'blog';
+			if(cardObjType === '[object Array]' && cardType.length > 0) {
+				card.type = 'blog';
 			} 
+
+			// Function that format final object in a consistent way
+			scope.formatCard = function(card) {
+
+				var cardType;
+
+				if (card.hasOwnProperty('type')) {
+					cardType = card.type;
+				}
+
+				switch (cardType) {
+
+					case 'article':
+
+						// Thumbnail image
+						if (card.custom_fields != undefined && card.custom_fields.thumbnail_image_url != '') {
+							card.image = card.custom_fields.thumbnail_image_url;
+						}
+
+						// Section name
+						if (card.taxonomy_article_section_url != '') {
+							if (card.taxonomy_article_section != undefined && card.taxonomy_article_section[0]['name'] != '') {
+								card.section = {'name': card.taxonomy_article_section[0]['name']};	
+							}
+						}
+
+						console.log(card);
+
+					break;
+				}		
+					
+			}(card);
 		}
 	}
 }])
