@@ -7,8 +7,10 @@
 	'commentApi',
 	'columns',
 	'niceDate',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate){
+	'tealium',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
 
+	$scope.tealium    = tealium;
 	$scope.loadingPg  = true;
 	$scope.sce        = $sce;
 	$scope.tags       = [];
@@ -65,7 +67,7 @@
 		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
 			emailBody = $scope.post.url,
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
-
+		
 		return emailPath
 
 	}
@@ -74,10 +76,11 @@
 
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
-			link   = (platform == 'fb') ? fbLink : twLink,
+			link   = (platform == 'facebook') ? fbLink : twLink,
 			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
+		tealium.socialLink(platform);
 
 	}
 

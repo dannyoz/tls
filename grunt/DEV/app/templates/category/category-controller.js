@@ -1,4 +1,11 @@
-.controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
+.controller('category', [
+	'$scope',
+	'$sce', 
+	'$timeout', 
+	'api', 
+	'columns',
+	'tealium', 
+	function ($scope,$sce,$timeout,api,columns,tealium){
 
 	var href   = window.location.href,
 		parent = href.indexOf('/blogs/') > -1,
@@ -76,6 +83,8 @@
 				$scope.loadMsg = "End of results in " + $scope.title;
 			});
 		}
+
+		tealium.loadMore();
 	}
 
 }])

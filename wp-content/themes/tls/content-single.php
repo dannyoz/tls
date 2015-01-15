@@ -12,14 +12,14 @@
 						Print 
 						<i class="icon icon-print"></i>
 					</a>
-					<a ng-attr-href="{{emailLink();}}" class="button clear small">
+					<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="button clear small">
 						Email 
 						<i class="icon icon-email"></i>
 					</a>
-					<a ng-click="socialLink(post.url,'fb')" class="button clear small">
+					<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
 						<i class="icon icon-facebook"></i>
 					</a>
-					<a ng-click="socialLink(post.url,'tw')" class="button clear small">
+					<a ng-click="socialLink(post.url,'twitter')" class="button clear small">
 						<i class="icon icon-twitter"></i>
 					</a>
 
@@ -83,14 +83,14 @@
 								Print 
 								<i class="icon icon-print"></i>
 							</a>
-							<a ng-attr-href="{{emailLink();}}" class="button clear small">
+							<a ng-attr-href="{{emailLink();}}"  ng-click="tealium.socialLink('email')" class="button clear small">
 								Email 
 								<i class="icon icon-email"></i>
 							</a>
-							<a ng-click="socialLink(post.url,'fb')" class="button clear small">
+							<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
 								<i class="icon icon-facebook"></i>
 							</a>
-							<a ng-click="socialLink(post.url,'tw')" class="button clear small">
+							<a ng-click="socialLink(post.url,'twitter')" class="button clear small">
 								<i class="icon icon-twitter"></i>
 							</a>
 

@@ -18,6 +18,23 @@
 
 	<?php wp_head(); ?>
 
+	<script type="text/javascript">
+	var utag_data = {
+	  page_name : "homepage", // Name of page
+	  page_type : "homepage", // Type of page
+	  page_section : "homepage", // Section
+	  page_restrictions : "public" // public or private
+	}
+	</script>
+
+	<script type="text/javascript">
+	    (function(a,b,c,d){
+	    a='//tags.tiqcdn.com/utag/newsinternational/thetimes.tls/dev/utag.js';
+	    b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+	    a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+	    })();
+	</script>
+
 	<script>try{Typekit.load();}catch(e){}</script>
 	<?php if ( is_home() || is_front_page() ) :
 		$front_page_id = get_option('page_on_front');
