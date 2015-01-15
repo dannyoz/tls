@@ -1,4 +1,8 @@
-<?php 
+<?php
+/*
+Template Name: Latest Edition Page Template
+*/
+
 	get_header();
  ?>
 
