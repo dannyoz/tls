@@ -1,3 +1,4 @@
+/* line 5, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -19,44 +20,53 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+/* line 22, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
+/* line 24, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
+/* line 26, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+/* line 28, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
+/* line 30, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
+/* line 103, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
+/* line 32, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
+/* line 116, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
+/* line 3, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 body {
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -64,56 +74,66 @@ body {
 /* =========================================*/
 /* CORE GLOBALS                             */
 /* =========================================*/
+/* line 22, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .container {
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 20px;
 }
 @media screen and (max-width: 450px) {
+  /* line 22, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
   .container {
     padding: 0 15px;
   }
 }
+/* line 32, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .container.relative {
   position: relative;
 }
 
+/* line 40, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .stack, #main-header #header-top #user.tablet button {
   float: left;
   width: 100%;
   clear: both;
 }
 
+/* line 51, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .rounded-5px {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
 
+/* line 51, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .rounded-10px {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
 
+/* line 51, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .rounded-15px {
   -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border-radius: 15px;
 }
 
+/* line 51, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .rounded-20px {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
 
+/* line 61, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .border-box {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
+/* line 72, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .transition-1, #main-header nav ul li a, .card, .card-flat {
   -moz-transition: all 0.25s ease;
   -o-transition: all 0.25s ease;
@@ -121,6 +141,7 @@ body {
   transition: all 0.25s ease;
 }
 
+/* line 72, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .transition-2 {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -128,6 +149,7 @@ body {
   transition: all 0.5s ease;
 }
 
+/* line 72, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .transition-3 {
   -moz-transition: all 0.75s ease;
   -o-transition: all 0.75s ease;
@@ -135,6 +157,7 @@ body {
   transition: all 0.75s ease;
 }
 
+/* line 72, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .transition-4 {
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
@@ -142,6 +165,7 @@ body {
   transition: all 1s ease;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .centre {
   position: absolute;
   top: 50%;
@@ -152,6 +176,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* line 92, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .centre-x {
   position: absolute;
   left: 50%;
@@ -161,6 +186,7 @@ body {
   transform: translateX(-50%);
 }
 
+/* line 96, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .centre-y {
   position: absolute;
   top: 50%;
@@ -170,6 +196,7 @@ body {
   transform: translateY(-50%);
 }
 
+/* line 103, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
 .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -180,22 +207,27 @@ body {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .fadeIn:nth-child(1) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .fadeIn:nth-child(2) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .fadeIn:nth-child(3) {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .fadeIn:nth-child(4) {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .fadeIn:nth-child(5) {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
@@ -205,15 +237,18 @@ body {
 /* =========================================*/
 /* GRID STYLES                              */
 /* =========================================*/
+/* line 75, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-row {
   min-height: 1%;
 }
+/* line 79, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-row:after {
   content: "";
   display: table;
   clear: both;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-1 {
   float: left;
   position: relative;
@@ -221,14 +256,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-1 {
   margin-left: 8.54167%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-1 {
   margin-right: 8.54167%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-2 {
   float: left;
   position: relative;
@@ -236,14 +274,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-2 {
   margin-left: 17.08333%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-2 {
   margin-right: 17.08333%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-3 {
   float: left;
   position: relative;
@@ -251,14 +292,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-3 {
   margin-left: 25.625%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-3 {
   margin-right: 25.625%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-4 {
   float: left;
   position: relative;
@@ -266,14 +310,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-4 {
   margin-left: 34.16667%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-4 {
   margin-right: 34.16667%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-5 {
   float: left;
   position: relative;
@@ -281,14 +328,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-5 {
   margin-left: 42.70833%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-5 {
   margin-right: 42.70833%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-6 {
   float: left;
   position: relative;
@@ -296,14 +346,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-6 {
   margin-left: 51.25%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-6 {
   margin-right: 51.25%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-7 {
   float: left;
   position: relative;
@@ -311,14 +364,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-7 {
   margin-left: 59.79167%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-7 {
   margin-right: 59.79167%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-8 {
   float: left;
   position: relative;
@@ -326,14 +382,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-8 {
   margin-left: 68.33333%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-8 {
   margin-right: 68.33333%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-9 {
   float: left;
   position: relative;
@@ -341,14 +400,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-9 {
   margin-left: 76.875%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-9 {
   margin-right: 76.875%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-10 {
   float: left;
   position: relative;
@@ -356,14 +418,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-10 {
   margin-left: 85.41667%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-10 {
   margin-right: 85.41667%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-11 {
   float: left;
   position: relative;
@@ -371,14 +436,17 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-11 {
   margin-left: 93.95833%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-11 {
   margin-right: 93.95833%;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .grid-12 {
   float: left;
   position: relative;
@@ -386,19 +454,23 @@ body {
   margin-right: 2.5%;
 }
 
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .push-12 {
   margin-left: 102.5%;
 }
 
+/* line 129, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 .pull-12 {
   margin-right: 102.5%;
 }
 
+/* line 158, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
 [class*="grid"]:last-child {
   margin-right: 0;
 }
 
 @media screen and (max-width: 450px) {
+  /* line 172, ../../../../grunt/DEV/app/global/sass-globals/mixins/_grid.scss */
   [class*="grid"] {
     margin-left: 0;
     margin-right: 0;
@@ -406,24 +478,29 @@ body {
   }
 }
 /* =========================================*/
+/* line 36, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 .max {
   max-width: 100%;
 }
 
+/* line 41, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 .circular {
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
 }
 
+/* line 45, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 .loadingopacity {
   opacity: 0.3;
 }
 
+/* line 50, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 section, article {
   min-height: 800px;
 }
 
+/* line 55, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner {
   background-color: grey;
   height: 492px;
@@ -440,16 +517,25 @@ section, article {
   -webkit-animation-duration: 1.5s;
   animation-duration: 1.5s;
 }
+/* line 64, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
+#banner a:hover {
+  text-decoration: none;
+  color: #d73f2b;
+}
 @media screen and (max-width: 840px) {
+  /* line 55, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
   #banner {
     height: 320px;
   }
 }
 @media screen and (max-width: 450px) {
+  /* line 55, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
   #banner {
     height: 200px;
+    margin-bottom: 15px;
   }
 }
+/* line 82, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .gradient {
   background-image: url(../images/banner-gradient.png);
   background-repeat: repeat-x;
@@ -460,11 +546,13 @@ section, article {
   bottom: 0;
   left: 0;
 }
+/* line 90, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .caption {
   position: absolute;
   bottom: 0;
   z-index: 9999;
 }
+/* line 96, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .caption h2, #banner .caption p {
   color: white;
   -webkit-animation-name: slideUp;
@@ -478,14 +566,17 @@ section, article {
   -webkit-animation-iteration-count: 0.7s;
   animation-iteration-count: 0.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 #banner .caption h2:nth-child(1), #banner .caption p:nth-child(1) {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 #banner .caption h2:nth-child(2), #banner .caption p:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 102, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .caption .category {
   float: left;
   clear: both;
@@ -497,64 +588,76 @@ section, article {
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 700;
 }
+/* line 117, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .caption h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 2.5em;
   font-weight: bold;
   float: left;
   width: 100%;
   clear: both;
 }
+/* line 127, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 #banner .caption .excerpt {
   margin-bottom: 30px;
   font-style: italic;
-  font-size: 1.5em;
+  font-size: 1.333em;
   float: left;
   width: 100%;
   clear: both;
 }
 @media screen and (max-width: 840px) {
+  /* line 90, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
   #banner .caption {
     font-size: 0.8em;
   }
 }
 @media screen and (max-width: 450px) {
+  /* line 90, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
   #banner .caption {
     font-size: 0.6em;
   }
+  /* line 146, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
   #banner .caption .excerpt {
     display: none;
   }
 }
 
+/* line 1, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a, button, input {
   cursor: pointer;
 }
 
+/* line 7, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:link {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
+/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:visited {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
+/* line 17, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:hover {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
+/* line 22, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:active {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
+/* line 27, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a.orange {
   color: #d73f2b;
 }
 
+/* line 34, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button, .button {
   outline: 0;
   border: 1px solid #d73f2b;
-  padding: 10px 18px;
+  padding: 5px 18px;
   background: #d73f2b;
   color: white;
   font-family: "futura-pt", "Arial", sans-serif;
@@ -564,23 +667,28 @@ button, .button {
   -webkit-border-radius: 30px;
   border-radius: 30px;
 }
+/* line 50, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button:hover, button:focus, .button:hover, .button:focus {
   background: #c72719;
   border-color: #c72719;
   text-decoration: none;
 }
+/* line 57, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button.clear, .button.clear {
   background: white;
   color: black;
   border-color: #d9d9d9;
 }
+/* line 63, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button.clear:hover, button.clear:focus, .button.clear:hover, .button.clear:focus {
   color: #d73f2b;
 }
+/* line 69, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button.small, .button.small {
   padding: 4px 15px;
 }
 
+/* line 2, ../../../../grunt/DEV/app/global/sass-globals/_forms.scss */
 fieldset {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -591,6 +699,7 @@ fieldset {
   clear: both;
 }
 
+/* line 9, ../../../../grunt/DEV/app/global/sass-globals/_forms.scss */
 textarea, input[type=text], input[type=email], input[type=password], input[type=url], input[type=tel], input[type=search] {
   font-family: "futura-pt", "Arial", sans-serif;
   margin: 0;
@@ -605,6 +714,7 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
   font-weight: normal;
   font-style: normal;
 }
+/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'icomoon';
   speak: none;
@@ -618,114 +728,139 @@ textarea, input[type=text], input[type=email], input[type=password], input[type=
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* line 26, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-minus:before {
   content: "\e600";
 }
 
+/* line 29, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-cross:before {
   content: "\e601";
 }
 
+/* line 32, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-dropdown:before {
   content: "\e602";
 }
 
+/* line 35, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-email:before {
   content: "\e603";
 }
 
+/* line 38, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-facebook:before {
   content: "\e604";
 }
 
+/* line 41, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-key:before {
   content: "\e605";
 }
 
+/* line 44, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-key-after:after {
   content: "\e605";
 }
 
+/* line 47, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-left-arrow:before {
   content: "\e606";
 }
 
+/* line 50, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-login:before {
   content: "\e607";
 }
 
+/* line 53, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-padlock:before {
   content: "\e608";
 }
 
+/* line 56, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-plus:before {
   content: "\e609";
 }
 
+/* line 59, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-print:before {
   content: "\e60a";
 }
 
+/* line 62, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-right-arrow:before {
   content: "\e60b";
 }
 
+/* line 65, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-search:before {
   content: "\e60c";
 }
 
+/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_icons.scss */
 .icon-twitter:before {
   content: "\e60d";
 }
 
+/* line 1, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h1 {
   margin-bottom: 0.5em;
   font-size: 2.8em;
   font-weight: bold;
 }
 
+/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h2 {
   margin-bottom: 0.5em;
   font-size: 2.2em;
   font-weight: bold;
 }
 
+/* line 23, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h3 {
   margin-bottom: 0.5em;
   font-size: 1.8em;
   font-weight: bold;
 }
 
+/* line 33, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h4 {
   margin-bottom: 0.5em;
   font-size: 1.4em;
   font-weight: bold;
 }
 
+/* line 43, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h5 {
   margin-bottom: 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
 
+/* line 53, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h6 {
   margin-bottom: 0.5em;
   font-size: 1em;
   font-weight: bold;
 }
 
+/* line 63, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p {
   line-height: 1.4em;
   margin-bottom: 2em;
 }
+/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p:last-of-type {
   margin-bottom: 0;
 }
 
+/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred {
   text-align: center;
 }
 
+/* line 78, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 blockquote {
   line-height: 1.6em;
   color: #d73f2b;
@@ -733,23 +868,28 @@ blockquote {
   font-size: 1.2em;
 }
 
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 strong, b {
   font-weight: bold;
 }
 
+/* line 93, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 em, i {
   font-style: italic;
 }
 
+/* line 98, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #home #subscriber h2, #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
+/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
+/* line 109, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p.author, h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
@@ -757,6 +897,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
+/* line 120, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -767,6 +908,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 700;
 }
+/* line 133, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading:after {
   bottom: -20px;
   height: 5px;
@@ -782,20 +924,42 @@ p.author, h4.author {
   transform: translateX(-50%);
 }
 
+/* line 9, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top .container {
   position: relative;
 }
+/* line 14, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand {
   padding: 30px 0;
   min-height: 50px;
 }
+@media screen and (max-width: 450px) {
+  /* line 14, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  #main-header #header-top #brand {
+    padding: 15px 0;
+  }
+}
+/* line 23, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand #logo {
   display: block;
-  height: 60px;
-  width: 106px;
   float: left;
   margin-right: 20px;
+  margin-bottom: 0;
 }
+@media screen and (min-width: 451px) {
+  /* line 23, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  #main-header #header-top #brand #logo {
+    height: 60px;
+    width: 106px;
+  }
+}
+@media screen and (max-width: 450px) {
+  /* line 35, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  #main-header #header-top #brand #logo img {
+    width: 60px;
+  }
+}
+/* line 42, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .sub {
   margin-top: 1px;
   margin-bottom: 0;
@@ -805,6 +969,7 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1.2em;
 }
+/* line 55, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .strap {
   margin-top: 3px;
   padding-right: 130px;
@@ -812,27 +977,34 @@ p.author, h4.author {
   font-style: italic;
 }
 @media screen and (max-width: 700px) {
+  /* line 67, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub {
     font-size: 1em;
   }
+  /* line 71, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .strap {
     font-size: 0.8em;
   }
 }
 @media screen and (max-width: 620px) {
+  /* line 80, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub, #main-header #header-top #brand .strap {
     display: none;
   }
 }
+/* line 87, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user {
   right: 20px;
 }
+/* line 91, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet {
   width: 110px;
 }
+/* line 99, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet button:first-child {
   margin-bottom: 10px;
 }
+/* line 108, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav {
   height: 52px;
   position: relative;
@@ -842,14 +1014,23 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+@media screen and (max-width: 450px) {
+  /* line 116, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  #main-header nav .container {
+    padding: 0;
+  }
+}
+/* line 122, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .grid-row {
   position: relative;
   background-color: #f2f2f2;
 }
+/* line 128, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul {
   float: left;
   width: 50%;
 }
+/* line 133, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li {
   display: inline-block;
   float: left;
@@ -858,11 +1039,13 @@ p.author, h4.author {
   height: 52px;
   overflow: hidden;
 }
+/* line 142, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li.current-menu-item a {
   -moz-box-shadow: inset 0 -4px 0 #e6e6e6;
   -webkit-box-shadow: inset 0 -4px 0 #e6e6e6;
   box-shadow: inset 0 -4px 0 #e6e6e6;
 }
+/* line 146, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a {
   text-align: center;
   display: block;
@@ -875,15 +1058,18 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 161, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a:hover {
   text-decoration: none;
   -moz-box-shadow: inset 0 -4px 0 #d73f2b;
   -webkit-box-shadow: inset 0 -4px 0 #d73f2b;
   box-shadow: inset 0 -4px 0 #d73f2b;
 }
+/* line 168, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li:last-child a {
   border-right-width: 1px;
 }
+/* line 175, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search {
   float: left;
   width: 50%;
@@ -895,6 +1081,7 @@ p.author, h4.author {
   -webkit-box-shadow: inset -1px 0 0 #d9d9d9;
   box-shadow: inset -1px 0 0 #d9d9d9;
 }
+/* line 185, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
@@ -904,6 +1091,7 @@ p.author, h4.author {
   font-size: 0.9em;
   font-weight: bold;
 }
+/* line 199, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search input[type="text"], #main-header nav .search input[type="search"] {
   border: 0;
   background-color: #f2f2f2;
@@ -916,6 +1104,7 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
+/* line 214, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper {
   position: absolute;
   top: 0;
@@ -923,6 +1112,7 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
+/* line 218, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper:before {
   height: 1px;
   background-color: #d9d9d9;
@@ -935,6 +1125,7 @@ p.author, h4.author {
   display: block;
   content: "";
 }
+/* line 228, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search button {
   position: absolute;
   top: 0;
@@ -950,6 +1141,7 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
+/* line 243, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint {
   position: absolute;
   top: 52px;
@@ -957,11 +1149,13 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
+/* line 247, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint p {
   padding: 0 70px 0 20px;
   font-size: 0.9em;
   letter-spacing: 0;
 }
+/* line 255, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .open-search {
   z-index: 9999;
   cursor: pointer;
@@ -971,20 +1165,24 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
+/* line 265, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet ul {
   width: 82%;
 }
+/* line 271, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search {
   position: absolute;
   right: 0;
   width: 18%;
   left: 82%;
 }
+/* line 278, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search.open {
   left: 1px;
   right: 0;
   width: auto;
 }
+/* line 289, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile ul {
   width: auto;
   position: absolute;
@@ -993,27 +1191,34 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
+/* line 294, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search {
   position: absolute;
   right: 0;
   width: 50px;
 }
+/* line 300, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search.open {
   width: 100%;
 }
+/* line 307, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting {
   height: 95px;
 }
+/* line 311, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li {
   height: 95px;
 }
+/* line 315, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li a {
   height: 95px;
 }
+/* line 322, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting .search {
   height: 95px;
 }
 
+/* line 1, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer {
   background: #000;
   color: white;
@@ -1022,9 +1227,11 @@ p.author, h4.author {
   width: 100%;
   clear: both;
 }
+/* line 8, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul {
   margin-bottom: 40px;
 }
+/* line 12, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li {
   display: inline-block;
   padding-right: 15px;
@@ -1032,6 +1239,7 @@ p.author, h4.author {
   margin-bottom: 10px;
   border-right: 2px solid white;
 }
+/* line 20, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li a {
   text-transform: uppercase;
   color: white;
@@ -1039,19 +1247,33 @@ p.author, h4.author {
   font-size: 1em;
   font-weight: 700;
 }
+/* line 30, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li a:hover {
   color: #d73f2b;
 }
+/* line 36, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li:last-child {
   padding-right: 0;
   margin-right: 0;
   border-right: none;
 }
+/* line 45, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer .copyright {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.7em;
 }
 
+@media screen and (max-width: 450px) {
+  /* line 9, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  #home .container p.excerpt.mobile {
+    font-family: "Times New Roman", "Times", serif;
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 22px;
+  }
+}
+/* line 20, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber {
   float: left;
   width: 100%;
@@ -1060,6 +1282,11 @@ p.author, h4.author {
   margin-top: 40px;
   padding-bottom: 40px;
 }
+/* line 28, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #subscriber .container {
+  overflow: hidden;
+}
+/* line 32, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber h2 {
   text-align: center;
   font-size: 24px;
@@ -1071,15 +1298,18 @@ p.author, h4.author {
   line-height: 115px;
 }
 @media (max-width: 450px) {
+  /* line 32, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber h2 {
     font-size: 18px;
   }
 }
+/* line 48, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .title-icon {
   position: relative;
   height: 125px;
   padding: 30px 0 10px 0;
 }
+/* line 54, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .icon-border {
   width: 66px;
   height: 90px;
@@ -1088,6 +1318,7 @@ p.author, h4.author {
   left: 50%;
   margin-left: -33px;
 }
+/* line 62, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .icon-border:before {
   font-size: 36px;
   position: absolute;
@@ -1095,27 +1326,32 @@ p.author, h4.author {
   top: 0;
   color: #706d73;
 }
+/* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .subscribe-grid {
   float: left;
   position: relative;
   width: 23.125%;
   margin-right: 2.5%;
 }
+/* line 75, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .subscribe-grid:last-child {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
+  /* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid {
     float: left;
     position: relative;
     width: 48.75%;
     margin-right: 2.5%;
   }
+  /* line 84, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid:nth-of-type(even) {
     margin-right: 0;
   }
 }
 @media screen and (max-width: 450px) {
+  /* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid {
     float: left;
     position: relative;
@@ -1123,36 +1359,59 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
+/* line 95, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #subscriber .subscribe-grid .card {
+  background-color: transparent;
+  border-color: #bfbfbf;
+}
+/* line 101, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber.locked {
   background-color: #e6e6e6;
 }
+/* line 105, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber.locked .card {
   border-color: #c4c4c4;
 }
+/* line 111, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #subscriber .cta-buttons {
+  clear: both;
+  overflow: hidden;
+  text-align: center;
+}
+/* line 116, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #subscriber .cta-buttons .subscribe {
+  margin-right: 10px;
+}
 @media screen and (max-width: 450px) {
+  /* line 125, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card {
     padding: 20px;
   }
 }
+/* line 131, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card h4 {
   margin-bottom: 2px;
 }
 @media screen and (max-width: 450px) {
+  /* line 135, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card h3 {
     padding: 0;
     margin-bottom: 10px;
   }
 }
+/* line 142, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card p.futura {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
 @media screen and (max-width: 450px) {
+  /* line 148, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .padded {
     padding: 0;
   }
 }
+/* line 154, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-avatar {
   float: left;
   position: relative;
@@ -1160,6 +1419,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 450px) {
+  /* line 154, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .blog-avatar {
     float: left;
     position: relative;
@@ -1167,6 +1427,7 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
+/* line 164, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-data {
   float: left;
   position: relative;
@@ -1174,6 +1435,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 450px) {
+  /* line 164, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .blog-data {
     float: left;
     position: relative;
@@ -1181,23 +1443,29 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
+/* line 172, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-data .inner {
   padding-left: 5px;
 }
 
+/* line 7, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post article .container {
   overflow: hidden;
 }
+/* line 12, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+/* line 17, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar a {
   margin-left: 10px;
 }
+/* line 21, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar a:first-child {
   margin-left: 0;
 }
+/* line 28, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .col-wide {
   margin-left: 25.625%;
   float: left;
@@ -1206,6 +1474,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
+  /* line 28, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .col-wide {
     margin-left: 8.54167%;
     float: left;
@@ -1214,9 +1483,11 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
+/* line 39, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner {
   position: relative;
 }
+/* line 43, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner:before, .single-post .folded-corner:after {
   display: block;
   position: absolute;
@@ -1224,22 +1495,26 @@ p.author, h4.author {
   right: 0;
   content: "";
 }
+/* line 52, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner:before {
   border-top: solid 15px #fff;
   border-right: solid 15px #fff;
   border-left: solid 15px transparent;
   border-bottom: solid 15px transparent;
 }
+/* line 60, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-section {
   color: #d73f2b;
   padding: 12px 0;
   font-weight: 500;
 }
 @media (max-width: 840px) {
+  /* line 60, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-section {
     border-top: 1px solid #d9d9d9;
   }
 }
+/* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
@@ -1251,78 +1526,96 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 0;
 }
+/* line 79, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body h2 {
   font-size: 48px;
   line-height: 60px;
   margin-bottom: 10px;
 }
 @media (max-width: 450px) {
+  /* line 79, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body h2 {
     font-size: 22px;
     line-height: 27px;
   }
 }
+/* line 90, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body p {
   text-align: justify;
   font-size: 20px;
   line-height: 32px;
 }
+/* line 97, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol, .single-post .article-body ul {
   margin-bottom: 2em;
   padding-left: 20px;
 }
+/* line 102, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li, .single-post .article-body ul li {
   line-height: 1.6em;
 }
+/* line 108, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li {
   list-style-type: decimal;
 }
+/* line 113, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ul li {
   list-style: initial;
 }
+/* line 118, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body blockquote {
   margin: 0 -13% 1em -13%;
   text-align: center;
 }
+/* line 124, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img {
   max-width: 100%;
 }
+/* line 128, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img.right {
   float: right;
   margin: 0 -13% 0 1em;
 }
+/* line 135, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .author {
   font-weight: 500;
   margin-bottom: 0;
 }
 @media (min-width: 451px) {
+  /* line 140, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body .article-date {
     text-align: right;
   }
 }
+/* line 148, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-meta {
   margin-bottom: 20px;
 }
+/* line 152, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary {
   background-color: #f2f2f2;
   margin-bottom: 20px;
 }
+/* line 157, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary p {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 16px;
   line-height: 26px;
 }
+/* line 163, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary .inner {
   padding: 20px 15px;
   width: 50%;
   line-height: 30px;
 }
 @media (max-width: 450px) {
+  /* line 163, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body .article-summary .inner {
     width: 80%;
   }
 }
 @media screen and (max-width: 840px) {
+  /* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body {
     margin-left: 8.54167%;
     float: left;
@@ -1330,21 +1623,26 @@ p.author, h4.author {
     width: 82.91667%;
     margin-right: 0;
   }
+  /* line 180, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body blockquote {
     text-align: left;
     margin-right: 0;
     margin-left: 0;
   }
+  /* line 187, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img {
     margin-left: 0;
   }
+  /* line 191, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img.right {
     margin-right: 0;
   }
 }
+/* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current {
   background-color: white;
 }
+/* line 204, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1355,6 +1653,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
 }
+/* line 210, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold {
   display: none;
   background-color: white;
@@ -1365,6 +1664,7 @@ p.author, h4.author {
   bottom: 0;
   left: 20px;
 }
+/* line 217, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnleft {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1377,6 +1677,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
+/* line 225, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnright {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1390,44 +1691,54 @@ p.author, h4.author {
   animation-duration: 0.4s;
 }
 
+/* line 234, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links {
   position: relative;
   z-index: 9999;
   min-height: 30px;
 }
+/* line 240, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links a {
   font-family: "Times New Roman", "Times", serif;
 }
 @media (max-width: 840px) {
+  /* line 234, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links {
     overflow: hidden;
     padding: 15px 60px;
   }
 }
 @media (max-width: 450px) {
+  /* line 250, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .inner {
     padding: 0 20px;
   }
 }
+/* line 256, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav {
   width: 14%;
 }
 @media (max-width: 840px) {
+  /* line 256, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav {
     width: 25%;
   }
 }
+/* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav .icon {
   font-weight: bold;
 }
 @media (max-width: 680px) {
+  /* line 268, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav .icon span {
     display: none;
   }
 }
+/* line 274, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav:hover {
   text-decoration: none;
 }
+/* line 279, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .icon:before,
 .article-links .icon:after {
   font-size: 25px;
@@ -1435,6 +1746,7 @@ p.author, h4.author {
   position: absolute;
   top: -1px;
 }
+/* line 287, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article {
   z-index: 999;
   text-align: right;
@@ -1445,6 +1757,7 @@ p.author, h4.author {
   right: 0;
 }
 @media (max-width: 840px) {
+  /* line 287, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .next-article {
     position: relative;
     top: auto;
@@ -1452,14 +1765,17 @@ p.author, h4.author {
     float: right;
   }
 }
+/* line 302, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
+/* line 306, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
   font-size: 25px;
   content: "\e60b";
 }
+/* line 313, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -1470,6 +1786,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 840px) {
+  /* line 313, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -1478,11 +1795,13 @@ p.author, h4.author {
     float: left;
   }
 }
+/* line 329, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 25px;
   left: 0;
 }
 
+/* line 336, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
@@ -1490,44 +1809,55 @@ p.author, h4.author {
   letter-spacing: 1px;
 }
 
+/* line 1, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category, #discover {
   height: auto;
 }
+/* line 5, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category #featured-post, #discover #featured-post {
   margin-bottom: 20px;
 }
+/* line 10, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category.loading, #discover.loading {
   height: 800px;
 }
+/* line 15, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category #load-more, #discover #load-more {
   display: block;
   position: relative;
   height: 100px;
 }
+/* line 22, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category .intro, #discover .intro {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+/* line 27, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category .intro p, #discover .intro p {
   font-style: italic;
   font-size: 1.2em;
 }
 
+/* line 1, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content {
   background-color: #f2f2f2;
 }
+/* line 5, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content h4 {
   margin: 50px 0 0 0;
   font-weight: 500;
   font-size: 1em;
 }
+/* line 14, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content #tags {
   padding: 20px 0;
 }
+/* line 18, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content #tags li {
   display: inline-block;
   margin: 0 10px 10px 0;
 }
+/* line 23, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content #tags li a {
   display: block;
   padding: 5px;
@@ -1541,15 +1871,18 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 32, ../../../../grunt/DEV/app/templates/article/_related-content.scss */
 #related-content #tags li a.applied {
   border-color: #d73f2b;
   color: #d73f2b;
 }
 
+/* line 1, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments {
   padding-top: 20px;
   padding-bottom: 50px;
 }
+/* line 6, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap {
   margin-left: 25.625%;
   float: left;
@@ -1561,6 +1894,7 @@ p.author, h4.author {
   border-color: #d9d9d9;
 }
 @media screen and (max-width: 840px) {
+  /* line 6, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
   #comments .comment-wrap {
     margin-left: 8.54167%;
     float: left;
@@ -1569,6 +1903,7 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
+/* line 18, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap h3 {
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -1576,6 +1911,7 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1em;
 }
+/* line 29, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment {
   padding-bottom: 20px;
   margin-bottom: 20px;
@@ -1583,14 +1919,17 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 35, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment .thumb-wrapper {
   float: left;
   margin-right: 20px;
 }
+/* line 41, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment h4 {
   font-weight: 500;
   font-size: 1em;
 }
+/* line 49, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment p {
   color: #706d73;
   padding-left: 105px;
@@ -1598,9 +1937,11 @@ p.author, h4.author {
   font-size: 0.9em;
 }
 
+/* line 1, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results {
   margin-top: 60px;
 }
+/* line 5, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters {
   top: auto;
   float: left;
@@ -1609,6 +1950,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 840px) {
+  /* line 5, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #search-filters {
     position: fixed;
     z-index: 999;
@@ -1619,21 +1961,25 @@ p.author, h4.author {
     width: 300px;
     overflow: auto;
   }
+  /* line 21, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #search-filters.open {
     left: 0;
     padding: 20px;
   }
 }
+/* line 29, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters h2 {
   margin-bottom: 30px;
   font-weight: 500;
   font-size: 1.5em;
 }
+/* line 40, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .close-filters {
   position: absolute;
   top: 10px;
   right: 10px;
 }
+/* line 49, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block h3 {
   font-weight: 500;
   font-size: 1em;
@@ -1642,18 +1988,22 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 59, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block h3 .clear {
   float: right;
   cursor: pointer;
   text-transform: none;
 }
+/* line 68, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+/* line 73, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul li {
   margin-bottom: 2px;
 }
+/* line 77, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul li a {
   color: #d73f2b;
   display: block;
@@ -1663,18 +2013,22 @@ p.author, h4.author {
   font-size: 0.95em;
   font-family: "futura-pt", "Arial", sans-serif;
 }
+/* line 89, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul li a .icon {
   display: none;
   float: right;
   font-size: 0.7em;
   margin-top: 2px;
 }
+/* line 97, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul li a:hover .icon {
   display: block;
 }
+/* line 103, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #search-filters .filter-block ul li.applied a {
   background-color: #fbebe9;
 }
+/* line 114, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results {
   position: relative;
   left: 0;
@@ -1684,9 +2038,11 @@ p.author, h4.author {
   width: 65.83333%;
   margin-right: 0;
 }
+/* line 116, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results #show-filters {
   margin: -40px 0 15px 0;
 }
+/* line 121, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results h2 {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1694,25 +2050,30 @@ p.author, h4.author {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
 }
+/* line 131, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results h2 .term {
   text-transform: none;
   color: #84868c;
 }
 @media screen and (max-width: 840px) {
+  /* line 114, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #results {
     float: left;
     position: relative;
     width: 100%;
     margin-right: 0;
   }
+  /* line 147, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #results.shift {
     left: 100px;
     opacity: 0.6;
   }
 }
+/* line 154, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results .card {
   position: relative;
 }
+/* line 158, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results .card .post-date {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
@@ -1720,17 +2081,21 @@ p.author, h4.author {
   top: 10px;
   right: 10px;
 }
+/* line 168, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #results.loading {
   opacity: 0.1;
 }
+/* line 175, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination {
   margin-bottom: 20px;
   float: left;
 }
+/* line 180, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li {
   display: inline-block;
   margin: 0 5px;
 }
+/* line 185, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li a {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
@@ -1744,30 +2109,38 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 197, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li:first-child {
   margin-left: 0;
 }
+/* line 202, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li:last-child {
   margin-right: 0;
 }
+/* line 207, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li.current a {
   background-color: #d9d9d9;
 }
+/* line 212, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .pagination li.desktop-only {
   display: inline-block;
 }
 @media screen and (max-width: 840px) {
+  /* line 212, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results .pagination li.desktop-only {
     display: none;
   }
 }
+/* line 225, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter {
   float: right;
 }
+/* line 229, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter span {
   float: left;
   padding: 10px 110px 10px 0;
 }
+/* line 235, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter .selector {
   right: 0;
   position: absolute;
@@ -1781,10 +2154,12 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 244, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter .selector li {
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 500;
 }
+/* line 251, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter .selector li a {
   display: block;
   padding: 10px 15px;
@@ -1792,6 +2167,7 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 256, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter .selector li a:hover {
   background-color: white;
   text-decoration: none;
@@ -1799,36 +2175,44 @@ p.author, h4.author {
   -webkit-box-shadow: inset 4px 0 0 #d9d9d9, inset 0 4px 0 #d9d9d9, inset -4px 0 0 #d9d9d9, inset 0 -4px 0 #d9d9d9;
   box-shadow: inset 4px 0 0 #d9d9d9, inset 0 4px 0 #d9d9d9, inset -4px 0 0 #d9d9d9, inset 0 -4px 0 #d9d9d9;
 }
+/* line 264, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results #sorter .selector li.current {
   padding: 10px 15px;
 }
+/* line 274, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results .tablet-show {
   display: none;
 }
 @media screen and (max-width: 840px) {
+  /* line 274, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results .tablet-show {
     display: block;
   }
 }
 
 @media screen and (max-width: 840px) {
+  /* line 2, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition {
     padding-top: 40px;
   }
 }
+/* line 8, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition h1 {
   font-size: 40px;
   text-align: center;
   margin: 45px 0 60px 0;
 }
+/* line 14, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition h2 {
   font-size: 28px;
   margin-bottom: 25px;
 }
+/* line 19, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition h1,
 #latest-edition h2 {
   font-family: "Times New Roman", "Times", serif;
 }
+/* line 24, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition h3 {
   text-transform: uppercase;
   font-size: 0.9em;
@@ -1836,90 +2220,110 @@ p.author, h4.author {
   margin-bottom: 5px;
   color: #d73f2b;
 }
+/* line 31, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition h3 a {
   color: #d73f2b;
 }
 @media screen and (max-width: 450px) {
+  /* line 24, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition h3 {
     font-weight: bold;
     font-size: 14px;
   }
 }
+/* line 41, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .article-links {
   min-height: 75px;
   margin-top: 45px;
 }
 @media screen and (max-width: 840px) {
+  /* line 41, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .article-links {
     padding: 0;
   }
 }
+/* line 50, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .article-links .article-nav {
   width: auto;
 }
 @media screen and (max-width: 840px) {
+  /* line 50, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .article-links .article-nav {
     width: 90px;
   }
 }
 @media screen and (max-width: 665px) {
+  /* line 50, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .article-links .article-nav {
     width: 75px;
     font-size: 14px;
   }
 }
+/* line 62, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .article-links .article-nav .icon span {
   display: block;
 }
+/* line 68, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item {
   border-top: 1px solid #bfbfbf;
 }
+/* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item .padded {
   padding: 30px;
 }
 @media screen and (max-width: 450px) {
+  /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-item .padded {
     padding: 20px;
   }
 }
+/* line 80, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item h4 {
   font-size: 20px;
   margin-bottom: 5px;
   line-height: 24px;
   word-wrap: break-word;
 }
+/* line 87, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item .title-small {
   text-transform: none;
   margin-bottom: 5px;
 }
 @media screen and (min-width: 841px) {
+  /* line 94, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current {
     margin-top: -120px;
   }
 }
+/* line 102, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .featured-col h1 {
   font-size: 28px;
   margin: 0;
 }
+/* line 107, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .featured-col .img-wrapper {
   border: 1px solid #d9d9d9;
   padding: 6px;
   margin-bottom: 10px;
   text-align: center;
 }
+/* line 114, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .featured-col .title-small {
   font-weight: 500;
 }
 @media screen and (max-width: 450px) {
+  /* line 114, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .featured-col .title-small {
     text-align: center;
   }
 }
+/* line 122, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .featured-col .article-links {
   margin: 20px 0;
   min-height: inherit;
   border-bottom: none;
 }
+/* line 129, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .editions-top-left {
   float: left;
   position: relative;
@@ -1927,6 +2331,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 840px) {
+  /* line 129, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-left {
     float: left;
     position: relative;
@@ -1935,6 +2340,7 @@ p.author, h4.author {
   }
 }
 @media screen and (max-width: 525px) {
+  /* line 129, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-left {
     float: left;
     position: relative;
@@ -1943,6 +2349,7 @@ p.author, h4.author {
     margin-bottom: 40px;
   }
 }
+/* line 143, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .editions-top-right {
   float: left;
   position: relative;
@@ -1950,6 +2357,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
+  /* line 143, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-right {
     float: left;
     position: relative;
@@ -1958,6 +2366,7 @@ p.author, h4.author {
   }
 }
 @media screen and (max-width: 525px) {
+  /* line 143, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-right {
     float: left;
     position: relative;
@@ -1965,6 +2374,7 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
+/* line 156, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .public-col {
   float: left;
   position: relative;
@@ -1972,6 +2382,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 840px) {
+  /* line 156, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .public-col {
     float: left;
     position: relative;
@@ -1980,6 +2391,7 @@ p.author, h4.author {
     margin-bottom: 25px;
   }
 }
+/* line 166, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .regular-col {
   float: left;
   position: relative;
@@ -1987,6 +2399,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
+  /* line 166, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .regular-col {
     float: left;
     position: relative;
@@ -1994,21 +2407,26 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
+/* line 179, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .public-col .edition-item .padded {
   padding: 20px 0;
 }
 @media screen and (max-width: 525px) {
+  /* line 179, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .public-col .edition-item .padded {
     padding: 20px;
   }
 }
+/* line 191, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .regular-col .edition-item {
   background-color: #e6e6e6;
 }
+/* line 195, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .regular-col .edition-item h3 {
   position: relative;
   padding-right: 40px;
 }
+/* line 199, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-current .regular-col .edition-item h3 .icon {
   display: block;
   position: absolute;
@@ -2018,11 +2436,13 @@ p.author, h4.author {
   font-size: 28px;
   line-height: 18px;
 }
+/* line 213, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom {
   background-color: #e6e6e6;
   margin-top: 40px;
   padding-bottom: 40px;
 }
+/* line 219, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom h2 {
   text-align: center;
   font-size: 24px;
@@ -2034,15 +2454,18 @@ p.author, h4.author {
   line-height: 115px;
 }
 @media (max-width: 450px) {
+  /* line 219, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .editions-bottom h2 {
     font-size: 18px;
   }
 }
+/* line 235, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .title-icon {
   position: relative;
   height: 125px;
   padding: 30px 0 10px 0;
 }
+/* line 241, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .icon-border {
   width: 66px;
   height: 90px;
@@ -2051,6 +2474,7 @@ p.author, h4.author {
   left: 50%;
   margin-left: -33px;
 }
+/* line 249, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .icon-border:before {
   font-size: 36px;
   position: absolute;
@@ -2058,20 +2482,25 @@ p.author, h4.author {
   top: 0;
   color: #706d73;
 }
+/* line 258, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item {
   border-top: none;
   border-bottom: 1px solid #bfbfbf;
 }
+/* line 262, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item .padded {
   padding: 20px 0;
 }
+/* line 266, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item:last-child {
   border-bottom: none;
 }
+/* line 269, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item:last-child .padded {
   padding-bottom: 0;
 }
 
+/* line 1, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card {
   background-color: white;
   margin-bottom: 30px;
@@ -2092,75 +2521,92 @@ p.author, h4.author {
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(1) {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(3) {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(4) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(5) {
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(6) {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(7) {
   -webkit-animation-delay: 0.7s;
   animation-delay: 0.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(8) {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(9) {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card:nth-child(10) {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
+  /* line 1, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
+  /* line 1, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card {
     margin-bottom: 15px;
     font-size: 0.8em;
   }
 }
+/* line 22, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card h3 {
   text-transform: uppercase;
   padding: 12px 20px 5px 20px;
   font-size: 0.9em;
   font-weight: 500;
 }
-.card h3 a {
+/* line 31, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card h3 a, .card h3.futura {
   color: #d73f2b;
 }
+/* line 36, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card h3.date {
   padding-right: 170px;
 }
+/* line 41, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card h3 .icon-key {
   float: right;
   color: #706d73;
   margin-top: -5px;
   font-size: 1.5em;
 }
+/* line 50, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card h4 {
   margin-bottom: 10px;
   word-wrap: break-word;
@@ -2168,13 +2614,23 @@ p.author, h4.author {
   font-weight: bold;
   font-family: "Times New Roman", "Times", serif;
 }
+/* line 60, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card h4 a:hover {
   color: #d73f2b;
   text-decoration: none;
 }
+/* line 67, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card p {
-  font-size: 0.9em;
+  font-size: 0.889em;
+  line-height: 1.5em;
 }
+@media screen and (max-width: 450px) {
+  /* line 67, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  .card p {
+    font-size: 1.1em;
+  }
+}
+/* line 76, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card p.author {
   padding-bottom: 10px;
   margin-bottom: 10px;
@@ -2182,20 +2638,25 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 84, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card img {
   margin-bottom: 20px;
 }
+/* line 89, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .padded {
   padding: 0 20px 20px 20px;
 }
+/* line 94, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .embed {
   margin-bottom: 20px;
 }
+/* line 99, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer {
   padding: 10px 20px;
   background-color: #f2f2f2;
   position: relative;
 }
+/* line 105, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub {
   color: #706d73;
   margin-bottom: 0;
@@ -2203,9 +2664,11 @@ p.author, h4.author {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
 }
+/* line 115, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub a {
   color: #706d73;
 }
+/* line 120, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer:after {
   height: 0;
   width: 0;
@@ -2218,9 +2681,11 @@ p.author, h4.author {
   display: block;
   content: "";
 }
+/* line 134, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer p {
   letter-spacing: 0;
 }
+/* line 139, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card:hover {
   border-color: #ccc;
   top: -3px;
@@ -2228,17 +2693,21 @@ p.author, h4.author {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+/* line 146, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private {
   background-color: #e6e6e6;
 }
+/* line 150, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private footer:after {
   border-right-color: #e6e6e6;
 }
+/* line 155, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .mpu {
   overflow: hidden;
   min-height: 300px;
   position: relative;
 }
+/* line 161, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card .mpu img {
   max-width: 100% !important;
   position: absolute;
@@ -2250,16 +2719,19 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
+/* line 169, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry {
   float: left;
   position: relative;
   width: 31.66667%;
   margin-right: 2.5%;
 }
+/* line 173, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
 }
 
+/* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -2280,61 +2752,75 @@ p.author, h4.author {
   animation-duration: 0.3s;
   padding: 20px 30px;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(1) {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(3) {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(4) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(5) {
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(6) {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(7) {
   -webkit-animation-delay: 0.7s;
   animation-delay: 0.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(8) {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(9) {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(10) {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
+  /* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
+  /* line 179, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 15px;
     font-size: 0.8em;
   }
 }
 
+/* line 1, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian {
   margin: 60px 0;
 }
+/* line 5, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title {
   cursor: pointer;
   padding: 20px 0 10px 0;
@@ -2343,6 +2829,7 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
+/* line 12, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title h3 {
   padding-right: 100px;
   text-transform: uppercase;
@@ -2350,16 +2837,19 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1em;
 }
+/* line 23, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title .toggler {
   position: absolute;
   top: 20px;
   right: 0;
 }
+/* line 29, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title .toggler span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.9em;
   font-weight: 500;
 }
+/* line 39, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title .toggler i {
   font-size: 1em;
   -moz-transform: rotate(0deg);
@@ -2367,12 +2857,14 @@ p.author, h4.author {
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
 }
+/* line 44, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-title .toggler i.open {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+/* line 52, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-body {
   overflow: hidden;
   position: relative;
@@ -2381,18 +2873,21 @@ p.author, h4.author {
   padding: 0;
   opacity: 0;
 }
+/* line 61, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-body hr {
   height: 1px;
   width: 100%;
   border: 0;
   background: #d9d9d9;
 }
+/* line 69, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-body.open {
   height: auto;
   left: 0;
   padding: 30px 0;
   opacity: 1;
 }
+/* line 76, ../../../../grunt/DEV/app/modules/accordian/_accordian.scss */
 .accordian .accordian-body.open p {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -2403,107 +2898,133 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(1) {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(3) {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(4) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(5) {
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(6) {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(7) {
   -webkit-animation-delay: 0.7s;
   animation-delay: 0.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(8) {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(9) {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(10) {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(11) {
   -webkit-animation-delay: 1.1s;
   animation-delay: 1.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(12) {
   -webkit-animation-delay: 1.2s;
   animation-delay: 1.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(13) {
   -webkit-animation-delay: 1.3s;
   animation-delay: 1.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(14) {
   -webkit-animation-delay: 1.4s;
   animation-delay: 1.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(15) {
   -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(16) {
   -webkit-animation-delay: 1.6s;
   animation-delay: 1.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(17) {
   -webkit-animation-delay: 1.7s;
   animation-delay: 1.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(18) {
   -webkit-animation-delay: 1.8s;
   animation-delay: 1.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(19) {
   -webkit-animation-delay: 1.9s;
   animation-delay: 1.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian .accordian-body.open p:nth-child(20) {
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
 
+/* line 3, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-title {
   cursor: pointer;
   position: relative;
 }
+/* line 8, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-title h3 {
   padding-right: 20px;
 }
+/* line 12, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-title .toggler {
   position: absolute;
   top: 0;
   right: 0;
 }
+/* line 18, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-title .toggler span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.9em;
   font-weight: 500;
 }
+/* line 28, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-title .toggler i {
   font-size: 1em;
 }
+/* line 34, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-body {
   overflow: hidden;
   position: relative;
@@ -2512,17 +3033,20 @@ p.author, h4.author {
   padding: 0;
   opacity: 0;
 }
+/* line 43, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-body hr {
   height: 1px;
   width: 100%;
   border: 0;
   background: #d9d9d9;
 }
+/* line 51, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-body.open {
   height: auto;
   left: 0;
   opacity: 1;
 }
+/* line 57, ../../../../grunt/DEV/app/modules/accordian-column/_accordian-column.scss */
 .accordian-column .accordian-body.open .padded {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
@@ -2533,90 +3057,112 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(1) {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(2) {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(3) {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(4) {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(5) {
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(6) {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(7) {
   -webkit-animation-delay: 0.7s;
   animation-delay: 0.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(8) {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(9) {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(10) {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(11) {
   -webkit-animation-delay: 1.1s;
   animation-delay: 1.1s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(12) {
   -webkit-animation-delay: 1.2s;
   animation-delay: 1.2s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(13) {
   -webkit-animation-delay: 1.3s;
   animation-delay: 1.3s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(14) {
   -webkit-animation-delay: 1.4s;
   animation-delay: 1.4s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(15) {
   -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(16) {
   -webkit-animation-delay: 1.6s;
   animation-delay: 1.6s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(17) {
   -webkit-animation-delay: 1.7s;
   animation-delay: 1.7s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(18) {
   -webkit-animation-delay: 1.8s;
   animation-delay: 1.8s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(19) {
   -webkit-animation-delay: 1.9s;
   animation-delay: 1.9s;
 }
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .accordian-column .accordian-body.open .padded:nth-child(20) {
   -webkit-animation-delay: 2s;
   animation-delay: 2s;
 }
 
+/* line 7, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading ul {
   text-align: center;
 }
+/* line 11, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading ul li {
   display: inline-block;
   position: relative;
@@ -2624,6 +3170,7 @@ p.author, h4.author {
   width: 5px;
   margin: 0 2px;
 }
+/* line 19, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading ul li b {
   position: absolute;
   height: 5px;
@@ -2643,11 +3190,13 @@ p.author, h4.author {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
+/* line 31, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading .flipper {
   position: relative;
   height: 62px;
   width: 42px;
 }
+/* line 37, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading .flipper .flip {
   position: absolute;
   overflow: hidden;
@@ -2665,6 +3214,7 @@ p.author, h4.author {
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
+/* line 47, ../../../../grunt/DEV/app/modules/loading/_loading.scss */
 #loading .flipper .flip img {
   max-height: 50%;
   position: absolute;
@@ -2676,12 +3226,14 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
+/* line 1, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview {
   padding: 40px 0;
   float: left;
   width: 100%;
   clear: both;
 }
+/* line 6, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview #this-week {
   float: left;
   position: relative;
@@ -2689,6 +3241,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 840px) {
+  /* line 6, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview #this-week {
     margin-bottom: 20px;
     float: left;
@@ -2697,6 +3250,7 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
+/* line 17, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview #next-week {
   float: left;
   position: relative;
@@ -2704,6 +3258,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
+  /* line 17, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview #next-week {
     float: left;
     position: relative;
@@ -2711,21 +3266,26 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
+/* line 27, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview {
   border: 4px solid #d9d9d9;
 }
+/* line 31, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .top {
   background-color: #f2f2f2;
-  padding: 20px;
+  padding: 30px;
   position: relative;
 }
+/* line 37, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .top h3 {
   text-transform: uppercase;
   color: #d73f2b;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 1.5em;
   font-weight: 500;
+  margin-bottom: 0;
 }
+/* line 49, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .top .date {
   text-align: center;
   -moz-box-sizing: border-box;
@@ -2733,8 +3293,8 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 10px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   width: 90px;
   height: 90px;
   background-color: #d73f2b;
@@ -2742,46 +3302,78 @@ p.author, h4.author {
   -webkit-border-radius: 90px;
   border-radius: 90px;
 }
+/* line 56, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .top .date span {
   color: white;
   font-size: 0.9em;
   font-family: "futura-pt", "Arial", sans-serif;
 }
+/* line 64, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .top .date span u {
   line-height: 1.5em;
   font-weight: 500;
   font-size: 1.1em;
 }
+/* line 77, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody {
-  padding: 20px;
+  padding: 30px;
 }
+/* line 81, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody img {
   position: relative;
-  margin-top: -90px;
+  margin-top: -140px;
   margin-bottom: 30px;
 }
+@media screen and (max-width: 450px) {
+  /* line 81, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+  #edition-preview .preview .prevbody img {
+    margin-top: auto;
+  }
+}
+/* line 92, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody .main {
   margin-bottom: 10px;
-  font-size: 1.6em;
+  font-size: 1.556em;
   font-weight: bold;
 }
+@media screen and (max-width: 450px) {
+  /* line 101, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+  #edition-preview .preview .prevbody p {
+    font-size: 0.889em;
+  }
+}
+/* line 107, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody button {
   margin: 20px 0;
 }
+/* line 114, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li {
   border-bottom: 1px solid black;
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
+/* line 120, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li h4 {
-  margin-bottom: 2px;
-  font-size: 0.9em;
+  margin-bottom: 5px;
+  font-size: 0.889em;
   font-family: "futura-pt", "Arial", sans-serif;
+  font-weight: normal;
 }
+/* line 130, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li h5 {
-  font-size: 1.1em;
+  margin-bottom: 5px;
+  line-height: 24px;
+  word-wrap: break-word;
+  font-size: 1.111em;
   font-weight: bold;
 }
+@media screen and (max-width: 450px) {
+  /* line 130, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
+  #edition-preview .preview .prevbody ul li h5 {
+    font-size: 0.889em;
+  }
+}
+/* line 146, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
 #edition-preview .preview .prevbody ul li:last-child {
   border: none;
   margin-bottom: 0;
@@ -2828,7 +3420,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2839,7 +3430,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2850,7 +3440,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(0.8);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2861,7 +3450,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: scale(1);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
@@ -2872,7 +3460,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: scale(1);
     opacity: 0;
   }
-
   100% {
     -moz-transform: scale(1);
     opacity: 1;
@@ -2883,7 +3470,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: scale(1);
     opacity: 0;
   }
-
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2894,7 +3480,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: translateY(0);
     opacity: 1;
@@ -2905,7 +3490,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     -moz-transform: translateY(0);
     opacity: 1;
@@ -2916,7 +3500,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: translateY(50px);
     opacity: 0;
   }
-
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -2927,7 +3510,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -webkit-transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     -webkit-transform: translateX(0);
     opacity: 1;
@@ -2938,7 +3520,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     -moz-transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     -moz-transform: translateX(0);
     opacity: 1;
@@ -2949,7 +3530,6 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     transform: translateX(50px);
     opacity: 0;
   }
-
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -2959,51 +3539,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -3012,51 +3580,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -3065,51 +3621,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -3118,51 +3662,39 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   8.3% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
   16.6% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   24.9% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   33% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   41.3% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   49.9% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   58.2% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   66.6% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
   74.8% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
   83.2% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
   91.4% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
   100% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
@@ -3171,86 +3703,70 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
   0% {
     background-color: white;
   }
-
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-moz-keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @keyframes pageTurnLeft {
   0% {
     background-color: white;
   }
-
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-webkit-keyframes pageTurnRight {
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -3259,21 +3775,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @-moz-keyframes pageTurnRight {
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
@@ -3282,21 +3794,17 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 @keyframes pageTurnRight {
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;

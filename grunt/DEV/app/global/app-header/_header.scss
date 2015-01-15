@@ -113,6 +113,12 @@
 
 		@include keyline(top bottom,$light-keyline);
 
+		.container {
+			@media screen and (max-width: $mobile) {
+				padding: 0;
+			}
+		}		
+
 		.grid-row{
 
 			position:relative;

@@ -116,7 +116,7 @@ section, article{
 
 		h2{
 
-			margin-bottom:20px;
+			margin-bottom: 15px;
 			font:{
 				size:2.5em;
 				weight:bold;
@@ -129,7 +129,7 @@ section, article{
 			margin-bottom:30px;
 			font:{
 				style:italic;
-				size:1.5em;
+				size: 1.333em;
 			}
 			@include stack;
 		}

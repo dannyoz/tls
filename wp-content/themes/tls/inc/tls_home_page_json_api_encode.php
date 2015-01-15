@@ -77,10 +77,17 @@ function tls_home_page_json_api_encode($response) {
                 $thumbnail_image = '';
             }
 
-            // Get Soundcloud Embed Code Custom Field Value using WP get_post_custom to return correct HTML output
+            // Get Custom Field Value using WP get_post_custom to return correct HTML output
             // because ACF get_field in the JSON API was returning all the tags with HTML stripped and encoded
             $card_post_custom_fields = get_post_custom( $card_post->ID );
             $card_post_soundcloud_custom_field = $card_post_custom_fields['soundcloud_embed_code'];
+            $teaserSummary = $card_post_custom_fields['teaser_summary'];
+
+            if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
+                $articleText = $teaserSummary;
+            } else {
+                $articleText = tls_make_post_excerpt( $card_post );
+            }
 
             // Add Cards to the JSON Response in the specific count slot
             $response['home_page_cards']['card_' . $home_page_card_count] = array(
@@ -88,7 +95,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $card_post->ID,
                 'title'         => $card_post->post_title,
                 'author'        => get_the_author_meta( 'display_name', $card_post->post_author ),
-                'text'          => tls_make_post_excerpt( $card_post ),
+                'text'          => $articleText,
                 'link'          => get_permalink( $card_post->ID ),
                 'section'       => array(
                     'name'      => $section[0]->name,
