@@ -3,13 +3,13 @@
 		restrict:"A",
 		templateUrl : "tls-card.html",
 		scope : {
-			data : "=tlsCard"
+			data : "=tlsCard",
+			type : "@"
 		},
 		link : function(scope){
 						
 			scope.sce = $sce;
 			var card = scope.data;	
-
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
@@ -21,6 +21,7 @@
 
 			// Function to check value is undefined
 			var isUndefined = function(val) {				
+				
 				var und = false;
 				if (val == undefined) {
 					und = true;
