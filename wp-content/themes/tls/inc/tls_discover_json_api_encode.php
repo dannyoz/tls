@@ -21,58 +21,133 @@ function tls_discover_json_api_encode($response) {
 
         // Get all the terms from Article Section Taxonomy
         $article_sections_args = array(
-            'hide_empty'    => false
+            'hide_empty'    => false,
+            'orderby'           => 'name',
+            'order'             => 'ASC',
         );
         $article_sections = get_terms( 'article_section', $article_sections_args );
 
+        /**
+         * Spotlight Article Section Category
+         * Get the latest post and add it to the top section articles with
+         * a spotlight attribute to use in FE
+         */
+        $spotlight_article_section = get_field( 'spotlight_category', $response['page']->id );
+
+        // Arguments for the WP_Query
+        $spotlight_article_args = array(
+            'post_type'         => 'tls_articles',
+            'posts_per_page'    => 1,
+            'orderby'           => 'date',
+            'order'             => 'DESC',
+            'tax_query'         => array( array(
+                'taxonomy'      => 'article_section',
+                'field'         => 'term_id',
+                'terms'         => $spotlight_article_section->term_id
+            ) )
+        );
+        // WP_Query for the Top Article in current section term
+        $spotlight_article_query = new WP_Query($spotlight_article_args);
+
+        // Get the first article returned from Query
+        $spotlight_article = $spotlight_article_query->posts[0];
+
+        // Add Article ID into the spotlight_articles array
+        $spotlight_articles[] = $spotlight_article->ID;
+
+        // Get Taxonomies
+        $spotlight_article_sections = wp_get_post_terms( $spotlight_article->ID, 'article_section' );
+        $spotlight_article_visibility = wp_get_post_terms( $spotlight_article->ID, 'article_visibility' );
+
+        // Get all custom fields
+        $spotlight_article_custom_fields = get_post_custom( $spotlight_article->ID );
+        // Get Specific Custom Fields from the Custom Fields
+        $spotlight_article_teaser = $spotlight_article_custom_fields['teaser_summary'];
+        $spotlight_article_thumbnail = $spotlight_article_custom_fields['thumbnail_image_url'][0];
+
+        // Add this article into top_articles array from the JSON Response Object
+        $response['top_articles'][] = array(
+            'spotlight'                     => true,
+            'type'                          => 'article',
+            'id'                            => $spotlight_article->ID,
+            'url'                           => get_permalink( $spotlight_article->ID ),
+            'title'                         => $spotlight_article->post_title,
+            'excerpt'                       => tls_make_post_excerpt( $spotlight_article ),
+            'author'                        => array(
+                'name'                      => get_the_author_meta( 'display_name', $spotlight_article->post_author ),
+                'slug'                      => get_the_author_meta( 'slug', $spotlight_article->post_author ),
+            ),
+            'custom_fields'                 => array(
+                'thumbnail_image_url'       => $spotlight_article_thumbnail,
+                'teaser_summary'            => $spotlight_article_teaser,
+            ),
+            'taxonomy_article_section'      => $spotlight_article_sections,
+            'taxonomy_article_section_url'  => get_term_link( $spotlight_article_sections[0]->term_id, $spotlight_article_sections[0]->taxonomy),
+            'taxonomy_article_visibility'   => $spotlight_article_visibility,
+        );
+
+        /**
+         * Get All Other Top Articles per Article Section Category
+         * Removing the article from the spotlight section
+         */
         // Loop through each of the sections to make a WP_Query
         foreach ($article_sections as $section) {
 
-            // Arguments for the WP_Query
-            $top_section_article_args = array(
-                'post_type'         => 'tls_articles',
-                'posts_per_page'    => 1,
-                'orderby'           => 'date',
-                'order'             => 'DESC',
-                'tax_query'         => array( array(
-                    'taxonomy'      => 'article_section',
-                    'field'         => 'term_id',
-                    'terms'         => $section->term_id
-                ) )
-            );
+            if (  $section->term_id != $spotlight_article_section->term_id ) {
+                // Arguments for the WP_Query
+                $top_section_article_args = array(
+                    'post_type' => 'tls_articles',
+                    'posts_per_page' => 1,
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'article_section',
+                            'field' => 'term_id',
+                            'terms' => $section->term_id
+                        )
+                    )
+                );
 
-            // WP_Query for the Top Article in current section term
-            $top_section_article_query = new WP_Query($top_section_article_args);
+                // WP_Query for the Top Article in current section term
+                $top_section_article_query = new WP_Query($top_section_article_args);
 
-            // Get the first article returned from Query
-            $top_section_article = $top_section_article_query->posts[0];
+                // Get the first article returned from Query
+                $top_section_article = $top_section_article_query->posts[0];
 
-            // Add Article ID into the top_section_articles array
-            $top_section_articles[] = $top_section_article->ID;
+                // Add Article ID into the top_section_articles array
+                $top_section_articles[] = $top_section_article->ID;
 
-            // Get Taxonomies
-            $top_section_article_section = wp_get_post_terms( $top_section_article->ID, 'article_section' );
-            $top_section_article_visibility = wp_get_post_terms( $top_section_article->ID, 'article_visibility' );
+                // Get Taxonomies
+                $top_section_article_section = wp_get_post_terms($top_section_article->ID, 'article_section');
+                $top_section_article_visibility = wp_get_post_terms($top_section_article->ID, 'article_visibility');
 
-            // Add this article into top_articles array from the JSON Response Object
-            $response['top_articles'][] = array(
-                'type'                          => 'article',
-                'id'                            => $top_section_article->ID,
-                'url'                           => get_permalink( $top_section_article->ID ),
-                'title'                         => $top_section_article->post_title,
-                'excerpt'                       => tls_make_post_excerpt( $top_section_article ),
-                'author'                        => array(
-                    'name'                      => get_the_author_meta( 'display_name', $top_section_article->post_author ),
-                    'slug'                      => get_the_author_meta( 'slug', $top_section_article->post_author ),
-                ),
-                'custom_fields'                 => array(
-                    'thumbnail_image_url'       => get_field( 'thumbnail_image_url', $top_section_article->ID ),
-                    'teaser_summary'            => get_field( 'teaser_summary', $top_section_article->ID ),
-                ),
-                'taxonomy_article_section'      => $top_section_article_section,
-                'taxonomy_article_section_url'  => get_term_link( $top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
-                'taxonomy_article_visibility'   => $top_section_article_visibility,
-            );
+                // Get all custom fields
+                $top_section_article_custom_fields = get_post_custom($top_section_article->ID);
+                // Get Specific Custom Fields from the Custom Fields
+                $top_section_article_teaser = $top_section_article_custom_fields['teaser_summary'];
+                $top_section_article_thumbnail = $top_section_article_custom_fields['thumbnail_image_url'][0];
+
+                // Add this article into top_articles array from the JSON Response Object
+                $response['top_articles'][] = array(
+                    'type' => 'article',
+                    'id' => $top_section_article->ID,
+                    'url' => get_permalink($top_section_article->ID),
+                    'title' => $top_section_article->post_title,
+                    'excerpt' => tls_make_post_excerpt($top_section_article),
+                    'author' => array(
+                        'name' => get_the_author_meta('display_name', $top_section_article->post_author),
+                        'slug' => get_the_author_meta('slug', $top_section_article->post_author),
+                    ),
+                    'custom_fields' => array(
+                        'thumbnail_image_url' => $top_section_article_thumbnail,
+                        'teaser_summary' => $top_section_article_teaser,
+                    ),
+                    'taxonomy_article_section' => $top_section_article_section,
+                    'taxonomy_article_section_url' => get_term_link($top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
+                    'taxonomy_article_visibility' => $top_section_article_visibility,
+                );
+            }
 
         } // END Loop of top Articles from each Article Section
 
@@ -98,9 +173,10 @@ function tls_discover_json_api_encode($response) {
 
         foreach ( $articles_archive as $article_post ) {
             $article_section_terms = wp_get_post_terms( $article_post->id, 'article_section' );
-
+            $article_custom_fields = get_post_custom( $article_post->id );
+            $article_post->custom_fields->thumbnail_image_url = $article_custom_fields['thumbnail_image_url'][0];
+            $article_post->custom_fields->teaser_summary = tls_make_post_excerpt( $article_post );
             $article_post->type = 'article';
-            $article_post->excerpt = tls_make_post_excerpt( $article_post );
             $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
         }
 

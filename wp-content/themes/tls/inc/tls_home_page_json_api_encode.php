@@ -80,7 +80,7 @@ function tls_home_page_json_api_encode($response) {
             $card_post_custom_fields = get_post_custom( $card_post->ID );
             $card_post_soundcloud_custom_field = $card_post_custom_fields['soundcloud_embed_code'];
             $teaserSummary = $card_post_custom_fields['teaser_summary'];
-            $thumbnail_image = get_field( 'thumbnail_image_url', $card_post->ID );
+            $thumbnail_image = $card_post_custom_fields['thumbnail_image_url'][0];
 
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;

@@ -52,7 +52,8 @@ function tls_blogs_archive_json_api_encode($response) {
 
         foreach ( $blogs_archive as $blog_post ) {
             $categories = wp_get_post_terms( $blog_post->id, 'category' );
-
+            $blog_post_custom_fields = get_post_custom( $blog_post->id );
+            $blog_post->soundcloud = $blog_post_custom_fields['soundcloud_embed_code'][0];
             $blog_post->excerpt = tls_make_post_excerpt( $blog_post );
             $blog_post->category_url = get_term_link( $categories[0]->term_id, $categories[0]->taxonomy );
             if ( $categories[0]->slug == 'a-dons-life' || $categories[0]->slug == 'dons-life' ) {
