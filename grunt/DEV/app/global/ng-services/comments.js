@@ -4,9 +4,9 @@
 		post : function (path,formData){
 
 			$http.post(path,formData)
-				.success(function (data){
+				.success(function (data, textStatus){
 
-					console.log('success', data);
+					console.log('success', data, textStatus);
 				})
 				.error(function (data){
 

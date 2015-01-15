@@ -11,7 +11,8 @@
 
 	$scope.sce        = $sce;
 	$scope.tags       = [];
-	$scope.activeTags = []; 
+	$scope.activeTags = [];
+	$scope.pageTurn   = false; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
@@ -79,8 +80,10 @@
 
 	$scope.chooseArticle = function(dir,path){
 
-		//Only turn page if path is defined
-		if(path){
+		console.log(path)
+
+		//Only turn page if path is defined an pageTurn var is set to true
+		if(path && $scope.pageTurn){
 
 			var duration = 400;
 			$scope.loading = true
@@ -147,6 +150,8 @@
 					})
 				}
 			})
+		} else if (path && !$scope.pageTurn){
+			location.replace(path);
 		}
 	}
 
@@ -199,7 +204,7 @@
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
+		commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
 	}
 
 }])

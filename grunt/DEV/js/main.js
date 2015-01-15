@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=data.soundcloud></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><a href=#><img class=max ng-src={{data.image}}></a><div class=padded><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div><footer><p class=sub><a href=#>Of Green Leaf, Bird, And Flower</a></p><p class=futura><a href=#>{{data.author}}</a></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
   );
 
 
@@ -28795,9 +28795,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		post : function (path,formData){
 
 			$http.post(path,formData)
-				.success(function (data){
+				.success(function (data, textStatus){
 
-					console.log('success', data);
+					console.log('success', data, textStatus);
 				})
 				.error(function (data){
 
@@ -28926,6 +28926,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		link : function(scope){
 			
 			console.log(scope.data);
+			scope.sce = $sce;
 			
 			// Type of card (Object or Array)
 			var cardType = Object.prototype.toString.call(scope.data);
@@ -29057,7 +29058,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.sce        = $sce;
 	$scope.tags       = [];
-	$scope.activeTags = []; 
+	$scope.activeTags = [];
+	$scope.pageTurn   = false; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
@@ -29125,8 +29127,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.chooseArticle = function(dir,path){
 
-		//Only turn page if path is defined
-		if(path){
+		console.log(path)
+
+		//Only turn page if path is defined an pageTurn var is set to true
+		if(path && $scope.pageTurn){
 
 			var duration = 400;
 			$scope.loading = true
@@ -29193,6 +29197,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					})
 				}
 			})
+		} else if (path && !$scope.pageTurn){
+			location.replace(path);
 		}
 	}
 
@@ -29245,7 +29251,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 		console.log('/wp-comments-post.php')
 
-		commentApi.post('/wp-comments-post.php', 'comment=sassssscx&comment_post_ID=2479&_wp_unfiltered_html_comment=c401be7974')
+		commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
 	}
 
 }])
