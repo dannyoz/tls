@@ -7,12 +7,15 @@
 	'commentApi',
 	'columns',
 	'niceDate',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate){
+	'tealium',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
 
+	$scope.tealium    = tealium;
+	$scope.loadingPg  = true;
 	$scope.sce        = $sce;
 	$scope.tags       = [];
 	$scope.activeTags = [];
-	$scope.pageTurn   = false; 
+	$scope.turn       = true; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
@@ -45,10 +48,12 @@
 					$scope.col2  = cols.col2
 					$scope.col3  = cols.col3
 				})
+
 			})
 
 		}
 
+		$scope.loadingPg = false;
 		console.log(result)
 
 	})
@@ -62,7 +67,7 @@
 		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
 			emailBody = $scope.post.url,
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
-
+		
 		return emailPath
 
 	}
@@ -71,19 +76,18 @@
 
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
-			link   = (platform == 'fb') ? fbLink : twLink,
+			link   = (platform == 'facebook') ? fbLink : twLink,
 			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
+		tealium.socialLink(platform);
 
 	}
 
 	$scope.chooseArticle = function(dir,path){
 
-		console.log(path)
-
-		//Only turn page if path is defined an pageTurn var is set to true
-		if(path && $scope.pageTurn){
+		//Only turn page if path is defined an turn var is set to true
+		if(path && $scope.turn){
 
 			var duration = 400;
 			$scope.loading = true
@@ -150,7 +154,9 @@
 					})
 				}
 			})
-		} else if (path && !$scope.pageTurn){
+		} else if (path && !$scope.turn){
+
+			$scope.loadingPg = true;
 			location.replace(path);
 		}
 	}

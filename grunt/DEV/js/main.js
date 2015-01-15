@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><h3 class=futura><a ng-attr-href=# ng-if=data.section.name>{{data.section.name}}</a> <a ng-attr-href={{data.taxonomy_article_section_url}} ng-bind-html=data.taxonomy_article_section[0].name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"> <img class=max ng-if=data.custom_fields.thumbnail_image_url ng-attr-src=\"{{data.custom_fields.thumbnail_image_url}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author.name class=futura ng-bind=data.author.name></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.taxonomy_article_visibility[0].slug == 'private'}\"><div ng-if=!data.mpu><h3 class=futura><a ng-attr-href=# ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.taxonomy_article_visibility[0].slug == 'private'\" class=\"icon icon-key\"></i></h3><a href=#><img class=max ng-if=data.image ng-attr-src=\"{{data.image}}\"></a><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-bind=data.title></a> <a ng-if=data.url ng-attr-href={{data.url}} ng-bind=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author.name class=futura ng-bind=data.author.name></p></footer></div><div class=mpu ng-if=data.mpu><script src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script></div></div><div class=card ng-if=\"data.type == 'listen_blog'\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-href={{data.link}}>{{data.title}}</a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div>"
   );
 
 
@@ -28855,7 +28855,75 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 })
 .factory('tealium',function(){
+
+	
+	var utagView = function utagView(tags) {
+		try {
+			if(utag) {
+				utag.view(tags);
+			}
+		}catch(e) {
+
+		}
+	};
+
+	var utagLink = function utagLink(tags) {
+		try {
+			if(utag) {
+				utag.link(tags);
+			}
+		}catch (e) {
+
+		}
+	};
+
+	var debug    = true;
+	var debugBar = function(tags,method){
+
+		if(debug){
+
+			var	old  = document.getElementById("tealium-debug");
+				body = document.body,
+				elem = angular.element(body),
+				coms = "Comic Sans MS",
+				pop  = '<div id="tealium-debug" class="centre" style="border-radius:40px;background:white;z-index:9999;padding:50px;box-shadow:0 0 100px rgba(0,0,0,0.9);width:700px;font-size:14px;font-family:'+coms+'">' +
+							'<h2 style="color:blue">Tealium debugger</h2>' +
+							'<p style="color:red">Method : '+method+'</p>' +
+							'<ul id="telium-tags">' +
+							'<li class="grid-row" style="background:#e9e9e9;padding:10px;"><span class="grid-6">Variable</span><span class="grid-6">Value</span></li>' +
+							'</ul>' +
+							'<a id="close-telium" style="display:block;background:#ddd;position:absolute;top:10px;right:10px;width:50px;height:50px;border-radius:100%">'+ 
+							'<i class="icon icon-cross centre"></i></a>' +
+					   '</div>'
+
+			if(old){
+				angular.element(old).remove();
+			}
+
+			elem.append(pop);
+
+			var tealiumList  = angular.element(document.getElementById("telium-tags")),
+				closeTealium = angular.element(document.getElementById("close-telium")),
+				tealiumDebug = angular.element(document.getElementById("tealium-debug"));
+
+			angular.forEach(tags,function (val,key){
+				var listItem = '<li class="grid-row" style="padding:10px;">' +
+							   '<span class="grid-6">'+key+'</span>' +
+							   '<span class="grid-6">'+val+'</span>' +
+							   '</li>'
+				tealiumList.append(listItem)
+			})
+
+			closeTealium.click(function(){
+				tealiumDebug.remove();
+			})
+
+		}
+
+	}
+
 	return{
+		debugBar : debugBar,
 		test : function(val1,val2,val3,val4){
 
 			var tags = {
@@ -28864,6 +28932,33 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				"key3" : val3,
 				"key4" : val4
 			}
+
+			return tags
+		},
+		socialLink : function(platform){
+
+			var tags = {
+				"event_social_action" : "share start",
+				"social_category" : "share",
+				"social_platform" : platform,
+				"page_name" : utag_data.page_name
+			}
+
+			debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		loadMore : function (){
+
+			var tags = {
+				"event_engagement_action" : "engagement",
+				"event_engagement_name" : "load more",
+				"event_engagement_browsing_method" : "click"
+			}
+
+			debugBar(tags, 'Link');
+			utagLink(tags);
 
 			return tags
 		}
@@ -28924,17 +29019,49 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			data : "=tlsCard"
 		},
 		link : function(scope){
-			
-			console.log(scope.data);
+						
 			scope.sce = $sce;
-			
+			var card = scope.data;				
+
 			// Type of card (Object or Array)
-			var cardType = Object.prototype.toString.call(scope.data);
+			var cardObjType = Object.prototype.toString.call(card);
 
 			// Card is array, must be blog items
-			if(cardType === '[object Array]' && cardType.length > 0) {
-				scope.data.type = 'blog';
+			if(cardObjType === '[object Array]' && cardType.length > 0) {
+				card.type = 'blog';
 			} 
+
+			// Function that format final object in a consistent way
+			scope.formatCard = function(card) {
+
+				var cardType;
+
+				if (card.hasOwnProperty('type')) {
+					cardType = card.type;
+				}
+
+				switch (cardType) {
+
+					case 'article':
+
+						// Thumbnail image
+						if (card.custom_fields != undefined && card.custom_fields.thumbnail_image_url != '') {
+							card.image = card.custom_fields.thumbnail_image_url;
+						}
+
+						// Section name
+						if (card.taxonomy_article_section_url != '') {
+							if (card.taxonomy_article_section != undefined && card.taxonomy_article_section[0]['name'] != '') {
+								card.section = {'name': card.taxonomy_article_section[0]['name']};	
+							}
+						}
+
+						console.log(card);
+
+					break;
+				}		
+					
+			}(card);
 		}
 	}
 }])
@@ -29054,12 +29181,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'commentApi',
 	'columns',
 	'niceDate',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate){
+	'tealium',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
 
+	$scope.tealium    = tealium;
+	$scope.loadingPg  = true;
 	$scope.sce        = $sce;
 	$scope.tags       = [];
 	$scope.activeTags = [];
-	$scope.pageTurn   = false; 
+	$scope.turn       = true; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
@@ -29092,10 +29222,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					$scope.col2  = cols.col2
 					$scope.col3  = cols.col3
 				})
+
 			})
 
 		}
 
+		$scope.loadingPg = false;
 		console.log(result)
 
 	})
@@ -29109,7 +29241,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
 			emailBody = $scope.post.url,
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
-
+		
 		return emailPath
 
 	}
@@ -29118,19 +29250,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 			twLink = "https://twitter.com/home?status=" + path,
-			link   = (platform == 'fb') ? fbLink : twLink,
+			link   = (platform == 'facebook') ? fbLink : twLink,
 			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
 		window.open(link,"_blank",params);
+		tealium.socialLink(platform);
 
 	}
 
 	$scope.chooseArticle = function(dir,path){
 
-		console.log(path)
-
-		//Only turn page if path is defined an pageTurn var is set to true
-		if(path && $scope.pageTurn){
+		//Only turn page if path is defined an turn var is set to true
+		if(path && $scope.turn){
 
 			var duration = 400;
 			$scope.loading = true
@@ -29197,7 +29328,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					})
 				}
 			})
-		} else if (path && !$scope.pageTurn){
+		} else if (path && !$scope.turn){
+
+			$scope.loadingPg = true;
 			location.replace(path);
 		}
 	}
@@ -29255,7 +29388,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 }])
-.controller('category', ['$scope','$sce', '$timeout', 'api', 'columns', function ($scope,$sce,$timeout,api,columns){
+.controller('category', [
+	'$scope',
+	'$sce', 
+	'$timeout', 
+	'api', 
+	'columns',
+	'tealium', 
+	function ($scope,$sce,$timeout,api,columns,tealium){
 
 	var href   = window.location.href,
 		parent = href.indexOf('/blogs/') > -1,
@@ -29333,6 +29473,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				$scope.loadMsg = "End of results in " + $scope.title;
 			});
 		}
+
+		tealium.loadMore();
 	}
 
 }])
