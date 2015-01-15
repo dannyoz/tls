@@ -35,7 +35,7 @@
 		<img class="max" ng-if="data.image_url" ng-attr-src="{{data.image_url}}" />						
 		
 		<div class="padded">
-			<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-bind="data.title"></a></h4>		
+			<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-bind-html="data.title"></a></h4>		
 			<p ng-bind-html="data.excerpt"></p>
 		</div>
 
@@ -58,7 +58,7 @@
 
 	<div class="padded">
 		<div class="embed" ng-bind-html="sce.trustAsHtml(data.soundcloud);"></div>
-		<h4><a ng-href="{{data.link}}">{{data.title}}</a></h4>		
+		<h4><a ng-attr-href="{{data.link}}" ng-bind-html="data.title"></a></h4>		
 		<p ng-bind-html="data.text"></p>
 
 	</div>
