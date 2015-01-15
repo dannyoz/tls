@@ -1,4 +1,4 @@
-<?php namespace PuSHSubscriberWP;
+<?php namespace TlsHubSubscriber;
 
 /**
  * @file

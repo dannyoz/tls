@@ -1,10 +1,10 @@
-<?php namespace PuSHSubscriberWP;
+<?php namespace TlsHubSubscriber;
 
 use PuSHSubscriberWP\PuSHSubscriber as PuSHSubscriber;
 use PuSHSubscriberWP\PuSHSubscription as PuSHSubscription;
 use PuSHSubscriberWP\PuSHEnvironment as PuSHEnvironment;
 
-class PuSHSubscriberWP {
+class TlsHubSubscriberWP {
 
 	/**
 	 * [__construct Start PuSHSubscriberWP actions, hooks, etc.]

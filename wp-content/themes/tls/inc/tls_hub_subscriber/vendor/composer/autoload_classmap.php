@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PuSHSubscriberWP\\PuSHSubscriberWP' => $baseDir . '/src/PuSHSubscriberWP.php',
+    'TlsHubSubscriber\\TlsHubSubscriberWP' => $baseDir . '/src/TlsHubSubscriberWP.php',
 );

@@ -1,17 +1,29 @@
 <?php
 
+function file_get_contents_curl($url) {
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
+	curl_setopt($ch, CURLOPT_URL, $url);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
+}
+
 $feedUrl = false;
 
 if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
 	// Sanitise URL using WP function esc_url() and assign it to $feedUrl variable
-	$feedUrl = esc_url( wp_strip_all_tags( $_GET['pull_url'] ) );
+	$feedUrl = esc_url(  $_GET['pull_url'] );
 }
-
+echo $feedUrl;
 // Get XML contents from teh feed URL
-$rawFeed = file_get_contents($feedUrl);
+$rawFeed = file_get_contents( get_stylesheet_directory_uri() . '/inc/push_subscriber_wp/src/feed.xml');
 
 // Assign the raw XML content of feed to a new SimpleXml object assigned to $xml
 $xml = new SimpleXmlElement($rawFeed);
+
+//die( print_r( $xml ) );
 
 
 /**
@@ -22,6 +34,8 @@ $xml = new SimpleXmlElement($rawFeed);
  * tags based on the data model of methode
  */
 foreach ($xml->entry as $article) {
+
+	$media = $article->children('media', true);
 
 	$articleFeedId = (string)$article->id;
 	$articleTitle = (string)$article->title;
@@ -51,9 +65,9 @@ foreach ($xml->entry as $article) {
 	 */
 	foreach ($article->category as $category) {
 
-		$categoryTerm = term_exists($category['term'], 'article-category');
+		$categoryTerm = term_exists($category['term'], 'article_section');
 		if ($categoryTerm == 0 && $categoryTerm == null) {
-			wp_insert_term($category['term'], 'article-category');
+			wp_insert_term($category['term'], 'article_section');
 		}
 
 		$articleCategories[] = $category['term'];
@@ -103,7 +117,7 @@ foreach ($xml->entry as $article) {
 
 		// Add Article Category Terms found in $articleCategories array
 		// This array will be reset again on the next item
-		wp_set_object_terms($newArticleId, $articleCategories, 'article-category');
+		wp_set_object_terms($newArticleId, $articleCategories, 'article_section');
 
 		// Article Feed ID Custom Field
 		update_field( "field_54776890165dc", $articleFeedId, $newArticleId );
@@ -119,6 +133,10 @@ foreach ($xml->entry as $article) {
 		update_field( "field_5477693b165e1", date( "Y-m-d H:i:s", strtotime( $articleUpdated ) ), $newArticleId );
 		// Article Teaser Custom Field
 		update_field( "field_54776952165e2", $articleTeaser, $newArticleId );
+
+		$thumbnailImage = (string) $media->content->attributes()->url;
+		update_field( 'thumbnail_image_url', $thumbnailImage , $newArticleId );
+
 	
 	} else { // Matches have been found
 
