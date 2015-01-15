@@ -24,7 +24,7 @@
 </div>
 
 
-<div class="card" ng-if="data.type == 'article'" ng-class="{private:data.visibility == 'private'}">
+<div class="card" ng-if="data.type == 'article' && data.title != null" ng-class="{private:data.visibility == 'private'}">
 
 	<div ng-if="!data.mpu">
 		<h3 class="futura">
@@ -53,7 +53,7 @@
 
 
 
-<div class="card" ng-if="data.type == 'listen_blog'">
+<div class="card" ng-if="data.type == 'listen_blog' && data.soundcloud != ''">
 	<h3 class="futura"><a href="#">{{data.section.name}}</a></h3>
 
 	<div class="padded">
