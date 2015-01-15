@@ -37,6 +37,7 @@ module.exports = function(grunt) {
                     'DEV/js/libs/angular-route.js',
                     'DEV/js/libs/angular-sanitize.js',
                     'DEV/js/libs/angular-touch.js',
+                    'DEV/js/libs/double-click-module.js',
                     'DEV/app/app.js',
                     'DEV/app/templates/templates.js',
                     'DEV/app/**/*.js'
