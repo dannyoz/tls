@@ -7,9 +7,16 @@
 			type : "@"
 		},
 		link : function(scope){
+
+			console.log(scope.type)
 						
 			scope.sce = $sce;
 			var card = scope.data;	
+
+			//Change type using data-type attribute
+			if(scope.type){
+				card.type = scope.type
+			}
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);

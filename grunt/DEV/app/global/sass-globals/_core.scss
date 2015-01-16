@@ -97,6 +97,12 @@ section, article{
 
 			color:white;
 			@include animation(slideUp,ease,1s,2,"",0.7s);
+
+			a:hover{
+
+				color:white;
+				text-decoration:underline;
+			}
 		}
 
 		.category{
