@@ -690,6 +690,10 @@ button.clear:hover, button.clear:focus, .button.clear:hover, .button.clear:focus
 button.small, .button.small {
   padding: 4px 15px;
 }
+/* line 73, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
+button.subscribe, .button.subscribe {
+  margin-right: 10px;
+}
 
 /* line 2, ../../../../grunt/DEV/app/global/sass-globals/_forms.scss */
 fieldset {
@@ -1246,24 +1250,37 @@ p.author, h4.author {
 #site-footer ul li a {
   text-transform: uppercase;
   color: white;
+  letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
-  font-size: 1em;
+  font-size: 0.778em;
   font-weight: 700;
 }
-/* line 30, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 32, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li a:hover {
   color: #d73f2b;
 }
-/* line 36, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 38, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li:last-child {
   padding-right: 0;
   margin-right: 0;
   border-right: none;
 }
-/* line 45, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 47, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer .copyright {
+  padding-right: 85px;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.7em;
+}
+/* line 56, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+#site-footer .container {
+  background: url("../images/footer-logo.jpg") right 0 no-repeat;
+  min-height: 175px;
+}
+@media screen and (max-width: 450px) {
+  /* line 56, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+  #site-footer .container {
+    background-position: right bottom;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -1381,40 +1398,36 @@ p.author, h4.author {
   overflow: hidden;
   text-align: center;
 }
-/* line 116, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home #subscriber .cta-buttons .subscribe {
-  margin-right: 10px;
-}
 @media screen and (max-width: 450px) {
-  /* line 125, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 121, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card {
     padding: 20px;
   }
 }
-/* line 131, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 127, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card h4 {
   margin-bottom: 2px;
 }
 @media screen and (max-width: 450px) {
-  /* line 135, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 131, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card h3 {
     padding: 0;
     margin-bottom: 10px;
   }
 }
-/* line 142, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 138, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card p.futura {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
 @media screen and (max-width: 450px) {
-  /* line 148, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 144, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .padded {
     padding: 0;
   }
 }
-/* line 154, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-avatar {
   float: left;
   position: relative;
@@ -1422,7 +1435,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 450px) {
-  /* line 154, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .blog-avatar {
     float: left;
     position: relative;
@@ -1430,7 +1443,7 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
-/* line 164, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-data {
   float: left;
   position: relative;
@@ -1438,7 +1451,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 450px) {
-  /* line 164, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home .blog-item.card .blog-data {
     float: left;
     position: relative;
@@ -1446,7 +1459,7 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 172, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 168, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home .blog-item.card .blog-data .inner {
   padding-left: 5px;
 }

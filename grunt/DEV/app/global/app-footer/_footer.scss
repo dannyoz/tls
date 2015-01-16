@@ -21,9 +21,11 @@
 
 				text-transform:uppercase;
 				color:white;
+				letter-spacing: 2px;
+
 				font:{
 					family:$futura;
-					size:1em;
+					size:0.778em;
 					weight:700;
 				}
 
@@ -44,9 +46,19 @@
 
 	.copyright{
 
+		padding-right: 85px;
 		font:{
 			family:$futura;
 			size:0.7em;
+		}
+	}
+
+	.container {		
+		background: url('../images/footer-logo.jpg') right 0 no-repeat;
+		min-height: 175px;
+
+		@media screen and (max-width: $mobile) {
+			background-position: right bottom;
 		}
 	}
 
