@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article' && data.title != null\" ng-class=\"{private:data.visibility == 'private'}\"><div ng-if=!data.mpu><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=mpu ng-if=data.mpu><script src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script></div></div><div class=card ng-if=\"data.type == 'listen_blog' && data.soundcloud != ''\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-attr-href={{data.link}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div><div class=card ng-if=\"data.type == 'related'\">derp</div>"
+    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article' && data.title != null\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog' && data.soundcloud != ''\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-attr-href={{data.link}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div><div class=card ng-if=\"data.type == 'related'\">derp</div>"
   );
 
 
@@ -29011,7 +29011,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 	}
 })
-.directive('tlsCard',['$sce',function ($sce) {
+.directive('tlsCard',['$sce', '$compile', function ($sce, $compile) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -29019,17 +29019,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			data : "=tlsCard",
 			type : "@"
 		},
-		link : function(scope){
-
-			console.log(scope.type)
+		link : function(scope, element, attr) {
 						
 			scope.sce = $sce;
 			var card = scope.data;	
-
-			//Change type using data-type attribute
-			if(scope.type){
-				card.type = scope.type
-			}
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
@@ -29061,6 +29054,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				switch (cardType) {
 
 					case 'article':
+					case 'tls_articles':		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
@@ -29125,10 +29119,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 									card.image_url = card.image[0];
 								}								
 							}
-						}	
-
-						//console.log(card);
-
+						}							
 					break;
 				}		
 
@@ -29654,6 +29645,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					var posts = result.posts;
 					$scope.scrollState = "on";
 
+					console.log(posts);
+
 					columns.divide(posts).then(function (cols){
 
 						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
@@ -29749,16 +29742,37 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
-			console.log(obj);
+			//console.log(obj);
+			
+			if (obj.hasOwnProperty('latest_edition')) {
+				// Full object			
+				$scope.latestEdition = obj.latest_edition;			
+				// Edition sections articles				
+				$scope.currentEdition = $scope.latestEdition.content;	
+				// Previous edition
+				$scope.nextEdition = $scope.latestEdition.next_post_info;	
+				// Next edition
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;	
+				$scope.previousEdition.url = window.location.origin + '/grunt/DEV/app/templates/latest-editions/11-december-2014.json';
 
-			// Full object			
-			$scope.latestEdition = obj.latest_edition;			
-			// Edition sections articles				
-			$scope.currentEdition = $scope.latestEdition.content;	
-			// Previous edition
-			$scope.nextEdition = $scope.latestEdition.next_post_info;			
-			// // Next edition
-			$scope.previousEdition = $scope.latestEdition.previous_post_info;
+			} else {
+
+				//========================================
+				// TEMP FOR DEMO / NEEDS TO BE REMOVED
+				//========================================
+				// Full object			
+				$scope.latestEdition = obj;			
+				// Edition sections articles				
+				$scope.currentEdition = $scope.latestEdition.content;
+				// Previous edition
+				$scope.nextEdition = $scope.latestEdition.next_post_info;			
+				// // Next edition
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;			
+
+				//========================================
+				// TEMP FOR DEMO / NEEDS TO BE REMOVED
+				//========================================
+			}			
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;
