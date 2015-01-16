@@ -33,11 +33,11 @@ add_action( 'admin_menu', 'tls_theme_options_page' );
  */
 function tls_initialise_theme_options() {
 
-	// Add New 'social_media_section' Section to be rendered on the new options page
+	// Add New 'theme_options_section' Section to be rendered on the new options page
 	add_settings_section(
-		'social_media_section', 	// The ID used for this section in attribute tags
+		'theme_options_section', 	// The ID used for this section in attribute tags
 		'Social Media Links',		// The title of the section rendered to the screen
-		'social_media_sec_display',	// Callback function used to render the options for this section
+		'theme_options_section_display',	// Callback function used to render the options for this section
 		'tls_theme_options'			// The ID (or slug) of the page on which this section is rendered
 	);
 
@@ -47,7 +47,7 @@ function tls_initialise_theme_options() {
 		'Facebook URL',				// The text used for the label of the field
 		'tls_facebook_url_display',	// The callback function used to render the field
 		'tls_theme_options',		// The ID (or slug) of the page on which this field is rendered
-		'social_media_section'		// The section to which setting is added
+		'theme_options_section'		// The section to which setting is added
 	);
 
 	// Define Facebook URL Setting Field
@@ -56,14 +56,23 @@ function tls_initialise_theme_options() {
 		'Twitter URL',				// The text used for the label of the field
 		'tls_twitter_url_display',	// The callback function used to render the field
 		'tls_theme_options',		// The ID (or slug) of the page on which this field is rendered
-		'social_media_section'		// The section to which setting is added
+		'theme_options_section'		// The section to which setting is added
+	);
+
+	// Define Facebook URL Setting Field
+	add_settings_field(
+		'classifieds_pdf',			// The ID (or the name) of the field
+		'Classifieds PDF File',		// The text used for the label of the field
+		'tls_classifieds_pdf_display',// The callback function used to render the field
+		'tls_theme_options',		// The ID (or slug) of the page on which this field is rendered
+		'theme_options_section'		// The section to which setting is added
 	);
 
 	// Register the 'facebook_url' setting with the 'General' section
 	register_setting(
-		'social_media_section', 	// Name of section to which setting is registered to
-		'social_media_options', 	// Name of the field setting,
-		'tls_sanitise_social_media'	// Sanitisation callback function
+		'theme_options_section', 	// Name of section to which setting is registered to
+		'theme_options_settings', 	// Name of the field setting,
+		'tls_sanitise_theme_options'	// Sanitisation callback function
 	);
 
 } // End of tls_initialise_theme_options
@@ -88,11 +97,11 @@ function tls_theme_options_display() {
 		<!-- run the settings_errors() function here. -->
         <?php settings_errors(); ?>
 
-		<form method="post" action="options.php">
+		<form method="post" action="options.php" enctype="multipart/form-data">
 			<?php 
 
 				// Render the settings for the settings identified as 'Social Media Links'. Parameter is the id for the settings group used in the register_setting
-				settings_fields( 'social_media_section' );
+				settings_fields( 'theme_options_section' );
 
 				// Render all of the settings for the 'tls_theme_options' section page. Parameter should be the id of the page used in add_settings_section
 				do_settings_sections( 'tls_theme_options' );
@@ -109,7 +118,7 @@ function tls_theme_options_display() {
 /**
  * Render Social Media Options Section
  */
-function social_media_sec_display() {
+function theme_options_section_display() {
 	echo "Your Social media links for people to follow you.";
 }
 
@@ -118,10 +127,10 @@ function social_media_sec_display() {
  */
 function tls_facebook_url_display() {
 
-	$options = (array)get_option('social_media_options');
+	$options = (array)get_option('theme_options_settings');
 	$facebook_url = $options['facebook_url'];
 
-	echo '<input type="text" name="social_media_options[facebook_url]" id="social_media_options_facebook_url" value="' . $facebook_url . '">';
+	echo '<input type="text" name="theme_options_settings[facebook_url]" id="theme_options_settings_facebook_url" value="' . $facebook_url . '">';
 } // End of tls_facebook_url_display
 
 /**
@@ -129,19 +138,31 @@ function tls_facebook_url_display() {
  */
 function tls_twitter_url_display() {
 
-	$options = (array)get_option('social_media_options');
+	$options = (array)get_option('theme_options_settings');
 	$twitter_url = $options['twitter_url'];
 
-	echo '<input type="text" name="social_media_options[twitter_url]" id="social_media_options_twitter_url" value="' . $twitter_url . '">';
+	echo '<input type="text" name="theme_options_settings[twitter_url]" id="theme_options_settings_twitter_url" value="' . $twitter_url . '">';
 } // End of tls_twitter_url_display
 
+/**
+ * Render the input field for the 'Classifieds PDF File' setting in the 'General Settings' section
+ */
+function tls_classifieds_pdf_display() {
+
+	$options = (array)get_option('theme_options_settings');
+	$classifieds_pdf = $options['classifieds_pdf'];
+	?>
+		<input type="text" id="theme_options_settings_classifieds_pdf" name="theme_options_settings[classifieds_pdf]" value="<?php echo esc_url( $classifieds_pdf ); ?>" />
+        <input id="upload_logo_button" type="button" class="button" value="<?php _e( 'Upload Classifieds', 'tls' ); ?>" />
+        <span class="description"><?php _e('Upload a PDF File for the Classifieds.', 'tls' ); ?></span>
+<?php } // End of tls_classifieds_pdf_display
 
 /**
- * Sanitise all social media links
+ * Sanitise all Options
  * @param  array 	$sm_options 		The array of options to sanitise
  * @return array 	$sanitised_options	The array of sanitised options
  */
-function tls_sanitise_social_media( $sm_options ) {
+function tls_sanitise_theme_options( $sm_options ) {
 
 	$sanitised_options = array();
 
@@ -150,5 +171,5 @@ function tls_sanitise_social_media( $sm_options ) {
 	} // end foreach
 
 	return $sanitised_options;
-} // End of tls_sanitise_social_media
+} // End of tls_sanitise_theme_options
 

@@ -4,6 +4,10 @@
 
 	//padding:30px 0;
 
+	img.max {
+		width: 100%;
+	}
+
 	article .container{
 
 		overflow: hidden;
@@ -11,8 +15,7 @@
 
 	.share-bar{
 
-		margin-top: 20px;
-		margin-bottom: 20px;
+		padding: 30px 0;
 
 		a{
 
@@ -78,6 +81,7 @@
 		text-align: right;
 		float: right;	
 		color:$comment-grey;
+		font-weight: 300;
 	}	
 
 	.article-body{
@@ -92,7 +96,7 @@
 		h2 {
 
 			font-size: 48px;
-			line-height: 60px;
+			line-height: 50px;
 			margin-bottom: 10px;
 			font-family: $times;
 
@@ -150,6 +154,7 @@
 		img{
 
 			max-width: 100%;
+			margin: 20px 0;
 
 			&.right{
 
@@ -170,21 +175,36 @@
 		.article-summary {
 
 			background-color: $subtle-light-grey;
-			margin-bottom: 20px;				
-
-			p {
-				font-family: $futura;
-				font-size: 16px;
-				line-height: 26px;			
-			}			
+			margin-bottom: 20px;						
+			font-family: $futura;
+			font-size: 16px;
+			line-height: 26px;
 
 			.inner {				
-				padding: 20px 15px;
-				width: 50%;
+				padding: 20px 15px;				
 				line-height: 30px;
 
-				@media (max-width: $mobile) {
-					width: 80%;
+				.book-title {
+					font-weight: bold;
+					color: $comment-grey;
+				}
+
+				.summary-top,
+				.summary-bottom {
+					width: 70%;
+
+					@media (max-width: $mobile) {
+						width: 80%;
+					}
+				}
+
+				.summary-top {
+					border-bottom: 1px solid $light-keyline;
+					padding-bottom: 10px;
+				}
+
+				.summary-bottom {
+					padding-top: 10px;	
 				}
 
 			}

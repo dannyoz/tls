@@ -183,8 +183,7 @@ add_action( 'init', 'tls_remove_page_from_search', 99 );
 /**
  * Remove Default Post Tags Taxonomy from WordPress
  */
-function tls_unregister_post_tag_taxonomy()
-{
+function tls_unregister_post_tag_taxonomy() {
 	global $wp_taxonomies;
 	$taxonomy = 'post_tag';
 	if ( taxonomy_exists($taxonomy) )
@@ -192,6 +191,13 @@ function tls_unregister_post_tag_taxonomy()
 }
 add_action( 'init', 'tls_unregister_post_tag_taxonomy' );
 
+
+/**
+ * Add Ajax to the Comment Submition
+ *
+ * @param $comment_ID		Comment ID
+ * @param $comment_status	The Comment Status
+ */
 function ajaxify_comments( $comment_ID, $comment_status ){
 	if( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
 		//If AJAX Request Then
@@ -213,6 +219,70 @@ function ajaxify_comments( $comment_ID, $comment_status ){
 }
 add_action( 'comment_post', 'ajaxify_comments', 20, 2 );
 
+
+/**
+ * Modify the Articles Visibility Permalink
+ *
+ * This will rewrite the %article_visibility% query var from the URL of the article and include the
+ * Article visibility taxonomy term which will be private or public
+ *
+ * @param string $post_link		The link of the Post
+ * @param int $id				The Post ID
+ * @param bool $leavename
+ * @return mixed				Returns the new rewritten URL permalink
+ */
+function tls_articles_visibility_permalink( $post_link, $id = 0, $leavename = false ) {
+	if ( strpos('%article_visibility%', $post_link) > 0 ) return $post_link;
+	$post = get_post($id);
+	if ( !is_object($post) || $post->post_type != 'tls_articles' ) return $post_link;
+	$terms = wp_get_object_terms($post->ID, 'article_visibility');
+	if ( !empty($terms) ) {
+		$visibility_slug = $terms[0]->slug;
+	}
+	if ( !$terms ) return str_replace('%article_visibility%/', '', $post_link);
+	return str_replace('%article_visibility%', $visibility_slug, $post_link);
+}
+add_filter('post_link', 'tls_articles_visibility_permalink', 1, 3);
+add_filter('post_type_link', 'tls_articles_visibility_permalink', 1, 3);
+
+
+/**
+ * Article Visibility Security
+ *
+ * This function protects the permalink so if a user changes the URL of a Private post to have public in the URL
+ * from being viewed. It will get the Post Object and compare to see if the the Visibility terms exists in the Request URI
+ * and if not then redirect to a 404 page
+ *
+ * @param $post		Post Object
+ * @return mixed	Returns the $post Object if URL is ok or redirect to 404 if not
+ */
+function tls_articles_visibility_permalink_security( $post ) {
+	if ( is_single() && 'tls_articles' == $post->post_type ) {
+		$visibility = wp_get_post_terms( $post->ID, 'article_visibility' );
+
+		if ( strpos( esc_url( $_SERVER['REQUEST_URI'] ), $visibility[0]->slug ) ) {
+			return $post;
+		} else {
+			$string = '<script type="text/javascript">';
+			$string .= 'window.location = "' . home_url('404') . '"';
+			$string .= '</script>';
+
+			echo $string;
+			exit();
+		}
+
+	}
+}
+add_action('the_post', 'tls_articles_visibility_permalink_security');
+
+
+/**
+ * Custom Post Excerpt
+ *
+ * @param object $post			Post Object
+ * @param int $word_length		The amount of words for the excerpt
+ * @return string				The newly made excerpt
+ */
 function tls_make_post_excerpt( $post, $word_length = 55 ){
 
 	if ($word_length < 0) {
@@ -229,40 +299,3 @@ function tls_make_post_excerpt( $post, $word_length = 55 ){
 	$text           = wp_trim_words( $text, $excerpt_length, '' );
 	return $text;
 }
-
-/**
- * Modify Permalink for Articles Post Type
- *
- * @TODO Refactoring needed for Articles Permalink with visibility term because if you are on a private article and change the permalink to public it still returns the Article Post.
- */
-//add_filter('post_link', 'tls_articles_visibility_permalink', 1, 3);
-//add_filter('post_type_link', 'tls_articles_visibility_permalink', 1, 3);
-//function tls_articles_visibility_permalink( $post_link, $id = 0, $leavename = false ) {
-//	if ( strpos('%article_visibility%', $post_link) > 0 ) return $post_link;
-//	$post = get_post($id);
-//	if ( !is_object($post) || $post->post_type != 'tls_articles' ) return $post_link;
-//	$terms = wp_get_object_terms($post->ID, 'article_visibility');
-//	if ( empty($terms) ) {
-//		$visibility_slug = $terms[0]->slug;
-//	} else {
-//		$visibility_slug = 'private';
-//	}
-//	//if ( !$terms ) return str_replace('%article_visibility%/', '', $post_link);
-//	return str_replace('%article_visibility%', $visibility_slug, $post_link);
-//}
-//
-//add_action('wp', 'tls_articles_visibility_permalink_security');
-//function tls_articles_visibility_permalink_security( $query ) {
-//
-//	if ( is_single() && 'tls_articles' == $query->query_vars['post_type'] ) {
-////		$post = get_posts( array(
-////			'post_type'	=> 'tls_articles',
-////			'name' => $query->query_vars['name']
-////		) );
-//
-//		wp_redirect( home_url('/'), 404 );
-//	}
-//}
-
-
-

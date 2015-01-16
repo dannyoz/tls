@@ -8,8 +8,6 @@
 		},
 		link : function(scope){
 
-			console.log(scope.type)
-						
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
@@ -47,8 +45,6 @@
 			scope.formatCard = function(card) {
 
 				var cardType;
-
-				console.log(card);
 
 				// Card type
 				if (card.hasOwnProperty('type')) {
@@ -124,8 +120,6 @@
 							}
 						}	
 
-						//console.log(card);
-
 					break;
 
 					case 'blog':
@@ -136,7 +130,10 @@
 							card.category.title = card.categories[0]['title'];
 						}
 
-						//console.log(card);
+						if (!isUndefined(card.custom_fields)
+						&& !isUndefined(card.custom_fields['soundcloud_embed_code'])) {
+							card.soundcloud =  card.custom_fields['soundcloud_embed_code'][0];
+						}
 
 					break;
 				}		

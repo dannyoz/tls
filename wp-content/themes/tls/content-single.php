@@ -70,8 +70,21 @@
 							<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length == 0"><h4 class="author" ng-bind="post.author.name"></h4></div>
 						</div>
 
-						<div class="grid-12 article-summary folded-corner" ng-if="post.custom_fields.teaser_summary[0]">
-							<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]"></div>						
+						<div class="grid-12 article-summary folded-corner" ng-if="post.custom_fields.book_title[0]">
+							<div class="inner">
+								<div class="summary-top">
+									<div class="top-wrapper">
+										<div class="book-title" ng-bind-html="post.custom_fields.book_title[0]"></div>
+										<div ng-bind-html="post.custom_fields.book_author[0]"></div>	
+									</div>									
+								</div>	
+								<div class="summary-bottom">									
+									<div ng-bind-html="post.custom_fields.book_info_1[0]"></div>
+									<div ng-bind-html="post.custom_fields.book_info_2[0]"></div>
+									<div ng-bind-html="post.custom_fields.book_isbn[0]"></div>					
+								</div>	
+							</div>
+							
 						</div>
 
 						<div ng-if="post.custom_fields.soundcloud_embed_code[0].length > -1">
