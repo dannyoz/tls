@@ -92,6 +92,7 @@ section, article{
 		position:absolute;
 		bottom:0;
 		z-index: 9999;
+		padding-right: 30px;
 
 		h2,p{
 
@@ -126,6 +127,7 @@ section, article{
 			font:{
 				size:2.5em;
 				weight:bold;
+				family: $times;
 			}
 			@include stack;
 		}
@@ -136,6 +138,7 @@ section, article{
 			font:{
 				style:italic;
 				size: 1.333em;
+				family: $times;
 			}
 			@include stack;
 		}

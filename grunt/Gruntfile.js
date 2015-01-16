@@ -161,6 +161,6 @@ module.exports = function(grunt) {
             opts: {stdio: 'inherit'}
         }, this.async());
     });
-    grunt.registerTask( 'php', ['watch','phpunit:tlstests'] );
+    grunt.registerTask( 'phput', ['watch:tests','phpunit:tlstests'] );
 
 };

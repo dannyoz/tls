@@ -225,33 +225,44 @@ function tls_make_post_excerpt( $post, $word_length = 55 ){
 	$text = str_replace( ']]>', ']]>', $text );
 
 	$excerpt_length = apply_filters( 'excerpt_length', $word_length );
-	$excerpt_more   = apply_filters( 'excerpt_more', ' ' . '[...]' );
+	$excerpt_more   = apply_filters( 'excerpt_more', '' );
 	$text           = wp_trim_words( $text, $excerpt_length, '' );
-	return $text . $excerpt_more;
+	return $text;
 }
 
 /**
  * Modify Permalink for Articles Post Type
+ *
+ * @TODO Refactoring needed for Articles Permalink with visibility term because if you are on a private article and change the permalink to public it still returns the Article Post.
  */
-//add_filter('post_link', 'article_visibility_modify_permalink', 10, 3);
-//add_filter('post_type_link', 'article_visibility_modify_permalink', 10, 3);
-//
-//function article_visibility_modify_permalink($permalink, $post_id, $leavename) {
-//	if (strpos($permalink, '%article_visibility%') === FALSE) return $permalink;
-//
-//	// Get post
-//	$post = get_post($post_id);
-//	if (!$post) return $permalink;
-//
-//	// Get taxonomy terms
+//add_filter('post_link', 'tls_articles_visibility_permalink', 1, 3);
+//add_filter('post_type_link', 'tls_articles_visibility_permalink', 1, 3);
+//function tls_articles_visibility_permalink( $post_link, $id = 0, $leavename = false ) {
+//	if ( strpos('%article_visibility%', $post_link) > 0 ) return $post_link;
+//	$post = get_post($id);
+//	if ( !is_object($post) || $post->post_type != 'tls_articles' ) return $post_link;
 //	$terms = wp_get_object_terms($post->ID, 'article_visibility');
-//	if (!is_wp_error($terms) && !empty($terms) && is_object($terms[0])) {
-//		$taxonomy_slug = $terms[0]->slug;
+//	if ( empty($terms) ) {
+//		$visibility_slug = $terms[0]->slug;
 //	} else {
-//		$taxonomy_slug = 'public';
+//		$visibility_slug = 'private';
 //	}
-//
-//	return str_replace('%article_visibility%', $taxonomy_slug, $permalink);
+//	//if ( !$terms ) return str_replace('%article_visibility%/', '', $post_link);
+//	return str_replace('%article_visibility%', $visibility_slug, $post_link);
 //}
+//
+//add_action('wp', 'tls_articles_visibility_permalink_security');
+//function tls_articles_visibility_permalink_security( $query ) {
+//
+//	if ( is_single() && 'tls_articles' == $query->query_vars['post_type'] ) {
+////		$post = get_posts( array(
+////			'post_type'	=> 'tls_articles',
+////			'name' => $query->query_vars['name']
+////		) );
+//
+//		wp_redirect( home_url('/'), 404 );
+//	}
+//}
+
 
 
