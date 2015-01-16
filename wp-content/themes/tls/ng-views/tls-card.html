@@ -24,7 +24,7 @@
 </div>
 
 
-<div class="card" ng-if="data.type == 'article' && data.title != null" ng-class="{private:data.visibility == 'private'}">
+<div class="card" ng-if="data.type == 'article'" ng-class="{private:data.visibility == 'private'}">
 
 	<h3 class="futura">
 		<a ng-attr-href="{{data.section.link}}" ng-if="data.section.name" ng-bind-html="data.section.name"></a>			
