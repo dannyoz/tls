@@ -53,7 +53,7 @@ function tls_discover_json_api_encode($response) {
         $spotlight_article = $spotlight_article_query->posts[0];
 
         // Add Article ID into the spotlight_articles array
-        $spotlight_articles[] = $spotlight_article->ID;
+        $top_section_articles[] = $spotlight_article->ID;
 
         // Get Taxonomies
         $spotlight_article_sections = wp_get_post_terms( $spotlight_article->ID, 'article_section' );

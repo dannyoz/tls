@@ -76,7 +76,7 @@ function tls_custom_post_types() {
 	);
 	// Article Post Type Rewrite Rules
 	$art_rewrite = array(
-		'slug'                => 'articles',
+		'slug'                => 'articles/%article_visibility%',
 		'with_front'          => true,
 		'pages'               => true,
 		'feeds'               => true,
