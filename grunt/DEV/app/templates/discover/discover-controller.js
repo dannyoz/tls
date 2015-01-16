@@ -71,6 +71,8 @@
 					var posts = result.posts;
 					$scope.scrollState = "on";
 
+					console.log(posts);
+
 					columns.divide(posts).then(function (cols){
 
 						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);

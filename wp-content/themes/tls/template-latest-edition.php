@@ -13,10 +13,10 @@ Template Name: Latest Edition Page Template
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
-				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
+				<a href="javascript:;" ng-if="nextEdition.title != null" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
 					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
 				</a>
-				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
+				<a href="javascript:;" ng-if="previousEdition.title != null" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
 					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
 				</a>	
 			</div>			
@@ -59,7 +59,7 @@ Template Name: Latest Edition Page Template
 								<div class="padded">
 									<h3 class="futura"><a href="#">{{public.section}}</a></h3>
 									<p class="title-small">{{public.author}}</p>
-									<h4><a href="{{public.url}}">{{public.title}}</a></h4>
+									<h4><a href="{{public.url}}" ng-bind-html="public.title"></a></h4>
 								</div>								
 							</div>
 						</div>
