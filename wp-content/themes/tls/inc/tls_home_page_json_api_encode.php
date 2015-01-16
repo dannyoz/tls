@@ -101,7 +101,14 @@ function tls_home_page_json_api_encode($response) {
                     'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
                 ),
                 'image'         => $thumbnail_image,
-                'soundcloud'    => $card_post_soundcloud_custom_field[0]
+                'soundcloud'    => $card_post_soundcloud_custom_field[0],
+                'custom_fields' => array(
+                    'book_title'    => $card_post_custom_fields['book_title'],
+                    'book_author'   => $card_post_custom_fields['book_author'],
+                    'book_info_1'   => $card_post_custom_fields['book_info_1'],
+                    'book_info_2'   => $card_post_custom_fields['book_info_2'],
+                    'book_isbn'     => $card_post_custom_fields['book_isbn']
+                )
             );
 
             // Iterate to next count slot
