@@ -16,7 +16,7 @@
 			<div class="blog-data">
 				<div class="inner">
 					<h4><a href="{{blog.link}}">{{blog.title}}</a></h4>
-					<p class="futura"><a href="#">{{blog.author}}</a></p>
+					<p class="futura"><a ng-href="/author/{{blog.author.slug}}">{{blog.author}}</a></p>
 					<p ng-bind-html="blog.text"></p>
 				</div>				
 			</div>
@@ -36,16 +36,15 @@
 		<div ng-if="data.category.slug != 'listen'" class="grid-row padded">			
 			<div class="blog-avatar">
 				<a href="#">
-					<!-- <img class="max circular" ng-if="data.categories[0].slug == 'a-dons-life'" src="<?php bloginfo('template_directory'); ?>/images/mary.jpg"/>
-					<img class="max circular" ng-if="data.categories[0].slug != 'a-dons-life'" src="<?php bloginfo('template_directory'); ?>/images/grey-logo.jpg" /> -->
-					<img class="max circular" src="http://placehold.it/90x90"/>
+					<img class="max circular" ng-if="data.categories[0].slug == 'a-dons-life'" src="/wp-content/themes/tls/images/mary.jpg"/>
+					<img class="max circular" ng-if="data.categories[0].slug != 'a-dons-life'" src="/wp-content/themes/tls/images/grey-logo.jpg" />
 				</a>
 			</div>
 
 			<div class="blog-data">
 				<div class="inner">
 					<h4><a href="{{data.url}}">{{data.title}}</a></h4>
-					<p class="futura"><a href="#">{{data.author.name}}</a></p>
+					<p class="futura"><a ng-href="/author/{{data.author.slug}}">{{data.author.name}}</a></p>
 					<!-- <p ng-bind-html="data.excerpt"></p> -->
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
 				</div>				
@@ -55,7 +54,6 @@
 		<div ng-if="data.category.slug == 'listen'" class="padded">			
 			<div class="embed" ng-bind-html="sce.trustAsHtml(data.soundcloud);"></div>
 			<h4><a href="{{data.link}}">{{data.title}}</a></h4>
-			<p class="futura"><a href="#">{{data.author.name}}</a></p>
 			<!-- <p ng-bind-html="data.excerpt"></p> -->
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
 		</div>		
