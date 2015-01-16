@@ -50,7 +50,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in topCol2">
 
 						<div ng-repeat="card in column">
-							<div tls-card="card"></div>
+							<div tls-card="card" ng-class="{spotlight:card.spotlight}"></div>
 						</div>	
 
 					</div>
@@ -62,7 +62,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-6" ng-repeat="column in topCol1">
 
 						<div ng-repeat="card in column">
-							<div tls-card="card"></div>
+							<div tls-card="card" ng-class="{spotlight:card.spotlight}"></div>
 						</div>
 
 					</div>		
