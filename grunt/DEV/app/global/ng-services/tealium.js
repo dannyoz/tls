@@ -88,7 +88,7 @@
 				"page_name" : utag_data.page_name
 			}
 
-			debugBar(tags, 'Link');
+			//debugBar(tags, 'Link');
 			utagLink(tags);
 
 			return tags
@@ -101,7 +101,7 @@
 				"event_engagement_browsing_method" : "click"
 			}
 
-			debugBar(tags, 'Link');
+			//debugBar(tags, 'Link');
 			utagLink(tags);
 
 			return tags

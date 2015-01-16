@@ -38,7 +38,7 @@ $articles_archive = new WP_Query($articles_archive_args);
 					<div class="grid-4" ng-repeat="column in topCol3">
 
 						<div ng-repeat="card in column">
-							<div tls-card="card"></div>
+							<div tls-card="card" ng-class="{spotlight:card.spotlight}"></div>
 						</div>		
 
 					</div>			

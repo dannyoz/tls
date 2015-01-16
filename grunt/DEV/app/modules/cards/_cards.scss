@@ -71,7 +71,7 @@
 
 	p{
 
-		font-size: 0.889em;
+		font-size: 16px;
 		line-height: 1.5em;
 
 		@media screen and (max-width:$mobile) {
@@ -178,6 +178,20 @@
 	&:nth-child(3){
 
 		margin-right:0;
+	}
+}
+
+.spotlight .card{
+
+	h3 {
+
+		background-color:$primary-orange;
+		margin-bottom:0;
+		padding-bottom:12px;
+
+		a{
+			color: white;
+		}
 	}
 }
 

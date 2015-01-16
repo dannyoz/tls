@@ -2571,7 +2571,7 @@ p.author, h4.author {
 }
 /* line 72, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card p {
-  font-size: 0.889em;
+  font-size: 16px;
   line-height: 1.5em;
 }
 @media screen and (max-width: 450px) {
@@ -2681,7 +2681,18 @@ p.author, h4.author {
   margin-right: 0;
 }
 
-/* line 184, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 186, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.spotlight .card h3 {
+  background-color: #d73f2b;
+  margin-bottom: 0;
+  padding-bottom: 12px;
+}
+/* line 192, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.spotlight .card h3 a {
+  color: white;
+}
+
+/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -2753,13 +2764,13 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
-  /* line 184, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 184, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 15px;
     font-size: 0.8em;
