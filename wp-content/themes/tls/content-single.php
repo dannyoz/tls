@@ -188,12 +188,23 @@
 					<div class="grid-4" ng-repeat="column in col3">
 				
 						<div class="card" ng-repeat="relPost in column">
-							<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
-							<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
-							<div class="padded" ng-bind-html="relPost.excerpt"></div>
+							
+							<h3 class="futura">
+								<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
+								<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
+							</h3>
+							
+							<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
+							
+							<div class="padded">
+								<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
+								<p ng-bind-html="relPost.excerpt"></p>
+							</div>
+
 							<footer>
-								<p class="futura"><a href="#" ng-bind="relPost.author.name"></a></p>
+								<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
 							</footer>
+
 						</div>
 
 					</div>
@@ -205,12 +216,23 @@
 					<div class="grid-6" ng-repeat="column in col2">
 				
 						<div class="card" ng-repeat="relPost in column">
-							<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
-							<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
-							<div class="padded" ng-bind-html="relPost.excerpt"></div>
+							
+							<h3 class="futura">
+								<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
+								<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
+							</h3>
+							
+							<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
+							
+							<div class="padded">
+								<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
+								<p ng-bind-html="relPost.excerpt"></p>
+							</div>
+
 							<footer>
-								<p class="futura"><a href="#" ng-bind="relPost.author.name"></a></p>
+								<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
 							</footer>
+
 						</div>
 
 					</div>
@@ -222,12 +244,23 @@
 					<div class="grid-4" ng-repeat="column in col3">
 				
 						<div class="card" ng-repeat="relPost in column">
-							<h3 class="futura"><a ng-attr-href="{{relPost.url}}" ng-bind="relPost.title"></a></h3>
-							<img class="max" ng-attr-src="{{relPost.thumbnail_images.full.url}}" />
-							<div class="padded" ng-bind-html="relPost.excerpt"></div>
+							
+							<h3 class="futura">
+								<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
+								<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
+							</h3>
+							
+							<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
+							
+							<div class="padded">
+								<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
+								<p ng-bind-html="relPost.excerpt"></p>
+							</div>
+
 							<footer>
-								<p class="futura"><a href="#" ng-bind="relPost.author.name"></a></p>
+								<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
 							</footer>
+
 						</div>
 
 					</div>
