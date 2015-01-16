@@ -90,6 +90,7 @@
 		@include grid-col-last(6);
 
 		h2 {
+
 			font-size: 48px;
 			line-height: 60px;
 			margin-bottom: 10px;
@@ -101,9 +102,21 @@
 			}
 		}
 
+		.body-copy{
+
+			h2,h3,h4,h5,h6{
+
+				font-size: 30px;
+			}
+		}
+
 		p{
 
-			font-size: 20px;
+			
+			font:{
+				size: 20px;
+				family:$times;
+			}
 			line-height: 32px;
 		}
 
@@ -177,6 +190,13 @@
 			}
 		}
 
+		@media screen and (max-width:$large){
+
+			@include shift("push",2);
+			@include grid-col-last(8);
+
+		}
+
 		@media screen and (max-width:$tablet){
 
 			@include shift("push",1);
@@ -243,7 +263,7 @@
 	min-height: 30px;
 
 	a {
-		font-family: $times;
+		font-family: $futura;
 	}
 
 
@@ -260,7 +280,7 @@
 
 	.article-nav {
 
-		width: 14%;
+		width: 20%;
 
 		@media (max-width: $tablet) {
 			width: 25%;
@@ -293,7 +313,7 @@
 
 		z-index: 999;
 		text-align: right;
-		padding-right: 35px;
+		padding-right: 20px;
 		@include absolutly(20px,top,right);
 		right: 0;
 
@@ -310,7 +330,8 @@
 
 		.icon:after {
 			right: 0;
-			font-size: 25px;
+			top:3px;
+			font-size: 18px;
 			content: "\e60b";
 		}
 	}
@@ -319,7 +340,7 @@
 
 		z-index: 999;
 		text-align: left;
-		padding-left: 35px;
+		padding-left: 20px;
 		@include absolutly(20px,top,left);	
 		left: 0;
 
@@ -332,9 +353,17 @@
 		}
 
 		.icon:before {				
-			font-size: 25px;
+			font-size: 18px;
+			top:3px;
 			left: 0;				
 		}		
+	}
+
+	.prev-article span, .next-article span{
+
+		font-family: $futura;
+		font-size: 15px;
+		font-weight: 500;
 	}
 }
 
