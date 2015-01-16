@@ -38,10 +38,15 @@
 					cardType = card.type;
 				}
 
+				//console.log(cardType);
+
 				switch (cardType) {
 
 					case 'article':
-					case 'tls_articles':		
+					case 'tls_articles':
+
+						// Card type
+						card.type = 'article';		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
