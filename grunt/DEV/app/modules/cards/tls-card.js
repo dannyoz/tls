@@ -1,4 +1,4 @@
-.directive('tlsCard',['$sce',function ($sce) {
+.directive('tlsCard',['$sce', '$compile', function ($sce, $compile) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -6,7 +6,7 @@
 			data : "=tlsCard",
 			type : "@"
 		},
-		link : function(scope){
+		link : function(scope, element, attr) {
 						
 			scope.sce = $sce;
 			var card = scope.data;	
@@ -41,6 +41,7 @@
 				switch (cardType) {
 
 					case 'article':
+					case 'tls_articles':		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
@@ -105,10 +106,7 @@
 									card.image_url = card.image[0];
 								}								
 							}
-						}	
-
-						//console.log(card);
-
+						}							
 					break;
 				}		
 

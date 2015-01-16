@@ -13,18 +13,18 @@ Template Name: Latest Edition Page Template
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
-				<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
-					<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
+				<a href="javascript:;" ng-if="nextEdition.title != null" ng-click="chooseEdition('next',nextEdition.url)" class="article-nav next-article">
+					<div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
 				</a>
-				<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
-					<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
+				<a href="javascript:;" ng-if="previousEdition.title != null" ng-click="chooseEdition('prev',previousEdition.url)" class="article-nav prev-article">
+					<div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
 				</a>	
 			</div>			
 		</div>
 
 		<div class="edition-current">
 
-			<h1 ng-if="size == 'desktop'">{{latestEdition.title}}</h1>
+			<h1 ng-if="size == 'desktop'" ng-bind="latestEdition.title"></h1>
 			
 			<!-- Latest Edition Top Section -->
 			<div class="editions-top grid-row">		
@@ -32,14 +32,14 @@ Template Name: Latest Edition Page Template
 				<div class="editions-top-left featured-col fadeIn">		
 
 					<!-- Tablet / Mobile Pagination -->
-					<h1 ng-if="size != 'desktop'">{{latestEdition.title}}</h1>					
+					<h1 ng-if="size != 'desktop'" ng-bind="latestEdition.title"></h1>					
 					<div class="article-links" ng-if="size != 'desktop'">						
 						<div class="inner">
 							<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
-								<div class="icon icon-right-arrow"><span>{{nextEdition.title}}</span></div>
+								<div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
 							</a>
 							<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',prev)" class="article-nav prev-article">
-								<div class="icon icon-left-arrow"><span>{{previousEdition.title}}</span></div>
+								<div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
 							</a>	
 						</div>			
 					</div>
@@ -47,7 +47,7 @@ Template Name: Latest Edition Page Template
 					<div class="img-wrapper">
 						<img class="max" ng-attr-src="{{currentEdition.featured.image_url}}">	
 					</div>								
-					<div class="title-small">{{currentEdition.featured.issue_no}}</div>
+					<div class="title-small" ng-bind="currentEdition.featured.issue_no"></div>
 				</div>
 				
 				<div class="editions-top-right fadeIn">
@@ -57,9 +57,9 @@ Template Name: Latest Edition Page Template
 							<h2>{{publicObj.title}}</h2>
 							<div class="edition-item" ng-repeat="public in publicObj.articles">
 								<div class="padded">
-									<h3 class="futura"><a href="#">{{public.section}}</a></h3>
-									<p class="title-small">{{public.author}}</p>
-									<h4><a href="{{public.url}}">{{public.title}}</a></h4>
+									<h3 class="futura"><a href="#" ng-bind="public.section"></a></h3>
+									<p class="title-small" ng-bind="public.author"></p>
+									<h4><a href="{{public.url}}" ng-bind-html="public.title"></a></h4>
 								</div>								
 							</div>
 						</div>
@@ -68,8 +68,8 @@ Template Name: Latest Edition Page Template
 							<h2>{{regularsObj.title}}</h2>
 							<div class="edition-item" ng-repeat="regular in regularsObj.articles">
 								<div class="padded">
-									<h3 class="futura"><a href="#">{{regular.section}}</a><i class="icon icon-key-after"></i></h3>								
-									<p class="title-small"><a href="{{regular.url}}">{{regular.title}}</a></p>
+									<h3 class="futura"><a href="#" ng-bind="regular.section"></a><i class="icon icon-key-after"></i></h3>								
+									<p class="title-small"><a href="{{regular.url}}" ng-bind="regular.title"></a></p>
 								</div>
 							</div>
 						</div>

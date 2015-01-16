@@ -9,16 +9,37 @@
 		// Set scope variables of Current Edition
 		$scope.setCurrentEditionObj = function(obj) {
 
-			console.log(obj);
+			//console.log(obj);
+			
+			if (obj.hasOwnProperty('latest_edition')) {
+				// Full object			
+				$scope.latestEdition = obj.latest_edition;			
+				// Edition sections articles				
+				$scope.currentEdition = $scope.latestEdition.content;	
+				// Previous edition
+				$scope.nextEdition = $scope.latestEdition.next_post_info;	
+				// Next edition
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;	
+				$scope.previousEdition.url = window.location.origin + '/grunt/DEV/app/templates/latest-editions/11-december-2014.json';
 
-			// Full object			
-			$scope.latestEdition = obj.latest_edition;			
-			// Edition sections articles				
-			$scope.currentEdition = $scope.latestEdition.content;	
-			// Previous edition
-			$scope.nextEdition = $scope.latestEdition.next_post_info;			
-			// // Next edition
-			$scope.previousEdition = $scope.latestEdition.previous_post_info;
+			} else {
+
+				//========================================
+				// TEMP FOR DEMO / NEEDS TO BE REMOVED
+				//========================================
+				// Full object			
+				$scope.latestEdition = obj;			
+				// Edition sections articles				
+				$scope.currentEdition = $scope.latestEdition.content;
+				// Previous edition
+				$scope.nextEdition = $scope.latestEdition.next_post_info;			
+				// // Next edition
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;			
+
+				//========================================
+				// TEMP FOR DEMO / NEEDS TO BE REMOVED
+				//========================================
+			}			
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;
