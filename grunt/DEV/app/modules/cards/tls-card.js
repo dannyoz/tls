@@ -10,14 +10,21 @@
 						
 			scope.sce = $sce;
 			var card = scope.data;	
+			// Type passed as attibute
+			var typeAttr = scope.type;
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
 
-			// Card is array, must be blog items
-			if(cardObjType === '[object Array]' && cardObjType.length > 0) {
-				card.type = 'blog';
+			// Homepage case: array of blog objects			
+			if (cardObjType === '[object Array]' && cardObjType.length > 0) {
+				card.type = 'blog_homepage';
 			} 
+
+			// Type passed as attibutes in template
+			if (typeAttr != undefined && typeAttr == 'blog') {
+				card.type = 'blog';	
+			}
 
 			// Function to check value is undefined
 			var isUndefined = function(val) {				
@@ -34,11 +41,12 @@
 
 				var cardType;
 
+				console.log(card);
+
+				// Card type
 				if (card.hasOwnProperty('type')) {
 					cardType = card.type;
 				}
-
-				//console.log(cardType);
 
 				switch (cardType) {
 
@@ -112,6 +120,18 @@
 								}								
 							}
 						}							
+					break;
+
+					case 'blog':
+						
+						if (!isUndefined(card.categories[0])) {
+							card.category = {};
+							card.category.slug = card.categories[0]['slug'];
+							card.category.title = card.categories[0]['title'];
+						}
+
+						//console.log(card);
+
 					break;
 				}		
 

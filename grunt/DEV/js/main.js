@@ -28547,7 +28547,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a href=#>Blog</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=card ng-if=\"data.type == 'listen_blog' && data.soundcloud != ''\"><h3 class=futura><a href=#>{{data.section.name}}</a></h3><div class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-attr-href={{data.link}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.text></p></div></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div><div class=card ng-if=\"data.type == 'related'\">derp</div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a href=#><!-- <img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"<?php bloginfo('template_directory'); ?>/images/mary.jpg\"/>\r" +
+    "\n" +
+    "\t\t\t\t\t<img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"<?php bloginfo('template_directory'); ?>/images/grey-logo.jpg\" /> --><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div><div class=card ng-if=\"data.type == 'related'\">derp</div>"
   );
 
 
@@ -29023,14 +29025,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						
 			scope.sce = $sce;
 			var card = scope.data;	
+			// Type passed as attibute
+			var typeAttr = scope.type;
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
 
-			// Card is array, must be blog items
-			if(cardObjType === '[object Array]' && cardObjType.length > 0) {
-				card.type = 'blog';
+			// Homepage case: array of blog objects			
+			if (cardObjType === '[object Array]' && cardObjType.length > 0) {
+				card.type = 'blog_homepage';
 			} 
+
+			// Type passed as attibutes in template
+			if (typeAttr != undefined && typeAttr == 'blog') {
+				card.type = 'blog';	
+			}
 
 			// Function to check value is undefined
 			var isUndefined = function(val) {				
@@ -29047,11 +29056,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 				var cardType;
 
+				console.log(card);
+
+				// Card type
 				if (card.hasOwnProperty('type')) {
 					cardType = card.type;
 				}
-
-				//console.log(cardType);
 
 				switch (cardType) {
 
@@ -29125,6 +29135,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 								}								
 							}
 						}							
+					break;
+
+					case 'blog':
+						
+						if (!isUndefined(card.categories[0])) {
+							card.category = {};
+							card.category.slug = card.categories[0]['slug'];
+							card.category.title = card.categories[0]['title'];
+						}
+
+						//console.log(card);
+
 					break;
 				}		
 

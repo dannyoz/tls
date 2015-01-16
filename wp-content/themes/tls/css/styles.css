@@ -1399,37 +1399,38 @@ p.author, h4.author {
   overflow: hidden;
   text-align: center;
 }
+
 @media screen and (max-width: 450px) {
   /* line 121, ../../../../grunt/DEV/app/templates/home/_home.scss */
-  #home .blog-item.card {
+  .blog-item.card {
     padding: 20px;
   }
 }
 /* line 127, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home .blog-item.card h4 {
+.blog-item.card h4 {
   margin-bottom: 2px;
 }
 @media screen and (max-width: 450px) {
   /* line 131, ../../../../grunt/DEV/app/templates/home/_home.scss */
-  #home .blog-item.card h3 {
+  .blog-item.card h3 {
     padding: 0;
     margin-bottom: 10px;
   }
 }
 /* line 138, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home .blog-item.card p.futura {
+.blog-item.card p.futura {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
 @media screen and (max-width: 450px) {
   /* line 144, ../../../../grunt/DEV/app/templates/home/_home.scss */
-  #home .blog-item.card .padded {
+  .blog-item.card .padded {
     padding: 0;
   }
 }
 /* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home .blog-item.card .blog-avatar {
+.blog-item.card .blog-avatar {
   float: left;
   position: relative;
   width: 31.66667%;
@@ -1437,7 +1438,7 @@ p.author, h4.author {
 }
 @media screen and (max-width: 450px) {
   /* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
-  #home .blog-item.card .blog-avatar {
+  .blog-item.card .blog-avatar {
     float: left;
     position: relative;
     width: 23.125%;
@@ -1445,7 +1446,7 @@ p.author, h4.author {
   }
 }
 /* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home .blog-item.card .blog-data {
+.blog-item.card .blog-data {
   float: left;
   position: relative;
   width: 65.83333%;
@@ -1453,7 +1454,7 @@ p.author, h4.author {
 }
 @media screen and (max-width: 450px) {
   /* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
-  #home .blog-item.card .blog-data {
+  .blog-item.card .blog-data {
     float: left;
     position: relative;
     width: 74.375%;
@@ -1461,7 +1462,7 @@ p.author, h4.author {
   }
 }
 /* line 168, ../../../../grunt/DEV/app/templates/home/_home.scss */
-#home .blog-item.card .blog-data .inner {
+.blog-item.card .blog-data .inner {
   padding-left: 5px;
 }
 
