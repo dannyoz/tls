@@ -41,9 +41,7 @@
 				switch (cardType) {
 
 					case 'article':
-					case 'tls_articles':
-
-						//console.log(card.title);						
+					case 'tls_articles':		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
