@@ -10,6 +10,7 @@
 	$scope.order           = "DESC"
 	$scope.showSorter      = false
 	$scope.loadResults     = true
+	$scope.clearable       = false
 	$scope.niceDate        = niceDate
 
 
@@ -106,8 +107,10 @@
 
 		if($this.isApplied){
 			$scope.dateRange = "";
+			$scope.clearable = false
 		} else {
 			$scope.dateRange = range;
+			$scope.clearable = true
 		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
@@ -173,6 +176,7 @@
 		$scope.taxonomyFilters = []
 		$scope.currentPage     = 1
 		$scope.dateRange       = ""
+		$scope.clearable       = false
 
 
 		angular.forEach($scope.contentType, function (obj){

@@ -4,6 +4,10 @@
 
 	//padding:30px 0;
 
+	img.max {
+		width: 100%;
+	}
+
 	article .container{
 
 		overflow: hidden;
@@ -11,8 +15,7 @@
 
 	.share-bar{
 
-		margin-top: 20px;
-		margin-bottom: 20px;
+		padding: 30px 0;
 
 		a{
 
@@ -22,6 +25,14 @@
 
 				margin-left:0;
 			}
+		}
+
+		.commentlink{
+
+			float: right;
+			margin-top:-5px;
+			font-weight: 500;
+			text-transform: uppercase;
 		}
 	}
 
@@ -70,6 +81,7 @@
 		text-align: right;
 		float: right;	
 		color:$comment-grey;
+		font-weight: 300;
 	}	
 
 	.article-body{
@@ -129,6 +141,7 @@
 		img{
 
 			max-width: 100%;
+			margin: 20px 0;
 
 			&.right{
 

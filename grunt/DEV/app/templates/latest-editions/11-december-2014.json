@@ -12,7 +12,7 @@
   "content": {
     "featured": {
       "issue_no": "No. 8824",
-      "image_url": "http://tls.localhost/wp-content/uploads/2015/01/cover2.jpg"
+      "image_url": "/wp-content/uploads/2015/01/cover2.jpg"
     },  
     "public": {
       "title": "Public content",

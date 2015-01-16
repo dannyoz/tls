@@ -1,4 +1,4 @@
-.directive('tlsCard',['$sce', '$compile', function ($sce, $compile) {
+.directive('tlsCard',['$sce',function ($sce) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -6,18 +6,30 @@
 			data : "=tlsCard",
 			type : "@"
 		},
-		link : function(scope, element, attr) {
-						
+		link : function(scope){
+
 			scope.sce = $sce;
 			var card = scope.data;	
+			// Type passed as attibute
+			var typeAttr = scope.type;
+
+			//Change type using data-type attribute
+			if(scope.type){
+				card.type = scope.type
+			}
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
 
-			// Card is array, must be blog items
-			if(cardObjType === '[object Array]' && cardObjType.length > 0) {
-				card.type = 'blog';
+			// Homepage case: array of blog objects			
+			if (cardObjType === '[object Array]' && cardObjType.length > 0) {
+				card.type = 'blog_homepage';
 			} 
+
+			// Type passed as attibutes in template
+			if (typeAttr != undefined && typeAttr == 'blog') {
+				card.type = 'blog';	
+			}
 
 			// Function to check value is undefined
 			var isUndefined = function(val) {				
@@ -34,19 +46,14 @@
 
 				var cardType;
 
+				// Card type
 				if (card.hasOwnProperty('type')) {
 					cardType = card.type;
 				}
 
-				//console.log(cardType);
-
 				switch (cardType) {
 
 					case 'article':
-					case 'tls_articles':
-
-						// Card type
-						card.type = 'article';		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
@@ -111,7 +118,23 @@
 									card.image_url = card.image[0];
 								}								
 							}
-						}							
+						}	
+
+					break;
+
+					case 'blog':
+						
+						if (!isUndefined(card.categories[0])) {
+							card.category = {};
+							card.category.slug = card.categories[0]['slug'];
+							card.category.title = card.categories[0]['title'];
+						}
+
+						if (!isUndefined(card.custom_fields)
+						&& !isUndefined(card.custom_fields['soundcloud_embed_code'])) {
+							card.soundcloud =  card.custom_fields['soundcloud_embed_code'][0];
+						}
+
 					break;
 				}		
 
