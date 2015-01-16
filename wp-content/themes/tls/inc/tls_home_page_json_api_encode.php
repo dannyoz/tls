@@ -45,7 +45,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => tls_make_post_excerpt( $blog_card ),
+                'text'          => tls_make_post_excerpt( $blog_card, 15 ),
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -85,7 +85,7 @@ function tls_home_page_json_api_encode($response) {
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;
             } else {
-                $articleText = tls_make_post_excerpt( $card_post );
+                $articleText = tls_make_post_excerpt( $card_post, 15 );
             }
 
             // Add Cards to the JSON Response in the specific count slot

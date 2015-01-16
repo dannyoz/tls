@@ -72,14 +72,14 @@ function tls_discover_json_api_encode($response) {
             'id'                            => $spotlight_article->ID,
             'url'                           => get_permalink( $spotlight_article->ID ),
             'title'                         => $spotlight_article->post_title,
-            'excerpt'                       => tls_make_post_excerpt( $spotlight_article ),
+            'excerpt'                       => tls_make_post_excerpt( $spotlight_article, 15 ),
             'author'                        => array(
                 'name'                      => get_the_author_meta( 'display_name', $spotlight_article->post_author ),
                 'slug'                      => get_the_author_meta( 'slug', $spotlight_article->post_author ),
             ),
             'custom_fields'                 => array(
                 'thumbnail_image_url'       => $spotlight_article_thumbnail,
-                'teaser_summary'            => $spotlight_article_teaser,
+                'teaser_summary'            => ( $spotlight_article_teaser ) ? $spotlight_article_teaser : tls_make_post_excerpt( $spotlight_article, 15 ),
             ),
             'taxonomy_article_section'      => $spotlight_article_sections,
             'taxonomy_article_section_url'  => get_term_link( $spotlight_article_sections[0]->term_id, $spotlight_article_sections[0]->taxonomy),
@@ -134,14 +134,14 @@ function tls_discover_json_api_encode($response) {
                     'id' => $top_section_article->ID,
                     'url' => get_permalink($top_section_article->ID),
                     'title' => $top_section_article->post_title,
-                    'excerpt' => tls_make_post_excerpt($top_section_article),
+                    'excerpt' => tls_make_post_excerpt($top_section_article, 15),
                     'author' => array(
                         'name' => get_the_author_meta('display_name', $top_section_article->post_author),
                         'slug' => get_the_author_meta('slug', $top_section_article->post_author),
                     ),
                     'custom_fields' => array(
                         'thumbnail_image_url' => $top_section_article_thumbnail,
-                        'teaser_summary' => $top_section_article_teaser,
+                        'teaser_summary' => ( $top_section_article_teaser ) ? $top_section_article_teaser : tls_make_post_excerpt($top_section_article, 15),
                     ),
                     'taxonomy_article_section' => $top_section_article_section,
                     'taxonomy_article_section_url' => get_term_link($top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
@@ -175,7 +175,7 @@ function tls_discover_json_api_encode($response) {
             $article_section_terms = wp_get_post_terms( $article_post->id, 'article_section' );
             $article_custom_fields = get_post_custom( $article_post->id );
             $article_post->custom_fields->thumbnail_image_url = $article_custom_fields['thumbnail_image_url'][0];
-            $article_post->custom_fields->teaser_summary = tls_make_post_excerpt( $article_post );
+            $article_post->custom_fields->teaser_summary = ( $article_custom_fields['teaser_summary'] ) ? $article_custom_fields['teaser_summary'] : tls_make_post_excerpt( $article_post );
             $article_post->type = 'article';
             $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
         }
