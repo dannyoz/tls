@@ -28549,7 +28549,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
   $templateCache.put('tls-card.html',
     "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a href=#><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a href=#>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a href=#><!-- <img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"<?php bloginfo('template_directory'); ?>/images/mary.jpg\"/>\r" +
     "\n" +
-    "\t\t\t\t\t<img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"<?php bloginfo('template_directory'); ?>/images/grey-logo.jpg\" /> --><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=card ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad=advert1></div></div><div class=card ng-if=\"data.type == 'related'\">derp</div>"
+    "\t\t\t\t\t<img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"<?php bloginfo('template_directory'); ?>/images/grey-logo.jpg\" /> --><img class=\"max circular\" src=\"http://placehold.it/90x90\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><p class=futura><a href=#>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-attr-href={{data.section.link}} ng-if=data.section.name ng-bind-html=data.section.name></a> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
   );
 
 
@@ -29013,7 +29013,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 	}
 })
-.directive('tlsCard',['$sce', '$compile', function ($sce, $compile) {
+.directive('tlsCard',['$sce',function ($sce) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -29021,12 +29021,19 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			data : "=tlsCard",
 			type : "@"
 		},
-		link : function(scope, element, attr) {
+		link : function(scope){
+
+			console.log(scope.type)
 						
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			//Change type using data-type attribute
+			if(scope.type){
+				card.type = scope.type
+			}
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
@@ -29066,10 +29073,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				switch (cardType) {
 
 					case 'article':
-					case 'tls_articles':
-
-						// Card type
-						card.type = 'article';		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
@@ -29134,7 +29137,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 									card.image_url = card.image[0];
 								}								
 							}
-						}							
+						}	
+
+						//console.log(card);
+
 					break;
 
 					case 'blog':
@@ -29735,14 +29741,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		var cards = objToArr.convert(result.home_page_cards);
 
 		//Inserts first advert to cards
-		// mpu.insert(cards,4).then(function (result){
-		// 	cards = result
-		// })
+		mpu.insert(cards,4).then(function (result){
+			cards = result
+		})
 
 		//Inserts second advert to cards
-		// mpu.insert(cards,10).then(function (result){
-		// 	cards = result
-		// })
+		mpu.insert(cards,9).then(function (result){
+			cards = result
+		})
 
 		columns.divide(cards).then(function (cols){
 
@@ -29876,6 +29882,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	$scope.order           = "DESC"
 	$scope.showSorter      = false
 	$scope.loadResults     = true
+	$scope.clearable       = false
 	$scope.niceDate        = niceDate
 
 
@@ -29972,8 +29979,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 		if($this.isApplied){
 			$scope.dateRange = "";
+			$scope.clearable = false
 		} else {
 			$scope.dateRange = range;
+			$scope.clearable = true
 		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
@@ -30039,6 +30048,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.taxonomyFilters = []
 		$scope.currentPage     = 1
 		$scope.dateRange       = ""
+		$scope.clearable       = false
 
 
 		angular.forEach($scope.contentType, function (obj){

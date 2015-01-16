@@ -21,14 +21,14 @@
 		var cards = objToArr.convert(result.home_page_cards);
 
 		//Inserts first advert to cards
-		// mpu.insert(cards,4).then(function (result){
-		// 	cards = result
-		// })
+		mpu.insert(cards,4).then(function (result){
+			cards = result
+		})
 
 		//Inserts second advert to cards
-		// mpu.insert(cards,10).then(function (result){
-		// 	cards = result
-		// })
+		mpu.insert(cards,9).then(function (result){
+			cards = result
+		})
 
 		columns.divide(cards).then(function (cols){
 

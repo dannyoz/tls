@@ -9,11 +9,11 @@
 				<div ng-if="post" class="col-wide share-bar">
 
 					<a href="javascript:if(window.print)window.print()" class="button clear small">
-						Print 
+						<span ng-if="size == 'desktop'">Print</span> 
 						<i class="icon icon-print"></i>
 					</a>
 					<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="button clear small">
-						Email 
+						<span ng-if="size == 'desktop'">Email</span> 
 						<i class="icon icon-email"></i>
 					</a>
 					<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
@@ -22,6 +22,8 @@
 					<a ng-click="socialLink(post.url,'twitter')" class="button clear small">
 						<i class="icon icon-twitter"></i>
 					</a>
+
+					<p class="commentlink futura"><a href="#comments">Comments (<span ng-bind="post.comment_count"></span>)</a></p>
 
 				</div>
 
@@ -47,6 +49,7 @@
 				<div class="grid-row article-top">
 					<div class="col-wide article-section title-small">
 						<div class="grid-6" ng-bind-html="post.taxonomy_article_section[0].title"></div>
+						<div class="grid-6" ng-if="!post.taxonomy_article_section" ng-bind="post.categories[0].title"></div>
 						<div class="grid-6 article-date title-small right" ng-bind="format(post.modified)"></div>
 					</div>
 				</div>
@@ -71,8 +74,8 @@
 							<div class="inner" ng-bind-html="post.custom_fields.teaser_summary[0]"></div>						
 						</div>
 
-						<div ng-if="post.custom_fields.embed_code[0].length > -1">
-							<div ng-bind-html="sce.trustAsHtml(post.custom_fields.embed_code[0])"></div>
+						<div ng-if="post.custom_fields.soundcloud_embed_code[0].length > -1">
+							<div ng-bind-html="sce.trustAsHtml(post.custom_fields.soundcloud_embed_code[0])"></div>
 						</div>
 						
 						<div ng-bind-html="post.content"></div>

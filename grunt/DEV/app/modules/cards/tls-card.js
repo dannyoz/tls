@@ -1,4 +1,4 @@
-.directive('tlsCard',['$sce', '$compile', function ($sce, $compile) {
+.directive('tlsCard',['$sce',function ($sce) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -6,12 +6,19 @@
 			data : "=tlsCard",
 			type : "@"
 		},
-		link : function(scope, element, attr) {
+		link : function(scope){
+
+			console.log(scope.type)
 						
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			//Change type using data-type attribute
+			if(scope.type){
+				card.type = scope.type
+			}
 
 			// Type of card (Object or Array)
 			var cardObjType = Object.prototype.toString.call(card);
@@ -51,10 +58,6 @@
 				switch (cardType) {
 
 					case 'article':
-					case 'tls_articles':
-
-						// Card type
-						card.type = 'article';		
 
 						// Visibility
 						if (!isUndefined(card.taxonomy_article_visibility)
@@ -119,7 +122,10 @@
 									card.image_url = card.image[0];
 								}								
 							}
-						}							
+						}	
+
+						//console.log(card);
+
 					break;
 
 					case 'blog':
