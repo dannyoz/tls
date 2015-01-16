@@ -30,19 +30,19 @@
 			 * Check if the Social Media links in Theme Options have been 
 			 * filled in and then display them
 			 */
-			$social_media_options = get_option( 'social_media_options' );
-			if ( $social_media_options ) {
+			$theme_options_settings = get_option( 'theme_options_settings' );
+			if ( $theme_options_settings ) {
 
-				$facebook_url = $social_media_options['facebook_url'];
-				$twitter_url = $social_media_options['twitter_url'];
+				$facebook_url = $theme_options_settings['facebook_url'];
+				$twitter_url = $theme_options_settings['twitter_url'];
 			
-				if ( $facebook_url != '' || $facebook_url != null ) {
-					echo '<li><a href="' . $facebook_url . '">Facebook</a></li>';
-				}
+				if ( $facebook_url != '' || $facebook_url != null ) { ?>
+					<li><a href="<?php echo $facebook_url; ?>"><i class="icon icon-facebook"></i></a></li>
+				<?php }
 
-				if ( $twitter_url != '' || $twitter_url != null ) {
-					echo '<li><a href="' . $twitter_url . '">Twitter</a></li>';
-				}
+				if ( $twitter_url != '' || $twitter_url != null ) { ?>
+					<li><a href="<?php echo $twitter_url ?>"><i class="icon icon-twitter"></i></a></li>
+				<?php }
 			
 			}
 		?>

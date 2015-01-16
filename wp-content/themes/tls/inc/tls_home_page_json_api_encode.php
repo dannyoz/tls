@@ -45,7 +45,7 @@ function tls_home_page_json_api_encode($response) {
                 'id'            => $blog_card->ID,
                 'title'         => $blog_card->post_title,
                 'author'        => get_the_author_meta( 'display_name', $blog_card->post_author ),
-                'text'          => tls_make_post_excerpt( $blog_card ),
+                'text'          => tls_make_post_excerpt( $blog_card, 15 ),
                 'link'          => get_permalink( $blog_card->ID ),
                 'section'       => array(
                     'name'      => $categories[0]->name,
@@ -85,7 +85,7 @@ function tls_home_page_json_api_encode($response) {
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;
             } else {
-                $articleText = tls_make_post_excerpt( $card_post );
+                $articleText = tls_make_post_excerpt( $card_post, 15 );
             }
 
             // Add Cards to the JSON Response in the specific count slot
@@ -101,7 +101,14 @@ function tls_home_page_json_api_encode($response) {
                     'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
                 ),
                 'image'         => $thumbnail_image,
-                'soundcloud'    => $card_post_soundcloud_custom_field[0]
+                'soundcloud'    => $card_post_soundcloud_custom_field[0],
+                'custom_fields' => array(
+                    'book_title'    => $card_post_custom_fields['book_title'],
+                    'book_author'   => $card_post_custom_fields['book_author'],
+                    'book_info_1'   => $card_post_custom_fields['book_info_1'],
+                    'book_info_2'   => $card_post_custom_fields['book_info_2'],
+                    'book_isbn'     => $card_post_custom_fields['book_isbn']
+                )
             );
 
             // Iterate to next count slot
