@@ -1,9 +1,10 @@
 jQuery(document).ready(function($) {
 
     jQuery('#upload_classifieds_button').click(function() {
+
         window.send_to_editor = function(html) {
             console.log(html);
-            var classifieds_pdf_url = jQuery('a',html).attr('href');
+            var classifieds_pdf_url = jQuery(html).attr('href');
             jQuery('#classifieds_pdf_url').val(classifieds_pdf_url);
             tb_remove();
         };
