@@ -118,7 +118,13 @@
 									card.image_url = card.image[0];
 								}								
 							}
-						}	
+						}
+
+						//Excerpt
+						if(!card.excerpt && card.text){
+							card.excerpt = card.text[0]
+						}
+
 
 					break;
 
