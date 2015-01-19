@@ -16,8 +16,8 @@ get_header(); ?>
 				
 			<div class="caption">
 				<a ng-href="{{firstPost.link}}">
-					<h2>{{firstPost.title}}</h2>
-					<p class="excerpt">{{firstPost.excerpt}}</p>
+					<h2 ng-bind-html="firstPost.title"></h2>
+					<p class="excerpt" ng-bind-html="firstPost.excerpt"></p>
 				</a>
 			</div>
 		</div>
