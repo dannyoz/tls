@@ -4,15 +4,24 @@
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard",
-			type : "@",
-			home : "@"
+			type : "@"
 		},
 		link : function(scope){
+
+			console.log(scope.data.type)
 
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			if(card.type == "listen_blog"){
+				card.type  = "blog"
+				card.category = {
+					slug: "listen",
+					title: "Listen"
+				}
+			}
 
 			//Change type using data-type attribute
 			if(scope.type){
