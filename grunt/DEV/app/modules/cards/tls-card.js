@@ -4,7 +4,8 @@
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard",
-			type : "@"
+			type : "@",
+			home : "@"
 		},
 		link : function(scope){
 
@@ -125,6 +126,10 @@
 							card.excerpt = card.text[0]
 						}
 
+						//HACK FOR DEMO!!!!
+						if(card.section.name == 'Poems'){
+							card.section.name = "Poem of the week"
+						}
 
 					break;
 

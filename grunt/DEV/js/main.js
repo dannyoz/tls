@@ -28832,7 +28832,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
 				m        = date.getMonth(),
 				year     = date.getFullYear(),
-				niceDate = day + " " + months[m]+ " " + year;
+				niceDate = months[m]+ " " + day + " " + year;
 
 			return niceDate;
 		}
@@ -29017,7 +29017,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard",
-			type : "@"
+			type : "@",
+			home : "@"
 		},
 		link : function(scope){
 
@@ -29138,6 +29139,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 							card.excerpt = card.text[0]
 						}
 
+						//HACK FOR DEMO!!!!
+						if(card.section.name == 'Poems'){
+							card.section.name = "Poem of the week"
+						}
 
 					break;
 
