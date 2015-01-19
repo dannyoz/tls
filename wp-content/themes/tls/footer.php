@@ -35,7 +35,8 @@
 
 				$facebook_url = $theme_options_settings['facebook_url'];
 				$twitter_url = $theme_options_settings['twitter_url'];
-			
+				$classifieds_pdf = $theme_options_settings['classifieds_pdf'];
+
 				if ( $facebook_url != '' || $facebook_url != null ) { ?>
 					<li><a href="<?php echo $facebook_url; ?>"><i class="icon icon-facebook"></i></a></li>
 				<?php }
@@ -43,7 +44,11 @@
 				if ( $twitter_url != '' || $twitter_url != null ) { ?>
 					<li><a href="<?php echo $twitter_url ?>"><i class="icon icon-twitter"></i></a></li>
 				<?php }
-			
+
+				if ( $classifieds_pdf != '' || $classifieds_pdf != null ) { ?>
+					<li><a href="<?php echo $classifieds_pdf ?>">Classifieds</a></li>
+				<?php }
+
 			}
 		?>
 
