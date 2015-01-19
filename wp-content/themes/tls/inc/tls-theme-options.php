@@ -1,10 +1,51 @@
 <?php
 
 /*================================*
+ * Admin Scripts for Media Upload
+/*================================*/
+
+function tls_theme_options_scripts() {
+	wp_register_script( 'tls-upload', get_stylesheet_directory_uri() .'/js/tls-upload.js', array('jquery','media-upload','thickbox') );
+
+	if ( 'appearance_page_tls_theme_options' == get_current_screen() -> id ) {
+		wp_enqueue_script('jquery');
+
+		wp_enqueue_script('thickbox');
+		wp_enqueue_style('thickbox');
+
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('tls-upload');
+
+	}
+
+}
+add_action('admin_enqueue_scripts', 'tls_theme_options_scripts');
+
+function tls_options_setup() {
+	global $pagenow;
+
+	if ( 'media-upload.php' == $pagenow || 'async-upload.php' == $pagenow ) {
+		// Now we'll replace the 'Insert into Post Button' inside Thickbox
+		add_filter( 'gettext', 'tls_replace_thickbox_text'  , 1, 3 );
+	}
+}
+add_action( 'admin_init', 'tls_options_setup' );
+
+function tls_replace_thickbox_text($translated_text, $text, $domain) {
+	if ( 'Insert into Post'  == $text) {
+		$referer = strpos( wp_get_referer(), 'tls_theme_options' );
+		if ( $referer != '' ) {
+			return __('Select Classifieds PDF', 'tls' );
+		}
+	}
+	return $translated_text;
+}
+
+/*================================*
  * Menus
 /*================================*/
 
- /**
+/**
   * Add 'TLS Theme Options' as a top level menu page
   */
 function tls_theme_options_page() {
@@ -152,21 +193,21 @@ function tls_classifieds_pdf_display() {
 	$options = (array)get_option('theme_options_settings');
 	$classifieds_pdf = $options['classifieds_pdf'];
 	?>
-		<input type="text" id="theme_options_settings_classifieds_pdf" name="theme_options_settings[classifieds_pdf]" value="<?php echo esc_url( $classifieds_pdf ); ?>" />
-        <input id="upload_logo_button" type="button" class="button" value="<?php _e( 'Upload Classifieds', 'tls' ); ?>" />
+		<input type="text" id="classifieds_pdf_url" name="theme_options_settings[classifieds_pdf]" value="<?php echo esc_url( $classifieds_pdf ); ?>" />
+        <input id="upload_classifieds_button" type="button" class="button" value="<?php _e( 'Upload Classifieds', 'tls' ); ?>" />
         <span class="description"><?php _e('Upload a PDF File for the Classifieds.', 'tls' ); ?></span>
 <?php } // End of tls_classifieds_pdf_display
 
 /**
  * Sanitise all Options
- * @param  array 	$sm_options 		The array of options to sanitise
+ * @param  array 	$theme_options 		The array of options to sanitise
  * @return array 	$sanitised_options	The array of sanitised options
  */
-function tls_sanitise_theme_options( $sm_options ) {
+function tls_sanitise_theme_options( $theme_options ) {
 
 	$sanitised_options = array();
 
-	foreach ($sm_options as $option_key => $option_value) {
+	foreach ($theme_options as $option_key => $option_value) {
 		$sanitised_options[ $option_key ] = strip_tags( stripslashes( $option_value ) );
 	} // end foreach
 
