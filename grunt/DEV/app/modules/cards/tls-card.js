@@ -8,10 +8,20 @@
 		},
 		link : function(scope){
 
+			console.log(scope.data.type)
+
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			if(card.type == "listen_blog"){
+				card.type  = "blog"
+				card.category = {
+					slug: "listen",
+					title: "Listen"
+				}
+			}
 
 			//Change type using data-type attribute
 			if(scope.type){
@@ -118,7 +128,17 @@
 									card.image_url = card.image[0];
 								}								
 							}
-						}	
+						}
+
+						//Excerpt
+						if(!card.excerpt && card.text){
+							card.excerpt = card.text[0]
+						}
+
+						//HACK FOR DEMO!!!!
+						if(card.section.name == 'Poems'){
+							card.section.name = "Poem of the week"
+						}
 
 					break;
 

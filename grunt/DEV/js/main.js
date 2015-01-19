@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog' || data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
   );
 
 
@@ -28832,7 +28832,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
 				m        = date.getMonth(),
 				year     = date.getFullYear(),
-				niceDate = day + " " + months[m]+ " " + year;
+				niceDate = months[m]+ " " + day + " " + year;
 
 			return niceDate;
 		}
@@ -29021,10 +29021,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		},
 		link : function(scope){
 
+			console.log(scope.data.type)
+
 			scope.sce = $sce;
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			if(card.type == "listen_blog"){
+				card.type  = "blog"
+				card.category = {
+					slug: "listen",
+					title: "Listen"
+				}
+			}
 
 			//Change type using data-type attribute
 			if(scope.type){
@@ -29131,7 +29141,17 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 									card.image_url = card.image[0];
 								}								
 							}
-						}	
+						}
+
+						//Excerpt
+						if(!card.excerpt && card.text){
+							card.excerpt = card.text[0]
+						}
+
+						//HACK FOR DEMO!!!!
+						if(card.section.name == 'Poems'){
+							card.section.name = "Poem of the week"
+						}
 
 					break;
 
