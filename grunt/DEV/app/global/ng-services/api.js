@@ -47,9 +47,6 @@
 
 			//expose url for testing
 			defer.promise.url = url
-
-			console.log(url)
-
 			$http.get(url).success(function (data){
 
 				//simulate server delay
@@ -84,9 +81,6 @@
 					defer.resolve(data)
 				},delay)
 			})
-
-			console.log(path+prefix+query+filt+order+dateRange)
-
 			return defer.promise
 		
 		},

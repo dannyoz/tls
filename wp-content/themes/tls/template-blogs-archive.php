@@ -70,7 +70,7 @@ get_header(); ?>
 
 				<p class="centred futura">{{loadMsg}}</p>
 				<div tls-loading="infLoading"></div>
-				<button class="clear centre" ng-if="!infinite && pageCount > 1" ng-click="loadMore();">
+				<button class="clear centre" ng-if="!infinite && pageCount > 1" ng-click="loadMore();tealium.engagement('load more');">
 					Load more <i class="icon icon-plus"></i>
 				</button>
 			</div>

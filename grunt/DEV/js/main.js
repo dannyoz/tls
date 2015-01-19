@@ -28666,9 +28666,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			//expose url for testing
 			defer.promise.url = url
-
-			console.log(url)
-
 			$http.get(url).success(function (data){
 
 				//simulate server delay
@@ -28703,9 +28700,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					defer.resolve(data)
 				},delay)
 			})
-
-			console.log(path+prefix+query+filt+order+dateRange)
-
 			return defer.promise
 		
 		},
@@ -28856,7 +28850,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 })
 .factory('tealium',function(){
 
-	
 	var utagView = function utagView(tags) {
 		try {
 			if(utag) {
@@ -28923,18 +28916,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 	return{
+		
 		debugBar : debugBar,
-		test : function(val1,val2,val3,val4){
-
-			var tags = {
-				"key1" : val1,
-				"key2" : val2,
-				"key3" : val3,
-				"key4" : val4
-			}
-
-			return tags
-		},
 		socialLink : function(platform){
 
 			var tags = {
@@ -28949,11 +28932,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			return tags
 		},
-		loadMore : function (){
+		engagement : function (name){
 
 			var tags = {
 				"event_engagement_action" : "engagement",
-				"event_engagement_name" : "load more",
+				"event_engagement_name" : name,
 				"event_engagement_browsing_method" : "click"
 			}
 
@@ -28961,6 +28944,155 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			utagLink(tags);
 
 			return tags
+		},
+		exitLink : function(platform){
+
+			var tags = {
+				"event_navigation_action" : "engagement",
+				"event_navigation_name" : "exit link:" + platform,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		subscribe : function(location){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "subscribe:" + location,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		viewEdition  :function (){
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "view edition",
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		paging : function (dir,title){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : dir +":"+ title,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		relatedTag : function (name) {
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "tag:"+ name,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		sortOrder : function (order){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "sort by:" + order,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		filtering : function(state,category,filter){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "search filters:"+state+":"+category+":"+filter,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		archive : function(){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "footer:archive",
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		classified : function(filename){
+
+			var tags = {
+				"event_engagement_action" : "engagement",
+				"event_engagement_name" : "classifieds:" + filename,
+				"event_engagement_browsing_method" : "click",
+				"event_download_action" :"download",
+				"event_download_name" : "classifieds:" + filename
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		emailLink : function(address){
+
+			var tags = {
+				"event_engagement_action" : "engagement",
+				"event_engagement_name" : "mailto:" + address,
+				"event_engagement_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		cardLink : function(category,title,availabilty){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "widget:"+category+":"+title,
+				"event_navigation_browsing_method" : "click",
+				"page_restrictions" : availabilty
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
 		}
 	}
 })
@@ -29519,6 +29651,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	$scope.scrollState = "off";
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
+	$scope.tealium     = tealium;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();
@@ -29583,8 +29716,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				$scope.loadMsg = "End of results in " + $scope.title;
 			});
 		}
-
-		tealium.loadMore();
 	}
 
 }])
@@ -29620,7 +29751,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		} 
 	}
 })
-.controller('discover',['$scope','$sce','api','columns',function ($scope,$sce,api,columns){
+.controller('discover',[
+	'$scope',
+	'$sce',
+	'api',
+	'columns',
+	'tealium',
+	function ($scope,$sce,api,columns,tealium){
 
 	var url = window.location.href;
 
@@ -29632,6 +29769,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
 	$scope.mpuPosition = 4;
+	$scope.tealium     = tealium;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();
@@ -29740,11 +29878,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'mpu',
 	'columns',
 	'objToArr',
-	function ($scope, $sce, api, mpu, columns, objToArr){
+	'tealium',
+	function ($scope, $sce, api, mpu, columns, objToArr, tealium){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
-	$scope.cards = ""
+	$scope.cards   = ""
+	$scope.tealium = tealium;
 
 	api.getHomePage(url).then(function (result){
 
@@ -29776,6 +29916,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.formatEmbed = function(html) {
 		return $sce.trustAsHtml(html);
+	}
+
+	$scope.subscribe = function(){
+		tealium.subscribe('subscriber exclusive box');
 	}
 
 }])

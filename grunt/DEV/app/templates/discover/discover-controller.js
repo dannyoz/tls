@@ -1,4 +1,10 @@
-.controller('discover',['$scope','$sce','api','columns',function ($scope,$sce,api,columns){
+.controller('discover',[
+	'$scope',
+	'$sce',
+	'api',
+	'columns',
+	'tealium',
+	function ($scope,$sce,api,columns,tealium){
 
 	var url = window.location.href;
 
@@ -10,6 +16,7 @@
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
 	$scope.mpuPosition = 4;
+	$scope.tealium     = tealium;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();

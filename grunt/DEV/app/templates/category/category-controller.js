@@ -19,6 +19,7 @@
 	$scope.scrollState = "off";
 	$scope.infinite    = false;
 	$scope.loadMsg     = "";
+	$scope.tealium     = tealium;
 
 	$scope.$on('loadNext',function(){
 		$scope.loadMore();
@@ -83,8 +84,6 @@
 				$scope.loadMsg = "End of results in " + $scope.title;
 			});
 		}
-
-		tealium.loadMore();
 	}
 
 }])

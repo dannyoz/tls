@@ -6,7 +6,7 @@ describe('niceDate', function() {
 
         var date    = "2014-12-02 10:32:36",
             test    = niceDate.format(date),
-            conv    = "2 DECEMBER 2014",
+            conv    = "DECEMBER 2 2014",
             match   = (test.indexOf(conv) > -1 && conv.length == test.length) ? true : false;
 
         expect(typeof test).toBe("string");

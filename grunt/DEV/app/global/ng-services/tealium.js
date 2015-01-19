@@ -1,6 +1,5 @@
 .factory('tealium',function(){
 
-	
 	var utagView = function utagView(tags) {
 		try {
 			if(utag) {
@@ -67,18 +66,8 @@
 	}
 
 	return{
+		
 		debugBar : debugBar,
-		test : function(val1,val2,val3,val4){
-
-			var tags = {
-				"key1" : val1,
-				"key2" : val2,
-				"key3" : val3,
-				"key4" : val4
-			}
-
-			return tags
-		},
 		socialLink : function(platform){
 
 			var tags = {
@@ -93,11 +82,11 @@
 
 			return tags
 		},
-		loadMore : function (){
+		engagement : function (name){
 
 			var tags = {
 				"event_engagement_action" : "engagement",
-				"event_engagement_name" : "load more",
+				"event_engagement_name" : name,
 				"event_engagement_browsing_method" : "click"
 			}
 
@@ -105,6 +94,155 @@
 			utagLink(tags);
 
 			return tags
+		},
+		exitLink : function(platform){
+
+			var tags = {
+				"event_navigation_action" : "engagement",
+				"event_navigation_name" : "exit link:" + platform,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		subscribe : function(location){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "subscribe:" + location,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		viewEdition  :function (){
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "view edition",
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		paging : function (dir,title){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : dir +":"+ title,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		relatedTag : function (name) {
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "tag:"+ name,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		sortOrder : function (order){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "sort by:" + order,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		filtering : function(state,category,filter){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "search filters:"+state+":"+category+":"+filter,
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+		},
+		archive : function(){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "footer:archive",
+				"event_navigation_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		classified : function(filename){
+
+			var tags = {
+				"event_engagement_action" : "engagement",
+				"event_engagement_name" : "classifieds:" + filename,
+				"event_engagement_browsing_method" : "click",
+				"event_download_action" :"download",
+				"event_download_name" : "classifieds:" + filename
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		emailLink : function(address){
+
+			var tags = {
+				"event_engagement_action" : "engagement",
+				"event_engagement_name" : "mailto:" + address,
+				"event_engagement_browsing_method" : "click"
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
+		cardLink : function(category,title,availabilty){
+
+			var tags = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "widget:"+category+":"+title,
+				"event_navigation_browsing_method" : "click",
+				"page_restrictions" : availabilty
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
 		}
 	}
 })

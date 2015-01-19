@@ -5,11 +5,13 @@
 	'mpu',
 	'columns',
 	'objToArr',
-	function ($scope, $sce, api, mpu, columns, objToArr){
+	'tealium',
+	function ($scope, $sce, api, mpu, columns, objToArr, tealium){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
-	$scope.cards = ""
+	$scope.cards   = ""
+	$scope.tealium = tealium;
 
 	api.getHomePage(url).then(function (result){
 
@@ -41,6 +43,10 @@
 
 	$scope.formatEmbed = function(html) {
 		return $sce.trustAsHtml(html);
+	}
+
+	$scope.subscribe = function(){
+		tealium.subscribe('subscriber exclusive box');
 	}
 
 }])

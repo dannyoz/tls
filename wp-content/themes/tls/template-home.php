@@ -120,7 +120,7 @@ get_header(); ?>
 				<?php endif; ?>
 
 				<div class="cta-buttons">
-					<button class="button subscribe">Subcribe</button>
+					<button class="button subscribe" ng-click="subscribe();">Subcribe</button>
 					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
 				</div>
 
@@ -147,7 +147,7 @@ get_header(); ?>
 								<p>
 									<?php the_field( 'this_weeks_text' ); ?>
 								</p>
-								<a href="<?php the_field( 'this_weeks_link_to_page' ) ?>"><button><?php _e( 'View edition', 'tls'); ?></button></a>
+								<a ng-click="tealium.viewEdition();" href="<?php the_field( 'this_weeks_link_to_page' ) ?>"><button><?php _e( 'View edition', 'tls'); ?></button></a>
 							</div>
 
 							<div class="grid-6">
