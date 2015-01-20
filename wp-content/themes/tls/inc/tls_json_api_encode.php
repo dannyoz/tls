@@ -30,6 +30,20 @@ function tls_json_api_encode($response) {
 				'title'	=> $next_post->post_title
 			);
 		}
+
+		/**
+		 * Change Content Length For Private Articles with Akamai Teaser View set true
+		 */
+		if ( $response['post']->type == 'tls_articles' && $response['post']->taxonomy_article_visibility[0]->slug == 'private' ) {
+			$url = parse_str( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY ), $urlQuery );
+
+			if ( isset( $urlQuery['akamai-teaser'] ) && $urlQuery['akamai-teaser'] == 'true' ) {
+				$article_post = get_post( $response['post']->id );
+				$response['post']->akamai_teaser = true;
+				$response['post']->content = tls_limit_content( $article_post->post_content, 150 );
+			}
+		}
+
 	}
 
 	/**

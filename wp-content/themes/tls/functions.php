@@ -302,3 +302,45 @@ function tls_make_post_excerpt( $post, $word_length = 55 ){
 	$text           = wp_trim_words( $text, $excerpt_length, '' );
 	return $text;
 }
+
+/**
+ * Limit Excerpt but maintain styling tags
+ * Inspired from https://wordpress.org/support/topic/how-to-limit-characters-in-content
+ *
+ * @param text
+ * @param $num
+ * @return mixed $content
+ */
+function tls_limit_excerpt( $text, $num) {
+	$theContent = $text;
+	$output = preg_replace('/<img[^>]+./','', $theContent);
+	$output = preg_replace( '/<blockquote>.*<\/blockquote>/', '', $output );
+	$output = preg_replace( '|\[(.+?)\](.+?\[/\\1\])?|s', '', $output );
+	$limit = $num+1;
+	$content = explode(' ', $output, $limit);
+	array_pop($content);
+	$content = implode(" ",$content)."...";
+	return $content;
+}
+
+/**
+ * Limit the content length
+ * Inspired from http://bavotasan.com/2009/limiting-the-number-of-words-in-your-excerpt-or-content-in-wordpress/
+ *
+ * @param $text
+ * @param $limit
+ * @return mixed
+ */
+function tls_limit_content( $text, $limit) {
+	$content = explode(' ', $text, $limit);
+	if (count($content)>=$limit) {
+		array_pop($content);
+		$content = implode(" ",$content).'...';
+	} else {
+		$content = implode(" ",$content);
+	}
+	$content = preg_replace('/\[.+\]/','', $content);
+	$content = apply_filters('the_content', $content);
+	$content = str_replace(']]>', ']]&gt;', $content);
+	return $content;
+}
