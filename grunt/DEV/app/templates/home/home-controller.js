@@ -49,4 +49,8 @@
 		tealium.subscribe('subscriber exclusive box');
 	}
 
+	$scope.login = function(){
+		tealium.user('login');
+	}
+
 }])

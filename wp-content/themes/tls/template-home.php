@@ -121,7 +121,7 @@ get_header(); ?>
 
 				<div class="cta-buttons">
 					<button class="button subscribe" ng-click="subscribe();">Subcribe</button>
-					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
+					<button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button>
 				</div>
 
 			</div>

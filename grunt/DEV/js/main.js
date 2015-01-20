@@ -28580,7 +28580,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
     "<ul class=pagination><li ng-if=\"config.currentPage>1\"><a ng-click=switchPage(config.currentPage-1)>Prev</a></li><li class=desktop-only ng-if=\"config.currentPage>1\">...</li><li class=desktop-only ng-if=\"config.currentPage-2>0\"><a ng-click=switchPage(config.currentPage-2)>{{config.currentPage-2}}</a></li><li class=desktop-only ng-if=\"config.currentPage-1>0\"><a ng-click=switchPage(config.currentPage-1)>{{config.currentPage-1}}</a></li><li class=current><a ng-click=switchPage(config.currentPage)>{{config.currentPage}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+1) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+1)>{{config.currentPage+1}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+2) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+2)>{{config.currentPage+2}}</a></li><li class=desktop-only ng-if=\"config.currentPage < config.pageCount\">...</li><li ng-if=\"config.currentPage < config.pageCount\"><a ng-click=switchPage(config.currentPage+1)>Next</a></li></ul>"
   );
 }])
-.controller('header',['$scope', function ($scope){
+.controller('footer',['$scope','tealium', function ($scope, tealium){
+
+	$scope.tealium = tealium;
+
+	$scope.classifieds = function(pdf){
+		tealium.classified(pdf);
+	}
+
+}])
+.controller('header',['$scope','tealium', function ($scope,tealium){
 
 	$scope.ready       = true
 	$scope.hint        = false
@@ -28598,6 +28607,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.hint = true
 		$scope.placeholder = ''; 
 		$scope.focus = true
+	}
+
+	$scope.subscribe = function(){
+		tealium.subscribe('header');
+	}
+
+	$scope.login = function(){
+		tealium.user('login');
 	}
 	
 }])
@@ -28918,6 +28935,33 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	return{
 
 		debugBar : debugBar,
+		user : function (action){
+
+			if(action == "login"){
+
+				var tags = {
+					"event_navigation_action" : "navigation",
+					"event_navigation_name" : action,
+					"event_navigation_browsing_method" : "click",
+					"page_name" : utag_data.page_name
+				}
+
+			}
+
+			if(action == "logout"){
+
+				var tags = {
+					"event_registration_action" : "logout success",
+					"page_name" : utag_data.page_name
+				}
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
 		socialLink : function(platform){
 
 			var tags = {
@@ -29945,6 +29989,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.subscribe = function(){
 		tealium.subscribe('subscriber exclusive box');
+	}
+
+	$scope.login = function(){
+		tealium.user('login');
 	}
 
 }])
