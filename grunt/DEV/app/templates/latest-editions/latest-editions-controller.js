@@ -1,9 +1,18 @@
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
-
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
+.controller('latesteditions',[
+	'$scope', 
+	'$sce',
+	'$location',
+	'$timeout',
+	'api',
+	'columns',
+	'niceDate', 
+	'objToArr',
+	'tealium',
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr, tealium) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
+		$scope.tealium = tealium;
 		var path = window.location.href;
 
 		// Set scope variables of Current Edition
@@ -68,7 +77,7 @@
 		});
 
 
-		$scope.chooseEdition = function(dir, path){
+		$scope.chooseEdition = function(dir, path, title){
 
 			//Only turn page if path is defined
 			if (path) {
@@ -91,6 +100,8 @@
 							$scope.pageTurn = false;
 						},duration);
 
+						tealium.paging('previous edition',title);
+
 					} else {
 
 						$scope.oldPost  = result;						
@@ -98,9 +109,12 @@
 							$scope.pageTurn = false;
 							$scope.setCurrentEditionObj(result);
 						},duration);
+
+						tealium.paging('next edition',title);
 					}					
 
 				})
+
 			}
 		}
 }])

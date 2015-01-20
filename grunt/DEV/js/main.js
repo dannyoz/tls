@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}}>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog' || data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}}>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}}>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog' || data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
   );
 
 
@@ -28880,7 +28880,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				elem = angular.element(body),
 				coms = "Comic Sans MS",
 				pop  = '<div id="tealium-debug" class="centre" style="border-radius:40px;background:white;z-index:9999;padding:50px;box-shadow:0 0 100px rgba(0,0,0,0.9);width:700px;font-size:14px;font-family:'+coms+'">' +
-							'<h2 style="color:blue">Tealium debugger</h2>' +
+							'<h2 style="color:blue;font-family:'+coms+'">Tealium debugger</h2>' +
 							'<p style="color:red">Method : '+method+'</p>' +
 							'<ul id="telium-tags">' +
 							'<li class="grid-row" style="background:#e9e9e9;padding:10px;"><span class="grid-6">Variable</span><span class="grid-6">Value</span></li>' +
@@ -28916,7 +28916,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 	return{
-		
+
 		debugBar : debugBar,
 		socialLink : function(platform){
 
@@ -29024,12 +29024,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		},
 		filtering : function(state,category,filter){
 
-			var tags = {
+      			var tags = {
 				"event_navigation_action" : "navigation",
 				"event_navigation_name" : "search filters:"+state+":"+category+":"+filter,
 				"event_navigation_browsing_method" : "click"
 			}
-
+ 
 			//debugBar(tags, 'Link');
 			utagLink(tags);
 
@@ -29143,7 +29143,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 	}
 })
-.directive('tlsCard',['$sce',function ($sce) {
+.directive('tlsCard',['$sce','tealium',function ($sce,tealium) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -29152,8 +29152,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			type : "@"
 		},
 		link : function(scope){
-
-			console.log(scope.data.type)
 
 			scope.sce = $sce;
 			var card = scope.data;	
@@ -29166,6 +29164,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					slug: "listen",
 					title: "Listen"
 				}
+			}
+
+			if(card.type == "tls_articles"){
+				card.type  = "article"
 			}
 
 			//Change type using data-type attribute
@@ -29304,6 +29306,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				}		
 
 			}(card);
+
+			scope.tealiumTag = function(card){
+
+				var cat   = (card.section) ? card.section.name : card.category.title,
+					title = card.title,
+					state = (card.taxonomy_article_visibility) ? card.taxonomy_article_visibility[0].name : "Public",
+					restr = (state == "Public") ? "public" : "restricted";
+
+				tealium.cardLink(cat,title,restr);
+			}
 		}
 	}
 }])
@@ -29478,6 +29490,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		return niceDate.format(date);
 	}
 
+	$scope.printPage = function(){
+
+		if(window.print){
+			window.print();
+			tealium.engagement('print');
+		}
+		
+	}
+
 	$scope.emailLink = function(){
 
 		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
@@ -29500,7 +29521,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	}
 
-	$scope.chooseArticle = function(dir,path){
+	$scope.chooseArticle = function(dir,path,pageTitle){
 
 		//Only turn page if path is defined an turn var is set to true
 		if(path && $scope.turn){
@@ -29529,6 +29550,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						$scope.pageTurn = false
 					},duration);
 
+					tealium.paging('previous article',pageTitle);
+
 					
 				}
 
@@ -29544,6 +29567,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						$scope.prev     = result.previous_url
 						$scope.next     = result.next_url
 					},duration)
+
+					tealium.paging('next article',pageTitle);
 
 				}
 
@@ -29923,12 +29948,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 }])
-.controller('latesteditions',['$scope', '$sce','$location','$timeout','api','columns','niceDate', 'objToArr',
-
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr) {
+.controller('latesteditions',[
+	'$scope', 
+	'$sce',
+	'$location',
+	'$timeout',
+	'api',
+	'columns',
+	'niceDate', 
+	'objToArr',
+	'tealium',
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr, tealium) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
+		$scope.tealium = tealium;
 		var path = window.location.href;
 
 		// Set scope variables of Current Edition
@@ -29993,7 +30027,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		});
 
 
-		$scope.chooseEdition = function(dir, path){
+		$scope.chooseEdition = function(dir, path, title){
 
 			//Only turn page if path is defined
 			if (path) {
@@ -30016,6 +30050,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 							$scope.pageTurn = false;
 						},duration);
 
+						tealium.paging('previous edition',title);
+
 					} else {
 
 						$scope.oldPost  = result;						
@@ -30023,13 +30059,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 							$scope.pageTurn = false;
 							$scope.setCurrentEditionObj(result);
 						},duration);
+
+						tealium.paging('next edition',title);
 					}					
 
 				})
+
 			}
 		}
 }])
-.controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
+.controller('search',[
+	"$scope",
+	'$sce',
+	'$timeout',
+	'api',
+	'niceDate',
+	'tealium', 
+	function ($scope,$sce,$timeout,api,niceDate,tealium) {
 
 	//Set default vars
 	var url = window.location.href;
@@ -30093,9 +30139,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.contentFilter = function(term,query,key,type){
 
-		console.log(term,query,key)
+		console.log(type)
 
-		var list = (type == 'content') ? $scope.contentType : $scope.sections
+		var list = (type == 'content') ? $scope.contentType : $scope.sections,
+			typeName = (type == 'content') ? 'content type' : type;
 
 		if(query){
 
@@ -30104,9 +30151,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			if(index == -1){
 				$scope.filters.push(query)
 				list[key].isApplied = true
+				tealium.filtering('add',typeName,term);
 			} else {
 				$scope.filters.splice(index,1)
 				list[key].isApplied = false
+				tealium.filtering('remove',typeName,term);
 			}
 
 			$scope.loadResults = true
@@ -30139,9 +30188,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		if($this.isApplied){
 			$scope.dateRange = "";
 			$scope.clearable = false
+			tealium.filtering('remove','date',range);
 		} else {
 			$scope.dateRange = range;
 			$scope.clearable = true
+			tealium.filtering('add','date',range);
 		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
@@ -30199,6 +30250,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					"dateRange"   : $scope.dateRange
 			}
 		})
+
+		tealium.sortOrder(orderName)
 	}
 
 	$scope.clearFilters = function(filters){

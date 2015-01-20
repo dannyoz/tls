@@ -2,13 +2,13 @@
 
 	<div ng-if="!loadingPg">
 
-		<div class="container relative" ng-swipe-right="chooseArticle('next',prev)" ng-swipe-left="chooseArticle('prev',next)">
+		<div class="container relative" ng-swipe-right="chooseArticle('next',prev,post.previous_post_info.title)" ng-swipe-left="chooseArticle('prev',next,post.next_post_info.title)">
 
 			<div class="article-current">
 
 				<div ng-if="post" class="col-wide share-bar">
 
-					<a href="javascript:if(window.print)window.print()" class="button clear small">
+					<a ng-click="printPage();" class="button clear small">
 						<span ng-if="size == 'desktop'">Print</span> 
 						<i class="icon icon-print"></i>
 					</a>
@@ -31,12 +31,12 @@
 
 			<div class="article-links">
 				<div class="inner">
-					<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('next',prev)" class="article-nav prev-article">
+					<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('next',prev,post.previous_post_info.title)" class="article-nav prev-article">
 						<div class="icon icon-left-arrow">
 							<span ng-bind-html="post.previous_post_info.title"></span>
 						</div>
 					</a>
-					<a href="javascript:;" ng-if="next" ng-click="chooseArticle('prev',next)" class="article-nav next-article">
+					<a href="javascript:;" ng-if="next" ng-click="chooseArticle('prev',next,post.next_post_info.title)" class="article-nav next-article">
 						<div class="icon icon-right-arrow">
 							<span ng-bind-html="post.next_post_info.title"></span>
 						</div>
@@ -95,7 +95,7 @@
 
 						<div ng-if="post" class="share-bar">
 
-							<a href="javascript:if(window.print)window.print()" class="button clear small">
+							<a ng-click="printPage();" class="button clear small">
 								Print 
 								<i class="icon icon-print"></i>
 							</a>
