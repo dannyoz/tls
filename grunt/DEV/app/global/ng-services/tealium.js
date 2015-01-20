@@ -30,7 +30,7 @@
 				elem = angular.element(body),
 				coms = "Comic Sans MS",
 				pop  = '<div id="tealium-debug" class="centre" style="border-radius:40px;background:white;z-index:9999;padding:50px;box-shadow:0 0 100px rgba(0,0,0,0.9);width:700px;font-size:14px;font-family:'+coms+'">' +
-							'<h2 style="color:blue">Tealium debugger</h2>' +
+							'<h2 style="color:blue;font-family:'+coms+'">Tealium debugger</h2>' +
 							'<p style="color:red">Method : '+method+'</p>' +
 							'<ul id="telium-tags">' +
 							'<li class="grid-row" style="background:#e9e9e9;padding:10px;"><span class="grid-6">Variable</span><span class="grid-6">Value</span></li>' +
@@ -66,7 +66,7 @@
 	}
 
 	return{
-		
+
 		debugBar : debugBar,
 		socialLink : function(platform){
 
@@ -174,12 +174,12 @@
 		},
 		filtering : function(state,category,filter){
 
-			var tags = {
+      			var tags = {
 				"event_navigation_action" : "navigation",
 				"event_navigation_name" : "search filters:"+state+":"+category+":"+filter,
 				"event_navigation_browsing_method" : "click"
 			}
-
+ 
 			//debugBar(tags, 'Link');
 			utagLink(tags);
 

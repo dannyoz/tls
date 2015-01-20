@@ -62,6 +62,15 @@
 		return niceDate.format(date);
 	}
 
+	$scope.printPage = function(){
+
+		if(window.print){
+			window.print();
+			tealium.engagement('print');
+		}
+		
+	}
+
 	$scope.emailLink = function(){
 
 		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
@@ -84,7 +93,7 @@
 
 	}
 
-	$scope.chooseArticle = function(dir,path){
+	$scope.chooseArticle = function(dir,path,pageTitle){
 
 		//Only turn page if path is defined an turn var is set to true
 		if(path && $scope.turn){
@@ -113,6 +122,8 @@
 						$scope.pageTurn = false
 					},duration);
 
+					tealium.paging('previous article',pageTitle);
+
 					
 				}
 
@@ -128,6 +139,8 @@
 						$scope.prev     = result.previous_url
 						$scope.next     = result.next_url
 					},duration)
+
+					tealium.paging('next article',pageTitle);
 
 				}
 

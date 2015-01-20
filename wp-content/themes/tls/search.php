@@ -29,7 +29,7 @@ get_header(); ?>
 						</h3>
 						<ul class="filters" ng-cloak>
 							<li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in contentType">
-								<a ng-click="contentFilter(val.slug,val.json_query,name,'content')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+								<a ng-click="contentFilter(val.item_label,val.json_query,name,'content')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
 							</li>
 						</ul>
 					</div>
@@ -49,7 +49,7 @@ get_header(); ?>
 						</h3>
 						<ul class="filters">
 							<li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in sections">
-								<a ng-click="contentFilter(val.slug,val.json_query,name,'category')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+								<a ng-click="contentFilter(val.item_label,val.json_query,name,'category')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
 							</li>
 						</ul>
 					</div>

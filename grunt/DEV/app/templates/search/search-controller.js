@@ -1,4 +1,11 @@
-.controller('search',["$scope",'$sce','$timeout','api','niceDate', function ($scope,$sce,$timeout,api,niceDate) {
+.controller('search',[
+	"$scope",
+	'$sce',
+	'$timeout',
+	'api',
+	'niceDate',
+	'tealium', 
+	function ($scope,$sce,$timeout,api,niceDate,tealium) {
 
 	//Set default vars
 	var url = window.location.href;
@@ -62,9 +69,10 @@
 
 	$scope.contentFilter = function(term,query,key,type){
 
-		console.log(term,query,key)
+		console.log(type)
 
-		var list = (type == 'content') ? $scope.contentType : $scope.sections
+		var list = (type == 'content') ? $scope.contentType : $scope.sections,
+			typeName = (type == 'content') ? 'content type' : type;
 
 		if(query){
 
@@ -73,9 +81,11 @@
 			if(index == -1){
 				$scope.filters.push(query)
 				list[key].isApplied = true
+				tealium.filtering('add',typeName,term);
 			} else {
 				$scope.filters.splice(index,1)
 				list[key].isApplied = false
+				tealium.filtering('remove',typeName,term);
 			}
 
 			$scope.loadResults = true
@@ -108,9 +118,11 @@
 		if($this.isApplied){
 			$scope.dateRange = "";
 			$scope.clearable = false
+			tealium.filtering('remove','date',range);
 		} else {
 			$scope.dateRange = range;
 			$scope.clearable = true
+			tealium.filtering('add','date',range);
 		}
 
 		angular.forEach($scope.dateRanges, function (obj,val){
@@ -168,6 +180,8 @@
 					"dateRange"   : $scope.dateRange
 			}
 		})
+
+		tealium.sortOrder(orderName)
 	}
 
 	$scope.clearFilters = function(filters){

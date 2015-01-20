@@ -1,4 +1,4 @@
-.directive('tlsCard',['$sce',function ($sce) {
+.directive('tlsCard',['$sce','tealium',function ($sce,tealium) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -7,8 +7,6 @@
 			type : "@"
 		},
 		link : function(scope){
-
-			console.log(scope.data.type)
 
 			scope.sce = $sce;
 			var card = scope.data;	
@@ -21,6 +19,10 @@
 					slug: "listen",
 					title: "Listen"
 				}
+			}
+
+			if(card.type == "tls_articles"){
+				card.type  = "article"
 			}
 
 			//Change type using data-type attribute
@@ -159,6 +161,16 @@
 				}		
 
 			}(card);
+
+			scope.tealiumTag = function(card){
+
+				var cat   = (card.section) ? card.section.name : card.category.title,
+					title = card.title,
+					state = (card.taxonomy_article_visibility) ? card.taxonomy_article_visibility[0].name : "Public",
+					restr = (state == "Public") ? "public" : "restricted";
+
+				tealium.cardLink(cat,title,restr);
+			}
 		}
 	}
 }])
