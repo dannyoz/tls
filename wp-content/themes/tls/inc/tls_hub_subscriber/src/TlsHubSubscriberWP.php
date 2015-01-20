@@ -1,8 +1,8 @@
-<?php namespace TlsHubSubscriber;
+<?php namespace Tls\TlsHubSubscriber;
 
-use TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
-use TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
-use TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
+use Tls\TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
+use Tls\TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
+use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
 
 class TlsHubSubscriberWP {
 

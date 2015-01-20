@@ -1,4 +1,4 @@
-<?php namespace TlsHubSubscriber;
+<?php namespace Tls\TlsHubSubscriber;
 
 /**
  * Implement a PuSHSubscriptionInterface.

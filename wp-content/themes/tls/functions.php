@@ -5,6 +5,8 @@
  * @package tls
  */
 
+require 'vendor/autoload.php';
+
 /**
  * Define Constants
  */
@@ -30,14 +32,14 @@ require_once TLS_TEMPLATE_DIR . '/inc/tls-taxonomies.php';
 /**
  *  Add Theme Options Page
  */
-require_once TLS_TEMPLATE_DIR . '/inc/ThemeOptions.php';
+//require_once TLS_TEMPLATE_DIR . '/inc/ThemeOptions.php';
 $TlsThemeOoptions = new Tls\ThemeOptions();
 
 /**
  * PuSHSubscriberWP - TLS Custom PubSubHubbub Integration
  */
-require_once TLS_TEMPLATE_DIR . '/inc/tls_hub_subscriber/src/TlsHubSubscriberWP.php';
-$TlsHubSubscriberWP = new TlsHubSubscriber\TlsHubSubscriberWP();
+//require_once TLS_TEMPLATE_DIR . '/inc/tls_hub_subscriber/src/TlsHubSubscriberWP.php';
+$TlsHubSubscriberWP = new Tls\TlsHubSubscriber\TlsHubSubscriberWP();
 
 
 /**

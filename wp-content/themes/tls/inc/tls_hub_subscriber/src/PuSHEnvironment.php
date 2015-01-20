@@ -1,4 +1,4 @@
-<?php namespace TlsHubSubscriber;
+<?php namespace Tls\TlsHubSubscriber;
 
 /**
  * Provide environmental functions to the PuSHSubscriber library.
