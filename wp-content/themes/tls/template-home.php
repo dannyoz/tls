@@ -95,7 +95,7 @@ get_header(); ?>
 							<div class="subscribe-grid">
 								<div class="card">
 									<?php if ( $subItemUrl ) : ?>
-										<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>" target="_self">
+										<a href="#" target="_self" ng-click="tealium.cardLink('subscriber exclusive','<?php echo $subItemTitle; ?>','restricted');">
 											<h3 class="futura"><?php echo $subItemTitle; ?></h3>
 										</a>
 									<?php else : ?>
