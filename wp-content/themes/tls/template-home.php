@@ -95,7 +95,7 @@ get_header(); ?>
 							<div class="subscribe-grid">
 								<div class="card">
 									<?php if ( $subItemUrl ) : ?>
-										<a href="<?php echo wp_strip_all_tags( $subItemUrl ); ?>" target="_self">
+										<a href="#" target="_self" ng-click="tealium.cardLink('subscriber exclusive','<?php echo $subItemTitle; ?>','restricted');">
 											<h3 class="futura"><?php echo $subItemTitle; ?></h3>
 										</a>
 									<?php else : ?>
@@ -121,7 +121,7 @@ get_header(); ?>
 
 				<div class="cta-buttons">
 					<button class="button subscribe" ng-click="subscribe();">Subcribe</button>
-					<button class="button clear login"><i class="icon icon-login"></i> Login</button>
+					<button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button>
 				</div>
 
 			</div>

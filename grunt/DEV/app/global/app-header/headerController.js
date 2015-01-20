@@ -1,4 +1,4 @@
-.controller('header',['$scope', function ($scope){
+.controller('header',['$scope','tealium', function ($scope,tealium){
 
 	$scope.ready       = true
 	$scope.hint        = false
@@ -16,6 +16,14 @@
 		$scope.hint = true
 		$scope.placeholder = ''; 
 		$scope.focus = true
+	}
+
+	$scope.subscribe = function(){
+		tealium.subscribe('header');
+	}
+
+	$scope.login = function(){
+		tealium.user('login');
 	}
 	
 }])

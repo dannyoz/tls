@@ -8,6 +8,30 @@ describe('Unit : tealium', function() {
 		page_section : "homepage", 
 		page_restrictions : "public" 
 	}
+
+	it('should report log in/out buttons correctly', inject(function (tealium){
+
+		var test = tealium.user('login'),
+
+        	expected = {
+				"event_navigation_action" : "navigation",
+				"event_navigation_name" : "login",
+				"event_navigation_browsing_method" : "click",
+				"page_name" : "homepage"
+			}
+
+		expect(test).toEqual(expected)
+
+		var test = tealium.user('logout'),
+
+        	expected = {
+				"event_registration_action" : "logout success",
+				"page_name" : "homepage"
+			}
+
+		expect(test).toEqual(expected)
+
+	}));
 	
     it('should report facebook shares correctly', inject(function (tealium){
 

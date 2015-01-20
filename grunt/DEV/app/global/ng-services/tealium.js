@@ -68,6 +68,33 @@
 	return{
 
 		debugBar : debugBar,
+		user : function (action){
+
+			if(action == "login"){
+
+				var tags = {
+					"event_navigation_action" : "navigation",
+					"event_navigation_name" : action,
+					"event_navigation_browsing_method" : "click",
+					"page_name" : utag_data.page_name
+				}
+
+			}
+
+			if(action == "logout"){
+
+				var tags = {
+					"event_registration_action" : "logout success",
+					"page_name" : utag_data.page_name
+				}
+			}
+
+			//debugBar(tags, 'Link');
+			utagLink(tags);
+
+			return tags
+
+		},
 		socialLink : function(platform){
 
 			var tags = {
