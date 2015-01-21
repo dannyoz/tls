@@ -1,6 +1,6 @@
 <section ng-controller="article">
 
-	<article class="single-post transition-2" ng-class="{show:ready}" ng-cloak>
+	<article class="single-post-template transition-2" ng-class="{show:ready}" ng-cloak>
 
 		<div ng-if="!loadingPg">
 
