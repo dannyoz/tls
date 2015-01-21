@@ -10,21 +10,23 @@
 	'tealium',
 	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
 
+	$scope.ready      = false;
 	$scope.tealium    = tealium;
 	$scope.loadingPg  = true;
 	$scope.sce        = $sce;
 	$scope.tags       = [];
 	$scope.activeTags = [];
-	$scope.turn       = true; 
+	$scope.turn       = false; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
 
-		$scope.post = result.post
-		$scope.prev = result.previous_url
-		$scope.next = result.next_url
+		$scope.post  = result.post
+		$scope.prev  = result.previous_url
+		$scope.next  = result.next_url
+		$scope.ready = true;
 
 		// Get related content
 		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){

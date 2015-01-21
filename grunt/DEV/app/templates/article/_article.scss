@@ -1,8 +1,13 @@
 
 
-.single-post{
+.single-post-template{
 
-	//padding:30px 0;
+	opacity:0;
+
+	&.show{
+
+		opacity: 1;
+	}
 
 	img.max {
 		width: 100%;

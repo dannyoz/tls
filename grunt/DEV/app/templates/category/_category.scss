@@ -31,5 +31,22 @@
 				size:1.2em;
 			}
 		}
+
+		@media screen and (max-width:$tablet){	
+			
+			p{
+				font-size: 1em;
+			}
+		}
+
+		@media screen and (max-width:$mobile){	
+			
+			padding-top:30px;
+			padding-bottom:20px;
+
+			p{
+				font-size: 0.85em;
+			}
+		}
 	}
 }
