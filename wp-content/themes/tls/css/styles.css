@@ -937,22 +937,58 @@ p.author, h4.author {
   transform: translateX(-50%);
 }
 
-/* line 9, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 7, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies {
+  background: black;
+  height: 0;
+  overflow: hidden;
+}
+/* line 13, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies .container {
+  position: relative;
+}
+/* line 18, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies p {
+  color: white;
+  letter-spacing: 0;
+  padding-right: 130px;
+  font-size: 0.9em;
+}
+/* line 26, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies p a {
+  color: #d73f2b;
+}
+/* line 31, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies .accept {
+  color: white;
+  right: 20px;
+  letter-spacing: 0;
+  font-size: 0.9em;
+  position: absolute;
+  right: 20px;
+  top: 3px;
+}
+/* line 46, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+#main-header #cookies.show {
+  height: auto;
+  padding: 10px 0;
+}
+/* line 55, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top .container {
   position: relative;
 }
-/* line 14, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 60, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand {
   padding: 30px 0;
   min-height: 50px;
 }
 @media screen and (max-width: 450px) {
-  /* line 14, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 60, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand {
     padding: 15px 0;
   }
 }
-/* line 23, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 69, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand #logo {
   display: block;
   float: left;
@@ -960,19 +996,19 @@ p.author, h4.author {
   margin-bottom: 0;
 }
 @media screen and (min-width: 451px) {
-  /* line 23, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 69, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand #logo {
     height: 60px;
     width: 106px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 35, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 81, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand #logo img {
     width: 60px;
   }
 }
-/* line 42, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 88, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .sub {
   margin-top: 1px;
   margin-bottom: 0;
@@ -982,7 +1018,7 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1.2em;
 }
-/* line 55, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 101, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .strap {
   margin-top: 3px;
   padding-right: 130px;
@@ -990,34 +1026,34 @@ p.author, h4.author {
   font-style: italic;
 }
 @media screen and (max-width: 700px) {
-  /* line 67, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 113, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub {
     font-size: 1em;
   }
-  /* line 71, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 117, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .strap {
     font-size: 0.8em;
   }
 }
 @media screen and (max-width: 620px) {
-  /* line 80, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 126, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub, #main-header #header-top #brand .strap {
     display: none;
   }
 }
-/* line 87, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 133, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user {
   right: 20px;
 }
-/* line 91, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 137, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet {
   width: 110px;
 }
-/* line 99, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 145, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet button:first-child {
   margin-bottom: 10px;
 }
-/* line 108, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 154, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav {
   height: 52px;
   position: relative;
@@ -1028,22 +1064,22 @@ p.author, h4.author {
   border-color: #d9d9d9;
 }
 @media screen and (max-width: 450px) {
-  /* line 116, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 162, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header nav .container {
     padding: 0;
   }
 }
-/* line 122, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 168, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .grid-row {
   position: relative;
   background-color: #f2f2f2;
 }
-/* line 128, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 174, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul {
   float: left;
   width: 50%;
 }
-/* line 133, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 179, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li {
   display: inline-block;
   float: left;
@@ -1052,13 +1088,13 @@ p.author, h4.author {
   height: 52px;
   overflow: hidden;
 }
-/* line 142, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 188, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li.current-menu-item a {
   -moz-box-shadow: inset 0 -4px 0 #e6e6e6;
   -webkit-box-shadow: inset 0 -4px 0 #e6e6e6;
   box-shadow: inset 0 -4px 0 #e6e6e6;
 }
-/* line 146, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 192, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a {
   text-align: center;
   display: block;
@@ -1072,18 +1108,18 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 162, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 208, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a:hover {
   text-decoration: none;
   -moz-box-shadow: inset 0 -4px 0 #d73f2b;
   -webkit-box-shadow: inset 0 -4px 0 #d73f2b;
   box-shadow: inset 0 -4px 0 #d73f2b;
 }
-/* line 169, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 215, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li:last-child a {
   border-right-width: 1px;
 }
-/* line 176, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 222, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search {
   float: left;
   width: 50%;
@@ -1095,7 +1131,7 @@ p.author, h4.author {
   -webkit-box-shadow: inset -1px 0 0 #d9d9d9;
   box-shadow: inset -1px 0 0 #d9d9d9;
 }
-/* line 186, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 232, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
@@ -1105,7 +1141,7 @@ p.author, h4.author {
   font-size: 0.9em;
   font-weight: bold;
 }
-/* line 200, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 246, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search input[type="text"], #main-header nav .search input[type="search"] {
   border: 0;
   background-color: #f2f2f2;
@@ -1118,7 +1154,7 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
-/* line 215, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 261, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper {
   position: absolute;
   top: 0;
@@ -1126,7 +1162,7 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 219, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 265, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper:before {
   height: 1px;
   background-color: #d9d9d9;
@@ -1139,7 +1175,7 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 229, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 275, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search button {
   position: absolute;
   top: 0;
@@ -1155,7 +1191,7 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
-/* line 244, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 290, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint {
   position: absolute;
   top: 52px;
@@ -1163,13 +1199,13 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 248, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 294, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint p {
   padding: 0 70px 0 20px;
   font-size: 0.9em;
   letter-spacing: 0;
 }
-/* line 256, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 302, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .open-search {
   z-index: 9999;
   cursor: pointer;
@@ -1179,24 +1215,24 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 266, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 312, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet ul {
   width: 82%;
 }
-/* line 272, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 318, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search {
   position: absolute;
   right: 0;
   width: 18%;
   left: 82%;
 }
-/* line 279, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 325, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search.open {
   left: 1px;
   right: 0;
   width: auto;
 }
-/* line 290, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 336, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile ul {
   width: auto;
   position: absolute;
@@ -1205,29 +1241,29 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 295, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 341, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search {
   position: absolute;
   right: 0;
   width: 50px;
 }
-/* line 301, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 347, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search.open {
   width: 100%;
 }
-/* line 308, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 354, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting {
   height: 95px;
 }
-/* line 312, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 358, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li {
   height: 95px;
 }
-/* line 316, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 362, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li a {
   height: 95px;
 }
-/* line 323, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 369, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting .search {
   height: 95px;
 }
@@ -1472,31 +1508,42 @@ p.author, h4.author {
   padding-left: 5px;
 }
 
-/* line 7, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 3, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post {
+  opacity: 0;
+}
+/* line 9, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post.show {
+  opacity: 1;
+}
+/* line 14, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post img.max {
+  width: 100%;
+}
+/* line 18, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post article .container {
   overflow: hidden;
 }
-/* line 12, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 23, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding: 30px 0;
 }
-/* line 17, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 27, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar a {
   margin-left: 10px;
 }
-/* line 21, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 31, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar a:first-child {
   margin-left: 0;
 }
-/* line 27, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 37, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .share-bar .commentlink {
   float: right;
   margin-top: -5px;
   font-weight: 500;
   text-transform: uppercase;
 }
-/* line 36, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 46, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .col-wide {
   margin-left: 25.625%;
   float: left;
@@ -1505,7 +1552,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
-  /* line 36, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 46, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .col-wide {
     margin-left: 8.54167%;
     float: left;
@@ -1514,11 +1561,11 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 47, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 57, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner {
   position: relative;
 }
-/* line 51, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 61, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner:before, .single-post .folded-corner:after {
   display: block;
   position: absolute;
@@ -1526,14 +1573,14 @@ p.author, h4.author {
   right: 0;
   content: "";
 }
-/* line 60, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .folded-corner:before {
   border-top: solid 15px #fff;
   border-right: solid 15px #fff;
   border-left: solid 15px transparent;
   border-bottom: solid 15px transparent;
 }
-/* line 68, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 78, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-section {
   color: #d73f2b;
   padding: 12px 0;
@@ -1542,13 +1589,14 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 76, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 86, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-date {
   text-align: right;
   float: right;
   color: #706d73;
+  font-weight: 300;
 }
-/* line 83, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 94, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
@@ -1560,95 +1608,112 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 0;
 }
-/* line 92, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 103, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body h2 {
   font-size: 48px;
-  line-height: 60px;
+  line-height: 50px;
   margin-bottom: 10px;
   font-family: "Times New Roman", "Times", serif;
 }
 @media (max-width: 450px) {
-  /* line 92, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 103, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body h2 {
     font-size: 22px;
     line-height: 27px;
   }
 }
-/* line 107, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 118, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .body-copy h2, .single-post .article-body .body-copy h3, .single-post .article-body .body-copy h4, .single-post .article-body .body-copy h5, .single-post .article-body .body-copy h6 {
   font-size: 30px;
 }
-/* line 113, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 124, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body p {
   font-size: 20px;
   font-family: "Times New Roman", "Times", serif;
   line-height: 32px;
 }
-/* line 123, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 134, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol, .single-post .article-body ul {
   margin-bottom: 2em;
   padding-left: 20px;
 }
-/* line 128, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li, .single-post .article-body ul li {
   line-height: 1.6em;
 }
-/* line 134, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 145, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ol li {
   list-style-type: decimal;
 }
-/* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 150, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body ul li {
   list-style: initial;
 }
-/* line 144, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 155, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body blockquote {
   margin: 0 -13% 1em -13%;
   text-align: center;
 }
-/* line 150, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 161, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img {
   max-width: 100%;
+  margin: 20px 0;
 }
-/* line 154, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 166, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body img.right {
   float: right;
   margin: 0 -13% 0 1em;
 }
-/* line 161, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 173, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .author {
   font-weight: 500;
   margin-bottom: 0;
 }
-/* line 166, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 178, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-meta {
   margin-bottom: 20px;
 }
-/* line 170, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 182, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary {
   background-color: #f2f2f2;
   margin-bottom: 20px;
-}
-/* line 175, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.single-post .article-body .article-summary p {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 16px;
   line-height: 26px;
 }
-/* line 181, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 190, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-body .article-summary .inner {
   padding: 20px 15px;
-  width: 50%;
   line-height: 30px;
 }
+/* line 194, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post .article-body .article-summary .inner .book-title {
+  font-weight: bold;
+  color: #706d73;
+}
+/* line 199, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post .article-body .article-summary .inner .summary-top,
+.single-post .article-body .article-summary .inner .summary-bottom {
+  width: 70%;
+}
 @media (max-width: 450px) {
-  /* line 181, ../../../../grunt/DEV/app/templates/article/_article.scss */
-  .single-post .article-body .article-summary .inner {
+  /* line 199, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post .article-body .article-summary .inner .summary-top,
+  .single-post .article-body .article-summary .inner .summary-bottom {
     width: 80%;
   }
 }
+/* line 208, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post .article-body .article-summary .inner .summary-top {
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 10px;
+}
+/* line 213, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post .article-body .article-summary .inner .summary-bottom {
+  padding-top: 10px;
+}
 @media screen and (max-width: 920px) {
-  /* line 83, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 94, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body {
     margin-left: 17.08333%;
     float: left;
@@ -1658,7 +1723,7 @@ p.author, h4.author {
   }
 }
 @media screen and (max-width: 840px) {
-  /* line 83, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 94, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body {
     margin-left: 8.54167%;
     float: left;
@@ -1666,26 +1731,26 @@ p.author, h4.author {
     width: 82.91667%;
     margin-right: 0;
   }
-  /* line 205, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 232, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body blockquote {
     text-align: left;
     margin-right: 0;
     margin-left: 0;
   }
-  /* line 212, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 239, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img {
     margin-left: 0;
   }
-  /* line 216, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 243, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post .article-body img.right {
     margin-right: 0;
   }
 }
-/* line 225, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 252, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current {
   background-color: white;
 }
-/* line 229, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 256, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1696,7 +1761,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
 }
-/* line 235, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 262, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold {
   display: none;
   background-color: white;
@@ -1707,7 +1772,7 @@ p.author, h4.author {
   bottom: 0;
   left: 20px;
 }
-/* line 242, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 269, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnleft {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1720,7 +1785,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 250, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 277, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post .fold.turnright {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1734,54 +1799,54 @@ p.author, h4.author {
   animation-duration: 0.4s;
 }
 
-/* line 259, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 286, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links {
   position: relative;
   z-index: 9999;
   min-height: 30px;
 }
-/* line 265, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 292, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links a {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 @media (max-width: 840px) {
-  /* line 259, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 286, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links {
     overflow: hidden;
     padding: 15px 60px;
   }
 }
 @media (max-width: 450px) {
-  /* line 275, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 302, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .inner {
     padding: 0 20px;
   }
 }
-/* line 281, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 308, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav {
   width: 20%;
 }
 @media (max-width: 840px) {
-  /* line 281, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 308, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav {
     width: 25%;
   }
 }
-/* line 289, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 316, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav .icon {
   font-weight: bold;
 }
 @media (max-width: 680px) {
-  /* line 293, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 320, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav .icon span {
     display: none;
   }
 }
-/* line 299, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 326, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav:hover {
   text-decoration: none;
 }
-/* line 304, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 331, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .icon:before,
 .article-links .icon:after {
   font-size: 25px;
@@ -1789,7 +1854,7 @@ p.author, h4.author {
   position: absolute;
   top: -1px;
 }
-/* line 312, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article {
   z-index: 999;
   text-align: right;
@@ -1800,7 +1865,7 @@ p.author, h4.author {
   right: 0;
 }
 @media (max-width: 840px) {
-  /* line 312, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .next-article {
     position: relative;
     top: auto;
@@ -1808,18 +1873,18 @@ p.author, h4.author {
     float: right;
   }
 }
-/* line 327, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 354, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
-/* line 331, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 358, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
   top: 3px;
   font-size: 18px;
   content: "\e60b";
 }
-/* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 366, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -1830,7 +1895,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 840px) {
-  /* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 366, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -1839,20 +1904,20 @@ p.author, h4.author {
     float: left;
   }
 }
-/* line 355, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 382, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 18px;
   top: 3px;
   left: 0;
 }
-/* line 362, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 389, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article span, .article-links .next-article span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 15px;
   font-weight: 500;
 }
 
-/* line 370, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 397, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
@@ -1887,6 +1952,23 @@ p.author, h4.author {
 #category .intro p, #discover .intro p {
   font-style: italic;
   font-size: 1.2em;
+}
+@media screen and (max-width: 840px) {
+  /* line 37, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  #category .intro p, #discover .intro p {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 450px) {
+  /* line 22, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  #category .intro, #discover .intro {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  /* line 47, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  #category .intro p, #discover .intro p {
+    font-size: 0.85em;
+  }
 }
 
 /* line 1, ../../../../grunt/DEV/app/templates/article/_related-content.scss */

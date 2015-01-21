@@ -3,6 +3,52 @@
 	$nav-height  : 52px;
 	$hint-height : 95px;
 	$bnt-width   : 50px;
+
+	#cookies{
+
+		background:black;
+		height: 0;
+		overflow: hidden;
+
+		.container{
+
+			position:relative;
+		}
+
+		p{
+			color: white;
+			letter-spacing: 0;
+			padding-right: 130px;
+			font: {
+				size:0.9em;
+			}
+
+			a{
+				color: $primary-orange;
+			}
+		}
+
+		.accept{
+
+			color: white;
+			right:20px;
+			letter-spacing: 0;
+			font: {
+				size:0.9em;
+			}
+			
+			position:absolute;
+			right:20px;
+			top:3px;
+
+		}
+
+		&.show{
+
+			height: auto;
+			padding:10px 0;
+		}
+	}
 	
 	#header-top{
 

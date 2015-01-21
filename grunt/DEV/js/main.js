@@ -28595,6 +28595,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	$scope.hint        = false
 	$scope.placeholder = "Tls archive, blogs and website";
 	$scope.searchOpen  = false
+	$scope.hasCookie   = true
+
+	$scope.checkCookies = function(){
+		
+		var cookies = document.cookie,
+			val     = "cookiesAccepted=true",
+			index   = cookies.indexOf(val);
+
+		if(index > -1){
+			$scope.hasCookie = true
+		} else {
+			$scope.hasCookie = false
+		}
+
+	}();
 
 	$scope.showSearch  = function(){
 
@@ -28615,6 +28630,19 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.login = function(){
 		tealium.user('login');
+	}
+
+	$scope.acceptCookies = function(){
+
+		var val    = "cookiesAccepted=true",
+			now    = new Date,
+			oneYr  = now.setYear(now.getFullYear() + 1),
+			expiry = "expires=" + oneYr,
+			path   = "path=/",
+			cookie = val + "; " + expiry + "; " + path;
+
+		document.cookie  = cookie;
+		$scope.hasCookie = true
 	}
 	
 }])
@@ -29482,21 +29510,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'tealium',
 	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
 
+	$scope.ready      = false;
 	$scope.tealium    = tealium;
 	$scope.loadingPg  = true;
 	$scope.sce        = $sce;
 	$scope.tags       = [];
 	$scope.activeTags = [];
-	$scope.turn       = true; 
+	$scope.turn       = false; 
 	$scope.firstLoad  = true;
 	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
 	//Get the json response from the api.js factory
 	api.getArticle(window.location.href).then(function (result){
 
-		$scope.post = result.post
-		$scope.prev = result.previous_url
-		$scope.next = result.next_url
+		$scope.post  = result.post
+		$scope.prev  = result.previous_url
+		$scope.next  = result.next_url
+		$scope.ready = true;
 
 		// Get related content
 		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
