@@ -54,6 +54,10 @@ class TlsHubSubscriberWP {
 		// hub callback page visits
 		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
 
+		add_action( 'admin_init', array( $this, 'hub_action_javascript') ); // Write our JS below here
+
+		add_action( 'wp_ajax_hub_action', array( $this, 'hub_action_callback' ) );
+
 		$this->current_options = $this->get_current_options();
 	}
 
@@ -154,11 +158,14 @@ class TlsHubSubscriberWP {
 										</tr>
 
 									</table>
-
+									<p class="description">NOTE: Make sure you have all the settings saved first before you click subscribe</p>
 									<p class="submit">
-										<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-									</p>
+										<input type="submit" class="button-primary right" value="<?php _e('Save Changes') ?>" />
 
+										<input class="button-secondary left tls_hub_action" type="button" name="tls_hub_action" value="Subscribe"/>
+										<input class="button-secondary left tls_hub_action" type="button" name="tls_hub_action" value="Unsubscribe"/>
+									</p>
+									<p><div id="show_loading_update" style="display:none;"><img class="alignnone" title="WordPress Loading Animation Image" src="<?php echo admin_url('/../wp-includes/js/thickbox/loadingAnimation.gif'); ?>" alt="WordPress Loading Animation Image" width="208" height="13"/>
 								</div>
 							</div>
 						</div>
@@ -186,8 +193,8 @@ class TlsHubSubscriberWP {
 		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
 		$valid['hub_url'] = sanitize_text_field($input['hub_url']);
 		$valid['subscription_status'] = sanitize_text_field($input['subscription_status']);
-		$valid['log_messages'] = sanitize_text_field($input['log_messages']);
-		$valid['error_messages'] = sanitize_text_field($input['error_messages']);
+		$valid['log_messages'] = esc_textarea($input['log_messages']);
+		$valid['error_messages'] = esc_textarea($input['error_messages']);
 
 
 		$valid['topic_url'] = $this->validate_url( $valid['topic_url'], 'topic_url', 'Topic URL' );
@@ -310,4 +317,31 @@ class TlsHubSubscriberWP {
 		include_once 'simplexml-feed.php';
 	}
 
+	public function hub_action_javascript() {
+
+		wp_enqueue_script('tls-hub-action-js', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/js/tls-hub-action.js');
+		wp_localize_script('tls-hub-action-js', 'tls_hub_action', array(
+				'ajax_admin' => admin_url( 'admin-ajax.php', 'relative' )
+			)
+		);
+
+	}
+
+	public function hub_action_callback() {
+
+		$tls_hub_action = wp_strip_all_tags( $_POST['tls_hub_action'] );
+
+		$message = '';
+
+		if ( strtolower( $tls_hub_action ) == 'subscribe' ) {
+			$message = "<div id=\"message\" class=\"updated\">Your Hub Subscription is being processed. Check back later to see if you are fully subscribed<p></p></div>";
+		} else if ( strtolower( $tls_hub_action ) == 'unsubscribe' ) {
+			$message = "<div id=\"message\" class=\"updated\">Your Hub Unsubscription is being processed. Check back later to see if you are fully unsubscribed<p></p></div>";
+		}
+
+		echo $message;
+
+		wp_die(); // this is required to terminate immediately and return a proper response
+	}
+	
 }
