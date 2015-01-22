@@ -15,11 +15,11 @@ class TlsHubSubscriberWP {
 	 * @var array $data		Default Values for the Data
      */
 	protected $data = array(
-		'subscription_id'		=> null,
-		'topic_url'				=> null,
-		'hub_url'				=> null,
-		'log_messages'			=> null,
-		'error_messages'		=> null,
+		'subscription_id'		=> '',
+		'topic_url'				=> '',
+		'hub_url'				=> '',
+		'log_messages'			=> '',
+		'error_messages'		=> '',
 		'subscription_status'	=> 'Unsubscribed'
 	);
 
@@ -40,24 +40,13 @@ class TlsHubSubscriberWP {
 		// Start TLS Hub Subscriber Settings
 		add_action( 'admin_init', array( $this, 'tls_hub_subscriber_settings_init' ) );
 
-		// admin head edit.php action hook for PuSH Feed
-		// Subscribe and Unsubscribe
-		add_action( 'edit_post', array( $this, 'pushfeed_custom_subscribe_unsubscribe' ) );
+		// Enqueue JavaScript File to handle Ajax Call on Settings Page for the Subscribe and Unsubscribe Button
+		add_action( 'admin_init', array( $this, 'hub_action_javascript') );
 
-		// init Action Hook to add hub callback rewrite rules
-		add_action( 'init', array( $this, 'pushfeed_hub_callback_rewrite' ) );
-
-		// query_vars filter to add subscription_id to the query vars
-		add_filter( 'query_vars', array( $this, 'pushfeed_hub_callback_query_vars' ) );
-
-		// parse_request action hook to create the parse request for
-		// hub callback page visits
-		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
-
-		add_action( 'admin_init', array( $this, 'hub_action_javascript') ); // Write our JS below here
-
+		// Ajax Callback Function to handle the Ajax Response on Settings Page for Subscribe and Unsubscribe actions
 		add_action( 'wp_ajax_hub_action', array( $this, 'hub_action_callback' ) );
 
+		// Grab all current options and add them to the $current_options variable
 		$this->current_options = $this->get_current_options();
 	}
 
@@ -200,7 +189,10 @@ class TlsHubSubscriberWP {
 		$valid['topic_url'] = $this->validate_url( $valid['topic_url'], 'topic_url', 'Topic URL' );
 		$valid['hub_url'] = $this->validate_url( $valid['hub_url'], 'hub_url', 'Hub URL' );
 
-		if ( !empty( $valid['subscription_id'] ) && !preg_match( "/^[0-9]+$/", $valid['subscription_id'] ) ) {
+		if ( empty( $valid['subscription_id'] ) && empty( $options['subscription_id'] ) ) {
+			$random_number = substr(number_format(time() * mt_rand(),0,'',''),0,10);
+			$valid['subscription_id'] = $random_number;
+		} else {
 			add_settings_error(
 				'subscription_id',										// Setting Title
 				'subscription_id_error',								// Error ID
@@ -208,9 +200,7 @@ class TlsHubSubscriberWP {
 				'error'														// Type of Message
 			);
 
-			$valid['subscription_id'] = $this->data['subscription_id'];
-		} else if ( empty( $valid['subscription_id'] ) ) {
-
+			$valid['subscription_id'] = $options['subscription_id'];
 		}
 
 		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
@@ -255,68 +245,8 @@ class TlsHubSubscriberWP {
 	}
 
 	/**
-	 * Method to add PuSH Feed Hub Callback Rewrite Rule
-	 * @return rewrite_rule Adds a new rewrite_rule to WordPress
-	 */
-	public function pushfeed_hub_callback_rewrite() {
-		add_rewrite_rule('^pushfeed/([^/]*)/?','index.php?pagename=pushfeed&subscription_id=$matches[1]','top');
-
-		flush_rewrite_rules();
-	}
-
-	/**
-	 * Method to add subscription_id to query_vars array
-	 * @param  array $query_vars 			WordPress $query_vars array
-	 * @return array $query_vars			Returns the new $query_vars with subscription_id added
-	 */
-	public function pushfeed_hub_callback_query_vars( $query_vars ) {
-	    $query_vars[] = 'subscription_id';
-	    return $query_vars;
-	}
-
-	/**
-	 * Method to handle and parse request to PuSH Feed Hub Callbacks
-	 * @param object $wp	Pass WordPress Object by reference
-	 */
-	public function pushfeed_hub_callback_parser( &$wp ) {
-
-	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
-
-			if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
-				include_once 'simplexml-feed.php';
-			}
-
-	    	$domain = site_url();
-		    $subscriber_id = $wp->query_vars['subscription_id'];
-
-		    $sub = PuSHSubscriber::instance($domain, $subscriber_id, 'PuSHSubscription', new PuSHEnvironment());
-  			
-  			$sub->handleRequest(array($this, 'pushfeed_notification'));
-  			exit();
-
-	    }
-
-	}
-
-	/**
-	 * @param $post_id
+	 * Enqueue JS File for Ajax Functionality on the Settings Page
      */
-	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
-
-		if( isset( $_GET['pubsub_subscribe'] ) ) {
-			echo 'Yo bro';
-		}
-	}
-
-	/**
-	 * @param string $raw
-	 * @param string $domain
-	 * @param string $subscriber_id
-     */
-	public function pushfeed_notification($raw = '', $domain = '', $subscriber_id ='') {
-		include_once 'simplexml-feed.php';
-	}
-
 	public function hub_action_javascript() {
 
 		wp_enqueue_script('tls-hub-action-js', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/js/tls-hub-action.js');
@@ -327,6 +257,9 @@ class TlsHubSubscriberWP {
 
 	}
 
+	/**
+	 * Ajax Callback Function for the Settings Page
+     */
 	public function hub_action_callback() {
 
 		$tls_hub_action = wp_strip_all_tags( $_POST['tls_hub_action'] );
