@@ -1,9 +1,5 @@
 <?php namespace Tls\TlsHubSubscriber;
 
-use Tls\TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
-use Tls\TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
-use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
-
 /**
  * Class TlsHubSubscriberWP
  * @package Tls\TlsHubSubscriber
@@ -11,12 +7,12 @@ use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
 class TlsHubSubscriberWP {
 
 	/**
-	 * @var string
+	 * @var string $option_name		Option Name used for the options page
      */
 	protected $option_name = 'tls_hub_sub';
 
 	/**
-	 * @var array
+	 * @var array $data		Default Values for the Data
      */
 	protected $data = array(
 		'subscription_id'		=> null,
@@ -27,6 +23,9 @@ class TlsHubSubscriberWP {
 		'subscription_status'	=> 'Unsubscribed'
 	);
 
+	/**
+	 * @var array $current_options	Current Options saved
+     */
 	protected $current_options;
 
 
@@ -59,13 +58,18 @@ class TlsHubSubscriberWP {
 	}
 
 	/**
-	 * @return array
+	 * Get current saved Options
+	 *
+	 * @return array	Returns the current saved Options
      */
-	private function get_current_options() {
+	protected function get_current_options() {
 		return get_option( $this->option_name );
 	}
 
-	private function tls_hub_subscriber_settings_init() {
+	/**
+	 *
+     */
+	public function tls_hub_subscriber_settings_init() {
 
 		register_setting(
 			'tls_hub_subscriber_options',
@@ -75,7 +79,10 @@ class TlsHubSubscriberWP {
 
 	}
 
-	private function tls_hub_subscriber_settings() {
+	/**
+	 * Add WP Menu Page for the Hub Settings
+     */
+	public function tls_hub_subscriber_settings() {
 		add_menu_page(
 			'TLS Hub Subscriber',									// Text displayed in the browser title bar
 			'Hub Subscriber', 										// Text used for the menu item
@@ -86,7 +93,10 @@ class TlsHubSubscriberWP {
 		);
 	}
 
-	private function render_tls_hub_subscriber_settings(){
+	/**
+	 * Display the Settings Form on the Hub Settings Page
+     */
+	public function render_tls_hub_subscriber_settings(){
 		$options = get_option($this->option_name);
 		?>
 		<div class="wrap">
@@ -161,8 +171,16 @@ class TlsHubSubscriberWP {
 	}
 
 
-	private function tls_hub_sub_validate($input) {
+	/**
+	 * Settings Validation
+	 *
+	 * @param array $input		Settings being posted by the settings form
+	 * @return array $valid		Validated settings
+     */
+	public function tls_hub_sub_validate($input) {
 		$options = $this->get_current_options();
+
+		//  Start empty $valid variable and do initial text field sanitization
 		$valid = array();
 		$valid['subscription_id'] = sanitize_text_field($input['subscription_id']);
 		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
@@ -273,6 +291,9 @@ class TlsHubSubscriberWP {
 
 	}
 
+	/**
+	 * @param $post_id
+     */
 	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
 
 		if( isset( $_GET['pubsub_subscribe'] ) ) {
@@ -280,6 +301,11 @@ class TlsHubSubscriberWP {
 		}
 	}
 
+	/**
+	 * @param string $raw
+	 * @param string $domain
+	 * @param string $subscriber_id
+     */
 	public function pushfeed_notification($raw = '', $domain = '', $subscriber_id ='') {
 		include_once 'simplexml-feed.php';
 	}

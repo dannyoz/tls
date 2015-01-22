@@ -5,14 +5,17 @@
  * @package tls
  */
 
-require 'vendor/autoload.php';
-
 /**
  * Define Constants
  */
 
 define( 'TLS_TEMPLATE_DIR', get_template_directory() );
 define( 'TLS_THEME_URI', get_stylesheet_directory_uri() );
+
+/**
+ * Include Composer Autoloader
+ */
+require_once TLS_TEMPLATE_DIR . '/vendor/autoload.php';
 
 /**
  * Include Plugin Absolute Path
@@ -32,13 +35,11 @@ require_once TLS_TEMPLATE_DIR . '/inc/tls-taxonomies.php';
 /**
  *  Add Theme Options Page
  */
-//require_once TLS_TEMPLATE_DIR . '/inc/ThemeOptions.php';
 $TlsThemeOoptions = new Tls\ThemeOptions();
 
 /**
  * PuSHSubscriberWP - TLS Custom PubSubHubbub Integration
  */
-//require_once TLS_TEMPLATE_DIR . '/inc/tls_hub_subscriber/src/TlsHubSubscriberWP.php';
 $TlsHubSubscriberWP = new Tls\TlsHubSubscriber\TlsHubSubscriberWP();
 
 
