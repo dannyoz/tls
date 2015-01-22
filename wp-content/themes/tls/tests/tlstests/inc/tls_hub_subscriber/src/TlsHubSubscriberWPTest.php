@@ -1,6 +1,6 @@
 <?php
 
-use TlsHubSubscriber\TlsHubSubscriberWP as TlsHubSubscriberWP;
+use Tls\TlsHubSubscriber\TlsHubSubscriberWP as TlsHubSubscriberWP;
 
 class TlsHubSubscriberWPTest extends WP_UnitTestCase {
 
@@ -9,6 +9,7 @@ class TlsHubSubscriberWPTest extends WP_UnitTestCase {
     protected $data = array(
         'subscription_id'		=> null,
         'topic_url'				=> null,
+        'hub_url'               => null,
         'log_messages'			=> null,
         'error_messages'		=> null,
         'subscription_status'	=> null

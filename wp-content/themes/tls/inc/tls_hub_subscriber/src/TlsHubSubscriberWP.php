@@ -4,19 +4,30 @@ use Tls\TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
 use Tls\TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
 use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
 
+/**
+ * Class TlsHubSubscriberWP
+ * @package Tls\TlsHubSubscriber
+ */
 class TlsHubSubscriberWP {
 
-	// Name of the array
+	/**
+	 * @var string
+     */
 	protected $option_name = 'tls_hub_sub';
 
-	// Default values
+	/**
+	 * @var array
+     */
 	protected $data = array(
 		'subscription_id'		=> null,
 		'topic_url'				=> null,
+		'hub_url'				=> null,
 		'log_messages'			=> null,
 		'error_messages'		=> null,
-		'subscription_status'	=> null
+		'subscription_status'	=> 'Unsubscribed'
 	);
+
+	protected $current_options;
 
 
 	/**
@@ -43,9 +54,18 @@ class TlsHubSubscriberWP {
 		// parse_request action hook to create the parse request for
 		// hub callback page visits
 		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
+
+		$this->current_options = $this->get_current_options();
 	}
 
-	public function tls_hub_subscriber_settings_init() {
+	/**
+	 * @return array
+     */
+	private function get_current_options() {
+		return get_option( $this->option_name );
+	}
+
+	private function tls_hub_subscriber_settings_init() {
 
 		register_setting(
 			'tls_hub_subscriber_options',
@@ -55,7 +75,7 @@ class TlsHubSubscriberWP {
 
 	}
 
-	public function tls_hub_subscriber_settings() {
+	private function tls_hub_subscriber_settings() {
 		add_menu_page(
 			'TLS Hub Subscriber',									// Text displayed in the browser title bar
 			'Hub Subscriber', 										// Text used for the menu item
@@ -66,12 +86,14 @@ class TlsHubSubscriberWP {
 		);
 	}
 
-	public function render_tls_hub_subscriber_settings(){
+	private function render_tls_hub_subscriber_settings(){
 		$options = get_option($this->option_name);
 		?>
 		<div class="wrap">
 			<h2>TLS Hub Subscriber Settings</h2>
 			<form method="post" action="options.php">
+				<input type="hidden" name="subscription_id" value="<?php echo ( isset($options['subscription_id']) ) ? $options['subscription_id'] : ''; ?>" />
+				
 				<div class="poststuff">
 					<!-- run the settings_errors() function here. -->
 					<?php settings_errors(); ?>
@@ -85,25 +107,39 @@ class TlsHubSubscriberWP {
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo $options['topic_url']; ?>" />
+												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo $options['topic_url']; ?>" />
+												<p class="description">Please include the http:// in the URL</p>
+											</td>
+										</tr>
+
+										<tr valign="top"><th scope="row">Topic URL:</th>
+											<td>
+												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo $options['hub_url']; ?>" />
+												<p class="description">Please include the http:// in the URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Subscription Status:</th>
 											<td>
-												<input type="text" name="<?php echo $this->option_name?>[subscription_status]" value="<?php echo $options['subscription_status']; ?>" disabled />
+												<input type="text" name="<?php echo $this->option_name?>[subscription_status]" value="<?php echo $options['subscription_status']; ?>" />
 											</td>
 										</tr>
 
-										<tr valign="top"><th scope="row">Log Messages:</th>
+										<tr valign="top">
+											<th scope="row">Log Messages:
+												<p class="description">If you want to clear all Log messages select all the messages and delete them before saving changes</p>
+											</th>
 											<td>
-												<textarea name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo $options['log_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo $options['log_messages']; ?></textarea>
 											</td>
 										</tr>
 
-										<tr valign="top"><th scope="row">Error Messages:</th>
+										<tr valign="top">
+											<th scope="row">Error Messages:
+												<p class="description">If you want to clear all Error messages select all the messages and delete them before saving changes</p>
+											</th>
 											<td>
-												<textarea name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo $options['error_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo $options['error_messages']; ?></textarea>
 											</td>
 										</tr>
 
@@ -125,51 +161,72 @@ class TlsHubSubscriberWP {
 	}
 
 
-	public function tls_hub_sub_validate($input) {
-		//die( var_dump($input) );
+	private function tls_hub_sub_validate($input) {
+		$options = $this->get_current_options();
 		$valid = array();
+		$valid['subscription_id'] = sanitize_text_field($input['subscription_id']);
 		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
+		$valid['hub_url'] = sanitize_text_field($input['hub_url']);
 		$valid['subscription_status'] = sanitize_text_field($input['subscription_status']);
 		$valid['log_messages'] = sanitize_text_field($input['log_messages']);
 		$valid['error_messages'] = sanitize_text_field($input['error_messages']);
 
-		/**
-		 * URL Validation Reg Ex
-		 * https://mathiasbynens.be/demo/url-regex
-		 */
-		$urlRegEx = '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS';
 
-		if ( !preg_match( $urlRegEx, $valid['topic_url'] ) ) {
+		$valid['topic_url'] = $this->validate_url( $valid['topic_url'], 'topic_url', 'Topic URL' );
+		$valid['hub_url'] = $this->validate_url( $valid['hub_url'], 'hub_url', 'Hub URL' );
+
+		if ( !empty( $valid['subscription_id'] ) && !preg_match( "/^[0-9]+$/", $valid['subscription_id'] ) ) {
 			add_settings_error(
-				'topic_url', 												// Setting Title
-				'topic_url_error',											// Error ID
-				'Please enter a valid URL',									// Error Message
+				'subscription_id',										// Setting Title
+				'subscription_id_error',								// Error ID
+				'Please do not manually change the Subscription Id',	// Error Message
 				'error'														// Type of Message
 			);
 
-			$valid['topic_url'] = $this->data['topic_url'];
+			$valid['subscription_id'] = $this->data['subscription_id'];
+		} else if ( empty( $valid['subscription_id'] ) ) {
+
 		}
 
-//		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
-//			add_settings_error(
-//				'subscription_status',										// Setting Title
-//				'subscription_status_error',								// Error ID
-//				'Please do not manually change the Subscription Status',	// Error Message
-//				'error'														// Type of Message
-//			);
-//
-//			$valid['subscription_status'] = $this->data['subscription_status'];
-//		}
+		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
+			add_settings_error(
+				'subscription_status',										// Setting Title
+				'subscription_status_error',								// Error ID
+				'Please do not manually change the Subscription Status',	// Error Message
+				'error'														// Type of Message
+			);
+
+			$valid['subscription_status'] = $this->data['subscription_status'];
+		}
 
 		return $valid;
 	}
 
+	/**
+	 * Validate URL
+	 *
+	 * @param string $url			URL to be validate
+	 * @param string $url_field		URL field name to be validated
+	 * @param string $label			Label for the URL Field being validated
+	 * @return string				Validated URL
+	 */
+	protected function validate_url($url, $url_field, $label) {
+		// URL Validation Regex
+		// https://mathiasbynens.be/demo/url-regex
+		$urlRegEx = '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS';
 
-	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
+		if ( !empty($url) && !preg_match($urlRegEx, $url)) {
+			add_settings_error(
+				$url_field,                                        	// Setting Title
+				$url_field . '_error',								// Error ID
+				'Please enter a valid URL for ' . $label,           // Error Message
+				'error'                                             // Type of Message
+			);
 
-	    if( isset( $_GET['pubsub_subscribe'] ) ) {
-	        echo 'Yo bro';
-	    }
+			return $this->data[$url_field];
+		}
+
+		return $url;
 	}
 
 	/**
@@ -184,9 +241,8 @@ class TlsHubSubscriberWP {
 
 	/**
 	 * Method to add subscription_id to query_vars array
-	 * @param  array $query_vars WordPress $query_vars array
-	 * @return array             Returns the new $query_vars 
-	 * with subscription_id added
+	 * @param  array $query_vars 			WordPress $query_vars array
+	 * @return array $query_vars			Returns the new $query_vars with subscription_id added
 	 */
 	public function pushfeed_hub_callback_query_vars( $query_vars ) {
 	    $query_vars[] = 'subscription_id';
@@ -195,7 +251,7 @@ class TlsHubSubscriberWP {
 
 	/**
 	 * Method to handle and parse request to PuSH Feed Hub Callbacks
-	 * @param object Pass WordPress Object by reference
+	 * @param object $wp	Pass WordPress Object by reference
 	 */
 	public function pushfeed_hub_callback_parser( &$wp ) {
 
@@ -215,6 +271,13 @@ class TlsHubSubscriberWP {
 
 	    }
 
+	}
+
+	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
+
+		if( isset( $_GET['pubsub_subscribe'] ) ) {
+			echo 'Yo bro';
+		}
 	}
 
 	public function pushfeed_notification($raw = '', $domain = '', $subscriber_id ='') {
