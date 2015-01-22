@@ -28634,10 +28634,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.acceptCookies = function(){
 
+		var exdate = new Date();
+   		exdate.setDate(exdate.getDate() + 365);
+
 		var val    = "cookiesAccepted=true",
-			now    = new Date,
-			oneYr  = now.setYear(now.getFullYear() + 1),
-			expiry = "expires=" + oneYr,
+			expiry = "expires=" + exdate.toUTCString(),
 			path   = "path=/",
 			cookie = val + "; " + expiry + "; " + path;
 
@@ -28762,6 +28763,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			return defer.promise
 
+		},
+		getFaqs : function (){
+
+			var defer = $q.defer(),
+				path  = '/api/get_posts/?post_type=tls_faq';
+
+			$http.get(path).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
 		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
@@ -29958,11 +29973,39 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 }])
-.controller('footerpages',['$scope','$sce','api','niceDate', function ($scope,$sce,api,niceDate){
+.controller('footerpages',[
+	'$scope',
+	'$sce',
+	'api',
+	'niceDate', 
+	'tealium',
+	function ($scope,$sce,api,niceDate,tealium){
+
+	$scope.ready   = false;
+	$scope.tealium = tealium;
 
 	api.getArticle(window.location.href).then(function (result){
-		$scope.page = result.page
+		$scope.page  = result.page
+		$scope.ready = true;
 		console.log(result)
+
+		if(result.page_template_slug == "template-faqs.php"){
+
+			api.getFaqs().then(function (result){
+				console.log(result)
+
+				$scope.page.accordion_items = [];
+
+				angular.forEach(result.posts, function(data){
+					var obj = {};
+
+					obj.heading = data.title
+					obj.content = data.content
+					
+					$scope.page.accordion_items.push(obj);
+				})
+			})
+		}
 	});
 
 	$scope.format = function(date){

@@ -43,10 +43,11 @@
 
 	$scope.acceptCookies = function(){
 
+		var exdate = new Date();
+   		exdate.setDate(exdate.getDate() + 365);
+
 		var val    = "cookiesAccepted=true",
-			now    = new Date,
-			oneYr  = now.setYear(now.getFullYear() + 1),
-			expiry = "expires=" + oneYr,
+			expiry = "expires=" + exdate.toUTCString(),
 			path   = "path=/",
 			cookie = val + "; " + expiry + "; " + path;
 

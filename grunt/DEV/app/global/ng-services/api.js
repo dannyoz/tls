@@ -99,6 +99,20 @@
 			return defer.promise
 
 		},
+		getFaqs : function (){
+
+			var defer = $q.defer(),
+				path  = '/api/get_posts/?post_type=tls_faq';
+
+			$http.get(path).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
