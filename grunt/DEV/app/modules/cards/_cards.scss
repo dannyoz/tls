@@ -203,15 +203,14 @@
 	@include keyline(top right bottom left,$dark-keyline);
 	@include animation(fadeIn,ease,0.3s,10);
 	@extend .transition-1;
-	padding: 20px 30px;
+	padding: 14px 24px 20px 20px;	
 
-	@media screen and (max-width:$tablet){
-
+	@media screen and (max-width:$tablet){		
 		margin-bottom:20px;
 	}
 
 	@media screen and (max-width:$mobile){
-		
+		padding: 20px 30px;
 		margin-bottom:15px;
 		font-size: 0.8em;
 	}
