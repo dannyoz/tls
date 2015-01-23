@@ -90,12 +90,10 @@ class TlsHubSubscriberWP {
 	 * Display the Settings Form on the Hub Settings Page
      */
 	public function render_tls_hub_subscriber_settings(){
-		$options = get_option($this->option_name);
 		?>
 		<div class="wrap">
 			<h2>TLS Hub Subscriber Settings</h2>
-			<form method="post" action="options.php">
-				<input type="hidden" name="subscription_id" value="<?php echo ( isset($options['subscription_id']) ) ? $options['subscription_id'] : ''; ?>" />
+			<form method="post" action="<?php echo admin_url('options.php'); ?>">
 				
 				<div class="poststuff">
 					<!-- run the settings_errors() function here. -->
@@ -110,21 +108,21 @@ class TlsHubSubscriberWP {
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo $options['topic_url']; ?>" />
+												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo $options['hub_url']; ?>" />
+												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Subscription Status:</th>
 											<td>
-												<input type="text" name="<?php echo $this->option_name?>[subscription_status]" value="<?php echo $options['subscription_status']; ?>" />
+												<p class="subscription_status"><?php echo ( isset($this->current_options['subscription_status']) ) ? $this->current_options['subscription_status'] : ''; ?></p>
 											</td>
 										</tr>
 
@@ -133,7 +131,7 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Log messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo $options['log_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['log_messages'] ) ) ? $this->current_options['log_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
@@ -142,7 +140,7 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Error messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo $options['error_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['error_messages'] ) ) ? $this->current_options['error_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
@@ -178,10 +176,11 @@ class TlsHubSubscriberWP {
 
 		//  Start empty $valid variable and do initial text field sanitization
 		$valid = array();
-		$valid['subscription_id'] = sanitize_text_field($input['subscription_id']);
+		$valid['subscription_id'] = ( isset($input['subscription_id']) ) ? sanitize_text_field($input['subscription_id']) : '';
+		$valid['subscription_status'] = (isset($input['subscription_status'])) ? sanitize_text_field($input['subscription_status']) : '';
+
 		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
 		$valid['hub_url'] = sanitize_text_field($input['hub_url']);
-		$valid['subscription_status'] = sanitize_text_field($input['subscription_status']);
 		$valid['log_messages'] = esc_textarea($input['log_messages']);
 		$valid['error_messages'] = esc_textarea($input['error_messages']);
 
@@ -189,29 +188,17 @@ class TlsHubSubscriberWP {
 		$valid['topic_url'] = $this->validate_url( $valid['topic_url'], 'topic_url', 'Topic URL' );
 		$valid['hub_url'] = $this->validate_url( $valid['hub_url'], 'hub_url', 'Hub URL' );
 
-		if ( empty( $valid['subscription_id'] ) && empty( $options['subscription_id'] ) ) {
+		if ( empty($this->current_options['subscription_id']) && empty($valid['subscription_id']) ) {
 			$random_number = substr(number_format(time() * mt_rand(),0,'',''),0,10);
 			$valid['subscription_id'] = $random_number;
 		} else {
-			add_settings_error(
-				'subscription_id',										// Setting Title
-				'subscription_id_error',								// Error ID
-				'Please do not manually change the Subscription Id',	// Error Message
-				'error'														// Type of Message
-			);
-
-			$valid['subscription_id'] = $options['subscription_id'];
+			$valid['subscription_id'] = $this->current_options['subscription_id'];
 		}
 
-		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
-			add_settings_error(
-				'subscription_status',										// Setting Title
-				'subscription_status_error',								// Error ID
-				'Please do not manually change the Subscription Status',	// Error Message
-				'error'														// Type of Message
-			);
-
+		if ( empty($this->current_options['subscription_status']) && empty($valid['subscription_status']) ) {
 			$valid['subscription_status'] = $this->data['subscription_status'];
+		} else {
+			$valid['subscription_status'] = $this->current_options['subscription_status'];
 		}
 
 		return $valid;
@@ -254,21 +241,25 @@ class TlsHubSubscriberWP {
 				'ajax_admin' => admin_url( 'admin-ajax.php', 'relative' )
 			)
 		);
-
+		wp_enqueue_style('tls-hub-sub-styles', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/css/tls-hub-sub-style.css', array(), '', 'all');
 	}
 
 	/**
 	 * Ajax Callback Function for the Settings Page
      */
 	public function hub_action_callback() {
-
+	
 		$tls_hub_action = wp_strip_all_tags( $_POST['tls_hub_action'] );
 
 		$message = '';
 
 		if ( strtolower( $tls_hub_action ) == 'subscribe' ) {
+			$this->current_options['subscription_status'] = 'Subscribing';
+			update_option($this->option_name, $this->current_options);
 			$message = "<div id=\"message\" class=\"updated\">Your Hub Subscription is being processed. Check back later to see if you are fully subscribed<p></p></div>";
 		} else if ( strtolower( $tls_hub_action ) == 'unsubscribe' ) {
+			$this->current_options['subscription_status'] = 'Unsubscribing';
+			update_option($this->option_name, $this->current_options);
 			$message = "<div id=\"message\" class=\"updated\">Your Hub Unsubscription is being processed. Check back later to see if you are fully unsubscribed<p></p></div>";
 		}
 
