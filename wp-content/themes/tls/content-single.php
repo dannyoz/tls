@@ -10,18 +10,18 @@
 
 					<div ng-if="post && size != 'mobile'" class="col-wide share-bar">
 
-						<a ng-click="printPage();" class="button clear small">
+						<a ng-click="printPage();" class="share-print button clear small">
 							<i class="icon icon-print"></i>						
 							<span ng-if="size == 'desktop'">Print</span> 							
 						</a>
-						<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="button clear small">
+						<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="share-email button clear small">
 							<i class="icon icon-email"></i>
 							<span ng-if="size == 'desktop'">Email</span> 							
 						</a>
-						<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
+						<a ng-click="socialLink(post.url,'facebook')" class="share-fb button clear small">
 							<i class="icon icon-facebook"></i>
 						</a>
-						<a ng-click="socialLink(post.url,'twitter')" class="button clear small">
+						<a ng-click="socialLink(post.url,'twitter')" class="share-twitter button clear small">
 							<i class="icon icon-twitter"></i>
 						</a>
 
@@ -102,18 +102,18 @@
 
 							<div ng-if="post" class="share-bar">
 
-								<a ng-click="printPage();" class="button clear small">									
+								<a ng-click="printPage();" class="share-print button clear small">									
 									<i class="icon icon-print"></i>
 									<span ng-if="size == 'desktop'">Print</span> 	
 								</a>
-								<a ng-attr-href="{{emailLink();}}"  ng-click="tealium.socialLink('email')" class="button clear small">									
+								<a ng-attr-href="{{emailLink();}}"  ng-click="tealium.socialLink('email')" class="share-email button clear small">									
 									<i class="icon icon-email"></i>
 									<span ng-if="size == 'desktop'">Email</span> 	
 								</a>
-								<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
+								<a ng-click="socialLink(post.url,'facebook')" class="share-fb button clear small">
 									<i class="icon icon-facebook"></i>
 								</a>
-								<a ng-click="socialLink(post.url,'twitter')" class="button clear small">
+								<a ng-click="socialLink(post.url,'twitter')" class="share-twitter button clear small">
 									<i class="icon icon-twitter"></i>
 								</a>
 
@@ -129,18 +129,18 @@
 
 					<div ng-if="oldPost" class="col-wide share-bar">
 
-						<a href="javascript:if(window.print)window.print()" class="button clear small">
-							Print 
+						<a href="javascript:if(window.print)window.print()" class="share-print button clear small">
 							<i class="icon icon-print"></i>
+							<span ng-if="size == 'desktop'">Print</span> 
 						</a>
-						<a ng-attr-href="{{emailLink();}}" class="button clear small">
-							Email 
+						<a ng-attr-href="{{emailLink();}}" class="share-email button clear small">							
 							<i class="icon icon-email"></i>
+							<span ng-if="size == 'desktop'">Email</span> 
 						</a>
-						<a ng-click="socialLink(oldPost.url,'fb')" class="button clear small">
+						<a ng-click="socialLink(oldPost.url,'fb')" class="share-fb button clear small">
 							<i class="icon icon-facebook"></i>
 						</a>
-						<a ng-click="socialLink(oldPost.url,'tw')" class="button clear small">
+						<a ng-click="socialLink(oldPost.url,'tw')" class="share-twitter button clear small">
 							<i class="icon icon-twitter"></i>
 						</a>
 
