@@ -4,7 +4,7 @@
 
 		<div ng-if="!loadingPg">
 
-			<div class="container relative" ng-swipe-right="chooseArticle('next',prev,post.previous_post_info.title)" ng-swipe-left="chooseArticle('prev',next,post.next_post_info.title)">
+			<div class="container relative">
 
 				<div class="article-current">
 

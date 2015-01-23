@@ -29,6 +29,10 @@
 
 		padding: 30px 0;
 
+		@media screen and (max-width: $tablet) {
+			padding: 30px 0 20px 0;
+		}
+
 		a {
 
 			margin-left:10px;
@@ -132,7 +136,6 @@
 			font-size: 2.222em;
 			line-height: 50px;
 			margin-bottom: 10px;
-			font-family: $times;
 
 			@media(max-width: $mobile) {
 				font-size: 22px;
