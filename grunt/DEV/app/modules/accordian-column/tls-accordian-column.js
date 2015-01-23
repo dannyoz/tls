@@ -10,9 +10,9 @@
 			scope.toggleOpen = function (i){
 
 				var newState = (scope.items[i].isOpen == true)? false : true;
-				angular.forEach(scope.items,function(obj){
-					obj.isOpen = false
-				})
+				// angular.forEach(scope.items,function(obj){
+				// 	obj.isOpen = false
+				// })
 				scope.items[i].isOpen = newState;
 				
 			}
