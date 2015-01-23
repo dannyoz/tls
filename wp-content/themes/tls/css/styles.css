@@ -1026,50 +1026,50 @@ p.author, h4.author {
 }
 /* line 88, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .sub {
-  margin-top: 1px;
+  margin-top: 18px;
   margin-bottom: 0;
   padding-right: 130px;
   text-transform: uppercase;
+  line-height: 1em;
   font-family: "Times New Roman", "Times", serif;
   font-weight: 500;
   font-size: 1.2em;
 }
-/* line 101, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 102, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .strap {
-  margin-top: 3px;
   padding-right: 130px;
   font-family: "Times New Roman", "Times", serif;
   font-style: italic;
 }
 @media screen and (max-width: 700px) {
-  /* line 113, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 112, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub {
     font-size: 1em;
   }
-  /* line 117, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 116, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .strap {
     font-size: 0.8em;
   }
 }
 @media screen and (max-width: 620px) {
-  /* line 126, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 125, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub, #main-header #header-top #brand .strap {
     display: none;
   }
 }
-/* line 133, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 132, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user {
   right: 20px;
 }
-/* line 137, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 136, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet {
   width: 110px;
 }
-/* line 145, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 144, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet button:first-child {
   margin-bottom: 10px;
 }
-/* line 154, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 153, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav {
   height: 52px;
   position: relative;
@@ -1080,22 +1080,22 @@ p.author, h4.author {
   border-color: #d9d9d9;
 }
 @media screen and (max-width: 450px) {
-  /* line 162, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 161, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header nav .container {
     padding: 0;
   }
 }
-/* line 168, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 167, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .grid-row {
   position: relative;
   background-color: #f2f2f2;
 }
-/* line 174, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 173, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul {
   float: left;
   width: 50%;
 }
-/* line 179, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 178, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li {
   display: inline-block;
   float: left;
@@ -1104,13 +1104,13 @@ p.author, h4.author {
   height: 52px;
   overflow: hidden;
 }
-/* line 188, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 187, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li.current-menu-item a {
   -moz-box-shadow: inset 0 -4px 0 #e6e6e6;
   -webkit-box-shadow: inset 0 -4px 0 #e6e6e6;
   box-shadow: inset 0 -4px 0 #e6e6e6;
 }
-/* line 192, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 191, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a {
   text-align: center;
   display: block;
@@ -1124,18 +1124,18 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 208, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 207, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a:hover {
   text-decoration: none;
   -moz-box-shadow: inset 0 -4px 0 #d73f2b;
   -webkit-box-shadow: inset 0 -4px 0 #d73f2b;
   box-shadow: inset 0 -4px 0 #d73f2b;
 }
-/* line 215, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 214, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li:last-child a {
   border-right-width: 1px;
 }
-/* line 222, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 221, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search {
   float: left;
   width: 50%;
@@ -1147,7 +1147,7 @@ p.author, h4.author {
   -webkit-box-shadow: inset -1px 0 0 #d9d9d9;
   box-shadow: inset -1px 0 0 #d9d9d9;
 }
-/* line 232, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 231, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
@@ -1157,7 +1157,7 @@ p.author, h4.author {
   font-size: 0.9em;
   font-weight: bold;
 }
-/* line 246, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 245, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search input[type="text"], #main-header nav .search input[type="search"] {
   border: 0;
   background-color: #f2f2f2;
@@ -1170,7 +1170,7 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
-/* line 261, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 260, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper {
   position: absolute;
   top: 0;
@@ -1178,7 +1178,7 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 265, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 264, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper:before {
   height: 1px;
   background-color: #d9d9d9;
@@ -1191,7 +1191,7 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 275, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 274, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search button {
   position: absolute;
   top: 0;
@@ -1207,7 +1207,7 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
-/* line 290, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 289, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint {
   position: absolute;
   top: 52px;
@@ -1215,13 +1215,13 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 294, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 293, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint p {
   padding: 0 70px 0 20px;
   font-size: 0.9em;
   letter-spacing: 0;
 }
-/* line 302, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 301, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .open-search {
   z-index: 9999;
   cursor: pointer;
@@ -1231,24 +1231,24 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 312, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 311, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet ul {
   width: 82%;
 }
-/* line 318, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 317, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search {
   position: absolute;
   right: 0;
   width: 18%;
   left: 82%;
 }
-/* line 325, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 324, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search.open {
   left: 1px;
   right: 0;
   width: auto;
 }
-/* line 336, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 335, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile ul {
   width: auto;
   position: absolute;
@@ -1257,29 +1257,29 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 341, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 340, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search {
   position: absolute;
   right: 0;
   width: 50px;
 }
-/* line 347, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 346, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search.open {
   width: 100%;
 }
-/* line 354, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 353, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting {
   height: 95px;
 }
-/* line 358, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 357, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li {
   height: 95px;
 }
-/* line 362, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 361, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li a {
   height: 95px;
 }
-/* line 369, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 368, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting .search {
   height: 95px;
 }
