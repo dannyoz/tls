@@ -8,15 +8,15 @@
 
 				<div class="article-current">
 
-					<div ng-if="post" class="col-wide share-bar">
+					<div ng-if="post && size != 'mobile'" class="col-wide share-bar">
 
 						<a ng-click="printPage();" class="button clear small">
-							<span ng-if="size == 'desktop'">Print</span> 
-							<i class="icon icon-print"></i>
+							<i class="icon icon-print"></i>						
+							<span ng-if="size == 'desktop'">Print</span> 							
 						</a>
 						<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="button clear small">
-							<span ng-if="size == 'desktop'">Email</span> 
 							<i class="icon icon-email"></i>
+							<span ng-if="size == 'desktop'">Email</span> 							
 						</a>
 						<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
 							<i class="icon icon-facebook"></i>
@@ -25,7 +25,9 @@
 							<i class="icon icon-twitter"></i>
 						</a>
 
-						<p class="commentlink futura"><a href="#comments">Comments (<span ng-bind="post.comment_count"></span>)</a></p>
+						<p class="commentlink futura">
+							<a href="#comments">Comments (<span ng-bind="post.comment_count"></span>)</a>
+						</p>
 
 					</div>
 
@@ -52,7 +54,7 @@
 						<div class="col-wide article-section title-small">
 							<div class="grid-6" ng-bind-html="post.taxonomy_article_section[0].title"></div>
 							<div class="grid-6" ng-if="!post.taxonomy_article_section" ng-bind="post.categories[0].title"></div>
-							<div class="grid-6 article-date title-small right" ng-bind="format(post.modified)"></div>
+							<div class="grid-6 article-date title-small right-align" ng-bind="format(post.modified)" ng-if="size != 'mobile'"></div>
 						</div>
 					</div>
 
@@ -70,20 +72,23 @@
 							<div class="article-meta grid-12">
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length > 0"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length == 0"><h4 class="author" ng-bind="post.author.name"></h4></div>
+								<div class="grid-12 article-date title-small" ng-bind="format(post.modified)" ng-if="size == 'mobile'"></div>
 							</div>
 
 							<div class="grid-12 article-summary folded-corner" ng-if="post.custom_fields.book_title[0]">
 								<div class="inner">
 									<div class="summary-top">
-										<div class="top-wrapper">
+										<div class="inner-wrapper">
 											<div class="book-title" ng-bind-html="post.custom_fields.book_title[0]"></div>
 											<div ng-bind-html="post.custom_fields.book_author[0]"></div>	
 										</div>									
 									</div>	
-									<div class="summary-bottom">									
-										<div ng-bind-html="post.custom_fields.book_info_1[0]"></div>
-										<div ng-bind-html="post.custom_fields.book_info_2[0]"></div>
-										<div ng-bind-html="post.custom_fields.book_isbn[0]"></div>					
+									<div class="summary-bottom">
+										<div class="inner-wrapper">									
+											<div ng-bind-html="post.custom_fields.book_info_1[0]"></div>
+											<div ng-bind-html="post.custom_fields.book_info_2[0]"></div>
+											<div ng-bind-html="post.custom_fields.book_isbn[0]"></div>					
+										</div>
 									</div>	
 								</div>
 								
@@ -97,13 +102,13 @@
 
 							<div ng-if="post" class="share-bar">
 
-								<a ng-click="printPage();" class="button clear small">
-									Print 
+								<a ng-click="printPage();" class="button clear small">									
 									<i class="icon icon-print"></i>
+									<span ng-if="size == 'desktop'">Print</span> 	
 								</a>
-								<a ng-attr-href="{{emailLink();}}"  ng-click="tealium.socialLink('email')" class="button clear small">
-									Email 
+								<a ng-attr-href="{{emailLink();}}"  ng-click="tealium.socialLink('email')" class="button clear small">									
 									<i class="icon icon-email"></i>
+									<span ng-if="size == 'desktop'">Email</span> 	
 								</a>
 								<a ng-click="socialLink(post.url,'facebook')" class="button clear small">
 									<i class="icon icon-facebook"></i>
