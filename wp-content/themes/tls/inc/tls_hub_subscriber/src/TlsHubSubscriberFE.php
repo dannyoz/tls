@@ -2,6 +2,8 @@
 
 namespace Tls\TlsHubSubscriber;
 
+use GuzzleHttp\Client;
+
 /**
  * Class TlsHubSubscriberFE
  *
@@ -62,16 +64,9 @@ class TlsHubSubscriberFE {
 
         if (array_key_exists('subscription_id', $wp->query_vars) && preg_match("/^[0-9]+$/", $wp->query_vars['subscription_id'])) {
 
-            if (isset($_GET['manual_pull']) && isset($_GET['pull_url'])) {
-                include_once 'simplexml-feed.php';
+            if ( isset($_GET['manual_pull']) && isset($_GET['pull_url']) ) {
+                require_once TLS_TEMPLATE_DIR . '/inc/tls_hub_subscriber/src/simplexml-feed.php';
             }
-
-            $domain = site_url();
-            $subscriber_id = $wp->query_vars['subscription_id'];
-
-            $sub = PuSHSubscriber::instance($domain, $subscriber_id, 'PuSHSubscription', new PuSHEnvironment());
-
-            $sub->handleRequest(array($this, 'pushfeed_notification'));
             exit();
 
         }

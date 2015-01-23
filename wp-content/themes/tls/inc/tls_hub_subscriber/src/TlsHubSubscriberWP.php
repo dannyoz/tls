@@ -48,6 +48,9 @@ class TlsHubSubscriberWP {
 
 		// Grab all current options and add them to the $current_options variable
 		$this->current_options = $this->get_current_options();
+
+		// Start TLS Hub Subscriber FE Class
+		$TlsHubSubscriberFE = new TlsHubSubscriberFE();
 	}
 
 	/**

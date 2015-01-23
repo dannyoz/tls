@@ -1,30 +1,26 @@
 <?php
-
-function file_get_contents_curl($url) {
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //Set curl to return the data instead of printing it to the browser.
-	curl_setopt($ch, CURLOPT_URL, $url);
-	$data = curl_exec($ch);
-	curl_close($ch);
-	return $data;
-}
+//place this before any script you want to calculate time
+$time_start = microtime(true);
+$articleCount = 1;
 
 $feedUrl = false;
-
+use GuzzleHttp\Client as GuzzleClient;
 if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
 	// Sanitise URL using WP function esc_url() and assign it to $feedUrl variable
 	$feedUrl = esc_url(  $_GET['pull_url'] );
+	$client = new GuzzleClient();
+	$response = $client->get($feedUrl);
+	$xml = $response->xml();
+
 }
-echo $feedUrl;
+//echo $feedUrl;
 // Get XML contents from teh feed URL
-$rawFeed = file_get_contents( get_stylesheet_directory_uri() . '/inc/push_subscriber_wp/src/feed.xml');
+//$rawFeed = file_get_contents( get_stylesheet_directory_uri() . '/inc/push_subscriber_wp/src/feed.xml');
 
 // Assign the raw XML content of feed to a new SimpleXml object assigned to $xml
-$xml = new SimpleXmlElement($rawFeed);
+//$xml = new SimpleXmlElement($rawFeed);
 
-//die( print_r( $xml ) );
-
+//die( var_export( $xml ) );
 
 /**
  * Loop through all entry tags in XML feed and assign each to
@@ -101,7 +97,7 @@ foreach ($xml->entry as $article) {
 		$newArticleData = array(
 			'post_content'   => html_entity_decode($articleContent), // The full text of the post.
 			'post_title'     => wp_strip_all_tags($articleTitle), // The title of your post.
-			'post_status'    => 'publish', // Default 'draft'.
+			'post_status'    => 'draft', // Default 'draft'.
 			'post_type'      => 'tls_articles', // Default 'post'.
 			'post_author'    => 1, // The user ID number of the author. Default is the current user ID.
 			'ping_status'    => 'closed', // Pingbacks or trackbacks allowed. Default is the option 'default_ping_status'.
@@ -120,24 +116,24 @@ foreach ($xml->entry as $article) {
 		wp_set_object_terms($newArticleId, $articleCategories, 'article_section');
 
 		// Article Feed ID Custom Field
-		update_field( "field_54776890165dc", $articleFeedId, $newArticleId );
+		update_field( "article_feed_id", $articleFeedId, $newArticleId );
 		// Article Author Name Custom Field
-		update_field( "field_547768aa165dd", $articleAuthor, $newArticleId );
+		update_field( "article_author_name", $articleAuthor, $newArticleId );
 		// Article Author Email Custom Field
-		update_field( "field_547768b9165de", $articleAuthorEmail, $newArticleId );
+		update_field( "article_author_email", $articleAuthorEmail, $newArticleId );
 		// Article Author URI Custom Field
-		update_field( "field_547768c4165df", $articleAuthorUri, $newArticleId );
+		update_field( "article_author_uri", $articleAuthorUri, $newArticleId );
 		// Article Date Published Custom Field
-		update_field( "field_547768d2165e0", date( "Y-m-d H:i:s", strtotime( $articlePublished ) ), $newArticleId );
+		update_field( "article_date_published", date( "Y-m-d H:i:s", strtotime( $articlePublished ) ), $newArticleId );
 		// Article Date Updated Custom Field
-		update_field( "field_5477693b165e1", date( "Y-m-d H:i:s", strtotime( $articleUpdated ) ), $newArticleId );
+		update_field( "article_date_updated", date( "Y-m-d H:i:s", strtotime( $articleUpdated ) ), $newArticleId );
 		// Article Teaser Custom Field
-		update_field( "field_54776952165e2", $articleTeaser, $newArticleId );
+		update_field( "teaser_summary", $articleTeaser, $newArticleId );
 
 		$thumbnailImage = (string) $media->content->attributes()->url;
 		update_field( 'thumbnail_image_url', $thumbnailImage , $newArticleId );
 
-	
+		$articleCount++;
 	} else { // Matches have been found
 
 		while($articleMatches->have_posts()) { // WP Loop to update the Article
@@ -168,22 +164,31 @@ foreach ($xml->entry as $article) {
 			wp_set_object_terms($articleID, $articleCategories, 'article-category');
 
 			// Article Feed ID Custom Field
-			update_field( "field_54776890165dc", $articleFeedId, $articleID );
+			update_field( "article_feed_id", $articleFeedId, $articleID );
 			// Article Author Name Custom Field
-			update_field( "field_547768aa165dd", $articleAuthor, $articleID );
+			update_field( "article_author_name", $articleAuthor, $articleID );
 			// Article Author Email Custom Field
-			update_field( "field_547768b9165de", $articleAuthorEmail, $articleID );
+			update_field( "article_author_email", $articleAuthorEmail, $articleID );
 			// Article Author URI Custom Field
-			update_field( "field_547768c4165df", $articleAuthorUri, $articleID );
+			update_field( "article_author_uri", $articleAuthorUri, $articleID );
 			// Article Date Published Custom Field
-			update_field( "field_547768d2165e0", date( "Y-m-d H:i:s", strtotime( $articlePublished ) ), $articleID );
+			update_field( "article_date_published", date( "Y-m-d H:i:s", strtotime( $articlePublished ) ), $articleID );
 			// Article Date Updated Custom Field
-			update_field( "field_5477693b165e1", date( "Y-m-d H:i:s", strtotime( $articleUpdated ) ), $articleID );
+			update_field( "article_date_updated", date( "Y-m-d H:i:s", strtotime( $articleUpdated ) ), $articleID );
 			// Article Teaser Custom Field
-			update_field( "field_54776952165e2", $articleTeaser, $articleID );
+			update_field( "teaser_summary", $articleTeaser, $articleID );
 
 		} // End While WP Loop
-	
+
+		$articleCount++;
 	} // End If/Else Loop for matching articles
 
 } // End foreach loop on the XML articles
+
+
+$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+echo 'The Script to parse this XML Feed took <strong>' . $execution_time . ' seconds</strong> for <strong>' . $articleCount . ' articles</strong>';

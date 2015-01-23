@@ -4,5 +4,8 @@
      "Tls\\": "inc/",
      "Tls\\TlsHubSubscriber\\": "inc/tls_hub_subscriber/"
    }
+ },
+ "require": {
+  "guzzlehttp/guzzle": "~5.1"
  }
 }
