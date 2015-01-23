@@ -418,16 +418,24 @@
 			float: right;
 		}
 
-		.icon:before {
-			content: "";
-		}
+		.icon {
 
-		.icon:after {
-			right: 0;
-			top:3px;
-			font-size: 18px;
-			content: "\e60b";
+			span {
+				padding-right: 10px;
+			}
+
+			&:before {
+				content: "";
+			}
+
+			&:after {
+				right: 0;
+				top: 0;
+				font-size: 18px;
+				content: "\e60b";
+			}
 		}
+		
 	}
 
 	.prev-article{
@@ -446,11 +454,19 @@
 			float: left;
 		}
 
-		.icon:before {				
-			font-size: 18px;
-			top:3px;
-			left: 0;				
-		}		
+		.icon {
+
+			span {
+				padding-left: 10px;
+			}
+
+			&:before {				
+				font-size: 18px;
+				top: 0;
+				left: 0;				
+			}	
+		}
+			
 	}
 
 	.prev-article span, .next-article span{

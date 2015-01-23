@@ -1964,18 +1964,22 @@ p.author, h4.author {
     float: right;
   }
 }
-/* line 421, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 423, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.article-links .next-article .icon span {
+  padding-right: 10px;
+}
+/* line 427, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
-/* line 425, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 431, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
-  top: 3px;
+  top: 0;
   font-size: 18px;
   content: "\e60b";
 }
-/* line 433, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 441, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -1986,7 +1990,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 840px) {
-  /* line 433, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 441, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -1995,20 +1999,24 @@ p.author, h4.author {
     float: left;
   }
 }
-/* line 449, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 459, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.article-links .prev-article .icon span {
+  padding-left: 10px;
+}
+/* line 463, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 18px;
-  top: 3px;
+  top: 0;
   left: 0;
 }
-/* line 456, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 472, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article span, .article-links .next-article span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 15px;
   font-weight: 500;
 }
 
-/* line 464, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 480, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
