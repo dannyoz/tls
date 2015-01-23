@@ -2492,7 +2492,7 @@ p.author, h4.author {
 }
 /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item .padded {
-  padding: 30px;
+  padding: 30px 24px;
 }
 @media screen and (max-width: 450px) {
   /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
