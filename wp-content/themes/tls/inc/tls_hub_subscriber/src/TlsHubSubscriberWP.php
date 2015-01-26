@@ -9,7 +9,7 @@ class TlsHubSubscriberWP {
 	/**
 	 * @var string $option_name		Option Name used for the options page
      */
-	protected $option_name = 'tls_hub_sub';
+	private $option_name = 'tls_hub_sub';
 
 	/**
 	 * @var array $data		Default Values for the Data
@@ -26,7 +26,12 @@ class TlsHubSubscriberWP {
 	/**
 	 * @var array $current_options	Current Options saved
      */
-	protected $current_options;
+	private $current_options;
+
+	/**
+	 * @var TlsHubSubscriberFE
+     */
+	private $TlsHubSubscriberFE;
 
 
 	/**
@@ -50,7 +55,8 @@ class TlsHubSubscriberWP {
 		$this->current_options = $this->get_current_options();
 
 		// Start TLS Hub Subscriber FE Class
-		$TlsHubSubscriberFE = new TlsHubSubscriberFE();
+		$TlsHubSubscriberFE = new TlsHubSubscriberFE($this->current_options);
+		$this->TlsHubSubscriberFE = $TlsHubSubscriberFE;
 	}
 
 	/**
@@ -112,14 +118,14 @@ class TlsHubSubscriberWP {
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
 												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
-												<p class="description">Please include the http:// in the URL</p>
+												<p class="description">Please include the http:// in the Topic URL</p>
 											</td>
 										</tr>
 
-										<tr valign="top"><th scope="row">Topic URL:</th>
+										<tr valign="top"><th scope="row">Hub URL:</th>
 											<td>
 												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
-												<p class="description">Please include the http:// in the URL</p>
+												<p class="description">Please include the http:// in the Hub URL</p>
 											</td>
 										</tr>
 

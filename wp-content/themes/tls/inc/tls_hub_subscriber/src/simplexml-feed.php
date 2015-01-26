@@ -1,7 +1,7 @@
 <?php
 //place this before any script you want to calculate time
 $time_start = microtime(true);
-$articleCount = 1;
+$articleCount = 0;
 
 $feedUrl = false;
 use GuzzleHttp\Client as GuzzleClient;

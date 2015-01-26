@@ -128,6 +128,7 @@ return array(
     'React\\Promise\\UnhandledRejectionException' => $vendorDir . '/react/promise/src/UnhandledRejectionException.php',
     'Tls\\ThemeOptions' => $baseDir . '/inc/ThemeOptions.php',
     'Tls\\TlsHubSubscriber\\FeedParser' => $baseDir . '/inc/tls_hub_subscriber/src/FeedParser.php',
+    'Tls\\TlsHubSubscriber\\Library\\HubSubscriber' => $baseDir . '/inc/tls_hub_subscriber/src/Library/HubSubscriber.php',
     'Tls\\TlsHubSubscriber\\PuSHEnvironment' => $baseDir . '/inc/tls_hub_subscriber/src/PuSHEnvironment.php',
     'Tls\\TlsHubSubscriber\\PuSHSubscriber' => $baseDir . '/inc/tls_hub_subscriber/src/PuSHSubscriber.php',
     'Tls\\TlsHubSubscriber\\PuSHSubscriberEnvironmentInterface' => $baseDir . '/inc/tls_hub_subscriber/src/PuSHSubscriber.php',
