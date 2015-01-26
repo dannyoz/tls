@@ -107,6 +107,26 @@
 		background-color:$subtle-light-grey;
 		position: relative;
 
+		.summary-wrapper {
+
+			font-family: $futura;
+			font-size: 0.889em;
+			line-height: 22px;
+
+			.book-title {
+				font-weight: bold;
+				color: $comment-grey;
+			}
+
+			.inner-wrapper {
+				width: 70%;
+
+				@media (max-width: $mobile) {
+					width: 95%;
+				}
+			}
+		}
+
 		.sub{
 
 			color: #706d73;

@@ -2842,6 +2842,27 @@ p.author, h4.author {
   position: relative;
 }
 /* line 110, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper {
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-size: 0.889em;
+  line-height: 22px;
+}
+/* line 116, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper .book-title {
+  font-weight: bold;
+  color: #706d73;
+}
+/* line 121, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper .inner-wrapper {
+  width: 70%;
+}
+@media (max-width: 450px) {
+  /* line 121, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  .card footer .summary-wrapper .inner-wrapper {
+    width: 95%;
+  }
+}
+/* line 130, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub {
   color: #706d73;
   margin-bottom: 0;
@@ -2849,11 +2870,11 @@ p.author, h4.author {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
 }
-/* line 120, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 140, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub a {
   color: #706d73;
 }
-/* line 125, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 145, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer:after {
   height: 0;
   width: 0;
@@ -2866,11 +2887,11 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 139, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 159, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer p {
   letter-spacing: 0;
 }
-/* line 144, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 164, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card:hover {
   border-color: #ccc;
   top: -3px;
@@ -2878,21 +2899,21 @@ p.author, h4.author {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
-/* line 151, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 171, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private {
   background-color: #e6e6e6;
 }
-/* line 155, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 175, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private footer:after {
   border-right-color: #e6e6e6;
 }
-/* line 160, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 180, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.mpu {
   overflow: hidden;
   min-height: 300px;
   position: relative;
 }
-/* line 166, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 186, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.mpu img {
   max-width: 100% !important;
   position: absolute;
@@ -2904,30 +2925,30 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
-/* line 174, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 194, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry {
   float: left;
   position: relative;
   width: 31.66667%;
   margin-right: 2.5%;
 }
-/* line 178, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
 }
 
-/* line 186, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 206, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 {
   background-color: #d73f2b;
   margin-bottom: 0;
   padding-bottom: 12px;
 }
-/* line 192, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 212, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 a {
   color: white;
 }
 
-/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -2999,13 +3020,13 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
-  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     padding: 20px 30px;
     margin-bottom: 15px;

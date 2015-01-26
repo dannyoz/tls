@@ -90,8 +90,7 @@
 											<div ng-bind-html="post.custom_fields.book_isbn[0]"></div>					
 										</div>
 									</div>	
-								</div>
-								
+								</div>							
 							</div>
 
 							<div ng-if="post.custom_fields.soundcloud_embed_code[0].length > -1">
