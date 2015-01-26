@@ -66,7 +66,7 @@ get_header(); ?>
 
 			</div>
 
-			<div id="load-more" class="grid-row">
+			<div id="load-more" class="grid-row" ng-if="ready">
 
 				<p class="centred futura">{{loadMsg}}</p>
 				<div tls-loading="infLoading"></div>

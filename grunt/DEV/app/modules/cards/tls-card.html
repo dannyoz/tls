@@ -26,7 +26,7 @@
 	</div>
 </div>
 
-<div ng-if="data.type == 'blog' || data.type == 'blog'">
+<div ng-if="data.type == 'blog'">
 
 	<div class="blog-item card">
 
@@ -79,7 +79,11 @@
 	</div>
 
 	<footer>
-		<p ng-if="data.author" class="futura" ng-bind="data.author"></p>	
+		<p ng-if="data.author != '' && data.custom_fields.book_title == null" class="futura" ng-bind="data.author"></p>	
+		<div class="summary-wrapper" ng-if="data.custom_fields.book_title[0]">
+			<div class="book-title" ng-bind-html="data.custom_fields.book_title[0]"></div>
+			<div ng-bind-html="data.custom_fields.book_author[0]"></div>	
+		</div>
 	</footer>
 </div>
 

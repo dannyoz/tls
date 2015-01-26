@@ -113,9 +113,9 @@ $articles_archive = new WP_Query($articles_archive_args);
 
 			</div>
 
-			<div id="load-more" class="grid-row">
+			<div id="load-more" class="grid-row" ng-if="ready">
 
-				<p class="centred futura">{{loadMsg}}</p>
+				<p class="centred futura" ng-bind="loadMsg"></p>
 				<div tls-loading="infLoading"></div>
 				<button class="clear centre" ng-if="!infinite && pageCount > 1" ng-click="loadMore();tealium.engagement('load more');">
 					Load more <i class="icon icon-plus"></i>
