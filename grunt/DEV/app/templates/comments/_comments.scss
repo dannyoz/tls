@@ -26,10 +26,58 @@
 			}
 		}
 
+		#commentform {
+
+			.form-element {
+				margin-bottom: 25px;
+			}
+
+			small {
+				font-size: .7em;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+			}
+
+			.required {
+				font-size: .7em;
+				padding-top: 15px;
+				font-style: italic;
+			}
+
+			input[type="text"] {
+				height: 20px;
+				padding: 5px;
+				width: 50%;
+
+				@media screen and (max-width: $tablet) {
+					width: 100%;
+				}
+			}
+
+			#comment {
+				width: 100%;
+				padding: 10px;
+			}
+
+			input[type="text"],
+			#comment {
+				font-family: $georgia;
+				font-size: .8em;
+			}
+		}
+
+		#comments-list {
+			margin-top: 50px;
+		}
+
 		.comment{
 
 			padding-bottom:20px;
 			margin-bottom:20px;
+			overflow: hidden;
 			@include keyline(bottom,$light-keyline);
 
 			.thumb-wrapper{
@@ -40,6 +88,8 @@
 
 			h4{
 
+				letter-spacing: 0;
+				margin-bottom: 5px;
 				font:{
 					weight:500;
 					size:1em;
@@ -47,14 +97,17 @@
 			}
 
 			p{
-
 				color:$comment-grey;
-				padding-left: 105px;
+				letter-spacing: 0;
 				font:{
 
 					family:$futura;
 					size:0.9em;
 				}
+			}
+
+			.comment-content {
+				margin-top: 15px;
 			}
 		}
 	}

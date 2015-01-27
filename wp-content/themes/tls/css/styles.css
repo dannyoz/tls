@@ -2143,30 +2143,83 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1em;
 }
-/* line 29, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 31, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform .form-element {
+  margin-bottom: 25px;
+}
+/* line 35, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform small {
+  font-size: .7em;
+}
+/* line 39, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform label {
+  display: block;
+  margin-bottom: 5px;
+}
+/* line 44, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform .required {
+  font-size: .7em;
+  padding-top: 15px;
+  font-style: italic;
+}
+/* line 50, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform input[type="text"] {
+  height: 20px;
+  padding: 5px;
+  width: 50%;
+}
+@media screen and (max-width: 840px) {
+  /* line 50, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+  #comments .comment-wrap #commentform input[type="text"] {
+    width: 100%;
+  }
+}
+/* line 60, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform #comment {
+  width: 100%;
+  padding: 10px;
+}
+/* line 65, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform input[type="text"],
+#comments .comment-wrap #commentform #comment {
+  font-family: "Georgia", "Times", serif;
+  font-size: .8em;
+}
+/* line 72, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #comments-list {
+  margin-top: 50px;
+}
+/* line 76, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment {
   padding-bottom: 20px;
   margin-bottom: 20px;
+  overflow: hidden;
   border-bottom-width: 1px;
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 35, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 83, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment .thumb-wrapper {
   float: left;
   margin-right: 20px;
 }
-/* line 41, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 89, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment h4 {
+  letter-spacing: 0;
+  margin-bottom: 5px;
   font-weight: 500;
   font-size: 1em;
 }
-/* line 49, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 99, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment p {
   color: #706d73;
-  padding-left: 105px;
+  letter-spacing: 0;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.9em;
+}
+/* line 109, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap .comment .comment-content {
+  margin-top: 15px;
 }
 
 /* line 1, ../../../../grunt/DEV/app/templates/search/_search.scss */
