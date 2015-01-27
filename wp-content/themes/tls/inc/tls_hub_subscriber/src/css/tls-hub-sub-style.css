@@ -12,3 +12,11 @@ p.subscription_status {
     font-size: 14px;
     height: 1.4em;
 }
+
+.tls_hub_action.subscribe {
+    display: none;
+}
+
+#show_loading_update {
+    display: none;
+}
