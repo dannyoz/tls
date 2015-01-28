@@ -2015,13 +2015,16 @@ p.author, h4.author {
   left: 0;
 }
 /* line 477, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.article-links .prev-article span, .article-links .next-article span {
+.article-links .prev-article span,
+.article-links .next-article span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 15px;
+  line-height: 1.4em;
   font-weight: 500;
+  display: block;
 }
 
-/* line 485, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 488, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;

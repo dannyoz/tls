@@ -474,11 +474,14 @@
 			
 	}
 
-	.prev-article span, .next-article span{
+	.prev-article span, 
+	.next-article span {
 
 		font-family: $futura;
 		font-size: 15px;
+		line-height: 1.4em;
 		font-weight: 500;
+		display: block;
 	}
 }
 
