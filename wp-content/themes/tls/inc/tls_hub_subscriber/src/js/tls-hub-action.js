@@ -1,4 +1,12 @@
 jQuery(document).ready(function() {
+
+    var topicUrl = jQuery('input#topic_url').val();
+    var hubUrl = jQuery('input#hub_url').val();
+
+    if ( topicUrl !== '' && hubUrl !== '' ) {
+        jQuery('.tls_hub_action').css('display', 'block');
+    }
+
     jQuery('.tls_hub_action').click(function(){
         var hub_action_data = {
             action: 'hub_action',

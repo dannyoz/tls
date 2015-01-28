@@ -5,153 +5,188 @@ namespace Tls\TlsHubSubscriber\Library;
 use GuzzleHttp\Client as GuzzleClient;
 
 /**
- *
+ * Class HubSubscriber
+ * @package Tls\TlsHubSubscriber\Library
  */
 class HubSubscriber {
-    protected $endpoint_base;
+
+    /**
+     * @var string
+     */
+    protected $option_name;
+
+    /**
+     * @var array
+     */
     protected $current_options;
+
+    /**
+     * @var string
+     */
+    protected $endpoint_base;
+
+    /**
+     * @var string
+     */
     protected $domain;
-    protected $guzzleClient;
+
+    /**
+     * @var string
+     */
     protected $callbackUrl;
 
     /**
+     * @var GuzzleClient
+     */
+    protected $guzzleClient;
+
+
+    /**
+     * @param $option_name
      * @param $current_options
      */
-    public function __construct($current_options) {
+    public function __construct($option_name, $current_options) {
+
+        // Option Name for the Hub Integration Settings
+        $this->option_name = $option_name;
+
+        // Current Options for the Hub Integration
         $this->current_options = $current_options;
+
+        // Domain to be used for the Callback uRL
         $this->domain = site_url('/');
+
+        // Callback URL endpoint base to add at the end of the URL before the Subscription ID
         $this->endpoint_base = 'pushfeed';
 
+        // Create Callback URL with the {Site URL}/pushfeed/{Subscription ID}
         $this->callbackUrl = $this->domain . $this->current_options['subscription_id'];
 
+        // Instantiate Guzzle Client to handle the HTTP Requests to be made
         $this->guzzleClient = new GuzzleClient();
+
+        // Hub Logger Class Instance
+        $this->hubLogger = HubLogger::instance($option_name, $current_options);
+    }
+
+
+    /**
+     * Method to handle the Subscribe Request to the Hub
+     * TODO: Need to connect this with the Ajax from the Backend Subscribe request
+     */
+    public function subscribe() {
+
+        // Start empty $hubUrl variable
+        $hubUrl = '';
+
+        // Check if the Hub URL finishes with a / or not to be able to create the correct subscribe URL
+        if (preg_match("/\/$/", $this->current_options['hub_url'])) {
+            $hubUrl = $this->current_options['hub_url'] . 'subscribe';
+        } else {
+            $hubUrl = $this->current_options['hub_url'] . '/subscribe';
+        }
+
+        // Json Data needed to send to the Hub for Subscription
+        $subscribeJson = json_encode(array(
+            "callbackUrl" => esc_url($this->callbackUrl),               // URL Where the Hub will communicate with the WP
+            "topicId" => esc_url($this->current_options['topic_url'])   // URL of topic we are subscribing to
+        ), JSON_UNESCAPED_SLASHES);
+
+        // Send Post Request with Guzzle to the Hub with the JSON Payload in the body
+        $subscribeResponse = $this->guzzleClient->post($hubUrl, array(
+            'content-type' => 'application/json',
+            'body' => $subscribeJson
+        ));
+
+        // Check if Response is 200, 202 or 204 and add a log message otherwise log error message
+        if (in_array($subscribeResponse->getStatusCode(), array(200, 202, 204))) {
+            $this->hubLogger->log('Positive response to Subscribe request to the Hub', $subscribeResponse->getStatusCode());
+        } else {
+            $this->hubLogger->error('Error issuing Subscribe request to the Hub', $subscribeResponse->getStatusCode());
+        }
+
     }
 
     /**
-     *
+     * Method to handle the requests coming into the endpoint callback URL
      */
-    public function subscribe() {
-        if ( !$this->current_options['hub_url'] ) {
-            //return 'Please fill in the Hub URL first';
+    public function handleRequest() {
+
+        // Allow for manual pull method for Testing ONLY
+        // TODO: Remove this before going live
+        if ( isset($_GET['manual_pull']) && isset($_GET['pull_url']) ) {
+            $feed = file_get_contents( esc_url($_GET['pull_url']) );
+            $feedParser = new HubXmlParser($this->option_name, $this->current_options);
+            $feedParser->parseFeed($feed);
+            exit();
         }
-        $subcribeUrl = '';
 
-        if ( preg_match("/\/$/", $this->current_options['hub_url'] ) ) {
-            $subcribeUrl = $this->current_options['hub_url'] . 'subscribe';
-        } else {
-            $subcribeUrl = $this->current_options['hub_url'] . '/subscribe';
+        // Make sure the request is POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('HTTP/1.1 404 "Not Found"', NULL, 404);
+            exit();
         }
 
-        $subscribeJson = json_encode(array(
-            "callbackUrl" => esc_url($this->callbackUrl),
-            "topicId" => esc_url($this->current_options['topic_url'])
-        ), JSON_UNESCAPED_SLASHES);
+        // TODO: Change this to $_SERVER before real live testing to test correct HTTP header instead of the testing $_GET variable
+        if ( !isset($_GET['HTTP_X_AMZ_SNS_MESSAGE_TYPE']) ) {
+            header('HTTP/1.1 404 "Not Found"', NULL, 404);
+            exit();
+        }
 
-        $response = $this->guzzleClient->get($this->current_options['hub_url']);
+        // TODO: Change the switch case condition to $_SERVER before real live testing to test correct HTTP header instead of the testing $_GET variable
+        switch ( $_GET['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] ) {
 
-        echo $subscribeJson;
+            case "SubscriptionConfirmation":
+                $this->verifySubscription();
+                break;
+
+            case "Notification":
+                $this->receive();
+                break;
+
+            default:
+                header('HTTP/1.1 404 "Not Found"', NULL, 404);
+                break;
+        }
+
+        exit();
+
     }
 
-    public function unsubscribe($topic_url, $callback_url) {
-        if ($sub = $this->subscription()) {
-            $this->request($sub->hub, $sub->topic, 'unsubscribe', $callback_url);
-            $sub->delete();
-        }
-    }
+    /**
+     * Method to handle receiving the XML Atom Feed
+     */
+    public function receive() {
+        $feedPayload = file_get_contents('php://input');
 
+        $feedParser = new HubXmlParser($this->option_name, $this->current_options);
+        $feedParser->parseFeed($feedPayload);
 
-    public function handleRequest($callback) {
-        if (isset($_GET['hub_challenge'])) {
-            $this->verifyRequest();
-        }
-        // No subscription notification has ben sent, we are being notified.
-        else {
-            if ($raw = $this->receive()) {
-                $callback($raw, $this->domain, $this->subscriber_id);
-            }
-        }
-    }
-
-    public function receive($ignore_signature = FALSE) {
-        /**
-         * Verification steps:
-         *
-         * 1) Verify that this is indeed a POST reuest.
-         * 2) Verify that posted string is XML.
-         * 3) Per default verify sender of message by checking the message's
-         *    signature against the shared secret.
-         */
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $raw = file_get_contents('php://input');
-            if (@simplexml_load_string($raw)) {
-                if ($ignore_signature) {
-                    return $raw;
-                }
-                if (isset($_SERVER['HTTP_X_HUB_SIGNATURE']) && ($sub = $this->subscription())) {
-                    $result = array();
-                    parse_str($_SERVER['HTTP_X_HUB_SIGNATURE'], $result);
-                    if (isset($result['sha1']) && $result['sha1'] == hash_hmac('sha1', $raw, $sub->secret)) {
-                        return $raw;
-                    }
-                    else {
-                        $this->log('Could not verify signature.', 'error');
-                    }
-                }
-                else {
-                    $this->log('No signature present.', 'error');
-                }
-            }
-        }
-        return FALSE;
-    }
-
-    public function verifyRequest() {
-        if (isset($_GET['hub_challenge'])) {
-            /**
-             * If a subscription is present, compare the verify token. If the token
-             * matches, set the status on the subscription record and confirm
-             * positive.
-             *
-             * If we cannot find a matching subscription and the hub checks on
-             * 'unsubscribe' confirm positive.
-             *
-             * In all other cases confirm negative.
-             */
-            if ($sub = $this->subscription()) {
-                if ($_GET['hub_verify_token'] == $sub->post_fields['hub.verify_token']) {
-                    if ($_GET['hub_mode'] == 'subscribe' && $sub->status == 'subscribe') {
-                        $sub->status = 'subscribed';
-                        $sub->post_fields = array();
-                        $sub->save();
-                        $this->log('Verified "subscribe" request.');
-                        $verify = TRUE;
-                    }
-                    elseif ($_GET['hub_mode'] == 'unsubscribe' && $sub->status == 'unsubscribe') {
-                        $sub->status = 'unsubscribed';
-                        $sub->post_fields = array();
-                        $sub->save();
-                        $this->log('Verified "unsubscribe" request.');
-                        $verify = TRUE;
-                    }
-                }
-            }
-            elseif ($_GET['hub_mode'] == 'unsubscribe') {
-                $this->log('Verified "unsubscribe" request.');
-                $verify = TRUE;
-            }
-            // Added this for testing. Need to remove
-            elseif ($_GET['hub_mode'] == 'subscribe') {
-                $this->log('Verified "subscribe" request.');
-                $verify = TRUE;
-            }
-            if ($verify) {
-                header('HTTP/1.1 200 "Found"', NULL, 200);
-                print $_GET['hub_challenge'];
-                exit();
-            }
-        }
-        header('HTTP/1.1 404 "Not Found"', NULL, 404);
-        $this->log('Could not verify subscription.', 'error');
         exit();
     }
+
+
+    /**
+     * Method to handle the Subscription Verification
+     */
+    public function verifySubscription() {
+
+        // Grab the JSON Payload being sent from the Hub and Decode it
+        $jsonPayload = file_get_contents('php://input');
+        $json = json_decode($jsonPayload);
+
+        // Perform a GET Request using Guzzle on the SubscribeURL that JSON Payload sent
+        $verificationResponse = $this->guzzleClient->get($json->SubscribeURL);
+
+        // Check if Response is 200, 202 or 204 and add a log message otherwise log error message
+        if (in_array($verificationResponse->getStatusCode(), array(200, 202, 204))) {
+            $this->hubLogger->log('Positive answer from Subscription Verification', $verificationResponse->getStatusCode());
+            $this->current_options['subscription_status'] = 'Subscribed';
+            update_option($this->option_name, $this->current_options);
+        } else {
+            $this->hubLogger->error('Error from Subscription Verification', $verificationResponse->getStatusCode());
+        }
+
+    }
+
 }

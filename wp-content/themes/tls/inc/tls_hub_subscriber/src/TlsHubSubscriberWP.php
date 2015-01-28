@@ -9,7 +9,7 @@ class TlsHubSubscriberWP {
 	/**
 	 * @var string $option_name		Option Name used for the options page
      */
-	private $option_name = 'tls_hub_sub';
+	protected $option_name = 'tls_hub_sub';
 
 	/**
 	 * @var array $data		Default Values for the Data
@@ -26,12 +26,12 @@ class TlsHubSubscriberWP {
 	/**
 	 * @var array $current_options	Current Options saved
      */
-	private $current_options;
+	protected $current_options;
 
 	/**
 	 * @var TlsHubSubscriberFE
      */
-	private $TlsHubSubscriberFE;
+	protected $TlsHubSubscriberFE;
 
 
 	/**
@@ -55,7 +55,7 @@ class TlsHubSubscriberWP {
 		$this->current_options = $this->get_current_options();
 
 		// Start TLS Hub Subscriber FE Class
-		$TlsHubSubscriberFE = new TlsHubSubscriberFE($this->current_options);
+		$TlsHubSubscriberFE = new TlsHubSubscriberFE($this->option_name, $this->current_options);
 		$this->TlsHubSubscriberFE = $TlsHubSubscriberFE;
 	}
 
@@ -69,7 +69,7 @@ class TlsHubSubscriberWP {
 	}
 
 	/**
-	 *
+	 * Initialize Settings
      */
 	public function tls_hub_subscriber_settings_init() {
 
@@ -100,7 +100,7 @@ class TlsHubSubscriberWP {
      */
 	public function render_tls_hub_subscriber_settings(){
 		?>
-		<div class="wrap">
+		<div class="wrap" xmlns="http://www.w3.org/1999/html">
 			<h2>TLS Hub Subscriber Settings</h2>
 			<form method="post" action="<?php echo admin_url('options.php'); ?>">
 				
@@ -117,14 +117,14 @@ class TlsHubSubscriberWP {
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
+												<input id="topic_url" class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the Topic URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Hub URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
+												<input id="hub_url" class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the Hub URL</p>
 											</td>
 										</tr>
@@ -158,10 +158,11 @@ class TlsHubSubscriberWP {
 									<p class="submit">
 										<input type="submit" class="button-primary right" value="<?php _e('Save Changes') ?>" />
 
-										<input class="button-secondary left tls_hub_action" type="button" name="tls_hub_action" value="Subscribe"/>
-										<input class="button-secondary left tls_hub_action" type="button" name="tls_hub_action" value="Unsubscribe"/>
+										<input class="button-secondary left tls_hub_action subscribe" type="button" name="tls_hub_action" value="Subscribe"/>
 									</p>
-									<p><div id="show_loading_update" style="display:none;"><img class="alignnone" title="WordPress Loading Animation Image" src="<?php echo admin_url('/../wp-includes/js/thickbox/loadingAnimation.gif'); ?>" alt="WordPress Loading Animation Image" width="208" height="13"/>
+									<div id="show_loading_update">
+										<img class="alignnone" title="WordPress Loading Animation Image" src="<?php echo admin_url('/../wp-includes/js/thickbox/loadingAnimation.gif'); ?>" alt="WordPress Loading Animation Image" width="208" height="13"/>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -185,6 +186,7 @@ class TlsHubSubscriberWP {
 
 		//  Start empty $valid variable and do initial text field sanitization
 		$valid = array();
+
 		$valid['subscription_id'] = ( isset($input['subscription_id']) ) ? sanitize_text_field($input['subscription_id']) : '';
 		$valid['subscription_status'] = (isset($input['subscription_status'])) ? sanitize_text_field($input['subscription_status']) : '';
 
