@@ -1,4 +1,6 @@
 
+$tablet: 1090px;
+$mobile: 560px;
 
 .single-post-template{
 
@@ -28,6 +30,10 @@
 	.share-bar{
 
 		padding: 30px 0;
+
+		@media screen and (max-width: $mobile) {
+			display: none;
+		}
 
 		@media screen and (max-width: $tablet) {
 			padding: 30px 0 20px 0;
