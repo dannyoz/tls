@@ -4,7 +4,8 @@
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard",
-			type : "@"
+			type : "@",
+			copy : "=copy"
 		},
 		link : function(scope){
 
@@ -12,6 +13,8 @@
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			card.hasCopy = (scope.copy == undefined) ? true : scope.copy; 
 
 			if(card.type == "listen_blog"){
 				card.type  = "blog"
