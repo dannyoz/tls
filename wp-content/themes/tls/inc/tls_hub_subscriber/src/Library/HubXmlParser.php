@@ -131,7 +131,8 @@ class HubXmlParser implements FeedParser {
             // Save Article Tags Taxonomy Terms
             $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
 
-
+            // TODO: Import of images into the local installation of WP
+            // TODO: Import books into the repeater field of WP
             // Add all the Custom Fields' data into an array
             $article_custom_fields = array(
                 'article_feed_id'       => (string) $article->id,
