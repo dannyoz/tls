@@ -837,58 +837,62 @@ h1 {
   font-size: 2.8em;
   font-weight: bold;
 }
+/* line 10, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+h1.padded {
+  padding-top: 50px;
+}
 
-/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 17, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h2 {
   margin-bottom: 0.5em;
   font-size: 2.2em;
   font-weight: bold;
 }
 
-/* line 23, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 28, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h3 {
   margin-bottom: 0.5em;
   font-size: 1.8em;
   font-weight: bold;
 }
 
-/* line 33, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 38, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h4 {
   margin-bottom: 0.5em;
   font-size: 1.4em;
   font-weight: bold;
 }
 
-/* line 43, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 48, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h5 {
   margin-bottom: 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
 
-/* line 53, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 58, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h6 {
   margin-bottom: 0.5em;
   font-size: 1em;
   font-weight: bold;
 }
 
-/* line 63, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p {
   line-height: 1.4em;
   margin-bottom: 2em;
 }
-/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 73, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p:last-of-type {
   margin-bottom: 0;
 }
 
-/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 79, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred {
   text-align: center;
 }
 
-/* line 78, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 83, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 blockquote {
   line-height: 1.6em;
   color: #d73f2b;
@@ -896,28 +900,28 @@ blockquote {
   font-size: 1.2em;
 }
 
-/* line 88, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 93, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 strong, b {
   font-weight: bold;
 }
 
-/* line 93, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 98, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 em, i {
   font-style: italic;
 }
 
-/* line 98, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 103, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #home #subscriber h2, #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
-/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 109, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 109, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 114, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p.author, h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
@@ -925,7 +929,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
-/* line 120, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 125, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -936,7 +940,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 700;
 }
-/* line 133, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 138, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading:after {
   bottom: -20px;
   height: 5px;

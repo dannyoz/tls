@@ -2,6 +2,14 @@ describe('niceDate', function() {
 
     beforeEach(module('tls'));
 
+    // it('should parse format for ie', inject(function(niceDate){
+    //     var date    = "2014-12-02 10:32:36",
+    //         test    = niceDate.format(date);
+
+    //     expect(test).toEqual(2014,12,2,10,32,36);
+
+    // }));
+
     it('should convert wordpress date format', inject(function(niceDate){
 
         var date    = "2014-12-02 10:32:36",
