@@ -16,7 +16,7 @@
 
 
   $templateCache.put('tls-accordian.html',
-    "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.heading></h3><div class=toggler><span ng-if=!item.isOpen>Open</span> <span ng-if=item.isOpen>Close</span> <i class=\"icon icon-plus transition-2\" ng-class={open:item.isOpen}></i></div></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
+    "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.heading></h3><div class=toggler><span ng-if=!item.isOpen>Open</span> <span ng-if=item.isOpen>Close</span> <i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
   );
 
 

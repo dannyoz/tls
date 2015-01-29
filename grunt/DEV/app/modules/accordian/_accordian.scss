@@ -39,6 +39,8 @@
 			i {
 
 				font-size: 1em;
+				position:relative;
+				top: 3px;
 				@include transform(rotate(0deg));
 
 				&.open{
