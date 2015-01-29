@@ -1,9 +1,5 @@
 <?php namespace Tls\TlsHubSubscriber;
 
-use Tls\TlsHubSubscriber\PuSHSubscriber as PuSHSubscriber;
-use Tls\TlsHubSubscriber\PuSHSubscription as PuSHSubscription;
-use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
-
 /**
  * Class TlsHubSubscriberWP
  * @package Tls\TlsHubSubscriber
@@ -11,23 +7,31 @@ use Tls\TlsHubSubscriber\PuSHEnvironment as PuSHEnvironment;
 class TlsHubSubscriberWP {
 
 	/**
-	 * @var string
+	 * @var string $option_name		Option Name used for the options page
      */
 	protected $option_name = 'tls_hub_sub';
 
 	/**
-	 * @var array
+	 * @var array $data		Default Values for the Data
      */
 	protected $data = array(
-		'subscription_id'		=> null,
-		'topic_url'				=> null,
-		'hub_url'				=> null,
-		'log_messages'			=> null,
-		'error_messages'		=> null,
+		'subscription_id'		=> '',
+		'topic_url'				=> '',
+		'hub_url'				=> '',
+		'log_messages'			=> '',
+		'error_messages'		=> '',
 		'subscription_status'	=> 'Unsubscribed'
 	);
 
+	/**
+	 * @var array $current_options	Current Options saved
+     */
 	protected $current_options;
+
+	/**
+	 * @var TlsHubSubscriberFE
+     */
+	protected $TlsHubSubscriberFE;
 
 
 	/**
@@ -41,31 +45,33 @@ class TlsHubSubscriberWP {
 		// Start TLS Hub Subscriber Settings
 		add_action( 'admin_init', array( $this, 'tls_hub_subscriber_settings_init' ) );
 
-		// admin head edit.php action hook for PuSH Feed
-		// Subscribe and Unsubscribe
-		add_action( 'edit_post', array( $this, 'pushfeed_custom_subscribe_unsubscribe' ) );
+		// Enqueue JavaScript File to handle Ajax Call on Settings Page for the Subscribe and Unsubscribe Button
+		add_action( 'admin_init', array( $this, 'hub_action_javascript') );
 
-		// init Action Hook to add hub callback rewrite rules
-		add_action( 'init', array( $this, 'pushfeed_hub_callback_rewrite' ) );
+		// Ajax Callback Function to handle the Ajax Response on Settings Page for Subscribe and Unsubscribe actions
+		add_action( 'wp_ajax_hub_action', array( $this, 'hub_action_callback' ) );
 
-		// query_vars filter to add subscription_id to the query vars
-		add_filter( 'query_vars', array( $this, 'pushfeed_hub_callback_query_vars' ) );
-
-		// parse_request action hook to create the parse request for
-		// hub callback page visits
-		add_action( 'parse_request', array( $this, 'pushfeed_hub_callback_parser' ) );
-
+		// Grab all current options and add them to the $current_options variable
 		$this->current_options = $this->get_current_options();
+
+		// Start TLS Hub Subscriber FE Class
+		$TlsHubSubscriberFE = new TlsHubSubscriberFE($this->option_name, $this->current_options);
+		$this->TlsHubSubscriberFE = $TlsHubSubscriberFE;
 	}
 
 	/**
-	 * @return array
+	 * Get current saved Options
+	 *
+	 * @return array	Returns the current saved Options
      */
-	private function get_current_options() {
+	protected function get_current_options() {
 		return get_option( $this->option_name );
 	}
 
-	private function tls_hub_subscriber_settings_init() {
+	/**
+	 * Initialize Settings
+     */
+	public function tls_hub_subscriber_settings_init() {
 
 		register_setting(
 			'tls_hub_subscriber_options',
@@ -75,7 +81,10 @@ class TlsHubSubscriberWP {
 
 	}
 
-	private function tls_hub_subscriber_settings() {
+	/**
+	 * Add WP Menu Page for the Hub Settings
+     */
+	public function tls_hub_subscriber_settings() {
 		add_menu_page(
 			'TLS Hub Subscriber',									// Text displayed in the browser title bar
 			'Hub Subscriber', 										// Text used for the menu item
@@ -86,13 +95,14 @@ class TlsHubSubscriberWP {
 		);
 	}
 
-	private function render_tls_hub_subscriber_settings(){
-		$options = get_option($this->option_name);
+	/**
+	 * Display the Settings Form on the Hub Settings Page
+     */
+	public function render_tls_hub_subscriber_settings(){
 		?>
-		<div class="wrap">
+		<div class="wrap" xmlns="http://www.w3.org/1999/html">
 			<h2>TLS Hub Subscriber Settings</h2>
-			<form method="post" action="options.php">
-				<input type="hidden" name="subscription_id" value="<?php echo ( isset($options['subscription_id']) ) ? $options['subscription_id'] : ''; ?>" />
+			<form method="post" action="<?php echo admin_url('options.php'); ?>">
 				
 				<div class="poststuff">
 					<!-- run the settings_errors() function here. -->
@@ -107,21 +117,21 @@ class TlsHubSubscriberWP {
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo $options['topic_url']; ?>" />
-												<p class="description">Please include the http:// in the URL</p>
+												<input id="topic_url" class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
+												<p class="description">Please include the http:// in the Topic URL</p>
 											</td>
 										</tr>
 
-										<tr valign="top"><th scope="row">Topic URL:</th>
+										<tr valign="top"><th scope="row">Hub URL:</th>
 											<td>
-												<input class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo $options['hub_url']; ?>" />
-												<p class="description">Please include the http:// in the URL</p>
+												<input id="hub_url" class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
+												<p class="description">Please include the http:// in the Hub URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Subscription Status:</th>
 											<td>
-												<input type="text" name="<?php echo $this->option_name?>[subscription_status]" value="<?php echo $options['subscription_status']; ?>" />
+												<p class="subscription_status"><?php echo ( isset($this->current_options['subscription_status']) ) ? $this->current_options['subscription_status'] : ''; ?></p>
 											</td>
 										</tr>
 
@@ -130,7 +140,7 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Log messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo $options['log_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['log_messages'] ) ) ? $this->current_options['log_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
@@ -139,16 +149,20 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Error messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo $options['error_messages']; ?></textarea>
+												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['error_messages'] ) ) ? $this->current_options['error_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
 									</table>
-
+									<p class="description">NOTE: Make sure you have all the settings saved first before you click subscribe</p>
 									<p class="submit">
-										<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-									</p>
+										<input type="submit" class="button-primary right" value="<?php _e('Save Changes') ?>" />
 
+										<input class="button-secondary left tls_hub_action subscribe" type="button" name="tls_hub_action" value="Subscribe"/>
+									</p>
+									<div id="show_loading_update">
+										<img class="alignnone" title="WordPress Loading Animation Image" src="<?php echo admin_url('/../wp-includes/js/thickbox/loadingAnimation.gif'); ?>" alt="WordPress Loading Animation Image" width="208" height="13"/>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -161,42 +175,41 @@ class TlsHubSubscriberWP {
 	}
 
 
-	private function tls_hub_sub_validate($input) {
+	/**
+	 * Settings Validation
+	 *
+	 * @param array $input		Settings being posted by the settings form
+	 * @return array $valid		Validated settings
+     */
+	public function tls_hub_sub_validate($input) {
 		$options = $this->get_current_options();
+
+		//  Start empty $valid variable and do initial text field sanitization
 		$valid = array();
-		$valid['subscription_id'] = sanitize_text_field($input['subscription_id']);
+
+		$valid['subscription_id'] = ( isset($input['subscription_id']) ) ? sanitize_text_field($input['subscription_id']) : '';
+		$valid['subscription_status'] = (isset($input['subscription_status'])) ? sanitize_text_field($input['subscription_status']) : '';
+
 		$valid['topic_url'] = sanitize_text_field($input['topic_url']);
 		$valid['hub_url'] = sanitize_text_field($input['hub_url']);
-		$valid['subscription_status'] = sanitize_text_field($input['subscription_status']);
-		$valid['log_messages'] = sanitize_text_field($input['log_messages']);
-		$valid['error_messages'] = sanitize_text_field($input['error_messages']);
+		$valid['log_messages'] = esc_textarea($input['log_messages']);
+		$valid['error_messages'] = esc_textarea($input['error_messages']);
 
 
 		$valid['topic_url'] = $this->validate_url( $valid['topic_url'], 'topic_url', 'Topic URL' );
 		$valid['hub_url'] = $this->validate_url( $valid['hub_url'], 'hub_url', 'Hub URL' );
 
-		if ( !empty( $valid['subscription_id'] ) && !preg_match( "/^[0-9]+$/", $valid['subscription_id'] ) ) {
-			add_settings_error(
-				'subscription_id',										// Setting Title
-				'subscription_id_error',								// Error ID
-				'Please do not manually change the Subscription Id',	// Error Message
-				'error'														// Type of Message
-			);
-
-			$valid['subscription_id'] = $this->data['subscription_id'];
-		} else if ( empty( $valid['subscription_id'] ) ) {
-
+		if ( empty($this->current_options['subscription_id']) && empty($valid['subscription_id']) ) {
+			$random_number = substr(number_format(time() * mt_rand(),0,'',''),0,10);
+			$valid['subscription_id'] = $random_number;
+		} else {
+			$valid['subscription_id'] = $this->current_options['subscription_id'];
 		}
 
-		if ( !$valid['subscription_status'] == 'Unsubscribed' || !$valid['subscription_status'] == 'Subscribed' || !$valid['subscription_status'] == 'Unsubscribing' || !$valid['subscription_status'] == 'Subscribing' ) {
-			add_settings_error(
-				'subscription_status',										// Setting Title
-				'subscription_status_error',								// Error ID
-				'Please do not manually change the Subscription Status',	// Error Message
-				'error'														// Type of Message
-			);
-
+		if ( empty($this->current_options['subscription_status']) && empty($valid['subscription_status']) ) {
 			$valid['subscription_status'] = $this->data['subscription_status'];
+		} else {
+			$valid['subscription_status'] = $this->current_options['subscription_status'];
 		}
 
 		return $valid;
@@ -230,58 +243,40 @@ class TlsHubSubscriberWP {
 	}
 
 	/**
-	 * Method to add PuSH Feed Hub Callback Rewrite Rule
-	 * @return rewrite_rule Adds a new rewrite_rule to WordPress
-	 */
-	public function pushfeed_hub_callback_rewrite() {
-		add_rewrite_rule('^pushfeed/([^/]*)/?','index.php?pagename=pushfeed&subscription_id=$matches[1]','top');
+	 * Enqueue JS File for Ajax Functionality on the Settings Page
+     */
+	public function hub_action_javascript() {
 
-		flush_rewrite_rules();
+		wp_enqueue_script('tls-hub-action-js', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/js/tls-hub-action.js');
+		wp_localize_script('tls-hub-action-js', 'tls_hub_action', array(
+				'ajax_admin' => admin_url( 'admin-ajax.php', 'relative' )
+			)
+		);
+		wp_enqueue_style('tls-hub-sub-styles', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/css/tls-hub-sub-style.css', array(), '', 'all');
 	}
 
 	/**
-	 * Method to add subscription_id to query_vars array
-	 * @param  array $query_vars 			WordPress $query_vars array
-	 * @return array $query_vars			Returns the new $query_vars with subscription_id added
-	 */
-	public function pushfeed_hub_callback_query_vars( $query_vars ) {
-	    $query_vars[] = 'subscription_id';
-	    return $query_vars;
-	}
+	 * Ajax Callback Function for the Settings Page
+     */
+	public function hub_action_callback() {
+	
+		$tls_hub_action = wp_strip_all_tags( $_POST['tls_hub_action'] );
 
-	/**
-	 * Method to handle and parse request to PuSH Feed Hub Callbacks
-	 * @param object $wp	Pass WordPress Object by reference
-	 */
-	public function pushfeed_hub_callback_parser( &$wp ) {
+		$message = '';
 
-	    if ( array_key_exists( 'subscription_id', $wp->query_vars ) && preg_match( "/^[0-9]+$/", $wp->query_vars['subscription_id'] ) ) {
-
-			if ( isset( $_GET['manual_pull'] ) && isset( $_GET['pull_url'] ) ) {
-				include_once 'simplexml-feed.php';
-			}
-
-	    	$domain = site_url();
-		    $subscriber_id = $wp->query_vars['subscription_id'];
-
-		    $sub = PuSHSubscriber::instance($domain, $subscriber_id, 'PuSHSubscription', new PuSHEnvironment());
-  			
-  			$sub->handleRequest(array($this, 'pushfeed_notification'));
-  			exit();
-
-	    }
-
-	}
-
-	public function pushfeed_custom_subscribe_unsubscribe( $post_id ) {
-
-		if( isset( $_GET['pubsub_subscribe'] ) ) {
-			echo 'Yo bro';
+		if ( strtolower( $tls_hub_action ) == 'subscribe' ) {
+			$this->current_options['subscription_status'] = 'Subscribing';
+			update_option($this->option_name, $this->current_options);
+			$message = "<div id=\"message\" class=\"updated\">Your Hub Subscription is being processed. Check back later to see if you are fully subscribed<p></p></div>";
+		} else if ( strtolower( $tls_hub_action ) == 'unsubscribe' ) {
+			$this->current_options['subscription_status'] = 'Unsubscribing';
+			update_option($this->option_name, $this->current_options);
+			$message = "<div id=\"message\" class=\"updated\">Your Hub Unsubscription is being processed. Check back later to see if you are fully unsubscribed<p></p></div>";
 		}
-	}
 
-	public function pushfeed_notification($raw = '', $domain = '', $subscriber_id ='') {
-		include_once 'simplexml-feed.php';
-	}
+		echo $message;
 
+		wp_die(); // this is required to terminate immediately and return a proper response
+	}
+	
 }

@@ -146,7 +146,8 @@
 
 					case 'blog':
 						
-						if (!isUndefined(card.categories[0])) {
+						if (!isUndefined(card.categories) &&
+							!isUndefined(card.categories[0])) {
 							card.category = {};
 							card.category.slug = card.categories[0]['slug'];
 							card.category.title = card.categories[0]['title'];

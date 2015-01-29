@@ -87,10 +87,11 @@
 
 			.sub{
 
-				margin-top:1px;
+				margin-top: 18px;
 				margin-bottom:0;
 				padding-right:130px;
 				text-transform:uppercase;
+				line-height: 1em;
 				font:{
 					family:$times;
 					weight:500;
@@ -99,8 +100,6 @@
 			}
 
 			.strap{
-
-				margin-top:3px;
 				padding-right:130px;
 				font: {
 					family:$times;

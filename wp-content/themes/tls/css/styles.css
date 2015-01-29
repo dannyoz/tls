@@ -1,4 +1,4 @@
-/* line 5, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,53 +20,53 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
 /* line 3, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 body {
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -631,6 +631,16 @@ section, article {
   }
 }
 
+/* line 163, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
+.right-align {
+  text-align: right;
+}
+
+/* line 167, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
+.left-align {
+  text-align: left;
+}
+
 /* line 1, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a, button, input {
   cursor: pointer;
@@ -638,22 +648,22 @@ a, button, input {
 
 /* line 7, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:link {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 /* line 12, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:visited {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 /* line 17, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:hover {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 /* line 22, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:active {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 /* line 27, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
@@ -697,7 +707,13 @@ button.small, .button.small {
 }
 /* line 73, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button.subscribe, .button.subscribe {
-  margin-right: 10px;
+  margin-right: 15px;
+}
+@media screen and (max-width: 450px) {
+  /* line 73, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
+  button.subscribe, .button.subscribe {
+    margin-right: 5px;
+  }
 }
 
 /* line 2, ../../../../grunt/DEV/app/global/sass-globals/_forms.scss */
@@ -821,63 +837,58 @@ h1 {
   font-size: 2.8em;
   font-weight: bold;
 }
-/* line 10, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
-h1.padded {
-  padding-top: 50px;
-}
 
-/* line 17, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h2 {
   margin-bottom: 0.5em;
   font-size: 2.2em;
   font-weight: bold;
-  font-family: "Times New Roman", "Times", serif;
 }
 
-/* line 29, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 23, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h3 {
   margin-bottom: 0.5em;
   font-size: 1.8em;
   font-weight: bold;
 }
 
-/* line 39, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 33, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h4 {
   margin-bottom: 0.5em;
   font-size: 1.4em;
   font-weight: bold;
 }
 
-/* line 49, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 43, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h5 {
   margin-bottom: 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
 
-/* line 59, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 53, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 h6 {
   margin-bottom: 0.5em;
   font-size: 1em;
   font-weight: bold;
 }
 
-/* line 69, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 63, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p {
   line-height: 1.4em;
   margin-bottom: 2em;
 }
-/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p:last-of-type {
   margin-bottom: 0;
 }
 
-/* line 80, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred {
   text-align: center;
 }
 
-/* line 84, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 78, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 blockquote {
   line-height: 1.6em;
   color: #d73f2b;
@@ -885,28 +896,28 @@ blockquote {
   font-size: 1.2em;
 }
 
-/* line 94, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 strong, b {
   font-weight: bold;
 }
 
-/* line 99, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 93, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 em, i {
   font-style: italic;
 }
 
-/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 98, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .futura, #main-header nav .search label, #main-header nav .search input[type="text"], #main-header nav .search input[type="search"], #home #subscriber h2, #latest-edition .editions-bottom h2 {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
-/* line 110, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 115, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 109, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 p.author, h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
@@ -914,7 +925,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 
-/* line 126, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 120, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -925,7 +936,7 @@ p.author, h4.author {
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 700;
 }
-/* line 139, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 133, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 .centred-heading:after {
   bottom: -20px;
   height: 5px;
@@ -1014,50 +1025,50 @@ p.author, h4.author {
 }
 /* line 88, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .sub {
-  margin-top: 1px;
+  margin-top: 18px;
   margin-bottom: 0;
   padding-right: 130px;
   text-transform: uppercase;
+  line-height: 1em;
   font-family: "Times New Roman", "Times", serif;
   font-weight: 500;
   font-size: 1.2em;
 }
-/* line 101, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 102, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #brand .strap {
-  margin-top: 3px;
   padding-right: 130px;
   font-family: "Times New Roman", "Times", serif;
   font-style: italic;
 }
 @media screen and (max-width: 700px) {
-  /* line 113, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 112, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub {
     font-size: 1em;
   }
-  /* line 117, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 116, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .strap {
     font-size: 0.8em;
   }
 }
 @media screen and (max-width: 620px) {
-  /* line 126, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 125, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header #header-top #brand .sub, #main-header #header-top #brand .strap {
     display: none;
   }
 }
-/* line 133, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 132, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user {
   right: 20px;
 }
-/* line 137, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 136, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet {
   width: 110px;
 }
-/* line 145, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 144, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header #header-top #user.tablet button:first-child {
   margin-bottom: 10px;
 }
-/* line 154, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 153, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav {
   height: 52px;
   position: relative;
@@ -1068,22 +1079,22 @@ p.author, h4.author {
   border-color: #d9d9d9;
 }
 @media screen and (max-width: 450px) {
-  /* line 162, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  /* line 161, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header nav .container {
     padding: 0;
   }
 }
-/* line 168, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 167, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .grid-row {
   position: relative;
   background-color: #f2f2f2;
 }
-/* line 174, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 173, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul {
   float: left;
   width: 50%;
 }
-/* line 179, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 178, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li {
   display: inline-block;
   float: left;
@@ -1092,13 +1103,13 @@ p.author, h4.author {
   height: 52px;
   overflow: hidden;
 }
-/* line 188, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 187, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li.current-menu-item a {
   -moz-box-shadow: inset 0 -4px 0 #e6e6e6;
   -webkit-box-shadow: inset 0 -4px 0 #e6e6e6;
   box-shadow: inset 0 -4px 0 #e6e6e6;
 }
-/* line 192, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 191, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a {
   text-align: center;
   display: block;
@@ -1112,18 +1123,18 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 208, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 207, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li a:hover {
   text-decoration: none;
   -moz-box-shadow: inset 0 -4px 0 #d73f2b;
   -webkit-box-shadow: inset 0 -4px 0 #d73f2b;
   box-shadow: inset 0 -4px 0 #d73f2b;
 }
-/* line 215, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 214, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav ul li:last-child a {
   border-right-width: 1px;
 }
-/* line 222, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 221, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search {
   float: left;
   width: 50%;
@@ -1135,7 +1146,7 @@ p.author, h4.author {
   -webkit-box-shadow: inset -1px 0 0 #d9d9d9;
   box-shadow: inset -1px 0 0 #d9d9d9;
 }
-/* line 232, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 231, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search label {
   position: absolute;
   line-height: 52px;
@@ -1145,7 +1156,7 @@ p.author, h4.author {
   font-size: 0.9em;
   font-weight: bold;
 }
-/* line 246, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 245, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search input[type="text"], #main-header nav .search input[type="search"] {
   border: 0;
   background-color: #f2f2f2;
@@ -1158,7 +1169,7 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
-/* line 261, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 260, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper {
   position: absolute;
   top: 0;
@@ -1166,7 +1177,7 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 265, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 264, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .search-wrapper:before {
   height: 1px;
   background-color: #d9d9d9;
@@ -1179,7 +1190,7 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 275, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 274, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search button {
   position: absolute;
   top: 0;
@@ -1195,7 +1206,7 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
-/* line 290, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 289, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint {
   position: absolute;
   top: 52px;
@@ -1203,13 +1214,13 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 294, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 293, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint p {
   padding: 0 70px 0 20px;
   font-size: 0.9em;
   letter-spacing: 0;
 }
-/* line 302, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 301, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .open-search {
   z-index: 9999;
   cursor: pointer;
@@ -1219,24 +1230,24 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 312, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 311, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet ul {
   width: 82%;
 }
-/* line 318, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 317, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search {
   position: absolute;
   right: 0;
   width: 18%;
   left: 82%;
 }
-/* line 325, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 324, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search.open {
   left: 1px;
   right: 0;
   width: auto;
 }
-/* line 336, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 335, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile ul {
   width: auto;
   position: absolute;
@@ -1245,29 +1256,29 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 341, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 340, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search {
   position: absolute;
   right: 0;
   width: 50px;
 }
-/* line 347, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 346, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search.open {
   width: 100%;
 }
-/* line 354, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 353, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting {
   height: 95px;
 }
-/* line 358, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 357, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li {
   height: 95px;
 }
-/* line 362, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 361, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li a {
   height: 95px;
 }
-/* line 369, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 368, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting .search {
   height: 95px;
 }
@@ -1528,26 +1539,63 @@ p.author, h4.author {
 .single-post-template article .container {
   overflow: hidden;
 }
-/* line 21, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media screen and (max-width: 450px) {
+  /* line 21, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .container {
+    padding: 0;
+  }
+}
+/* line 28, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar {
   padding: 30px 0;
 }
-/* line 25, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media screen and (max-width: 840px) {
+  /* line 28, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .share-bar {
+    padding: 30px 0 20px 0;
+  }
+}
+/* line 36, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .share-bar .icon {
+  display: inline-block;
+  margin-left: 5px;
+}
+/* line 41, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a {
   margin-left: 10px;
+  color: #706d73;
+  letter-spacing: 1px;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
-/* line 29, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 48, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a:first-child {
   margin-left: 0;
 }
-/* line 35, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 55, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .share-bar a.share-print:hover, .single-post-template .share-bar a.share-email:hover {
+  border-color: #f3c5bf;
+}
+/* line 61, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .share-bar a.share-fb:hover {
+  color: #3b5998;
+  border-color: #c4cde0;
+}
+/* line 68, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .share-bar a.share-twitter:hover {
+  color: #55acee;
+  border-color: #cce6fa;
+}
+/* line 75, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar .commentlink {
   float: right;
   margin-top: -5px;
   font-weight: 500;
   text-transform: uppercase;
 }
-/* line 44, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 84, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .col-wide {
   margin-left: 25.625%;
   float: left;
@@ -1556,7 +1604,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
-  /* line 44, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 84, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .col-wide {
     margin-left: 8.54167%;
     float: left;
@@ -1565,11 +1613,11 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 55, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 95, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner {
   position: relative;
 }
-/* line 59, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 99, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner:before, .single-post-template .folded-corner:after {
   display: block;
   position: absolute;
@@ -1577,14 +1625,14 @@ p.author, h4.author {
   right: 0;
   content: "";
 }
-/* line 68, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 108, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner:before {
   border-top: solid 15px #fff;
   border-right: solid 15px #fff;
   border-left: solid 15px transparent;
   border-bottom: solid 15px transparent;
 }
-/* line 76, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 116, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-section {
   color: #d73f2b;
   padding: 12px 0;
@@ -1593,131 +1641,175 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 84, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 124, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-date {
-  text-align: right;
-  float: right;
   color: #706d73;
   font-weight: 300;
 }
-/* line 92, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 129, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
   margin-top: 10px;
   margin-bottom: 40px;
+  word-wrap: break-word;
   margin-left: 25.625%;
   float: left;
   position: relative;
   width: 48.75%;
   margin-right: 0;
 }
-/* line 101, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body h2 {
-  font-size: 48px;
+  font-size: 2.222em;
   line-height: 50px;
   margin-bottom: 10px;
-  font-family: "Times New Roman", "Times", serif;
 }
 @media (max-width: 450px) {
-  /* line 101, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body h2 {
     font-size: 22px;
     line-height: 27px;
+    float: left;
+    position: relative;
+    width: 100%;
+    margin-right: 0;
   }
 }
-/* line 116, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 154, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .body-copy h2, .single-post-template .article-body .body-copy h3, .single-post-template .article-body .body-copy h4, .single-post-template .article-body .body-copy h5, .single-post-template .article-body .body-copy h6 {
   font-size: 30px;
 }
-/* line 122, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.single-post-template .article-body p {
-  font-size: 20px;
-  font-family: "Times New Roman", "Times", serif;
-  line-height: 32px;
+@media (max-width: 450px) {
+  /* line 154, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body .body-copy h2, .single-post-template .article-body .body-copy h3, .single-post-template .article-body .body-copy h4, .single-post-template .article-body .body-copy h5, .single-post-template .article-body .body-copy h6 {
+    font-size: 1.111em;
+  }
 }
-/* line 132, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media (max-width: 450px) {
+  /* line 163, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body .body-copy h1 {
+    font-size: 1.3em;
+  }
+}
+/* line 170, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .article-body p,
+.single-post-template .article-body figcaption {
+  font-size: 1.111em;
+  font-family: "Times New Roman", "Times", serif;
+  line-height: 1.778em;
+}
+@media (max-width: 450px) {
+  /* line 170, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body p,
+  .single-post-template .article-body figcaption {
+    font-size: 0.833em;
+    line-height: 1.6em;
+  }
+}
+/* line 188, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol, .single-post-template .article-body ul {
   margin-bottom: 2em;
   padding-left: 20px;
 }
-/* line 137, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 193, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol li, .single-post-template .article-body ul li {
   line-height: 1.6em;
 }
-/* line 143, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media (max-width: 450px) {
+  /* line 193, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body ol li, .single-post-template .article-body ul li {
+    font-size: 0.833em;
+  }
+}
+/* line 205, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol li {
   list-style-type: decimal;
 }
-/* line 148, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 210, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ul li {
   list-style: initial;
 }
-/* line 153, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 215, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body blockquote {
   margin: 0 -13% 1em -13%;
   text-align: center;
 }
-/* line 159, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 221, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body img {
   max-width: 100%;
-  margin: 20px 0;
+  margin-bottom: 2em;
 }
-/* line 164, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media screen and (max-width: 450px) {
+  /* line 221, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body img {
+    margin-bottom: 1em;
+  }
+}
+/* line 230, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body img.right {
   float: right;
   margin: 0 -13% 0 1em;
 }
-/* line 171, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 237, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .author {
   font-weight: 500;
   margin-bottom: 0;
+  letter-spacing: 0;
 }
-/* line 176, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 243, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-meta {
   margin-bottom: 20px;
 }
-/* line 180, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 247, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .article-body .article-date {
+  margin-top: 10px;
+  font-size: .8em;
+}
+/* line 252, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary {
   background-color: #f2f2f2;
   margin-bottom: 20px;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 16px;
-  line-height: 26px;
+  line-height: 22px;
 }
-/* line 188, ../../../../grunt/DEV/app/templates/article/_article.scss */
+@media (max-width: 450px) {
+  /* line 252, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body .article-summary {
+    font-size: 14px;
+  }
+}
+/* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner {
   padding: 20px 15px;
-  line-height: 30px;
 }
-/* line 192, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 267, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .book-title {
   font-weight: bold;
   color: #706d73;
 }
-/* line 197, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.single-post-template .article-body .article-summary .inner .summary-top,
-.single-post-template .article-body .article-summary .inner .summary-bottom {
+/* line 272, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.single-post-template .article-body .article-summary .inner .inner-wrapper {
   width: 70%;
 }
 @media (max-width: 450px) {
-  /* line 197, ../../../../grunt/DEV/app/templates/article/_article.scss */
-  .single-post-template .article-body .article-summary .inner .summary-top,
-  .single-post-template .article-body .article-summary .inner .summary-bottom {
-    width: 80%;
+  /* line 272, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  .single-post-template .article-body .article-summary .inner .inner-wrapper {
+    width: 95%;
   }
 }
-/* line 206, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 280, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .summary-top {
-  border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
 }
-/* line 211, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 284, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .summary-bottom {
   padding-top: 10px;
+  border-top: 1px solid #d9d9d9;
 }
 @media screen and (max-width: 920px) {
-  /* line 92, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 129, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body {
     margin-left: 17.08333%;
     float: left;
@@ -1727,7 +1819,7 @@ p.author, h4.author {
   }
 }
 @media screen and (max-width: 840px) {
-  /* line 92, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 129, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body {
     margin-left: 8.54167%;
     float: left;
@@ -1735,26 +1827,26 @@ p.author, h4.author {
     width: 82.91667%;
     margin-right: 0;
   }
-  /* line 230, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 304, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body blockquote {
     text-align: left;
     margin-right: 0;
     margin-left: 0;
   }
-  /* line 237, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 311, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body img {
     margin-left: 0;
   }
-  /* line 241, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 315, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body img.right {
     margin-right: 0;
   }
 }
-/* line 250, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 324, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-current {
   background-color: white;
 }
-/* line 254, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 328, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1765,7 +1857,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
 }
-/* line 260, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 334, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold {
   display: none;
   background-color: white;
@@ -1776,7 +1868,7 @@ p.author, h4.author {
   bottom: 0;
   left: 20px;
 }
-/* line 267, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 341, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold.turnleft {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1789,7 +1881,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 275, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 349, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold.turnright {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1803,54 +1895,54 @@ p.author, h4.author {
   animation-duration: 0.4s;
 }
 
-/* line 284, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 358, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links {
   position: relative;
   z-index: 9999;
   min-height: 30px;
 }
-/* line 290, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 364, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links a {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 @media (max-width: 840px) {
-  /* line 284, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 358, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links {
     overflow: hidden;
     padding: 15px 60px;
   }
 }
 @media (max-width: 450px) {
-  /* line 300, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 374, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .inner {
     padding: 0 20px;
   }
 }
-/* line 306, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 380, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav {
   width: 20%;
 }
 @media (max-width: 840px) {
-  /* line 306, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 380, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav {
     width: 25%;
   }
 }
-/* line 314, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 388, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav .icon {
   font-weight: bold;
 }
 @media (max-width: 680px) {
-  /* line 318, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 392, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav .icon span {
     display: none;
   }
 }
-/* line 324, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 398, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav:hover {
   text-decoration: none;
 }
-/* line 329, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 403, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .icon:before,
 .article-links .icon:after {
   font-size: 25px;
@@ -1858,7 +1950,7 @@ p.author, h4.author {
   position: absolute;
   top: -1px;
 }
-/* line 337, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 411, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article {
   z-index: 999;
   text-align: right;
@@ -1869,7 +1961,7 @@ p.author, h4.author {
   right: 0;
 }
 @media (max-width: 840px) {
-  /* line 337, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 411, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .next-article {
     position: relative;
     top: auto;
@@ -1877,18 +1969,22 @@ p.author, h4.author {
     float: right;
   }
 }
-/* line 352, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 428, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.article-links .next-article .icon span {
+  padding-right: 10px;
+}
+/* line 432, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
-/* line 356, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 436, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
-  top: 3px;
+  top: 0;
   font-size: 18px;
   content: "\e60b";
 }
-/* line 364, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 446, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -1899,7 +1995,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 840px) {
-  /* line 364, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 446, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -1908,20 +2004,27 @@ p.author, h4.author {
     float: left;
   }
 }
-/* line 380, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 464, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.article-links .prev-article .icon span {
+  padding-left: 10px;
+}
+/* line 468, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 18px;
-  top: 3px;
+  top: 0;
   left: 0;
 }
-/* line 387, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.article-links .prev-article span, .article-links .next-article span {
+/* line 477, ../../../../grunt/DEV/app/templates/article/_article.scss */
+.article-links .prev-article span,
+.article-links .next-article span {
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 15px;
+  line-height: 1.4em;
   font-weight: 500;
+  display: block;
 }
 
-/* line 395, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 488, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
@@ -2048,30 +2151,87 @@ p.author, h4.author {
   font-weight: 500;
   font-size: 1em;
 }
-/* line 29, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 31, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform .form-element {
+  margin-bottom: 25px;
+}
+/* line 35, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform small {
+  font-size: .7em;
+}
+/* line 39, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform label {
+  display: block;
+  margin-bottom: 5px;
+}
+/* line 44, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform .required {
+  font-size: .7em;
+  padding-top: 15px;
+  font-style: italic;
+}
+/* line 50, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform input[type="text"] {
+  height: 20px;
+  padding: 5px;
+  width: 50%;
+}
+@media screen and (max-width: 840px) {
+  /* line 50, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+  #comments .comment-wrap #commentform input[type="text"] {
+    width: 100%;
+  }
+}
+/* line 60, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform #comment {
+  width: 100%;
+  padding: 10px;
+}
+/* line 65, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #commentform input[type="text"],
+#comments .comment-wrap #commentform #comment {
+  font-family: "Georgia", "Times", serif;
+  font-size: .8em;
+}
+/* line 72, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap #comments-list {
+  margin-top: 50px;
+}
+/* line 76, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment {
   padding-bottom: 20px;
   margin-bottom: 20px;
+  overflow: hidden;
   border-bottom-width: 1px;
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 35, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 83, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment .thumb-wrapper {
   float: left;
   margin-right: 20px;
 }
-/* line 41, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 89, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment h4 {
+  letter-spacing: 0;
+  margin-bottom: 5px;
   font-weight: 500;
   font-size: 1em;
 }
-/* line 49, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+/* line 99, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
 #comments .comment-wrap .comment p {
   color: #706d73;
-  padding-left: 105px;
+  letter-spacing: 0;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.9em;
+}
+/* line 108, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap .comment p.date {
+  font-size: .8em;
+}
+/* line 113, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-wrap .comment .comment-content {
+  margin-top: 15px;
 }
 
 /* line 1, ../../../../grunt/DEV/app/templates/search/_search.scss */
@@ -2405,7 +2565,7 @@ p.author, h4.author {
 }
 /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item .padded {
-  padding: 30px;
+  padding: 30px 24px;
 }
 @media screen and (max-width: 450px) {
   /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
@@ -2415,7 +2575,7 @@ p.author, h4.author {
 }
 /* line 80, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .edition-item h4 {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 5px;
   line-height: 24px;
   word-wrap: break-word;
@@ -2625,7 +2785,7 @@ p.author, h4.author {
 }
 /* line 262, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item .padded {
-  padding: 20px 0;
+  padding: 15px 0 20px 0;
 }
 /* line 266, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
 #latest-edition .editions-bottom .edition-item:last-child {
@@ -2747,6 +2907,27 @@ p.author, h4.author {
   position: relative;
 }
 /* line 110, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper {
+  font-family: "futura-pt", "Arial", sans-serif;
+  font-size: 0.889em;
+  line-height: 22px;
+}
+/* line 116, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper .book-title {
+  font-weight: bold;
+  color: #706d73;
+}
+/* line 121, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+.card footer .summary-wrapper .inner-wrapper {
+  width: 70%;
+}
+@media (max-width: 450px) {
+  /* line 121, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  .card footer .summary-wrapper .inner-wrapper {
+    width: 95%;
+  }
+}
+/* line 130, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub {
   color: #706d73;
   margin-bottom: 0;
@@ -2754,11 +2935,11 @@ p.author, h4.author {
   font-weight: 500;
   font-family: "futura-pt", "Arial", sans-serif;
 }
-/* line 120, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 140, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer .sub a {
   color: #706d73;
 }
-/* line 125, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 145, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer:after {
   height: 0;
   width: 0;
@@ -2771,11 +2952,11 @@ p.author, h4.author {
   display: block;
   content: "";
 }
-/* line 139, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 159, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card footer p {
   letter-spacing: 0;
 }
-/* line 144, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 164, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card:hover {
   border-color: #ccc;
   top: -3px;
@@ -2783,21 +2964,21 @@ p.author, h4.author {
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
-/* line 151, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 171, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private {
   background-color: #e6e6e6;
 }
-/* line 155, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 175, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.private footer:after {
   border-right-color: #e6e6e6;
 }
-/* line 160, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 180, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.mpu {
   overflow: hidden;
   min-height: 300px;
   position: relative;
 }
-/* line 166, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 186, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.mpu img {
   max-width: 100% !important;
   position: absolute;
@@ -2809,30 +2990,30 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
-/* line 174, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 194, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry {
   float: left;
   position: relative;
   width: 31.66667%;
   margin-right: 2.5%;
 }
-/* line 178, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
 }
 
-/* line 186, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 206, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 {
   background-color: #d73f2b;
   margin-bottom: 0;
   padding-bottom: 12px;
 }
-/* line 192, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 212, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 a {
   color: white;
 }
 
-/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -2851,7 +3032,7 @@ p.author, h4.author {
   animation-timing-function: ease;
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
-  padding: 20px 30px;
+  padding: 14px 24px 20px 20px;
 }
 /* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
 .card-flat:nth-child(1) {
@@ -2904,14 +3085,15 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
-  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
+    padding: 20px 30px;
     margin-bottom: 15px;
     font-size: 0.8em;
   }
@@ -3517,585 +3699,395 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 
 */
 @-webkit-keyframes fadeIn {
-  /* line 63, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 109, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
   }
 }
 @-moz-keyframes fadeIn {
-  /* line 237, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 283, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes fadeIn {
-  /* line 411, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 457, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes fade {
-  /* line 63, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: scale(1);
     opacity: 0;
   }
-
-  /* line 109, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
   }
 }
 @-moz-keyframes fade {
-  /* line 237, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: scale(1);
     opacity: 0;
   }
-
-  /* line 283, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes fade {
-  /* line 411, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: scale(1);
     opacity: 0;
   }
-
-  /* line 457, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes slideUp {
-  /* line 79, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: translateY(0);
     opacity: 1;
   }
 }
 @-moz-keyframes slideUp {
-  /* line 253, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 299, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: translateY(0);
     opacity: 1;
   }
 }
 @keyframes slideUp {
-  /* line 427, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 473, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: translateY(0);
     opacity: 1;
   }
 }
 @-webkit-keyframes slideleft {
-  /* line 75, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 121, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: translateX(0);
     opacity: 1;
   }
 }
 @-moz-keyframes slideleft {
-  /* line 249, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 295, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: translateX(0);
     opacity: 1;
   }
 }
 @keyframes slideleft {
-  /* line 423, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 469, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: translateX(0);
     opacity: 1;
   }
 }
 @-webkit-keyframes flips {
-  /* line 48, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 49, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 50, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 51, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 52, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 53, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 54, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 55, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 56, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 57, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 58, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 59, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 60, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-moz-keyframes flips {
-  /* line 64, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 65, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 66, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 67, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 68, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 69, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 70, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 71, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 72, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 73, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 74, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 75, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 76, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-ms-keyframes flips {
-  /* line 80, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 81, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 82, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 83, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 84, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 85, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 86, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 87, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 88, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 89, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 90, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 91, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 92, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @keyframes flips {
-  /* line 96, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 97, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 98, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 99, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 100, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 101, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 102, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 103, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 104, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 105, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 106, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 107, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 108, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-webkit-keyframes pageTurnLeft {
-  /* line 118, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 119, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 120, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 121, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 122, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-moz-keyframes pageTurnLeft {
-  /* line 126, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 127, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 128, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 129, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 130, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @keyframes pageTurnLeft {
-  /* line 134, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 135, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 136, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 137, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 138, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-webkit-keyframes pageTurnRight {
-  /* line 144, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 145, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 146, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 147, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 148, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
 }
 @-moz-keyframes pageTurnRight {
-  /* line 153, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 154, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 155, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 156, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 157, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
 }
 @keyframes pageTurnRight {
-  /* line 162, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 163, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 164, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 165, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 166, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;

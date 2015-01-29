@@ -42,86 +42,81 @@
   font-size: 2.8em;
   font-weight: bold;
 }
-/* line 10, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
-#tinymce h1.padded {
-  padding-top: 50px;
-}
-/* line 17, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 12, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce h2 {
   margin-bottom: 0.5em;
   font-size: 2.2em;
   font-weight: bold;
-  font-family: "Times New Roman", "Times", serif;
 }
-/* line 29, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 23, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce h3 {
   margin-bottom: 0.5em;
   font-size: 1.8em;
   font-weight: bold;
 }
-/* line 39, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 33, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce h4 {
   margin-bottom: 0.5em;
   font-size: 1.4em;
   font-weight: bold;
 }
-/* line 49, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 43, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce h5 {
   margin-bottom: 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
-/* line 59, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 53, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce h6 {
   margin-bottom: 0.5em;
   font-size: 1em;
   font-weight: bold;
 }
-/* line 69, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 63, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce p {
   line-height: 1.4em;
   margin-bottom: 2em;
 }
-/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 68, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce p:last-of-type {
   margin-bottom: 0;
 }
-/* line 80, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 74, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce .centred {
   text-align: center;
 }
-/* line 84, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 78, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce blockquote {
   line-height: 1.6em;
   color: #d73f2b;
   font-style: italic;
   font-size: 1.2em;
 }
-/* line 94, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 88, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce strong, #tinymce b {
   font-weight: bold;
 }
-/* line 99, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 93, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce em, #tinymce i {
   font-style: italic;
 }
-/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 98, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce .futura {
   letter-spacing: 2px;
   font-family: "futura-pt", "Arial", sans-serif;
 }
-/* line 110, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 104, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce .uppercase {
   text-transform: uppercase;
 }
-/* line 115, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 109, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce p.author, #tinymce h4.author {
   margin-bottom: 0.6em;
   letter-spacing: 1px;
   font-size: 1em;
   font-family: "futura-pt", "Arial", sans-serif;
 }
-/* line 126, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 120, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce .centred-heading {
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -132,7 +127,7 @@
   font-family: "futura-pt", "Arial", sans-serif;
   font-weight: 700;
 }
-/* line 139, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
+/* line 133, ../../../../grunt/DEV/app/global/sass-globals/_typography.scss */
 #tinymce .centred-heading:after {
   bottom: -20px;
   height: 5px;

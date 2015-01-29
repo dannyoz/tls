@@ -24,31 +24,50 @@ if ( post_password_required() ) {
 
 			<h3 class="futura">Comments (<span ng-bind="post.comment_count"></span>)</h3>
 
-			<div class="comment" ng-repeat="comment in post.comments">
-				<div class="thumb-wrapper">
-					<img class="max circular" src="http://placehold.it/85x85">
-				</div>
-				<h4 class="futura" ng-bind="comment.name"></h4>
-				<p class="date futura" ng-bind="format(comment.date)"></p>
-				<div ng-bind-html="comment.content"></div>
-			</div>
-	
+			<div id="comments-list">
+				<div class="comment" ng-repeat="comment in post.comments">
+					<h4 class="futura" ng-bind="comment.name"></h4>
+					<p class="date futura" ng-bind="format(comment.date)"></p>
+					<div class="comment-content" ng-bind-html="comment.content"></div>
+				</div>				
+			</div>			
+
 			<?php if(comments_open()) : ?>
 				<?php if(get_option('comment_registration') && !$user_ID) : ?>
 					<p>You must be <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?redirect_to=<?php echo urlencode(get_permalink()); ?>">logged in</a> to post a comment.</p><?php else : ?>
-					<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
+
+					<h3 class="futura">Leave a comment</h3>
+					
+					<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">						
 						<?php if($user_ID) : ?>
 							<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account">Log out &raquo;</a></p>
 						<?php else : ?>
-							<p><input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
-							<label for="author"><small>Name <?php if($req) echo "(required)"; ?></small></label></p>
-							<p><input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />
-							<label for="email"><small>Mail (will not be published) <?php if($req) echo "(required)"; ?></small></label></p>
+
+							<div class="form-element">
+								<label for="author">Name</label>
+								<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
+							</div>
+							
+							<div class="form-element">
+								<label for="email">Email Address <small>(will not be published)</small></label>
+								<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />	
+							</div>							
+							
 						<?php endif; ?>
-						<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
-						<p><input class="button clear small" name="submit" type="submit" id="submit" tabindex="5" value="Leave comment" />
-						<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" /></p>
+
+						<div class="form-element">
+							<label for="comment">Comment</label>
+							<textarea name="comment" id="comment" rows="10" tabindex="4" placeholder="Leave your comment"></textarea>
+							<div class="required">All fields required</div>
+						</div>
+
+						<div class="form-element">
+							<input class="button clear small" name="submit" type="submit" id="submit" tabindex="5" value="Leave comment" />
+							<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
+						</div>						
+						
 						<?php do_action('comment_form', $post->ID); ?>
+
 					</form>
 				<?php endif; ?>
 			<?php else : ?>

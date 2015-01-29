@@ -8,4 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Tls\\TlsHubSubscriber\\' => array($baseDir . '/inc/tls_hub_subscriber'),
     'Tls\\' => array($baseDir . '/inc'),
+    'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
+    'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
+    'GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
 );
