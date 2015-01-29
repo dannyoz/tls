@@ -58,7 +58,7 @@
 						</div>
 					</div>
 
-					<div class="grid-row">
+					<div class="grid-row" ng-if="post.custom_fields.hero_image_url[0]">
 						<div class="col-wide">
 							<img class="max" ng-attr-src="{{post.custom_fields.hero_image_url[0]}}">
 						</div>
