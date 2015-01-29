@@ -28542,12 +28542,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-accordian.html',
-    "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.heading></h3><div class=toggler><span ng-if=!item.isOpen>Open</span> <span ng-if=item.isOpen>Close</span> <i class=\"icon icon-plus transition-2\" ng-class={open:item.isOpen}></i></div></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
+    "<div class=accordian><div class=accordian-item ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.heading></h3><div class=toggler><span ng-if=!item.isOpen>Open</span> <span ng-if=item.isOpen>Close</span> <i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=\"accordian-body transition-2\" ng-class={open:item.isOpen} ng-bind-html=item.content></div></div></div>"
   );
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog' || data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer><p ng-if=data.author class=futura ng-bind=data.author></p></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null\" class=futura ng-bind=data.author></p><div class=summary-wrapper ng-if=data.custom_fields.book_title[0]><div class=book-title ng-bind-html=data.custom_fields.book_title[0]></div><div ng-bind-html=data.custom_fields.book_author[0]></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
   );
 
 
@@ -28634,10 +28634,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.acceptCookies = function(){
 
+		var exdate = new Date();
+   		exdate.setDate(exdate.getDate() + 365);
+
 		var val    = "cookiesAccepted=true",
-			now    = new Date,
-			oneYr  = now.setYear(now.getFullYear() + 1),
-			expiry = "expires=" + oneYr,
+			expiry = "expires=" + exdate.toUTCString(),
 			path   = "path=/",
 			cookie = val + "; " + expiry + "; " + path;
 
@@ -28763,6 +28764,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			return defer.promise
 
 		},
+		getFaqs : function (){
+
+			var defer = $q.defer(),
+				path  = '/api/get_posts/?post_type=tls_faq';
+
+			$http.get(path).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+		},
 		checkQueries : function(url){
 			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
 			return prefix
@@ -28864,16 +28879,45 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 }])
 .factory('niceDate',function(){
 	return{
-		format : function(d){
+		testobj : {},
+		format  : function(d){
+			
+			if (d) {
 
-			var date     = new Date(d),
-				day      = date.getDate(),
-				months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
-				m        = date.getMonth(),
-				year     = date.getFullYear(),
-				niceDate = months[m]+ " " + day + " " + year;
+				var dateTime  = d.split(" "),
+				    dateItems = dateTime[0].split("-"),
+				    timeItems =  dateTime[1].split(":");
 
-			return niceDate;
+				var y  = Number(dateItems[0]), // year
+					m  = Number(dateItems[1]) - 1, // month
+					da = Number(dateItems[2]); // day
+
+				var h  = Number(timeItems[0]), // hour
+					mn = Number(timeItems[1]),	// minutes
+					s  = Number(timeItems[2]);	// seconds
+
+				this.testobj = {
+					"year"    : y,
+					"month"   : m + 1,
+					"date"    : da,
+					"hours"   : h,
+					"mins"    : mn,
+					"seconds" : s
+  				}
+
+
+				var date     = new Date(y, m, da, h, mn, s),
+					day      = date.getDate(),
+					months   = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"],
+					m        = date.getMonth(),
+					year     = date.getFullYear(),
+					niceDate = months[m]+ " " + day + " " + year;
+
+				console.log(niceDate)
+				
+				return niceDate;
+
+			}
 		}
 	}
 })
@@ -29180,9 +29224,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			scope.toggleOpen = function (i){
 
 				var newState = (scope.items[i].isOpen == true)? false : true;
-				angular.forEach(scope.items,function(obj){
-					obj.isOpen = false
-				})
+				// angular.forEach(scope.items,function(obj){
+				// 	obj.isOpen = false
+				// })
 				scope.items[i].isOpen = newState;
 				
 			}
@@ -29221,7 +29265,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		templateUrl : "tls-card.html",
 		scope : {
 			data : "=tlsCard",
-			type : "@"
+			type : "@",
+			copy : "=copy"
 		},
 		link : function(scope){
 
@@ -29229,6 +29274,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			var card = scope.data;	
 			// Type passed as attibute
 			var typeAttr = scope.type;
+
+			card.hasCopy = (scope.copy == undefined) ? true : scope.copy; 
 
 			if(card.type == "listen_blog"){
 				card.type  = "blog"
@@ -29363,7 +29410,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 					case 'blog':
 						
-						if (!isUndefined(card.categories[0])) {
+						if (!isUndefined(card.categories) &&
+							!isUndefined(card.categories[0])) {
 							card.category = {};
 							card.category.slug = card.categories[0]['slug'];
 							card.category.title = card.categories[0]['title'];
@@ -29575,8 +29623,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.emailLink = function(){
 
-		var subject   = 'TLS article you may be interested in -' + $scope.post.title_plain,
-			emailBody = $scope.post.url,
+		var subject   = 'TLS article',
+			emailBody = 'I thought you might be interested in this article from the Times Literary Supplement ' + $scope.post.url,
 			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
 		
 		return emailPath
@@ -29948,6 +29996,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 
 		} else {
+			
 			$scope.scrollState = "off";
 			$scope.infLoading  = false;
 
@@ -29958,11 +30007,39 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	}
 
 }])
-.controller('footerpages',['$scope','$sce','api','niceDate', function ($scope,$sce,api,niceDate){
+.controller('footerpages',[
+	'$scope',
+	'$sce',
+	'api',
+	'niceDate', 
+	'tealium',
+	function ($scope,$sce,api,niceDate,tealium){
+
+	$scope.ready   = false;
+	$scope.tealium = tealium;
 
 	api.getArticle(window.location.href).then(function (result){
-		$scope.page = result.page
+		$scope.page  = result.page
+		$scope.ready = true;
 		console.log(result)
+
+		if(result.page_template_slug == "template-faqs.php"){
+
+			api.getFaqs().then(function (result){
+				console.log(result)
+
+				$scope.page.accordion_items = [];
+
+				angular.forEach(result.posts, function(data){
+					var obj = {};
+
+					obj.heading = data.title
+					obj.content = data.content
+					
+					$scope.page.accordion_items.push(obj);
+				})
+			})
+		}
 	});
 
 	$scope.format = function(date){

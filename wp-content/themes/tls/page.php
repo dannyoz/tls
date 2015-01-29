@@ -12,16 +12,16 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php get_template_part( 'content', 'page' ); ?>
-
-			<?php endwhile; // end of the loop. ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+<article id="accordian-template" class="single-post-template transition-2" ng-class="{show:ready}" ng-controller="footerpages">
+	<div class="container">
+		<div class="grid-row">
+			<div class="article-body">
+				<h1 ng-bind="page.title" class="padded"></h1>
+				<p class="date" ng-bind="format(page.date);"></p>
+				<div ng-bind-html="page.content"></div>
+			</div>		
+		</div>
+	</div>
+</article>
 
 <?php get_footer(); ?>

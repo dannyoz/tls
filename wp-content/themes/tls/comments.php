@@ -57,7 +57,7 @@ if ( post_password_required() ) {
 
 						<div class="form-element">
 							<label for="comment">Comment</label>
-							<textarea name="comment" id="comment" rows="10" tabindex="4" placeholder="Leave your comment"></textarea>
+							<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
 							<div class="required">All fields required</div>
 						</div>
 

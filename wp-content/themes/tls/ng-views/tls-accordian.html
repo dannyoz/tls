@@ -5,7 +5,8 @@
 			<div class="toggler">
 				<span ng-if="!item.isOpen">Open</span>
 				<span ng-if="item.isOpen">Close</span>
-				<i class="icon icon-plus transition-2" ng-class="{open:item.isOpen}"></i>
+				<i class="icon icon-plus transition-2" ng-if="!item.isOpen"></i>
+				<i class="icon icon-minus transition-2" ng-if="item.isOpen"></i>
 			</div>
 		</div>
 		<div class="accordian-body transition-2" ng-class="{open:item.isOpen}" ng-bind-html="item.content"></div>

@@ -96,6 +96,7 @@
 			}
 
 		} else {
+			
 			$scope.scrollState = "off";
 			$scope.infLoading  = false;
 

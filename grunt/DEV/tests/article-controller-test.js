@@ -12,18 +12,6 @@ describe('Unit: article', function() {
     }));
 
 
-    it('should convert wordpress date format', function(){
-
-        var date    = "2014-12-02 10:32:36",
-            test    = scope.format(date),
-            conv    = "DECEMBER 2 2014",
-            match   = (test.indexOf(conv) > -1 && conv.length == test.length) ? true : false;
-
-        expect(typeof test).toBe("string");
-        expect(match).toBe(true);
-        
-    })
-
     it('should apply or remove filters on click', function(){
 
         scope.orginalList = ['this','is','the','orginal','array'];

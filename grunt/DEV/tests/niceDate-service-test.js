@@ -3,15 +3,20 @@ describe('niceDate', function() {
     beforeEach(module('tls'));
 
     it('should convert wordpress date format', inject(function(niceDate){
+        var input   = "2014-12-02 10:32:36",
+            test    = niceDate.format(input),
+            date    = niceDate.testobj;
 
-        var date    = "2014-12-02 10:32:36",
-            test    = niceDate.format(date),
-            conv    = "DECEMBER 2 2014",
-            match   = (test.indexOf(conv) > -1 && conv.length == test.length) ? true : false;
+        expect(test).toEqual("DECEMBER 2 2014");
+        expect(date).toBeDefined();
 
-        expect(typeof test).toBe("string");
-        expect(match).toBe(true);
-        
+        expect(date.year).toBe(2014);
+        expect(date.month).toBe(12);
+        expect(date.date).toBe(02);
+        expect(date.hours).toBe(10);
+        expect(date.mins).toBe(32);
+        expect(date.seconds).toBe(36);
+
     }));
 
 })
