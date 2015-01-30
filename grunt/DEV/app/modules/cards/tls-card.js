@@ -66,8 +66,6 @@
 					cardType = card.type;
 				}
 
-				console.log(cardType);
-
 				switch (cardType) {
 
 					case 'article':
@@ -159,6 +157,14 @@
 						}
 
 					break;
+
+					// case 'then_and_now':
+					// 	console.log(card);
+					// break;
+
+					// case 'poem_of_week':
+					// 	console.log(card);
+					// break;
 				}		
 
 			}(card);
