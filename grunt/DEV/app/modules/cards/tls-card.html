@@ -36,15 +36,14 @@
 		
 		<div ng-if="data.category.slug != 'listen'" class="grid-row padded">			
 			<div class="blog-avatar">
-				<a ng-href="/author/{{data.author.slug}}">
-					<img class="max circular" ng-if="data.categories[0].slug == 'a-dons-life'" src="/wp-content/themes/tls/images/mary.jpg"/>
-					<img class="max circular" ng-if="data.categories[0].slug != 'a-dons-life'" src="/wp-content/themes/tls/images/grey-logo.jpg" />
+				<a ng-href="{{data.url}}">
+					<img class="max circular" ng-attr-src="{{data.thumbnail}}"/>
 				</a>
 			</div>
 
 			<div class="blog-data">
 				<div class="inner">
-					<h4><a href="{{data.url}}" ng-click="tealiumTag(data);">{{data.title}}</a></h4>
+					<h4><a ng-href="{{data.url}}" ng-click="tealiumTag(data);">{{data.title}}</a></h4>
 					<p class="futura"><a ng-href="/author/{{data.author.slug}}">{{data.author.name}}</a></p>
 					<!-- <p ng-bind-html="data.excerpt"></p> -->
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
