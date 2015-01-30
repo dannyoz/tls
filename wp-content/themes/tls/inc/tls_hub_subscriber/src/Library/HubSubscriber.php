@@ -118,6 +118,7 @@ class HubSubscriber {
             $feed = file_get_contents( esc_url($_GET['pull_url']) );
             $feedParser = new HubXmlParser($this->option_name, $this->current_options);
             $feedParser->parseFeed($feed);
+            header('HTTP/1.1 200 "Found"', NULL, 200);
             exit();
         }
 
@@ -162,6 +163,7 @@ class HubSubscriber {
         $feedParser = new HubXmlParser($this->option_name, $this->current_options);
         $feedParser->parseFeed($feedPayload);
 
+        header('HTTP/1.1 200 "Found"', NULL, 200);
         exit();
     }
 
@@ -187,6 +189,8 @@ class HubSubscriber {
             $this->hubLogger->error('Error from Subscription Verification', $verificationResponse->getStatusCode());
         }
 
+        header('HTTP/1.1 200 "Found"', NULL, 200);
+        exit();
     }
 
 }

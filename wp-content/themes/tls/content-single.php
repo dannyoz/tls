@@ -8,7 +8,7 @@
 
 				<div class="article-current">
 
-					<div ng-if="post && size != 'mobile'" class="col-wide share-bar">
+					<div ng-if="post && size != 'mobile' && !post.akamai_teaser" class="col-wide share-bar">
 
 						<a ng-click="printPage();" class="share-print button clear small">
 							<i class="icon icon-print"></i>						
@@ -117,6 +117,41 @@
 								</a>
 
 							</div>	
+
+							<div id="subscribe-form-wrapper" ng-if="post.akamai_teaser">
+
+								<div class="grid-row">
+									<div class="grid-8">
+										
+										<div class="form-subtitle futura">To read the full article, please login</div>
+
+										<form novalidate name="login-form" class="form">	
+
+											<div class="form-item">
+												<label for="akamaiEmail" class="label">Email address</label>
+												<input name="akamaiEmail" type="email" ng-model="lg.akamaiEmail" required />													
+											</div>										
+											<div class="form-item">
+												<label for="akamaiPassword" class="label">Password</label>
+												<input name="akamaiPassword" type="password" ng-model="lg.akamaiPassword" required />													
+											</div>
+											<div class="form-item">												
+												<input name="akamaiKeepme" type="checkbox" ng-model="lg.akamaiKeepme" />
+												<label for="akamaiKeepme" class="label inline">Keep me logged in</label>	
+											</div>
+											<div class="form-item">
+												<button ng-click="login(lg);" class="button clear login"><i class="icon icon-login"></i> Login</button>
+											</div>																					
+
+										</form>
+									</div>
+									<div class="grid-4 subscribe-col">
+										<div class="form-subtitle futura">Not a subscriber?</div>
+										<button ng-click="subscribe();" class="button subscribe">Subscribe</button>
+									</div>
+								</div>
+
+							</div>
 
 						</div>
 					</div>

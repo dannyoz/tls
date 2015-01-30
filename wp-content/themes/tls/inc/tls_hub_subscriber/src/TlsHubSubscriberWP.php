@@ -109,7 +109,7 @@ class TlsHubSubscriberWP {
 					<?php settings_errors(); ?>
 					<?php settings_fields('tls_hub_subscriber_options'); ?>
 					<div id="post-body" class="metabox-holder">
-						<div id="postbox-container-1" class="postbox-container">
+						<div id="tls_hub_container" class="postbox-container">
 							<div class="postbox">
 								<div class="inside">
 
