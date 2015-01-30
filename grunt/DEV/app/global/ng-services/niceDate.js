@@ -33,8 +33,6 @@
 					m        = date.getMonth(),
 					year     = date.getFullYear(),
 					niceDate = months[m]+ " " + day + " " + year;
-
-				console.log(niceDate)
 				
 				return niceDate;
 
