@@ -3,9 +3,11 @@
 namespace Tls\TlsHubSubscriber\Library;
 
 use GuzzleHttp\Client as GuzzleClient;
+use Tls\TlsHubSubscriber\TlsHubSubscriberWP;
 
 /**
  * Class HubSubscriber
+ * @property HubLogger hubLogger
  * @package Tls\TlsHubSubscriber\Library
  */
 class HubSubscriber {
@@ -60,7 +62,9 @@ class HubSubscriber {
         $this->endpoint_base = 'pushfeed';
 
         // Create Callback URL with the {Site URL}/pushfeed/{Subscription ID}
-        $this->callbackUrl = $this->domain . $this->current_options['subscription_id'];
+        if (isset($this->current_options['subscription_id'])) {
+            $this->callbackUrl = $this->domain . $this->current_options['subscription_id'];
+        }
 
         // Instantiate Guzzle Client to handle the HTTP Requests to be made
         $this->guzzleClient = new GuzzleClient();
@@ -138,7 +142,7 @@ class HubSubscriber {
         switch ( $_GET['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] ) {
 
             case "SubscriptionConfirmation":
-                $this->verifySubscription();
+                $verifySubscription = $this->verifySubscription();
                 break;
 
             case "Notification":
@@ -148,6 +152,11 @@ class HubSubscriber {
             default:
                 header('HTTP/1.1 404 "Not Found"', NULL, 404);
                 break;
+        }
+
+        if (isset($verifySubscription) && $verifySubscription == true) {
+            $this->current_options['subscription_status'] = 'Subscribed';
+            update_option($this->option_name, TlsHubSubscriberWP::get_current_options());
         }
 
         exit();
@@ -179,18 +188,18 @@ class HubSubscriber {
 
         // Perform a GET Request using Guzzle on the SubscribeURL that JSON Payload sent
         $verificationResponse = $this->guzzleClient->get($json->SubscribeURL);
-
+        echo $verificationResponse->getStatusCode();
         // Check if Response is 200, 202 or 204 and add a log message otherwise log error message
         if (in_array($verificationResponse->getStatusCode(), array(200, 202, 204))) {
-            $this->hubLogger->log('Positive answer from Subscription Verification', $verificationResponse->getStatusCode());
-            $this->current_options['subscription_status'] = 'Subscribed';
-            update_option($this->option_name, $this->current_options);
+            $this->hubLogger->log('Positive answer from Subscription Verification. You are now Subscribed', $verificationResponse->getStatusCode());
+            header('HTTP/1.1 200 "Found"', NULL, 200);
+            return true;
         } else {
             $this->hubLogger->error('Error from Subscription Verification', $verificationResponse->getStatusCode());
+            header('HTTP/1.1 404 "Not Found"', NULL, 404);
+            return false;
         }
 
-        header('HTTP/1.1 200 "Found"', NULL, 200);
-        exit();
     }
 
 }

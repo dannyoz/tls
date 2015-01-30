@@ -54,8 +54,8 @@ class HubXmlParser implements FeedParser {
         $feed=preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $feed);
         // Turn on Simple XML Internal Errors to catch any errors that appear
         libxml_use_internal_errors(true);
-        $xml = new SimpleXMLElement($feed);
-
+        $xml = simplexml_load_string($feed);
+var_dump(libxml_get_errors());
         // If there are errors then add them to the error logs
         if ($xml === false) {
             $error_msg = "Failed loading XML\n";
@@ -66,7 +66,7 @@ class HubXmlParser implements FeedParser {
         }
 
         // Parse the article entries [Separate method so this method doesn't become extremely long]
-        $articlesCount = $this->parseArticles($xml);
+        $articlesResult = $this->parseArticles($xml);
 
         // Stop Time Counter
         $end_time = microtime(true);
@@ -74,7 +74,9 @@ class HubXmlParser implements FeedParser {
         $execution_time = ($end_time - $start_time);
 
         // Add Log of the time it took and how many articles it imported
-        echo 'It took ' . $execution_time . ' seconds to import ' . $articlesCount . ' articles.';
+        $articles = ( $articlesResult['articleCount'] == 1 ) ? 'article' : 'articles';
+        echo 'It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
+        $this->hubLogger->log('It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
     }
 
     /**
@@ -119,9 +121,11 @@ class HubXmlParser implements FeedParser {
             // If there is no article match then send the article data into saveArticleData method
             if (!$articleMatches->found_posts > 0) {
                 $article_id = $this->saveArticleData($article_data);
+                $import_type = 'import';
             } else { // If a match is found then add ID into the Article Data array and then send the data to the saveArticleData and with second parameter true to indicate an update and not an insert
                 $article_data['ID'] = (int) $articleMatches->posts[0]->ID;
                 $article_id = $this->saveArticleData($article_data, true);
+                $import_type = 'update';
             }
 
             // Save Article Section Taxonomy Term
@@ -153,7 +157,7 @@ class HubXmlParser implements FeedParser {
         }
 
         // Returns the number of articles parsed back into the parseFeed method to add a log of how many articles were imported
-        return $articleCount;
+        return array( 'import_type' => $import_type, 'articleCount' => $articleCount );
     }
 
     /**

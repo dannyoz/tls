@@ -73,10 +73,10 @@ class HubLogger implements Logger {
      */
     public function log($msg, $code = null) {
 
-        $logMessage = $this->logs_date_time . $msg;
+        $logMessage = $this->logs_date_time . $msg . "\n";
 
         if ( $code != null ) {
-            $logMessage = $this->logs_date_time . $msg . " (Code: " . $code . ")";
+            $logMessage = $this->logs_date_time . $msg . " (Code: " . $code . ")" . "\n";
         }
         $logMessage .= "--------------\n";
         $this->current_options['log_messages'] = $this->current_options['log_messages'] . $logMessage ;
@@ -92,10 +92,10 @@ class HubLogger implements Logger {
      */
     public function error($msg, $code = null) {
 
-        $errorMessage = $this->logs_date_time . $msg;
+        $errorMessage = $this->logs_date_time . $msg . "\n";
 
         if ( $code != null ) {
-            $errorMessage = $this->logs_date_time . $msg . " (Code: " . $code . ")";
+            $errorMessage = $this->logs_date_time . $msg . " (Code: " . $code . ")" . "\n";
         }
         $errorMessage .= "--------------\n";
 
