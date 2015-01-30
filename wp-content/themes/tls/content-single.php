@@ -75,19 +75,19 @@
 								<div class="grid-12 article-date title-small" ng-bind="format(post.modified)" ng-if="size == 'mobile'"></div>
 							</div>
 
-							<div class="grid-12 article-summary folded-corner" ng-if="post.custom_fields.book_title[0]">
-								<div class="inner">
+							<div class="grid-12 article-summary folded-corner" ng-if="post.books">
+								<div class="inner" ng-repeat="book in post.books">
 									<div class="summary-top">
 										<div class="inner-wrapper">
-											<div class="book-title" ng-bind-html="post.custom_fields.book_title[0]"></div>
-											<div ng-bind-html="post.custom_fields.book_author[0]"></div>	
+											<div class="book-title" ng-bind-html="book.title"></div>
+											<div ng-bind-html="book.author"></div>	
 										</div>									
 									</div>	
 									<div class="summary-bottom">
 										<div class="inner-wrapper">									
-											<div ng-bind-html="post.custom_fields.book_info_1[0]"></div>
-											<div ng-bind-html="post.custom_fields.book_info_2[0]"></div>
-											<div ng-bind-html="post.custom_fields.book_isbn[0]"></div>					
+											<div ng-bind-html="book.info1"></div>
+											<div ng-bind-html="book.info2"></div>
+											<div ng-bind-html="book.isbn"></div>					
 										</div>
 									</div>	
 								</div>							

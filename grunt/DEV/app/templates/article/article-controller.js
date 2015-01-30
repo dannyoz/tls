@@ -8,7 +8,8 @@
 	'columns',
 	'niceDate',
 	'tealium',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
+	'books',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium,books){
 
 	$scope.ready      = false;
 	$scope.tealium    = tealium;
@@ -27,6 +28,14 @@
 		$scope.prev  = result.previous_url
 		$scope.next  = result.next_url
 		$scope.ready = true;
+
+
+		//restructure book format
+		if($scope.post.custom_fields.books){
+			books.parse($scope.post.custom_fields).then(function (returned){
+				$scope.post.books = returned;
+			});
+		}
 
 		// Get related content
 		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
