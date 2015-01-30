@@ -28547,7 +28547,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null\" class=futura ng-bind=data.author></p><div class=summary-wrapper ng-if=data.custom_fields.book_title[0]><div class=book-title ng-bind-html=data.custom_fields.book_title[0]></div><div ng-bind-html=data.custom_fields.book_author[0]></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{data.author.slug}}><img class=\"max circular\" ng-if=\"data.categories[0].slug == 'a-dons-life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"data.categories[0].slug != 'a-dons-life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-href={{data.section.link}} ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null\" class=futura ng-bind=data.author></p><div class=summary-wrapper ng-if=data.custom_fields.book_title[0]><div class=book-title ng-bind-html=data.custom_fields.book_title[0]></div><div ng-bind-html=data.custom_fields.book_author[0]></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><img src=\"/wp-content/themes/tls/images/mpu.jpg\"></div>"
   );
 
 
@@ -28702,6 +28702,25 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			return defer.promise
 		},
+		getPagedPosts : function(section,pg){
+
+			var defer  = $q.defer(),
+				prefix = "/api/get_posts/?post_type=tls_articles&article_section=",
+				page   = (pg) ? "&paged=" + pg : "";
+
+			//expose url for testing
+			defer.promise.url = prefix+section+page
+
+			$http.get(prefix+section+page).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+
+		},
 		getRelatedContent : function(tags){
 
 			var defer  = $q.defer(),
@@ -28794,6 +28813,39 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 			
 		}		
+	}
+}])
+//Factory for parsing the custom fields for books into a  more manageble format
+
+.factory('books', [ "$q", function ($q){
+	return{
+		parse : function(fields){
+
+			var defer     = $q.defer(),
+				bookcount = fields.books[0],
+				books     = [];
+
+			for(var i = 0; i<bookcount; i ++){
+				
+				var book = {},
+					author  = "books_" + i + "_book_author",
+					info1   = "books_" + i + "_book_info_1",
+					info2   = "books_" + i + "_book_info_2",
+					isbn    = "books_" + i + "_book_isbn",
+					title   = "books_" + i + "_book_title";
+
+				book.author = fields[author][0]
+				book.info1  = fields[info1][0]
+				book.info2  = fields[info2][0]
+				book.isbn   = fields[isbn][0]
+				book.title  = fields[title][0]
+
+				books.push(book)
+			}
+
+			defer.resolve(books);
+			return defer.promise
+		}
 	}
 }])
 .factory('columns',['$q', function ($q){
@@ -29556,7 +29608,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'columns',
 	'niceDate',
 	'tealium',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium){
+	'books',
+	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium,books){
 
 	$scope.ready      = false;
 	$scope.tealium    = tealium;
@@ -29575,6 +29628,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.prev  = result.previous_url
 		$scope.next  = result.next_url
 		$scope.ready = true;
+
+
+		//restructure book format
+		if($scope.post.custom_fields.books){
+			books.parse($scope.post.custom_fields).then(function (returned){
+				$scope.post.books = returned;
+			});
+		}
 
 		// Get related content
 		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
@@ -29974,6 +30035,117 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			} else {
 
 				api.getArticleList($scope.pageNumber).then(function (result){
+
+					var posts = result.posts;
+					$scope.scrollState = "on";
+
+					console.log(posts);
+
+					columns.divide(posts).then(function (cols){
+
+						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+						$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+						$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+						$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+						$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+						$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+						$scope.pageNumber ++
+						$scope.infLoading = false;
+					})
+				})
+			}
+
+		} else {
+			
+			$scope.scrollState = "off";
+			$scope.infLoading  = false;
+
+			$scope.$apply(function(){
+				$scope.loadMsg = "End of results in " + $scope.page.title;
+			});
+		}
+	}
+
+}])
+.controller('articleSection',[
+	'$scope',
+	'$sce',
+	'api',
+	'columns',
+	'tealium',
+	function ($scope,$sce,api,columns,tealium){
+
+	var url     = window.location.href,
+		paths   = window.location.pathname.split('/'),
+		section = paths[2];
+
+	$scope.test = true
+	$scope.ready       = false;
+	$scope.pageNumber  = 1;
+	$scope.loading     = true;
+	$scope.scrollState = "off";
+	$scope.infinite    = false;
+	$scope.loadMsg     = "";
+	$scope.mpuPosition = 4;
+	$scope.tealium     = tealium;
+
+	$scope.$on('loadNext',function(){
+		$scope.loadMore();
+	})
+
+	api.getPagedPosts(section).then(function (result){
+		
+		$scope.page      = result.page
+		$scope.loading   = false;
+		$scope.pageCount = result.pages
+
+		columns.divide(result.top_articles).then(function (cols){
+			$scope.topCol1  = cols.col1
+			$scope.topCol2  = cols.col2
+			$scope.topCol3  = cols.col3
+
+			console.log($scope.topCol3)
+		})
+
+
+		columns.divide(result.posts).then(function (cols){
+			$scope.col1  = cols.col1
+			$scope.col2  = cols.col2
+			$scope.col3  = cols.col3
+			$scope.ready = true
+		})
+
+		console.log(result)
+
+	})
+
+	$scope.truncate = function(str){
+
+		if (!! str) {
+			var trunc    = str.substring(0,200),
+				combined = trunc + " [...]"
+
+			return combined
+		}
+		
+	}
+
+	$scope.loadMore = function(){
+
+		$scope.scrollState = "on";
+		$scope.infinite    = true;
+		$scope.infLoading  = true;
+
+		if($scope.pageCount > ($scope.pageNumber-1)){
+
+			if($scope.pageNumber == 1){
+
+				$scope.pageNumber ++
+
+			} else {
+
+				api.getPagedPosts(section,$scope.pageNumber).then(function (result){
 
 					var posts = result.posts;
 					$scope.scrollState = "on";

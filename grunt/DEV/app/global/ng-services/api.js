@@ -37,6 +37,25 @@
 
 			return defer.promise
 		},
+		getPagedPosts : function(section,pg){
+
+			var defer  = $q.defer(),
+				prefix = "/api/get_posts/?post_type=tls_articles&article_section=",
+				page   = (pg) ? "&paged=" + pg : "";
+
+			//expose url for testing
+			defer.promise.url = prefix+section+page
+
+			$http.get(prefix+section+page).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+
+			return defer.promise
+
+		},
 		getRelatedContent : function(tags){
 
 			var defer  = $q.defer(),

@@ -9,7 +9,7 @@
 
 get_header(); ?>
 
-<section id="discover" ng-controller="discover">
+<section id="discover" ng-controller="articleSection">
 
 	<div class="container">
 		<div class="grid-row">
@@ -26,7 +26,7 @@ get_header(); ?>
 				<div  class="grid-4" ng-repeat="column in col3">
 
 					<div ng-repeat="card in column">
-						<div tls-card="card"></div>
+						<div tls-card="card" data-copy="false"></div>
 					</div>
 
 				</div>
@@ -38,7 +38,7 @@ get_header(); ?>
 				<div class="grid-6" ng-repeat="column in col2">
 
 					<div ng-repeat="card in column">
-							<div tls-card="card"></div>
+							<div tls-card="card" data-copy="false"></div>
 						</div>
 
 				</div>
@@ -50,7 +50,7 @@ get_header(); ?>
 				<div class="grid-6" ng-repeat="column in col1">
 
 					<div ng-repeat="card in column">
-						<div tls-card="card"></div>
+						<div tls-card="card" data-copy="false"></div>
 					</div>
 
 				</div>
