@@ -4,7 +4,9 @@ namespace Tls\TlsHubSubscriber\Library;
 
 /**
  * Interface PuSHSubscriberEnvironmentInterface
+ *
  * @package Tls\TlsHubSubscriber\Library
+ * @author Vitor Faiante
  */
 interface Logger {
 
@@ -15,7 +17,7 @@ interface Logger {
      * @param $code
      * @return mixed
      */
-    public function log($msg, $code = null);
+    public static function log($msg, $code = null);
 
     /**
      * Method to log Error Messages
@@ -24,6 +26,6 @@ interface Logger {
      * @param $code
      * @return mixed
      */
-    public function error($msg, $code = null);
+    public static function error($msg, $code = null);
 
 }

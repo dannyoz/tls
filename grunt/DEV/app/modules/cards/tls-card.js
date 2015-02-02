@@ -47,13 +47,8 @@
 			}
 
 			// Function to check value is undefined
-			var isUndefined = function(val) {				
-				
-				var und = false;
-				if (val == undefined) {
-					und = true;
-				}
-				return und;
+			var isUndefined = function(val) {							
+				return angular.isUndefined(val);
 			}
 
 			// Handle mpus
@@ -135,7 +130,7 @@
 							}
 							// It's an Array
 							if (typeof card.image == 'object') {
-								if (!isUndefined(card.image[0])) {
+								if (!isUndefined(card.image) && card.image != null) {
 									card.image_url = card.image[0];
 								}								
 							}

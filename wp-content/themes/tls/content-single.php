@@ -133,7 +133,6 @@
 										<div class="grid-8">
 											
 											<div class="form-subtitle futura">To read the full article, please login</div>
-
 											<form novalidate name="login-form" class="form">	
 
 												<div class="form-item">

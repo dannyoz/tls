@@ -1,15 +1,18 @@
 <?php namespace Tls\TlsHubSubscriber;
+use Tls\TlsHubSubscriber\Library\HubSubscriber;
 
 /**
  * Class TlsHubSubscriberWP
+ *
  * @package Tls\TlsHubSubscriber
+ * @author Vitor Faiante
  */
 class TlsHubSubscriberWP {
 
 	/**
 	 * @var string $option_name		Option Name used for the options page
      */
-	protected $option_name = 'tls_hub_sub';
+	protected static $option_name = 'tls_hub_sub';
 
 	/**
 	 * @var array $data		Default Values for the Data
@@ -55,7 +58,7 @@ class TlsHubSubscriberWP {
 		$this->current_options = $this->get_current_options();
 
 		// Start TLS Hub Subscriber FE Class
-		$TlsHubSubscriberFE = new TlsHubSubscriberFE($this->option_name, $this->current_options);
+		$TlsHubSubscriberFE = new TlsHubSubscriberFE(self::$option_name, $this->current_options);
 		$this->TlsHubSubscriberFE = $TlsHubSubscriberFE;
 	}
 
@@ -64,8 +67,17 @@ class TlsHubSubscriberWP {
 	 *
 	 * @return array	Returns the current saved Options
      */
-	protected function get_current_options() {
-		return get_option( $this->option_name );
+	public static function get_current_options() {
+		return get_option( self::$option_name);
+	}
+
+	/**
+	 * Get the option name
+	 *
+	 * @return string
+     */
+	public static function get_option_name(){
+		return self::$option_name;
 	}
 
 	/**
@@ -75,7 +87,7 @@ class TlsHubSubscriberWP {
 
 		register_setting(
 			'tls_hub_subscriber_options',
-			$this->option_name,
+			self::$option_name,
 			array($this, 'tls_hub_sub_validate')
 		);
 
@@ -117,14 +129,14 @@ class TlsHubSubscriberWP {
 
 										<tr valign="top"><th scope="row">Topic URL:</th>
 											<td>
-												<input id="topic_url" class="widefat" type="text" name="<?php echo $this->option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
+												<input id="topic_url" class="widefat" type="text" name="<?php echo self::$option_name?>[topic_url]" value="<?php echo ( isset( $this->current_options['topic_url'] ) ) ? $this->current_options['topic_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the Topic URL</p>
 											</td>
 										</tr>
 
 										<tr valign="top"><th scope="row">Hub URL:</th>
 											<td>
-												<input id="hub_url" class="widefat" type="text" name="<?php echo $this->option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
+												<input id="hub_url" class="widefat" type="text" name="<?php echo self::$option_name?>[hub_url]" value="<?php echo ( isset( $this->current_options['hub_url'] ) ) ? $this->current_options['hub_url'] : ''; ?>" />
 												<p class="description">Please include the http:// in the Hub URL</p>
 											</td>
 										</tr>
@@ -140,7 +152,7 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Log messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[log_messages]" id="<?php echo $this->option_name; ?>[log_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['log_messages'] ) ) ? $this->current_options['log_messages'] : ''; ?></textarea>
+												<textarea class="widefat" name="<?php echo self::$option_name; ?>[log_messages]" id="<?php echo self::$option_name; ?>[log_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['log_messages'] ) ) ? $this->current_options['log_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
@@ -149,12 +161,13 @@ class TlsHubSubscriberWP {
 												<p class="description">If you want to clear all Error messages select all the messages and delete them before saving changes</p>
 											</th>
 											<td>
-												<textarea class="widefat" name="<?php echo $this->option_name; ?>[error_messages]" id="<?php echo $this->option_name; ?>[error_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['error_messages'] ) ) ? $this->current_options['error_messages'] : ''; ?></textarea>
+												<textarea class="widefat" name="<?php echo self::$option_name; ?>[error_messages]" id="<?php echo self::$option_name; ?>[error_messages]" cols="30" rows="10"><?php echo ( isset( $this->current_options['error_messages'] ) ) ? $this->current_options['error_messages'] : ''; ?></textarea>
 											</td>
 										</tr>
 
 									</table>
 									<p class="description">NOTE: Make sure you have all the settings saved first before you click subscribe</p>
+									<div id="hub-message"></div>
 									<p class="submit">
 										<input type="submit" class="button-primary right" value="<?php _e('Save Changes') ?>" />
 
@@ -266,15 +279,12 @@ class TlsHubSubscriberWP {
 
 		if ( strtolower( $tls_hub_action ) == 'subscribe' ) {
 			$this->current_options['subscription_status'] = 'Subscribing';
-			update_option($this->option_name, $this->current_options);
-			$message = "<div id=\"message\" class=\"updated\">Your Hub Subscription is being processed. Check back later to see if you are fully subscribed<p></p></div>";
-		} else if ( strtolower( $tls_hub_action ) == 'unsubscribe' ) {
-			$this->current_options['subscription_status'] = 'Unsubscribing';
-			update_option($this->option_name, $this->current_options);
-			$message = "<div id=\"message\" class=\"updated\">Your Hub Unsubscription is being processed. Check back later to see if you are fully unsubscribed<p></p></div>";
-		}
+			update_option(self::$option_name, $this->current_options);
 
-		echo $message;
+			$HubSubscriber = new HubSubscriber(self::$option_name, $this->current_options);
+
+			echo $HubSubscriber->subscribe();
+		}
 
 		wp_die(); // this is required to terminate immediately and return a proper response
 	}

@@ -18,14 +18,20 @@ jQuery(document).ready(function() {
             hub_action_data,
             function(response) {
                 var subscription_status = jQuery('p.subscription_status');
+                var hub_message = jQuery('#hub-message');
                 jQuery('#show_loading_update').css('display', 'none');
-                jQuery('p.submit').prepend(response);
+
                 if (hub_action_data.tls_hub_action == 'Subscribe') {
                     subscription_status.html('Subscribing');
-                } else if (hub_action_data.tls_hub_action == 'Unsubscribe') {
-                    subscription_status.html('Unsubscribing');
+                    if (response == true) {
+                        hub_message.addClass('success').css('display', 'block');
+                        hub_message.html('Your Subscription request is being processed. Check back later to see if you are fully Subscribed');
+                    } else if ( response == false ) {
+                        hub_message.addClass('fail').css('display', 'block');
+                        hub_message.html('Error issuing Subscribe request to the Hub. Please make sure all your details are correct');
+                    }
+
                 }
-                console.log(hub_action_data.tls_hub_action, subscription_status, response);
             }
         );
 
