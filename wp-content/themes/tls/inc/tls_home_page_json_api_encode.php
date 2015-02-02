@@ -108,12 +108,8 @@ function tls_home_page_json_api_encode($response) {
                 'soundcloud'    => $card_post_soundcloud_custom_field[0],
                 'custom_fields' => array(
                     'thumbnail_image_url' => $card_post_custom_fields['thumbnail_image_url'][0],
-                    'book_title'    => $card_post_custom_fields['book_title'],
-                    'book_author'   => $card_post_custom_fields['book_author'],
-                    'book_info_1'   => $card_post_custom_fields['book_info_1'],
-                    'book_info_2'   => $card_post_custom_fields['book_info_2'],
-                    'book_isbn'     => $card_post_custom_fields['book_isbn']
-                )
+                ),
+                'books'         => get_field('books', $card_post->ID),
             );
 
             // If the current Home Page card is a Blog Post

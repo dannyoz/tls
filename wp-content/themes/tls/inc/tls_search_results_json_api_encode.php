@@ -275,6 +275,7 @@ function tls_search_results_json_api_encode($response) {
 
             $post_type_search_archive_query = array_merge($current_query, $post_type_search_archive_args);
             $post_type_search_archive = $json_api->introspector->get_posts($post_type_search_archive_query);
+
             $response['count'] = count($post_type_search_archive);
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
@@ -373,6 +374,13 @@ function tls_search_results_json_api_encode($response) {
         }
 
     } // END of Search Specific JSON API queries
+
+    // Add book to all the results before they are returned
+    foreach ($response['posts'] as $search_post) {
+        if (get_post_type($search_post->id) == 'tls_articles') {
+            $search_post->books = get_field('books', $search_post->id);
+        }
+    }
 
     return $response;
 }

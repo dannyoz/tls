@@ -80,15 +80,11 @@ function tls_discover_json_api_encode($response) {
             'custom_fields'                 => array(
                 'thumbnail_image_url'       => $spotlight_article_thumbnail,
                 'teaser_summary'            => ( $spotlight_article_teaser ) ? $spotlight_article_teaser : tls_make_post_excerpt( $spotlight_article, 15 ),
-                'book_title'                => $spotlight_article_custom_fields['book_title'],
-                'book_author'               => $spotlight_article_custom_fields['book_author'],
-                'book_info_1'               => $spotlight_article_custom_fields['book_info_1'],
-                'book_info_2'               => $spotlight_article_custom_fields['book_info_2'],
-                'book_isbn'                 => $spotlight_article_custom_fields['book_isbn']
             ),
             'taxonomy_article_section'      => $spotlight_article_sections,
             'taxonomy_article_section_url'  => get_term_link( $spotlight_article_sections[0]->term_id, $spotlight_article_sections[0]->taxonomy),
             'taxonomy_article_visibility'   => $spotlight_article_visibility,
+            'books'                         => get_field('books', $spotlight_article->ID),
         );
 
         /**
@@ -147,16 +143,13 @@ function tls_discover_json_api_encode($response) {
                     'custom_fields' => array(
                         'thumbnail_image_url' => $top_section_article_thumbnail,
                         'teaser_summary' => ( $top_section_article_teaser ) ? $top_section_article_teaser : tls_make_post_excerpt($top_section_article, 15),
-                        'book_title'                => $top_section_article_custom_fields['book_title'],
-                        'book_author'               => $top_section_article_custom_fields['book_author'],
-                        'book_info_1'               => $top_section_article_custom_fields['book_info_1'],
-                        'book_info_2'               => $top_section_article_custom_fields['book_info_2'],
-                        'book_isbn'                 => $top_section_article_custom_fields['book_isbn']
                     ),
                     'taxonomy_article_section' => $top_section_article_section,
                     'taxonomy_article_section_url' => get_term_link($top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
                     'taxonomy_article_visibility' => $top_section_article_visibility,
+                    'books'                         => get_field('books', $top_section_article->ID),
                 );
+
             }
 
         } // END Loop of top Articles from each Article Section
@@ -188,6 +181,7 @@ function tls_discover_json_api_encode($response) {
             $article_post->custom_fields->teaser_summary = ( $article_custom_fields['teaser_summary'] ) ? $article_custom_fields['teaser_summary'] : tls_make_post_excerpt( $article_post );
             $article_post->type = 'article';
             $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
+            $article_post->books = get_field('books', $article_post->id);
         }
 
         // Update JSON Response Object for the main Articles Archive
