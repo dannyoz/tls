@@ -7,7 +7,9 @@ use WP_Query;
 
 /**
  * Class HubXmlParser
+ *
  * @package Tls\TlsHubSubscriber\Library
+ * @author Vitor Faiante
  */
 class HubXmlParser implements FeedParser {
 
@@ -22,11 +24,6 @@ class HubXmlParser implements FeedParser {
     protected $current_options;
 
     /**
-     * @var HubLogger
-     */
-    protected $hubLogger;
-
-    /**
      * Constructor
      *
      * @param $option_name
@@ -35,9 +32,6 @@ class HubXmlParser implements FeedParser {
     public function __construct($option_name, $current_options) {
         $this->current_options = $current_options;
         $this->option_name = $option_name;
-
-        // Hub Logger Class Instance
-        $this->hubLogger = HubLogger::instance($option_name, $current_options);
     }
 
     /**
@@ -62,7 +56,7 @@ var_dump(libxml_get_errors());
             foreach(libxml_get_errors() as $error) {
                 $error_msg .= "\t" . $error->message;
             }
-            $this->hubLogger->error($error_msg);
+            HubLogger::error($error_msg);
         }
 
         // Parse the article entries [Separate method so this method doesn't become extremely long]
@@ -76,7 +70,7 @@ var_dump(libxml_get_errors());
         // Add Log of the time it took and how many articles it imported
         $articles = ( $articlesResult['articleCount'] == 1 ) ? 'article' : 'articles';
         echo 'It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
-        $this->hubLogger->log('It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
+        HubLogger::log('It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
     }
 
     /**
@@ -181,7 +175,7 @@ var_dump(libxml_get_errors());
             foreach($errors as $error) {
                 $error_msg .= "\t" . $error;
             }
-            $this->hubLogger->error($error_msg);
+            HubLogger::error($error_msg);
         }
 
         return $article_id;

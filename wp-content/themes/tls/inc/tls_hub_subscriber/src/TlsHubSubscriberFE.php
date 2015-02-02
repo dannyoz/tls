@@ -9,6 +9,7 @@ use Tls\TlsHubSubscriber\Library\HubSubscriber as HubSubscriber;
  * This Class Deals with the "Front End" specific actions for the TLS Hub Subscriber (i.e. Rewrite Rules for end point URL, etc)
  *
  * @package Tls\TlsHubSubscriber
+ * @author Vitor Faiante
  */
 class TlsHubSubscriberFE {
 

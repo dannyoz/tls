@@ -4,7 +4,9 @@ namespace Tls\TlsHubSubscriber\Library;
 
 /**
  * Interface FeedParser
+ *
  * @package Tls\TlsHubSubscriber\Library
+ * @author Vitor Faiante
  */
 interface FeedParser {
 

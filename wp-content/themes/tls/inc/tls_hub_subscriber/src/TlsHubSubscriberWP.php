@@ -1,8 +1,11 @@
 <?php namespace Tls\TlsHubSubscriber;
+use Tls\TlsHubSubscriber\Library\HubSubscriber;
 
 /**
  * Class TlsHubSubscriberWP
+ *
  * @package Tls\TlsHubSubscriber
+ * @author Vitor Faiante
  */
 class TlsHubSubscriberWP {
 
@@ -66,6 +69,15 @@ class TlsHubSubscriberWP {
      */
 	public static function get_current_options() {
 		return get_option( self::$option_name);
+	}
+
+	/**
+	 * Get the option name
+	 *
+	 * @return string
+     */
+	public static function get_option_name(){
+		return self::$option_name;
 	}
 
 	/**
@@ -155,6 +167,7 @@ class TlsHubSubscriberWP {
 
 									</table>
 									<p class="description">NOTE: Make sure you have all the settings saved first before you click subscribe</p>
+									<div id="hub-message"></div>
 									<p class="submit">
 										<input type="submit" class="button-primary right" value="<?php _e('Save Changes') ?>" />
 
@@ -267,14 +280,11 @@ class TlsHubSubscriberWP {
 		if ( strtolower( $tls_hub_action ) == 'subscribe' ) {
 			$this->current_options['subscription_status'] = 'Subscribing';
 			update_option(self::$option_name, $this->current_options);
-			$message = "<div id=\"message\" class=\"updated\">Your Hub Subscription is being processed. Check back later to see if you are fully subscribed<p></p></div>";
-		} else if ( strtolower( $tls_hub_action ) == 'unsubscribe' ) {
-			$this->current_options['subscription_status'] = 'Unsubscribing';
-			update_option(self::$option_name, $this->current_options);
-			$message = "<div id=\"message\" class=\"updated\">Your Hub Unsubscription is being processed. Check back later to see if you are fully unsubscribed<p></p></div>";
-		}
 
-		echo $message;
+			$HubSubscriber = new HubSubscriber(self::$option_name, $this->current_options);
+
+			echo $HubSubscriber->subscribe();
+		}
 
 		wp_die(); // this is required to terminate immediately and return a proper response
 	}
