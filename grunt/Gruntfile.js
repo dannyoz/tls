@@ -59,9 +59,10 @@ module.exports = function(grunt) {
                     'DEV/js/libs/angular.js',
                     'DEV/js/libs/angular-route.js',
                     'DEV/app/**/*.js',
+                    'DEV/tests/**/*.js',
                     '../wp-content/themes/tls/*.php'
                 ],
-                tasks: ['ngtemplates','concat', 'uglify'],
+                tasks: ['ngtemplates','concat', 'uglify','karma'],
                 options: {
                     spawn: false
                 },
@@ -150,7 +151,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-phpunit');
 
     // RUN GRUNT 
-    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy']);
+    grunt.registerTask('default', ['ngtemplates','concat', 'uglify', 'watch', 'compass', 'copy', 'karma']);
 
     // RUN GRUNT PHPUnit
     // Testing tasks.

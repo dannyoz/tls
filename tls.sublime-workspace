@@ -1,0 +1,1274 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"a",
+				"after"
+			],
+			[
+				"pa",
+				"padding-bottom"
+			],
+			[
+				"re",
+				"returned"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"boo",
+				"book"
+			],
+			[
+				"info",
+				"info2"
+			],
+			[
+				"f",
+				"fields"
+			],
+			[
+				"mon",
+				"month"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"pr",
+				"primary-red"
+			],
+			[
+				"x",
+				"xpos"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"tex",
+				"text-transform"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"al",
+				"alt	Attr"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"ex",
+				"exdate"
+			],
+			[
+				"prot",
+				"proto	Prototype"
+			],
+			[
+				"ca",
+				"card"
+			],
+			[
+				"ored",
+				"orderName"
+			],
+			[
+				"de",
+				"debugBar"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"t",
+				"tealium"
+			],
+			[
+				"is",
+				"isUndefined"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"el",
+				"element"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"li",
+				"listItem"
+			],
+			[
+				"e",
+				"element"
+			],
+			[
+				"ta",
+				"tagsArr"
+			],
+			[
+				"va",
+				"val"
+			],
+			[
+				"hi",
+				"hint-height"
+			],
+			[
+				"na",
+				"nav-height"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"tw",
+				"twLink"
+			],
+			[
+				"fb",
+				"fbLink"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"top",
+				"topCol2"
+			],
+			[
+				"c",
+				"columns"
+			],
+			[
+				"tr",
+				"trunc"
+			],
+			[
+				"l",
+				"log"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"loc",
+				"location"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"la",
+				"location"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"ge",
+				"getArticle"
+			],
+			[
+				"tea",
+				"Tealium"
+			],
+			[
+				"abs",
+				"absolute"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"da",
+				"dateRange"
+			],
+			[
+				"ch",
+				"childArr"
+			],
+			[
+				"ad",
+				"adultArr"
+			],
+			[
+				"for",
+				"formdata"
+			],
+			[
+				"tre",
+				"true"
+			],
+			[
+				"ve",
+				"viewName"
+			],
+			[
+				"v",
+				"val"
+			],
+			[
+				"bui",
+				"buildOwnHolidayForm"
+			],
+			[
+				"backg",
+				"background"
+			],
+			[
+				"le",
+				"level2"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"border-col",
+				"border-color"
+			],
+			[
+				"sc",
+				"scrollable"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"cos",
+				"console"
+			],
+			[
+				"or",
+				"orginalList"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"day",
+				"days"
+			],
+			[
+				"vi",
+				"viewName"
+			],
+			[
+				"tes",
+				"test2"
+			],
+			[
+				"to",
+				"toBe"
+			],
+			[
+				"test",
+				"test1"
+			],
+			[
+				"col",
+				"col1"
+			],
+			[
+				"list",
+				"list1"
+			],
+			[
+				"lis",
+				"list1"
+			],
+			[
+				"text-",
+				"text-transform"
+			],
+			[
+				"order",
+				"orderName"
+			],
+			[
+				"pro",
+				"promise"
+			],
+			[
+				"the",
+				"then"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"cu",
+				"curr"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"fi",
+				"fitParent"
+			],
+			[
+				"ti",
+				"toBeDefined"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"bord",
+				"border-color"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"colu",
+				"columns"
+			],
+			[
+				"backgro",
+				"background-size"
+			],
+			[
+				"bor",
+				"border-right"
+			],
+			[
+				"borde",
+				"border-bottom-style"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"n",
+				"nav	Tag"
+			],
+			[
+				"light",
+				"lighten"
+			],
+			[
+				"intr",
+				"introText"
+			],
+			[
+				"bas",
+				"baseblue"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"fonte",
+				"font-weight"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"editorI",
+				"editorIndent"
+			],
+			[
+				"border",
+				"border-right"
+			],
+			[
+				"ed",
+				"editorBtnHeight"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"up",
+				"uploadMedia"
+			],
+			[
+				"tiler",
+				"tilerHost"
+			],
+			[
+				"new",
+				"newVal"
+			],
+			[
+				"p",
+				"project"
+			],
+			[
+				"por",
+				"proj"
+			],
+			[
+				"site",
+				"site"
+			],
+			[
+				"syn",
+				"syncObj"
+			],
+			[
+				"sy",
+				"syncObj"
+			],
+			[
+				"sh",
+				"show"
+			],
+			[
+				"fra",
+				"frameDelay"
+			],
+			[
+				"fr",
+				"frameCount"
+			],
+			[
+				"overa",
+				"overallScore"
+			],
+			[
+				"over",
+				"overallScore"
+			],
+			[
+				"client",
+				"clientName"
+			],
+			[
+				"loca",
+				"localStorage"
+			],
+			[
+				"i",
+				"images"
+			],
+			[
+				"cur",
+				"cursor"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "wp-content/themes/tls/content-single.php",
+			"settings":
+			{
+				"buffer_size": 10608,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grunt/DEV/app/templates/article/article-controller.js",
+			"settings":
+			{
+				"buffer_size": 5700,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grunt/DEV/app/templates/article/_article.scss",
+			"settings":
+			{
+				"buffer_size": 9015,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grunt/DEV/tests/article-controller-test.js",
+			"settings":
+			{
+				"buffer_size": 1383,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"to",
+				"TodoReview: Project and Open Files"
+			],
+			[
+				"tod",
+				"TodoReview: Project Files"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"men",
+				"View: Toggle Menu"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"asp ",
+				"Set Syntax: ASP"
+			],
+			[
+				"asp",
+				"Set Syntax: ASP"
+			]
+		],
+		"width": 520.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/xampp/htdocs/tls",
+		"/C/xampp/htdocs/tls/grunt",
+		"/C/xampp/htdocs/tls/grunt/DEV",
+		"/C/xampp/htdocs/tls/grunt/DEV/app",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules/print",
+		"/C/xampp/htdocs/tls/grunt/DEV/tests",
+		"/C/xampp/htdocs/tls/grunt/node_modules",
+		"/C/xampp/htdocs/tls/wp-content",
+		"/C/xampp/htdocs/tls/wp-content/themes",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls"
+	],
+	"file_history":
+	[
+		"/C/xampp/htdocs/tls/grunt/DEV/tests/coulmns-service-test.js",
+		"/C/xampp/htdocs/tls/grunt/Gruntfile.js",
+		"/C/xampp/htdocs/tls/grunt/karma.conf.js",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/template-blogs-archive.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules/cards/tls-card.html",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/category/category-controller.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/discover/discover-controller.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/discover/section-controller.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/global/ng-services/api.js",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/taxonomy-article_section.php",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/category.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules/cards/tls-card.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/article/article-controller.js",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/comments.php",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/template-articles-archive.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/global/ng-services/book-parser.js",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/content-single.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/tests/niceDate-service-test.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/tests/article-controller-test.js",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/global/ng-services/niceDate.js",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/template-page-with-accordion.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/article/_article.scss",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules/accordian/tls-accordian.html",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/modules/accordian/_accordian.scss",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/templates/templates.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/workshop/_workshop.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/workshop/workshop.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/contact/_contact.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/contact/contact.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/about/about.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/work/work.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/header-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/styles.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/header.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/Views/Layout.cshtml",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/work/_work.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/about/_about.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/views/views.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/homepage/homepage.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/app.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/Gruntfile.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/index.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/_template-main.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/views/_views.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/Views/HomePage.cshtml",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/js/libs/angular-animate.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/_header.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/_main-nav.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/routes.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/_burger.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/footer/footer.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/sass/_typography.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/sass/_forms.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/blocks/_blocks.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/homepage/_homepage.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/homepage/_planets.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/templates/homepage/hompage-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/js/directives/paa-perspective.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/sass/_images.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/sass/_core.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/story/_story.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/header/header.tests.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/images/logo.svg",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/global/sass/variables/_theme.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/footer/_footer.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/pre-build/app/modules/story/story.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunty/.gitignore",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/modules/header/header-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/modules/header/_header.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact/_contact.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/modules/header/header.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/global/sass/_core.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/homepage/_homepage.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/homepage/homepage.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/global/sass/variables/_theme.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/modules/footer/footer.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/modules/footer/_footer.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/views/_views.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/work/_work.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/workshop/workshop-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact/contact-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/views/views-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/about/about-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/work/work.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/styles.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/app.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/work/work-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact/contact.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/about-us/about-us.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact-us/contact-us.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/workshop/_worksop.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/views/views.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact-us/contact-us-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/workshop/workshop.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/about-us/about-us-controller.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/about-us/_about-us.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/.gitignore",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/Gruntfile.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/global/sass/_forms.scss",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/app/templates/contact-us/_contact-us.scss",
+		"/E/Repos/ft-boilerplate/index.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/default.aspx",
+		"/E/Sites/partners-agency-website/PresentationLayer/scripts/dummy.txt",
+		"/E/Sites/partners-agency-website/PresentationLayer/index.html",
+		"/E/Sites/partners-agency-website/PresentationLayer/server.js",
+		"/E/Sites/partners-agency-website/PresentationLayer/grunt/server.js",
+		"/E/Repos/ft-boilerplate/dev/templates/homepage/hompage-controller.js",
+		"/E/Repos/ft-boilerplate/dev/styles.scss",
+		"/E/Repos/ft-boilerplate/dev/global/sass/variables/_theme.scss",
+		"/E/Repos/ft-boilerplate/dev/templates/contact-us/contact-us.scss",
+		"/E/Repos/ft-boilerplate/dev/app.js",
+		"/E/Repos/ft-boilerplate/dev/templates/homepage/homepage.html",
+		"/E/Repos/ft-boilerplate/Gruntfile.js",
+		"/E/Repos/ft-boilerplate/dev/templates/hompage/_homepage.scss",
+		"/E/Repos/ft-boilerplate/ng-views/styleguide.html",
+		"/E/Repos/ft-boilerplate/dev/js/app.js",
+		"/E/Repos/ft-boilerplate/dev/templates/hompage/homepage.scss",
+		"/E/Repos/ft-boilerplate/dev/templates/contact us/contact-us.scss",
+		"/E/Repos/ft-boilerplate/dev/global/styles.scss",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/app.js",
+		"/E/Repos/ft-boilerplate/server.js",
+		"/E/Repos/ft-boilerplate/dev/sass/styles.scss",
+		"/E/Repos/ft-boilerplate/package.json",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/global/app-header/_header.scss",
+		"/C/xampp/htdocs/tls/grunt/DEV/app/global/sass-globals/_typography.scss",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/page.php",
+		"/C/xampp/htdocs/tls/wp-content/themes/tls/template-faqs.php",
+		"/C/xampp/htdocs/tls/grunt/DEV/tests/tealium-service-test.js"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\xampp\\htdocs\\tls\\wp-content\\themes\\tls",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\controllers",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\directives",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\directives",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\controllers",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\views",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\factories",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\directives",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\controllers\\pagesControllers",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\views",
+			"C:\\xampp\\htdocs\\sun-holidays\\wp-content\\themes\\sunholidays\\dev\\js\\controllers",
+			"E:\\Repos\\cx-score\\Grunt\\js",
+			"E:\\Sites\\Rolls-Royce\\Rolls-Royce\\assets\\js\\mylibs",
+			"E:\\Sites\\rsc.web\\wwwroot\\src\\sass",
+			"E:\\Sites\\rsc.web\\wwwroot\\Views\\Shared",
+			"E:\\Sites\\rsc.web\\wwwroot\\src\\js\\modules",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"E:\\Repos\\cx-score\\CXS Web\\CXSTool.Web\\ng-views",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\flexible-posts-widget",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\inc",
+			"E:\\Repos\\cx-score\\Grunt\\js\\controllers",
+			"E:\\Repos\\cx-score\\CXS Web\\CXSTool.Web\\ng-views",
+			"E:\\Sites\\cor\\Sites\\Corinthia.Web\\Views",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass",
+			"C:\\xampp\\htdocs\\times-politics-blog\\wp-content\\themes\\timesblog",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"E:\\Repos\\ANGULAR BOILERPLATE\\DEV\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\js",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\js",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\flexible-posts-widget",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\templates",
+			"E:\\Repos\\ANGULAR BOILERPLATE\\DEV\\sass",
+			"E:\\Repos\\dod CMS\\DEV\\sass",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\templates",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-foundation",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group\\partials",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\templates",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\modules\\custom",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\templates",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-foundation",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group\\partials\\modules",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group\\partials",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\templates",
+			"C:\\xampp\\htdocs\\Ashmore\\docroot\\sites\\all\\themes\\ashmore_sa_ar\\sass\\ashmore-group",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials\\components-content",
+			"E:\\Sites\\rsc.web\\wwwroot\\src\\sass",
+			"E:\\Sites\\rsc.web\\wwwroot",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass\\partials",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\js",
+			"E:\\Sites\\Rolls-Royce\\Rolls-Royce\\masterpages",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\flexible-posts-widget",
+			"",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround\\DEV\\sass",
+			"E:\\Sites\\Rolls-Royce\\Rolls-Royce\\assets\\fonts",
+			"C:\\xampp\\htdocs\\milkround\\wp-content\\themes\\milkround",
+			"C:\\Bitnami\\wordpress-3.9.1-0\\apps\\wordpress\\htdocs",
+			"E:\\Sites\\Rolls-Royce",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\assets\\js",
+			"C:\\xampp\\htdocs\\yha\\docroot\\sites\\all\\themes\\yha\\js",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\assets\\js",
+			"C:\\xampp\\htdocs\\yha\\docroot\\sites\\all\\themes\\yha",
+			"C:\\xampp\\htdocs\\yha\\docroot\\sites\\all\\themes\\yha\\js",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\assets\\js",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\",
+			"E:\\Sites\\Rolls2\\Rolls-Royce\\assets\\sass",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\modules\\custom",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\modules\\custom",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\themes\\fd",
+			"C:\\xampp\\htdocs\\yha",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\themes\\fd\\",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\themes\\fd\\assets\\sass",
+			"C:\\xampp\\htdocs\\foster\\docroot\\sites\\all\\themes\\fd\\assets",
+			"C:\\xampp\\htdocs\\yha\\docroot",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"tls-tealium-email.js",
+			");\n",
+			"footer",
+			"pageTurn",
+			"get_option",
+			"blog index",
+			"dateRange",
+			"$col",
+			"tea",
+			"banners.homeBanners",
+			"$watch",
+			"banners.homeBanners",
+			"exclusive-deals",
+			"baseRoute",
+			"exclus",
+			"\"exclus",
+			"Tealium",
+			"ddlDepartingFromID",
+			"holidaydeals//wp-content/themes/",
+			"getImageUrl(",
+			"<h2>LATEST NEWS</h2>",
+			"getImageUrl",
+			"url('/wp-content/",
+			"orientation",
+			"size",
+			"prevURL",
+			"mode",
+			"toggleMenu(",
+			"toggleMenu",
+			");\n",
+			"editor.scss",
+			"url",
+			"search",
+			"width=\"600\"",
+			"width=600",
+			";\n",
+			"then",
+			"console.log",
+			"math.random",
+			"id",
+			"markDown",
+			"2",
+			"setTime",
+			"setInterval",
+			"interval",
+			"auto",
+			".rr-image-carousel",
+			"auto",
+			".parsley-error-list",
+			"help-text",
+			"TextareaFragment",
+			"form-row",
+			"checkbox",
+			"help-text",
+			".required'",
+			".help-text",
+			"help-text",
+			"$scope.projects",
+			"projArr",
+			".sh-salaries",
+			"ng-views",
+			"perc",
+			"$chartHeight",
+			"5",
+			"Use the tags to browse careers advice for school-leavers and graduates",
+			".homepage-excerpt",
+			"h1",
+			"mainPage",
+			"top:573px",
+			"browse",
+			"mainPage.percCalcul8",
+			" mainPage.percCalcul8",
+			"grid",
+			".destination-list",
+			"TotalItems",
+			"insider",
+			"blog",
+			"|",
+			"\"|\"",
+			"Pager",
+			"id=\"pagination-links\"",
+			"pagination-links",
+			"\"/>",
+			".browse-funds",
+			".rr-slideshow-panel .bd",
+			".bd",
+			"list-style-image:",
+			"list-style-image: url(../../misc/menu-collapsed-rtl.png); ",
+			".collapsed",
+			"li.collapsed",
+			"                   //",
+			"console.log",
+			"e.preventDefault()",
+			"link-read-more",
+			"=\"key_link",
+			"id=\"summary_link\"",
+			"data_id=",
+			"$('.popup').click(expandTweets);",
+			".link-emphasised",
+			"/sites/all/themes/ashmore/img/template/btn_chevrons.png",
+			".link-emphasised",
+			"a.link-emphasised",
+			"h3 + a",
+			".spotlight",
+			"+ a",
+			".spotlight",
+			"body",
+			"primary-lang",
+			"	\n",
+			"@include boxSizing(",
+			"console.log",
+			"parsedDate",
+			".homepage-excerpt",
+			"milkround_categories_filter",
+			"filter",
+			"console.log",
+			"ng-bind-html",
+			"<!-- Milkround.Advice/industries -->",
+			".results-item ",
+			"mr-filtercategory=\"",
+			".breadcrumb",
+			"<!-- Milkround.Advice/home -->",
+			".share-class-info",
+			".l-column-b",
+			"#content",
+			".fund-bar",
+			"<!-- Milkround.Advice/article -->",
+			"gutter-left-ad"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"$col-orange",
+			"$col-blue",
+			"$col-dark",
+			"$col-grey",
+			"$col-light",
+			"$colDashboard",
+			"$colLight",
+			"$colGrey",
+			"$colDark",
+			"$colPrimary",
+			"//e.preventDefault();",
+			"global",
+			"global.",
+			"",
+			"com/assets",
+			"assets",
+			"assets/",
+			"/assets/",
+			"wraith/assets/"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "wp-content/themes/tls/content-single.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10608,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2513,
+								2513
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 28.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "grunt/DEV/app/templates/article/article-controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4446,
+								4446
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1058.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "grunt/DEV/app/templates/article/_article.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9015,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "grunt/DEV/tests/article-controller-test.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1383,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.552158322503,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "tls.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 229.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

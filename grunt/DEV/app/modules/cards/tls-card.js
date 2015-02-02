@@ -55,6 +55,12 @@
 				}
 				return und;
 			}
+
+			// Handle mpus
+			if(scope.type == 'mpu'){
+
+				consol.log('Mpu logic goes here')
+			}
 			
 			// Function that format final object in a consistent way
 			scope.formatCard = function(card) {
