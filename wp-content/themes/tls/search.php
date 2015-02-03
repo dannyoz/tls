@@ -95,6 +95,13 @@ get_header(); ?>
 							<h4><a ng-attr-href="{{post.url}}" ng-bind-html="post.title"></a></h4>
 							<div ng-bind-html="post.excerpt"></div>
 						</div>
+
+						<footer ng-if="post.books">
+							<div class="book summary-wrapper" ng-repeat="book in post.books">
+								<p class="book-title futura" ng-bind-html="book.book_title"></p>
+								<p class="futura" ng-bind-html="book.book_author"></p>
+							</div>
+						</footer>
 					</div>
 
 					<div ng-if="results.pages" tls-pagination="paginationConfig"></div>
