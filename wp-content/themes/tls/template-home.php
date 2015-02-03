@@ -137,7 +137,11 @@ get_header(); ?>
 					<div class="preview grid-row">
 
 						<div class="top">
-							<h3><?php _e( 'This <br> week\'s <br> TLS', 'tls' ); ?></h3>
+							<?php if (get_field('this_week_title')) : ?>
+								<h3><?php the_field('this_week_title') ?></h3>
+							<?php else : ?>
+								<h3><?php _e( 'This <br> week\'s <br> TLS', 'tls' ); ?></h3>
+							<?php endif; ?>
 						</div>
 
 						<div class="prevbody">
@@ -174,13 +178,17 @@ get_header(); ?>
 					<div class="preview grid-row">
 
 						<div class="top">
-							<h3><?php _e( 'In next <br/> week\'s <br/> TLS', 'tls') ?></h3>
+							<?php if (get_field('next_week_title')) : ?>
+								<h3><?php the_field('next_week_title') ?></h3>
+							<?php else : ?>
+								<h3><?php _e( 'In next <br/> week\'s <br/> TLS', 'tls') ?></h3>
+							<?php endif; ?>
 							<div class="date">
 								<span><u><?php _e( 'OUT', 'tls'); ?></u></span><br/>
 								<span>
 									<?php
 									$nextWeeksDate = DateTime::createFromFormat('Ymd', get_field('next_weeks_date'));
-									echo $nextWeeksDate->format( 'j M Y' );
+									echo $nextWeeksDate->format( 'M j Y' );
 									?>
 								</span>
 							</div>

@@ -12,6 +12,12 @@ function tls_blogs_archive_json_api_encode($response) {
         // Globals to be used with many of the specific searches
         global $json_api, $wp_query;
 
+        /**
+         * ===========================================
+         *              Featured Blog Post
+         * ===========================================
+         */
+
         // Get Featured Post Details
         $featured_post = get_post( $response['page']->custom_fields->featured_blog_post[0] );
 
@@ -37,6 +43,28 @@ function tls_blogs_archive_json_api_encode($response) {
             'images'     => $images
         );
 
+        /**
+         * ===========================================
+         *              Spotlight Podcast
+         * ===========================================
+         */
+        $spotlight_podcast = get_post( $response['page']->custom_fields->spotlight_podcast[0] );
+        $spotlight_podcast_custom_fields = get_post_custom( $spotlight_podcast->ID );
+        $response['spotlight_podcast'] = array(
+            'type'          => 'listen_blog',
+            'id'            => $spotlight_podcast->ID,
+            'title'         => $spotlight_podcast->post_title,
+            'excerpt'       => tls_make_post_excerpt($spotlight_podcast, 15),
+            'link'          => get_permalink( $spotlight_podcast->ID ),
+            'soundcloud'    => $spotlight_podcast_custom_fields['soundcloud_embed_code'][0]
+        );
+
+        /**
+         * ===========================================
+         *              Blog Posts Archive
+         * ===========================================
+         */
+
         // Get Blog Archive excluding Featured Blog from list
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
         $blogs_archive_args = array(
@@ -44,7 +72,7 @@ function tls_blogs_archive_json_api_encode($response) {
             'orderby'           => 'date',
             'order'             => 'DESC',
             'paged'             => $paged,
-            'post__not_in'      => array( $featured_post->ID ),
+            'post__not_in'      => array( $featured_post->ID, $spotlight_podcast->ID ),
         );
 
         $wp_query->query = $blogs_archive_args;
