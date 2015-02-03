@@ -194,7 +194,7 @@
 
 						<div class="grid-4" ng-repeat="column in col3">
 							<div ng-repeat="card in column">
-								<div tls-card="card" data-type="article"></div>
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
 						</div>
 
@@ -205,7 +205,7 @@
 						<div class="grid-6" ng-repeat="column in col2">
 					
 							<div ng-repeat="card in column">
-								<div tls-card="card" data-type="article"></div>
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
 
 						</div>
@@ -217,7 +217,7 @@
 						<div class="grid-4" ng-repeat="column in col1">
 					
 							<div ng-repeat="card in column">
-								<div tls-card="card" data-type="article"></div>
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
 
 						</div>

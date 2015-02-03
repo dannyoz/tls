@@ -78,10 +78,12 @@
 	</div>
 
 	<footer>
-		<p ng-if="data.author != '' && data.custom_fields.book_title == null" class="futura" ng-bind="data.author"></p>	
-		<div class="summary-wrapper" ng-if="data.custom_fields.book_title[0]">
-			<div class="book-title" ng-bind-html="data.custom_fields.book_title[0]"></div>
-			<div ng-bind-html="data.custom_fields.book_author[0]"></div>	
+		<p ng-if="data.author != '' && data.custom_fields.book_title == null && !data.books" class="futura" ng-bind="data.author"></p>	
+		<div ng-if="data.books">
+			<div class="book summary-wrapper" ng-repeat="book in data.books">
+				<p class="book-title futura" ng-bind-html="book.book_title"></p>
+				<p class="futura" ng-bind-html="book.book_author"></p>
+			</div>
 		</div>
 	</footer>
 </div>
