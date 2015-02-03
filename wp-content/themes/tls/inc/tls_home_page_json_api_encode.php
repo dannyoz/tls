@@ -38,6 +38,9 @@ function tls_home_page_json_api_encode($response) {
         foreach ( (array)$blog_cards as $blog_card) {
             // Get the categories for the Blog Post
             $categories = wp_get_post_terms( $blog_card->ID, 'category' );
+            // Get the blog post featured image as thumbnail and then get the URL for it
+            $thumbnail_id = get_post_thumbnail_id($blog_card->ID);
+            $thumbnail_array = wp_get_attachment_image_src($thumbnail_id, 'thumbnail');
 
             // Add Blog Post Cards to JSON Response in the first card slot
             $response['home_page_cards']['card_0'][] = array(
@@ -51,6 +54,7 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $categories[0]->name,
                     'link'      => get_term_link( $categories[0]->term_id, $categories[0]->taxonomy )
                 ),
+                'thumbnail'     => $thumbnail_array[0]
             );
         }
 
@@ -63,9 +67,9 @@ function tls_home_page_json_api_encode($response) {
         $home_page_card_count = 1;
         foreach ((array)$home_page_cards as $home_page_card) {
 
-            // Variable that grabs Card Type
+            // Variable that grabs Card Type from Custom fields
             $card_type = $home_page_card['card_type'];
-            // Variable that gets the post for the Card Type
+            // Variable that gets the post for the Card Type and adds _post to match the Post Object Custom field in the backend
             $card_post = $home_page_card[$card_type . '_post'];
 
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
@@ -80,13 +84,14 @@ function tls_home_page_json_api_encode($response) {
             $card_post_custom_fields = get_post_custom( $card_post->ID );
             $card_post_soundcloud_custom_field = $card_post_custom_fields['soundcloud_embed_code'];
             $teaserSummary = $card_post_custom_fields['teaser_summary'];
-            $thumbnail_image = $card_post_custom_fields['thumbnail_image_url'][0];
 
+            // IF there is a teaser use it otherwise make one
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;
             } else {
                 $articleText = tls_make_post_excerpt( $card_post, 15 );
             }
+
 
             // Add Cards to the JSON Response in the specific count slot
             $response['home_page_cards']['card_' . $home_page_card_count] = array(
@@ -100,16 +105,22 @@ function tls_home_page_json_api_encode($response) {
                     'name'      => $section[0]->name,
                     'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
                 ),
-                'image'         => $thumbnail_image,
                 'soundcloud'    => $card_post_soundcloud_custom_field[0],
                 'custom_fields' => array(
-                    'book_title'    => $card_post_custom_fields['book_title'],
-                    'book_author'   => $card_post_custom_fields['book_author'],
-                    'book_info_1'   => $card_post_custom_fields['book_info_1'],
-                    'book_info_2'   => $card_post_custom_fields['book_info_2'],
-                    'book_isbn'     => $card_post_custom_fields['book_isbn']
-                )
+                    'thumbnail_image_url' => $card_post_custom_fields['thumbnail_image_url'][0],
+                ),
+                'books'         => get_field('books', $card_post->ID),
             );
+
+            // If the current Home Page card is a Blog Post
+            if ( get_post_type($card_post->ID) == "post" ) {
+                // Get a blog post's featured image as a thumbnail and then get its URL
+                $card_thumbnail_id = get_post_thumbnail_id($card_post->ID);
+                $card_thumbnail_array = wp_get_attachment_image_src($card_thumbnail_id, 'thumbnail');
+
+                // Add a thumbnail to the JSON Response only for the Blog posts
+                $response['home_page_cards']['card_' . $home_page_card_count]['thumbnail'] = $card_thumbnail_array[0];
+            } // END If
 
             // Iterate to next count slot
             $home_page_card_count++;
