@@ -1,0 +1,14 @@
+@media print {
+
+	header, .share-bar, footer, .article-links, #comments, #related-content{
+
+		display: none;
+	}
+
+	.article-body, .col-wide{
+
+		margin: 0!important;
+		width:100%!important;
+		@include box-sizing(border-box);
+	}
+}

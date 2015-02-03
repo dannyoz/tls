@@ -58,6 +58,12 @@
 						</div>
 					</div>
 
+					<div class="grid-row" ng-if="!post.custom_fields.hero_image_url[0] && post.thumbnail_images.medium.url">
+						<div class="col-wide">
+							<img class="max" ng-attr-src="{{post.thumbnail_images.medium.url}}">
+						</div>
+					</div>
+
 					<div class="grid-row" ng-if="post.custom_fields.hero_image_url[0]">
 						<div class="col-wide">
 							<img class="max" ng-attr-src="{{post.custom_fields.hero_image_url[0]}}">
@@ -162,66 +168,6 @@
 
 				</div>
 
-
-				<div class="fold" ng-class="{turnleft:pageTurn && dir == 'prev',turnright:pageTurn && dir == 'next'}">
-
-					<div ng-if="oldPost" class="col-wide share-bar">
-
-						<a href="javascript:if(window.print)window.print()" class="share-print button clear small">
-							<i class="icon icon-print"></i>
-							<span ng-if="size == 'desktop'">Print</span> 
-						</a>
-						<a ng-attr-href="{{emailLink();}}" class="share-email button clear small">							
-							<i class="icon icon-email"></i>
-							<span ng-if="size == 'desktop'">Email</span> 
-						</a>
-						<a ng-click="socialLink(oldPost.url,'fb')" class="share-fb button clear small">
-							<i class="icon icon-facebook"></i>
-						</a>
-						<a ng-click="socialLink(oldPost.url,'tw')" class="share-twitter button clear small">
-							<i class="icon icon-twitter"></i>
-						</a>
-
-					</div>
-
-					<div class="grid-row article-top">
-						<div class="col-wide article-section title-small">
-							<div class="grid-6" ng-bind-html="oldPost.taxonomy_article_section[0].title"></div>
-							<div class="grid-6 article-date title-small right" ng-bind="format(oldPost.modified)"></div>
-						</div>
-					</div>
-
-					<div class="grid-row">
-						<div class="col-wide">
-							<img class="max" ng-attr-src="{{oldPost.custom_fields.hero_image_url[0]}}">
-						</div>
-					</div>
-
-					<div class="grid-row">
-						
-						<div class="article-body">
-
-							<h2 ng-bind-html="oldPost.title"></h2>
-							<div class="article-meta grid-12">
-								<div class="grid-12" ng-if="oldPost.custom_fields.article_author_name[0].length > 0"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
-								<div class="grid-12" ng-if="oldPost.custom_fields.article_author_name[0].length == 0"><h4 class="author" ng-bind="post.author.name"></h4></div>
-							</div>
-
-							<div class="grid-12 article-summary folded-corner" ng-if="oldPost.custom_fields.teaser_summary[0]">
-								<div class="inner" ng-bind-html="oldPost.custom_fields.teaser_summary[0]"></div>						
-							</div>
-
-							<div ng-if="oldPost.custom_fields.embed_code[0].length > -1">
-								<div ng-bind-html="sce.trustAsHtml(oldPost.custom_fields.embed_code[0])"></div>
-							</div>
-							
-							<div ng-bind-html="oldPost.content"></div>
-
-						</div>
-					</div>
-
-				</div>
-
 			</div>
 
 			<?php
@@ -247,27 +193,9 @@
 					<div class="grid-row" ng-if="size == 'desktop'">
 
 						<div class="grid-4" ng-repeat="column in col3">
-					
-							<div class="card" ng-repeat="relPost in column">
-								
-								<h3 class="futura">
-									<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
-									<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
-								</h3>
-								
-								<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
-								
-								<div class="padded">
-									<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
-									<p ng-bind-html="relPost.excerpt"></p>
-								</div>
-
-								<footer>
-									<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
-								</footer>
-
+							<div ng-repeat="card in column">
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
-
 						</div>
 
 					</div>
@@ -276,24 +204,8 @@
 
 						<div class="grid-6" ng-repeat="column in col2">
 					
-							<div class="card" ng-repeat="relPost in column">
-								
-								<h3 class="futura">
-									<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
-									<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
-								</h3>
-								
-								<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
-								
-								<div class="padded">
-									<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
-									<p ng-bind-html="relPost.excerpt"></p>
-								</div>
-
-								<footer>
-									<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
-								</footer>
-
+							<div ng-repeat="card in column">
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
 
 						</div>
@@ -302,26 +214,10 @@
 
 					<div class="grid-row" ng-if="size == 'mobile'">
 
-						<div class="grid-4" ng-repeat="column in col3">
+						<div class="grid-4" ng-repeat="column in col1">
 					
-							<div class="card" ng-repeat="relPost in column">
-								
-								<h3 class="futura">
-									<a ng-attr-href="{{relPost.section.link}}" ng-if="relPost.taxonomy_article_section" ng-bind-html="relPost.taxonomy_article_section[0].title"></a>			
-									<i ng-if="relPost.visibility == 'private'" class="icon icon-key"></i>
-								</h3>
-								
-								<img class="max" ng-if="relPost.custom_fields.thumbnail_image_url" ng-attr-src="{{relPost.custom_fields.thumbnail_image_url[0]}}" />						
-								
-								<div class="padded">
-									<h4><a ng-if="relPost.url" ng-attr-href="{{relPost.url}}" ng-bind-html="relPost.title"></a></h4>		
-									<p ng-bind-html="relPost.excerpt"></p>
-								</div>
-
-								<footer>
-									<p ng-if="relPost.author" class="futura" ng-bind="relPost.author.name"></p>	
-								</footer>
-
+							<div ng-repeat="card in column">
+								<div tls-card="card" data-type="article" data-copy="false"></div>
 							</div>
 
 						</div>
