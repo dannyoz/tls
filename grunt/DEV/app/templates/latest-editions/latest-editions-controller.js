@@ -73,7 +73,9 @@
 
 		// API request
 		api.getArticle(path).then(function (result) {		
-			$scope.setCurrentEditionObj(result);			
+			$scope.setCurrentEditionObj(result);	
+
+			console.log(result);		
 		});
 
 
