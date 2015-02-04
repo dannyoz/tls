@@ -128,7 +128,7 @@ function tls_remove_wp_ver_css_js( $src ) {
  * Enqueue scripts and styles.
  */
  function tls_scripts_and_styles() {
-
+	 global $wp_query;
 	 // Enqueue Styles
 	 wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/style.css', array(), '', 'all' );
 
@@ -136,12 +136,17 @@ function tls_remove_wp_ver_css_js( $src ) {
 	 wp_enqueue_script( 'tls-typekit', '//use.typekit.net/zvh7bpe.js', array(), '', false );
 	 wp_enqueue_script( 'tls-scripts', TLS_THEME_URI . '/js/main.min.js', array(), '', true);
 
-	 if ( is_single() ) {
+	 if ( !is_search() ) {
+		 wp_dequeue_script('jquery');
+	 }
+
+	 if ( is_single() && "post" == get_post_type() ) {
 		 wp_enqueue_script('ajaxcomments', TLS_THEME_URI .'/js/comment-ajax.js', array( 'jquery' ));
 	 }
 
+
  }
- add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles' );
+ add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles', 100 );
 
 /**
  * JSON API Response Modifications to work with Angularjs Front End
