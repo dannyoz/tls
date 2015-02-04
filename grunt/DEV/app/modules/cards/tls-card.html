@@ -88,6 +88,31 @@
 	</footer>
 </div>
 
+<div class="card" ng-if="data.type == 'then_and_now'" ng-class="{private:data.visibility == 'private'}">
+	
+	<h3 class="futura">
+		Then and now
+		<i ng-if="data.visibility == 'private'" class="icon icon-key"></i>
+	</h3>
+	
+	<img class="max" ng-if="data.image_url" ng-attr-src="{{data.image_url}}" />						
+	
+	<div class="padded">
+		<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>		
+		<p ng-if="data.hasCopy" ng-bind-html="data.excerpt"></p>
+	</div>
+
+	<footer>
+		<p ng-if="data.author != '' && data.custom_fields.book_title == null && !data.books" class="futura" ng-bind="data.author"></p>	
+		<div ng-if="data.books">
+			<div class="book summary-wrapper" ng-repeat="book in data.books">
+				<p class="book-title futura" ng-bind-html="book.book_title"></p>
+				<p class="futura" ng-bind-html="book.book_author"></p>
+			</div>
+		</div>
+	</footer>
+</div>
+
 
 <div class="card mpu" ng-if="data.type == 'mpu'">
 	
