@@ -293,6 +293,10 @@ $mobile: 560px;
 
 			max-width: 100%;
 			margin-bottom: 2em;
+			float: left;
+			margin: 0 1em 1em -13%;
+			max-width:75%;
+
 
 			@media screen and (max-width: $mobile) {
 				margin-bottom: 1em;
@@ -301,7 +305,7 @@ $mobile: 560px;
 			&.right{
 
 				float: right;
-				margin: 0 -13% 0 1em;
+				margin: 0 -13% 1em 1em;
 			}
 		}
 
@@ -404,6 +408,7 @@ $mobile: 560px;
 			img{
 
 				margin-left:0;
+				max-width: 100%;
 
 				&.right{
 

@@ -28770,6 +28770,25 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			return defer.promise
 		
 		},
+		getFullResults : function(path){
+
+			var defer = $q.defer(),
+				prefix    = this.checkQueries(path),
+				query     = "json=1&count=-1",
+				finalPath = path+prefix+query;
+
+			//expose url for testing
+			defer.promise.url = finalPath
+
+			$http.get(finalPath).success(function (data){
+				//simulate server delay
+				$timeout(function(){
+					defer.resolve(data)
+				},delay)
+			})
+			return defer.promise
+
+		},
 		getArticleList : function(page){
 
 			var defer = $q.defer(),
