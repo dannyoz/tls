@@ -28,8 +28,7 @@
 				// Previous edition
 				$scope.nextEdition = $scope.latestEdition.next_post_info;	
 				// Next edition
-				$scope.previousEdition = $scope.latestEdition.previous_post_info;	
-				$scope.previousEdition.url = window.location.origin + '/grunt/DEV/app/templates/latest-editions/11-december-2014.json';
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
 			} else {
 

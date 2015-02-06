@@ -31,20 +31,31 @@ function tls_latest_edition_page_json_api_encode($response) {
         );
     }*/
 
-    if ( (isset( $response['page_template_slug'] ) && $response['page_template_slug'] == 'template-latest-edition.php') || $response['post']->type == 'tls_editions' ) {
+    if ( (isset( $response['page_template_slug'] ) && $response['page_template_slug'] == "template-latest-edition.php") || isset($response['post']) && $response['post']->type == 'tls_editions' ) {
 
-        $latest_edition = new WP_Query( array(
-            'post_type'         => 'tls_editions',
-            'post_status'       => 'publish',
-            'posts_per_page'    => 1,
-            'orderby '          => 'date'
-        ) ); wp_reset_query();
+        if ( (isset( $response['page_template_slug'] ) && $response['page_template_slug'] == "template-latest-edition.php") ) {
+            $latest_edition = new WP_Query(array(
+                'post_type' => 'tls_editions',
+                'post_status' => 'publish',
+                'posts_per_page' => 1,
+                'orderby ' => 'date'
+            ));
+            wp_reset_query();
+        } else if (isset($response['post']) && $response['post']->type == 'tls_editions') {
+            $latest_edition = new WP_Query(array(
+                'p' => $response['post']->id,
+                'post_type' => 'tls_editions',
+                'post_status' => 'publish',
+                'posts_per_page' => 1,
+                'orderby ' => 'date'
+            ));
+            wp_reset_query();
+        }
         $latest_edition = $latest_edition->posts[0];
 
         global $post;
         $oldGlobal = $post;
         $post = get_post( $latest_edition->ID );
-        // $response['debug'] = get_previous_post();
 
         $response['latest_edition'] = array(
             'id'        => $latest_edition->ID,
@@ -53,24 +64,27 @@ function tls_latest_edition_page_json_api_encode($response) {
 
         );
 
-        $previousPost = get_previous_post();
-        $response['latest_edition']['previous_post_info'] = array(
-            'id'        => $previousPost->ID,
-            'title'     => $previousPost->post_title,
-            'url'       => get_permalink($previousPost->ID),
+        if ( get_previous_post() ) {
+            $previousPost = get_previous_post();
+            $response['latest_edition']['previous_post_info'] = array(
+                'previous' => $previousPost,
+                'id' => $previousPost->ID,
+                'title' => $previousPost->post_title,
+                'url' => get_permalink($previousPost->ID),
+            );
+        }
 
-        );
-
-        $nextPost = get_next_post();
-        $response['latest_edition']['next_post_info'] = array(
-            'id'        => $nextPost->ID,
-            'title'     => $nextPost->post_title,
-            'url'       => get_permalink($nextPost->ID),
-
-        );
+        if ( get_next_post() ) {
+            $nextPost = get_next_post();
+            $response['latest_edition']['next_post_info'] = array(
+                'next' => $nextPost,
+                'id' => $nextPost->ID,
+                'title' => $nextPost->post_title,
+                'url' => get_permalink($nextPost->ID),
+            );
+        }
 
         $latest_edition_articles = get_fields($latest_edition->ID);
-        //$response['latest_edition']['test_content'] =  $latest_edition_articles['edition_number'];
 
         $response['latest_edition']['content']['featured'] = array(
             'issue_no'  => $latest_edition_articles['edition_number'],
@@ -139,8 +153,6 @@ function tls_latest_edition_page_json_api_encode($response) {
 
             );
         }
-
-        //$response['latest_edition']['content'] = get_the_terms('2433','article_section');
 
     }
 

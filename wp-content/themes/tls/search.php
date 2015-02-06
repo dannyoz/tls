@@ -22,7 +22,7 @@ get_header(); ?>
 
 					<div class="filter-block">
 						<h3 class="futura uppercase">
-							Content type 
+							Content type
 							<span class="clear">Clear <i style="font-size:14px" class="icon icon-cross"></i></span>
 						</h3>
 						<?php echo facetwp_display( 'facet', 'content_type' ); ?>
