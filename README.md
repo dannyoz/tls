@@ -8,7 +8,11 @@ The following plugins should be installed and activated for the TLS theme to wor
 
 - Advanced Custom Fields
 - Advanced Custom Fields: Repeater Field
-- FeedWordPress
+
+## Back-End Notes
+- TLS Hub Integration uses:
+ - Composer to autoload Classes
+ - Guzzle HTTP Client
 
 
 ## Front end notes
@@ -20,5 +24,3 @@ The front end build is built using the following tech
 - Sass
 - Compass
 - Angular.js
-
-
