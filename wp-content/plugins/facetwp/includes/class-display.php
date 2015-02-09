@@ -6,6 +6,9 @@ class FacetWP_Display
     /* (array) Facet types being used on the current page */
     public $active_types = array();
 
+    /* (array) An array of preloaded data (template, facets, etc) */
+    public $preload_data = array();
+
     /* (boolean) Whether to enable FacetWP for the current page */
     public $load_assets = false;
 
@@ -40,7 +43,17 @@ class FacetWP_Display
         elseif ( isset( $atts['template'] ) ) {
             foreach ( FWP()->helper->get_templates() as $template ) {
                 if ( $atts['template'] == $template['name'] ) {
-                    $output = '<div class="facetwp-template" data-name="' . $atts['template'] . '"></div>';
+                    global $wp_query;
+
+                    // Preload the template (search engine visible)
+                    $temp_query = $wp_query;
+                    $this->preload_data = $this->get_preload_data( $template['name'] );
+                    $wp_query = $temp_query;
+
+                    $output = '<div class="facetwp-template" data-name="' . $atts['template'] . '">';
+                    $output .= $this->preload_data['template'];
+                    $output .= '</div>';
+
                     $this->load_assets = true;
                 }
             }
@@ -104,5 +117,40 @@ class FacetWP_Display
                 FWP()->helper->facet_types[ $type ]->front_scripts();
             }
         }
+    }
+
+
+    /**
+     * Preload the AJAX response so search engines can see it
+     * @since 2.0
+     */
+    function get_preload_data( $template_name ) {
+
+        $params = array(
+            'facets' => array(),
+            'template' => $template_name,
+            'http_params' => array(
+                'uri' => FWP()->helper->get_uri(),
+            ),
+            'extras' => array(),
+            'paged' => 1,
+        );
+
+        foreach ( FWP()->ajax->url_vars as $key => $val ) {
+            if ( 'paged' == $key ) {
+                $params['paged'] = $val;
+            }
+            elseif ( 'sort' == $key ) {
+                $params['extras']['sort'] = $val;
+            }
+            else {
+                $params['facets'][] = array(
+                    'facet_name' => $key,
+                    'selected_values' => explode( ',', $val ),
+                );
+            }
+        }
+
+        return FWP()->facet->render( $params );
     }
 }

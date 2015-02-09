@@ -69,6 +69,31 @@
     background: #fff;
 }
 
+.facetwp-content-welcome {
+    border: none;
+    font-size: 15px;
+}
+
+.facetwp-content-welcome .wp-badge {
+    background: #0074a2 url(../images/logo.png) center 24px no-repeat;
+    padding-top: 100px;
+}
+
+.facetwp-content-welcome .welcome-box-wrap {
+    margin-top: 50px;
+}
+
+.facetwp-content-welcome .welcome-box {
+    border-top: 1px solid #ccc;
+    padding: 40px 0;
+}
+
+.facetwp-content-welcome h2 {
+    font-size: 24px;
+    line-height: 1;
+    padding: 0;
+}
+
 .facetwp-content.active {
     display: block;
 }
@@ -184,6 +209,10 @@
 }
 
 /* Settings page */
+
+.facetwp-settings-wrap td {
+    padding-bottom: 20px;
+}
 
 .facetwp-content .export-code,
 .facetwp-content .import-code {

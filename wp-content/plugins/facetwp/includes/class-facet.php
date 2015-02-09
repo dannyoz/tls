@@ -528,13 +528,7 @@ class FacetWP_Facet
         $total_rows = (int) $params['total_rows'];
 
         // Prevent division by zero
-        if ( $per_page < 1 ) {
-            $total_pages = 0;
-        }
-        else {
-            $total_pages = ceil( $total_rows / $per_page );
-        }
-
+        $total_pages = ( $per_page < 1 ) ? 0 : ceil( $total_rows / $per_page );
 
         // Only show pagination when > 1 page
         if ( 1 < $total_pages ) {

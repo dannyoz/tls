@@ -95,6 +95,8 @@ class FacetWP_Facet_Autocomplete
                 type: 'POST',
                 minChars: 3,
                 deferRequestBy: 200,
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'No results',
                 params: {
                     action: 'facetwp_autocomplete_load',
                     facet_name: $this.closest('.facetwp-facet').attr('data-name')

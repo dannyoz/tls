@@ -57,6 +57,7 @@ foreach ( $facet_types as $class ) {
 <div class="facetwp-header">
     <span class="facetwp-logo" title="FacetWP">&nbsp;</span>
     <span class="facetwp-header-nav">
+        <a class="facetwp-nav-tab" rel="welcome"><?php _e( 'Welcome', 'fwp' ); ?></a>
         <a class="facetwp-nav-tab" rel="facets"><?php _e( 'Facets', 'fwp' ); ?></a>
         <a class="facetwp-nav-tab" rel="templates"><?php _e( 'Templates', 'fwp' ); ?></a>
         <a class="facetwp-nav-tab" rel="settings"><?php _e( 'Settings', 'fwp' ); ?></a>
@@ -68,6 +69,26 @@ foreach ( $facet_types as $class ) {
 
     <div class="facetwp-response"></div>
     <div class="facetwp-loading"></div>
+
+    <!-- Welcome tab -->
+
+    <div class="facetwp-content facetwp-content-welcome about-wrap">
+        <h1>Welcome to FacetWP</h1>
+        <div class="about-text">Thanks for choosing FacetWP. Below is a quick introduction to the plugin's key components - Facets and Templates.</div>
+        <div class="wp-badge">Version <?php echo FACETWP_VERSION; ?></div>
+        <div class="welcome-box-wrap">
+            <div class="welcome-box">
+                <h2>Facets</h2>
+                <p>A facet is a UI element (checkboxes, dropdown, etc.) used to filter, or "drill-down", content.</p>
+                <a class="button" href="https://facetwp.com/documentation/facet-configuration/" target="_blank">Learn more</a>
+            </div>
+            <div class="welcome-box">
+                <h2>Templates</h2>
+                <p>A FacetWP Template is responsible for loading (see <code>Query Arguments</code>) and displaying (see <code>Display Code</code>) the post listing. A template is <strong>required</strong>, since facets use these posts to filter on.</p>
+                <a class="button" href="https://facetwp.com/documentation/template-configuration/" target="_blank">Learn more</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Facets tab -->
 
@@ -130,7 +151,7 @@ foreach ( $facet_types as $class ) {
 
             <!-- General settings -->
 
-            <table style="width:100%; margin-top:20px">
+            <table style="width:100%">
                 <tr>
                     <td style="width:175px; vertical-align:top">
                         <?php _e( 'Permalink Type', 'fwp' ); ?>
@@ -144,7 +165,7 @@ foreach ( $facet_types as $class ) {
                             <option value="hash"><?php _e( 'URL Hash', 'fwp' ); ?></option>
                             <option value="get"><?php _e( 'GET variables', 'fwp' ); ?></option>
                         </select>
-                        <div class="field-notes" style="margin-bottom:20px"><?php _e( 'GET variables are uglier, but more SEO-friendly.', 'fwp' ); ?></div>
+                        <div class="field-notes"><?php _e( 'GET variables are recommended.', 'fwp' ); ?></div>
                     </td>
                 </tr>
                 <tr>
@@ -163,11 +184,27 @@ foreach ( $facet_types as $class ) {
                         <div class="field-notes"><?php _e( 'Please re-index after changing this value.', 'fwp' ); ?></div>
                     </td>
                 </tr>
+                <tr>
+                    <td style="width:175px; vertical-align:top">
+                        <?php _e( 'Thousands Separator', 'fwp' ); ?>
+                    </td>
+                    <td>
+                        <input type="text" style="width:50px" class="facetwp-setting" data-name="thousands_separator" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:175px; vertical-align:top">
+                        <?php _e( 'Decimal Separator', 'fwp' ); ?>
+                    </td>
+                    <td>
+                        <input type="text" style="width:50px" class="facetwp-setting" data-name="decimal_separator" />
+                    </td>
+                </tr>
             </table>
 
             <!-- Migration -->
 
-            <table style="width:100%; margin-top:20px">
+            <table style="width:100%">
                 <tr>
                     <td style="width:175px; vertical-align:top">
                         <?php _e( 'Export', 'fwp' ); ?>
@@ -186,7 +223,7 @@ foreach ( $facet_types as $class ) {
                 </tr>
             </table>
 
-            <table style="width:100%; margin-top:20px">
+            <table style="width:100%">
                 <tr>
                     <td style="width:175px; vertical-align:top">
                         <?php _e( 'Import', 'fwp' ); ?>

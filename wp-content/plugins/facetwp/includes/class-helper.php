@@ -83,6 +83,20 @@ final class FacetWP_Helper
             $settings['settings'] = array();
         }
 
+        // Default global settings
+        if ( ! isset( $settings['settings']['permalink_type'] ) ) {
+            $settings['settings']['permalink_type'] = 'get';
+        }
+        if ( ! isset( $settings['settings']['term_permalink'] ) ) {
+            $settings['settings']['term_permalink'] = 'slug';
+        }
+        if ( ! isset( $settings['settings']['thousands_separator'] ) ) {
+            $settings['settings']['thousands_separator'] = ',';
+        }
+        if ( ! isset( $settings['settings']['decimal_separator'] ) ) {
+            $settings['settings']['decimal_separator'] = '.';
+        }
+
         // Unfiltered settings
         $this->settings_raw = $settings;
 

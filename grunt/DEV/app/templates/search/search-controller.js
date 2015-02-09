@@ -100,6 +100,9 @@
 				
 					$scope.loadResults = false
 					$scope.results = results
+					$scope.contentType = results.content_type_filters
+					$scope.sections    = results.articles_sections
+					$scope.dateRanges  = results.date_filters
 					$scope.paginationConfig = {
 						"pageCount"   : results.pages,
 						"currentPage" : 1,
@@ -145,6 +148,9 @@
 			
 				$scope.loadResults = false
 				$scope.results = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
 				$scope.paginationConfig = {
 					"pageCount"   : results.pages,
 					"currentPage" : 1,
@@ -172,6 +178,9 @@
 				
 				$scope.loadResults = false
 				$scope.results = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
 				$scope.paginationConfig = {
 					"pageCount"   : results.pages,
 					"currentPage" : 1,
