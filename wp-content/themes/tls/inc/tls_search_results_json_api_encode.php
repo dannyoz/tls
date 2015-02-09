@@ -24,6 +24,7 @@ function tls_search_results_json_api_encode($response) {
 
         // Get Current WP Query;
         $current_query = $wp_query->query;
+        $response['wp_query'] = $wp_query->query_vars['post_type'];
 
         /**
          * Add Multiple Custom Post Type Search Filtering to
@@ -180,7 +181,6 @@ function tls_search_results_json_api_encode($response) {
     /**
      * Reviews (Articles) Post Type
      */
-    $reviews_tag_id = (int) $reviews_tag->term_id;
     $reviews = new WP_Query( array(
         'post_type'         => 'tls_articles',
         'post_status'       => 'publish',
@@ -191,7 +191,7 @@ function tls_search_results_json_api_encode($response) {
     $response['content_type_filters']['reviews'] = array(
         'item_label'        => __('Reviews', 'tls'),
         'json_query'        => 'post_type=tls_articles',
-        'search_count'      => (int) $reviews->found_posts
+        'search_count'      => ( $current_query['post_type']== 'tls_articles' || $wp_query->query_vars['post_type'] == 'any' ) ? $reviews->found_posts : 0,
     );
 
     /**
@@ -207,7 +207,7 @@ function tls_search_results_json_api_encode($response) {
     $response['content_type_filters']['blogs'] = array(
         'item_label'        => __('Blogs', 'tls'),
         'json_query'        => 'post_type=post',
-        'search_count'      => (int) $blogs->found_posts
+        'search_count'      => (int) ( $current_query['post_type'] == 'post' || $wp_query->query_vars['post_type'] == 'any' ) ? $blogs->found_posts : 0,
     );
 
     /**
@@ -223,7 +223,7 @@ function tls_search_results_json_api_encode($response) {
     $response['content_type_filters']['faqs'] = array(
         'item_label'        => __('FAQs', 'tls'),
         'json_query'        => 'post_type=tls_faq',
-        'search_count'      => (int) $faqs->found_posts
+        'search_count'      => (int) ( $current_query['post_type'] == 'tls_faq' || $wp_query->query_vars['post_type'] == 'any' ) ? $faqs->found_posts : 0,
     );
 
 
@@ -346,7 +346,7 @@ function tls_search_results_json_api_encode($response) {
         $response['articles_sections'][$value->slug] = array(
             'item_label'        => $value->name,
             'type'              => 'taxonomy',
-            'json_query'        => 'tax_filter[article_section]='.$value->slug,
+            'json_query'        => 'article_section='.$value->slug,
             'taxonomy'          => $value->taxonomy,
             'slug'              => $value->slug,
             'search_count'      => $sections_count->found_posts
