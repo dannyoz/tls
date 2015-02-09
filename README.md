@@ -11,6 +11,7 @@ The following plugins should be installed and activated for the TLS theme to wor
 
 ## Back-End Notes
 TLS Hub Integration uses:
+
  - Composer to autoload Classes
  - Guzzle HTTP Client
 
