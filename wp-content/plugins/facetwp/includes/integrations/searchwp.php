@@ -77,5 +77,4 @@ class FacetWP_Integration_SearchWP
     }
 }
 
-
 new FacetWP_Integration_SearchWP();

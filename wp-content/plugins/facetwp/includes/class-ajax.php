@@ -3,8 +3,12 @@
 class FacetWP_Ajax
 {
 
+    /* (array) FacetWP-related GET variables */
+    public $url_vars = array();
+
+
     function __construct() {
-        // ajax settings
+        // Ajax settings
         add_action( 'wp_ajax_facetwp_load', array( $this, 'load_settings' ) );
         add_action( 'wp_ajax_facetwp_save', array( $this, 'save_settings' ) );
         add_action( 'wp_ajax_facetwp_refresh', array( $this, 'refresh' ) );
@@ -15,13 +19,26 @@ class FacetWP_Ajax
         add_action( 'wp_ajax_facetwp_license', array( $this, 'license' ) );
         add_action( 'wp_ajax_facetwp_migrate', array( $this, 'migrate' ) );
 
-        // handle requests without templates
+        // Handle requests without templates
         $action = isset( $_POST['action'] ) ? $_POST['action'] : '';
-        if ( 'facetwp_refresh' == $action && 'wp' == $_POST['data']['template'] ) {
-            ob_start();
 
-            add_action( 'pre_get_posts', array( $this, 'update_query_vars' ), 999 );
-            add_action( 'shutdown', array( $this, 'inject_template' ), 0 );
+        if ( 'facetwp_refresh' == $action ) {
+            if ( 'wp' == $_POST['data']['template'] ) {
+                ob_start();
+
+                add_action( 'pre_get_posts', array( $this, 'update_query_vars' ), 999 );
+                add_action( 'shutdown', array( $this, 'inject_template' ), 0 );
+            }
+        }
+        // Store any FacetWP-related GET variables
+        // Used in class-display.php
+        else {
+            foreach ( $_GET as $key => $val ) {
+                if ( 'fwp_' == substr( $key, 0, 4 ) ) {
+                    $new_key = substr( $key, 4 );
+                    $this->url_vars[ $new_key ] = $val;
+                }
+            }
         }
     }
 

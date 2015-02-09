@@ -78,6 +78,8 @@ class FacetWP_Facet_Slider
                 'min' => (float) $selected_min,
                 'max' => (float) $selected_max
             ),
+            'decimal_separator' => FWP()->helper->get_setting( 'decimal_separator' ),
+            'thousands_separator' => FWP()->helper->get_setting( 'thousands_separator' ),
             'start' => array( $min, $max ),
             'format' => $facet['format'],
             'prefix' => $facet['prefix'],
@@ -144,18 +146,23 @@ FWP.used_facets = {};
         var min = FWP.settings[facet_name]['lower'];
         var max = FWP.settings[facet_name]['upper'];
         var format = FWP.settings[facet_name]['format'];
+        var opts = {
+            decimal_separator: FWP.settings[facet_name]['decimal_separator'],
+            thousands_separator: FWP.settings[facet_name]['thousands_separator']
+        };
+
         if ( min === max ) {
             var label = FWP.settings[facet_name]['prefix']
-                + nummy(min).format(format)
+                + nummy(min).format(format, opts)
                 + FWP.settings[facet_name]['suffix'];
         }
         else {
             var label = FWP.settings[facet_name]['prefix']
-                + nummy(min).format(format)
+                + nummy(min).format(format, opts)
                 + FWP.settings[facet_name]['suffix']
                 + ' &mdash; '
                 + FWP.settings[facet_name]['prefix']
-                + nummy(max).format(format)
+                + nummy(max).format(format, opts)
                 + FWP.settings[facet_name]['suffix'];
         }
         $this.find('.facetwp-slider-label').html(label);
@@ -223,6 +230,8 @@ FWP.used_facets = {};
      * (Admin) Output settings HTML
      */
     function settings_html() {
+        $thousands = FWP()->helper->get_setting( 'thousands_separator' );
+        $decimal = FWP()->helper->get_setting( 'decimal_separator' );
 ?>
         <tr class="facetwp-conditional type-slider">
             <td>
@@ -254,15 +263,17 @@ FWP.used_facets = {};
             </td>
             <td>
                 <select class="facet-format">
-                    <option value="0,0">5,280</option>
-                    <option value="0,0.0">5,280.4</option>
-                    <option value="0,0.00">5,280.42</option>
+                    <?php if ( '' != $thousands ) : ?>
+                    <option value="0,0">5<?php echo $thousands; ?>280</option>
+                    <option value="0,0.0">5<?php echo $thousands; ?>280<?php echo $decimal; ?>4</option>
+                    <option value="0,0.00">5<?php echo $thousands; ?>280<?php echo $decimal; ?>42</option>
+                    <?php endif; ?>
                     <option value="0">5280</option>
-                    <option value="0.0">5280.4</option>
-                    <option value="0.00">5280.42</option>
+                    <option value="0.0">5280<?php echo $decimal; ?>4</option>
+                    <option value="0.00">5280<?php echo $decimal; ?>42</option>
                     <option value="0a">5k</option>
-                    <option value="0.0a">5.3k</option>
-                    <option value="0.00a">5.28k</option>
+                    <option value="0.0a">5<?php echo $decimal; ?>3k</option>
+                    <option value="0.00a">5<?php echo $decimal; ?>28k</option>
                 </select>
             </td>
         </tr>

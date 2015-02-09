@@ -26,263 +26,38 @@ function tls_search_results_json_api_encode($response) {
         $current_query = $wp_query->query;
 
         /**
-         * Reviews Articles Tag Search Filter
-         */
-        $reviews_tag = get_term_by( 'slug', 'reviews', 'article_tags' );
-        $reviews_tag_id = (int) $reviews_tag->term_id;
-        $reviews = new WP_Query( array(
-            'post_type'			=> 'tls_articles',
-            'post_status'		=> 'publish',
-            'posts_per_page'	=> 1,
-            's'					=> $search_query,
-            'tax_query'			=> array( array (
-                'taxonomy'		=> 'article_tags',
-                'field'			=> 'term_id',
-                'terms'			=> $reviews_tag_id
-            ) )
-        ) ); wp_reset_query();
-
-        $response['content_type_filters']['reviews'] = array(
-            'item_label'		=> __('Reviews', 'tls'),
-            'json_query'        => 'post_types[tls_articles]&tax_filter[article_tags]=reviews',
-            //'taxonomy'			=> $reviews_tag->taxonomy,
-            //'slug'				=> $reviews_tag->slug,
-            'search_count'		=> (int) $reviews->found_posts
-        );
-
-        /**
-         * Reviews Articles Tag Search Filter
-         */
-        $public_visibility = get_term_by( 'slug', 'public', 'article_visibility' );
-        $public_visibility_id = (int) $public_visibility->term_id;
-        $public_articles = new WP_Query( array(
-            'post_type'			=> 'tls_articles',
-            'post_status'		=> 'publish',
-            'posts_per_page'	=> 1,
-            's'					=> $search_query,
-            'tax_query'			=> array( array (
-                'taxonomy'		=> 'article_visibility',
-                'field'			=> 'term_id',
-                'terms'			=> $public_visibility_id
-            ) )
-        ) ); wp_reset_query();
-
-        $response['content_type_filters']['public_articles'] = array(
-            'item_label'		=> __('Free To Non Subscribers', 'tls'),
-            //'type'              => 'taxonomy',
-            'json_query'        => 'post_types[tls_articles]&tax_filter[article_visibility]=public',
-            //'taxonomy'			=> $public_visibility->taxonomy,
-            //'slug'				=> $public_visibility->slug,
-            'search_count'		=> (int) $public_articles->found_posts
-        );
-
-
-        /**
-         * TLS catagory filters
-         */
-
-        $sections = get_terms( 'article_section' );
-        foreach ($sections as $key => $value) {
-
-            $sections_count_args = array(
-                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-                'post_status'       => 'publish',
-                's'                 => $search_query,
-                'tax_query'         =>  array(
-                    'relation' => 'OR',
-                    array(
-                        'taxonomy' => 'article_section',
-                        'field'    => 'term_id',
-                        'terms'    => $value->term_id,
-                    )
-                ),
-            );
-
-            $sections_count = new WP_Query($sections_count_args);
-            wp_reset_query();
-
-
-            $response['articles_sections'][$value->slug] = array(
-                'item_label'        => $value->name,
-                'type'              => 'taxonomy',
-                'json_query'        => 'tax_filter[article_section]='.$value->slug,
-                'taxonomy'          => $value->taxonomy,
-                'slug'              => $value->slug,
-                'search_count'      => $sections_count->found_posts
-            );
-
-
-
-        }
-
-        /**
-         * TLS Blogs post type
-         */
-        $blogs = new WP_Query( array(
-            'post_type'			=> 'post',
-            'post_status' 		=> 'publish',
-            'posts_per_page' 	=> 1,
-            's'					=> $search_query
-        ) ); wp_reset_query();
-
-        $response['content_type_filters']['blogs'] = array(
-            'item_label'		=> __('Blogs', 'tls'),
-            //'type'              => 'post_type',
-            //'slug' 				=> 'post',
-            'json_query'        => 'post_types[post]',
-            'search_count' 		=> (int) $blogs->found_posts
-        );
-
-        /**
-         * FAQs Post Type Search Filter
-         */
-        $faqs = new WP_Query( array(
-            'post_type'			=> 'tls_faq',
-            'post_status'		=> 'publish',
-            'posts_per_page'	=> 1,
-            's'					=> $search_query
-        ) ); wp_reset_query();
-
-        $response['content_type_filters']['faqs'] = array(
-            'item_label'		=> __('FAQs', 'tls'),
-            'json_query'        => 'post_types[tls_faq]',
-            //'type'              => 'post_type',
-            //'slug'				=> 'tls_faq',
-            'search_count'		=> (int) $faqs->found_posts
-        );
-
-
-        /**
-         * Date Filters Options with post count
-         */
-        // Past 7 Days
-        $past_7_days = new WP_Query( array (
-            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-            'post_status'       => 'publish',
-            's'                 => $search_query,
-            'date_query'        => array(
-                array(
-                    'column'    => 'post_date',
-                    'after'     => '7 days ago',
-                    'inclusive' => true
-                ),
-            ),
-        ) ); wp_reset_query();
-        $response['date_filters']['1_past_7_days'] = array(
-            'item_label'        => __('Past 7 Days'),
-            'search_term'       => '7 days ago',
-            'search_count'      => (int) $past_7_days->found_posts
-        );
-
-        // Past 30 Days
-        $past_30_days = new WP_Query( array (
-            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-            'post_status'       => 'publish',
-            's'                 => $search_query,
-            'date_query'        => array(
-                array(
-                    'column'    => 'post_date',
-                    'after'     => '30 days ago',
-                    'inclusive' => true
-                ),
-            ),
-        ) ); wp_reset_query();
-        $response['date_filters']['2_past_30_days'] = array(
-            'item_label'        => __('Past 30 Days'),
-            'search_term'       => '30 days ago',
-            'search_count'      => (int) $past_30_days->found_posts
-        );
-
-        // Past 1 Year
-        $past_1_year = new WP_Query( array (
-            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-            'post_status'       => 'publish',
-            's'                 => $search_query,
-            'date_query'        => array(
-                array(
-                    'column'    => 'post_date',
-                    'after'     => '1 year ago',
-                    'inclusive' => true
-                ),
-            ),
-        ) ); wp_reset_query();
-        $response['date_filters']['3_past_1_year'] = array(
-            'item_label'        => __('Past Year'),
-            'search_term'       => '1 year ago',
-            'search_count'      => (int) $past_1_year->found_posts
-        );
-
-        // Past 5 Years
-        $past_5_years = new WP_Query( array (
-            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-            'post_status'       => 'publish',
-            's'                 => $search_query,
-            'date_query'        => array(
-                array(
-                    'column'    => 'post_date',
-                    'after'     => '5 years ago',
-                    'inclusive' => true
-                ),
-            ),
-        ) ); wp_reset_query();
-        $response['date_filters']['4_past_5_years'] = array(
-            'item_label'        => __('Past 5 Years'),
-            'search_term'       => '5 years ago',
-            'search_count'      => (int) $past_5_years->found_posts
-        );
-
-        // Past 10 Years
-        $past_10_years = new WP_Query( array (
-            'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-            'post_status'       => 'publish',
-            's'                 => $search_query,
-            'date_query'        => array(
-                array(
-                    'column'    => 'post_date',
-                    'after'     => '10 years ago',
-                    'inclusive' => true
-                ),
-            ),
-        ) ); wp_reset_query();
-        $response['date_filters']['5_past_10_years'] = array(
-            'item_label'        => __('Past 10 Years'),
-            'search_term'       => '10 years ago',
-            'search_count'      => (int) $past_10_years->found_posts
-        );
-
-        /**
          * Add Multiple Custom Post Type Search Filtering to
          * JSON API post_type filter which only works
          * with one post type out of the box
          */
-        if ( isset( $_GET['post_types'] ) ) {
+        // if ( isset( $_GET['post_types'] ) ) {
 
-            $post_types = array();
+        //     $post_types = array();
 
-            foreach ( $_GET['post_types'] as $post_type_key => $post_type_value ) {
-                if ( $post_type_key != 'tls_articles' ) {
-                    $post_types[] = wp_strip_all_tags($post_type_key);
-                }
-            }
+        //     foreach ( $_GET['post_types'] as $post_type_key => $post_type_value ) {
+        //         if ( $post_type_key != 'tls_articles' ) {
+        //             $post_types[] = wp_strip_all_tags($post_type_key);
+        //         }
+        //     }
 
-            $current_query['post_type'] = $post_types;
+        //     $current_query['post_type'] = $post_types;
 
-            $post_type_search_archive_args = array(
-                'post_type'         => $post_types,
-                'post_status'       => 'publish',
-                's'                 => $search_query
-            );
+        //     $post_type_search_archive_args = array(
+        //         'post_type'         => $post_types,
+        //         'post_status'       => 'publish',
+        //         's'                 => $search_query
+        //     );
 
-            $post_type_search_archive_query = array_merge($current_query, $post_type_search_archive_args);
-            $post_type_search_archive = $json_api->introspector->get_posts($post_type_search_archive_query);
+        //     $post_type_search_archive_query = array_merge($current_query, $post_type_search_archive_args);
+        //     $post_type_search_archive = $json_api->introspector->get_posts($post_type_search_archive_query);
 
-            $response['count'] = count($post_type_search_archive);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $post_type_search_archive;
+        //     $response['count'] = count($post_type_search_archive);
+        //     $response['count_total'] = (int) $wp_query->found_posts;
+        //     $response['pages'] = $wp_query->max_num_pages;
+        //     $response['posts'] = $post_type_search_archive;
 
-            $response['debug'] = (int) $wp_query->found_posts;
-        }
+        //     $response['debug'] = (int) $wp_query->found_posts;
+        // }
 
         /**
          * Add Custom post filtering for Custom taxonomy search
@@ -374,6 +149,210 @@ function tls_search_results_json_api_encode($response) {
         }
 
     } // END of Search Specific JSON API queries
+
+    /**
+     * ===========================================================
+     *                 Search Filters + Filter Count
+     * ===========================================================
+     */
+
+    /**
+     * Public Articles Taxonomy Term Filter
+     */
+    $public_visibility = get_term_by( 'slug', 'public', 'article_visibility' );
+    $public_visibility_id = (int) $public_visibility->term_id;
+    $public_articles_args = array(
+        'tax_query'         => array( array (
+            'taxonomy'      => 'article_visibility',
+            'field'         => 'term_id',
+            'terms'         => $public_visibility_id
+        ) )
+    );
+    $public_articles_query = array_merge($current_query, $public_articles_args);
+    $public_articles = new WP_Query($public_articles_query); wp_reset_query();
+
+    $response['content_type_filters']['public_articles'] = array(
+        'item_label'        => __('Free To Non Subscribers', 'tls'),
+        'json_query'        => 'post_type=tls_articles&tax_filter[article_visibility]=public',
+        'search_count'      => (int) $public_articles->found_posts
+    );
+
+    /**
+     * Reviews (Articles) Post Type
+     */
+    $reviews_tag_id = (int) $reviews_tag->term_id;
+    $reviews = new WP_Query( array(
+        'post_type'         => 'tls_articles',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 1,
+        's'                 => $search_query,
+    ) ); wp_reset_query();
+
+    $response['content_type_filters']['reviews'] = array(
+        'item_label'        => __('Reviews', 'tls'),
+        'json_query'        => 'post_type=tls_articles',
+        'search_count'      => (int) $reviews->found_posts
+    );
+
+    /**
+     * TLS Blogs Post Type
+     */
+    $blogs = new WP_Query( array(
+        'post_type'         => 'post',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 1,
+        's'                 => $search_query
+    ) ); wp_reset_query();
+
+    $response['content_type_filters']['blogs'] = array(
+        'item_label'        => __('Blogs', 'tls'),
+        'json_query'        => 'post_type=post',
+        'search_count'      => (int) $blogs->found_posts
+    );
+
+    /**
+     * FAQs Post Type
+     */
+    $faqs = new WP_Query( array(
+        'post_type'         => 'tls_faq',
+        'post_status'       => 'publish',
+        'posts_per_page'    => 1,
+        's'                 => $search_query
+    ) ); wp_reset_query();
+
+    $response['content_type_filters']['faqs'] = array(
+        'item_label'        => __('FAQs', 'tls'),
+        'json_query'        => 'post_type=tls_faq',
+        'search_count'      => (int) $faqs->found_posts
+    );
+
+
+    /**
+     * Date Filters Options with post count
+     */
+    // Past 7 Days
+    $past_7_days_args = array(
+        'date_query'        => array(
+            array(
+                'column'    => 'post_date',
+                'after'     => '7 days ago',
+                'inclusive' => true
+            ),
+        ),
+    );
+    $past_7_days_query = array_merge($current_query, $past_7_days_args);
+    $past_7_days = new WP_Query( $past_7_days_query ); wp_reset_query();
+    $response['date_filters']['1_past_7_days'] = array(
+        'item_label'        => __('Past 7 Days'),
+        'search_term'       => '7 days ago',
+        'search_count'      => (int) $past_7_days->found_posts
+    );
+
+    // Past 30 Days
+    $past_30_days_args = array(
+        'date_query'        => array(
+            array(
+                'column'    => 'post_date',
+                'after'     => '30 days ago',
+                'inclusive' => true
+            ),
+        ),
+    );
+    $past_30_days_query = array_merge($current_query, $past_30_days_args);
+    $past_30_days = new WP_Query( $past_30_days_query); wp_reset_query();
+    $response['date_filters']['2_past_30_days'] = array(
+        'item_label'        => __('Past 30 Days'),
+        'search_term'       => '30 days ago',
+        'search_count'      => (int) $past_30_days->found_posts
+    );
+
+    // Past 1 Year
+    $past_1_year_args = array(
+        'date_query'        => array(
+            array(
+                'column'    => 'post_date',
+                'after'     => '1 year ago',
+                'inclusive' => true
+            ),
+        ),
+    );
+    $past_1_year_query = array_merge($current_query, $past_1_year_args);
+    $past_1_year = new WP_Query( $past_1_year_query ); wp_reset_query();
+    $response['date_filters']['3_past_1_year'] = array(
+        'item_label'        => __('Past Year'),
+        'search_term'       => '1 year ago',
+        'search_count'      => (int) $past_1_year->found_posts
+    );
+
+    // Past 5 Years
+    $past_5_years_args = array(
+        'date_query'        => array(
+            array(
+                'column'    => 'post_date',
+                'after'     => '5 years ago',
+                'inclusive' => true
+            ),
+        ),
+    );
+    $past_5_years_query = array_merge($current_query, $past_5_years_args);
+    $past_5_years = new WP_Query( $past_5_years_query ); wp_reset_query();
+    $response['date_filters']['4_past_5_years'] = array(
+        'item_label'        => __('Past 5 Years'),
+        'search_term'       => '5 years ago',
+        'search_count'      => (int) $past_5_years->found_posts
+    );
+
+    // Past 10 Years
+    $past_10_years_args = array(
+        'date_query'        => array(
+            array(
+                'column'    => 'post_date',
+                'after'     => '10 years ago',
+                'inclusive' => true
+            ),
+        ),
+    );
+    $past_10_years_query = array_merge($current_query, $past_10_years_args);
+    $past_10_years = new WP_Query( $past_10_years_query ); wp_reset_query();
+    $response['date_filters']['5_past_10_years'] = array(
+        'item_label'        => __('Past 10 Years'),
+        'search_term'       => '10 years ago',
+        'search_count'      => (int) $past_10_years->found_posts
+    );
+
+    /**
+     * Article Categories
+     */
+
+    $sections = get_terms( 'article_section' );
+    foreach ($sections as $key => $value) {
+
+        $sections_count_args = array(
+            'tax_query'         =>  array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => 'article_section',
+                    'field'    => 'term_id',
+                    'terms'    => $value->term_id,
+                )
+            ),
+        );
+        $sections_count_query = array_merge($current_query, $sections_count_args);
+
+        $sections_count = new WP_Query($sections_count_query);
+        wp_reset_query();
+
+
+        $response['articles_sections'][$value->slug] = array(
+            'item_label'        => $value->name,
+            'type'              => 'taxonomy',
+            'json_query'        => 'tax_filter[article_section]='.$value->slug,
+            'taxonomy'          => $value->taxonomy,
+            'slug'              => $value->slug,
+            'search_count'      => $sections_count->found_posts
+        );
+    }
+
 
     // Add book to all the results before they are returned
     foreach ($response['posts'] as $search_post) {

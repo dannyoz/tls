@@ -45,7 +45,7 @@ function tls_custom_post_types() {
 		'menu_position'       => 5,
 		'menu_icon'           => 'dashicons-media-spreadsheet',
 		'can_export'          => true,
-		'has_archive'         => true,
+		'has_archive'         => false,
 		'exclude_from_search' => true,
 		'publicly_queryable'  => true,
 		'rewrite'             => $ed_rewrite,

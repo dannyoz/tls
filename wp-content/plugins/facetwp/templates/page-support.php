@@ -38,16 +38,9 @@ MySQL Version:              <?php echo $wpdb->get_var( "SELECT VERSION()" ); ?>
 
 Web Server Info:            <?php echo $_SERVER['SERVER_SOFTWARE']; ?>
 
-
-WordPress Memory Limit:     <?php echo WP_MEMORY_LIMIT; ?>
-
 PHP Memory Limit:           <?php echo ini_get( 'memory_limit' ); ?>
 
 PHP Memory Usage:           <?php echo round( memory_get_usage( true ) / 1048576 ) . 'M'; ?>
-
-PHP Post Max Size:          <?php echo ini_get( 'post_max_size' ); ?>
-
-PHP Time Limit:             <?php echo ini_get( 'max_execution_time' ); ?>
 
 
 <?php

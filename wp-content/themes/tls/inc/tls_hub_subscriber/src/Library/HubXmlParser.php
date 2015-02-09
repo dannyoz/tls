@@ -49,7 +49,7 @@ class HubXmlParser implements FeedParser {
         // Turn on Simple XML Internal Errors to catch any errors that appear
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($feed);
-var_dump(libxml_get_errors());
+
         // If there are errors then add them to the error logs
         if ($xml === false) {
             $error_msg = "Failed loading XML\n";
