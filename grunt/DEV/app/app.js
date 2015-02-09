@@ -8,5 +8,5 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
  //  	}])
 
 .config(["DoubleClickProvider",function (DoubleClickProvider) {
-  	DoubleClickProvider.defineSlot('gclid=CJjsqefUkAJSHDJ_gPdDiEAAA&gclsrc=ds', [300, 250], 'advert1');
+  	DoubleClickProvider.defineSlot('/1234/travel/asia/food', [300, 250], 'div-gpt-ad-123456789-0');
 }])
