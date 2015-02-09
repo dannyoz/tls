@@ -10,7 +10,7 @@ The following plugins should be installed and activated for the TLS theme to wor
 - Advanced Custom Fields: Repeater Field
 
 ## Back-End Notes
-- TLS Hub Integration uses:
+TLS Hub Integration uses:
  - Composer to autoload Classes
  - Guzzle HTTP Client
 
