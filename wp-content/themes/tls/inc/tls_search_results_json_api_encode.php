@@ -327,16 +327,7 @@ function tls_search_results_json_api_encode($response) {
     $sections = get_terms( 'article_section' );
     foreach ($sections as $key => $value) {
 
-        $sections_count_args = array(
-            'tax_query'         =>  array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'article_section',
-                    'field'    => 'term_id',
-                    'terms'    => $value->term_id,
-                )
-            ),
-        );
+        $sections_count_args = array( 'article_section' => $value->slug );
         $sections_count_query = array_merge($current_query, $sections_count_args);
 
         $sections_count = new WP_Query($sections_count_query);
