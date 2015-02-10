@@ -136,12 +136,10 @@ function tls_remove_wp_ver_css_js( $src ) {
 	 wp_enqueue_script( 'tls-typekit', '//use.typekit.net/zvh7bpe.js', array(), '', false );
 	 wp_enqueue_script( 'tls-scripts', TLS_THEME_URI . '/js/main.min.js', array(), '', true);
 
-	 if ( !is_search() ) {
-		 wp_dequeue_script('jquery');
-	 }
-
 	 if ( is_single() && "post" == get_post_type() ) {
 		 wp_enqueue_script('ajaxcomments', TLS_THEME_URI .'/js/comment-ajax.js', array( 'jquery' ));
+	 } else {
+		 wp_dequeue_script('jquery');
 	 }
 
 
