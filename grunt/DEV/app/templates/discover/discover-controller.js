@@ -42,11 +42,11 @@
 			];
 
 			mpu.insert(result.top_articles, mpuObj[0]).then(function (result){
-				cards = result;
+				result.top_articles = result;
 			});
 
 			mpu.insert(result.top_articles, mpuObj[1]).then(function (result){
-				cards = result;
+				result.top_articles = result;
 			});
 
 			columns.divide(result.top_articles).then(function (cols){

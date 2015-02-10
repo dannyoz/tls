@@ -1,11 +1,12 @@
 .controller('category', [
 	'$scope',
 	'$sce', 
-	'$timeout', 
+	'$timeout', 	
 	'api', 
+	'mpu',
 	'columns',
 	'tealium', 
-	function ($scope,$sce,$timeout,api,columns,tealium){
+	function ($scope,$sce,$timeout,api,mpu,columns,tealium){
 
 	var href   = window.location.href,
 		parent = href.indexOf('/blogs/') > -1,
@@ -34,7 +35,20 @@
 		$scope.firstPost = result.featured_post;
 		var posts        = result.posts;
 
-		console.log(result)
+		//console.log(result);
+
+		//Inserts Blogs Ads to cards
+		var mpuObj = [
+			{
+				id: 'blogs-1',
+				order: 3,
+				type: 'mpu'
+			}
+		];
+
+		mpu.insert(posts, mpuObj[0]).then(function (result){
+			posts = result;
+		});		
 
 		columns.divide(posts).then(function (cols){
 			$scope.col1  = cols.col1
