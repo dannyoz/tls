@@ -49,7 +49,6 @@
 			}
 
 				console.log(results);
-
 		})
 	}	
 

@@ -30468,7 +30468,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 
 				console.log(results);
-
 		})
 	}	
 

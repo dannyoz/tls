@@ -24,6 +24,7 @@ function tls_search_results_json_api_encode($response) {
 
         // Get Current WP Query;
         $current_query = $wp_query->query;
+        $response['wp_query'] = $wp_query;
 
         /**
          * Add Multiple Custom Post Type Search Filtering to
@@ -63,62 +64,62 @@ function tls_search_results_json_api_encode($response) {
          * Add Custom post filtering for Custom taxonomy search
          * then return appropriate filtered posts
          */
-        if ( isset( $_GET['tax_filter'] ) ) {
-
-            $current_query['posts_per_page'] = -1;
-            $current_archive = get_posts($current_query);
-            $response['current_query_posts'] = $current_archive;
-
-            $tax_query = array(
-                'relation'          => 'OR'
-            );
-
-            foreach ($_GET['tax_filter'] as $tax => $tax_term) {
-                $taxonomy_queries = array(
-                    'taxonomy'      => wp_strip_all_tags($tax),
-                    'field'         => 'slug',
-                    'terms'         => wp_strip_all_tags($tax_term),
-                );
-                array_push($tax_query, $taxonomy_queries);
-            }
-
-            $taxonomy_posts_archive_args = array(
-                'post_type'         => array( 'tls_articles' ),
-                'post_status'       => 'publish',
-                's'                 => $search_query,
-                'tax_query'         => $tax_query,
-                'posts_per_page'    => -1
-            );
-
-            $taxonomy_posts_archive = new WP_Query($taxonomy_posts_archive_args);
-
-            $results_archive = array_merge( $current_archive, $taxonomy_posts_archive->posts );
-
-            $results_post_ids = array();
-            foreach ($results_archive as $result) {
-                $results_post_ids[]=$result->ID;
-            }
-
-            $final_post_ids = array_unique($results_post_ids);
-            $final_archive_args = array(
-                'post_type'     => array( 'post', 'tls_faq', 'tls_articles' ),
-                'post__in'      => $final_post_ids,
-                'post_status'   => 'publish'
-            );
-
-            $final_archive = new WP_Query($final_archive_args);
-
-            $results = $json_api->introspector->get_posts($final_archive);
-
-            $wp_query = $final_archive;
-            $response['wp_query'] = $wp_query;
-            $response['count'] = count($results);
-            $response['count_total'] = (int) $wp_query->found_posts;
-            $response['pages'] = $wp_query->max_num_pages;
-            $response['posts'] = $results;
-
-
-        }
+//        if ( isset( $_GET['tax_filter'] ) ) {
+//
+//            $current_query['posts_per_page'] = -1;
+//            $current_archive = get_posts($current_query);
+//            $response['current_query_posts'] = $current_archive;
+//
+//            $tax_query = array(
+//                'relation'          => 'OR'
+//            );
+//
+//            foreach ($_GET['tax_filter'] as $tax => $tax_term) {
+//                $taxonomy_queries = array(
+//                    'taxonomy'      => wp_strip_all_tags($tax),
+//                    'field'         => 'slug',
+//                    'terms'         => wp_strip_all_tags($tax_term),
+//                );
+//                array_push($tax_query, $taxonomy_queries);
+//            }
+//
+//            $taxonomy_posts_archive_args = array(
+//                'post_type'         => array( 'tls_articles' ),
+//                'post_status'       => 'publish',
+//                's'                 => $search_query,
+//                'tax_query'         => $tax_query,
+//                'posts_per_page'    => -1
+//            );
+//
+//            $taxonomy_posts_archive = new WP_Query($taxonomy_posts_archive_args);
+//
+//            $results_archive = array_merge( $current_archive, $taxonomy_posts_archive->posts );
+//
+//            $results_post_ids = array();
+//            foreach ($results_archive as $result) {
+//                $results_post_ids[]=$result->ID;
+//            }
+//
+//            $final_post_ids = array_unique($results_post_ids);
+//            $final_archive_args = array(
+//                'post_type'     => array( 'post', 'tls_faq', 'tls_articles' ),
+//                'post__in'      => $final_post_ids,
+//                'post_status'   => 'publish'
+//            );
+//
+//            $final_archive = new WP_Query($final_archive_args);
+//
+//            $results = $json_api->introspector->get_posts($final_archive);
+//
+//            $wp_query = $final_archive;
+//            $response['wp_query'] = $wp_query;
+//            $response['count'] = count($results);
+//            $response['count_total'] = (int) $wp_query->found_posts;
+//            $response['pages'] = $wp_query->max_num_pages;
+//            $response['posts'] = $results;
+//
+//
+//        }
 
 
         /**
@@ -128,9 +129,6 @@ function tls_search_results_json_api_encode($response) {
         if ( isset( $_GET['date_filter'] ) && $_GET['date_filter'] != '' ) {
 
             $date_posts_archive_args = array(
-                'post_type'         => array('post', 'tls_articles', 'tls_faq'),
-                'post_status'		=> 'publish',
-                's'                 => $search_query,
                 'date_query'		=> array(
                     array(
                         'column' => 'post_date',
@@ -138,10 +136,10 @@ function tls_search_results_json_api_encode($response) {
                         'inclusive' => true
                     ),
                 ),
-
             );
+            $date_posts_archive_query = array_merge($current_query, $date_posts_archive_args);
 
-            $date_posts_archive = $json_api->introspector->get_posts($date_posts_archive_args);
+            $date_posts_archive = $json_api->introspector->get_posts($date_posts_archive_query);
             $response['count'] = count($date_posts_archive);
             $response['count_total'] = (int) $wp_query->found_posts;
             $response['pages'] = $wp_query->max_num_pages;
@@ -161,69 +159,53 @@ function tls_search_results_json_api_encode($response) {
      */
     $public_visibility = get_term_by( 'slug', 'public', 'article_visibility' );
     $public_visibility_id = (int) $public_visibility->term_id;
-    $public_articles_args = array(
-        'tax_query'         => array( array (
-            'taxonomy'      => 'article_visibility',
-            'field'         => 'term_id',
-            'terms'         => $public_visibility_id
-        ) )
-    );
+    $public_articles_args = array( 'article_visibility' => 'public' );
     $public_articles_query = array_merge($current_query, $public_articles_args);
     $public_articles = new WP_Query($public_articles_query); wp_reset_query();
 
-    $response['content_type_filters']['public_articles'] = array(
+    $response['content_type_filters']['2_public_articles'] = array(
         'item_label'        => __('Free To Non Subscribers', 'tls'),
-        'json_query'        => 'post_type=tls_articles&tax_filter[article_visibility]=public',
+        'json_query'        => 'post_type=tls_articles&article_visibility=public',
         'search_count'      => (int) $public_articles->found_posts
     );
 
     /**
      * Reviews (Articles) Post Type
      */
-    $reviews_tag_id = (int) $reviews_tag->term_id;
-    $reviews = new WP_Query( array(
-        'post_type'         => 'tls_articles',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query,
-    ) ); wp_reset_query();
+    $reviews_args = array ('post_type' => 'tls_articles', 'posts_per_page' => 1);
+    $reviews_query = array_merge($current_query, $reviews_args);
+    $reviews = new WP_Query( $reviews_query ); wp_reset_query();
 
-    $response['content_type_filters']['reviews'] = array(
+    $response['content_type_filters']['1_reviews'] = array(
         'item_label'        => __('Reviews', 'tls'),
         'json_query'        => 'post_type=tls_articles',
-        'search_count'      => (int) $reviews->found_posts
+        'search_count'      => ( $current_query['post_type']== 'tls_articles' || $wp_query->query_vars['post_type'] == 'any' ) ? $reviews->found_posts : 0,
     );
 
     /**
      * TLS Blogs Post Type
      */
-    $blogs = new WP_Query( array(
-        'post_type'         => 'post',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query
-    ) ); wp_reset_query();
+    $blogs_args = array('post_type' => 'post', 'posts_per_page' => 1);
+    $blogs_query = array_merge($current_query, $blogs_args);
+    $blogs = new WP_Query( $blogs_query ); wp_reset_query();
 
-    $response['content_type_filters']['blogs'] = array(
+    $response['content_type_filters']['3_blogs'] = array(
         'item_label'        => __('Blogs', 'tls'),
         'json_query'        => 'post_type=post',
-        'search_count'      => (int) $blogs->found_posts
+        'search_count'      => (int) ( $current_query['post_type'] == 'post' || $wp_query->query_vars['post_type'] == 'any' ) ? $blogs->found_posts : 0,
     );
 
     /**
      * FAQs Post Type
      */
-    $faqs = new WP_Query( array(
-        'post_type'         => 'tls_faq',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query
-    ) ); wp_reset_query();
+    $faqs_args = array('post_type' => 'tls_faq', 'posts_per_page' => 1);
+    $faqs_query = array_merge($current_query, $faqs_args);
+    $faqs = new WP_Query( $faqs_query ); wp_reset_query();
 
-    $response['content_type_filters']['faqs'] = array(
+    $response['content_type_filters']['4_faqs'] = array(
         'item_label'        => __('FAQs', 'tls'),
         'json_query'        => 'post_type=tls_faq',
-        'search_count'      => (int) $faqs->found_posts
+        'search_count'      => (int) ( $current_query['post_type'] == 'tls_faq' || $wp_query->query_vars['post_type'] == 'any' ) ? $faqs->found_posts : 0,
     );
 
 
@@ -327,16 +309,7 @@ function tls_search_results_json_api_encode($response) {
     $sections = get_terms( 'article_section' );
     foreach ($sections as $key => $value) {
 
-        $sections_count_args = array(
-            'tax_query'         =>  array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => 'article_section',
-                    'field'    => 'term_id',
-                    'terms'    => $value->term_id,
-                )
-            ),
-        );
+        $sections_count_args = array( 'article_section' => $value->slug );
         $sections_count_query = array_merge($current_query, $sections_count_args);
 
         $sections_count = new WP_Query($sections_count_query);
@@ -346,10 +319,10 @@ function tls_search_results_json_api_encode($response) {
         $response['articles_sections'][$value->slug] = array(
             'item_label'        => $value->name,
             'type'              => 'taxonomy',
-            'json_query'        => 'tax_filter[article_section]='.$value->slug,
+            'json_query'        => 'article_section='.$value->slug,
             'taxonomy'          => $value->taxonomy,
             'slug'              => $value->slug,
-            'search_count'      => $sections_count->found_posts
+            'search_count'      => ( isset($current_query['article_section']) && $current_query['article_section'] != $value->slug ) ? 0 :$sections_count->found_posts
         );
     }
 
