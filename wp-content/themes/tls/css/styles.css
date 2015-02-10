@@ -1,4 +1,4 @@
-/* line 5, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,53 +20,53 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Ruby200-x64/lib/ruby/gems/2.0.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
 /* line 3, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
 body {
-  background: white;
-  color: black;
+  background: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-family: "Georgia", "Times", serif;
 }
@@ -648,22 +648,22 @@ a, button, input {
 
 /* line 7, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:link {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 /* line 12, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:visited {
-  color: black;
+  color: #000000;
   text-decoration: none;
 }
 /* line 17, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:hover {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 /* line 22, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a:active {
-  color: black;
+  color: #000000;
   text-decoration: underline;
 }
 /* line 27, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
@@ -3163,8 +3163,10 @@ p.author, h4.author {
   overflow: hidden;
   min-height: 300px;
   position: relative;
+  text-align: center;
+  padding-top: 35px;
 }
-/* line 198, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 200, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card.mpu img {
   max-width: 100% !important;
   position: absolute;
@@ -3176,30 +3178,30 @@ p.author, h4.author {
   transform: translate(-50%, -50%);
 }
 
-/* line 206, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 208, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry {
   float: left;
   position: relative;
   width: 31.66667%;
   margin-right: 2.5%;
 }
-/* line 210, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 212, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .tls-mansonry:nth-child(3) {
   margin-right: 0;
 }
 
-/* line 218, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 220, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 {
   background-color: #d73f2b;
   margin-bottom: 0;
   padding-bottom: 12px;
 }
-/* line 224, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 226, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 a {
   color: white;
 }
 
-/* line 230, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -3271,13 +3273,13 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 1090px) {
-  /* line 230, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 560px) {
-  /* line 230, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     padding: 20px 30px;
     margin-bottom: 15px;
@@ -3903,585 +3905,395 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
 
 */
 @-webkit-keyframes fadeIn {
-  /* line 63, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 109, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
   }
 }
 @-moz-keyframes fadeIn {
-  /* line 237, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 283, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes fadeIn {
-  /* line 411, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: scale(0.8);
     opacity: 0;
   }
-
-  /* line 457, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes fade {
-  /* line 63, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: scale(1);
     opacity: 0;
   }
-
-  /* line 109, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: scale(1);
     opacity: 1;
   }
 }
 @-moz-keyframes fade {
-  /* line 237, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: scale(1);
     opacity: 0;
   }
-
-  /* line 283, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes fade {
-  /* line 411, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: scale(1);
     opacity: 0;
   }
-
-  /* line 457, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes slideUp {
-  /* line 79, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 125, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: translateY(0);
     opacity: 1;
   }
 }
 @-moz-keyframes slideUp {
-  /* line 253, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 299, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: translateY(0);
     opacity: 1;
   }
 }
 @keyframes slideUp {
-  /* line 427, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: translateY(50px);
     opacity: 0;
   }
-
-  /* line 473, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: translateY(0);
     opacity: 1;
   }
 }
 @-webkit-keyframes slideleft {
-  /* line 75, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -webkit-transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 121, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -webkit-transform: translateX(0);
     opacity: 1;
   }
 }
 @-moz-keyframes slideleft {
-  /* line 249, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     -moz-transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 295, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     -moz-transform: translateX(0);
     opacity: 1;
   }
 }
 @keyframes slideleft {
-  /* line 423, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   0% {
     transform: translateX(50px);
     opacity: 0;
   }
-
-  /* line 469, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
   100% {
     transform: translateX(0);
     opacity: 1;
   }
 }
 @-webkit-keyframes flips {
-  /* line 48, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 49, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 50, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 51, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 52, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 53, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 54, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 55, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 56, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 57, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -webkit-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 58, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -webkit-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 59, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -webkit-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 60, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-moz-keyframes flips {
-  /* line 64, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 65, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 66, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 67, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 68, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 69, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 70, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 71, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 72, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 73, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -moz-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 74, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -moz-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 75, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -moz-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 76, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-ms-keyframes flips {
-  /* line 80, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 81, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 82, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 83, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 84, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 85, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 86, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 87, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 88, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 89, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     -ms-transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 90, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     -ms-transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 91, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     -ms-transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 92, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -ms-transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @keyframes flips {
-  /* line 96, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 97, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   8.3% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 98, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   16.6% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 99, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   24.9% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 100, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   33% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 101, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   41.3% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 102, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   49.9% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 103, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   58.2% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 104, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   66.6% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
-
-  /* line 105, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   74.8% {
     transform: rotate3d(0, 1, 1, 360deg);
   }
-
-  /* line 106, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   83.2% {
     transform: rotate3d(1, 0, 0, 90deg);
   }
-
-  /* line 107, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   91.4% {
     transform: rotate3d(0, 1, 1, 0deg);
   }
-
-  /* line 108, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: rotate3d(0, 1, 0, 90deg);
   }
 }
 @-webkit-keyframes pageTurnLeft {
-  /* line 118, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 119, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 120, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 121, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 122, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-moz-keyframes pageTurnLeft {
-  /* line 126, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 127, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 128, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 129, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -moz-transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 130, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @keyframes pageTurnLeft {
-  /* line 134, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     background-color: white;
   }
-
-  /* line 135, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   10% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 136, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   25% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 137, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     transform: translateX(-24%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 138, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
 }
 @-webkit-keyframes pageTurnRight {
-  /* line 144, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -webkit-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 145, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -webkit-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 146, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     -webkit-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 147, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 148, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -webkit-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
 }
 @-moz-keyframes pageTurnRight {
-  /* line 153, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     -moz-transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 154, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     -moz-transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 155, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     -moz-transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 156, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 157, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     -moz-transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;
   }
 }
 @keyframes pageTurnRight {
-  /* line 162, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   0% {
     transform: translateX(-75%) rotate3d(0, 1, 0, -90deg);
-    background-color: white;
+    background-color: #fff;
   }
-
-  /* line 163, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   50% {
     transform: translateX(-25%) rotate3d(0, 1, 0, -60deg);
   }
-
-  /* line 164, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   75% {
     transform: translateX(-6%) rotate3d(0, 1, 0, -30deg);
   }
-
-  /* line 165, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   90% {
     transform: translateX(0) rotate3d(0, 1, 0, -12deg);
   }
-
-  /* line 166, ../../../../grunt/DEV/app/global/sass-globals/_animations.scss */
   100% {
     transform: translateX(0) rotate3d(0, 1, 0, 0deg);
     background-color: white;

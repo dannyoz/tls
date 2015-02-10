@@ -22,15 +22,25 @@
 
 		var cards = objToArr.convert(result.home_page_cards);
 
-		//Inserts first advert to cards
-		mpu.insert(cards,4).then(function (result){
-			cards = result
-		})
+		//Inserts home Ads to cards
+		var mpuObj = [
+			{
+				id: 'home-1',
+				order: 4
+			},
+			{
+				id: 'home-2',
+				order: 9
+			}
+		];
 
-		//Inserts second advert to cards
-		mpu.insert(cards,9).then(function (result){
-			cards = result
-		})
+		mpu.insert(cards, mpuObj[0]).then(function (result){
+			cards = result;
+		});
+
+		mpu.insert(cards, mpuObj[1]).then(function (result){
+			cards = result;
+		});
 
 		columns.divide(cards).then(function (cols){
 

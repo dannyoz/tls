@@ -62,8 +62,19 @@ angular.module('ngDfp', [])
      Initializes and configures the slots that were added with defineSlot.
      */
     this._initialize = function () {
+      
       angular.forEach(slots, function (slot, id) {
-        definedSlots[id] = googletag.defineSlot.apply(null, slot).addService(googletag.pubads());
+
+            // =====================
+            // TLS Hack - Passing values to setTargeting as 3rd parameter on defineSlot() instance
+            // ======================
+            if (typeof slot[3] == 'object' && slot[3].hasOwnProperty('target')) {
+                var slotTarget = slot[3].target;
+                definedSlots[id] = googletag.defineSlot.apply(null, slot).setTargeting('pos', slotTarget).addService(googletag.pubads());  
+            } else {
+                definedSlots[id] = googletag.defineSlot.apply(null, slot).addService(googletag.pubads());
+            }
+        
       });
 
       googletag.pubads().enableSingleRequest();

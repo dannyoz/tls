@@ -2,15 +2,18 @@
 
 	return {
 
-		insert : function(posts,order){
+		insert : function(posts, mpuObj){
 
 			var defer  = $q.defer(),
-				object = {"type" : "mpu"};
+				object = {
+                    id   : "div-gpt-ad-" + mpuObj.id,
+                    type : "mpu"
+                };
 
-			posts.splice(order,0,object);
+			posts.splice(mpuObj.order, 0, object);
 			defer.resolve(posts);
 
-			return defer.promise
+			return defer.promise;
 		}
 	}
 
