@@ -172,12 +172,9 @@ function tls_search_results_json_api_encode($response) {
     /**
      * Reviews (Articles) Post Type
      */
-    $reviews = new WP_Query( array(
-        'post_type'         => 'tls_articles',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query,
-    ) ); wp_reset_query();
+    $reviews_args = array ('post_type' => 'tls_articles', 'posts_per_page' => 1);
+    $reviews_query = array_merge($current_query, $reviews_args);
+    $reviews = new WP_Query( $reviews_query ); wp_reset_query();
 
     $response['content_type_filters']['1_reviews'] = array(
         'item_label'        => __('Reviews', 'tls'),
@@ -188,12 +185,9 @@ function tls_search_results_json_api_encode($response) {
     /**
      * TLS Blogs Post Type
      */
-    $blogs = new WP_Query( array(
-        'post_type'         => 'post',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query
-    ) ); wp_reset_query();
+    $blogs_args = array('post_type' => 'post', 'posts_per_page' => 1);
+    $blogs_query = array_merge($current_query, $blogs_args);
+    $blogs = new WP_Query( $blogs_query ); wp_reset_query();
 
     $response['content_type_filters']['3_blogs'] = array(
         'item_label'        => __('Blogs', 'tls'),
@@ -204,12 +198,9 @@ function tls_search_results_json_api_encode($response) {
     /**
      * FAQs Post Type
      */
-    $faqs = new WP_Query( array(
-        'post_type'         => 'tls_faq',
-        'post_status'       => 'publish',
-        'posts_per_page'    => 1,
-        's'                 => $search_query
-    ) ); wp_reset_query();
+    $faqs_args = array('post_type' => 'tls_faq', 'posts_per_page' => 1);
+    $faqs_query = array_merge($current_query, $faqs_args);
+    $faqs = new WP_Query( $faqs_query ); wp_reset_query();
 
     $response['content_type_filters']['4_faqs'] = array(
         'item_label'        => __('FAQs', 'tls'),

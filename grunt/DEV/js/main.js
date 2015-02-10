@@ -30326,8 +30326,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				// Previous edition
 				$scope.nextEdition = $scope.latestEdition.next_post_info;	
 				// Next edition
-				$scope.previousEdition = $scope.latestEdition.previous_post_info;	
-				$scope.previousEdition.url = window.location.origin + '/grunt/DEV/app/templates/latest-editions/11-december-2014.json';
+				$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
 			} else {
 
@@ -30469,7 +30468,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 
 				console.log(results);
-
 		})
 	}	
 
@@ -30520,6 +30518,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				
 					$scope.loadResults = false
 					$scope.results = results
+					$scope.contentType = results.content_type_filters
+					$scope.sections    = results.articles_sections
+					$scope.dateRanges  = results.date_filters
 					$scope.paginationConfig = {
 						"pageCount"   : results.pages,
 						"currentPage" : 1,
@@ -30565,6 +30566,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			
 				$scope.loadResults = false
 				$scope.results = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
 				$scope.paginationConfig = {
 					"pageCount"   : results.pages,
 					"currentPage" : 1,
@@ -30592,6 +30596,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				
 				$scope.loadResults = false
 				$scope.results = results
+				$scope.contentType = results.content_type_filters
+				$scope.sections    = results.articles_sections
+				$scope.dateRanges  = results.date_filters
 				$scope.paginationConfig = {
 					"pageCount"   : results.pages,
 					"currentPage" : 1,
