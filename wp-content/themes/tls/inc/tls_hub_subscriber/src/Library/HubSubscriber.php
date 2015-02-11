@@ -160,9 +160,21 @@ class HubSubscriber {
         }
 
         // If HTTP Header does not contain the HTTP_X_AMZ_SNS_MESSAGE_TYPE header that the Hub sends then give a 404
-        if ( !isset($_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE']) ) {
-            header('HTTP/1.1 404 "Not Found"', NULL, 404);
-            exit();
+//        if ( !isset($_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE']) ) {
+//            header('HTTP/1.1 404 "Not Found"', NULL, 404);
+//            exit();
+//        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $serverVar = $_SERVER;
+
+            $requestVar = $_REQUEST;
+
+            $postVar = $_POST;
+
+            HubLogger::log("SERVER Variables:\n" . $serverVar . "\n POST Variables:\n" . $postVar . "\n REQUEST Variables:\n" . $requestVar);
+
         }
 
         // Handle the different types of messages sent by the Hub
