@@ -7,16 +7,19 @@
 			type : "@",
 			copy : "=copy"
 		},
-		link : function(scope){
+		link : function(scope) {
 
 			scope.sce = $sce;
 			var card = scope.data;	
-			// Type passed as attibute
-			var typeAttr = scope.type;
-
+			var typeAttr = scope.type; // passed as attribute
 			card.hasCopy = (scope.copy == undefined) ? true : scope.copy; 
 
-			if(card.type == "listen_blog"){
+			// Function to check value is undefined
+			var isUndefined = function(val) {							
+				return angular.isUndefined(val);
+			}
+
+			if (card.type == "listen_blog") {
 				card.type  = "blog"
 				card.category = {
 					slug: "listen",
@@ -28,9 +31,9 @@
 				card.type  = "article"
 			}
 
-			//Change type using data-type attribute
-			if(scope.type){
-				card.type = scope.type
+			// Change type using data-type attribute
+			if (typeAttr && card.type != 'mpu') {
+				card.type = scope.type;
 			}
 
 			// Type of card (Object or Array)
@@ -41,21 +44,7 @@
 				card.type = 'blog_homepage';
 			} 
 
-			// Type passed as attibutes in template
-			if (typeAttr != undefined && typeAttr == 'blog') {
-				card.type = 'blog';	
-			}
-
-			// Function to check value is undefined
-			var isUndefined = function(val) {							
-				return angular.isUndefined(val);
-			}
-
-			// Handle mpus
-			if(scope.type == 'mpu'){
-
-				consol.log('Mpu logic goes here')
-			}
+			
 			
 			// Function that format final object in a consistent way
 			scope.formatCard = function(card) {
@@ -158,14 +147,6 @@
 						}
 
 					break;
-
-					// case 'then_and_now':
-					// 	console.log(card);
-					// break;
-
-					// case 'poem_of_week':
-					// 	console.log(card);
-					// break;
 				}		
 
 			}(card);
