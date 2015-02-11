@@ -1,7 +1,15 @@
 <?php namespace Tls;
 
+/**
+ * Class ThemeOptions
+ * @package Tls
+ * @author Vitor Faiante
+ */
 class ThemeOptions {
 
+	/**
+	 * Theme Options Constructor
+     */
 	public function __construct(){
 
 		// Enqueue Scripts and Styles for Thickbox Uploader and Theme Options Scripts
@@ -135,6 +143,15 @@ class ThemeOptions {
 			'theme_options_section'								// The section to which setting is added
 		);
 
+		// Define Facebook URL Setting Field
+		add_settings_field(
+			'tls_tealium',										// The ID (or the name) of the field
+			'Tealium Environment Variable',						// The text used for the label of the field
+			array( $this, 'tls_tealium_display' ),				// The callback function used to render the field
+			'tls_theme_options',								// The ID (or slug) of the page on which this field is rendered
+			'theme_options_section'								// The section to which setting is added
+		);
+
 		// Register the 'facebook_url' setting with the 'General' section
 		register_setting(
 			'theme_options_section', 							// Name of section to which setting is registered to
@@ -194,7 +211,7 @@ class ThemeOptions {
 	function tls_facebook_url_display() {
 
 		$options = (array)get_option('theme_options_settings');
-		$facebook_url = $options['facebook_url'];
+		$facebook_url = (isset($options['facebook_url'])) ? $options['facebook_url'] : '';
 
 		echo '<input type="text" name="theme_options_settings[facebook_url]" id="theme_options_settings_facebook_url" value="' . $facebook_url . '">';
 	} // End of tls_facebook_url_display
@@ -205,7 +222,7 @@ class ThemeOptions {
 	function tls_twitter_url_display() {
 
 		$options = (array)get_option('theme_options_settings');
-		$twitter_url = $options['twitter_url'];
+		$twitter_url = (isset($options['twitter_url'])) ? $options['twitter_url'] : '';
 
 		echo '<input type="text" name="theme_options_settings[twitter_url]" id="theme_options_settings_twitter_url" value="' . $twitter_url . '">';
 	} // End of tls_twitter_url_display
@@ -216,12 +233,36 @@ class ThemeOptions {
 	function tls_classifieds_pdf_display() {
 
 		$options = (array)get_option('theme_options_settings');
-		$classifieds_pdf = $options['classifieds_pdf'];
+		$classifieds_pdf = (isset($options['classifieds_pdf'])) ? $options['classifieds_pdf'] : '';
 		?>
 		<input type="text" id="classifieds_pdf_url" name="theme_options_settings[classifieds_pdf]" value="<?php echo esc_url( $classifieds_pdf ); ?>" />
 		<input id="upload_classifieds_button" type="button" class="button" value="<?php _e( 'Upload Classifieds', 'tls' ); ?>" />
 		<span class="description"><?php _e('Upload a PDF File for the Classifieds.', 'tls' ); ?></span>
 	<?php } // End of tls_classifieds_pdf_display
+
+	/**
+	 * Render the input field for the 'Tealium Environment Variable' setting in the 'General Settings' section
+	 */
+	function tls_tealium_display() {
+
+		$options = (array)get_option('theme_options_settings');
+		$tls_tealium = (isset($options['tls_tealium'])) ? $options['tls_tealium'] : '';
+
+		$environment_options = array(
+			'dev'	=> 'Development',
+			'qa'	=> 'Testing/QA',
+			'prod'	=> 'Production'
+		);
+		?>
+
+		<select name="theme_options_settings[tls_tealium]" id="theme_options_settings_tls_tealium">
+			<option value=""> -- Select A Tealium Environment -- </option>
+		<?php foreach ($environment_options as $environment_key => $environment_value) : ?>
+			<option value="<?php echo $environment_key; ?>" <?php echo ($tls_tealium == $environment_key) ? 'selected' : ''; ?>><?php echo $environment_value; ?></option>
+		<?php endforeach; ?>
+		</select>
+		<?php
+	} // End of tls_tealium_display
 
 	/**
 	 * Sanitise all Options
