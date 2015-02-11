@@ -7,7 +7,7 @@
 			var defer  = $q.defer(),
 				object = {
                     id   : "div-gpt-ad-" + mpuObj.id,
-                    type : mpuObj.type || "mpu"
+                    type : "mpu"
                 };
 
 			posts.splice(mpuObj.order, 0, object);

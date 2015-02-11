@@ -33,11 +33,11 @@
 			var mpuObj = [
 				{
 					id: 'discover-1',
-					order: 7
+					order: 4
 				},
 				{
 					id: 'discover-2',
-					order: 9
+					order: 10
 				}
 			];
 
