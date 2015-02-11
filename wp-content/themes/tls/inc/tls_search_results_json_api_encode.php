@@ -319,10 +319,10 @@ function tls_search_results_json_api_encode($response) {
         $response['articles_sections'][$value->slug] = array(
             'item_label'        => $value->name,
             'type'              => 'taxonomy',
-            'json_query'        => 'article_section='.$value->slug,
+            'json_query'        => $value->slug,
             'taxonomy'          => $value->taxonomy,
             'slug'              => $value->slug,
-            'search_count'      => ( isset($current_query['article_section']) && $current_query['article_section'] != $value->slug ) ? 0 :$sections_count->found_posts
+            'search_count'      => $sections_count->found_posts
         );
     }
 
