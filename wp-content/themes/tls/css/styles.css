@@ -1858,19 +1858,8 @@ p.author, h4.author {
 }
 /* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner {
-  padding: 20px 15px 15px 15px;
+  padding: 20px 15px 0 15px;
   position: relative;
-}
-/* line 343, ../../../../grunt/DEV/app/templates/article/_article.scss */
-.single-post-template .article-body .article-summary .inner:after {
-  position: absolute;
-  bottom: 0;
-  height: 3px;
-  left: 15px;
-  right: 15px;
-  background-color: rgba(112, 109, 115, 0.15);
-  display: block;
-  content: "";
 }
 /* line 354, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner:last-child {

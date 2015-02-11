@@ -337,19 +337,19 @@ $mobile: 560px;
 			}
 
 			.inner {				
-				padding: 20px 15px 15px 15px;
+				padding: 20px 15px 0 15px;
 				position:relative;
 
-				&:after{
+				// &:after{
 
-					position:absolute;
-					bottom:0;
-					height:3px;
-					left:15px;
-					right:15px;
-					background-color:rgba(112, 109, 115, 0.15);	
-					@include afterBefore;
-				}
+				// 	position:absolute;
+				// 	bottom:0;
+				// 	height:3px;
+				// 	left:15px;
+				// 	right:15px;
+				// 	background-color:rgba(112, 109, 115, 0.15);	
+				// 	@include afterBefore;
+				// }
 
 				&:last-child{
 

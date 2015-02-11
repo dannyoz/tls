@@ -38,8 +38,7 @@
 			console.log(result);
 
 			//Inserts Blogs Ads to cards
-			var mpuObj = [
-				{
+			var mpuObj = [{
 					id: 'blogs-1',
 					order: 4,
 					type: 'mpu'
@@ -48,8 +47,7 @@
 					id: 'blogs-2',
 					order: 9,
 					type: 'mpu'
-				}
-			];
+				}];
 
 			mpu.insert(posts, mpuObj[0]).then(function (result){
 				posts = result;

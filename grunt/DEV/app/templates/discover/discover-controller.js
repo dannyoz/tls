@@ -30,16 +30,14 @@
 			$scope.pageCount = result.pages
 
 			//Inserts Discover Ads to cards
-			var mpuObj = [
-				{
+			var mpuObj = [{
 					id: 'discover-1',
 					order: 4
 				},
 				{
 					id: 'discover-2',
 					order: 10
-				}
-			];
+				}];
 
 			mpu.insert(result.top_articles, mpuObj[0]).then(function (result){
 				result.top_articles = result;
@@ -88,7 +86,7 @@
 
 			if($scope.pageCount > ($scope.pageNumber-1)){
 
-				if($scope.pageNumber == 1){
+				if($scope.pageNumber == 1) {
 
 					$scope.pageNumber ++
 
