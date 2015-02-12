@@ -9,8 +9,12 @@
 
         //Set default vars
         var url = window.location.href;
+
+        // Used to build final string to be passed to the API call
         $scope.filters         = []
+        // Used to check active filters to add class
         $scope.activeFilters   = []
+
         $scope.taxonomyFilters = []
         $scope.currentPage     = 1
         $scope.dateRange       = ""
@@ -75,40 +79,45 @@
 
         })
 
-        $scope.contentFilter = function(term,query,key,type) {
+        // =====================
+        // Content Type filter
+        // =====================
+        $scope.contentFilter = function(term,query,key) {
 
-            var list = (type == 'content') ? $scope.contentType : $scope.sections,
-                typeName = (type == 'content') ? 'content type' : type;
+            var list = $scope.contentType,
+                typeName = 'content type';
 
             if (query) {
 
+            	// Index of filter in filters array
                 var index = $scope.filters.indexOf(query);
 
+                // Filter clicked not in array
                 if (index == -1) {
+                	// Add value to array
                     $scope.filters.push(query);
-                    // Restrict single filter for Content Types
-                    if (type == 'content') {
-                    	$scope.activeFilters = [];
-                    } 
+                    // Clear active filters array 
+                    // (force to filter one at a time)
+                    $scope.activeFilters = [];
+                    // Add filter key name to array
                     $scope.activeFilters.push(key);	                   
+                    // Tealium tag
                     tealium.filtering('add',typeName,term);
-                } else {
+                } 
+                else {
+                	// Clearing filter already in arrays
                     $scope.filters.splice(index,1);
                     $scope.activeFilters.splice(index,1);
+                    // Remove Tealium tag
                     tealium.filtering('remove',typeName,term);
                 }
 
                 $scope.loadResults = true;              
 
-                // Refactor filters based on filter type
-                if (type == 'content') {                      		
-                	var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
-                	var converted = filtersArr.toString().replace(/,/g,'&');
-                	var filters = (filtersArr.length == 0) ? "" : "&"+converted;
-
-                } else if (type == 'category') {
-	                var filters = 'article_section=' + $scope.filters.toString();
-                }
+                // Refactor filters string for API call
+                var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
+                var converted = filtersArr.toString().replace(/,/g,'&');
+                var filters = (filtersArr.length == 0) ? "" : "&"+converted;
 
                 api.getSearchResults(
                         url,
@@ -132,11 +141,14 @@
                             "dateRange"   : $scope.dateRange
                         }   
 
-                        //console.log($scope.contentType);                    
+                        console.log($scope.results);                    
                 })
             }
         }
 
+        // =====================
+        // Dates filter
+        // =====================
         $scope.dateRangeFilter = function(range,name){
 
             var $this = $scope.dateRanges[name];
@@ -145,7 +157,7 @@
             if (index == -1) {
             	// Restrict single filter for Dates
             	$scope.activeFilters = [];
-            	
+
                 $scope.activeFilters.push(name);
                 $scope.dateRange = range;
                 $scope.clearable = true;
@@ -183,6 +195,60 @@
                 }
             })
         }
+
+        // =====================
+        // Category filter
+        // =====================
+	    $scope.categoryFilter = function(term,query,key) {
+
+	        var list = $scope.sections,
+	        	typeName = 'category';    
+
+	        if (query) {
+
+	            var index = $scope.filters.indexOf(query);
+
+	            if (index == -1) {
+	                $scope.filters.push(query);
+	                $scope.activeFilters.push(key);	                   
+	                tealium.filtering('add',typeName,term);
+	            } else {
+	                $scope.filters.splice(index,1);
+	                $scope.activeFilters.splice(index,1);
+	                tealium.filtering('remove',typeName,term);
+	            }
+
+	            $scope.loadResults = true;              
+
+	            // Refactor filters string for API call
+	            var filters = 'article_section=' + $scope.filters.toString();	            
+
+	            api.getSearchResults(
+	                    url,
+	                    1,
+	                    filters,
+	                    $scope.order,
+	                    $scope.dateRange
+	                )
+	                .then(function (results) {
+	                
+	                    $scope.loadResults = false
+	                    $scope.results = results
+	                    $scope.contentType = results.content_type_filters
+	                    $scope.sections    = results.articles_sections
+	                    $scope.dateRanges  = results.date_filters
+	                    $scope.paginationConfig = {
+	                        "pageCount"   : results.pages,
+	                        "currentPage" : 1,
+	                        "filters"     : $scope.filters,
+	                        "order"       : $scope.order,
+	                        "dateRange"   : $scope.dateRange
+	                    }   
+
+	                    console.log($scope.results);                    
+	            })
+	        }
+	    }        
 
         $scope.orderResults = function(order,orderName){
 

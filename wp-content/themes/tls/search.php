@@ -21,7 +21,7 @@
                     <ul class="filters" ng-cloak>      
                         <!-- <li ng-if="val.search_count > 0" ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in contentType"> -->                           
                         <li ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in contentType">
-                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'content')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
+                            <a ng-click="contentFilter(val.item_label,val.json_query,name)"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                     </h3>
                     <ul class="filters">
                         <li ng-if="val.search_count > 0" ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in sections">                        
-                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'category')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
+                            <a ng-click="categoryFilter(val.item_label,val.json_query,name)"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
                         </li>
                     </ul>
                 </div>
