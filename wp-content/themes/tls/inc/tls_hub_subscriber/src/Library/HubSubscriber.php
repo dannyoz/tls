@@ -119,6 +119,20 @@ class HubSubscriber {
      */
     public function handleRequest() {
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $serverVar = $_SERVER;
+
+            $requestVar = $_REQUEST;
+
+            $postVar = $_POST;
+
+            HubLogger::log("SERVER Variables:\n" . $serverVar . "\n POST Variables:\n" . $postVar . "\n REQUEST Variables:\n" . $requestVar);
+
+            exit();
+
+        }
+
         // Allow for manual pull method for Debugging ONLY
         // TODO: Remove this before going live
         if (isset($_GET['hub_tls_debug']) && $_GET['tls_hub_debug'] === true) {
@@ -154,10 +168,10 @@ class HubSubscriber {
         } // END of Debugging section that needs to be removed before going live
 
         // Make sure the request is POST
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('HTTP/1.1 404 "Not Found"', NULL, 404);
-            exit();
-        }
+//        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+//            header('HTTP/1.1 404 "Not Found"', NULL, 404);
+//            exit();
+//        }
 
         // If HTTP Header does not contain the HTTP_X_AMZ_SNS_MESSAGE_TYPE header that the Hub sends then give a 404
 //        if ( !isset($_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE']) ) {
@@ -165,34 +179,22 @@ class HubSubscriber {
 //            exit();
 //        }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $serverVar = $_SERVER;
-
-            $requestVar = $_REQUEST;
-
-            $postVar = $_POST;
-
-            HubLogger::log("SERVER Variables:\n" . $serverVar . "\n POST Variables:\n" . $postVar . "\n REQUEST Variables:\n" . $requestVar);
-
-        }
-
         // Handle the different types of messages sent by the Hub
-        switch ( $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] ) {
-
-            case "SubscriptionConfirmation":
-                $this->verifySubscription();
-                break;
-
-            case "Notification":
-                $this->receive();
-                break;
-
-            default:
-                header('HTTP/1.1 404 "Not Found"', NULL, 404);
-                break;
-        }
-
+//        switch ( $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] ) {
+//
+//            case "SubscriptionConfirmation":
+//                $this->verifySubscription();
+//                break;
+//
+//            case "Notification":
+//                $this->receive();
+//                break;
+//
+//            default:
+//                header('HTTP/1.1 404 "Not Found"', NULL, 404);
+//                break;
+//        }
+//
         exit();
 
     }
