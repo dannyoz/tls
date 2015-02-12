@@ -33,6 +33,11 @@ require_once TLS_TEMPLATE_DIR . '/inc/tls-custom-post-types.php';
 require_once TLS_TEMPLATE_DIR . '/inc/tls-taxonomies.php';
 
 /**
+ * TLS Tealium
+ */
+$TlsTealium = new \Tls\TlsTealium();
+
+/**
  *  Add Theme Options Page
  */
 $TlsThemeOoptions = new Tls\ThemeOptions();

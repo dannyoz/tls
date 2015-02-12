@@ -75,6 +75,7 @@ function tls_home_page_json_api_encode($response) {
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ( $card_type == 'article' ) {
                 $section = wp_get_post_terms( $card_post->ID, 'article_section' );
+                $visibility = wp_get_post_terms($card_post->ID, 'article_visibility');
             } else {
                 $section = wp_get_post_terms( $card_post->ID, 'category' );
             }
@@ -110,6 +111,7 @@ function tls_home_page_json_api_encode($response) {
                     'thumbnail_image_url' => $card_post_custom_fields['thumbnail_image_url'][0],
                 ),
                 'books'         => get_field('books', $card_post->ID),
+                'taxonomy_article_visibility'    => $visibility
             );
 
             // If the current Home Page card is a Blog Post

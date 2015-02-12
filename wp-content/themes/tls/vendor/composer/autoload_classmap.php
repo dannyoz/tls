@@ -186,4 +186,5 @@ return array(
     'Tls\\TlsHubSubscriber\\Library\\Logger' => $baseDir . '/inc/tls_hub_subscriber/src/Library/Logger.php',
     'Tls\\TlsHubSubscriber\\TlsHubSubscriberFE' => $baseDir . '/inc/tls_hub_subscriber/src/TlsHubSubscriberFE.php',
     'Tls\\TlsHubSubscriber\\TlsHubSubscriberWP' => $baseDir . '/inc/tls_hub_subscriber/src/TlsHubSubscriberWP.php',
+    'Tls\\TlsTealium' => $baseDir . '/inc/TlsTealium.php',
 );
