@@ -86,8 +86,11 @@
 
                 if (index == -1) {
                     $scope.filters.push(query);
-                    // For active class
-                    $scope.activeFilters.push(key);
+                    // Restrict single filter for Content Types
+                    if (type == 'content') {
+                    	$scope.activeFilters = [];
+                    } 
+                    $scope.activeFilters.push(key);	                   
                     tealium.filtering('add',typeName,term);
                 } else {
                     $scope.filters.splice(index,1);
@@ -98,7 +101,7 @@
                 $scope.loadResults = true;              
 
                 // Refactor filters based on filter type
-                if (type == 'content') {                	
+                if (type == 'content') {                      		
                 	var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
                 	var converted = filtersArr.toString().replace(/,/g,'&');
                 	var filters = (filtersArr.length == 0) ? "" : "&"+converted;
@@ -137,9 +140,12 @@
         $scope.dateRangeFilter = function(range,name){
 
             var $this = $scope.dateRanges[name];
-            var index = $scope.activeFilters.indexOf(name);
+            var index = $scope.activeFilters.indexOf(name);            
 
             if (index == -1) {
+            	// Restrict single filter for Dates
+            	$scope.activeFilters = [];
+            	
                 $scope.activeFilters.push(name);
                 $scope.dateRange = range;
                 $scope.clearable = true;

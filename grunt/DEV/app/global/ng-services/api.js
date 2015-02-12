@@ -81,10 +81,6 @@
 
             var defer     = $q.defer(),
                 page      = (!page) ? 1 : page,
-                //filters   = (!filters) ? [] : filters,
-                //converted = 'article_section=' + filters.toString(),
-                //converted = filters.toString().replace(/,/g,'&'),
-                //filt      = (filters.length == 0) ? "" : "&"+converted,
                 filt      = (filters.length == 0) ? "" : "&"+filters,
                 prefix    = this.checkQueries(path),
                 order     = (!ord)? "" : "&orderby=date&order=" + ord,
@@ -95,7 +91,7 @@
 
             //expose url for testing
             defer.promise.url = finalPath
-            console.log(finalPath);
+            //console.log(finalPath);
 
             $http.get(finalPath).success(function (data){
                 //simulate server delay
