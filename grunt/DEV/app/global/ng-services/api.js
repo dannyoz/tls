@@ -143,7 +143,7 @@
         getFaqs : function (){
 
             var defer = $q.defer(),
-                path  = '/api/get_posts/?post_type=tls_faq';
+                path  = '/api/get_posts/?post_type=tls_faq&order=ASC&orderby=menu_order';
 
             $http.get(path).success(function (data){
                 //simulate server delay
