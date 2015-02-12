@@ -45,7 +45,7 @@
             return inFilter;
         };
 
-        // Helpe function
+        // Helper function
         // Check if content type returns categories
         $scope.contentNoCategories = function(contentType) {
         	var hasCats = false;
@@ -113,8 +113,8 @@
 
             	// Index of filter in filters array
                 var index = $scope.filters.indexOf(query);
-                // Clearing filter already in arrays
-                // to force searching by one filter at a time
+                // Removing filter already in array
+                // to force searching one filter at a time
                 $scope.filters.splice(index,1);
 
                 // Filter clicked not in array
