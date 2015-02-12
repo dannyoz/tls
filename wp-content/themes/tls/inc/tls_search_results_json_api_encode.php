@@ -13,7 +13,7 @@ function tls_search_results_json_api_encode($response) {
     /**
      * Search Page Specific
      */
-    if ( is_search() ) {
+    if ( is_search() || $wp_query->is_search == true ) {
 
         // URL parsing to use with custom JSON API queries
         $url = parse_url($_SERVER['REQUEST_URI']);
