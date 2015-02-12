@@ -29,13 +29,14 @@
 	<title>Times Literary Supplement</title>
 	<link>http://tls.localhost</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Tue, 03 Feb 2015 13:04:11 +0000</pubDate>
+	<pubDate>Thu, 12 Feb 2015 10:38:56 +0000</pubDate>
 	<language></language>
 	<wp:wxr_version>1.1</wp:wxr_version>
 	<wp:base_site_url>http://tls.localhost</wp:base_site_url>
 	<wp:base_blog_url>http://tls.localhost</wp:base_blog_url>
 	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>vitor_faiante</wp:author_login><wp:author_email>vitor.faiante@madebypartners.com</wp:author_email><wp:author_display_name><![CDATA[Vitor Faiante]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>2</wp:author_id><wp:author_login>nic_cage</wp:author_login><wp:author_email>nic_cage@notthebees.com</wp:author_email><wp:author_display_name><![CDATA[Nicolas Cage]]></wp:author_display_name><wp:author_first_name><![CDATA[Nicolas]]></wp:author_first_name><wp:author_last_name><![CDATA[Cage]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>3</wp:author_id><wp:author_login>gareth_rehal</wp:author_login><wp:author_email>Gareth.Rehal@theenginegroup.com</wp:author_email><wp:author_display_name><![CDATA[Gareth Rehal]]></wp:author_display_name><wp:author_first_name><![CDATA[Gareth]]></wp:author_first_name><wp:author_last_name><![CDATA[Rehal]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>4</wp:author_id><wp:author_login>SRebelo</wp:author_login><wp:author_email>silvia.rebelo@fantasticthinking.com</wp:author_email><wp:author_display_name><![CDATA[Silvia Rebelo]]></wp:author_display_name><wp:author_first_name><![CDATA[Silvia]]></wp:author_first_name><wp:author_last_name><![CDATA[Rebelo]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>5</wp:author_id><wp:author_login>Mary</wp:author_login><wp:author_email>mary@beard.lambs</wp:author_email><wp:author_display_name><![CDATA[Mary Beard]]></wp:author_display_name><wp:author_first_name><![CDATA[Mary]]></wp:author_first_name><wp:author_last_name><![CDATA[Beard]]></wp:author_last_name></wp:author>
 	<item>
@@ -186,16 +187,12 @@
 			<wp:meta_value><![CDATA[a:8:{s:3:"key";s:19:"field_54ad40c2b469f";s:5:"label";s:15:"Regular Content";s:4:"name";s:0:"";s:4:"type";s:3:"tab";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:5;}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
-			<wp:meta_key>field_54ad40d2b46a0</wp:meta_key>
-			<wp:meta_value><![CDATA[a:14:{s:3:"key";s:19:"field_54ad40d2b46a0";s:5:"label";s:16:"Regular Articles";s:4:"name";s:16:"regular_articles";s:4:"type";s:12:"relationship";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:13:"return_format";s:6:"object";s:9:"post_type";a:1:{i:0;s:12:"tls_articles";}s:8:"taxonomy";a:1:{i:0;s:3:"all";}s:7:"filters";a:1:{i:0;s:6:"search";}s:15:"result_elements";a:2:{i:0;s:14:"featured_image";i:1;s:9:"post_type";}s:3:"max";s:0:"";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:6;}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
 			<wp:meta_key>field_54ad41e8779d6</wp:meta_key>
-			<wp:meta_value><![CDATA[a:8:{s:3:"key";s:19:"field_54ad41e8779d6";s:5:"label";s:28:"Subscriber Exclusive Content";s:4:"name";s:0:"";s:4:"type";s:3:"tab";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:7;}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:8:{s:3:"key";s:19:"field_54ad41e8779d6";s:5:"label";s:28:"Subscriber Exclusive Content";s:4:"name";s:0:"";s:4:"type";s:3:"tab";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:6;}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key>field_54ad44c6e37a9</wp:meta_key>
-			<wp:meta_value><![CDATA[a:14:{s:3:"key";s:19:"field_54ad44c6e37a9";s:5:"label";s:24:"Subscriber Only Articles";s:4:"name";s:24:"subscriber_only_articles";s:4:"type";s:12:"relationship";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:13:"return_format";s:6:"object";s:9:"post_type";a:1:{i:0;s:12:"tls_articles";}s:8:"taxonomy";a:1:{i:0;s:22:"article_visibility:132";}s:7:"filters";a:1:{i:0;s:6:"search";}s:15:"result_elements";a:2:{i:0;s:14:"featured_image";i:1;s:9:"post_type";}s:3:"max";s:0:"";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:2:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:8;}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:14:{s:3:"key";s:19:"field_54ad44c6e37a9";s:5:"label";s:24:"Subscriber Only Articles";s:4:"name";s:24:"subscriber_only_articles";s:4:"type";s:12:"relationship";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:13:"return_format";s:6:"object";s:9:"post_type";a:1:{i:0;s:12:"tls_articles";}s:8:"taxonomy";a:1:{i:0;s:22:"article_visibility:132";}s:7:"filters";a:1:{i:0;s:6:"search";}s:15:"result_elements";a:2:{i:0;s:14:"featured_image";i:1;s:9:"post_type";}s:3:"max";s:0:"";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:7;}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key>rule</wp:meta_key>

@@ -28273,8 +28273,19 @@ angular.module('ngDfp', [])
      Initializes and configures the slots that were added with defineSlot.
      */
     this._initialize = function () {
+      
       angular.forEach(slots, function (slot, id) {
-        definedSlots[id] = googletag.defineSlot.apply(null, slot).addService(googletag.pubads());
+
+            // =====================
+            // TLS Hack - Passing values to setTargeting as 3rd parameter on defineSlot() instance
+            // ======================
+            if (typeof slot[3] == 'object' && slot[3].hasOwnProperty('target')) {
+                var slotTarget = slot[3].target;
+                definedSlots[id] = googletag.defineSlot.apply(null, slot).setTargeting('pos', slotTarget).addService(googletag.pubads());  
+            } else {
+                definedSlots[id] = googletag.defineSlot.apply(null, slot).addService(googletag.pubads());
+            }
+        
       });
 
       googletag.pubads().enableSingleRequest();
@@ -28521,8 +28532,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
  //  	}])
 
 .config(["DoubleClickProvider", function (DoubleClickProvider) {
-    DoubleClickProvider.defineSlot('/25436805/TheTimesTLS/Home', [[300,250]],'div-gpt-ad-home-1');
-  	DoubleClickProvider.defineSlot('/25436805/TheTimesTLS/Home', [[300,250]],'div-gpt-ad-home-2');
+    
+    DoubleClickProvider
+        // Homepage
+        .defineSlot('/25436805/TheTimesTLS/Home', [[300,250]],'div-gpt-ad-home-1', {target: ['mpu']})
+  	    .defineSlot('/25436805/TheTimesTLS/Home', [[300,251]],'div-gpt-ad-home-2', {target: ['bottommpu']})    
+        // Discover
+        .defineSlot('/25436805/TheTimesTLS/Discover', [[300,250]],'div-gpt-ad-discover-1', {target: ['mpu']})
+        .defineSlot('/25436805/TheTimesTLS/Discover', [[300,251]],'div-gpt-ad-discover-2', {target: ['bottommpu']})
+        // Discover single article
+        .defineSlot('/25436805/TheTimesTLS/Discover', [[300,250]],'div-gpt-ad-discover-single-1', {target: ['mpu']})
+        .defineSlot('/25436805/TheTimesTLS/Discover', [[300,251]],'div-gpt-ad-discover-single-2', {target: ['bottommpu']})
+        // Blogs
+        .defineSlot('/25436805/TheTimesTLS/Blogs', [[300,250]],'div-gpt-ad-blogs-1', {target: ['mpu']})
+        .defineSlot('/25436805/TheTimesTLS/Blogs', [[300,251]],'div-gpt-ad-blogs-2', {target: ['bottommpu']}); 
+
 }])
 
 .run(["$templateCache", function($templateCache) {  'use strict';
@@ -28548,7 +28572,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href={{data.url}}><img class=\"max circular\" ng-attr-src=\"{{data.thumbnail}}\"></a></div><div class=blog-data><div class=inner><h4><a ng-href={{data.url}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data);>{{data.title}}</a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-href={{data.section.link}} ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=futura ng-bind=data.author></p><div ng-if=data.books><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-bind-html=book.book_title></p><p class=futura ng-bind-html=book.book_author></p></div></div></footer></div><div class=card ng-if=\"data.type == 'then_and_now'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura>Then and now <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=futura ng-bind=data.author></p><div ng-if=data.books><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-bind-html=book.book_title></p><p class=futura ng-bind-html=book.book_author></p></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad={{data.id}}></div></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href={{data.url}}><img class=\"max circular\" ng-attr-src=\"{{data.thumbnail}}\"></a></div><div class=blog-data><div class=inner><h4><a ng-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><!-- <p ng-bind-html=\"data.excerpt\"></p> --><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-href={{data.section.link}} ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=futura ng-bind=data.author></p><div ng-if=data.books><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-bind-html=book.book_title></p><p class=futura ng-bind-html=book.book_author></p></div></div></footer></div><div class=card ng-if=\"data.type == 'then_and_now'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura>Then and now <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=data.hasCopy ng-bind-html=data.excerpt></p></div><footer><p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=futura ng-bind=data.author></p><div ng-if=data.books><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-bind-html=book.book_title></p><p class=futura ng-bind-html=book.book_author></p></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad={{data.id}}></div></div>"
   );
 
 
@@ -28666,174 +28690,177 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 })
 .factory('api',['$http','$q','$timeout', function ($http,$q,$timeout){
 
-	var delay  = 1;
+    var delay  = 1;
 
-	return {
-		getHomePage : function(url){
+    return {
+        getHomePage : function(url){
 
-			var defer  = $q.defer();
+            var defer  = $q.defer();
 
-			$http.get(url).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
+            $http.get(url).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
 
-			return defer.promise
+            return defer.promise
 
-		},
-		getArticle : function(url,pg){
+        },
+        getArticle : function(url,pg){
 
-			var defer  = $q.defer(),
-				path   = this.removeHashFrag(url),
-				prefix = this.checkQueries(path),
-				page   = (pg) ? "&paged=" + pg : "",
-				query  = "json=1";
+            var defer  = $q.defer(),
+                path   = this.removeHashFrag(url),
+                prefix = this.checkQueries(path),
+                page   = (pg) ? "&paged=" + pg : "",
+                query  = "json=1";
 
-			//expose url for testing
-			defer.promise.url = path+prefix+query+page
+            //expose url for testing
+            defer.promise.url = path+prefix+query+page
 
-			$http.get(path+prefix+query+page).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
+            $http.get(path+prefix+query+page).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
 
-			return defer.promise
-		},
-		getPagedPosts : function(section,pg){
+            return defer.promise
+        },
+        getPagedPosts : function(section,pg){
 
-			var defer  = $q.defer(),
-				prefix = "/api/get_posts/?post_type=tls_articles&article_section=",
-				page   = (pg) ? "&paged=" + pg : "";
+            var defer  = $q.defer(),
+                prefix = "/api/get_posts/?post_type=tls_articles&article_section=",
+                page   = (pg) ? "&paged=" + pg : "";
 
-			//expose url for testing
-			defer.promise.url = prefix+section+page
+            //expose url for testing
+            defer.promise.url = prefix+section+page
 
-			$http.get(prefix+section+page).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
+            $http.get(prefix+section+page).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
 
-			return defer.promise
+            return defer.promise
 
-		},
-		getRelatedContent : function(tags){
+        },
+        getRelatedContent : function(tags){
 
-			var defer  = $q.defer(),
-				parse  = tags.toString(),
-				path1  = "/tag/"+parse+"/?json=1",
-				path2  = "/?tag="+parse+"&json=1",
-				url    = "/api/get_posts/?article_tags=" + parse;
+            var defer  = $q.defer(),
+                parse  = tags.toString(),
+                path1  = "/tag/"+parse+"/?json=1",
+                path2  = "/?tag="+parse+"&json=1",
+                url    = "/api/get_posts/?article_tags=" + parse;
 
-			//expose url for testing
-			defer.promise.url = url
-			$http.get(url).success(function (data){
+            //expose url for testing
+            defer.promise.url = url
+            $http.get(url).success(function (data){
 
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-				
-			})
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+                
+            })
 
-			return defer.promise
-		},
-		getSearchResults : function(path,page,filters,ord,date,contentFilters){
+            return defer.promise
+        },
+        getSearchResults : function(path,page,filters,ord,date,contentFilters) {
 
-			var defer     = $q.defer(),
-				page      = (!page) ? 1 : page,
-				filters   = (!filters) ? [] : filters,
-				converted = filters.toString().replace(/,/g,'&'),
-				filt      = (filters.length == 0) ? "" : "&"+converted,
-				prefix    = this.checkQueries(path),
-				order     = (!ord)? "" : "&orderby=date&order=" + ord,
-				dateRange = (!date)? "" : "&date_filter=" + date,
-				cFilters  = (!contentFilters)? "" : "&post_type["+contentFilters+"]",
-				query     = "json=1&paged="+page,
-				finalPath = path+prefix+query+filt+order+dateRange+cFilters;
+            var defer     = $q.defer(),
+                page      = (!page) ? 1 : page,
+                //filters   = (!filters) ? [] : filters,
+                //converted = 'article_section=' + filters.toString(),
+                //converted = filters.toString().replace(/,/g,'&'),
+                //filt      = (filters.length == 0) ? "" : "&"+converted,
+                filt      = (filters.length == 0) ? "" : "&"+filters,
+                prefix    = this.checkQueries(path),
+                order     = (!ord)? "" : "&orderby=date&order=" + ord,
+                dateRange = (!date)? "" : "&date_filter=" + date,
+                cFilters  = (!contentFilters)? "" : "&post_type["+contentFilters+"]",
+                query     = "json=1&paged="+page,
+                finalPath = path+prefix+query+filt+order+dateRange+cFilters;
 
-			//expose url for testing
-			defer.promise.url = finalPath
+            //expose url for testing
+            defer.promise.url = finalPath
+            console.log(finalPath);
 
-			$http.get(finalPath).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
-			return defer.promise
-		
-		},
-		getFullResults : function(path){
+            $http.get(finalPath).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
+            return defer.promise
+        
+        },
+        getFullResults : function(path){
 
-			var defer = $q.defer(),
-				prefix    = this.checkQueries(path),
-				query     = "json=1&count=-1",
-				finalPath = path+prefix+query;
+            var defer = $q.defer(),
+                prefix    = this.checkQueries(path),
+                query     = "json=1&count=-1",
+                finalPath = path+prefix+query;
 
-			//expose url for testing
-			defer.promise.url = finalPath
+            //expose url for testing
+            defer.promise.url = finalPath
 
-			$http.get(finalPath).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
-			return defer.promise
+            $http.get(finalPath).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
+            return defer.promise
 
-		},
-		getArticleList : function(page){
+        },
+        getArticleList : function(page){
 
-			var defer = $q.defer(),
-				path  = '/api/get_posts/?post_type=tls_articles&page=' + page;
+            var defer = $q.defer(),
+                path  = '/api/get_posts/?post_type=tls_articles&page=' + page;
 
-			$http.get(path).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
+            $http.get(path).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
 
-			return defer.promise
+            return defer.promise
 
-		},
-		getFaqs : function (){
+        },
+        getFaqs : function (){
 
-			var defer = $q.defer(),
-				path  = '/api/get_posts/?post_type=tls_faq';
+            var defer = $q.defer(),
+                path  = '/api/get_posts/?post_type=tls_faq&order=ASC&orderby=menu_order';
 
-			$http.get(path).success(function (data){
-				//simulate server delay
-				$timeout(function(){
-					defer.resolve(data)
-				},delay)
-			})
+            $http.get(path).success(function (data){
+                //simulate server delay
+                $timeout(function(){
+                    defer.resolve(data)
+                },delay)
+            })
 
-			return defer.promise
-		},
-		checkQueries : function(url){
-			var prefix = (url.indexOf('?') > -1) ? "&" : "?"
-			return prefix
-		},
-		removeHashFrag : function(url){
+            return defer.promise
+        },
+        checkQueries : function(url){
+            var prefix = (url.indexOf('?') > -1) ? "&" : "?"
+            return prefix
+        },
+        removeHashFrag : function(url){
 
-			var hashIndex = url.indexOf('#'),
-				newPath   = url.slice(0,hashIndex);
+            var hashIndex = url.indexOf('#'),
+                newPath   = url.slice(0,hashIndex);
 
-			if(hashIndex > -1){
-				return newPath
-			} else{
-				return url
-			}
-			
-		}		
-	}
+            if(hashIndex > -1){
+                return newPath
+            } else{
+                return url
+            }
+            
+        }       
+    }
 }])
 //Factory for parsing the custom fields for books into a  more manageble format
 
@@ -28944,9 +28971,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                     type : "mpu"
                 };
 
-            console.log(mpuObj.order);    
-
 			posts.splice(mpuObj.order, 0, object);
+
 			defer.resolve(posts);
 
 			return defer.promise;
@@ -29343,16 +29369,19 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			type : "@",
 			copy : "=copy"
 		},
-		link : function(scope){
+		link : function(scope) {
 
 			scope.sce = $sce;
 			var card = scope.data;	
-			// Type passed as attibute
-			var typeAttr = scope.type;
-
+			var typeAttr = scope.type; // passed as attribute
 			card.hasCopy = (scope.copy == undefined) ? true : scope.copy; 
 
-			if(card.type == "listen_blog"){
+			// Function to check value is undefined
+			var isUndefined = function(val) {							
+				return angular.isUndefined(val);
+			}
+
+			if (card.type == "listen_blog") {
 				card.type  = "blog"
 				card.category = {
 					slug: "listen",
@@ -29364,9 +29393,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				card.type  = "article"
 			}
 
-			//Change type using data-type attribute
-			if(scope.type){
-				card.type = scope.type
+			// Change type using data-type attribute
+			if (typeAttr && card.type != 'mpu') {
+				card.type = scope.type;
 			}
 
 			// Type of card (Object or Array)
@@ -29377,21 +29406,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				card.type = 'blog_homepage';
 			} 
 
-			// Type passed as attibutes in template
-			if (typeAttr != undefined && typeAttr == 'blog') {
-				card.type = 'blog';	
-			}
-
-			// Function to check value is undefined
-			var isUndefined = function(val) {							
-				return angular.isUndefined(val);
-			}
-
-			// Handle mpus
-			if(scope.type == 'mpu'){
-
-				consol.log('Mpu logic goes here')
-			}
+			
 			
 			// Function that format final object in a consistent way
 			scope.formatCard = function(card) {
@@ -29494,14 +29509,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						}
 
 					break;
-
-					// case 'then_and_now':
-					// 	console.log(card);
-					// break;
-
-					// case 'poem_of_week':
-					// 	console.log(card);
-					// break;
 				}		
 
 			}(card);
@@ -29631,327 +29638,375 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'$location',
 	'$timeout',
 	'api',
+	'mpu',
 	'commentApi',
 	'columns',
 	'niceDate',
 	'tealium',
 	'books',
-	function ($scope,$sce,$location,$timeout,api,commentApi,columns,niceDate,tealium,books){
+	function ($scope,$sce,$location,$timeout,api, mpu, commentApi,columns,niceDate,tealium,books){
 
-	$scope.ready      = false;
-	$scope.tealium    = tealium;
-	$scope.loadingPg  = true;
-	$scope.sce        = $sce;
-	$scope.tags       = [];
-	$scope.activeTags = [];
-	$scope.turn       = false; 
-	$scope.firstLoad  = true;
-	$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
+		$scope.ready      = false;
+		$scope.tealium    = tealium;
+		$scope.loadingPg  = true;
+		$scope.sce        = $sce;
+		$scope.tags       = [];
+		$scope.activeTags = [];
+		$scope.turn       = false; 
+		$scope.firstLoad  = true;
+		//$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
 
-	//Get the json response from the api.js factory
-	api.getArticle(window.location.href).then(function (result){
+		// Helper function to insert MPU's into related taxonomy_article_tags
+		var insertMPU = function(posts) {
 
-		$scope.post  = result.post
-		$scope.prev  = result.previous_url
-		$scope.next  = result.next_url
-		$scope.ready = true;
+			var mpuObj = [{
+					id: 'discover-single-1',
+					order: 0
+				},
+				{
+					id: 'discover-single-2',
+					order: 4
+				}];
 
-
-		//restructure book format
-		if($scope.post.custom_fields.books){
-			books.parse($scope.post.custom_fields).then(function (returned){
-				$scope.post.books = returned;
+			mpu.insert(posts, mpuObj[0]).then(function (result){
+				posts = result;
 			});
-		}
 
-		// Get related content
-		if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
+			mpu.insert(posts, mpuObj[1]).then(function (result){
+				posts = result;
+			});
 
-			for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
-				$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
-				$scope.activeTags.push({isApplied : false});
-			};
+			return posts;
+		};
 
-			$scope.orginalList = $scope.tags
-			$scope.loadingTags = true
+		//Get the json response from the api.js factory
+		api.getArticle(window.location.href).then(function (result){
 
-			api.getRelatedContent($scope.tags).then(function (result){
+			$scope.post  = result.post
+			$scope.prev  = result.previous_url
+			$scope.next  = result.next_url
+			$scope.ready = true;
 
-				$scope.loadingTags = false
-				
-				var posts = result.posts;
+			//restructure book format
+			if($scope.post.custom_fields.books){
+				books.parse($scope.post.custom_fields).then(function (returned){
+					$scope.post.books = returned;
+				});
+			}
 
-				columns.divide(posts).then(function (cols){
-					$scope.col1  = cols.col1
-					$scope.col2  = cols.col2
-					$scope.col3  = cols.col3
+			// Get related content
+			if($scope.post.taxonomy_article_tags && $scope.post.taxonomy_article_tags.length > 0){
+
+				for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+					$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+					$scope.activeTags.push({isApplied : false});
+				};
+
+				$scope.orginalList = $scope.tags;
+				$scope.loadingTags = true;
+
+				api.getRelatedContent($scope.tags).then(function (result){
+
+					$scope.loadingTags = false
+					
+					var posts = result.posts;
+
+					//Inserts Discover Ads to cards
+					posts = insertMPU(posts);					
+
+					columns.divide(posts).then(function (cols){
+						$scope.col1  = cols.col1
+						$scope.col2  = cols.col2
+						$scope.col3  = cols.col3
+					})
+
 				})
 
-			})
+			}
+
+			$scope.loadingPg = false;
+			console.log(result)
+
+		})
+
+		$scope.format = function(date){
+			return niceDate.format(date);
+		}
+
+		$scope.printPage = function(){
+
+			if(window.print){
+				window.print();
+				tealium.engagement('print');
+			}
+			
+		}
+
+		$scope.emailLink = function(){
+
+			var subject   = 'TLS article',
+				emailBody = 'I thought you might be interested in this article from the Times Literary Supplement ' + $scope.post.url,
+				emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+			
+			return emailPath
 
 		}
 
-		$scope.loadingPg = false;
-		console.log(result)
+		$scope.socialLink = function(path,platform){
 
-	})
+			var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
+				twLink = "https://twitter.com/home?status=" + path,
+				link   = (platform == 'facebook') ? fbLink : twLink,
+				params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
-	$scope.format = function(date){
-		return niceDate.format(date);
-	}
+			window.open(link,"_blank",params);
+			tealium.socialLink(platform);
 
-	$scope.printPage = function(){
-
-		if(window.print){
-			window.print();
-			tealium.engagement('print');
 		}
-		
-	}
 
-	$scope.emailLink = function(){
+		$scope.chooseArticle = function(dir,path,pageTitle){
 
-		var subject   = 'TLS article',
-			emailBody = 'I thought you might be interested in this article from the Times Literary Supplement ' + $scope.post.url,
-			emailPath = "mailto:&subject="+subject+"&body=" + emailBody
-		
-		return emailPath
+			//Only turn page if path is defined an turn var is set to true
+			if(path && $scope.turn){
 
-	}
+				var duration = 400;
+				$scope.loading = true
 
-	$scope.socialLink = function(path,platform){
+				api.getArticle(path).then(function (result){
 
-		var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
-			twLink = "https://twitter.com/home?status=" + path,
-			link   = (platform == 'facebook') ? fbLink : twLink,
-			params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
+					$scope.loading = false
 
-		window.open(link,"_blank",params);
-		tealium.socialLink(platform);
+					if(dir == 'prev'){
 
-	}
-
-	$scope.chooseArticle = function(dir,path,pageTitle){
-
-		//Only turn page if path is defined an turn var is set to true
-		if(path && $scope.turn){
-
-			var duration = 400;
-			$scope.loading = true
-
-			api.getArticle(path).then(function (result){
-
-				$scope.loading = false
-
-				if(dir == 'prev'){
-
-					$scope.oldPost  = $scope.post;
-					$scope.post     = result.post
-					$scope.prev     = result.previous_url
-					$scope.next     = result.next_url
-					$scope.dir      = dir
-					$scope.pageTurn = true
-
-					// console.log(path.split( '/' ));
-
-					// $location.path(path.split( '/' )[3]);
-
-					$timeout(function(){
-						$scope.pageTurn = false
-					},duration);
-
-					tealium.paging('previous article',pageTitle);
-
-					
-				}
-
-				if(dir == 'next'){
-
-					$scope.oldPost  = result.post;
-					$scope.dir      = dir
-					$scope.pageTurn = true
-
-					$timeout(function(){
-						$scope.pageTurn = false
+						$scope.oldPost  = $scope.post;
 						$scope.post     = result.post
 						$scope.prev     = result.previous_url
 						$scope.next     = result.next_url
-					},duration)
+						$scope.dir      = dir
+						$scope.pageTurn = true
 
-					tealium.paging('next article',pageTitle);
+						// console.log(path.split( '/' ));
 
-				}
+						// $location.path(path.split( '/' )[3]);
 
-				$scope.tags = [];
-				$scope.activeTags = [];
+						$timeout(function(){
+							$scope.pageTurn = false
+						},duration);
 
-				if($scope.post.taxonomy_article_tags){ 
+						tealium.paging('previous article',pageTitle);						
+					}
 
-					for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
-						$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
-						$scope.activeTags.push({isApplied : false});
-					};
+					if(dir == 'next'){
 
-					$scope.orginalList = $scope.tags
+						$scope.oldPost  = result.post;
+						$scope.dir      = dir
+						$scope.pageTurn = true
 
-					api.getRelatedContent($scope.tags).then(function (result){
-						var posts = result.posts;
+						$timeout(function(){
+							$scope.pageTurn = false
+							$scope.post     = result.post
+							$scope.prev     = result.previous_url
+							$scope.next     = result.next_url
+						},duration)
 
-						columns.divide(posts).then(function (cols){
-							$scope.col1  = cols.col1
-							$scope.col2  = cols.col2
-							$scope.col3  = cols.col3
+						tealium.paging('next article',pageTitle);
+
+					}
+
+					$scope.tags = [];
+					$scope.activeTags = [];
+
+					if($scope.post.taxonomy_article_tags){ 
+
+						for (var i = 0; i<$scope.post.taxonomy_article_tags.length; i++){
+							$scope.tags.push($scope.post.taxonomy_article_tags[i].title);
+							$scope.activeTags.push({isApplied : false});
+						};
+
+						$scope.orginalList = $scope.tags
+
+						api.getRelatedContent($scope.tags).then(function (result){
+							var posts = result.posts;
+
+							columns.divide(posts).then(function (cols){
+								$scope.col1  = cols.col1
+								$scope.col2  = cols.col2
+								$scope.col3  = cols.col3
+							})
 						})
-					})
-				}
-			})
-		} else if (path && !$scope.turn){
-
-			$scope.loadingPg = true;
-			location.replace(path);
-		}
-	}
-
-	$scope.refineRelated = function(tag,i){
-
-		if(!$scope.loadingTags){
-
-			// Reset tags variable if no filters have been applied yet
-			if($scope.firstLoad || $scope.tags == $scope.orginalList){
-				$scope.firstLoad = false
-				$scope.tags = [];
-			}
-
-			// Add or remove tag
-			var index = $scope.tags.indexOf(tag);
-			if(index == -1){
-				$scope.tags.push(tag);
-				$scope.activeTags[i].isApplied = true
-			} else {
-				$scope.tags.splice(index,1);
-				$scope.activeTags[i].isApplied = false
-			}
-
-			if($scope.tags.length == 0){
-				$scope.tags = $scope.orginalList
-			}
-
-			$scope.loadingTags = true
-		
-			api.getRelatedContent($scope.tags).then(function (result){
-
-				$scope.loadingTags = false
-				
-				var posts = result.posts;
-
-				columns.divide(posts).then(function (cols){
-					$scope.col1  = cols.col1
-					$scope.col2  = cols.col2
-					$scope.col3  = cols.col3
+					}
 				})
-			})
+			} else if (path && !$scope.turn){
 
-			//console.log($scope.tags)
-
-			return $scope.tags
+				$scope.loadingPg = true;
+				location.replace(path);
+			}
 		}
-	}
 
-	$scope.addComment = function(){
+		$scope.refineRelated = function(tag,i){
 
-		console.log('/wp-comments-post.php')
+			if(!$scope.loadingTags){
 
-		commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
-	}
+				// Reset tags variable if no filters have been applied yet
+				if($scope.firstLoad || $scope.tags == $scope.orginalList){
+					$scope.firstLoad = false
+					$scope.tags = [];
+				}
+
+				// Add or remove tag
+				var index = $scope.tags.indexOf(tag);
+				if(index == -1){
+					$scope.tags.push(tag);
+					$scope.activeTags[i].isApplied = true
+				} else {
+					$scope.tags.splice(index,1);
+					$scope.activeTags[i].isApplied = false
+				}
+
+				if($scope.tags.length == 0){
+					$scope.tags = $scope.orginalList
+				}
+
+				$scope.loadingTags = true
+			
+				api.getRelatedContent($scope.tags).then(function (result){
+
+					$scope.loadingTags = false
+					
+					var posts = result.posts;
+
+					//Inserts Discover Ads to cards
+					posts = insertMPU(posts);
+
+					columns.divide(posts).then(function (cols){
+						$scope.col1  = cols.col1
+						$scope.col2  = cols.col2
+						$scope.col3  = cols.col3
+					})
+				})
+
+				//console.log($scope.tags)
+
+				return $scope.tags
+			}
+		}
+
+		$scope.addComment = function(){
+
+			console.log('/wp-comments-post.php')
+
+			commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
+		}
 
 }])
 .controller('category', [
 	'$scope',
 	'$sce', 
-	'$timeout', 
+	'$timeout', 	
 	'api', 
+	'mpu',
 	'columns',
 	'tealium', 
-	function ($scope,$sce,$timeout,api,columns,tealium){
+	function ($scope,$sce,$timeout,api,mpu,columns,tealium) {
 
-	var href   = window.location.href,
-		parent = href.indexOf('/blogs/') > -1,
-		url    = (parent) ?  '/?post_type[post]' : href;
+		var href   = window.location.href,
+			parent = href.indexOf('/blogs/') > -1,
+			url    = (parent) ?  '/?post_type[post]' : href;
 
-	console.log(url)
+		console.log(url)
 
-	$scope.ready       = false;
-	$scope.page        = 1;
-	$scope.loading     = true;
-	$scope.scrollState = "off";
-	$scope.infinite    = false;
-	$scope.loadMsg     = "";
-	$scope.tealium     = tealium;
+		$scope.ready       = false;
+		$scope.page        = 1;
+		$scope.loading     = true;
+		$scope.scrollState = "off";
+		$scope.infinite    = false;
+		$scope.loadMsg     = "";
+		$scope.tealium     = tealium;
 
-	$scope.$on('loadNext',function(){
-		$scope.loadMore();
-	})
-
-	api.getArticle(href).then(function (result){
-
-		$scope.loading   = false;
-		$scope.title     = (result.category)? result.category.title : 'blog'
-		$scope.content   = result
-		$scope.pageCount = result.pages
-		$scope.firstPost = result.featured_post;
-		var posts        = result.posts;
-
-		console.log(result)
-
-		columns.divide(posts).then(function (cols){
-			$scope.col1  = cols.col1
-			$scope.col2  = cols.col2
-			$scope.col3  = cols.col3
-			$scope.ready = true
-			$scope.page ++
+		$scope.$on('loadNext',function(){
+			$scope.loadMore();
 		})
-	})
 
-	$scope.formatEmbed = function(html){
+		api.getArticle(href).then(function (result){
 
-		return $sce.trustAsHtml(html)
-	}
+			$scope.loading   = false;
+			$scope.title     = (result.category)? result.category.title : 'blog'
+			$scope.content   = result
+			$scope.pageCount = result.pages
+			$scope.firstPost = result.featured_post;
+			var posts        = result.posts;
 
-	$scope.loadMore = function(){
+			console.log(result);
 
-		$scope.scrollState = "on";
-		$scope.infinite    = true;
-		$scope.infLoading  = true;
+			//Inserts Blogs Ads to cards
+			var mpuObj = [{
+					id: 'blogs-1',
+					order: 4,
+					type: 'mpu'
+				},
+				{
+					id: 'blogs-2',
+					order: 9,
+					type: 'mpu'
+				}];
 
-		if($scope.pageCount > ($scope.page-1)){
+			mpu.insert(posts, mpuObj[0]).then(function (result){
+				posts = result;
+			});	
 
-			api.getArticle(url,$scope.page).then(function (result){
+			mpu.insert(posts, mpuObj[1]).then(function (result){
+				posts = result;
+			});		
 
-				var posts = result.posts;
-				$scope.scrollState = "on";
-
-				columns.divide(posts).then(function (cols){
-
-					$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
-					$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
-					$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
-					$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
-					$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
-					$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
-
-					$scope.page ++
-					$scope.infLoading = false;
-				})
+			columns.divide(posts).then(function (cols){
+				$scope.col1  = cols.col1
+				$scope.col2  = cols.col2
+				$scope.col3  = cols.col3
+				$scope.ready = true
+				$scope.page ++
 			})
-		} else {
-			$scope.scrollState = "off";
-			$scope.infLoading  = false;
+		})
 
-			$scope.$apply(function(){
-				$scope.loadMsg = "End of results in " + $scope.title;
-			});
+		$scope.formatEmbed = function(html){
+
+			return $sce.trustAsHtml(html)
 		}
-	}
+
+		$scope.loadMore = function(){
+
+			$scope.scrollState = "on";
+			$scope.infinite    = true;
+			$scope.infLoading  = true;
+
+			if($scope.pageCount > ($scope.page-1)){
+
+				api.getArticle(url,$scope.page).then(function (result){
+
+					var posts = result.posts;
+					$scope.scrollState = "on";
+
+					columns.divide(posts).then(function (cols){
+
+						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+						$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+						$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+						$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+						$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+						$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+						$scope.page ++
+						$scope.infLoading = false;
+					})
+				})
+			} else {
+				$scope.scrollState = "off";
+				$scope.infLoading  = false;
+
+				$scope.$apply(function(){
+					$scope.loadMsg = "End of results in " + $scope.title;
+				});
+			}
+		}
 
 }])
 .directive('tlsScroll',function(){
@@ -29990,109 +30045,128 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'$scope',
 	'$sce',
 	'api',
+	'mpu',
 	'columns',
 	'tealium',
-	function ($scope,$sce,api,columns,tealium){
+	function ($scope,$sce,api, mpu, columns,tealium){
 
-	var url = window.location.href;
+		var url = window.location.href;
 
-	$scope.test = true
-	$scope.ready       = false;
-	$scope.pageNumber  = 1;
-	$scope.loading     = true;
-	$scope.scrollState = "off";
-	$scope.infinite    = false;
-	$scope.loadMsg     = "";
-	$scope.mpuPosition = 4;
-	$scope.tealium     = tealium;
+		$scope.test = true
+		$scope.ready       = false;
+		$scope.pageNumber  = 1;
+		$scope.loading     = true;
+		$scope.scrollState = "off";
+		$scope.infinite    = false;
+		$scope.loadMsg     = "";
+		$scope.mpuPosition = 4;
+		$scope.tealium     = tealium;
 
-	$scope.$on('loadNext',function(){
-		$scope.loadMore();
-	})
-
-	api.getArticle(url).then(function (result){
-		
-		$scope.page      = result.page
-		$scope.loading   = false;
-		$scope.pageCount = result.pages
-
-		columns.divide(result.top_articles).then(function (cols){
-			$scope.topCol1  = cols.col1
-			$scope.topCol2  = cols.col2
-			$scope.topCol3  = cols.col3
-
-			console.log($scope.topCol3)
+		$scope.$on('loadNext',function(){
+			$scope.loadMore();
 		})
 
+		api.getArticle(url).then(function (result){
+			
+			$scope.page      = result.page
+			$scope.loading   = false;
+			$scope.pageCount = result.pages
 
-		columns.divide(result.posts).then(function (cols){
-			$scope.col1  = cols.col1
-			$scope.col2  = cols.col2
-			$scope.col3  = cols.col3
-			$scope.ready = true
+			//Inserts Discover Ads to cards
+			var mpuObj = [{
+					id: 'discover-1',
+					order: 4
+				},
+				{
+					id: 'discover-2',
+					order: 10
+				}];
+
+			mpu.insert(result.top_articles, mpuObj[0]).then(function (result){
+				result.top_articles = result;
+			});
+
+			mpu.insert(result.top_articles, mpuObj[1]).then(function (result){
+				result.top_articles = result;
+			});
+
+			columns.divide(result.top_articles).then(function (cols){
+				$scope.topCol1  = cols.col1
+				$scope.topCol2  = cols.col2
+				$scope.topCol3  = cols.col3
+
+				//console.log($scope.topCol3)
+			})
+
+
+			columns.divide(result.posts).then(function (cols){
+				$scope.col1  = cols.col1
+				$scope.col2  = cols.col2
+				$scope.col3  = cols.col3
+				$scope.ready = true
+			})
+
+			console.log(result)
+
 		})
 
-		console.log(result)
+		$scope.truncate = function(str){
 
-	})
+			if (!! str) {
+				var trunc    = str.substring(0,200),
+					combined = trunc + " [...]"
 
-	$scope.truncate = function(str){
-
-		if (!! str) {
-			var trunc    = str.substring(0,200),
-				combined = trunc + " [...]"
-
-			return combined
+				return combined
+			}
+			
 		}
-		
-	}
 
-	$scope.loadMore = function(){
+		$scope.loadMore = function(){
 
-		$scope.scrollState = "on";
-		$scope.infinite    = true;
-		$scope.infLoading  = true;
+			$scope.scrollState = "on";
+			$scope.infinite    = true;
+			$scope.infLoading  = true;
 
-		if($scope.pageCount > ($scope.pageNumber-1)){
+			if($scope.pageCount > ($scope.pageNumber-1)){
 
-			if($scope.pageNumber == 1){
+				if($scope.pageNumber == 1) {
 
-				$scope.pageNumber ++
+					$scope.pageNumber ++
+
+				} else {
+
+					api.getArticleList($scope.pageNumber).then(function (result){
+
+						var posts = result.posts;
+						$scope.scrollState = "on";
+
+						console.log(posts);
+
+						columns.divide(posts).then(function (cols){
+
+							$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
+							$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
+							$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
+							$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
+							$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
+							$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
+
+							$scope.pageNumber ++
+							$scope.infLoading = false;
+						})
+					})
+				}
 
 			} else {
+				
+				$scope.scrollState = "off";
+				$scope.infLoading  = false;
 
-				api.getArticleList($scope.pageNumber).then(function (result){
-
-					var posts = result.posts;
-					$scope.scrollState = "on";
-
-					console.log(posts);
-
-					columns.divide(posts).then(function (cols){
-
-						$scope.col1[0] = $scope.col1[0].concat(cols.col2[0]);
-						$scope.col2[0] = $scope.col2[0].concat(cols.col2[0]);
-						$scope.col2[1] = $scope.col2[1].concat(cols.col2[1]);
-						$scope.col3[0] = $scope.col3[0].concat(cols.col3[0]);
-						$scope.col3[1] = $scope.col3[1].concat(cols.col3[1]);
-						$scope.col3[2] = $scope.col3[2].concat(cols.col3[2]);
-
-						$scope.pageNumber ++
-						$scope.infLoading = false;
-					})
-				})
+				$scope.$apply(function(){
+					$scope.loadMsg = "End of results in " + $scope.page.title;
+				});
 			}
-
-		} else {
-			
-			$scope.scrollState = "off";
-			$scope.infLoading  = false;
-
-			$scope.$apply(function(){
-				$scope.loadMsg = "End of results in " + $scope.page.title;
-			});
 		}
-	}
 
 }])
 .controller('articleSection',[
@@ -30263,26 +30337,24 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	api.getHomePage(url).then(function (result){
 
-		//console.log(result);	
+		console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
 
 		var cards = objToArr.convert(result.home_page_cards);
 
-		//Inserts home adverts to cards
+		//Inserts home Ads to cards
 		var mpuObj = [
 			{
-				id: 'home-1'
+				id: 'home-1',
 				order: 4
 			},
 			{
-				id: 'home-2'
+				id: 'home-2',
 				order: 9
 			}
 		];
-
-		console.log(mpuObj);
 
 		mpu.insert(cards, mpuObj[0]).then(function (result){
 			cards = result;
@@ -30291,11 +30363,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		mpu.insert(cards, mpuObj[1]).then(function (result){
 			cards = result;
 		});
-
-		//Inserts second advert to cards
-		// mpu.insert(cards,9).then(function (result){
-		// 	cards = result
-		// })
 
 		columns.divide(cards).then(function (cols){
 
@@ -30441,225 +30508,230 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 }])
 .controller('search',[
-	"$scope",
-	'$sce',
-	'$timeout',
-	'api',
-	'niceDate',
-	'tealium', 
-	function ($scope,$sce,$timeout,api,niceDate,tealium) {
+    "$scope",
+    '$sce',
+    '$timeout',
+    'api',
+    'niceDate',
+    'tealium', 
+    function ($scope,$sce,$timeout,api,niceDate,tealium) {
 
-	//Set default vars
-	var url = window.location.href;
-	$scope.filters         = []
-	$scope.taxonomyFilters = []
-	$scope.currentPage     = 1
-	$scope.dateRange       = ""
-	$scope.orderName       = "Newest"
-	$scope.order           = "DESC"
-	$scope.showSorter      = false
-	$scope.loadResults     = true
-	$scope.clearable       = false
-	$scope.niceDate        = niceDate
-
-
-	$scope.request = function(){
-
-		$scope.loadResults = true
-
-		api.getSearchResults(
-			url,
-			$scope.currentPage,
-			$scope.filters,
-			$scope.order,
-			$scope.dateRange
-			)
-			.then(function (results){
-			
-				$scope.showFilters = false
-				$scope.loadResults = false
-				$scope.results     = results
-				$scope.contentType = results.content_type_filters
-				$scope.sections    = results.articles_sections
-				$scope.dateRanges  = results.date_filters
-				$scope.paginationConfig = {
-					"pageCount"   : results.pages,
-					"currentPage" : $scope.currentPage,
-					"filters"     : $scope.filters,
-					"order"       : $scope.order,
-					"dateRange"   : $scope.dateRange
-			}
-
-				console.log(results);
-		})
-	}	
-
-	//Refresh scope when pagination page is selected
-	$scope.$on('loading',function (){
-		$scope.loadResults = true
-	})
-
-	$scope.$on('updatePage',function (e,results,curr){
-
-		$scope.loadResults = false
-		$scope.paginationConfig.currentPage = curr
-		$scope.currentPage = curr
-		$scope.results     = results
-
-	})
-
-	$scope.contentFilter = function(term,query,key,type){
-
-		console.log(type)
-
-		var list = (type == 'content') ? $scope.contentType : $scope.sections,
-			typeName = (type == 'content') ? 'content type' : type;
-
-		if(query){
-
-			var index = $scope.filters.indexOf(query);
-
-			if(index == -1){
-				$scope.filters.push(query)
-				list[key].isApplied = true
-				tealium.filtering('add',typeName,term);
-			} else {
-				$scope.filters.splice(index,1)
-				list[key].isApplied = false
-				tealium.filtering('remove',typeName,term);
-			}
-
-			$scope.loadResults = true
-			api.getSearchResults(
-					url,
-					1,
-					$scope.filters,
-					$scope.order,
-					$scope.dateRange
-				)
-				.then(function (results){
-				
-					$scope.loadResults = false
-					$scope.results = results
-					$scope.contentType = results.content_type_filters
-					$scope.sections    = results.articles_sections
-					$scope.dateRanges  = results.date_filters
-					$scope.paginationConfig = {
-						"pageCount"   : results.pages,
-						"currentPage" : 1,
-						"filters"     : $scope.filters,
-						"order"       : $scope.order,
-						"dateRange"   : $scope.dateRange
-				}
-			})
-		}
-	}
-
-	$scope.dateRangeFilter = function(range,name){
-
-		var $this = $scope.dateRanges[name]
-
-		if($this.isApplied){
-			$scope.dateRange = "";
-			$scope.clearable = false
-			tealium.filtering('remove','date',range);
-		} else {
-			$scope.dateRange = range;
-			$scope.clearable = true
-			tealium.filtering('add','date',range);
-		}
-
-		angular.forEach($scope.dateRanges, function (obj,val){
-			if(val != name){
-				obj.isApplied = false
-			}
-		});
-
-		$scope.dateRanges[name].isApplied = !$scope.dateRanges[name].isApplied
-		$scope.loadResults = true
-
-		api.getSearchResults(
-				url,
-				1,
-				$scope.filters,
-				$scope.order,
-				$scope.dateRange
-			)
-			.then(function (results){
-			
-				$scope.loadResults = false
-				$scope.results = results
-				$scope.contentType = results.content_type_filters
-				$scope.sections    = results.articles_sections
-				$scope.dateRanges  = results.date_filters
-				$scope.paginationConfig = {
-					"pageCount"   : results.pages,
-					"currentPage" : 1,
-					"filters"     : $scope.filters,
-					"order"       : $scope.order,
-					"dateRange"   : $scope.dateRange
-			}
-		})
-	}
-
-	$scope.orderResults = function(order,orderName){
-
-		$scope.loadResults = true
-
-		$scope.order     = order;
-		$scope.orderName = orderName;
-		
-		api.getSearchResults(
-				url,
-				1,
-				$scope.filters,
-				$scope.order,
-				$scope.dateRange)
-			.then(function (results){
-				
-				$scope.loadResults = false
-				$scope.results = results
-				$scope.contentType = results.content_type_filters
-				$scope.sections    = results.articles_sections
-				$scope.dateRanges  = results.date_filters
-				$scope.paginationConfig = {
-					"pageCount"   : results.pages,
-					"currentPage" : 1,
-					"filters"     : $scope.filters,
-					"order"       : $scope.order,
-					"dateRange"   : $scope.dateRange
-			}
-		})
-
-		tealium.sortOrder(orderName)
-	}
-
-	$scope.clearFilters = function(filters){
-
-		$scope.filters         = []
-		$scope.taxonomyFilters = []
-		$scope.currentPage     = 1
-		$scope.dateRange       = ""
-		$scope.clearable       = false
+        //Set default vars
+        var url = window.location.href;
+        $scope.filters         = []
+        $scope.activeFilters   = []
+        $scope.taxonomyFilters = []
+        $scope.currentPage     = 1
+        $scope.dateRange       = ""
+        $scope.orderName       = "Newest"
+        $scope.order           = "DESC"
+        $scope.showSorter      = false
+        $scope.loadResults     = true
+        $scope.clearable       = false
+        $scope.niceDate        = niceDate
 
 
-		angular.forEach($scope.contentType, function (obj){
-			obj.isApplied = false
-		});
+        // Helper function that checks whether a filter is active or not
+        $scope.inFiltersArray = function(value) {        	
+            var inFilter = false;
+            if ($scope.activeFilters.indexOf(value) != -1) inFilter = true;
+            return inFilter;
+        };
 
-		angular.forEach($scope.dateRanges, function (obj){
-			obj.isApplied = false
-		});
 
-		angular.forEach($scope.sections, function (obj){
-			obj.isApplied = false
-		});
+        $scope.request = function(){
 
-		$scope.request();
+            $scope.loadResults = true
 
-	}
+            api.getSearchResults(
+                url,
+                $scope.currentPage,
+                $scope.filters,
+                $scope.order,
+                $scope.dateRange
+                )
+                .then(function (results){
+                
+                    $scope.showFilters = false
+                    $scope.loadResults = false
+                    $scope.results     = results
+                    $scope.contentType = results.content_type_filters
+                    $scope.sections    = results.articles_sections
+                    $scope.dateRanges  = results.date_filters
+                    $scope.paginationConfig = {
+                        "pageCount"   : results.pages,
+                        "currentPage" : $scope.currentPage,
+                        "filters"     : $scope.filters,
+                        "order"       : $scope.order,
+                        "dateRange"   : $scope.dateRange
+                }
 
-	$scope.request();
+                //console.log(results);
+            })
+        }   
+
+        //Refresh scope when pagination page is selected
+        $scope.$on('loading',function (){
+            $scope.loadResults = true
+        })
+
+        $scope.$on('updatePage',function (e,results,curr){
+
+            $scope.loadResults = false
+            $scope.paginationConfig.currentPage = curr
+            $scope.currentPage = curr
+            $scope.results     = results
+
+        })
+
+        $scope.contentFilter = function(term,query,key,type) {
+
+            var list = (type == 'content') ? $scope.contentType : $scope.sections,
+                typeName = (type == 'content') ? 'content type' : type;
+
+            if (query) {
+
+                var index = $scope.filters.indexOf(query);
+
+                if (index == -1) {
+                    $scope.filters.push(query);
+                    // For active class
+                    $scope.activeFilters.push(key);
+                    tealium.filtering('add',typeName,term);
+                } else {
+                    $scope.filters.splice(index,1);
+                    $scope.activeFilters.splice(index,1);
+                    tealium.filtering('remove',typeName,term);
+                }
+
+                $scope.loadResults = true;              
+
+                // Refactor filters based on filter type
+                if (type == 'content') {                	
+                	var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
+                	var converted = filtersArr.toString().replace(/,/g,'&');
+                	var filters = (filtersArr.length == 0) ? "" : "&"+converted;
+
+                } else if (type == 'category') {
+	                var filters = 'article_section=' + $scope.filters.toString();
+                }
+
+                api.getSearchResults(
+                        url,
+                        1,
+                        filters,
+                        $scope.order,
+                        $scope.dateRange
+                    )
+                    .then(function (results) {
+                    
+                        $scope.loadResults = false
+                        $scope.results = results
+                        $scope.contentType = results.content_type_filters
+                        $scope.sections    = results.articles_sections
+                        $scope.dateRanges  = results.date_filters
+                        $scope.paginationConfig = {
+                            "pageCount"   : results.pages,
+                            "currentPage" : 1,
+                            "filters"     : $scope.filters,
+                            "order"       : $scope.order,
+                            "dateRange"   : $scope.dateRange
+                        }   
+
+                        //console.log($scope.contentType);                    
+                })
+            }
+        }
+
+        $scope.dateRangeFilter = function(range,name){
+
+            var $this = $scope.dateRanges[name];
+            var index = $scope.activeFilters.indexOf(name);
+
+            if (index == -1) {
+                $scope.activeFilters.push(name);
+                $scope.dateRange = range;
+                $scope.clearable = true;
+                tealium.filtering('add','date',range);
+                
+            } else {
+                $scope.activeFilters.splice(index,1);
+                $scope.dateRange = "";
+                $scope.clearable = false
+                tealium.filtering('remove','date',range);
+            }
+
+            $scope.loadResults = true;
+
+            api.getSearchResults(
+                    url,
+                    1,
+                    $scope.filters,
+                    $scope.order,
+                    $scope.dateRange
+                )
+                .then(function (results){
+                
+                    $scope.loadResults = false
+                    $scope.results = results
+                    $scope.contentType = results.content_type_filters
+                    $scope.sections    = results.articles_sections
+                    $scope.dateRanges  = results.date_filters
+                    $scope.paginationConfig = {
+                        "pageCount"   : results.pages,
+                        "currentPage" : 1,
+                        "filters"     : $scope.filters,
+                        "order"       : $scope.order,
+                        "dateRange"   : $scope.dateRange
+                }
+            })
+        }
+
+        $scope.orderResults = function(order,orderName){
+
+            $scope.loadResults = true
+
+            $scope.order     = order;
+            $scope.orderName = orderName;
+            
+            api.getSearchResults(
+                    url,
+                    1,
+                    $scope.filters,
+                    $scope.order,
+                    $scope.dateRange)
+                .then(function (results){
+                    
+                    $scope.loadResults = false
+                    $scope.results = results
+                    $scope.contentType = results.content_type_filters
+                    $scope.sections    = results.articles_sections
+                    $scope.dateRanges  = results.date_filters
+                    $scope.paginationConfig = {
+                        "pageCount"   : results.pages,
+                        "currentPage" : 1,
+                        "filters"     : $scope.filters,
+                        "order"       : $scope.order,
+                        "dateRange"   : $scope.dateRange
+                }
+            })
+
+            tealium.sortOrder(orderName)
+        }
+
+        $scope.clearFilters = function(filters){
+
+            $scope.filters         = [];
+            $scope.activeFilters   = [];
+            $scope.taxonomyFilters = [];
+            $scope.currentPage     = 1;
+            $scope.dateRange       = "";
+            $scope.clearable       = false;
+
+            $scope.request();
+        }
+
+        $scope.request();
 
 }])
 .directive('tlsPagination',[ 'api', function (api){

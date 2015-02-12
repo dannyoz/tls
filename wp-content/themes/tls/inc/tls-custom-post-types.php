@@ -137,7 +137,7 @@ function tls_custom_post_types() {
 		'label'               => __( 'tls_faq', 'tls' ),
 		'description'         => __( 'TLS FAQs Custom Content Post Type', 'tls' ),
 		'labels'              => $faq_labels,
-		'supports'            => array( 'title', 'editor', 'comments' ),
+		'supports'            => array( 'title', 'editor', 'comments', 'page-attributes' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_ui'             => true,
