@@ -16,11 +16,12 @@
                 <div class="filter-block">
                     <h3 class="futura uppercase">
                         Content type
-                        <span class="clear" ng-if="filters.length > 0 || clearable" ng-click="clearFilters()">Clear <i style="font-size:14px" class="icon icon-cross"></i></span>
+                        <span class="clear" ng-if="filters.length > 0 || clearable" ng-click="clearFilters()">Clear all <i style="font-size:14px" class="icon icon-cross"></i></span>
                     </h3>
-                    <ul class="filters" ng-cloak>
-                        <li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in contentType">
-                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'content')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+                    <ul class="filters" ng-cloak>      
+                        <!-- <li ng-if="val.search_count > 0" ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in contentType"> -->                           
+                        <li ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in contentType">
+                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'content')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -28,8 +29,8 @@
                 <div class="filter-block">
                     <h3 class="futura uppercase">Date</h3>
                     <ul class="filters" ng-cloak>
-                        <li ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in dateRanges">
-                            <a ng-click="dateRangeFilter(val.search_term,name)"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+                        <li ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in dateRanges">
+                            <a ng-click="dateRangeFilter(val.search_term,name)"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -39,8 +40,8 @@
                         Category
                     </h3>
                     <ul class="filters">
-                        <li ng-if="val.search_count > 0" ng-class="{applied:val.isApplied}" ng-repeat="(name,val) in sections">
-                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'category')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="val.isApplied" class="icon icon-cross"></i></a>
+                        <li ng-if="val.search_count > 0" ng-class="{applied: inFiltersArray(name)}" ng-repeat="(name,val) in sections">                        
+                            <a ng-click="contentFilter(val.item_label,val.json_query,name,'category')"><span ng-bind-html="val.item_label"></span> ({{val.search_count}}) <i ng-if="inFiltersArray(name)" class="icon icon-cross"></i></a>
                         </li>
                     </ul>
                 </div>
