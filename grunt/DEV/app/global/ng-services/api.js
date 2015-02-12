@@ -91,7 +91,7 @@
 
             //expose url for testing
             defer.promise.url = finalPath
-            console.log(finalPath);
+            //console.log(finalPath);
 
             $http.get(finalPath).success(function (data){
                 //simulate server delay

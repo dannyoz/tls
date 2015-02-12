@@ -13,7 +13,13 @@
         // Used to build final string to be passed to the API call
         $scope.filters         = []
         // Used to check active filters to add class
-        $scope.activeFilters   = []
+        var activeFilters   = {
+        	'contentType': [],
+        	'date':        [],
+        	'category':    []
+        };
+        // Content types not attached to categories
+        var contentTypeNoCategories = ['Blogs', 'FAQs'];
 
         $scope.taxonomyFilters = []
         $scope.currentPage     = 1
@@ -25,18 +31,34 @@
         $scope.clearable       = false
         $scope.niceDate        = niceDate
 
+        // Flag to show/hide Categories based on content type
+        $scope.showCategories  = true; 
 
-        // Helper function that checks whether a filter is active or not
-        $scope.inFiltersArray = function(value) {        	
+
+        // Helper function
+        // Checks if clicked filter exists in array
+        $scope.inFiltersArray = function(value, type) {        	
             var inFilter = false;
-            if ($scope.activeFilters.indexOf(value) != -1) inFilter = true;
+            if (type) {
+            	if (activeFilters[type].indexOf(value) != -1) inFilter = true;	
+            }            
             return inFilter;
         };
+
+        // Helpe function
+        // Check if content type returns categories
+        $scope.contentNoCategories = function(contentType) {
+        	var hasCats = false;
+        	if (contentType) {
+        		if (contentTypeNoCategories.indexOf(contentType) != -1) hasCats = true;	
+        	}
+        	return hasCats;
+        }
 
 
         $scope.request = function(){
 
-            $scope.loadResults = true
+            $scope.loadResults = true;
 
             api.getSearchResults(
                 url,
@@ -60,8 +82,6 @@
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
                 }
-
-                //console.log(results);
             })
         }   
 
@@ -84,30 +104,33 @@
         // =====================
         $scope.contentFilter = function(term,query,key) {
 
-            var list = $scope.contentType,
+        	var list = $scope.contentType,
                 typeName = 'content type';
+
+            $scope.showCategories = !$scope.contentNoCategories(term);    
 
             if (query) {
 
             	// Index of filter in filters array
                 var index = $scope.filters.indexOf(query);
+                // Clearing filter already in arrays
+                // to force searching by one filter at a time
+                $scope.filters.splice(index,1);
 
                 // Filter clicked not in array
-                if (index == -1) {
-                	// Add value to array
-                    $scope.filters.push(query);
+                if (index == -1) {                	
                     // Clear active filters array 
                     // (force to filter one at a time)
-                    $scope.activeFilters = [];
+                    activeFilters['contentType'] = [];
+                    // Add filter to array
+                    $scope.filters.push(query);
                     // Add filter key name to array
-                    $scope.activeFilters.push(key);	                   
+                    activeFilters['contentType'].push(key);	                   
                     // Tealium tag
                     tealium.filtering('add',typeName,term);
                 } 
-                else {
-                	// Clearing filter already in arrays
-                    $scope.filters.splice(index,1);
-                    $scope.activeFilters.splice(index,1);
+                else {                	
+                    activeFilters['contentType'].splice(index,1);
                     // Remove Tealium tag
                     tealium.filtering('remove',typeName,term);
                 }
@@ -139,9 +162,7 @@
                             "filters"     : $scope.filters,
                             "order"       : $scope.order,
                             "dateRange"   : $scope.dateRange
-                        }   
-
-                        console.log($scope.results);                    
+                        }                  
                 })
             }
         }
@@ -152,19 +173,18 @@
         $scope.dateRangeFilter = function(range,name){
 
             var $this = $scope.dateRanges[name];
-            var index = $scope.activeFilters.indexOf(name);            
+            var index = activeFilters['date'].indexOf(name);            
 
             if (index == -1) {
             	// Restrict single filter for Dates
-            	$scope.activeFilters = [];
-
-                $scope.activeFilters.push(name);
+            	activeFilters['date'] = [];
+                activeFilters['date'].push(name);
                 $scope.dateRange = range;
                 $scope.clearable = true;
                 tealium.filtering('add','date',range);
                 
             } else {
-                $scope.activeFilters.splice(index,1);
+                activeFilters['date'].splice(index,1);
                 $scope.dateRange = "";
                 $scope.clearable = false
                 tealium.filtering('remove','date',range);
@@ -206,22 +226,25 @@
 
 	        if (query) {
 
+	        	// Index of filter in filters array
 	            var index = $scope.filters.indexOf(query);
 
+	            // Filter clicked not in array
 	            if (index == -1) {
+	            	// Add filter to array
 	                $scope.filters.push(query);
-	                $scope.activeFilters.push(key);	                   
+	                activeFilters['category'].push(key);	                   
 	                tealium.filtering('add',typeName,term);
 	            } else {
 	                $scope.filters.splice(index,1);
-	                $scope.activeFilters.splice(index,1);
+	                activeFilters['category'].splice(index,1);
 	                tealium.filtering('remove',typeName,term);
 	            }
 
 	            $scope.loadResults = true;              
 
 	            // Refactor filters string for API call
-	            var filters = 'article_section=' + $scope.filters.toString();	            
+	            var filters = 'article_section=' + $scope.filters.toString();	    
 
 	            api.getSearchResults(
 	                    url,
@@ -243,9 +266,7 @@
 	                        "filters"     : $scope.filters,
 	                        "order"       : $scope.order,
 	                        "dateRange"   : $scope.dateRange
-	                    }   
-
-	                    console.log($scope.results);                    
+	                    }                       
 	            })
 	        }
 	    }        
@@ -285,7 +306,11 @@
         $scope.clearFilters = function(filters){
 
             $scope.filters         = [];
-            $scope.activeFilters   = [];
+            activeFilters   = {
+	        	'contentType': [],
+	        	'date':        [],
+	        	'category':    []
+	        };
             $scope.taxonomyFilters = [];
             $scope.currentPage     = 1;
             $scope.dateRange       = "";
