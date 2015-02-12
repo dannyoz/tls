@@ -121,11 +121,20 @@ class HubSubscriber {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $serverVar = $_SERVER;
+            $serverVar = '';
+            foreach ($_SERVER as $s_key => $s_value) {
+                $serverVar .= "{$s_key} : {$s_value},\n";
+            }
 
-            $requestVar = $_REQUEST;
+            $requestVar = '';
+            foreach ($_REQUEST as $r_key => $r_value) {
+                $requestVar .= "{$r_key} : {$r_value},\n";
+            }
 
-            $postVar = $_POST;
+            $postVar = '';
+            foreach ($_POST as $p_key => $p_value) {
+                $postVar .= "{$p_key} : {$p_value},\n";
+            }
 
             HubLogger::log("SERVER Variables:\n" . $serverVar . "\n POST Variables:\n" . $postVar . "\n REQUEST Variables:\n" . $requestVar);
 
