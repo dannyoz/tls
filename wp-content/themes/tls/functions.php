@@ -168,9 +168,6 @@ if (is_plugin_active('json-api/json-api.php')) {
 	// Blogs Archive Page Template JSON API Modifications
 	include_once TLS_TEMPLATE_DIR . '/inc/tls_blogs_archive_json_api_encode.php';
 
-	// FAQs Page JSON API Modifications
-	include_once TLS_TEMPLATE_DIR . '/inc/tls_faqs_json_api_encode.php';
-
 	// Latest Edition Page Template JSON API Modifications
 	include_once TLS_TEMPLATE_DIR . '/inc/tls_latest_edition_page_json_api_encode.php';
 
