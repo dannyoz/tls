@@ -28771,10 +28771,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
             var defer     = $q.defer(),
                 page      = (!page) ? 1 : page,
-                //filters   = (!filters) ? [] : filters,
-                //converted = 'article_section=' + filters.toString(),
-                //converted = filters.toString().replace(/,/g,'&'),
-                //filt      = (filters.length == 0) ? "" : "&"+converted,
                 filt      = (filters.length == 0) ? "" : "&"+filters,
                 prefix    = this.checkQueries(path),
                 order     = (!ord)? "" : "&orderby=date&order=" + ord,
@@ -28785,7 +28781,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
             //expose url for testing
             defer.promise.url = finalPath
-            console.log(finalPath);
+            //console.log(finalPath);
 
             $http.get(finalPath).success(function (data){
                 //simulate server delay
@@ -28945,17 +28941,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 .factory('commentApi',['$http','$q', function ($http,$q){
 	return {
 
-		post : function (path,formData){
+		post : function (path){
 
-			$http.post(path,formData)
+			var defer = $q.defer();
+
+			$http.post(path)
 				.success(function (data, textStatus){
 
-					console.log('success', data, textStatus);
+					defer.resolve(data);
+
 				})
 				.error(function (data){
 
-					console.log('error', data);
+					defer.resolve(data);
+
 				})
+
+			return defer.promise
 		}
 	}
 }])
@@ -29654,7 +29656,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.activeTags = [];
 		$scope.turn       = false; 
 		$scope.firstLoad  = true;
-		//$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
+		$scope.successCommentMessage = false;
+		$scope.errorCommentMessage = false;
 
 		// Helper function to insert MPU's into related taxonomy_article_tags
 		var insertMPU = function(posts) {
@@ -29686,6 +29689,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			$scope.prev  = result.previous_url
 			$scope.next  = result.next_url
 			$scope.ready = true;
+			$scope.commentAuthor = result.post.commenter_information.comment_author;
+			$scope.commentEmail = result.post.commenter_information.comment_author_email;
+			$scope.commentContent = '';
 
 			//restructure book format
 			if($scope.post.custom_fields.books){
@@ -29891,11 +29897,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 		}
 
-		$scope.addComment = function(){
+		$scope.addComment = function(author, email, content){
 
-			console.log('/wp-comments-post.php')
+			if ($scope.successCommentMessage == true || $scope.errorCommentMessage == true) {
+				$scope.successCommentMessage = false;
+				$sce.errorCommentMessage = false;
+			}
 
-			commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
+			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
+				.then(function(data){
+					if (data.status == 'error') {
+						$scope.errorCommentMessage = true;
+					} else {
+						$scope.successCommentMessage = true;
+						content = '';
+					}
+				});
 		}
 
 }])
@@ -30518,8 +30535,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
         //Set default vars
         var url = window.location.href;
+
+        // Used to build final string to be passed to the API call
         $scope.filters         = []
-        $scope.activeFilters   = []
+        // Used to check active filters to add class
+        var activeFilters   = {
+        	'contentType': [],
+        	'date':        [],
+        	'category':    []
+        };
+        // Content types not attached to categories
+        var contentTypeNoCategories = ['Blogs', 'FAQs'];
+
         $scope.taxonomyFilters = []
         $scope.currentPage     = 1
         $scope.dateRange       = ""
@@ -30530,18 +30557,34 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         $scope.clearable       = false
         $scope.niceDate        = niceDate
 
+        // Flag to show/hide Categories based on content type
+        $scope.showCategories  = true; 
 
-        // Helper function that checks whether a filter is active or not
-        $scope.inFiltersArray = function(value) {        	
+
+        // Helper function
+        // Checks if clicked filter exists in array
+        $scope.inFiltersArray = function(value, type) {        	
             var inFilter = false;
-            if ($scope.activeFilters.indexOf(value) != -1) inFilter = true;
+            if (type) {
+            	if (activeFilters[type].indexOf(value) != -1) inFilter = true;	
+            }            
             return inFilter;
         };
+
+        // Helper function
+        // Check if content type returns categories
+        $scope.contentNoCategories = function(contentType) {
+        	var hasCats = false;
+        	if (contentType) {
+        		if (contentTypeNoCategories.indexOf(contentType) != -1) hasCats = true;	
+        	}
+        	return hasCats;
+        }
 
 
         $scope.request = function(){
 
-            $scope.loadResults = true
+            $scope.loadResults = true;
 
             api.getSearchResults(
                 url,
@@ -30565,8 +30608,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
                 }
-
-                //console.log(results);
             })
         }   
 
@@ -30584,37 +30625,50 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
         })
 
-        $scope.contentFilter = function(term,query,key,type) {
+        // =====================
+        // Content Type filter
+        // =====================
+        $scope.contentFilter = function(term,query,key) {
 
-            var list = (type == 'content') ? $scope.contentType : $scope.sections,
-                typeName = (type == 'content') ? 'content type' : type;
+        	var list = $scope.contentType,
+                typeName = 'content type';
+
+            $scope.showCategories = !$scope.contentNoCategories(term);    
 
             if (query) {
 
+            	// Index of filter in filters array
                 var index = $scope.filters.indexOf(query);
+                // Removing filter already in array
+                // to force searching one filter at a time
+                $scope.filters.splice(index,1);
 
-                if (index == -1) {
+                // Filter clicked not in array
+                if (index == -1) {                	
+                    // Clear active filters array 
+                    // (force to filter one at a time)
+                    activeFilters['contentType'] = [];
+                    // Add filter to array
                     $scope.filters.push(query);
-                    // For active class
-                    $scope.activeFilters.push(key);
+                    // Add filter key name to array
+                    activeFilters['contentType'].push(key);	                   
+                    // Tealium tag
                     tealium.filtering('add',typeName,term);
-                } else {
-                    $scope.filters.splice(index,1);
-                    $scope.activeFilters.splice(index,1);
+                } 
+                else {                	
+                    activeFilters['contentType'].splice(index,1);
+                    // Show categories back
+                    $scope.showCategories = true;
+                    // Remove Tealium tag
                     tealium.filtering('remove',typeName,term);
                 }
 
                 $scope.loadResults = true;              
 
-                // Refactor filters based on filter type
-                if (type == 'content') {                	
-                	var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
-                	var converted = filtersArr.toString().replace(/,/g,'&');
-                	var filters = (filtersArr.length == 0) ? "" : "&"+converted;
-
-                } else if (type == 'category') {
-	                var filters = 'article_section=' + $scope.filters.toString();
-                }
+                // Refactor filters string for API call
+                var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
+                var converted = filtersArr.toString().replace(/,/g,'&');
+                var filters = (filtersArr.length == 0) ? "" : "&"+converted;
 
                 api.getSearchResults(
                         url,
@@ -30636,26 +30690,29 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                             "filters"     : $scope.filters,
                             "order"       : $scope.order,
                             "dateRange"   : $scope.dateRange
-                        }   
-
-                        //console.log($scope.contentType);                    
+                        }                  
                 })
             }
         }
 
+        // =====================
+        // Dates filter
+        // =====================
         $scope.dateRangeFilter = function(range,name){
 
             var $this = $scope.dateRanges[name];
-            var index = $scope.activeFilters.indexOf(name);
+            var index = activeFilters['date'].indexOf(name);            
 
             if (index == -1) {
-                $scope.activeFilters.push(name);
+            	// Restrict single filter for Dates
+            	activeFilters['date'] = [];
+                activeFilters['date'].push(name);
                 $scope.dateRange = range;
                 $scope.clearable = true;
                 tealium.filtering('add','date',range);
                 
             } else {
-                $scope.activeFilters.splice(index,1);
+                activeFilters['date'].splice(index,1);
                 $scope.dateRange = "";
                 $scope.clearable = false
                 tealium.filtering('remove','date',range);
@@ -30686,6 +30743,61 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                 }
             })
         }
+
+        // =====================
+        // Category filter
+        // =====================
+	    $scope.categoryFilter = function(term,query,key) {
+
+	        var list = $scope.sections,
+	        	typeName = 'category';    
+
+	        if (query) {
+
+	        	// Index of filter in filters array
+	            var index = $scope.filters.indexOf(query);
+
+	            // Filter clicked not in array
+	            if (index == -1) {
+	            	// Add filter to array
+	                $scope.filters.push(query);
+	                activeFilters['category'].push(key);	                   
+	                tealium.filtering('add',typeName,term);
+	            } else {
+	                $scope.filters.splice(index,1);
+	                activeFilters['category'].splice(index,1);
+	                tealium.filtering('remove',typeName,term);
+	            }
+
+	            $scope.loadResults = true;              
+
+	            // Refactor filters string for API call
+	            var filters = 'article_section=' + $scope.filters.toString();	    
+
+	            api.getSearchResults(
+	                    url,
+	                    1,
+	                    filters,
+	                    $scope.order,
+	                    $scope.dateRange
+	                )
+	                .then(function (results) {
+	                
+	                    $scope.loadResults = false
+	                    $scope.results = results
+	                    $scope.contentType = results.content_type_filters
+	                    $scope.sections    = results.articles_sections
+	                    $scope.dateRanges  = results.date_filters
+	                    $scope.paginationConfig = {
+	                        "pageCount"   : results.pages,
+	                        "currentPage" : 1,
+	                        "filters"     : $scope.filters,
+	                        "order"       : $scope.order,
+	                        "dateRange"   : $scope.dateRange
+	                    }                       
+	            })
+	        }
+	    }        
 
         $scope.orderResults = function(order,orderName){
 
@@ -30722,7 +30834,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         $scope.clearFilters = function(filters){
 
             $scope.filters         = [];
-            $scope.activeFilters   = [];
+            activeFilters   = {
+	        	'contentType': [],
+	        	'date':        [],
+	        	'category':    []
+	        };
             $scope.taxonomyFilters = [];
             $scope.currentPage     = 1;
             $scope.dateRange       = "";

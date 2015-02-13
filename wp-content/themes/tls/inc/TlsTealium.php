@@ -111,7 +111,7 @@ class TlsTealium {
             $tealium_data = $this->tealium_data($article_id . ':' . $article->post_title, 'article:' . $page_type, html_entity_decode($article_section[0]->name), $page_restriction, array(
                 'article_publish_timestamp' => strtolower(date( 'Y/m/d H:i l', strtotime($article->post_date))),
                 'article_id'                => $article_id,
-                'article_author'            => $article_custom['article_author_name'][0],
+                'article_author'            => (isset($article_custom['article_author_name'][0])) ? $article_custom['article_author_name'][0] : '',
             ));
 
         } else if (is_page_template('template-faqs.php')) { // FAQs Page

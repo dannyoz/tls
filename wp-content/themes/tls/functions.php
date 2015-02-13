@@ -133,7 +133,6 @@ function tls_remove_wp_ver_css_js( $src ) {
  * Enqueue scripts and styles.
  */
  function tls_scripts_and_styles() {
-	 global $wp_query;
 	 // Enqueue Styles
 	 wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/style.css', array(), '', 'all' );
 
@@ -141,13 +140,9 @@ function tls_remove_wp_ver_css_js( $src ) {
 	 wp_enqueue_script( 'tls-typekit', '//use.typekit.net/zvh7bpe.js', array(), '', false );
 	 wp_enqueue_script( 'tls-scripts', TLS_THEME_URI . '/js/main.min.js', array(), '', true);
 
-	 if ( is_single() && "post" == get_post_type() ) {
-		 wp_enqueue_script('ajaxcomments', TLS_THEME_URI .'/js/comment-ajax.js', array( 'jquery' ));
-	 } else {
+	 if (!is_admin()) {
 		 wp_dequeue_script('jquery');
 	 }
-
-
  }
  add_action( 'wp_enqueue_scripts', 'tls_scripts_and_styles', 100 );
 
@@ -199,34 +194,6 @@ function tls_unregister_post_tag_taxonomy() {
 		unset( $wp_taxonomies[$taxonomy] );
 }
 add_action( 'init', 'tls_unregister_post_tag_taxonomy' );
-
-
-/**
- * Add Ajax to the Comment Submition
- *
- * @param $comment_ID		Comment ID
- * @param $comment_status	The Comment Status
- */
-function ajaxify_comments( $comment_ID, $comment_status ){
-	if( ! empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) {
-		//If AJAX Request Then
-		switch( $comment_status ) {
-			case '0':
-				//notify moderator of unapproved comment
-				wp_notify_moderator( $comment_ID );
-			case '1': //Approved comment
-				echo "success";
-				$commentdata = &get_comment( $comment_ID, ARRAY_A );
-				$post = &get_post( $commentdata['comment_post_ID'] );
-				wp_notify_postauthor( $comment_ID, $commentdata['comment_type'] );
-				break;
-			default:
-				echo "error";
-		}
-		exit;
-	}
-}
-add_action( 'comment_post', 'ajaxify_comments', 20, 2 );
 
 
 /**
