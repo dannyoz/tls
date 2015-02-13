@@ -1527,16 +1527,16 @@ p.author, h4.author {
   padding-left: 5px;
 }
 
-/* line 7, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 9, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 .article-body {
   margin-top: 100px;
   text-align: center;
 }
-/* line 12, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 14, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 #searchform {
   margin-top: 30px;
 }
-/* line 15, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 17, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 #searchform .searchform-wrapper {
   position: relative;
   display: inline-block;
@@ -1546,12 +1546,12 @@ p.author, h4.author {
   width: 440px;
 }
 @media screen and (max-width: 1090px) {
-  /* line 15, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 17, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .error404 #searchform .searchform-wrapper {
     width: 80%;
   }
 }
-/* line 28, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 30, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 #searchform .searchform-wrapper label {
   position: absolute;
   text-transform: uppercase;
@@ -1561,7 +1561,7 @@ p.author, h4.author {
   z-index: 999;
   font-size: 0.9em;
 }
-/* line 41, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 43, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 #searchform .searchform-wrapper input[type="text"] {
   width: 100%;
   border: 0;
@@ -1573,7 +1573,7 @@ p.author, h4.author {
   box-sizing: border-box;
   padding: 16px 0 16px 100px;
 }
-/* line 53, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 55, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .error404 #searchform .searchform-wrapper .icon-search {
   position: absolute;
   top: 0;
@@ -1590,50 +1590,50 @@ p.author, h4.author {
   border-radius: 0px;
 }
 
-/* line 70, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 72, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template {
   opacity: 0;
 }
-/* line 74, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 76, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template.show {
   opacity: 1;
 }
-/* line 79, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 81, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template img.max {
   width: 100%;
 }
-/* line 83, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 85, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template article .container {
   overflow: hidden;
 }
 @media screen and (max-width: 560px) {
-  /* line 88, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 90, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .container {
     padding: 0;
   }
 }
-/* line 95, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 97, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar {
   padding: 30px 0;
 }
 @media screen and (max-width: 560px) {
-  /* line 95, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 97, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .share-bar {
     display: none;
   }
 }
 @media screen and (max-width: 1090px) {
-  /* line 95, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 97, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .share-bar {
     padding: 30px 0 20px 0;
   }
 }
-/* line 107, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 109, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar .icon {
   display: inline-block;
   margin-left: 5px;
 }
-/* line 112, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 114, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a {
   margin-left: 10px;
   color: #706d73;
@@ -1643,32 +1643,32 @@ p.author, h4.author {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-/* line 119, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 121, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a:first-child {
   margin-left: 0;
 }
-/* line 126, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 128, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a.share-print:hover, .single-post-template .share-bar a.share-email:hover {
   border-color: #f3c5bf;
 }
-/* line 132, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 134, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a.share-fb:hover {
   color: #3b5998;
   border-color: #c4cde0;
 }
-/* line 139, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 141, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar a.share-twitter:hover {
   color: #55acee;
   border-color: #cce6fa;
 }
-/* line 146, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 148, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .share-bar .commentlink {
   float: right;
   margin-top: -5px;
   font-weight: 500;
   text-transform: uppercase;
 }
-/* line 155, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 157, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .col-wide {
   margin-left: 25.625%;
   float: left;
@@ -1677,7 +1677,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 1090px) {
-  /* line 155, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 157, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .col-wide {
     margin-left: 8.54167%;
     float: left;
@@ -1686,11 +1686,11 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 166, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 168, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner {
   position: relative;
 }
-/* line 170, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 172, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner:before, .single-post-template .folded-corner:after {
   display: block;
   position: absolute;
@@ -1698,14 +1698,14 @@ p.author, h4.author {
   right: 0;
   content: "";
 }
-/* line 179, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 181, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .folded-corner:before {
   border-top: solid 15px #fff;
   border-right: solid 15px #fff;
   border-left: solid 15px transparent;
   border-bottom: solid 15px transparent;
 }
-/* line 187, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 189, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-section {
   color: #d73f2b;
   padding: 12px 0;
@@ -1714,12 +1714,12 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-/* line 195, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 197, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-date {
   color: #706d73;
   font-weight: 300;
 }
-/* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 202, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body {
   -webkit-perspective: 1000;
   perspective: 1000;
@@ -1732,14 +1732,14 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 0;
 }
-/* line 210, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 212, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body h2 {
   font-size: 2.222em;
   line-height: 50px;
   margin-bottom: 10px;
 }
 @media (max-width: 560px) {
-  /* line 210, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 212, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body h2 {
     font-size: 22px;
     line-height: 27px;
@@ -1749,23 +1749,23 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 225, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 227, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .body-copy h2, .single-post-template .article-body .body-copy h3, .single-post-template .article-body .body-copy h4, .single-post-template .article-body .body-copy h5, .single-post-template .article-body .body-copy h6 {
   font-size: 30px;
 }
 @media (max-width: 560px) {
-  /* line 225, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 227, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body .body-copy h2, .single-post-template .article-body .body-copy h3, .single-post-template .article-body .body-copy h4, .single-post-template .article-body .body-copy h5, .single-post-template .article-body .body-copy h6 {
     font-size: 1.111em;
   }
 }
 @media (max-width: 560px) {
-  /* line 234, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 236, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body .body-copy h1 {
     font-size: 1.3em;
   }
 }
-/* line 241, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 243, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body p,
 .single-post-template .article-body figcaption {
   font-size: 1.111em;
@@ -1773,42 +1773,42 @@ p.author, h4.author {
   line-height: 1.778em;
 }
 @media (max-width: 560px) {
-  /* line 241, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 243, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body p,
   .single-post-template .article-body figcaption {
     font-size: 0.833em;
     line-height: 1.6em;
   }
 }
-/* line 259, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 261, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol, .single-post-template .article-body ul {
   margin-bottom: 2em;
   padding-left: 20px;
 }
-/* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 266, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol li, .single-post-template .article-body ul li {
   line-height: 1.6em;
 }
 @media (max-width: 560px) {
-  /* line 264, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 266, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body ol li, .single-post-template .article-body ul li {
     font-size: 0.833em;
   }
 }
-/* line 276, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 278, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ol li {
   list-style-type: decimal;
 }
-/* line 281, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 283, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body ul li {
   list-style: initial;
 }
-/* line 286, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 288, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body blockquote {
   margin: 0 -13% 1em -13%;
   text-align: center;
 }
-/* line 292, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 294, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body img {
   max-width: 100%;
   margin-bottom: 2em;
@@ -1817,32 +1817,32 @@ p.author, h4.author {
   max-width: 75%;
 }
 @media screen and (max-width: 560px) {
-  /* line 292, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 294, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body img {
     margin-bottom: 1em;
   }
 }
-/* line 305, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 307, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body img.right {
   float: right;
   margin: 0 -13% 1em 1em;
 }
-/* line 312, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 314, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .author {
   font-weight: 500;
   margin-bottom: 0;
   letter-spacing: 0;
 }
-/* line 318, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 320, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-meta {
   margin-bottom: 20px;
 }
-/* line 322, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 324, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-date {
   margin-top: 10px;
   font-size: .8em;
 }
-/* line 327, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 329, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary {
   background-color: #f2f2f2;
   margin-bottom: 20px;
@@ -1851,50 +1851,50 @@ p.author, h4.author {
   line-height: 22px;
 }
 @media (max-width: 560px) {
-  /* line 327, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 329, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body .article-summary {
     font-size: 14px;
   }
 }
-/* line 339, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 341, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner {
   padding: 20px 15px 0 15px;
   position: relative;
 }
-/* line 354, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 356, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner:last-child {
   padding-bottom: 20px;
 }
-/* line 358, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 360, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner:last-child:after {
   display: none;
 }
-/* line 364, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 366, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .book-title {
   font-weight: bold;
   color: #706d73;
 }
-/* line 369, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 371, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .inner-wrapper {
   width: 70%;
 }
 @media (max-width: 560px) {
-  /* line 369, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 371, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body .article-summary .inner .inner-wrapper {
     width: 95%;
   }
 }
-/* line 377, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 379, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .summary-top {
   padding-bottom: 10px;
 }
-/* line 381, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 383, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-body .article-summary .inner .summary-bottom {
   padding-top: 10px;
   border-top: 1px solid #d9d9d9;
 }
 @media screen and (max-width: 920px) {
-  /* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 202, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body {
     margin-left: 17.08333%;
     float: left;
@@ -1904,7 +1904,7 @@ p.author, h4.author {
   }
 }
 @media screen and (max-width: 1090px) {
-  /* line 200, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 202, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body {
     margin-left: 8.54167%;
     float: left;
@@ -1912,27 +1912,27 @@ p.author, h4.author {
     width: 82.91667%;
     margin-right: 0;
   }
-  /* line 401, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 403, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body blockquote {
     text-align: left;
     margin-right: 0;
     margin-left: 0;
   }
-  /* line 408, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 410, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body img {
     margin-left: 0;
     max-width: 100%;
   }
-  /* line 413, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 415, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body img.right {
     margin-right: 0;
   }
 }
-/* line 422, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 424, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-current {
   background-color: white;
 }
-/* line 426, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 428, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .article-current.turn {
   -webkit-animation-name: pageTurn;
   animation-name: pageTurn;
@@ -1943,7 +1943,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.6s;
   animation-duration: 0.6s;
 }
-/* line 432, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 434, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold {
   display: none;
   background-color: white;
@@ -1954,7 +1954,7 @@ p.author, h4.author {
   bottom: 0;
   left: 20px;
 }
-/* line 439, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 441, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold.turnleft {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1967,7 +1967,7 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 447, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 449, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template .fold.turnright {
   display: block;
   -webkit-transform-style: preserve-3d;
@@ -1980,30 +1980,30 @@ p.author, h4.author {
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 455, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 457, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper {
   background-color: #f2f2f2;
   margin-top: 20px;
 }
-/* line 460, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 462, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .inner {
   padding: 25px;
 }
-/* line 464, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 466, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .futura, .single-post-template #subscribe-form-wrapper #main-header nav .search label, #main-header nav .search .single-post-template #subscribe-form-wrapper label, .single-post-template #subscribe-form-wrapper #main-header nav .search input[type="text"], #main-header nav .search .single-post-template #subscribe-form-wrapper input[type="text"], .single-post-template #subscribe-form-wrapper #main-header nav .search input[type="search"], #main-header nav .search .single-post-template #subscribe-form-wrapper input[type="search"], .single-post-template #subscribe-form-wrapper #home #subscriber h2, #home #subscriber .single-post-template #subscribe-form-wrapper h2, .single-post-template #subscribe-form-wrapper .error404 #searchform .searchform-wrapper label, .error404 #searchform .searchform-wrapper .single-post-template #subscribe-form-wrapper label, .single-post-template #subscribe-form-wrapper .error404 #searchform .searchform-wrapper input[type="text"], .error404 #searchform .searchform-wrapper .single-post-template #subscribe-form-wrapper input[type="text"], .single-post-template #subscribe-form-wrapper #latest-edition .editions-bottom h2, #latest-edition .editions-bottom .single-post-template #subscribe-form-wrapper h2 {
   font-weight: 500;
   letter-spacing: 0;
   margin-bottom: 20px;
 }
-/* line 472, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 474, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item {
   margin-bottom: 15px;
 }
-/* line 476, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 478, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item:last-child {
   margin-bottom: 0;
 }
-/* line 480, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 482, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="email"],
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="password"] {
   width: 90%;
@@ -2013,22 +2013,22 @@ p.author, h4.author {
   letter-spacing: 0;
   border: 3px solid #f2f2f2;
 }
-/* line 489, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 491, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="email"]:-webkit-autofill,
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="password"]:-webkit-autofill {
   background-color: white !important;
 }
-/* line 493, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 495, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="email"]:focus,
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="password"]:focus {
   border: 3px solid #d9d9d9;
 }
-/* line 497, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 499, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="email"].ng-invalid.ng-touched,
 .single-post-template #subscribe-form-wrapper .form .form-item input[type="password"].ng-invalid.ng-touched {
   border: 2px solid #FA787E;
 }
-/* line 503, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 505, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .label {
   margin-bottom: 5px;
   display: block;
@@ -2036,76 +2036,76 @@ p.author, h4.author {
   color: #69666c;
   font-size: 0.889em;
 }
-/* line 510, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 512, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .single-post-template #subscribe-form-wrapper .form .label.inline {
   display: inline-block;
 }
 @media screen and (max-width: 560px) {
-  /* line 517, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 519, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template #subscribe-form-wrapper .subscribe-col {
     margin-top: 20px;
   }
 }
 @media screen and (min-width: 561px) {
-  /* line 525, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 527, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template #subscribe-form-wrapper .subscribe-col .form-subtitle {
     text-align: center;
   }
-  /* line 529, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 531, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template #subscribe-form-wrapper .subscribe-col .button {
     margin: auto;
     display: block;
   }
 }
 
-/* line 541, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 543, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links {
   position: relative;
   z-index: 9999;
   min-height: 30px;
 }
-/* line 547, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 549, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links a {
   font-family: "futura-pt", "Arial", sans-serif;
 }
 @media (max-width: 1090px) {
-  /* line 541, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 543, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links {
     overflow: hidden;
     padding: 15px 60px;
   }
 }
 @media (max-width: 560px) {
-  /* line 557, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 559, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .inner {
     padding: 0 20px;
   }
 }
-/* line 563, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 565, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav {
   width: 20%;
 }
 @media (max-width: 1090px) {
-  /* line 563, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 565, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav {
     width: 25%;
   }
 }
-/* line 571, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 573, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav .icon {
   font-weight: bold;
 }
 @media (max-width: 680px) {
-  /* line 575, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 577, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .article-nav .icon span {
     display: none;
   }
 }
-/* line 581, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 583, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .article-nav:hover {
   text-decoration: none;
 }
-/* line 586, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 588, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .icon:before,
 .article-links .icon:after {
   font-size: 25px;
@@ -2113,7 +2113,7 @@ p.author, h4.author {
   position: absolute;
   top: -1px;
 }
-/* line 594, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 596, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article {
   z-index: 999;
   text-align: right;
@@ -2124,7 +2124,7 @@ p.author, h4.author {
   right: 0;
 }
 @media (max-width: 1090px) {
-  /* line 594, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 596, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .next-article {
     position: relative;
     top: auto;
@@ -2132,22 +2132,22 @@ p.author, h4.author {
     float: right;
   }
 }
-/* line 611, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 613, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon span {
   padding-right: 10px;
 }
-/* line 615, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 617, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:before {
   content: "";
 }
-/* line 619, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 621, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .next-article .icon:after {
   right: 0;
   top: 0;
   font-size: 18px;
   content: "\e60b";
 }
-/* line 629, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 631, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article {
   z-index: 999;
   text-align: left;
@@ -2158,7 +2158,7 @@ p.author, h4.author {
   left: 0;
 }
 @media (max-width: 1090px) {
-  /* line 629, ../../../../grunt/DEV/app/templates/article/_article.scss */
+  /* line 631, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .article-links .prev-article {
     position: relative;
     top: auto;
@@ -2167,17 +2167,17 @@ p.author, h4.author {
     float: left;
   }
 }
-/* line 647, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 649, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon span {
   padding-left: 10px;
 }
-/* line 651, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 653, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article .icon:before {
   font-size: 18px;
   top: 0;
   left: 0;
 }
-/* line 660, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 662, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .article-links .prev-article span,
 .article-links .next-article span {
   font-family: "futura-pt", "Arial", sans-serif;
@@ -2187,7 +2187,7 @@ p.author, h4.author {
   display: block;
 }
 
-/* line 671, ../../../../grunt/DEV/app/templates/article/_article.scss */
+/* line 673, ../../../../grunt/DEV/app/templates/article/_article.scss */
 .title-small {
   font-family: "futura-pt", "Arial", sans-serif;
   text-transform: uppercase;
@@ -2223,13 +2223,13 @@ p.author, h4.author {
   font-style: italic;
   font-size: 1.2em;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 37, ../../../../grunt/DEV/app/templates/category/_category.scss */
   #category .intro p, #discover .intro p {
     font-size: 1em;
   }
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 22, ../../../../grunt/DEV/app/templates/category/_category.scss */
   #category .intro, #discover .intro {
     padding-top: 30px;
@@ -2296,7 +2296,7 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 6, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
   #comments .comment-wrap {
     margin-left: 8.54167%;
@@ -2339,7 +2339,7 @@ p.author, h4.author {
   padding: 5px;
   width: 50%;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 50, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
   #comments .comment-wrap #commentform input[type="text"] {
     width: 100%;
@@ -2409,7 +2409,7 @@ p.author, h4.author {
   width: 31.66667%;
   margin-right: 2.5%;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 5, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #search-filters {
     position: fixed;
@@ -2514,7 +2514,7 @@ p.author, h4.author {
   text-transform: none;
   color: #84868c;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 113, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results #results {
     float: left;
@@ -2584,7 +2584,7 @@ p.author, h4.author {
 #search-results .pagination li.desktop-only {
   display: inline-block;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 211, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results .pagination li.desktop-only {
     display: none;
@@ -2642,14 +2642,14 @@ p.author, h4.author {
 #search-results .tablet-show {
   display: none;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 273, ../../../../grunt/DEV/app/templates/search/_search.scss */
   #search-results .tablet-show {
     display: block;
   }
 }
 
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 2, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition {
     padding-top: 40px;
@@ -2683,7 +2683,7 @@ p.author, h4.author {
 #latest-edition h3 a {
   color: #d73f2b;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 24, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition h3 {
     font-weight: bold;
@@ -2695,7 +2695,7 @@ p.author, h4.author {
   min-height: 75px;
   margin-top: 45px;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 41, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .article-links {
     padding: 0;
@@ -2705,7 +2705,7 @@ p.author, h4.author {
 #latest-edition .article-links .article-nav {
   width: auto;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 50, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .article-links .article-nav {
     width: 90px;
@@ -2730,7 +2730,7 @@ p.author, h4.author {
 #latest-edition .edition-item .padded {
   padding: 30px 24px;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 72, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-item .padded {
     padding: 20px;
@@ -2748,7 +2748,7 @@ p.author, h4.author {
   text-transform: none;
   margin-bottom: 5px;
 }
-@media screen and (min-width: 1091px) {
+@media screen and (min-width: 841px) {
   /* line 94, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current {
     margin-top: -120px;
@@ -2770,7 +2770,7 @@ p.author, h4.author {
 #latest-edition .edition-current .featured-col .title-small {
   font-weight: 500;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 114, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .featured-col .title-small {
     text-align: center;
@@ -2789,7 +2789,7 @@ p.author, h4.author {
   width: 31.66667%;
   margin-right: 2.5%;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 129, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-left {
     float: left;
@@ -2815,7 +2815,7 @@ p.author, h4.author {
   width: 65.83333%;
   margin-right: 0;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 143, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .editions-top-right {
     float: left;
@@ -2840,7 +2840,7 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 2.5%;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 156, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .public-col {
     float: left;
@@ -2857,7 +2857,7 @@ p.author, h4.author {
   width: 48.75%;
   margin-right: 0;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 166, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .edition-current .regular-col {
     float: left;
@@ -2912,7 +2912,7 @@ p.author, h4.author {
   margin: 0;
   line-height: 115px;
 }
-@media (max-width: 560px) {
+@media (max-width: 450px) {
   /* line 219, ../../../../grunt/DEV/app/templates/latest-editions/_latest-editions.scss */
   #latest-edition .editions-bottom h2 {
     font-size: 18px;
@@ -2980,13 +2980,13 @@ p.author, h4.author {
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 1, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card {
     margin-bottom: 20px;
   }
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 1, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card {
     margin-bottom: 15px;
@@ -3037,7 +3037,7 @@ p.author, h4.author {
   font-size: 16px;
   line-height: 1.5em;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 72, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card p {
     font-size: 1.1em;
@@ -3096,7 +3096,7 @@ p.author, h4.author {
 .card footer .summary-wrapper .inner-wrapper {
   width: 70%;
 }
-@media (max-width: 560px) {
+@media (max-width: 450px) {
   /* line 133, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card footer .summary-wrapper .inner-wrapper {
     width: 95%;
@@ -3261,13 +3261,13 @@ p.author, h4.author {
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     padding: 20px 30px;
@@ -3703,7 +3703,7 @@ p.author, h4.author {
   width: 65.83333%;
   margin-right: 2.5%;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 6, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview #this-week {
     margin-bottom: 20px;
@@ -3720,7 +3720,7 @@ p.author, h4.author {
   width: 31.66667%;
   margin-right: 0;
 }
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 840px) {
   /* line 17, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview #next-week {
     float: left;
@@ -3787,7 +3787,7 @@ p.author, h4.author {
   margin-top: -140px;
   margin-bottom: 30px;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 81, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview .preview .prevbody img {
     margin-top: auto;
@@ -3799,7 +3799,7 @@ p.author, h4.author {
   font-size: 1.556em;
   font-weight: bold;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 101, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview .preview .prevbody p {
     font-size: 0.889em;
@@ -3830,7 +3830,7 @@ p.author, h4.author {
   font-size: 1.111em;
   font-weight: bold;
 }
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 450px) {
   /* line 130, ../../../../grunt/DEV/app/modules/edition-preview/_edition-preview.scss */
   #edition-preview .preview .prevbody ul li h5 {
     font-size: 0.889em;
