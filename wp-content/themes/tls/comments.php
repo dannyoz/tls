@@ -34,30 +34,33 @@ if ( post_password_required() ) {
 
 			<?php if(comments_open()) : ?>
 				<?php if(get_option('comment_registration') && !$user_ID) : ?>
-					<p>You must be <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?redirect_to=<?php echo urlencode(get_permalink()); ?>">logged in</a> to post a comment.</p><?php else : ?>
+					<p>You must be <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?redirect_to=<?php echo urlencode(get_permalink()); ?>">logged in</a> to post a comment.</p>
+					<input type="hidden" ng-model="commentAuthor" value="<?php echo $user_ID; ?>" ng-init="'<?php echo $user_ID; ?>'" />
+				<?php else : ?>
 
 					<h3 class="futura">Leave a comment</h3>
 					
-					<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">						
+					<form ng-submit="addComment(commentAuthor,commentEmail,commentContent)" method="post" id="commentform" >
 						<?php if($user_ID) : ?>
 							<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account">Log out &raquo;</a></p>
+
 						<?php else : ?>
 
 							<div class="form-element">
 								<label for="author">Name</label>
-								<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="22" tabindex="1" />
+								<input type="text" name="author" id="author" size="22" tabindex="1" ng-model="commentAuthor" />
 							</div>
 							
 							<div class="form-element">
 								<label for="email">Email Address <small>(will not be published)</small></label>
-								<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="22" tabindex="2" />	
+								<input type="text" name="email" id="email" size="22" tabindex="2" ng-model="commentEmail" />
 							</div>							
 							
 						<?php endif; ?>
 
 						<div class="form-element">
 							<label for="comment">Comment</label>
-							<textarea name="comment" id="comment" rows="10" tabindex="4"></textarea>
+							<textarea name="comment" id="comment" rows="10" tabindex="4" ng-model="commentContent"></textarea>
 							<div class="required">All fields required</div>
 						</div>
 
@@ -65,7 +68,12 @@ if ( post_password_required() ) {
 							<input class="button clear small" name="submit" type="submit" id="submit" tabindex="5" value="Leave comment" />
 							<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>" />
 						</div>						
-						
+
+						<div class="form-element" ng-if="successCommentMessage || errorCommentMessage">
+							<p class="comment-success" ng-if="successCommentMessage" >Thanks for your comment. We appreciate your response.</p>
+							<p class="comment-error" ng-if="errorCommentMessage" >You might have left one of the fields blank, or be posting too quickly</p>
+						</div>
+
 						<?php do_action('comment_form', $post->ID); ?>
 
 					</form>

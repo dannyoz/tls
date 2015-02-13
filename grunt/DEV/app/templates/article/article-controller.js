@@ -20,7 +20,8 @@
 		$scope.activeTags = [];
 		$scope.turn       = false; 
 		$scope.firstLoad  = true;
-		//$scope.mpu        = "<script type=\"text/javascript\" src=\"http://ad.uk.doubleclick.net/adj/tls.thesundaytimes/mainhomepage/index;pos=mpu;content_type=sec;sz=300x250;'+RStag + cipsCookieValue +'tile=1;'+categoryValues+'ord='+randnum+'?\"></script>"
+		$scope.successCommentMessage = false;
+		$scope.errorCommentMessage = false;
 
 		// Helper function to insert MPU's into related taxonomy_article_tags
 		var insertMPU = function(posts) {
@@ -52,6 +53,9 @@
 			$scope.prev  = result.previous_url
 			$scope.next  = result.next_url
 			$scope.ready = true;
+			$scope.commentAuthor = result.post.commenter_information.comment_author;
+			$scope.commentEmail = result.post.commenter_information.comment_author_email;
+			$scope.commentContent = '';
 
 			//restructure book format
 			if($scope.post.custom_fields.books){
@@ -257,11 +261,22 @@
 			}
 		}
 
-		$scope.addComment = function(){
+		$scope.addComment = function(author, email, content){
 
-			console.log('/wp-comments-post.php')
+			if ($scope.successCommentMessage == true || $scope.errorCommentMessage == true) {
+				$scope.successCommentMessage = false;
+				$sce.errorCommentMessage = false;
+			}
 
-			commentApi.post('http://tls.localhost/wp-comments-post.php', 'comment=Hello+this+is+a+test+comment&comment_post_ID=1&_wp_unfiltered_html_comment=c35d80192a')
+			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
+				.then(function(data){
+					if (data.status == 'error') {
+						$scope.errorCommentMessage = true;
+					} else {
+						$scope.successCommentMessage = true;
+						content = '';
+					}
+				});
 		}
 
 }])

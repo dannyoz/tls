@@ -1,17 +1,23 @@
 .factory('commentApi',['$http','$q', function ($http,$q){
 	return {
 
-		post : function (path,formData){
+		post : function (path){
 
-			$http.post(path,formData)
+			var defer = $q.defer();
+
+			$http.post(path)
 				.success(function (data, textStatus){
 
-					console.log('success', data, textStatus);
+					defer.resolve(data);
+
 				})
 				.error(function (data){
 
-					console.log('error', data);
+					defer.resolve(data);
+
 				})
+
+			return defer.promise
 		}
 	}
 }])
