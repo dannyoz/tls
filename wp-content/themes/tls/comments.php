@@ -71,7 +71,7 @@ if ( post_password_required() ) {
 
 						<div class="form-element" ng-if="successCommentMessage || errorCommentMessage">
 							<p class="comment-success" ng-if="successCommentMessage" >Thanks for your comment. We appreciate your response.</p>
-							<p class="comment-error" ng-if="errorCommentMessage" >You might have left one of the fields blank, or be posting too quickly</p>
+							<p class="comment-error" ng-if="errorCommentMessage" >{{ errorMessage }}</p>
 						</div>
 
 						<?php do_action('comment_form', $post->ID); ?>

@@ -28948,12 +28948,20 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			$http.post(path)
 				.success(function (data, textStatus){
 
-					defer.resolve(data);
+					if (data.status == 'error') {
+						defer.reject('You might have left one of the fields blank, or be posting too quickly');
+					} else {
+						defer.resolve(data);
+					}
 
 				})
-				.error(function (data){
+				.error(function (data, textStatus){
 
-					defer.resolve(data);
+					if (textStatus == 409 || textStatus == '409') {
+						defer.reject('Duplicate comment detected, it looks as though you’ve already said that!');
+					} else {
+						defer.reject('Sorry there was an error posting your comment! Please check all fields are correct.');
+					}
 
 				})
 
@@ -29658,6 +29666,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.firstLoad  = true;
 		$scope.successCommentMessage = false;
 		$scope.errorCommentMessage = false;
+		$scope.errorMessage = '';
 
 		// Helper function to insert MPU's into related taxonomy_article_tags
 		var insertMPU = function(posts) {
@@ -29902,16 +29911,17 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			if ($scope.successCommentMessage == true || $scope.errorCommentMessage == true) {
 				$scope.successCommentMessage = false;
 				$sce.errorCommentMessage = false;
+				$scope.errorMessage = '';
 			}
 
 			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
 				.then(function(data){
-					if (data.status == 'error') {
-						$scope.errorCommentMessage = true;
-					} else {
-						$scope.successCommentMessage = true;
-						content = '';
-					}
+					$scope.successCommentMessage = true;
+					$scope.commentContent = '';
+					content = '';
+				}, function (error) {
+					$scope.errorCommentMessage = true;
+					$scope.errorMessage = error;
 				});
 		}
 
@@ -30435,24 +30445,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				// Next edition
 				$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
-			} else {
-
-				//========================================
-				// TEMP FOR DEMO / NEEDS TO BE REMOVED
-				//========================================
-				// Full object			
-				$scope.latestEdition = obj;			
-				// Edition sections articles				
-				$scope.currentEdition = $scope.latestEdition.content;
-				// Previous edition
-				$scope.nextEdition = $scope.latestEdition.next_post_info;			
-				// // Next edition
-				$scope.previousEdition = $scope.latestEdition.previous_post_info;			
-
-				//========================================
-				// TEMP FOR DEMO / NEEDS TO BE REMOVED
-				//========================================
-			}			
+			} 		
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;

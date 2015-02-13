@@ -22,6 +22,7 @@
 		$scope.firstLoad  = true;
 		$scope.successCommentMessage = false;
 		$scope.errorCommentMessage = false;
+		$scope.errorMessage = '';
 
 		// Helper function to insert MPU's into related taxonomy_article_tags
 		var insertMPU = function(posts) {
@@ -266,16 +267,17 @@
 			if ($scope.successCommentMessage == true || $scope.errorCommentMessage == true) {
 				$scope.successCommentMessage = false;
 				$sce.errorCommentMessage = false;
+				$scope.errorMessage = '';
 			}
 
 			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
 				.then(function(data){
-					if (data.status == 'error') {
-						$scope.errorCommentMessage = true;
-					} else {
-						$scope.successCommentMessage = true;
-						content = '';
-					}
+					$scope.successCommentMessage = true;
+					$scope.commentContent = '';
+					content = '';
+				}, function (error) {
+					$scope.errorCommentMessage = true;
+					$scope.errorMessage = error;
 				});
 		}
 
