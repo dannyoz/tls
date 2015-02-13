@@ -273,12 +273,17 @@
 			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
 				.then(function(data){
 					$scope.successCommentMessage = true;
-					$scope.commentContent = '';
-					content = '';
+					var commentContent = document.getElementById('comment');
+					commentContent.value = '';
 				}, function (error) {
 					$scope.errorCommentMessage = true;
 					$scope.errorMessage = error;
 				});
+
+			if ($scope.success == true) {
+				$scope.commentContent = '';
+			}
+
 		}
 
 }])
