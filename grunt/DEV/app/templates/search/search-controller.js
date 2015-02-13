@@ -131,6 +131,8 @@
                 } 
                 else {                	
                     activeFilters['contentType'].splice(index,1);
+                    // Show categories back
+                    $scope.showCategories = true;
                     // Remove Tealium tag
                     tealium.filtering('remove',typeName,term);
                 }
