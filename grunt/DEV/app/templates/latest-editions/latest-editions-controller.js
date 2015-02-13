@@ -30,24 +30,7 @@
 				// Next edition
 				$scope.previousEdition = $scope.latestEdition.previous_post_info;
 
-			} else {
-
-				//========================================
-				// TEMP FOR DEMO / NEEDS TO BE REMOVED
-				//========================================
-				// Full object			
-				$scope.latestEdition = obj;			
-				// Edition sections articles				
-				$scope.currentEdition = $scope.latestEdition.content;
-				// Previous edition
-				$scope.nextEdition = $scope.latestEdition.next_post_info;			
-				// // Next edition
-				$scope.previousEdition = $scope.latestEdition.previous_post_info;			
-
-				//========================================
-				// TEMP FOR DEMO / NEEDS TO BE REMOVED
-				//========================================
-			}			
+			} 		
 
 			// Public content
 			$scope.publicObj = $scope.currentEdition.public;

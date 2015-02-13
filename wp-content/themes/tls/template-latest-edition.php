@@ -13,10 +13,10 @@ Template Name: Latest Edition Page Template
 		<!-- Desktop Pagination -->
 		<div class="article-links" ng-if="size == 'desktop'">
 			<div class="inner">
-				<a href="javascript:;" ng-if="nextEdition.title != null" ng-click="chooseEdition('next',nextEdition.url,nextEdition.title)" class="article-nav next-article">
+				<a ng-href="{{::nextEdition.url}}" ng-if="nextEdition.title != null" class="article-nav next-article">
 					<div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
 				</a>
-				<a href="javascript:;" ng-if="previousEdition.title != null" ng-click="chooseEdition('prev',previousEdition.url,previousEdition.title)" class="article-nav prev-article">
+				<a ng-href="{{::previousEdition.url}}" ng-if="previousEdition.title != null" class="article-nav prev-article">
 					<div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
 				</a>	
 			</div>			
@@ -35,10 +35,10 @@ Template Name: Latest Edition Page Template
 					<h1 ng-if="size != 'desktop'" ng-bind="latestEdition.title"></h1>					
 					<div class="article-links" ng-if="size != 'desktop'">						
 						<div class="inner">
-							<a href="javascript:;" ng-if="nextEdition.url" ng-click="chooseEdition('next',next)" class="article-nav next-article">
+							<a ng-href="{{::nextEdition.url}}" ng-if="nextEdition.url" class="article-nav next-article">
 								<div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
 							</a>
-							<a href="javascript:;" ng-if="previousEdition.url" ng-click="chooseEdition('prev',prev)" class="article-nav prev-article">
+							<a ng-href="{{::previousEdition.url}}" ng-if="previousEdition.url" class="article-nav prev-article">
 								<div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
 							</a>	
 						</div>			
@@ -81,9 +81,9 @@ Template Name: Latest Edition Page Template
 	</div>
 
 	<!-- Latest Edition Bottom Section -->
-	<div class="editions-bottom fadeIn">		
+	<div ng-if="ready" class="editions-bottom fadeIn">		
 
-		<div class="container relative" ng-if="ready">
+		<div class="container relative">
 			<div class="title-icon icon">
 				<div class="icon-border icon-key"></div>
 				<h2>{{subscribersObj.title}}</h2>	
