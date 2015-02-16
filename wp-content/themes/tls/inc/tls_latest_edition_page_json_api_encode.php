@@ -98,57 +98,64 @@ function tls_latest_edition_page_json_api_encode($response) {
 
         foreach ($latest_edition_articles['public_articles'] as $key => $value) {
 
-            $section = get_the_terms($value->ID,'article_section');
-
-
-            foreach ($section as $termkey => $termvalue) {
-                $section = $termvalue->name;
-            }
+            $section = wp_get_post_terms($value->ID,'article_section');
 
             $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
-                'section'   => $section,
+                'section'       => array(
+                    'name'      => $section[0]->name,
+                    'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
+                ),
                 'url'       => get_permalink($value->ID),
 
             );
         }
 
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
-        foreach ($latest_edition_articles['regular_articles'] as $key => $value) {
-            $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $termkey => $termvalue) {
-                $section = $termvalue->name;
-            }
-            $postAuthor = get_fields($value->ID);
-            $response['latest_edition']['content']['regulars']['articles'][$value->post_name] = array(
-                'id'        => $value->ID,
-                'author'    => $postAuthor['article_author_name'],
-                'title'     => $value->post_title,
-                'section'   => $section,
-                'url'       => get_permalink($value->ID),
+        while (have_rows('edition_regular_articles', $latest_edition->ID)) {
+            the_row();
+            $article_type = get_sub_field('regular_article_type');
+            $regular_article = get_sub_field('regular_article');
+            $postAuthor = get_field('article_author_name', $value->ID);
 
+            $section = wp_get_post_terms($regular_article->ID, 'article_section');
+            $artile_section = wp_get_post_terms($regular_article->ID, 'article_visibility');
+
+            $response['latest_edition']['content']['regulars']['articles'][$regular_article->post_name] = array(
+                'type'      => $article_type,
+                'id'        => $regular_article->ID,
+                'author'    => $postAuthor,
+                'title'     => $regular_article->post_title,
+                'section'       => array(
+                    'name'      => $section[0]->name,
+                    'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
+                ),
+                'taxonomy_article_visibility' => $artile_section,
+                'url'       => get_permalink($regular_article->ID),
             );
+
         }
 
 
         $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
         foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
 
-            $section = get_the_terms($value->ID,'article_section');
-            foreach ($section as $termkey => $termvalue) {
-                $section = $termvalue->name;
+            $section = wp_get_post_terms($value->ID,'article_section');
 
-            }
             $postAuthor = get_fields($value->ID);
-            $response['latest_edition']['content']['subscribers']['articles'][$section]['section'] = $section;
-            $response['latest_edition']['content']['subscribers']['articles'][$section]['posts'][$value->post_name] = array(
+            $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['section']->name = $section[0]->name;
+            $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['section']->link = get_term_link( $section[0]->term_id, $section[0]->taxonomy );
+            $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['posts'][$value->post_name] = array(
                 'id'        => $value->ID,
                 'author'    => $postAuthor['article_author_name'],
                 'title'     => $value->post_title,
-                'section'   => $section,
+                'section'       => array(
+                    'name'      => $section[0]->name,
+                    'link'      => get_term_link( $section[0]->term_id, $section[0]->taxonomy )
+                ),
                 'url'       => get_permalink($value->ID),
 
             );

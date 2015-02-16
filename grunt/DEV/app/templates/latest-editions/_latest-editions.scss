@@ -190,7 +190,9 @@
 
 			.edition-item {
 
-				background-color: $locked-grey;			
+				.private {
+                  background-color: $locked-grey;
+                }
 
 				h3 {
 					position: relative;

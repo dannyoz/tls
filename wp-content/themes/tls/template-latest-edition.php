@@ -57,7 +57,7 @@ Template Name: Latest Edition Page Template
 							<h2>{{publicObj.title}}</h2>
 							<div class="edition-item" ng-repeat="public in publicObj.articles">
 								<div class="padded">
-									<h3 class="futura"><a href="#" ng-bind="public.section"></a></h3>
+									<h3 class="futura"><a href="{{public.section.link}}" ng-bind="public.section.name"></a></h3>
 									<p class="title-small" ng-bind="public.author"></p>
 									<h4><a href="{{public.url}}" ng-bind-html="public.title"></a></h4>
 								</div>								
@@ -67,8 +67,9 @@ Template Name: Latest Edition Page Template
 						<div class="regular-col">					
 							<h2>{{regularsObj.title}}</h2>
 							<div class="edition-item" ng-repeat="regular in regularsObj.articles">
-								<div class="padded">
-									<h3 class="futura"><a href="#" ng-bind="regular.section"></a><i class="icon icon-key-after"></i></h3>								
+								<div class="padded" ng-class="{ 'private' : regular.taxonomy_article_visibility[0].slug == 'private'}">
+                                    <h3 class="futura" ng-show="regular.type == 'then_and_now'" ><a href="javascript:void(0)" >Then And Now</a><i class="icon icon-key-after" ng-if="regular.taxonomy_article_visibility[0].slug == 'private'"></i></h3>
+									<h3 class="futura" ng-hide="regular.type == 'then_and_now'"><a href="{{regular.section.link}}" ng-bind="regular.section.name"></a><i class="icon icon-key-after" ng-if="regular.taxonomy_article_visibility[0].slug == 'private'"></i></h3>
 									<p class="title-small"><a href="{{regular.url}}" ng-bind="regular.title"></a></p>
 								</div>
 							</div>
@@ -94,7 +95,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-4" ng-repeat="column in col3">								
 
 					<div class="card-flat" ng-repeat="card in column">	
-						<h3 class="futura"><a href="#">{{card.section}}</a></h3>										
+						<h3 class="futura"><a href="{{card.section.link}}">{{card.section.name}}</a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{::post.author}}</p>
@@ -112,7 +113,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-6" ng-repeat="column in col2">										
 					
 					<div class="card-flat" ng-repeat="card in column">						
-						<h3 class="futura"><a href="#">{{card.section}}</a></h3>
+						<h3 class="futura"><a href="{{card.section.link}}">{{card.section.name}}</a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{post.author}}</p>

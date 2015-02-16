@@ -28961,7 +28961,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						defer.reject('Duplicate comment detected, it looks as though you’ve already said that!');
 					} else {
 						defer.reject('Sorry there was an error posting your comment! Please check all fields are correct.');
-					} 
+					}
 
 				})
 
