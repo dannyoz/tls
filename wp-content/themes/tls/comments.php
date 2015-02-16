@@ -40,7 +40,7 @@ if ( post_password_required() ) {
 
 					<h3 class="futura">Leave a comment</h3>
 					
-					<form ng-submit="addComment(commentAuthor,commentEmail,commentContent)" method="post" id="commentform" >
+					<form ng-submit="addComment(commentAuthor,commentEmail,commentContent)" method="post" id="commentform" name="commentform">
 						<?php if($user_ID) : ?>
 							<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo get_option('siteurl'); ?>/wp-login.php?action=logout" title="Log out of this account">Log out &raquo;</a></p>
 
@@ -60,7 +60,7 @@ if ( post_password_required() ) {
 
 						<div class="form-element">
 							<label for="comment">Comment</label>
-							<textarea name="comment" id="comment" rows="10" tabindex="4" ng-model="commentContent"></textarea>
+							<textarea name="comment" id="comment" rows="10" tabindex="4" ng-model="commentContent" ng-init="text = ''"></textarea>
 							<div class="required">All fields required</div>
 						</div>
 

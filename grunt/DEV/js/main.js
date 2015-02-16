@@ -28961,7 +28961,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 						defer.reject('Duplicate comment detected, it looks as though you’ve already said that!');
 					} else {
 						defer.reject('Sorry there was an error posting your comment! Please check all fields are correct.');
-					}
+					} 
 
 				})
 
@@ -29917,12 +29917,17 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
 				.then(function(data){
 					$scope.successCommentMessage = true;
-					$scope.commentContent = '';
-					content = '';
+					var commentContent = document.getElementById('comment');
+					commentContent.value = '';
 				}, function (error) {
 					$scope.errorCommentMessage = true;
 					$scope.errorMessage = error;
 				});
+
+			if ($scope.success == true) {
+				$scope.commentContent = '';
+			}
+
 		}
 
 }])
