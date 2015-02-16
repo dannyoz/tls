@@ -72,8 +72,11 @@ class TlsTealium {
 
             $blog_id = get_the_ID(); // Get Current Blog's ID
             $blog_title = get_the_title($blog_id); // Get Current Blog Post
+            $blog_category = wp_get_post_terms($blog_id, 'category');
             // Single Blog Tealium Data Object
-            $tealium_data = $this->tealium_data('blogs:' . $blog_title, 'blog', 'blogs');
+            $tealium_data = $this->tealium_data('blog post:' . $blog_title, 'blog post', 'blogs', 'public', array(
+                'page_section_2'    => 'blogs:' . $blog_category[0]->name
+            ));
 
         } else if (is_search()) { // Search Page
 
@@ -96,7 +99,9 @@ class TlsTealium {
 
             $category = get_queried_object();
             // Blog Category Archive Tealium Data Object
-            $tealium_data = $this->tealium_data(html_entity_decode($category->name), 'section level 2', 'info and navigation');
+            $tealium_data = $this->tealium_data('blog:' . html_entity_decode($category->name), 'blog', 'blogs', 'public', array(
+                'page_section_2'    => 'blogs:' . html_entity_decode($category->name)
+            ));
 
         } else if (is_singular('tls_articles')) { // Single Article Page
 
