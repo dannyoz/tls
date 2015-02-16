@@ -50,7 +50,7 @@ function tls_blogs_archive_json_api_encode($response) {
          */
         $spotlight_podcast = get_post( $response['page']->custom_fields->spotlight_podcast[0] );
         $spotlight_podcast_custom_fields = get_post_custom( $spotlight_podcast->ID );
-        $response['spotlight_podcast'] = array(
+        $response['posts'][] = array(
             'type'          => 'listen_blog',
             'id'            => $spotlight_podcast->ID,
             'title'         => $spotlight_podcast->post_title,
@@ -79,11 +79,15 @@ function tls_blogs_archive_json_api_encode($response) {
         $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
 
         foreach ( $blogs_archive as $blog_post ) {
+            $response['posts'][] = $blog_post;
+
             $categories = wp_get_post_terms( $blog_post->id, 'category' );
             $blog_post_custom_fields = get_post_custom( $blog_post->id );
+
             $blog_post->soundcloud = $blog_post_custom_fields['soundcloud_embed_code'][0];
             $blog_post->excerpt = tls_make_post_excerpt( $blog_post );
             $blog_post->category_url = get_term_link( $categories[0]->term_id, $categories[0]->taxonomy );
+
             if ( $categories[0]->slug == 'a-dons-life' || $categories[0]->slug == 'dons-life' ) {
                 $blog_post->type = 'dons_life_blog';
             } else {
@@ -94,7 +98,6 @@ function tls_blogs_archive_json_api_encode($response) {
         $response['count'] = count($blogs_archive);
         $response['count_total'] = (int) $wp_query->found_posts;
         $response['pages'] = $wp_query->max_num_pages;
-        $response['posts'] = $blogs_archive;
     }
 
     return $response;

@@ -33,7 +33,7 @@ get_header(); ?>
 			<div class="grid-row" ng-if="size == 'desktop'">
 
 				<div  class="grid-4" ng-repeat="column in col3">
-					
+
 					<div ng-repeat="card in column">
 						<div tls-card="card" data-type="blog"></div>
 					</div>
