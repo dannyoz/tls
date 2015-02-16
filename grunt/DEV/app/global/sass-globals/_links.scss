@@ -61,8 +61,8 @@ button, .button{
 		border-color:$light-keyline;
 
 		&:hover, &:focus{
-
-			color:$primary-orange;
+			border-color: #f3c5bf;
+			color: $primary-orange;
 		}
 	}
 

@@ -699,6 +699,7 @@ button.clear, .button.clear {
 }
 /* line 63, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 button.clear:hover, button.clear:focus, .button.clear:hover, .button.clear:focus {
+  border-color: #f3c5bf;
   color: #d73f2b;
 }
 /* line 69, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
