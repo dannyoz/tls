@@ -217,7 +217,20 @@ class HubXmlParser implements FeedParser {
             $tax_terms[] = (string) $term;
         }
 
-        wp_set_object_terms($article_id, $tax_terms, $taxonomy);
+        $tax_terms_ids = wp_set_object_terms($article_id, $tax_terms, $taxonomy);
+
+        // If there is an error setting Object Terms then log those errors and return false
+        if ( is_wp_error($tax_terms_ids) ) {
+            $article = get_post($article_id); // Get Article to use its Title in the Error Message
+
+            $errors = $tax_terms_ids->get_error_messages();
+            $error_msg = "Failed setting Article Section for article: " . $article->post_title  . "\n";
+            foreach($errors as $error) {
+                $error_msg .= "\t" . $error;
+            }
+            HubLogger::error($error_msg);
+            return false;
+        }
 
         return true;
     }

@@ -181,6 +181,11 @@ function tls_remove_page_from_search() {
 		// exclude from search results
 		$wp_post_types['page']->exclude_from_search = true;
 	}
+
+    if ( post_type_exists( 'attachment' ) ) {
+        // exclude from search results
+        $wp_post_types['attachment']->exclude_from_search = true;
+    }
 }
 add_action( 'init', 'tls_remove_page_from_search', 99 );
 
@@ -251,6 +256,24 @@ function tls_articles_visibility_permalink_security( $post ) {
 }
 add_action('the_post', 'tls_articles_visibility_permalink_security');
 
+/**
+ * Remove Content from Wordpress Search (This could not be achieved with Search Everything Plugin)
+ * Adaptation from https://wordpress.org/support/topic/exclude-content-from-search-results , removed the last \) from the query because it was
+ * causing an SQL error
+ */
+add_action( 'posts_search', 'dont_search_post_content', 10000, 1 );
+function dont_search_post_content( $search_sql ) {
+    if (!is_admin() && is_search()) {
+        global $wpdb, $wp_query;
+        $search_query = $wp_query->query_vars['s'];
+        //var_dump($wp_query);
+        if (strpos($search_sql, 'post_content LIKE')) {
+            $search_sql = preg_replace("/OR \({$wpdb->posts}.post_content LIKE '\%{$search_query}\%'\)/", '', $search_sql);
+        }
+    }
+
+    return $search_sql;
+}
 
 /**
  * Custom Post Excerpt
