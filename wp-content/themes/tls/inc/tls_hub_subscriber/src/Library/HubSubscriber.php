@@ -121,7 +121,7 @@ class HubSubscriber {
 
         // Allow for manual pull method for Debugging ONLY
         // TODO: Remove this before going live
-        if (isset($_GET['hub_tls_debug']) && $_GET['tls_hub_debug'] === true) {
+        if (isset($_GET['tls_hub_debug']) && $_GET['tls_hub_debug'] == true) {
 
             if ( isset($_GET['manual_pull']) && isset($_GET['pull_url']) ) {
                 $feed = file_get_contents( esc_url($_GET['pull_url']) );
@@ -191,7 +191,7 @@ class HubSubscriber {
     public function receive() {
         $feedPayload = file_get_contents('php://input');
 
-        $feedParser = new HubXmlParser($this->option_name, $this->current_options);
+        $feedParser = new HubXmlParser();
         $feedParser->parseFeed($feedPayload);
 
         header('HTTP/1.1 200 "Found"', NULL, 200);
