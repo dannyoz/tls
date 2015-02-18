@@ -90,8 +90,8 @@ class HubXmlParser implements FeedParser {
 
             // Add all the Article Data into an array
             $article_data = array(
-                'post_content'   => $article->content->saveXml(), // The full text of the post.
-                'post_title'     => wp_strip_all_tags( $article->title ), // The title of your post.
+                'post_content'   => $cpiNamespace->body->saveXml(), // The full text of the post.
+                'post_title'     => wp_strip_all_tags( $cpiNamespace->xpath('//cpi:headline')[0]->div[0]->p[0] ), // The title of your post.
                 'post_status'    => 'publish', // Default 'draft'.
                 'post_type'      => 'tls_articles', // Default 'post'.
                 'post_author'    => 1, // The user ID number of the author. Default is the current user ID.
@@ -103,7 +103,9 @@ class HubXmlParser implements FeedParser {
                 'comment_status' => 'closed', // Default is the option 'default_comment_status', or 'closed'.
             );
 
-            // Prepare and make WP_Query to check if the article being parsed already exists in WP based on the ID in the XML Feed entry
+            /*
+             * Prepare and make WP_Query to check if the article being parsed already exists in WP based on the ID in the XML Feed entry
+             */
             $articleMatches_args = array(
                 'posts_per_page' => 1,
                 'post_type' => 'tls_articles',
@@ -112,11 +114,14 @@ class HubXmlParser implements FeedParser {
             );
             $articleMatches = new WP_Query($articleMatches_args);
 
-            // If there is no article match then send the article data into saveArticleData method
+            /*
+             * Check to see if there wasn't any matches. If no match is found then send $article_data to saveArticleData method to insert new article
+             * Otherwise if a match was found the send $article_data to saveArticleData method with update parameter true to update article instead
+             */
             if (!$articleMatches->found_posts > 0) {
                 $article_id = $this->saveArticleData($article_data);
                 $import_type = 'import';
-            } else { // If a match is found then add ID into the Article Data array and then send the data to the saveArticleData and with second parameter true to indicate an update and not an insert
+            } else {
                 $article_data['ID'] = (int) $articleMatches->posts[0]->ID;
                 $article_id = $this->saveArticleData($article_data, true);
                 $import_type = 'update';
@@ -134,11 +139,8 @@ class HubXmlParser implements FeedParser {
             // Add all the Custom Fields' data into an array
             $article_custom_fields = array(
                 'article_feed_id'       => (string) $article->id,
-                'article_author_name'   => (string)$article->author->name,
-                'article_author_email'  => (string)$article->author->email,
-                'article_author_uri'    => (string)$article->author->uri,
+                'article_author_name'   => (string) $cpiNamespace->xpath('//cpi:byline')[0]->div->p[0],
                 'headline'              => (string) $cpiNamespace->xpath('//cpi:headline')[0]->div[0]->p[0],
-                'teaser_summary'        => (string) $cpiNamespace->xpath('//cpi:teasersummary')[0]->div->p[0],
                 'thumbnail_image_url'   => '',
                 'full_image_url'        => '',
                 'hero_image_url'        => ''
@@ -163,12 +165,21 @@ class HubXmlParser implements FeedParser {
      */
     private function saveArticleData($article_data, $update = false) {
 
+        /*
+         * If $update parameter is true call update wordpress function, otherwise call the insert function
+         * Both update and insert function will have the second parameter for the WP_Error to be true which
+         * will throw a WP_Error if there is any error in updating or inserting the posts
+         */
         if ($update == true) {
             $article_id = wp_update_post($article_data, true);
         } else {
             $article_id = wp_insert_post($article_data, true);
         }
 
+        /*
+         * If any WP_Error is thrown when inserting or updating the article then
+         * Log those errors
+         */
         if ( is_wp_error($article_id) ) {
             $errors = $article_id->get_error_messages();
             $error_msg = "Failed Importing Article" . $article_data['post_title'] .  " \n";
@@ -178,7 +189,7 @@ class HubXmlParser implements FeedParser {
             HubLogger::error($error_msg);
         }
 
-        return $article_id;
+        return $article_id; // Returns the ID of the post that was inserted/updated
     }
 
     /**
@@ -204,22 +215,36 @@ class HubXmlParser implements FeedParser {
      * @return bool
      */
     private function saveArticleTaxonomyTerms($article_id, $terms, $taxonomy) {
-        $tax_terms = array();
+        $tax_terms = array(); // Start an empty array of tax terms
 
         foreach ($terms as $term) {
+
+            /*
+             * If the Taxonomy is Article Section perform a string replacement on 'Reviews - '
+             * This is because Sections coming from methode used to have that before the real name of each section
+             */
             if ($taxonomy == 'article_section') {
                 $term = str_replace('Reviews - ', '', $term);
             }
+
+            /*
+             * If the taxonomy term does not exist then create it
+             */
             $tax_term = term_exists($term, $taxonomy);
             if ($tax_term == 0 || $tax_term == null) {
                 wp_insert_term($term, $taxonomy);
             }
-            $tax_terms[] = (string) $term;
+
+            $tax_terms[] = (string) $term; // Add the the current looped term into the $tax_terms array
+
         }
 
-        $tax_terms_ids = wp_set_object_terms($article_id, $tax_terms, $taxonomy);
+        $tax_terms_ids = wp_set_object_terms($article_id, $tax_terms, $taxonomy); // Assign the terms to a variable to test for errors
 
-        // If there is an error setting Object Terms then log those errors and return false
+        /*
+         * If there is a WP_Error thrown when setting a section to the article
+         * Log the errors that were thrown
+         */
         if ( is_wp_error($tax_terms_ids) ) {
             $article = get_post($article_id); // Get Article to use its Title in the Error Message
 
