@@ -1,6 +1,7 @@
 <?php
 
 namespace Tls\TlsHubSubscriber\Library;
+use DOMDocument;
 use WP_Query;
 
 /**
@@ -126,6 +127,25 @@ class HubXmlParser implements FeedParser {
 
             // TODO: Import of images into the local installation of WP
             // TODO: Import books into the repeater field of WP
+            $standfirst_xml = $cpiNamespace->standfirst->saveXml();
+            preg_match_all("|<author>(.+?)<\/info1>|mis", (string) $standfirst_xml, $book_matches);
+
+            foreach ($book_matches[0] as $book_match) {
+                $book_string = "<?xml version='1.0'?><document>" . $book_match . "</document>";
+                $book_xml = simplexml_load_string($book_string);
+
+                $book['book_title'] = (string) $book_xml->title;
+                $book['book_author'] = (string) $book_xml->author;
+                $book['book_info'] = '';
+                foreach ($book_xml->info as $book_info) {
+                    $book['book_info'] .= (string) $book_info . "\n";
+                }
+                $book['book_isbn'] = (string) $book_xml->info1;
+
+                $this->saveArticleCustomFields($book, $article_id, 'books');
+            }
+
+
             // Add all the Custom Fields' data into an array
             $article_custom_fields = array(
                 'article_feed_id'       => (string) $article->id,
@@ -187,11 +207,22 @@ class HubXmlParser implements FeedParser {
      *
      * @param $article_custom_fields
      * @param $article_id
+     * @param string $repeater
      */
-    private function saveArticleCustomFields($article_custom_fields, $article_id) {
+    private function saveArticleCustomFields($article_custom_fields, $article_id, $repeater = '') {
 
-        foreach($article_custom_fields as $custom_field_key => $custom_field_value) {
-            update_post_meta($article_id, $custom_field_key , $custom_field_value); // Use update_post_meta as it works better than acf update_field
+        if (!empty($repeater)) {
+            $repeater_obj = get_field($repeater, $article_id);
+            $repeater_obj[] = $article_custom_fields;
+            update_field($repeater, $repeater_obj, $article_id);
+        } else {
+
+            foreach ($article_custom_fields as $custom_field_key => $custom_field_value) {
+
+                $custom_field_obj = get_field_object($custom_field_key, $article_id, true);
+                update_field($custom_field_obj['key'], $custom_field_value, $article_id);
+
+            }
         }
 
     }
