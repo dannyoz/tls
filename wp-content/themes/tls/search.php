@@ -55,7 +55,7 @@
 
                 <div class="grid-row">
 
-                    <div ng-if="results.pages" tls-pagination="paginationConfig"></div>
+                    <div ng-if="results.pages" tls-pagination="paginationConfig" data-search="searchData"></div>
 
                     <div id="sorter">
                         <span>Sort:</span>
@@ -95,7 +95,7 @@
                     </footer>
                 </div>
 
-                <div ng-if="results.pages" tls-pagination="paginationConfig"></div>
+                <div ng-if="results.pages" tls-pagination="paginationConfig" data-search="searchData"></div>
 
             </div>
 

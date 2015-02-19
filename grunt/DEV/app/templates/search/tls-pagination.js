@@ -1,9 +1,10 @@
-.directive('tlsPagination',[ 'api', function (api){
+.directive('tlsPagination',[ 'api', 'tealium', function (api, tealium){
 	return{
 		restrict:"A",
 		templateUrl :  "tls-pagination.html",
 		scope : {
 			config : '=tlsPagination',
+            data : '=search'
 		},
 		link : function(scope){
 
@@ -25,6 +26,14 @@
 				api.getSearchResults(u,i,f,o,d).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
+
+
+                var term = scope.data.searchTerm,
+                    total = scope.data.count,
+                    pages = scope.config.pageCount,
+                    pageNum = scope.config.currentPage + 1;
+
+                tealium.searchPagination(term, total, pages, pageNum);
 
 			}
 		}

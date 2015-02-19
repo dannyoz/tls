@@ -13,7 +13,7 @@ function tls_search_results_json_api_encode($response) {
     /**
      * Search Page Specific
      */
-    if ( isset($response['posts']) && is_search() || $wp_query->is_search == true ) {
+    if ( isset($response['posts']) && $wp_query->is_search == true ) {
 
         // URL parsing to use with custom JSON API queries
         $url = parse_url($_SERVER['REQUEST_URI']);
@@ -21,6 +21,11 @@ function tls_search_results_json_api_encode($response) {
 
         // Get Search Query to be used in all the queries
         $search_query = get_search_query();
+        $response['search_query'] = $search_query;
+
+        // Get Current Page and add it to the response
+        $page_number = $wp_query->query_vars['paged'];
+        $response['page_number'] = $page_number;
 
         // Get Current WP Query;
         $current_query = (array) $wp_query->query;

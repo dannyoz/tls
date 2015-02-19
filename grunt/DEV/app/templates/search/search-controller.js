@@ -68,13 +68,17 @@
                 $scope.dateRange
                 )
                 .then(function (results){
-                
+
                     $scope.showFilters = false
                     $scope.loadResults = false
                     $scope.results     = results
                     $scope.contentType = results.content_type_filters
                     $scope.sections    = results.articles_sections
                     $scope.dateRanges  = results.date_filters
+                    $scope.searchData  = {
+                        searchTerm : results.search_query,
+                        count : results.count_total
+                    },
                     $scope.paginationConfig = {
                         "pageCount"   : results.pages,
                         "currentPage" : $scope.currentPage,
@@ -82,6 +86,7 @@
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
                 }
+
             })
         }   
 

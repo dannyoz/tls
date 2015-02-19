@@ -270,6 +270,24 @@
 
 			return tags
 
-		}
+		},
+        searchPagination : function(searchTerm, resultsTotal, pageTotal, pageNumber){
+
+            var tags = {
+                "page_name" : "search results",
+                "page_type" : "search",
+                "page_section" : "search",
+                "page_restrictions" : "public",
+                "internal_search_term" : searchTerm,
+                "internal_search_results" : resultsTotal,
+                "page_number" : pageNumber + " of " + pageTotal
+            }
+
+            //debugBar(tags, 'Link');
+            utagView(tags);
+
+            return tags
+
+        }
 	}
 })

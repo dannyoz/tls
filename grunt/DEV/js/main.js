@@ -29320,7 +29320,25 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			return tags
 
-		}
+		},
+        searchPagination : function(searchTerm, resultsTotal, pageTotal, pageNumber){
+
+            var tags = {
+                "page_name" : "search results",
+                "page_type" : "search",
+                "page_section" : "search",
+                "page_restrictions" : "public",
+                "internal_search_term" : searchTerm,
+                "internal_search_results" : resultsTotal,
+                "page_number" : pageNumber + " of " + pageTotal
+            }
+
+            //debugBar(tags, 'Link');
+            utagView(tags);
+
+            return tags
+
+        }
 	}
 })
 .directive('tlsAccordianColumn', function () {
@@ -30592,13 +30610,17 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                 $scope.dateRange
                 )
                 .then(function (results){
-                
+
                     $scope.showFilters = false
                     $scope.loadResults = false
                     $scope.results     = results
                     $scope.contentType = results.content_type_filters
                     $scope.sections    = results.articles_sections
                     $scope.dateRanges  = results.date_filters
+                    $scope.searchData  = {
+                        searchTerm : results.search_query,
+                        count : results.count_total
+                    },
                     $scope.paginationConfig = {
                         "pageCount"   : results.pages,
                         "currentPage" : $scope.currentPage,
@@ -30606,6 +30628,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
                 }
+
             })
         }   
 
@@ -30848,12 +30871,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         $scope.request();
 
 }])
-.directive('tlsPagination',[ 'api', function (api){
+.directive('tlsPagination',[ 'api', 'tealium', function (api, tealium){
 	return{
 		restrict:"A",
 		templateUrl :  "tls-pagination.html",
 		scope : {
 			config : '=tlsPagination',
+            data : '=search'
 		},
 		link : function(scope){
 
@@ -30875,6 +30899,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				api.getSearchResults(u,i,f,o,d).then(function (results){
 					scope.$emit('updatePage',results,i)
 				})
+
+
+                var term = scope.data.searchTerm,
+                    total = scope.data.count,
+                    pages = scope.config.pageCount,
+                    pageNum = scope.config.currentPage + 1;
+
+                tealium.searchPagination(term, total, pages, pageNum);
 
 			}
 		}
