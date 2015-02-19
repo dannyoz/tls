@@ -1,8 +1,6 @@
 <?php
 
 namespace Tls\TlsHubSubscriber\Library;
-
-use SimpleXMLElement;
 use WP_Query;
 
 /**
@@ -14,24 +12,9 @@ use WP_Query;
 class HubXmlParser implements FeedParser {
 
     /**
-     * @var $option_name
-     */
-    private $option_name;
-
-    /**
-     * @var $current_options
-     */
-    protected $current_options;
-
-    /**
      * Constructor
-     *
-     * @param $option_name
-     * @param $current_options
      */
-    public function __construct($option_name, $current_options) {
-        $this->current_options = $current_options;
-        $this->option_name = $option_name;
+    public function __construct() {
     }
 
     /**
@@ -88,9 +71,16 @@ class HubXmlParser implements FeedParser {
             // Get all cpi: nodes from the XML
             $cpiNamespace = $article->children('cpi', true);
 
+            // Get Content from either cpi:body or cpi:copy nodes
+            if ( isset($cpiNamespace->body) ) {
+                $content = $cpiNamespace->body->saveXml();
+            } elseif (isset($cpiNamespace->copy) ) {
+                $content = $cpiNamespace->copy->saveXml();
+            }
+
             // Add all the Article Data into an array
             $article_data = array(
-                'post_content'   => $cpiNamespace->body->saveXml(), // The full text of the post.
+                'post_content'   => $content, // The full text of the post.
                 'post_title'     => wp_strip_all_tags( $cpiNamespace->xpath('//cpi:headline')[0]->div[0]->p[0] ), // The title of your post.
                 'post_status'    => 'publish', // Default 'draft'.
                 'post_type'      => 'tls_articles', // Default 'post'.
@@ -140,7 +130,7 @@ class HubXmlParser implements FeedParser {
             $article_custom_fields = array(
                 'article_feed_id'       => (string) $article->id,
                 'article_author_name'   => (string) $cpiNamespace->xpath('//cpi:byline')[0]->div->p[0],
-                'headline'              => (string) $cpiNamespace->xpath('//cpi:headline')[0]->div[0]->p[0],
+                'teaser_summary'        => '',
                 'thumbnail_image_url'   => '',
                 'full_image_url'        => '',
                 'hero_image_url'        => ''
@@ -201,7 +191,7 @@ class HubXmlParser implements FeedParser {
     private function saveArticleCustomFields($article_custom_fields, $article_id) {
 
         foreach($article_custom_fields as $custom_field_key => $custom_field_value) {
-            update_field($custom_field_key, $custom_field_value, $article_id);
+            update_post_meta($article_id, $custom_field_key , $custom_field_value); // Use update_post_meta as it works better than acf update_field
         }
 
     }
