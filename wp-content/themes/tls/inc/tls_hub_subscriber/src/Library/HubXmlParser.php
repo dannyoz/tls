@@ -130,20 +130,26 @@ class HubXmlParser implements FeedParser {
             $standfirst_xml = $cpiNamespace->standfirst->saveXml();
             preg_match_all("|<author>(.+?)<\/info1>|mis", (string) $standfirst_xml, $book_matches);
 
+            $books = array();
             foreach ($book_matches[0] as $book_match) {
+
                 $book_string = "<?xml version='1.0'?><document>" . $book_match . "</document>";
                 $book_xml = simplexml_load_string($book_string);
 
-                $book['book_title'] = (string) $book_xml->title;
-                $book['book_author'] = (string) $book_xml->author;
-                $book['book_info'] = '';
-                foreach ($book_xml->info as $book_info) {
-                    $book['book_info'] .= (string) $book_info . "\n";
+                $book_info = '';
+                foreach ($book_xml->info as $info) {
+                    $book_info .= (string) $info . "\n";
                 }
-                $book['book_isbn'] = (string) $book_xml->info1;
 
-                $this->saveArticleCustomFields($book, $article_id, 'books');
+                $books[] = array(
+                    'book_author'   => (string) $book_xml->author,
+                    'book_title'    => (string) $book_xml->title,
+                    'book_info'     => $book_info,
+                    'book_isbn'     => (string) $book_xml->info1
+                );
+
             }
+            $this->saveArticleCustomFields($books, $article_id, 'books');
 
 
             // Add all the Custom Fields' data into an array
@@ -213,7 +219,7 @@ class HubXmlParser implements FeedParser {
 
         if (!empty($repeater)) {
             $repeater_obj = get_field($repeater, $article_id);
-            $repeater_obj[] = $article_custom_fields;
+            $repeater_obj = $article_custom_fields;
             update_field($repeater, $repeater_obj, $article_id);
         } else {
 
