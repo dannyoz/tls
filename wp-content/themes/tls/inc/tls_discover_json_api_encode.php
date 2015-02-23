@@ -25,20 +25,23 @@ function tls_discover_json_api_encode($response) {
             'orderby'           => 'name',
             'order'             => 'ASC',
         );
-        $article_sections = get_terms( 'article_section', $article_sections_args );
+        $article_sections = get_terms( 'article_section', $article_sections_args ); // Get all terms for Article Section taxonomy
 
-        $show_sections = array();
-        $show_sections_ids = array();
+        $show_sections = array(); // Start empty array to inject sections that can be shown in discover page
+        $show_sections_ids = array(); // empty array to use later for wp query to search posts in these terms only
         foreach ($article_sections as $show_section) {
-            $show_in_discover_page = get_field('show_in_discover_page', 'article_section_' . $show_section->term_id);
+            $show_in_discover_page = get_field('show_in_discover_page', 'article_section_'.$show_section->term_id); // get the show in discover page for current term
 
+            /*
+             * If the term has the option set to 'yes' for show in discover page then add
+             * Term Object to the show sections and term ids to show_section_ids
+             */
             if ($show_in_discover_page == 'yes') {
                 $show_sections[] = $show_section;
                 $show_sections_ids[] = $show_section->term_id;
-
             }
         }
-        $article_sections = $show_sections;
+        $article_sections = $show_sections; // Reassign article_sections to use later on
 
         /**
          * Spotlight Article Section Category

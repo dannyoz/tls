@@ -100,8 +100,13 @@ class HubXmlParser implements FeedParser {
             $articleMatches_args = array(
                 'posts_per_page' => 1,
                 'post_type' => 'tls_articles',
-                'meta_key' => 'article_feed_id',
-                'meta_value' => (string)$article->id
+                'meta_query' => array(
+                    array(
+                        'key'   => 'article_feed_id',
+                        'value' => (string)$article->id,
+                        'compare' => '='
+                    )
+                ),
             );
             $articleMatches = new WP_Query($articleMatches_args);
 
@@ -113,6 +118,12 @@ class HubXmlParser implements FeedParser {
                 $article_id = $this->saveArticleData($article_data);
                 $import_type = 'import';
             } else {
+                $article_last_updated = get_field('article_last_updated', $articleMatches->posts[0]->ID);
+
+                if ( $article_last_updated >= date( "Y-m-d H:i:s", strtotime( $article->updated ) ) ) {
+                    break;
+                }
+
                 $article_data['ID'] = (int) $articleMatches->posts[0]->ID;
                 $article_id = $this->saveArticleData($article_data, true);
                 $import_type = 'update';
@@ -155,6 +166,7 @@ class HubXmlParser implements FeedParser {
             // Add all the Custom Fields' data into an array
             $article_custom_fields = array(
                 'article_feed_id'       => (string) $article->id,
+                'article_last_updated'  => date( "Y-m-d H:i:s", strtotime( $article->updated ) ),
                 'article_author_name'   => (string) $cpiNamespace->xpath('//cpi:byline')[0]->div->p[0],
                 'teaser_summary'        => '',
                 'thumbnail_image_url'   => '',
@@ -259,7 +271,24 @@ class HubXmlParser implements FeedParser {
              */
             $tax_term = term_exists($term, $taxonomy);
             if ($tax_term == 0 || $tax_term == null) {
-                wp_insert_term($term, $taxonomy);
+                $new_tax_term = wp_insert_term($term, $taxonomy); // Function returns an array with term_id and term_taxonomy_id, or a WP Error
+                // Add 'Yes' to 'Show in Discover Page' taxonomy term option to show Articles of this Section in the Discover page
+                $custom_field_obj = get_field_object('show_in_discover_page', 'article_section_'.$new_tax_term['term_id'], true);
+                update_field($custom_field_obj['key'], 'yes', 'article_section_'.$new_tax_term['term_id']);
+
+                // If any error is caught stop processing, log the errors and return false
+                if ( is_wp_error($new_tax_term) ) {
+                    $article = get_post($article_id); // Get Article to use its Title in the Error Message
+
+                    $errors = $new_tax_term->get_error_messages();
+                    $error_msg = "Failed setting Article Section for article: " . $article->post_title  . "\n";
+                    foreach($errors as $error) {
+                        $error_msg .= "\t" . $error;
+                    }
+                    HubLogger::error($error_msg);
+                    return false;
+                }
+
             }
 
             $tax_terms[] = (string) $term; // Add the the current looped term into the $tax_terms array
