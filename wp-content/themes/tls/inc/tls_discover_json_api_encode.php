@@ -27,6 +27,19 @@ function tls_discover_json_api_encode($response) {
         );
         $article_sections = get_terms( 'article_section', $article_sections_args );
 
+        $show_sections = array();
+        $show_sections_ids = array();
+        foreach ($article_sections as $show_section) {
+            $show_in_discover_page = get_field('show_in_discover_page', 'article_section_' . $show_section->term_id);
+
+            if ($show_in_discover_page == 'yes') {
+                $show_sections[] = $show_section;
+                $show_sections_ids[] = $show_section->term_id;
+
+            }
+        }
+        $article_sections = $show_sections;
+
         /**
          * Spotlight Article Section Category
          * Get the latest post and add it to the top section articles with
@@ -43,7 +56,7 @@ function tls_discover_json_api_encode($response) {
             'tax_query'         => array( array(
                 'taxonomy'      => 'article_section',
                 'field'         => 'term_id',
-                'terms'         => $spotlight_article_section->term_id
+                'terms'         => $spotlight_article_section
             ) )
         );
         // WP_Query for the Top Article in current section term
@@ -94,7 +107,7 @@ function tls_discover_json_api_encode($response) {
         // Loop through each of the sections to make a WP_Query
         foreach ($article_sections as $section) {
 
-            if (  $section->term_id != $spotlight_article_section->term_id ) {
+            if (  $section->term_id != $spotlight_article_section  ) {
                 // Arguments for the WP_Query
                 $top_section_article_args = array(
                     'post_type' => 'tls_articles',
@@ -167,7 +180,14 @@ function tls_discover_json_api_encode($response) {
             'orderby'           => 'date',
             'order'             => 'DESC',
             'paged'             => $paged,
-            'post__not_in'      => $top_section_articles // Array of ID's of Top Articles to remove
+            'post__not_in'      => $top_section_articles, // Array of ID's of Top Articles to remove
+            'tax_query'         => array(
+                array(
+                    'taxonomy'  => 'article_section',
+                    'field'     => 'term_id',
+                    'terms'     => $show_sections_ids
+                )
+            )
         );
 
         // Override query inside the $wp_query global to be able to use the JSON API get_posts

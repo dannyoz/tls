@@ -340,3 +340,40 @@ function tls_limit_content( $text, $limit) {
 	$content = str_replace(']]>', ']]&gt;', $content);
 	return $content;
 }
+
+/**
+ * Function to dynamically populate the Spotlight Category Select Box Custom Field
+ * Only includes the Article Section with the custom field option to include
+ * in the Discover Page archive.
+ *
+ * @param array $field
+ * @return array $field
+ */
+function acf_load_spotlight_category_choices( $field ) {
+
+    // reset choices
+    $field['choices'] = array();
+
+    // Get all the terms from Article Section Taxonomy
+    $article_sections_args = array(
+        'hide_empty'    => false,
+        'orderby'           => 'name',
+        'order'             => 'ASC',
+    );
+    $all_article_sections = get_terms( 'article_section', $article_sections_args );
+
+    $field['choices'][''] = ' -- Select the Spotlight Section -- ';
+
+    foreach ($all_article_sections as $article_section) {
+        $section_show_in_discover_page = get_field('show_in_discover_page', 'article_section_' . $article_section->term_id);
+
+        if ($section_show_in_discover_page == 'yes') {
+            $field['choices'][$article_section->term_id] = $article_section->name;
+        }
+    }
+
+    // return the field
+    return $field;
+
+}
+add_filter('acf/load_field/name=spotlight_category', 'acf_load_spotlight_category_choices');

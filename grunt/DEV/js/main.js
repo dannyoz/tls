@@ -30156,7 +30156,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				$scope.ready = true
 			})
 
-			console.log(result)
+			//console.log(result)
 
 		})
 
