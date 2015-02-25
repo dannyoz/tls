@@ -3,6 +3,7 @@
 namespace Tls\TlsHubSubscriber\Library;
 
 use Carbon\Carbon;
+use DOMDocument;
 use WP_Query;
 
 /**
@@ -36,7 +37,7 @@ class HubXmlParser implements FeedParser
         $feed = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $feed);
         // Turn on Simple XML Internal Errors to catch any errors that appear
         libxml_use_internal_errors(true);
-        $xml = simplexml_load_string($feed);
+        $xml = simplexml_load_string($feed, null, LIBXML_NOCDATA);
 
         // If there are errors then add them to the error logs
         if ($xml === false) {
@@ -57,39 +58,39 @@ class HubXmlParser implements FeedParser
 
         // Add Log of the time it took and how many articles it imported
         $articles = ($articlesResult['articleCount'] == 1) ? 'article' : 'articles';
-        echo 'It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
-        HubLogger::log('It took ' . $execution_time . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
+        echo 'It took ' . number_format($execution_time, 2) . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
+        HubLogger::log('It took ' . number_format($execution_time, 2) . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
     }
 
     /**
      * Method to parse each article entry from the XML feed and save all its data, taxonomy terms and custom fields
      *
-     * @param $article
+     * @param object $xml The XML Object being passed from the parseFeed method
      * @return int $articleCount    The count of how many articles were parsed to be returned back to parseFeed
      */
     protected function parseArticles($article)
     {
         // Start the articleCount variable
-        $articleCount = 0;;
+        $articleCount = 0;
 
         // Get all cpi: nodes from the XML
         $cpiNamespace = $article->children('cpi', true);
 
-        $article_entry_published = new Carbon((string) $article->published);
-        $article_entry_updated = new Carbon((string) $article->updated);
+        $article_entry_published = new Carbon($article->published);
+        $article_entry_updated = new Carbon($article->updated);
 
         // Add all the Article Data into an array
         $article_data = array(
-            'post_content' => $content = $cpiNamespace->copy->saveXml(), // The full text of the post.
-            'post_title' => wp_strip_all_tags($cpiNamespace->xpath('//cpi:headline')[0]->div[0]->p[0]), // The title of your post.
+            'post_content' => $cpiNamespace->copy, // The full text of the post.
+            'post_title' => wp_strip_all_tags($cpiNamespace->headline), // The title of your post.
             'post_status' => 'publish', // Default 'draft'.
             'post_type' => 'tls_articles', // Default 'post'.
             'post_author' => 1, // The user ID number of the author. Default is the current user ID.
             'ping_status' => 'closed', // Pingbacks or trackbacks allowed. Default is the option 'default_ping_status'.
-            'post_date' => $article_entry_published, // Published Date
-            'post_date_gmt' => $article_entry_published, // Published Date GMT
-            'post_modified' => $article_entry_updated, // Updated Date
-            'post_modified_gmt' => $article_entry_updated, // Updated Date GMT
+            'post_date' => $article_entry_published->toDateTimeString(), // Published Date
+            'post_date_gmt' => $article_entry_published->toDateTimeString(), // Published Date GMT
+            'post_modified' => $article_entry_updated->toDateTimeString(), // Updated Date
+            'post_modified_gmt' => $article_entry_updated->toDateTimeString(), // Updated Date GMT
             'comment_status' => 'closed', // Default is the option 'default_comment_status', or 'closed'.
         );
 
@@ -99,13 +100,8 @@ class HubXmlParser implements FeedParser
         $articleMatches_args = array(
             'posts_per_page' => 1,
             'post_type' => 'tls_articles',
-            'meta_query' => array(
-                array(
-                    'key' => 'article_feed_id',
-                    'value' => (string)$article->id,
-                    'compare' => '='
-                )
-            ),
+            'meta_key' => 'article_feed_id',
+            'meta_value' => (string)$article->id
         );
         $articleMatches = new WP_Query($articleMatches_args);
 
@@ -117,13 +113,6 @@ class HubXmlParser implements FeedParser
             $article_id = $this->saveArticleData($article_data);
             $import_type = 'import';
         } else {
-            $article_last_updated = get_field_object('article_last_updated', $articleMatches->posts[0]->ID);
-            var_dump($article_last_updated);
-
-//            if ($article_last_updated >= $article_entry_updated) {
-//                exit;
-//            }
-
             $article_data['ID'] = (int)$articleMatches->posts[0]->ID;
             $article_id = $this->saveArticleData($article_data, true);
             $import_type = 'update';
@@ -137,29 +126,11 @@ class HubXmlParser implements FeedParser
         $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
 
         // TODO: Import of images into the local installation of WP
-
-        /*
-         * Article Books
-         */
-        $books = array();
-        foreach ($cpiNamespace->book as $book) {
-
-            $books[] = array(
-                'book_author' => (string)$book->author,
-                'book_title' => (string)$book->title,
-                'book_info' => (string)$book->info,
-                'book_isbn' => (string)$book->isbn
-            );
-
-        }
-        $this->saveArticleCustomFields($books, $article_id, 'books');
-
-
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
-            'article_feed_id' => (string)$article->id,
-            'article_last_updated' => $article_entry_updated,
-            'article_author_name' => (string)$cpiNamespace->xpath('//cpi:byline')[0]->div->p[0],
+            'article_feed_id' => $article->id,
+            'article_last_updated' => $article_entry_updated->toDateTimeString(),
+            'article_author_name' => $cpiNamespace->byline,
             'teaser_summary' => '',
             'thumbnail_image_url' => '',
             'full_image_url' => '',
@@ -167,6 +138,20 @@ class HubXmlParser implements FeedParser
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
+
+        // Article Review Books
+        $books = array();
+        foreach ($cpiNamespace->book as $book) {
+
+            $books[] = array(
+                'article_review_book_author' => (string)$book->author,
+                'article_review_book_title' => (string)$book->title,
+                'article_review_book_info' => (string)$book->info,
+                'article_review_book_isbn' => (string)$book->isbn
+            );
+
+        }
+        //$this->saveArticleCustomFields($books, $article_id, 'article_review_books');
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
@@ -230,7 +215,7 @@ class HubXmlParser implements FeedParser
 
             foreach ($article_custom_fields as $custom_field_key => $custom_field_value) {
 
-                $custom_field_obj = get_field_object($custom_field_key, $article_id, true);
+                $custom_field_obj = get_field_object($custom_field_key, $article_id);
                 update_field($custom_field_obj['key'], $custom_field_value, $article_id);
 
             }
@@ -265,24 +250,7 @@ class HubXmlParser implements FeedParser
              */
             $tax_term = term_exists($term, $taxonomy);
             if ($tax_term == 0 || $tax_term == null) {
-                $new_tax_term = wp_insert_term($term, $taxonomy); // Function returns an array with term_id and term_taxonomy_id, or a WP Error
-                // Add 'Yes' to 'Show in Discover Page' taxonomy term option to show Articles of this Section in the Discover page
-                $custom_field_obj = get_field_object('show_in_discover_page', 'article_section_' . $new_tax_term['term_id'], true);
-                update_field($custom_field_obj['key'], 'yes', 'article_section_' . $new_tax_term['term_id']);
-
-                // If any error is caught stop processing, log the errors and return false
-                if (is_wp_error($new_tax_term)) {
-                    $article = get_post($article_id); // Get Article to use its Title in the Error Message
-
-                    $errors = $new_tax_term->get_error_messages();
-                    $error_msg = "Failed setting Article Section for article: " . $article->post_title . "\n";
-                    foreach ($errors as $error) {
-                        $error_msg .= "\t" . $error;
-                    }
-                    HubLogger::error($error_msg);
-                    return false;
-                }
-
+                wp_insert_term($term, $taxonomy);
             }
 
             $tax_terms[] = (string)$term; // Add the the current looped term into the $tax_terms array
