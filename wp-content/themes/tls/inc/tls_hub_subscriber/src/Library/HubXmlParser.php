@@ -137,26 +137,18 @@ class HubXmlParser implements FeedParser {
             $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
 
             // TODO: Import of images into the local installation of WP
-            // TODO: Import books into the repeater field of WP
-            $standfirst_xml = $cpiNamespace->standfirst->saveXml();
-            preg_match_all("|<author>(.+?)<\/info1>|mis", (string) $standfirst_xml, $book_matches);
 
+            /*
+             * Article Books
+             */
             $books = array();
-            foreach ($book_matches[0] as $book_match) {
-
-                $book_string = "<?xml version='1.0'?><document>" . $book_match . "</document>";
-                $book_xml = simplexml_load_string($book_string);
-
-                $book_info = '';
-                foreach ($book_xml->info as $info) {
-                    $book_info .= (string) $info . "\n";
-                }
+            foreach ($cpiNamespace->book as $book) {
 
                 $books[] = array(
-                    'book_author'   => (string) $book_xml->author,
-                    'book_title'    => (string) $book_xml->title,
-                    'book_info'     => $book_info,
-                    'book_isbn'     => (string) $book_xml->info1
+                    'book_author'   => (string) $book->author,
+                    'book_title'    => (string) $book->title,
+                    'book_info'     => (string) $book->info,
+                    'book_isbn'     => (string) $book->isbn
                 );
 
             }
