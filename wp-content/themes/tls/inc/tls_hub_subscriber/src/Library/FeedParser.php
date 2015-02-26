@@ -6,14 +6,16 @@ namespace Tls\TlsHubSubscriber\Library;
  * Interface FeedParser
  *
  * @package Tls\TlsHubSubscriber\Library
- * @author Vitor Faiante
+ * @author  Vitor Faiante
  */
-interface FeedParser {
+interface FeedParser
+{
 
     /**
      * @param $feed
+     *
      * @return mixed
      */
-    public function parseFeed($feed);
+    public function parseFeed( $feed );
 
 }

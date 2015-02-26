@@ -104,7 +104,7 @@
             $scope.currentPage = curr
             $scope.results     = results
             $scope.searchData.pageNumber = curr
-            
+
         })
 
         // =====================

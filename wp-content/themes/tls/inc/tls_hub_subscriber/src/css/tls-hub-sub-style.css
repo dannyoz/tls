@@ -4,8 +4,8 @@
 
 p.subscription_status {
     border: 1px solid #ddd;
-    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .07);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .07);
     background-color: #EEEEEE;
     color: #333;
     outline: 0;
@@ -22,8 +22,8 @@ p.subscription_status {
     font-weight: bold;
     margin: 5px 0 15px;
     background: #fff;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     padding: 0.5em 12px;
     height: 1.4em;
     border-left: 4px solid #fff;
