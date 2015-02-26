@@ -63,7 +63,7 @@
 				$scope.ready = true
 			})
 
-			//console.log(result)
+			console.log(result)
 
 		})
 

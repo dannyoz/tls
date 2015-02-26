@@ -60,6 +60,8 @@ function tls_json_api_encode($response) {
 				'comment_author'		=> $comment_author,
 				'comment_author_email'	=> $comment_author_email
 			);
+
+            $response['post']->books = get_field('field_54edde1e60d80', $response['post']->id);
 		}
 
 	}

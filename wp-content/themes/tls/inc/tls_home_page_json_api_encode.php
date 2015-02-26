@@ -110,7 +110,7 @@ function tls_home_page_json_api_encode($response) {
                 'custom_fields' => array(
                     'thumbnail_image_url' => $card_post_custom_fields['thumbnail_image_url'][0],
                 ),
-                'books'         => get_field('books', $card_post->ID),
+                'books'         => get_field('field_54edde1e60d80', $card_post->ID),
                 'taxonomy_article_visibility'    => $visibility
             );
 

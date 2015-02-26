@@ -65,7 +65,7 @@ class HubXmlParser implements FeedParser
     /**
      * Method to parse each article entry from the XML feed and save all its data, taxonomy terms and custom fields
      *
-     * @param object $xml The XML Object being passed from the parseFeed method
+     * @param $article
      * @return int $articleCount    The count of how many articles were parsed to be returned back to parseFeed
      */
     protected function parseArticles($article)
@@ -128,30 +128,30 @@ class HubXmlParser implements FeedParser
         // TODO: Import of images into the local installation of WP
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
-            'article_feed_id' => $article->id,
-            'article_last_updated' => $article_entry_updated->toDateTimeString(),
-            'article_author_name' => $cpiNamespace->byline,
-            'teaser_summary' => '',
-            'thumbnail_image_url' => '',
-            'full_image_url' => '',
-            'hero_image_url' => ''
+            'field_54e4d372b0093' => (string) $article->id, // Article Feed ID
+            'field_54eb50af14d87' => (string) $article_entry_updated->toDateTimeString(), // Last Updated Date
+            'field_54e4d3b1b0094' => (string) $cpiNamespace->byline, // Author Name
+            'field_54e4d3c3b0095' => '', // Teaser Summary
+            'field_54e4d481b009a' => '', // Thumbnail Image
+            'field_54e4d4a5b009b' => '', // Full Image
+            'field_54e4d4b3b009c' => '' // Hero Image
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
 
         // Article Review Books
         $books = array();
-        foreach ($cpiNamespace->book as $book) {
+        foreach ($article->xpath('//cpi:book') as $book) {
 
             $books[] = array(
-                'article_review_book_author' => (string)$book->author,
-                'article_review_book_title' => (string)$book->title,
-                'article_review_book_info' => (string)$book->info,
-                'article_review_book_isbn' => (string)$book->isbn
+                'book_title' => (string) $book->title,
+                'book_author' => (string) $book->author,
+                'book_info' => (string) $book->info,
+                'book_isbn' => (string) $book->isbn
             );
 
         }
-        //$this->saveArticleCustomFields($books, $article_id, 'article_review_books');
+        $this->saveArticleCustomFields($books, $article_id, 'field_54edde1e60d80'); // Books
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
@@ -206,7 +206,6 @@ class HubXmlParser implements FeedParser
      */
     private function saveArticleCustomFields($article_custom_fields, $article_id, $repeater = '')
     {
-
         if (!empty($repeater)) {
             $repeater_obj = get_field($repeater, $article_id);
             $repeater_obj = $article_custom_fields;
@@ -215,8 +214,7 @@ class HubXmlParser implements FeedParser
 
             foreach ($article_custom_fields as $custom_field_key => $custom_field_value) {
 
-                $custom_field_obj = get_field_object($custom_field_key, $article_id);
-                update_field($custom_field_obj['key'], $custom_field_value, $article_id);
+                update_field( $custom_field_key, $custom_field_value, $article_id );
 
             }
         }

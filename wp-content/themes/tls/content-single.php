@@ -86,14 +86,14 @@
 									<div class="summary-top">
 										<div class="inner-wrapper">
 											<div class="book-title" ng-bind-html="book.title"></div>
-											<div ng-bind-html="book.author"></div>	
+											<div ng-bind-html="book.author"></div>
 										</div>									
 									</div>	
 									<div class="summary-bottom">
 										<div class="inner-wrapper">									
 											<div ng-bind-html="book.info1"></div>
 											<div ng-bind-html="book.info2"></div>
-											<div ng-bind-html="book.isbn"></div>					
+											<div ng-bind-html="book.isbn"></div>
 										</div>
 									</div>	
 								</div>							

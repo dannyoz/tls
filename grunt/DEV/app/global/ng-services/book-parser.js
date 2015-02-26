@@ -11,17 +11,15 @@
 			for(var i = 0; i<bookcount; i ++){
 				
 				var book = {},
+                    title   = "books_" + i + "_book_title",
 					author  = "books_" + i + "_book_author",
-					info1   = "books_" + i + "_book_info_1",
-					info2   = "books_" + i + "_book_info_2",
-					isbn    = "books_" + i + "_book_isbn",
-					title   = "books_" + i + "_book_title";
+					info   = "books_" + i + "_book_info",
+					isbn    = "books_" + i + "_book_isbn";
 
+                book.title  = fields[title][0]
 				book.author = fields[author][0]
-				book.info1  = fields[info1][0]
-				book.info2  = fields[info2][0]
+				book.info1  = fields[info][0]
 				book.isbn   = fields[isbn][0]
-				book.title  = fields[title][0]
 
 				books.push(book)
 			}

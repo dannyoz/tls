@@ -163,7 +163,7 @@ function tls_discover_json_api_encode($response) {
                     'taxonomy_article_section' => $top_section_article_section,
                     'taxonomy_article_section_url' => get_term_link($top_section_article_section[0]->term_id, $top_section_article_section[0]->taxonomy),
                     'taxonomy_article_visibility' => $top_section_article_visibility,
-                    'books'                         => get_field('books', $top_section_article->ID),
+                    'books'                         => get_field('field_54edde1e60d80', $top_section_article->ID),
                 );
 
             }
@@ -204,7 +204,7 @@ function tls_discover_json_api_encode($response) {
             $article_post->custom_fields->teaser_summary = ( $article_custom_fields['teaser_summary'] ) ? $article_custom_fields['teaser_summary'] : tls_make_post_excerpt( $article_post );
             $article_post->type = 'article';
             $article_post->taxonomy_article_section_url = get_term_link( $article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy );
-            $article_post->books = get_field('books', $article_post->id);
+            $article_post->books = get_field('field_54edde1e60d80', $article_post->id);
         }
 
         // Update JSON Response Object for the main Articles Archive
