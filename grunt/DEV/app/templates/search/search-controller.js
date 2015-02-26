@@ -76,8 +76,10 @@
                     $scope.sections    = results.articles_sections
                     $scope.dateRanges  = results.date_filters
                     $scope.searchData  = {
-                        searchTerm : results.search_query,
-                        count : results.count_total
+                        "searchTerm" : results.search_query,
+                        "count" : results.count_total,
+                        "pagesTotal": results.pages,
+                        "pageNumber": results.page_number
                     },
                     $scope.paginationConfig = {
                         "pageCount"   : results.pages,
@@ -85,7 +87,7 @@
                         "filters"     : $scope.filters,
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
-                }
+                    }
 
             })
         }   
@@ -101,7 +103,8 @@
             $scope.paginationConfig.currentPage = curr
             $scope.currentPage = curr
             $scope.results     = results
-
+            $scope.searchData.pageNumber = curr
+            
         })
 
         // =====================

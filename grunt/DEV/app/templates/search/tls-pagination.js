@@ -24,16 +24,15 @@
 				scope.$emit('loading')
 
 				api.getSearchResults(u,i,f,o,d).then(function (results){
-					scope.$emit('updatePage',results,i)
+					scope.$emit('updatePage',results,i);
+
+                    var term = scope.data.searchTerm,
+                        total = scope.data.count,
+                        pages = scope.data.pagesTotal,
+                        pageNum = scope.data.pageNumber;
+
+                    tealium.searchPagination(term, total, pages, pageNum);
 				})
-
-
-                var term = scope.data.searchTerm,
-                    total = scope.data.count,
-                    pages = scope.config.pageCount,
-                    pageNum = scope.config.currentPage + 1;
-
-                tealium.searchPagination(term, total, pages, pageNum);
 
 			}
 		}

@@ -30616,8 +30616,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                     $scope.sections    = results.articles_sections
                     $scope.dateRanges  = results.date_filters
                     $scope.searchData  = {
-                        searchTerm : results.search_query,
-                        count : results.count_total
+                        "searchTerm" : results.search_query,
+                        "count" : results.count_total,
+                        "pagesTotal": results.pages,
+                        "pageNumber": results.page_number
                     },
                     $scope.paginationConfig = {
                         "pageCount"   : results.pages,
@@ -30625,7 +30627,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                         "filters"     : $scope.filters,
                         "order"       : $scope.order,
                         "dateRange"   : $scope.dateRange
-                }
+                    }
 
             })
         }   
@@ -30641,7 +30643,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
             $scope.paginationConfig.currentPage = curr
             $scope.currentPage = curr
             $scope.results     = results
-
+            $scope.searchData.pageNumber = curr
+            
         })
 
         // =====================
@@ -30895,16 +30898,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				scope.$emit('loading')
 
 				api.getSearchResults(u,i,f,o,d).then(function (results){
-					scope.$emit('updatePage',results,i)
+					scope.$emit('updatePage',results,i);
+
+                    var term = scope.data.searchTerm,
+                        total = scope.data.count,
+                        pages = scope.data.pagesTotal,
+                        pageNum = scope.data.pageNumber;
+
+                    tealium.searchPagination(term, total, pages, pageNum);
 				})
-
-
-                var term = scope.data.searchTerm,
-                    total = scope.data.count,
-                    pages = scope.config.pageCount,
-                    pageNum = scope.config.currentPage + 1;
-
-                tealium.searchPagination(term, total, pages, pageNum);
 
 			}
 		}
