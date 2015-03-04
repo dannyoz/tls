@@ -88,10 +88,6 @@ class HubXmlParser implements FeedParser
             'post_type' => 'tls_articles', // Default 'post'.
             'post_author' => 1, // The user ID number of the author. Default is the current user ID.
             'ping_status' => 'closed', // Pingbacks or trackbacks allowed. Default is the option 'default_ping_status'.
-            'post_date' => $article_entry_published->toDateTimeString(), // Published Date
-            'post_date_gmt' => $article_entry_published->toDateTimeString(), // Published Date GMT
-            'post_modified' => $article_entry_updated->toDateTimeString(), // Updated Date
-            'post_modified_gmt' => $article_entry_updated->toDateTimeString(), // Updated Date GMT
             'comment_status' => 'closed', // Default is the option 'default_comment_status', or 'closed'.
         );
 
@@ -106,9 +102,21 @@ class HubXmlParser implements FeedParser
          * Otherwise if a match was found the send $article_data to saveArticleData method with update parameter true to update article instead
          */
         if ( !$articleMatches->found_posts > 0 ) {
+
+            $article_data['post_date'] = $article_entry_published->toDateTimeString(); // Published Date
+            $article_data['post_date_gmt'] = $article_entry_published->toDateTimeString(); // Published Date GMT
+            $article_data['post_modified'] = $article_entry_updated->toDateTimeString(); // Updated Date
+            $article_data['post_modified_gmt'] = $article_entry_updated->toDateTimeString(); // Updated Date GMT
+
             $article_id = $this->saveArticleData( $article_data );
             $import_type = 'import';
         } else {
+            $last_updated_date = new Carbon(get_field('field_54eb50af14d87', $articleMatches->posts[0]->ID));
+
+            if ( $article_entry_updated->toDayDateTimeString() <= $last_updated_date->toDayDateTimeString()) {
+                die('This article will not be imported because this article seems older than another one we have');
+            }
+
             $article_data[ 'ID' ] = (int) $articleMatches->posts[ 0 ]->ID;
             $article_id = $this->saveArticleData( $article_data, true );
             $import_type = 'update';
