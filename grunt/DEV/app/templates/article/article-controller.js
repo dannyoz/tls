@@ -211,6 +211,14 @@
 
 				$scope.loadingPg = true;
 				location.replace(path);
+
+				if(dir == 'prev'){
+					tealium.paging('previous article',pageTitle);
+				}
+
+				if(dir == 'next'){
+					tealium.paging('next article',pageTitle);
+				}
 			}
 		}
 

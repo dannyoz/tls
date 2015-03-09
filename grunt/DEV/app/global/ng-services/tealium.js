@@ -104,7 +104,7 @@
 				"page_name" : utag_data.page_name
 			}
 
-			//debugBar(tags, 'Link');
+			debugBar(tags, 'Link');
 			utagLink(tags);
 
 			return tags

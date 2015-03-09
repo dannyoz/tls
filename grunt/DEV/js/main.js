@@ -29152,7 +29152,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				"page_name" : utag_data.page_name
 			}
 
-			//debugBar(tags, 'Link');
+			debugBar(tags, 'Link');
 			utagLink(tags);
 
 			return tags
@@ -29871,6 +29871,14 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 				$scope.loadingPg = true;
 				location.replace(path);
+
+				if(dir == 'prev'){
+					tealium.paging('previous article',pageTitle);
+				}
+
+				if(dir == 'next'){
+					tealium.paging('next article',pageTitle);
+				}
 			}
 		}
 
@@ -30644,7 +30652,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
             $scope.currentPage = curr
             $scope.results     = results
             $scope.searchData.pageNumber = curr
-            
+
         })
 
         // =====================
