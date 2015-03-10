@@ -17,8 +17,8 @@ get_header(); ?>
 			<div class="container">
 
 				<div class="caption">
-					<h2><a ng-attr-href="{{featued.link}}" ng-bind="featured.title"></a></h2>
-					<p class="excerpt"><a ng-attr-href="{{featued.link}}" ng-bind="featured.text"></a></p>
+					<h2><a ng-attr-href="{{featured.link}}" ng-bind="featured.title"></a></h2>
+					<p class="excerpt"><a ng-attr-href="{{featured.link}}" ng-bind="featured.text"></a></p>
 				</div>
 			</div>
 
@@ -29,13 +29,13 @@ get_header(); ?>
 		<div class="container">
 
 			<p class="excerpt mobile" ng-if="size == 'mobile'">
-				<a ng-attr-href="{{featued.link}}" ng-bind="featured.text"></a>
+				<a ng-attr-href="{{featured.link}}" ng-bind="featured.text"></a>
 			</p>
-			
+
 			<div class="grid-row" ng-if="size == 'desktop'">
-				
+
 				<div  class="grid-4" ng-repeat="column in col3">
-					
+
 					<div ng-repeat="card in column">
 						<div tls-card="card"></div>
 					</div>
@@ -45,9 +45,9 @@ get_header(); ?>
 			</div>
 
 			<div class="grid-row" ng-if="size == 'tablet'">
-				
+
 				<div  class="grid-6" ng-repeat="column in col2">
-					
+
 					<div ng-repeat="card in column">
 						<div tls-card="card"></div>
 					</div>
@@ -57,9 +57,9 @@ get_header(); ?>
 			</div>
 
 			<div class="grid-row" ng-if="size == 'mobile'">
-				
+
 				<div  class="grid-12" ng-repeat="column in col1">
-					
+
 					<div ng-repeat="card in column">
 
 						<div tls-card="card"></div>
@@ -69,7 +69,7 @@ get_header(); ?>
 				</div>
 
 			</div>
-			
+
 		</div>
 
 		<div class="grid-row" id="subscriber" ng-class="{locked:isLocked}">
@@ -83,8 +83,8 @@ get_header(); ?>
 
 				<?php if( have_rows('subscriber_exclusive_items') ): ?>
 
-					<div class="subscriber-grid-wrapper">					
-					
+					<div class="subscriber-grid-wrapper">
+
 						<?php while ( have_rows('subscriber_exclusive_items') ) : the_row(); ?>
 							<?php
 								$subItemTitle = get_sub_field( 'title' );
@@ -131,7 +131,7 @@ get_header(); ?>
 		<div id="edition-preview">
 
 			<div class="container">
-				
+
 				<div id="this-week">
 
 					<div class="preview grid-row">
@@ -163,10 +163,10 @@ get_header(); ?>
 								<?php endif; ?>
 							</div>
 
-						</div>		
+						</div>
 
 					</div>
-					
+
 				</div>
 
 				<div id="next-week">
@@ -203,7 +203,7 @@ get_header(); ?>
 
 					</div>
 
-				</div>			
+				</div>
 
 			</div>
 
