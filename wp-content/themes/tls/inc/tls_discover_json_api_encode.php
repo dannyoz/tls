@@ -22,7 +22,7 @@ function tls_discover_json_api_encode( $response )
         $top_section_articles = array();
 
         // Get all the terms from Article Section Taxonomy
-        $article_sections_args = array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC', );
+        $article_sections_args = array( 'hide_empty' => true, 'orderby' => 'name', 'order' => 'ASC', );
         $article_sections = get_terms( 'article_section', $article_sections_args ); // Get all terms for Article Section taxonomy
 
         $show_sections = array(); // Start empty array to inject sections that can be shown in discover page
