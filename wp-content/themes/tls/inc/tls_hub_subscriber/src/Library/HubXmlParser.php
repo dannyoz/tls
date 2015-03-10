@@ -77,6 +77,11 @@ class HubXmlParser implements FeedParser
         // Get all cpi: nodes from the XML
         $cpiNamespace = $article->children( 'cpi', true );
 
+        // Get Article Entry ID from the URL in the id node
+        // ID after the last slash /
+        $article_id_url = explode('/', $article->id);
+        $article_entry_id = array_pop($article_id_url);
+
         $article_entry_published = new Carbon( $article->published );
         $article_entry_updated = new Carbon( $article->updated );
 
@@ -94,7 +99,7 @@ class HubXmlParser implements FeedParser
         /*
          * Prepare and make WP_Query to check if the article being parsed already exists in WP based on the ID in the XML Feed entry
          */
-        $articleMatches_args = array( 'posts_per_page' => 1, 'post_type' => 'tls_articles', 'meta_key' => 'article_feed_id', 'meta_value' => (string) $article->id );
+        $articleMatches_args = array( 'posts_per_page' => 1, 'post_type' => 'tls_articles', 'meta_key' => 'article_feed_id', 'meta_value' => (string) $article_entry_id );
         $articleMatches = new WP_Query( $articleMatches_args );
 
         /*
@@ -132,7 +137,7 @@ class HubXmlParser implements FeedParser
         // TODO: Import of images into the local installation of WP
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
-            'field_54e4d372b0093' => (string) $article->id, // Article Feed ID
+            'field_54e4d372b0093' => (string) $article_entry_id, // Article Feed ID
             'field_54eb50af14d87' => (string) $article_entry_updated->toDateTimeString(), // Last Updated Date
             'field_54e4d3b1b0094' => (string) $cpiNamespace->byline, // Author Name
             'field_54e4d3c3b0095' => '', // Teaser Summary
