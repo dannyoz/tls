@@ -18,9 +18,20 @@ function tls_home_page_json_api_encode( $response )
         // Get Featured Post Details
         $featured_article = get_field( 'featured_article', $home_page_id );
 
-        $images = array( 'hero_image' => get_field( 'hero_image_url', $featured_article->ID ), 'full_image' => get_field( 'full_image_url', $featured_article->ID ), 'thumbnail_image' => get_field( 'thumbnail_image_url', $featured_article->ID ) );
+        $images = array(
+            'hero_image' => get_field( 'hero_image_url', $featured_article->ID ),
+            'full_image' => get_field( 'full_image_url', $featured_article->ID ),
+            'thumbnail_image' => get_field( 'thumbnail_image_url', $featured_article->ID )
+        );
 
-        $response[ 'featured_article' ] = array( 'id' => $featured_article->ID, 'title' => $featured_article->post_title, 'author' => get_the_author_meta( 'display_name', $featured_article->post_author ), 'text' => tls_make_post_excerpt( $featured_article, 15 ), 'link' => get_permalink( $featured_article->ID ), 'images' => $images );
+        $response[ 'featured_article' ] = array(
+            'id' => $featured_article->ID,
+            'title' => $featured_article->post_title,
+            'author' => get_the_author_meta( 'display_name', $featured_article->post_author ),
+            'text' => tls_make_post_excerpt( $featured_article, 15 ),
+            'link' => get_permalink( $featured_article->ID ),
+            'images' => $images
+        );
 
         /**
          * Home Page Blog Cards (For the 2 first Blog Cards)
@@ -34,7 +45,19 @@ function tls_home_page_json_api_encode( $response )
             $thumbnail_array = wp_get_attachment_image_src( $thumbnail_id, 'thumbnail' );
 
             // Add Blog Post Cards to JSON Response in the first card slot
-            $response[ 'home_page_cards' ][ 'card_0' ][ ] = array( 'type' => 'blog', 'id' => $blog_card->ID, 'title' => $blog_card->post_title, 'author' => get_the_author_meta( 'display_name', $blog_card->post_author ), 'text' => tls_make_post_excerpt( $blog_card, 15 ), 'link' => get_permalink( $blog_card->ID ), 'section' => array( 'name' => $categories[ 0 ]->name, 'link' => get_term_link( $categories[ 0 ]->term_id, $categories[ 0 ]->taxonomy ) ), 'thumbnail' => $thumbnail_array[ 0 ] );
+            $response[ 'home_page_cards' ][ 'card_0' ][ ] = array(
+                'type' => 'blog',
+                'id' => $blog_card->ID,
+                'title' => $blog_card->post_title,
+                'author' => get_the_author_meta( 'display_name', $blog_card->post_author ),
+                'text' => tls_make_post_excerpt( $blog_card, 15 ),
+                'link' => get_permalink( $blog_card->ID ),
+                'section' => array(
+                    'name' => $categories[ 0 ]->name,
+                    'link' => get_term_link( $categories[ 0 ]->term_id, $categories[ 0 ]->taxonomy )
+                ),
+                'thumbnail' => $thumbnail_array[ 0 ]
+            );
         }
 
         /**
@@ -69,12 +92,27 @@ function tls_home_page_json_api_encode( $response )
             if ( !empty( $teaserSummary ) || 0 < count( strlen( trim( $teaserSummary ) ) ) ) {
                 $articleText = $teaserSummary;
             } else {
-                $articleText = tls_make_post_excerpt( $card_post, 15 );
+                $articleText = tls_make_post_excerpt( $card_post, 20 );
             }
 
 
             // Add Cards to the JSON Response in the specific count slot
-            $response[ 'home_page_cards' ][ 'card_' . $home_page_card_count ] = array( 'type' => $card_type, 'id' => $card_post->ID, 'title' => $card_post->post_title, 'author' => get_the_author_meta( 'display_name', $card_post->post_author ), 'text' => $articleText, 'link' => get_permalink( $card_post->ID ), 'section' => array( 'name' => $section[ 0 ]->name, 'link' => get_term_link( $section[ 0 ]->term_id, $section[ 0 ]->taxonomy ) ), 'soundcloud' => $card_post_soundcloud_custom_field[ 0 ], 'custom_fields' => array( 'thumbnail_image_url' => $card_post_custom_fields[ 'thumbnail_image_url' ][ 0 ], ), 'books' => get_field( 'field_54edde1e60d80', $card_post->ID ), 'taxonomy_article_visibility' => $visibility );
+            $response[ 'home_page_cards' ][ 'card_' . $home_page_card_count ] = array(
+                'type' => $card_type,
+                'id' => $card_post->ID,
+                'title' => $card_post->post_title,
+                'author' => get_the_author_meta( 'display_name', $card_post->post_author ),
+                'text' => $articleText,
+                'link' => get_permalink( $card_post->ID ),
+                'section' => array(
+                    'name' => $section[ 0 ]->name,
+                    'link' => get_term_link( $section[ 0 ]->term_id, $section[ 0 ]->taxonomy )
+                ),
+                'soundcloud' => $card_post_soundcloud_custom_field[ 0 ],
+                'custom_fields' => array( 'thumbnail_image_url' => $card_post_custom_fields[ 'thumbnail_image_url' ][ 0 ], ),
+                'books' => get_field( 'field_54edde1e60d80', $card_post->ID ),
+                'taxonomy_article_visibility' => $visibility
+            );
 
             // If the current Home Page card is a Blog Post
             if ( get_post_type( $card_post->ID ) == "post" ) {

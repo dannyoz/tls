@@ -296,19 +296,24 @@ function dont_search_post_content( $search_sql )
 /**
  * Custom Post Excerpt
  *
- * @param object $post        Post Object
+ * @param object|string $content        Content
  * @param int    $word_length The amount of words for the excerpt
  *
  * @return string                The newly made excerpt
  */
-function tls_make_post_excerpt( $post, $word_length = 55 )
+function tls_make_post_excerpt( $content, $word_length = 55 )
 {
 
     if ( $word_length < 0 ) {
         $word_length = 55;
     }
 
-    $text = $post->post_content;
+    if (is_a($content, 'WP_Post')) {
+        $text = $content->post_content;
+    } else {
+        $text = $content;
+    }
+
     $text = strip_shortcodes( $text );
     $text = apply_filters( 'the_content', $text );
     $text = str_replace( ']]>', ']]>', $text );

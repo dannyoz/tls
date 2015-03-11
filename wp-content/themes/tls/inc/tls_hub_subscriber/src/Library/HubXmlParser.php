@@ -140,7 +140,7 @@ class HubXmlParser implements FeedParser
             'field_54e4d372b0093' => (string) $article_entry_id, // Article Feed ID
             'field_54eb50af14d87' => (string) $article_entry_updated->toDateTimeString(), // Last Updated Date
             'field_54e4d3b1b0094' => (string) $cpiNamespace->byline, // Author Name
-            'field_54e4d3c3b0095' => '', // Teaser Summary
+            'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 20), // Teaser Summary
             'field_54e4d481b009a' => '', // Thumbnail Image
             'field_54e4d4a5b009b' => '', // Full Image
             'field_54e4d4b3b009c' => '' // Hero Image
