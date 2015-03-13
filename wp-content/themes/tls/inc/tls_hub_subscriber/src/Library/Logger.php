@@ -19,7 +19,7 @@ interface Logger
      *
      * @return mixed
      */
-    public static function log( $msg, $code = null );
+    public static function log($msg, $code = null);
 
     /**
      * Method to log Error Messages
@@ -29,6 +29,5 @@ interface Logger
      *
      * @return mixed
      */
-    public static function error( $msg, $code = null );
-
+    public static function error($msg, $code = null);
 }

@@ -15,11 +15,11 @@ use Tls\TlsHubSubscriber\TlsHubSubscriberWP;
 class HubLogger implements Logger
 {
 
-    protected static function  logs_date_time()
+    protected static function logs_date_time()
     {
-        $date_time = new DateTime( null, new DateTimeZone( 'Europe/London' ) );
+        $date_time = new DateTime(null, new DateTimeZone('Europe/London'));
 
-        $logs_date_time = $date_time->format( 'd M Y H:i' ) . ': ';
+        $logs_date_time = $date_time->format('d M Y H:i') . ': ';
 
         return $logs_date_time;
     }
@@ -32,20 +32,19 @@ class HubLogger implements Logger
      *
      * @return mixed
      */
-    public static function log( $msg, $code = null )
+    public static function log($msg, $code = null)
     {
-
-        $current_options = get_option( TlsHubSubscriberWP::get_option_name() );
+        $current_options = get_option(TlsHubSubscriberWP::get_option_name());
 
         $logMessage = self::logs_date_time() . $msg . "\n";
 
-        if ( $code != null ) {
+        if ($code != null) {
             $logMessage = self::logs_date_time() . $msg . " (Code: " . $code . ")" . "\n";
         }
         $logMessage .= "--------------\n";
 
-        $current_options[ 'log_messages' ] = $current_options[ 'log_messages' ] . $logMessage;
-        update_option( TlsHubSubscriberWP::get_option_name(), $current_options );
+        $current_options['log_messages'] = $current_options['log_messages'] . $logMessage;
+        update_option(TlsHubSubscriberWP::get_option_name(), $current_options);
     }
 
     /**
@@ -56,19 +55,18 @@ class HubLogger implements Logger
      *
      * @return mixed
      */
-    public static function error( $msg, $code = null )
+    public static function error($msg, $code = null)
     {
-
-        $current_options = get_option( TlsHubSubscriberWP::get_option_name() );
+        $current_options = get_option(TlsHubSubscriberWP::get_option_name());
 
         $errorMessage = self::logs_date_time() . $msg . "\n";
 
-        if ( $code != null ) {
+        if ($code != null) {
             $errorMessage = self::logs_date_time() . $msg . " (Code: " . $code . ")" . "\n";
         }
         $errorMessage .= "--------------\n";
 
-        $current_options[ 'error_messages' ] = $current_options[ 'error_messages' ] . $errorMessage;
-        update_option( TlsHubSubscriberWP::get_option_name(), $current_options );
+        $current_options['error_messages'] = $current_options['error_messages'] . $errorMessage;
+        update_option(TlsHubSubscriberWP::get_option_name(), $current_options);
     }
 }

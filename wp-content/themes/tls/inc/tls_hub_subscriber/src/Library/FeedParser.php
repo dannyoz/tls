@@ -16,6 +16,5 @@ interface FeedParser
      *
      * @return mixed
      */
-    public function parseFeed( $feed );
-
+    public function parseFeed($feed);
 }
