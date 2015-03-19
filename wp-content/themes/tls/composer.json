@@ -1,8 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Tls\\": "inc/",
-      "Tls\\TlsHubSubscriber\\": "inc/tls_hub_subscriber/"
+      "Tls\\": "inc/"
     }
   },
   "require": {

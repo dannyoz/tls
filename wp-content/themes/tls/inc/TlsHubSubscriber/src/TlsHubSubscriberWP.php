@@ -1,4 +1,6 @@
-<?php namespace Tls\TlsHubSubscriber;
+<?php
+
+namespace Tls\TlsHubSubscriber;
 
 use Tls\TlsHubSubscriber\Library\HubSubscriber;
 
@@ -306,10 +308,10 @@ class TlsHubSubscriberWP
      */
     public function hub_action_javascript()
     {
-        wp_enqueue_script('tls-hub-action-js', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/js/tls-hub-action.js');
+        wp_enqueue_script('tls-hub-action-js', TLS_THEME_URI . '/inc/TlsHubSubscriber/src/js/tls-hub-action.js');
         wp_localize_script('tls-hub-action-js', 'tls_hub_action',
             array('ajax_admin' => admin_url('admin-ajax.php', 'relative')));
-        wp_enqueue_style('tls-hub-sub-styles', TLS_THEME_URI . '/inc/tls_hub_subscriber/src/css/tls-hub-sub-style.css',
+        wp_enqueue_style('tls-hub-sub-styles', TLS_THEME_URI . '/inc/TlsHubSubscriber/src/css/tls-hub-sub-style.css',
             array(), '', 'all');
     }
 
