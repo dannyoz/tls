@@ -164,10 +164,10 @@ class HubXmlParser implements FeedParser
 
         // Article Review Books
         $books = array();
-        foreach ($article->xpath('//cpi:book') as $book) {
+        foreach ($cpiNamespace->books->book as $book) {
             $books[] = array(
                 'book_title'  => (string) $book->title,
-                'book_author' => (string) $book->author,
+                'book_author' => (string) $book->authorname,
                 'book_info'   => (string) $book->info,
                 'book_isbn'   => (string) $book->isbn
             );
