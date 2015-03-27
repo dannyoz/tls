@@ -22,11 +22,11 @@ class TlsHubSubscriberWP
      * @var array $data Default Values for the Data
      */
     protected $data = array(
-        'subscription_id'     => '',
-        'topic_url'           => '',
-        'hub_url'             => '',
-        'log_messages'        => '',
-        'error_messages'      => '',
+        'subscription_id' => '',
+        'topic_url' => '',
+        'hub_url' => '',
+        'log_messages' => '',
+        'error_messages' => '',
         'subscription_status' => 'Unsubscribed'
     );
 
@@ -48,22 +48,34 @@ class TlsHubSubscriberWP
     {
 
         // Add TLS Hub Subscriber Setting Menu to Admin Menu
-        add_action('admin_menu', array($this, 'tls_hub_subscriber_settings'));
+        add_action('admin_menu', array(
+            $this,
+            'tls_hub_subscriber_settings'
+        ));
 
         // Start TLS Hub Subscriber Settings
-        add_action('admin_init', array($this, 'tls_hub_subscriber_settings_init'));
+        add_action('admin_init', array(
+            $this,
+            'tls_hub_subscriber_settings_init'
+        ));
 
         // Enqueue JavaScript File to handle Ajax Call on Settings Page for the Subscribe and Unsubscribe Button
-        add_action('admin_init', array($this, 'hub_action_javascript'));
+        add_action('admin_init', array(
+            $this,
+            'hub_action_javascript'
+        ));
 
         // Ajax Callback Function to handle the Ajax Response on Settings Page for Subscribe and Unsubscribe actions
-        add_action('wp_ajax_hub_action', array($this, 'hub_action_callback'));
+        add_action('wp_ajax_hub_action', array(
+            $this,
+            'hub_action_callback'
+        ));
 
         // Grab all current options and add them to the $current_options variable
         $this->current_options = $this->get_current_options();
 
         // Start TLS Hub Subscriber FE Class
-        $TlsHubSubscriberFE       = new TlsHubSubscriberFE(self::$option_name, $this->current_options);
+        $TlsHubSubscriberFE = new TlsHubSubscriberFE(self::$option_name, $this->current_options);
         $this->TlsHubSubscriberFE = $TlsHubSubscriberFE;
     }
 
@@ -92,7 +104,10 @@ class TlsHubSubscriberWP
      */
     public function tls_hub_subscriber_settings_init()
     {
-        register_setting('tls_hub_subscriber_options', self::$option_name, array($this, 'tls_hub_sub_validate'));
+        register_setting('tls_hub_subscriber_options', self::$option_name, array(
+            $this,
+            'tls_hub_sub_validate'
+        ));
     }
 
     /**
@@ -106,7 +121,10 @@ class TlsHubSubscriberWP
             'manage_options',
             // Minimum required capability of users to access this menu
             'tls-hub-subscriber',                                    // Slug used to access this menu item
-            array($this, 'render_tls_hub_subscriber_settings'),
+            array(
+                $this,
+                'render_tls_hub_subscriber_settings'
+            ),
             // Name of the function used to display the page content
             'dashicons-rss'                                        // Icon to display in the admin menu
         );
@@ -247,20 +265,20 @@ class TlsHubSubscriberWP
         //  Start empty $valid variable and do initial text field sanitization
         $valid = array();
 
-        $valid['subscription_id']     = (isset($input['subscription_id'])) ? sanitize_text_field($input['subscription_id']) : '';
+        $valid['subscription_id'] = (isset($input['subscription_id'])) ? sanitize_text_field($input['subscription_id']) : '';
         $valid['subscription_status'] = (isset($input['subscription_status'])) ? sanitize_text_field($input['subscription_status']) : '';
 
-        $valid['topic_url']      = sanitize_text_field($input['topic_url']);
-        $valid['hub_url']        = sanitize_text_field($input['hub_url']);
-        $valid['log_messages']   = esc_textarea($input['log_messages']);
+        $valid['topic_url'] = sanitize_text_field($input['topic_url']);
+        $valid['hub_url'] = sanitize_text_field($input['hub_url']);
+        $valid['log_messages'] = esc_textarea($input['log_messages']);
         $valid['error_messages'] = esc_textarea($input['error_messages']);
 
 
         $valid['topic_url'] = $this->validate_url($valid['topic_url'], 'topic_url', 'Topic URL');
-        $valid['hub_url']   = $this->validate_url($valid['hub_url'], 'hub_url', 'Hub URL');
+        $valid['hub_url'] = $this->validate_url($valid['hub_url'], 'hub_url', 'Hub URL');
 
         if (empty($this->current_options['subscription_id']) && empty($valid['subscription_id'])) {
-            $random_number            = substr(number_format(time() * mt_rand(), 0, '', ''), 0, 10);
+            $random_number = substr(number_format(time() * mt_rand(), 0, '', ''), 0, 10);
             $valid['subscription_id'] = $random_number;
         } else {
             $valid['subscription_id'] = $this->current_options['subscription_id'];
@@ -278,9 +296,9 @@ class TlsHubSubscriberWP
     /**
      * Validate URL
      *
-     * @param string $url       URL to be validate
+     * @param string $url URL to be validate
      * @param string $url_field URL field name to be validated
-     * @param string $label     Label for the URL Field being validated
+     * @param string $label Label for the URL Field being validated
      *
      * @return string                Validated URL
      */
@@ -290,7 +308,7 @@ class TlsHubSubscriberWP
         // https://mathiasbynens.be/demo/url-regex
         $urlRegEx = '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iuS';
 
-        if ( ! empty($url) && ! preg_match($urlRegEx, $url)) {
+        if (!empty($url) && !preg_match($urlRegEx, $url)) {
             add_settings_error($url_field,                                            // Setting Title
                 $url_field . '_error',                                // Error ID
                 'Please enter a valid URL for ' . $label,           // Error Message

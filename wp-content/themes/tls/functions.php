@@ -321,6 +321,7 @@ function tls_make_post_excerpt( $content, $word_length = 55 )
     $excerpt_length = apply_filters( 'excerpt_length', $word_length );
     $excerpt_more = apply_filters( 'excerpt_more', '' );
     $text = wp_trim_words( $text, $excerpt_length, '' );
+    $text = $text . " ...";
 
     return $text;
 }

@@ -95,7 +95,7 @@ class HubSubscriber
         $subscribeJson = json_encode(array(
             "callbackUrl" => esc_url($this->callbackUrl),
             // URL Where the Hub will communicate with the WP
-            "topicId"     => esc_url($this->current_options['topic_url'])
+            "topicId" => esc_url($this->current_options['topic_url'])
             // URL of topic we are subscribing to
         ), JSON_UNESCAPED_SLASHES);
 
@@ -106,7 +106,11 @@ class HubSubscriber
         $subscribeResponse = $this->guzzleClient->send($subscribeRequest);
 
         // Check if Response is 200, 202 or 204 and add a log message otherwise log error message
-        if (in_array($subscribeResponse->getStatusCode(), array(200, 202, 204))) {
+        if (in_array($subscribeResponse->getStatusCode(), array(
+            200,
+            202,
+            204
+        ))) {
             HubLogger::log('Your Subscription request is being processed. Check back later to see if you are fully Subscribed',
                 $subscribeResponse->getStatusCode());
 
@@ -129,7 +133,7 @@ class HubSubscriber
         // TODO: Remove this before going live
         if (isset($_GET['tls_hub_debug']) && $_GET['tls_hub_debug'] == true) {
             if (isset($_GET['manual_pull']) && isset($_GET['pull_url'])) {
-                $feed       = file_get_contents(esc_url($_GET['pull_url']));
+                $feed = file_get_contents(esc_url($_GET['pull_url']));
                 $feedParser = new HubXmlParser($this->option_name, $this->current_options);
                 $feedParser->parseFeed($feed);
                 header('HTTP/1.1 200 "Found"', null, 200);
@@ -165,7 +169,7 @@ class HubSubscriber
         }
 
         // If HTTP Header does not contain the HTTP_X_AMZ_SNS_MESSAGE_TYPE header that the Hub sends then give a 404
-        if ( ! isset($_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'])) {
+        if (!isset($_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'])) {
             header('HTTP/1.1 404 "Not Found"', null, 404);
             exit();
         }
@@ -212,13 +216,17 @@ class HubSubscriber
 
         // Grab the JSON Payload being sent from the Hub and Decode it
         $jsonPayload = file_get_contents('php://input');
-        $json        = json_decode($jsonPayload);
+        $json = json_decode($jsonPayload);
 
         // Perform a GET Request using Guzzle on the SubscribeURL that JSON Payload sent
         $verificationResponse = $this->guzzleClient->get($json->SubscribeURL);
 
         // Check if Response is 200, 202 or 204 and add a log message otherwise log error message
-        if (in_array($verificationResponse->getStatusCode(), array(200, 202, 204))) {
+        if (in_array($verificationResponse->getStatusCode(), array(
+            200,
+            202,
+            204
+        ))) {
             $this->current_options['subscription_status'] = 'Subscribed';
             update_option($this->option_name, $this->current_options);
 

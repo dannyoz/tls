@@ -15,14 +15,26 @@ class ThemeOptions
     {
 
         // Enqueue Scripts and Styles for Thickbox Uploader and Theme Options Scripts
-        add_action( 'admin_enqueue_scripts', array( $this, 'tls_theme_options_scripts' ) );
+        add_action('admin_enqueue_scripts', array(
+            $this,
+            'tls_theme_options_scripts'
+        ));
         // Set Up Theme Options Thickbox Uploader to change button text
-        add_action( 'admin_init', array( $this, 'tls_options_setup' ) );
+        add_action('admin_init', array(
+            $this,
+            'tls_options_setup'
+        ));
 
         // Add TLS Theme Options Page
-        add_action( 'admin_menu', array( $this, 'tls_theme_options_page' ) );
+        add_action('admin_menu', array(
+            $this,
+            'tls_theme_options_page'
+        ));
         // Initialize TLS Theme Options
-        add_action( 'admin_init', array( $this, 'tls_initialise_theme_options' ) );
+        add_action('admin_init', array(
+            $this,
+            'tls_initialise_theme_options'
+        ));
     }
 
     /*================================*
@@ -34,16 +46,20 @@ class ThemeOptions
      */
     function tls_theme_options_scripts()
     {
-        wp_register_script( 'tls-upload', get_stylesheet_directory_uri() . '/js/tls-upload.js', array( 'jquery', 'media-upload', 'thickbox' ) );
+        wp_register_script('tls-upload', get_stylesheet_directory_uri() . '/js/tls-upload.js', array(
+            'jquery',
+            'media-upload',
+            'thickbox'
+        ));
 
-        if ( 'appearance_page_tls_theme_options' == get_current_screen()->id ) {
-            wp_enqueue_script( 'jquery' );
+        if ('appearance_page_tls_theme_options' == get_current_screen()->id) {
+            wp_enqueue_script('jquery');
 
-            wp_enqueue_script( 'thickbox' );
-            wp_enqueue_style( 'thickbox' );
+            wp_enqueue_script('thickbox');
+            wp_enqueue_style('thickbox');
 
-            wp_enqueue_script( 'media-upload' );
-            wp_enqueue_script( 'tls-upload' );
+            wp_enqueue_script('media-upload');
+            wp_enqueue_script('tls-upload');
 
         }
 
@@ -56,9 +72,14 @@ class ThemeOptions
     {
         global $pagenow;
 
-        if ( 'media-upload.php' == $pagenow || 'async-upload.php' == $pagenow ) {
+        if ('media-upload.php' == $pagenow || 'async-upload.php' == $pagenow) {
             // Now we'll replace the 'Insert into Post Button' inside Thickbox
-            add_filter( 'gettext', array( $this, 'tls_replace_thickbox_text', 1, 3 ) );
+            add_filter('gettext', array(
+                $this,
+                'tls_replace_thickbox_text',
+                1,
+                3
+            ));
         }
     }
 
@@ -67,16 +88,17 @@ class ThemeOptions
      *
      * @param string $translated_text Translated text. Only used to return the new text
      * @param string $text            Text to be used. This is the text we will change
-     * @param string $domain          Text Domain. Not used but it is one of the arguments that needs to be there so set it to null
+     * @param string $domain          Text Domain. Not used but it is one of the arguments that needs to be there so
+     *                                set it to null
      *
      * @return string $translated_text    New Changed text
      */
-    function tls_replace_thickbox_text( $translated_text, $text, $domain = null )
+    function tls_replace_thickbox_text($translated_text, $text, $domain = null)
     {
-        if ( 'Insert into Post' == $text ) {
-            $referer = strpos( wp_get_referer(), 'tls_theme_options' );
-            if ( $referer != '' ) {
-                return __( 'Select Classifieds PDF', 'tls' );
+        if ('Insert into Post' == $text) {
+            $referer = strpos(wp_get_referer(), 'tls_theme_options');
+            if ($referer != '') {
+                return __('Select Classifieds PDF', 'tls');
             }
         }
 
@@ -94,12 +116,15 @@ class ThemeOptions
     function tls_theme_options_page()
     {
 
-        add_submenu_page( 'themes.php',                                        // Parent page slug
+        add_submenu_page('themes.php',                                        // Parent page slug
             'TLS Theme Options',                                // Text displayed in the browser title bar
             'Theme Options',                                    // Text used for the menu item
-            'manage_options',                                    // Minimum required capability of users to access this menu
+            'manage_options',// Minimum required capability of users to access this menu
             'tls_theme_options',                                // Slug used to access this menu item
-            array( $this, 'tls_theme_options_display' )            // Name of the function used to display the page content
+            array(
+                $this,
+                'tls_theme_options_display'
+            )            // Name of the function used to display the page content
         );
 
     } // End of tls_theme_options_page
@@ -117,48 +142,66 @@ class ThemeOptions
     {
 
         // Add New 'theme_options_section' Section to be rendered on the new options page
-        add_settings_section( 'theme_options_section',                            // The ID used for this section in attribute tags
+        add_settings_section('theme_options_section',// The ID used for this section in attribute tags
             'Social Media Links',                                // The title of the section rendered to the screen
-            array( $this, 'theme_options_section_display' ),    // Callback function used to render the options for this section
+            array(
+                $this,
+                'theme_options_section_display'
+            ),    // Callback function used to render the options for this section
             'tls_theme_options'                                    // The ID (or slug) of the page on which this section is rendered
         );
 
         // Define Facebook URL Setting Field
-        add_settings_field( 'facebook_url',                                        // The ID (or the name) of the field
+        add_settings_field('facebook_url',                                        // The ID (or the name) of the field
             'Facebook URL',                                        // The text used for the label of the field
-            array( $this, 'tls_facebook_url_display' ),            // The callback function used to render the field
-            'tls_theme_options',                                // The ID (or slug) of the page on which this field is rendered
+            array(
+                $this,
+                'tls_facebook_url_display'
+            ),            // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
             'theme_options_section'                                // The section to which setting is added
         );
 
         // Define Facebook URL Setting Field
-        add_settings_field( 'twitter_url',                                        // The ID (or the name) of the field
+        add_settings_field('twitter_url',                                        // The ID (or the name) of the field
             'Twitter URL',                                        // The text used for the label of the field
-            array( $this, 'tls_twitter_url_display' ),            // The callback function used to render the field
-            'tls_theme_options',                                // The ID (or slug) of the page on which this field is rendered
+            array(
+                $this,
+                'tls_twitter_url_display'
+            ),            // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
             'theme_options_section'                                // The section to which setting is added
         );
 
         // Define Facebook URL Setting Field
-        add_settings_field( 'classifieds_pdf',                                    // The ID (or the name) of the field
+        add_settings_field('classifieds_pdf',                                    // The ID (or the name) of the field
             'Classifieds PDF File',                                // The text used for the label of the field
-            array( $this, 'tls_classifieds_pdf_display' ),        // The callback function used to render the field
-            'tls_theme_options',                                // The ID (or slug) of the page on which this field is rendered
+            array(
+                $this,
+                'tls_classifieds_pdf_display'
+            ),        // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
             'theme_options_section'                                // The section to which setting is added
         );
 
         // Define Facebook URL Setting Field
-        add_settings_field( 'tls_tealium',                                        // The ID (or the name) of the field
+        add_settings_field('tls_tealium',                                        // The ID (or the name) of the field
             'Tealium Environment Variable',                        // The text used for the label of the field
-            array( $this, 'tls_tealium_display' ),                // The callback function used to render the field
-            'tls_theme_options',                                // The ID (or slug) of the page on which this field is rendered
+            array(
+                $this,
+                'tls_tealium_display'
+            ),                // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
             'theme_options_section'                                // The section to which setting is added
         );
 
         // Register the 'facebook_url' setting with the 'General' section
-        register_setting( 'theme_options_section',                            // Name of section to which setting is registered to
+        register_setting('theme_options_section',// Name of section to which setting is registered to
             'theme_options_settings',                            // Name of the field setting,
-            array( $this, 'tls_sanitise_theme_options' )        // Sanitise callback function
+            array(
+                $this,
+                'tls_sanitise_theme_options'
+            )        // Sanitise callback function
         );
 
     } // End of tls_initialise_theme_options
@@ -186,10 +229,10 @@ class ThemeOptions
                 <?php
 
                 // Render the settings for the settings identified as 'Social Media Links'. Parameter is the id for the settings group used in the register_setting
-                settings_fields( 'theme_options_section' );
+                settings_fields('theme_options_section');
 
                 // Render all of the settings for the 'tls_theme_options' section page. Parameter should be the id of the page used in add_settings_section
-                do_settings_sections( 'tls_theme_options' );
+                do_settings_sections('tls_theme_options');
 
                 // Add Submit button to save and serialise the options
                 submit_button();
@@ -214,8 +257,8 @@ class ThemeOptions
     function tls_facebook_url_display()
     {
 
-        $options = (array) get_option( 'theme_options_settings' );
-        $facebook_url = ( isset( $options[ 'facebook_url' ] ) ) ? $options[ 'facebook_url' ] : '';
+        $options = (array)get_option('theme_options_settings');
+        $facebook_url = (isset($options['facebook_url'])) ? $options['facebook_url'] : '';
 
         echo '<input type="text" name="theme_options_settings[facebook_url]" id="theme_options_settings_facebook_url" value="' . $facebook_url . '">';
     } // End of tls_facebook_url_display
@@ -226,8 +269,8 @@ class ThemeOptions
     function tls_twitter_url_display()
     {
 
-        $options = (array) get_option( 'theme_options_settings' );
-        $twitter_url = ( isset( $options[ 'twitter_url' ] ) ) ? $options[ 'twitter_url' ] : '';
+        $options = (array)get_option('theme_options_settings');
+        $twitter_url = (isset($options['twitter_url'])) ? $options['twitter_url'] : '';
 
         echo '<input type="text" name="theme_options_settings[twitter_url]" id="theme_options_settings_twitter_url" value="' . $twitter_url . '">';
     } // End of tls_twitter_url_display
@@ -238,14 +281,14 @@ class ThemeOptions
     function tls_classifieds_pdf_display()
     {
 
-        $options = (array) get_option( 'theme_options_settings' );
-        $classifieds_pdf = ( isset( $options[ 'classifieds_pdf' ] ) ) ? $options[ 'classifieds_pdf' ] : '';
+        $options = (array)get_option('theme_options_settings');
+        $classifieds_pdf = (isset($options['classifieds_pdf'])) ? $options['classifieds_pdf'] : '';
         ?>
         <input type="text" id="classifieds_pdf_url" name="theme_options_settings[classifieds_pdf]"
-               value="<?php echo esc_url( $classifieds_pdf ); ?>"/>
+               value="<?php echo esc_url($classifieds_pdf); ?>"/>
         <input id="upload_classifieds_button" type="button" class="button"
-               value="<?php _e( 'Upload Classifieds', 'tls' ); ?>"/>
-        <span class="description"><?php _e( 'Upload a PDF File for the Classifieds.', 'tls' ); ?></span>
+               value="<?php _e('Upload Classifieds', 'tls'); ?>"/>
+        <span class="description"><?php _e('Upload a PDF File for the Classifieds.', 'tls'); ?></span>
     <?php } // End of tls_classifieds_pdf_display
 
     /**
@@ -254,17 +297,21 @@ class ThemeOptions
     function tls_tealium_display()
     {
 
-        $options = (array) get_option( 'theme_options_settings' );
-        $tls_tealium = ( isset( $options[ 'tls_tealium' ] ) ) ? $options[ 'tls_tealium' ] : '';
+        $options = (array)get_option('theme_options_settings');
+        $tls_tealium = (isset($options['tls_tealium'])) ? $options['tls_tealium'] : '';
 
-        $environment_options = array( 'dev' => 'Development', 'qa' => 'Testing/QA', 'prod' => 'Production' );
+        $environment_options = array(
+            'dev' => 'Development',
+            'qa' => 'Testing/QA',
+            'prod' => 'Production'
+        );
         ?>
 
         <select name="theme_options_settings[tls_tealium]" id="theme_options_settings_tls_tealium">
             <option value=""> -- Select A Tealium Environment --</option>
-            <?php foreach ( $environment_options as $environment_key => $environment_value ) : ?>
+            <?php foreach ($environment_options as $environment_key => $environment_value) : ?>
                 <option
-                    value="<?php echo $environment_key; ?>" <?php echo ( $tls_tealium == $environment_key ) ? 'selected' : ''; ?>><?php echo $environment_value; ?></option>
+                    value="<?php echo $environment_key; ?>" <?php echo ($tls_tealium == $environment_key) ? 'selected' : ''; ?>><?php echo $environment_value; ?></option>
             <?php endforeach; ?>
         </select>
     <?php
@@ -277,13 +324,13 @@ class ThemeOptions
      *
      * @return array    $sanitised_options    The array of sanitised options
      */
-    function tls_sanitise_theme_options( $theme_options )
+    function tls_sanitise_theme_options($theme_options)
     {
 
         $sanitised_options = array();
 
-        foreach ( $theme_options as $option_key => $option_value ) {
-            $sanitised_options[ $option_key ] = strip_tags( stripslashes( $option_value ) );
+        foreach ($theme_options as $option_key => $option_value) {
+            $sanitised_options[$option_key] = strip_tags(stripslashes($option_value));
         } // end foreach
 
         return $sanitised_options;
