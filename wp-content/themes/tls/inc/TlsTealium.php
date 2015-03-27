@@ -126,17 +126,17 @@ class TlsTealium
 
                                                 $article_id = get_the_ID(); // Get Article ID
                                                 $article = get_post($article_id); // Get Article Post
-                                                $article_visibility = wp_get_post_terms($article_id,
-                                                    'article_visibility'); // Get Article Visibility
-                                                $article_section = wp_get_post_terms($article_id,
-                                                    'article_section'); // Get article Section
+                                                $article_visibility = wp_get_post_terms($article_id, 'article_visibility'); // Get Article Visibility
+                                                $article_section = wp_get_post_terms($article_id, 'article_section'); // Get article Section
                                                 $article_custom = get_post_custom($article_id); // Get article's custom fields
                                                 $page_type = ($article_visibility[0]->slug == 'public') ? 'public' : 'subscriber'; // If article is public assign 'public' to variable $page_type otherwise assign 'subscriber'. This is used later on for the page_type in the tealium data object
                                                 $page_restriction = ($article_visibility[0]->slug == 'public') ? 'public' : 'restricted'; // If article is public assign 'public' to $page_restriction variable otherwise assign 'restricted'. This is used later on the page_restrictions in the tealium data object
                                                 // Single Article Tealium Data Object
-                                                $tealium_data = $this->tealium_data($article_id . ':' . $article->post_title,
+                                                $tealium_data = $this->tealium_data(
+                                                    $article_id . ':' . $article->post_title,
                                                     'article:' . $page_type,
-                                                    html_entity_decode($article_section[0]->name), $page_restriction,
+                                                    (!empty($article_section)) ? html_entity_decode($article_section[0]->name) : '',
+                                                    $page_restriction,
                                                     array(
                                                         'article_name' => $article->post_title,
                                                         'article_publish_timestamp' => strtolower(date('Y/m/d H:i l',
