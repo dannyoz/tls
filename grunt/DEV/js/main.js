@@ -30129,22 +30129,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			$scope.pageCount = result.pages
 
 			//Inserts Discover Ads to cards
-			var mpuObj = [{
-					id: 'discover-1',
-					order: 4
-				},
-				{
-					id: 'discover-2',
-					order: 10
-				}];
+			// var mpuObj = [{
+			// 		id: 'discover-1',
+			// 		order: 4
+			// 	},
+			// 	{
+			// 		id: 'discover-2',
+			// 		order: 10
+			// 	}];
 
-			mpu.insert(result.top_articles, mpuObj[0]).then(function (result){
-				result.top_articles = result;
-			});
+			// mpu.insert(result.top_articles, mpuObj[0]).then(function (result){
+			// 	result.top_articles = result;
+			// });
 
-			mpu.insert(result.top_articles, mpuObj[1]).then(function (result){
-				result.top_articles = result;
-			});
+			// mpu.insert(result.top_articles, mpuObj[1]).then(function (result){
+			// 	result.top_articles = result;
+			// });
 
 			columns.divide(result.top_articles).then(function (cols){
 				$scope.topCol1  = cols.col1

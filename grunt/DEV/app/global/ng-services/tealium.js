@@ -10,7 +10,7 @@
 		}
 	};
 
-	var utagLink = function utagLink(tags) {
+	var utagLink = function utagLink(tags) {		
 		try {
 			if(utag) {
 				utag.link(tags);
@@ -104,7 +104,7 @@
 				"page_name" : utag_data.page_name
 			}
 
-			debugBar(tags, 'Link');
+			//debugBar(tags, 'Link');
 			utagLink(tags);
 
 			return tags
@@ -125,7 +125,7 @@
 		exitLink : function(platform){
 
 			var tags = {
-				"event_navigation_action" : "engagement",
+				"event_navigation_action" : "navigation",
 				"event_navigation_name" : "exit link:" + platform,
 				"event_navigation_browsing_method" : "click"
 			}
@@ -167,8 +167,8 @@
 				"event_navigation_name" : dir +":"+ title,
 				"event_navigation_browsing_method" : "click"
 			}
-
-			//debugBar(tags, 'Link');
+			//debugBar(tags, 'Link');			
+			console.log(tags);
 			utagLink(tags);
 
 			return tags
