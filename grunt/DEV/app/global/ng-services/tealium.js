@@ -167,8 +167,7 @@
 				"event_navigation_name" : dir +":"+ title,
 				"event_navigation_browsing_method" : "click"
 			}
-			//debugBar(tags, 'Link');			
-			console.log(tags);
+			//debugBar(tags, 'Link');	
 			utagLink(tags);
 
 			return tags
