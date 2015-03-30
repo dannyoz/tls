@@ -86,10 +86,12 @@ class HubXmlParser implements FeedParser
 
         $article_entry_published = new Carbon($article->published);
         $article_entry_updated = new Carbon($article->updated);
+        
+        $article_content_copy = html_entity_decode(htmlspecialchars_decode($cpiNamespace->copy), ENT_QUOTES, 'UTF-8');
 
         // Add all the Article Data into an array
         $article_data = array(
-            'post_content' => $cpiNamespace->copy,
+            'post_content' => $article_content_copy,
             // The full text of the post.
             'post_title' => wp_strip_all_tags($cpiNamespace->headline),
             // The title of your post.
