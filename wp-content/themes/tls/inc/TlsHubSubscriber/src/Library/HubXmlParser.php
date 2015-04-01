@@ -88,7 +88,7 @@ class HubXmlParser implements FeedParser
         $article_entry_updated = new Carbon($article->updated);
         
         $article_content_copy = html_entity_decode(htmlspecialchars_decode($cpiNamespace->copy), ENT_QUOTES, 'UTF-8');
-        $article_content_copy = trim(preg_replace('/\s\s+/', ' ', $article_content_copy));
+        $article_content_copy = trim(preg_replace('/\s+/', ' ', $article_content_copy));
 
         // Add all the Article Data into an array
         $article_data = array(
