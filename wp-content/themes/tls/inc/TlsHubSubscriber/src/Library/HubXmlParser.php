@@ -2,6 +2,8 @@
 
 namespace Tls\TlsHubSubscriber\Library;
 
+require_once(ABSPATH . 'wp-admin/includes/file.php');
+require_once(ABSPATH . 'wp-admin/includes/media.php');
 use Carbon\Carbon;
 use WP_Query;
 
@@ -78,6 +80,37 @@ class HubXmlParser implements FeedParser
 
         // Get all cpi: nodes from the XML
         $cpiNamespace = $article->children('cpi', true);
+
+        foreach ($article->link as $link) {
+            if ($link->attributes()->rel == 'related') {
+                // Related Image XML
+                $related_image_xml = simplexml_load_file((string) $link->attributes()->href);
+
+                $image_url = (string) $related_image_xml->link->attributes()->href;
+
+                $image_type = explode('/', (string) $related_image_xml->link->attributes()->type);
+                $image_extension = array_pop($image_type);
+
+                $tmp = download_url($image_url);
+                $file_array = array(
+                    'name'      => $related_image_xml->title . '.' . $image_extension,
+                    'type'      => $image_type,
+                    'tmp_name'  => $tmp
+                );
+
+                // Check for download errors
+                if ( is_wp_error( $tmp ) ) {
+                    @unlink( $file_array[ 'tmp_name' ] );
+                    return $tmp;
+                }
+
+                $wp_image_media_id = media_handle_sideload($file_array, 0);
+
+                var_dump($wp_image_media_id);
+            }
+        }
+        die(exit());
+
 
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
