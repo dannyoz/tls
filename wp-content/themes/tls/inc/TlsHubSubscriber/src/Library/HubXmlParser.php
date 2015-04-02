@@ -171,8 +171,6 @@ class HubXmlParser implements FeedParser
             $full_image_attachment_id = $related_images['full_image_attachment_id'];
         } else if (isset($related_images['main_image_attachment_id'])) {
             $full_image_attachment_id = $related_images['main_image_attachment_id'];
-        } else {
-            $full_image_attachment_id = '';
         }
 
         // Add all the Custom Fields' data into an array
@@ -185,11 +183,11 @@ class HubXmlParser implements FeedParser
             // Author Name
             'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
             // Thumbnail Image
-            'field_54e4d481b009a' => ($related_images['thumbnail_image_attachment_id']) ?: '',
+            'field_54e4d481b009a' => isset($related_images['thumbnail_image_attachment_id']) ?: '',
             // Full Image
-            'field_54e4d4a5b009b' => $full_image_attachment_id,
+            'field_54e4d4a5b009b' => isset($full_image_attachment_id) ?: '',
             // Hero Image
-            'field_54e4d4b3b009c' => ($related_images['hero_image_attachment_id']) ?: ''
+            'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: ''
 
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
@@ -353,7 +351,8 @@ class HubXmlParser implements FeedParser
         }
 
         // Related Image XML
-        $related_image_xml = simplexml_load_file((string) $href);
+        $related_image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
+        $imageCpiNamespace = $related_image_xml->children('cpi', true);
 
         $image_url = (string) $related_image_xml->link->attributes()->href;
 
@@ -383,7 +382,7 @@ class HubXmlParser implements FeedParser
         }
 
         // Sideload Image to Media
-        $image_upload_id = media_handle_sideload($file_array, 0);
+        $image_upload_id = media_handle_sideload($file_array, 0, (string) $imageCpiNamespace->description);
 
         // Check for handle sideload errors.
         if ( is_wp_error( $image_upload_id ) ) {
