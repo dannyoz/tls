@@ -4,6 +4,8 @@ namespace Tls\TlsHubSubscriber\Library;
 
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 require_once(ABSPATH . 'wp-admin/includes/media.php');
+require_once(ABSPATH . 'wp-admin/includes/image.php');
+
 use Carbon\Carbon;
 use WP_Query;
 
@@ -81,36 +83,16 @@ class HubXmlParser implements FeedParser
         // Get all cpi: nodes from the XML
         $cpiNamespace = $article->children('cpi', true);
 
+        // Download related images
+        $related_images = array();
         foreach ($article->link as $link) {
             if ($link->attributes()->rel == 'related') {
-                // Related Image XML
-                $related_image_xml = simplexml_load_file((string) $link->attributes()->href);
 
-                $image_url = (string) $related_image_xml->link->attributes()->href;
+                $image = $this->handleImageUpload($link->attributes()->href, $link->attributes()->option);
+                $related_images += $image;
 
-                $image_type = explode('/', (string) $related_image_xml->link->attributes()->type);
-                $image_extension = array_pop($image_type);
-
-                $tmp = download_url($image_url);
-                $file_array = array(
-                    'name'      => $related_image_xml->title . '.' . $image_extension,
-                    'type'      => $image_type,
-                    'tmp_name'  => $tmp
-                );
-
-                // Check for download errors
-                if ( is_wp_error( $tmp ) ) {
-                    @unlink( $file_array[ 'tmp_name' ] );
-                    return $tmp;
-                }
-
-                $wp_image_media_id = media_handle_sideload($file_array, 0);
-
-                var_dump($wp_image_media_id);
             }
         }
-        die(exit());
-
 
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
@@ -185,6 +167,14 @@ class HubXmlParser implements FeedParser
         $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
 
         // TODO: Import of images into the local installation of WP
+        if (isset($related_images['full_image_attachment_id'])) {
+            $full_image_attachment_id = $related_images['full_image_attachment_id'];
+        } else if (isset($related_images['main_image_attachment_id'])) {
+            $full_image_attachment_id = $related_images['main_image_attachment_id'];
+        } else {
+            $full_image_attachment_id = '';
+        }
+
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
             'field_54e4d372b0093' => (string)$article_entry_id,
@@ -194,13 +184,13 @@ class HubXmlParser implements FeedParser
             'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
             // Author Name
             'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
-            // Teaser Summary
-            'field_54e4d481b009a' => '',
             // Thumbnail Image
-            'field_54e4d4a5b009b' => '',
+            'field_54e4d481b009a' => ($related_images['thumbnail_image_attachment_id']) ?: '',
             // Full Image
-            'field_54e4d4b3b009c' => ''
+            'field_54e4d4a5b009b' => $full_image_attachment_id,
             // Hero Image
+            'field_54e4d4b3b009c' => ($related_images['hero_image_attachment_id']) ?: ''
+
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
@@ -340,5 +330,79 @@ class HubXmlParser implements FeedParser
         }
 
         return true;
+    }
+
+    /**
+     * Download Images from URL
+     *
+     * @param $href
+     *
+     * @return array
+     */
+    private function handleImageUpload($href)
+    {
+
+        if (strpos($href, '440x220')) {
+            $image_option = 'thumbnail_image';
+        } else if (strpos($href, '1280x490')) {
+            $image_option = 'hero_image';
+        } else if (strpos($href, '760x320')) {
+            $image_option = 'full_image';
+        } else if (strpos($href, '.main_image')) {
+            $image_option = 'main_image';
+        }
+
+        // Related Image XML
+        $related_image_xml = simplexml_load_file((string) $href);
+
+        $image_url = (string) $related_image_xml->link->attributes()->href;
+
+        $image_type = explode('/', (string) $related_image_xml->link->attributes()->type);
+        $image_extension = array_pop($image_type);
+
+        $temp_file = download_url($image_url, 500);
+        $file_array = array(
+            'name'      => $related_image_xml->title . '.' . $image_extension,
+            'type'      => $image_type,
+            'tmp_name'  => $temp_file,
+            'error'     => 0,
+            'size'      => filesize($temp_file),
+        );
+
+        // Check for download errors
+        if ( is_wp_error( $temp_file ) ) {
+            @unlink( $file_array[ 'tmp_name' ] );
+
+            $errors = $temp_file->get_error_messages();
+            $error_msg = "Failed downloading image from url: " . $image_url . "\n";
+            foreach ($errors as $error) {
+                $error_msg .= "\t" . $error;
+            }
+            HubLogger::error($error_msg);
+
+        }
+
+        // Sideload Image to Media
+        $image_upload_id = media_handle_sideload($file_array, 0);
+
+        // Check for handle sideload errors.
+        if ( is_wp_error( $image_upload_id ) ) {
+            @unlink( $file_array['tmp_name'] );
+
+            $errors = $image_upload_id->get_error_messages();
+            $error_msg = "Failed downloading image: " . $image_url . "\n";
+            foreach ($errors as $error) {
+                $error_msg .= "\t" . $error;
+            }
+            HubLogger::error($error_msg);
+        }
+
+        if (empty($image_option)) {
+            return null;
+        }
+
+        return array(
+            $image_option . '_attachment_id' => $image_upload_id
+        );
     }
 }
