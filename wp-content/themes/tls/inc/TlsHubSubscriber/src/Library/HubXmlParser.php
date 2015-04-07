@@ -86,17 +86,6 @@ class HubXmlParser implements FeedParser
         // Get all cpi: nodes from the XML
         $cpiNamespace = $article->children('cpi', true);
 
-        // Download related images
-        $related_images = array();
-        foreach ($article->link as $link) {
-            if ($link->attributes()->rel == 'related') {
-
-                $image = $this->handleImageUpload($link->attributes()->href, $link->attributes()->option);
-                $related_images += $image;
-
-            }
-        }
-
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
         $article_id_url = explode('/', $article->id);
@@ -104,9 +93,37 @@ class HubXmlParser implements FeedParser
 
         $article_entry_published = new Carbon($article->published);
         $article_entry_updated = new Carbon($article->updated);
-        
+
         $article_content_copy = html_entity_decode(htmlspecialchars_decode($cpiNamespace->copy), ENT_QUOTES, 'UTF-8');
         $article_content_copy = trim(preg_replace('/\s+/', ' ', $article_content_copy));
+
+        // Get all of the Inline Images
+        preg_match_all("|<link(.+?)\/>|mis", (string) $article_content_copy, $content_inline_images_matches);
+
+        if ($content_inline_images_matches > 0) {
+            $inline_images = array();
+            $inline_image_counter = 0;
+            foreach ($content_inline_images_matches[0] as $content_inline_images_match) {
+                $inline_image_obj = simplexml_load_string($content_inline_images_match);
+
+                $inline_img = $this->handleImageUpload($inline_image_obj->attributes()->href, true,
+                    $inline_image_counter);
+                $inline_images += $inline_img;
+
+                $inline_image_counter++;
+            }
+        }
+
+        // Download related images
+        $related_images = array();
+        foreach ($article->link as $link) {
+            if ($link->attributes()->rel == 'related') {
+
+                $image = $this->handleImageUpload($link->attributes()->href);
+                $related_images += $image;
+
+            }
+        }
 
         // Add all the Article Data into an array
         $article_data = array(
@@ -186,6 +203,9 @@ class HubXmlParser implements FeedParser
         $this->saveArticleCustomFields($books, $article_id, 'field_54edde1e60d80'); // Books
 
 
+        /*
+         * Attach all related Images to the article
+         */
         if (isset($related_images['full_image_attachment_id'])) {
             $full_image_attachment_id = $related_images['full_image_attachment_id'];
         } else if (isset($related_images['main_image_attachment_id'])) {
@@ -213,6 +233,24 @@ class HubXmlParser implements FeedParser
         // using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
 
+        /*
+         * Search and replace all Inline Images with downloaded images.
+         */
+        if ($content_inline_images_matches > 0) {
+            $content_with_inline_images = $this->searchReplaceInlineImages(
+                $article_content_copy,
+                $content_inline_images_matches[0],
+                $inline_images
+            );
+
+            $inline_images_updated_article_data = array(
+                'ID'            => $article_id,
+                'post_content'  => $content_with_inline_images
+            );
+
+            $this->saveArticleData($inline_images_updated_article_data, true);
+
+        }
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
@@ -343,35 +381,46 @@ class HubXmlParser implements FeedParser
     /**
      * Download Images from URL
      *
-     * @param $href
+     * @param string     $href
+     * @param bool       $inline_image
+     * @param string|int $image_counter
      *
      * @return array
      */
-    private function handleImageUpload($href)
+    private function handleImageUpload($href, $inline_image = false, $image_counter = '')
     {
 
-        if (strpos($href, '440x220')) {
-            $image_option = 'thumbnail_image';
-        } else if (strpos($href, '1280x490')) {
-            $image_option = 'hero_image';
-        } else if (strpos($href, '760x320')) {
-            $image_option = 'full_image';
-        } else if (strpos($href, '.main_image')) {
-            $image_option = 'main_image';
+        if ($inline_image === false) {
+
+            switch (true) {
+                case strpos($href, '440x220'):
+                    $image_option = 'thumbnail_image';
+                    break;
+                case strpos($href, '1280x490'):
+                    $image_option = 'hero_image';
+                    break;
+                case strpos($href, '760x320'):
+                    $image_option = 'full_image';
+                    break;
+                case strpos($href, '.main_image'):
+                    $image_option = 'main_image';
+                    break;
+            }
+
         }
 
-        // Related Image XML
-        $related_image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
-        $imageCpiNamespace = $related_image_xml->children('cpi', true);
+        // Image XML
+        $image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
+        $imageCpiNamespace = $image_xml->children('cpi', true);
 
-        $image_url = (string) $related_image_xml->link->attributes()->href;
+        $image_url = (string) $image_xml->link->attributes()->href;
 
-        $image_type = explode('/', (string) $related_image_xml->link->attributes()->type);
+        $image_type = explode('/', (string) $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
 
         $temp_file = download_url($image_url, 500);
         $file_array = array(
-            'name'      => $related_image_xml->title . '.' . $image_extension,
+            'name'      => $image_xml->title . '.' . $image_extension,
             'type'      => $image_type,
             'tmp_name'  => $temp_file,
             'error'     => 0,
@@ -406,7 +455,7 @@ class HubXmlParser implements FeedParser
             HubLogger::error($error_msg);
         }
 
-        if (empty($image_option)) {
+        if ($inline_image === false && empty($image_option)) {
             return null;
         }
 
@@ -428,8 +477,39 @@ class HubXmlParser implements FeedParser
         );
         $this->saveArticleCustomFields($attachment_custom_metadata, $image_upload_id);
 
+        // If it is an inline image and the counter is not null then return Attachment ID with image counter
+        if ($inline_image === true && $image_counter !== '') {
+            return array(
+                $image_counter . '_attachment_id' => $image_upload_id
+            );
+        }
+
         return array(
             $image_option . '_attachment_id' => $image_upload_id
         );
+
+    }
+
+    /**
+     * @param string    $article_content
+     * @param array     $inline_images_search
+     * @param array     $inline_images_replace
+     *
+     * @return string   $updated_content
+     */
+    private function searchReplaceInlineImages($article_content, $inline_images_search, $inline_images_replace)
+    {
+        $inline_images_replace_array = array();
+
+        foreach ($inline_images_replace as $inline_image_id) {
+            $image_url = wp_get_attachment_url($inline_image_id);
+            $image_alttext = get_post_meta( $inline_image_id, '_wp_attachment_image_alt', true);
+
+            $inline_images_replace_array[] = "<img src=\"{$image_url}\" alt=\"{$image_alttext}\" />";
+        }
+
+        $updated_content = str_replace($inline_images_search, $inline_images_replace_array, $article_content);
+
+        return $updated_content;
     }
 }
