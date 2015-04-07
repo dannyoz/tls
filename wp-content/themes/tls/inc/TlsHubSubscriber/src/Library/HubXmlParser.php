@@ -92,7 +92,7 @@ class HubXmlParser implements FeedParser
                 $related_images += $image;
 
             }
-        }die(exit());
+        }
 
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
@@ -151,11 +151,12 @@ class HubXmlParser implements FeedParser
 
             if ($article_entry_updated->toDayDateTimeString() <= $last_updated_date->toDayDateTimeString()) {
                 die('This article will not be imported because this article seems older than another one we have');
+            } else {
+                $article_data['ID'] = (int)$articleMatches->posts[0]->ID;
+                $article_id = $this->saveArticleData($article_data, true);
+                $import_type = 'update';
             }
 
-            $article_data['ID'] = (int)$articleMatches->posts[0]->ID;
-            $article_id = $this->saveArticleData($article_data, true);
-            $import_type = 'update';
         }
 
         // Save Article Section Taxonomy Term
@@ -165,20 +166,6 @@ class HubXmlParser implements FeedParser
             'article_visibility');
         // Save Article Tags Taxonomy Terms
         $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
-
-        // Add all the Custom Fields' data into an array
-        $article_custom_fields = array(
-            'field_54e4d372b0093' => (string)$article_entry_id,
-            // Article Feed ID
-            'field_54eb50af14d87' => (string)$article_entry_updated->toDateTimeString(),
-            // Last Updated Date
-            'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
-            // Author Name
-            'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
-
-        );
-        // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
-        $this->saveArticleCustomFields($article_custom_fields, $article_id);
 
         // Article Review Books
         $books = array();
@@ -192,16 +179,23 @@ class HubXmlParser implements FeedParser
         }
         $this->saveArticleCustomFields($books, $article_id, 'field_54edde1e60d80'); // Books
 
-        /*
-         * Attach Related Images to their specific custom fields
-         */
+
         if (isset($related_images['full_image_attachment_id'])) {
             $full_image_attachment_id = $related_images['full_image_attachment_id'];
         } else if (isset($related_images['main_image_attachment_id'])) {
             $full_image_attachment_id = $related_images['main_image_attachment_id'];
         }
 
-        $related_images_custom_fileds = array(
+        // Add all the Custom Fields' data into an array
+        $article_custom_fields = array(
+            // Article Feed ID
+            'field_54e4d372b0093' => (string)$article_entry_id,
+            // Last Updated Date
+            'field_54eb50af14d87' => (string)$article_entry_updated->toDateTimeString(),
+            // Author Name
+            'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
+            // Teaser Summary
+            'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
             // Thumbnail Image
             'field_54e4d481b009a' => isset($related_images['thumbnail_image_attachment_id']) ?: '',
             // Full Image
@@ -209,8 +203,9 @@ class HubXmlParser implements FeedParser
             // Hero Image
             'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: '',
         );
-        // Save Related Images Custom Fields
-        $this->saveArticleCustomFields($related_images_custom_fileds, $article_id);
+        // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
+        $this->saveArticleCustomFields($article_custom_fields, $article_id);
+
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
@@ -344,7 +339,6 @@ class HubXmlParser implements FeedParser
      *
      * @return array
      */
-    // TODO: Find a way to add Credit, Copyright, Alt Text and Title to images
     private function handleImageUpload($href)
     {
 
@@ -411,9 +405,21 @@ class HubXmlParser implements FeedParser
         // Save Image Alt Text
         update_post_meta( $image_upload_id, '_wp_attachment_image_alt', (string)$imageCpiNamespace->alttext );
 
+        // Save Custom Attachment Metadata
+        $attachment_custom_metadata = array(
+            // Attachment Caption
+            'field_5523b88f78941'   => (string)$imageCpiNamespace->caption,
+            // Attachment Copyright
+            'field_5523b8017893e'   => (string)$imageCpiNamespace->copyright,
+            // Attachment Credit
+            'field_5523b84b7893f'   => (string)$imageCpiNamespace->credit,
+            // Attachment Photographer
+            'field_5523b85578940'   => (string)$imageCpiNamespace->photographer
+        );
+        $this->saveArticleCustomFields($attachment_custom_metadata, $image_upload_id);
+
         return array(
             $image_option . '_attachment_id' => $image_upload_id
         );
-
     }
 }
