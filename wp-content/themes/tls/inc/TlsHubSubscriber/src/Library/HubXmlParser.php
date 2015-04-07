@@ -202,16 +202,6 @@ class HubXmlParser implements FeedParser
         }
         $this->saveArticleCustomFields($books, $article_id, 'field_54edde1e60d80'); // Books
 
-
-        /*
-         * Attach all related Images to the article
-         */
-        if (isset($related_images['full_image_attachment_id'])) {
-            $full_image_attachment_id = $related_images['full_image_attachment_id'];
-        } else if (isset($related_images['main_image_attachment_id'])) {
-            $full_image_attachment_id = $related_images['main_image_attachment_id'];
-        }
-
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
             // Article Feed ID
@@ -222,21 +212,39 @@ class HubXmlParser implements FeedParser
             'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
             // Teaser Summary
             'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
-            // Thumbnail Image
-            'field_54e4d481b009a' => isset($related_images['thumbnail_image_attachment_id']) ?: '',
-            // Full Image
-            'field_54e4d4a5b009b' => isset($full_image_attachment_id) ?: '',
-            // Hero Image
-            'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: '',
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved
         // using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
 
         /*
+         * Save All Related Images Custom Fields
+         */
+        // Get Main Full Image based upon either the size or being main_image
+        if (isset($related_images['full_image_attachment_id'])) {
+            $full_image_attachment_id = (int)$related_images['full_image_attachment_id'];
+        } else if (isset($related_images['main_image_attachment_id'])) {
+            $full_image_attachment_id = (int)$related_images['main_image_attachment_id'];
+        } else {
+            $full_image_attachment_id = '';
+        }
+        $thumb_image = isset($related_images['thumbnail_image_attachment_id']) ? (int)$related_images['thumbnail_image_attachment_id'] : '';
+        $hero_image = isset($related_images['hero_image_attachment_id']) ? (int)$related_images['hero_image_attachment_id'] : '';
+
+        $related_images_custom_fields = array(
+            // Thumbnail Image
+            'field_54e4d481b009a' => $thumb_image,
+            // Full Image
+            'field_54e4d4a5b009b' => $full_image_attachment_id,
+            // Hero Image
+            'field_54e4d4b3b009c' => $hero_image,
+        );
+        $this->saveArticleCustomFields($related_images_custom_fields, $article_id);
+
+        /*
          * Search and replace all Inline Images with downloaded images.
          */
-        if ($content_inline_images_matches > 0) {
+        if ($content_inline_images_matches[0] > 0) {
             $content_with_inline_images = $this->searchReplaceInlineImages(
                 $article_content_copy,
                 $content_inline_images_matches[0],
@@ -250,6 +258,14 @@ class HubXmlParser implements FeedParser
 
             $this->saveArticleData($inline_images_updated_article_data, true);
 
+        }
+
+        // Attach all images to post
+        if (!empty($inline_images) || !empty($related_images)) {
+            $attach_images = array_merge($inline_images, $related_images);
+            $attach_images_ids = array_values($attach_images);
+
+            $this->attachImagesToPost($attach_images_ids, $article_id);
         }
 
         // Add 1 to the articleCount after parsing the article
@@ -511,5 +527,20 @@ class HubXmlParser implements FeedParser
         $updated_content = str_replace($inline_images_search, $inline_images_replace_array, $article_content);
 
         return $updated_content;
+    }
+
+    /**
+     * @param $attach_images_ids
+     * @param $article_id
+     */
+    private function attachImagesToPost($attach_images_ids, $article_id)
+    {
+        foreach ($attach_images_ids as $attach_images_id) {
+            wp_update_post( array(
+                    'ID' => $attach_images_id,
+                    'post_parent' => $article_id
+                )
+            );
+        }
     }
 }
