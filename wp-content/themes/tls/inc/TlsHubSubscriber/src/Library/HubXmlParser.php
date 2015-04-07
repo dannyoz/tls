@@ -92,7 +92,7 @@ class HubXmlParser implements FeedParser
                 $related_images += $image;
 
             }
-        }
+        }die(exit());
 
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
@@ -344,6 +344,7 @@ class HubXmlParser implements FeedParser
      *
      * @return array
      */
+    // TODO: Find a way to add Credit, Copyright, Alt Text and Title to images
     private function handleImageUpload($href)
     {
 
@@ -407,8 +408,12 @@ class HubXmlParser implements FeedParser
             return null;
         }
 
+        // Save Image Alt Text
+        update_post_meta( $image_upload_id, '_wp_attachment_image_alt', (string)$imageCpiNamespace->alttext );
+
         return array(
             $image_option . '_attachment_id' => $image_upload_id
         );
+
     }
 }
