@@ -89,12 +89,17 @@ function tls_home_page_json_api_encode($response)
             $teaserSummary = $card_post_custom_fields['teaser_summary'];
 
             // IF there is a teaser use it otherwise make one
-            if (!empty($teaserSummary) || 0 < count(strlen(trim($teaserSummary)))) {
+            if (!empty($teaserSummary)) {
                 $articleText = $teaserSummary;
             } else {
-                $articleText = tls_make_post_excerpt($card_post, 20);
+                $articleText = tls_make_post_excerpt($card_post, 30);
             }
 
+            if (!empty($card_post_custom_fields['thumbnail_image_url'][0])) {
+                $thumbnail_image = wp_get_attachment_url($card_post_custom_fields['thumbnail_image_url'][0]);
+            } else if (!empty($card_post_custom_fields['full_image_url'][0])) {
+                $thumbnail_image = wp_get_attachment_url($card_post_custom_fields['full_image_url'][0]);
+            }
 
             // Add Cards to the JSON Response in the specific count slot
             $response['home_page_cards']['card_' . $home_page_card_count] = array(
@@ -109,7 +114,9 @@ function tls_home_page_json_api_encode($response)
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
                 ),
                 'soundcloud' => $card_post_soundcloud_custom_field[0],
-                'custom_fields' => array('thumbnail_image_url' => $card_post_custom_fields['thumbnail_image_url'][0],),
+                'custom_fields' => array(
+                    'thumbnail_image_url' => $thumbnail_image,
+                ),
                 'books' => get_field('field_54edde1e60d80', $card_post->ID),
                 'taxonomy_article_visibility' => $visibility
             );
