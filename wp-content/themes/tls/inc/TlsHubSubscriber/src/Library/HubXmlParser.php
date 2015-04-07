@@ -62,10 +62,13 @@ class HubXmlParser implements FeedParser
 
         // Add Log of the time it took and how many articles it imported
         $articles = ($articlesResult['articleCount'] == 1) ? 'article' : 'articles';
-        echo 'It took ' . number_format($execution_time,
-                2) . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
-        HubLogger::log('It took ' . number_format($execution_time,
-                2) . ' seconds to ' . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
+
+        echo 'It took ' . number_format($execution_time, 2) . ' seconds to '
+            . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
+
+        HubLogger::log('It took ' . number_format($execution_time, 2) . ' seconds to '
+            . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
+
     }
 
     /**
@@ -124,7 +127,8 @@ class HubXmlParser implements FeedParser
         );
 
         /*
-         * Prepare and make WP_Query to check if the article being parsed already exists in WP based on the ID in the XML Feed entry
+         * Prepare and make WP_Query to check if the article being parsed already exists in WP
+         * based on the ID in the XML Feed entry
          */
         $articleMatches_args = array(
             'posts_per_page' => 1,
@@ -135,8 +139,10 @@ class HubXmlParser implements FeedParser
         $articleMatches = new WP_Query($articleMatches_args);
 
         /*
-         * Check to see if there wasn't any matches. If no match is found then send $article_data to saveArticleData method to insert new article
-         * Otherwise if a match was found the send $article_data to saveArticleData method with update parameter true to update article instead
+         * Check to see if there wasn't any matches. If no match is found
+         * then send $article_data to saveArticleData method to insert new article
+         * Otherwise if a match was found the send $article_data to saveArticleData method
+         * with update parameter true to update article instead
          */
         if (!$articleMatches->found_posts > 0) {
             $article_data['post_date'] = $article_entry_published->toDateTimeString(); // Published Date
@@ -203,14 +209,16 @@ class HubXmlParser implements FeedParser
             // Hero Image
             'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: '',
         );
-        // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
+        // Send Custom Fields Data to saveArticleCustomFields method to be saved
+        // using the $article_id that came out of the saving or updating method
         $this->saveArticleCustomFields($article_custom_fields, $article_id);
 
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
 
-        // Returns the number of articles parsed back into the parseFeed method to add a log of how many articles were imported
+        // Returns the number of articles parsed back into the parseFeed method
+        // to add a log of how many articles were imported
         return array(
             'import_type' => $import_type,
             'articleCount' => $articleCount
