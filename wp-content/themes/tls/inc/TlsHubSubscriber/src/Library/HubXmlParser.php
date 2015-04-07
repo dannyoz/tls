@@ -166,13 +166,6 @@ class HubXmlParser implements FeedParser
         // Save Article Tags Taxonomy Terms
         $article_tags = $this->saveArticleTaxonomyTerms($article_id, $cpiNamespace->tag, 'article_tags');
 
-        // TODO: Import of images into the local installation of WP
-        if (isset($related_images['full_image_attachment_id'])) {
-            $full_image_attachment_id = $related_images['full_image_attachment_id'];
-        } else if (isset($related_images['main_image_attachment_id'])) {
-            $full_image_attachment_id = $related_images['main_image_attachment_id'];
-        }
-
         // Add all the Custom Fields' data into an array
         $article_custom_fields = array(
             'field_54e4d372b0093' => (string)$article_entry_id,
@@ -182,12 +175,6 @@ class HubXmlParser implements FeedParser
             'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
             // Author Name
             'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
-            // Thumbnail Image
-            'field_54e4d481b009a' => isset($related_images['thumbnail_image_attachment_id']) ?: '',
-            // Full Image
-            'field_54e4d4a5b009b' => isset($full_image_attachment_id) ?: '',
-            // Hero Image
-            'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: ''
 
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved using the $article_id that came out of the saving or updating method
@@ -204,6 +191,26 @@ class HubXmlParser implements FeedParser
             );
         }
         $this->saveArticleCustomFields($books, $article_id, 'field_54edde1e60d80'); // Books
+
+        /*
+         * Attach Related Images to their specific custom fields
+         */
+        if (isset($related_images['full_image_attachment_id'])) {
+            $full_image_attachment_id = $related_images['full_image_attachment_id'];
+        } else if (isset($related_images['main_image_attachment_id'])) {
+            $full_image_attachment_id = $related_images['main_image_attachment_id'];
+        }
+
+        $related_images_custom_fileds = array(
+            // Thumbnail Image
+            'field_54e4d481b009a' => isset($related_images['thumbnail_image_attachment_id']) ?: '',
+            // Full Image
+            'field_54e4d4a5b009b' => isset($full_image_attachment_id) ?: '',
+            // Hero Image
+            'field_54e4d4b3b009c' => isset($related_images['hero_image_attachment_id']) ?: '',
+        );
+        // Save Related Images Custom Fields
+        $this->saveArticleCustomFields($related_images_custom_fileds, $article_id);
 
         // Add 1 to the articleCount after parsing the article
         $articleCount++;
