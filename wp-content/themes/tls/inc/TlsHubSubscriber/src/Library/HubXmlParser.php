@@ -97,6 +97,25 @@ class HubXmlParser implements FeedParser
         $article_content_copy = html_entity_decode(htmlspecialchars_decode($cpiNamespace->copy), ENT_QUOTES, 'UTF-8');
         $article_content_copy = trim(preg_replace('/\s+/', ' ', $article_content_copy));
 
+        /*
+         * Prepare and make WP_Query to check if the article being parsed already exists in WP
+         * based on the ID in the XML Feed entry
+         */
+        $articleMatches_args = array(
+            'posts_per_page' => 1,
+            'post_type' => 'tls_articles',
+            'meta_key' => 'article_feed_id',
+            'meta_value' => (string)$article_entry_id
+        );
+        $articleMatches = new WP_Query($articleMatches_args);
+
+        if ($articleMatches->found_posts > 0) {
+            $last_updated_date = new Carbon(get_field('field_54eb50af14d87', $articleMatches->posts[0]->ID));
+            if ($article_entry_updated->toDayDateTimeString() <= $last_updated_date->toDayDateTimeString()) {
+                die('This article will not be imported because this article seems older than another one we have');
+            }
+        }
+
         // Get all of the Inline Images
         preg_match_all("|<link(.+?)\/>|mis", (string) $article_content_copy, $content_inline_images_matches);
 
@@ -144,18 +163,6 @@ class HubXmlParser implements FeedParser
         );
 
         /*
-         * Prepare and make WP_Query to check if the article being parsed already exists in WP
-         * based on the ID in the XML Feed entry
-         */
-        $articleMatches_args = array(
-            'posts_per_page' => 1,
-            'post_type' => 'tls_articles',
-            'meta_key' => 'article_feed_id',
-            'meta_value' => (string)$article_entry_id
-        );
-        $articleMatches = new WP_Query($articleMatches_args);
-
-        /*
          * Check to see if there wasn't any matches. If no match is found
          * then send $article_data to saveArticleData method to insert new article
          * Otherwise if a match was found the send $article_data to saveArticleData method
@@ -170,11 +177,9 @@ class HubXmlParser implements FeedParser
             $article_id = $this->saveArticleData($article_data);
             $import_type = 'import';
         } else {
-            $last_updated_date = new Carbon(get_field('field_54eb50af14d87', $articleMatches->posts[0]->ID));
 
-            if ($article_entry_updated->toDayDateTimeString() <= $last_updated_date->toDayDateTimeString()) {
-                die('This article will not be imported because this article seems older than another one we have');
-            } else {
+            if ($article_entry_updated->toDayDateTimeString() > $last_updated_date->toDayDateTimeString()) {
+
                 $article_data['ID'] = (int)$articleMatches->posts[0]->ID;
                 $article_id = $this->saveArticleData($article_data, true);
                 $import_type = 'update';
