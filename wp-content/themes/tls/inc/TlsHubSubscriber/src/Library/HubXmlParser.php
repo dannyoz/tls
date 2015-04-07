@@ -89,7 +89,7 @@ class HubXmlParser implements FeedParser
         // Get Article Entry ID from the URL in the id node
         // ID after the last slash /
         $article_id_url = explode('/', $article->id);
-        $article_entry_id = array_pop($article_id_url);
+        $article_entry_id = trim(array_pop($article_id_url));
 
         $article_entry_published = new Carbon($article->published);
         $article_entry_updated = new Carbon($article->updated);
