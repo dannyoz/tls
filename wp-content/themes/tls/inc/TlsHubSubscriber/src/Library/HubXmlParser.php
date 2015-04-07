@@ -403,7 +403,9 @@ class HubXmlParser implements FeedParser
         }
 
         // Save Image Alt Text
-        update_post_meta( $image_upload_id, '_wp_attachment_image_alt', (string)$imageCpiNamespace->alttext );
+        update_post_meta( $image_upload_id, '_wp_attachment_image_alt',
+            (!empty($imageCpiNamespace->alttext) ?: (string) $imageCpiNamespace->description)
+        );
 
         // Save Custom Attachment Metadata
         $attachment_custom_metadata = array(
