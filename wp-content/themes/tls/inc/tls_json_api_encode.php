@@ -19,6 +19,7 @@ function tls_json_api_encode($response)
         $previous_post = get_previous_post();
         $next_post = get_next_post();
 
+        // Previous Post
         if (!empty($previous_post)) {
             $response['post']->previous_post_info = array(
                 'url' => get_permalink($previous_post->ID),
@@ -26,6 +27,7 @@ function tls_json_api_encode($response)
             );
         }
 
+        // Next Post
         if (!empty($next_post)) {
             $response['post']->next_post_info = array(
                 'url' => get_permalink($next_post->ID),
@@ -46,25 +48,39 @@ function tls_json_api_encode($response)
             }
         }
 
-        if (isset($response['post'])) {
-            if (!is_user_logged_in()) {
-                $commenter_info = wp_get_current_commenter();
-                $comment_author = $commenter_info['comment_author'];
-                $comment_author_email = $commenter_info['comment_author_email'];
-            } else {
-                global $current_user;
-                get_currentuserinfo();
-                $comment_author = $current_user->display_name;
-                $comment_author_email = $current_user->user_email;
-            }
+        // Books
+        $response['post']->books = get_field('field_54edde1e60d80', $response['post']->id);
 
-            $response['post']->commenter_information = array(
-                'comment_author' => $comment_author,
-                'comment_author_email' => $comment_author_email
-            );
+        // Images
+        $hero_image = get_field('field_54e4d4b3b009c', $response['post']->id);
+        $response['post']->custom_fields->hero_image_url = $hero_image['url'];
 
-            $response['post']->books = get_field('field_54edde1e60d80', $response['post']->id);
+        $full_image = get_field('field_54e4d4a5b009b', $response['post']->id);
+        $response['post']->custom_fields->full_image_url = $full_image['url'];
+
+        $thumbnail_image = get_field('field_54e4d481b009a', $response['post']->id);
+        $response['post']->custom_fields->thumbnail_image_url = $thumbnail_image['url'];
+
+        /**
+         * Single Blog Post
+         */
+        // Commenter Information
+        if (!is_user_logged_in()) {
+            $commenter_info = wp_get_current_commenter();
+            $comment_author = $commenter_info['comment_author'];
+            $comment_author_email = $commenter_info['comment_author_email'];
+        } else {
+            global $current_user;
+            get_currentuserinfo();
+            $comment_author = $current_user->display_name;
+            $comment_author_email = $current_user->user_email;
         }
+
+        $response['post']->commenter_information = array(
+            'comment_author' => $comment_author,
+            'comment_author_email' => $comment_author_email
+        );
+
 
     }
 
@@ -82,9 +98,6 @@ function tls_json_api_encode($response)
     if (isset($response['page']) && $response['page_template_slug'] == 'template-page-with-accordion.php') { // If it is template-page-with-accordion.php Page template
         $response['page']->accordion_items = get_field('accordion', $response['page']->id);
     }
-
-    $response['query'] = $wp_query->query;
-    $response['json_query'] = $json_api->query;
 
     return $response;
 }
