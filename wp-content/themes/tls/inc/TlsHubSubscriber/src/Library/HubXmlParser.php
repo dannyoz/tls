@@ -436,13 +436,13 @@ class HubXmlParser implements FeedParser
 
         $image_url = (string) $image_xml->link->attributes()->href;
 
-        $image_type = explode('/', (string) $image_xml->link->attributes()->type);
+        $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
 
         $temp_file = download_url($image_url, 500);
         $file_array = array(
             'name'      => $image_xml->title . '.' . $image_extension,
-            'type'      => $image_type,
+            'type'      => (string) $image_xml->link->attributes()->type,
             'tmp_name'  => $temp_file,
             'error'     => 0,
             'size'      => filesize($temp_file),
@@ -462,7 +462,8 @@ class HubXmlParser implements FeedParser
         }
 
         // Sideload Image to Media
-        $image_upload_id = media_handle_sideload($file_array, 0, (string) $imageCpiNamespace->description);
+        $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
+        $image_upload_id = media_handle_sideload($file_array, 0, $image_title);
 
         // Check for handle sideload errors.
         if ( is_wp_error( $image_upload_id ) ) {
@@ -481,9 +482,8 @@ class HubXmlParser implements FeedParser
         }
 
         // Save Image Alt Text
-        update_post_meta( $image_upload_id, '_wp_attachment_image_alt',
-            (!empty($imageCpiNamespace->alttext) ?: (string) $imageCpiNamespace->description)
-        );
+        $image_alttext = (!empty($imageCpiNamespace->alttext)) ? (string) $imageCpiNamespace->alttext : $image_title;
+        update_post_meta( $image_upload_id, '_wp_attachment_image_alt', $image_alttext);
 
         // Save Custom Attachment Metadata
         $attachment_custom_metadata = array(
