@@ -17,7 +17,7 @@ p.subscription_status {
     height: 1.4em;
 }
 
-#hub-message {
+#ajax-message {
     display: none;
     font-weight: bold;
     margin: 5px 0 15px;
@@ -29,11 +29,11 @@ p.subscription_status {
     border-left: 4px solid #fff;
 }
 
-#hub-message.success {
+#ajax-message.success {
     border-left-color: #7ad03a;
 }
 
-#hub-message.fail {
+#ajax-message.fail {
     border-left-color: #dd3d36;
 }
 

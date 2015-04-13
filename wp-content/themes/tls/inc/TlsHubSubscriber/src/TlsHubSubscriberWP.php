@@ -136,7 +136,7 @@ class TlsHubSubscriberWP
     public function render_tls_hub_subscriber_settings()
     {
         ?>
-        <div class="wrap" xmlns="http://www.w3.org/1999/html">
+        <div class="wrap">
             <h2>TLS Hub Subscriber Settings</h2>
 
             <form method="post" action="<?php echo admin_url('options.php');
@@ -224,7 +224,7 @@ class TlsHubSubscriberWP
                                     <p class="description">NOTE: Make sure you have all the settings saved first before
                                         you click subscribe</p>
 
-                                    <div id="hub-message"></div>
+                                    <div id="ajax-message"></div>
                                     <p class="submit">
                                         <input type="submit" class="button-primary right"
                                                value="<?php _e('Save Changes') ?>"/>

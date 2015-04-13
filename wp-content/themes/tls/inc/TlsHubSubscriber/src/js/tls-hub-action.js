@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
             hub_action_data,
             function (response) {
                 var subscription_status = jQuery('p.subscription_status');
-                var hub_message = jQuery('#hub-message');
+                var hub_message = jQuery('#ajax-message');
                 jQuery('#show_loading_update').css('display', 'none');
 
                 if (hub_action_data.tls_hub_action == 'Subscribe') {

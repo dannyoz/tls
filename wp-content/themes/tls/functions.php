@@ -47,6 +47,11 @@ $TlsThemeOoptions = new Tls\ThemeOptions();
  */
 $TlsHubSubscriberWP = new Tls\TlsHubSubscriber\TlsHubSubscriberWP();
 
+/**
+ * TlsPostImageImporter - Import Images from Post Content
+ */
+$TlsPostImageImporter = new Tls\TlsPostImageImporter();
+
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
