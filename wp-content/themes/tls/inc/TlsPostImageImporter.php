@@ -181,11 +181,40 @@ class TlsPostImageImporter
         ));
 
         $message = "Found " . $post_query->found_posts . " Posts with that Category <br /><br />";
+        $posts_with_external_images = 0;
 
         foreach ($post_query->posts as $single_post) {
-            $post_content_images = $this->search_content($single_post);
+            $post_content_images = $this->search_content($single_post->post_content);
+            $new_post_content_images = array();
 
-            $message .= $post_content_images;
+            if (count($post_content_images['urls']) > 0) {
+                $message .= "Post: {$single_post->post_title} (ID: {$single_post->ID}) has " . count($post_content_images['imgs']) . " external images <br />";
+
+                foreach ($post_content_images['urls'] as $old_content_image_url) {
+                    $message .= "Old Image URL: <a href=\"" . $old_content_image_url . "\" target=\"_blank\">" . $old_content_image_url . "</a><br />";
+
+                    $new_content_image_url = $this->download__images($old_content_image_url, $single_post->ID);
+
+                    $new_post_content_images[] = '<img src="' . $new_content_image_url . '" alt="" />';
+
+                    $message .= "New Image: <a href=\"" . $new_content_image_url . "\" target=\"_blank\">" . $new_content_image_url . "</a><br />";
+                }
+
+                $updated_content = $this->search_replace_content_images($post_content_images['imgs'], $new_post_content_images, $single_post->post_content);
+
+                wp_update_post( array(
+                        'ID'            => $single_post->ID,
+                        'post_content'  => $updated_content,
+                        'post_status'   => 'publish'
+                    )
+                );
+
+                $posts_with_external_images++;
+            }
+        }
+
+        if (!$posts_with_external_images > 0) {
+            $message .= "No External Images Found in any of the posts";
         }
 
         echo $message;
@@ -193,31 +222,128 @@ class TlsPostImageImporter
         wp_die();
     }
 
-    private function search_content($single_post)
+    /**
+     * @param $post_content
+     *
+     * @return array|void
+     */
+    private function search_content($post_content)
     {
+        $content_images = '';
+
         // Get all of the Inline Images
-        preg_match_all("|<img(.+?)\/>|mis", (string) $single_post->post_content, $content_images_matches);
+        preg_match_all("|<a(.+?)\/a>|mis", (string) $post_content, $content_a_tag_matches);
 
-        $outside_images = 0;
-        $site_url = parse_url(site_url());
-        foreach ($content_images_matches[0] as $content_image) {
-            $image_simple_xml = simplexml_load_string($content_image);
-
-            if (!strpos($image_simple_xml->attributes()->src, $site_url['host'])) {
-                $outside_images++;
+        if (count($content_a_tag_matches[0]) > 0) {
+            foreach ($content_a_tag_matches[0] as $content_a_tag_match) {
+                preg_match_all("|<img(.+?)\/>|mis", (string) $content_a_tag_match, $content_a_tag_images_matches);
+                if (count($content_a_tag_images_matches[0]) > 0) {
+                    $content_images[] = $content_a_tag_match;
+                }
+            }
+        } else {
+            preg_match_all("|<img(.+?)\/>|mis", (string) $post_content, $content_images_matches);
+            if (count($content_images_matches[0]) > 0) {
+                $content_images = $content_images_matches[0];
             }
         }
 
-        if (!count($content_images_matches[0]) > 0) {
+        $site_url = parse_url(site_url());
+
+        $external_images_search = array();
+        $external_images_urls = array();
+
+        foreach ($content_images as $content_image) {
+
+            $image = strip_tags($content_image, '<img>');
+            $image_simple_xml = simplexml_load_string($image);
+            $image_url = (string) $image_simple_xml->attributes()->src;
+
+            if (!strpos($image_url, $site_url['host'])) {
+                $external_images_search[] = $content_image;
+                $external_images_urls[] = $image_url;
+            }
+
+        }
+
+        if (!count($content_images) > 0) {
             return;
         }
 
-        if (!$outside_images > 0) {
+        if (!count($external_images_search) > 0) {
             return;
         }
 
-        return "Post: {$single_post->post_title} (ID: {$single_post->ID}) has " . count($content_images_matches[0]) . " Images in the content. Of which it has " . $outside_images . " external images <br />";
+        return array(
+            'urls' => $external_images_urls,
+            'imgs' => $external_images_search
+        );
+    }
 
+    /**
+     * Download Images from content
+     *
+     * @param $image_url    Image URL
+     * @param $post_id      Post ID
+     *
+     * @return bool|string
+     */
+    private function download__images($image_url, $post_id)
+    {
+        $tmp = download_url( $image_url );
+
+        $url_array = explode('/', $image_url);
+        $image_name = array_pop($url_array);
+        $image_mime_type = image_type_to_mime_type(exif_imagetype($image_url));
+        $image_mime_type_array = explode('/', $image_mime_type);
+        $image_type = array_pop($image_mime_type_array);
+
+        // Set variables for storage
+        $file_array = array(
+            'name'      => $image_name . '.' . $image_type,
+            'type'      => $image_mime_type,
+            'tmp_name'  => $tmp,
+            'error'     => 0,
+            'size'      => filesize($tmp),
+        );
+
+        // If error storing temporarily, unlink
+        if ( is_wp_error( $tmp ) ) {
+            @unlink($file_array['tmp_name']);
+            $file_array['tmp_name'] = '';
+
+            return false;
+        }
+
+        // do the validation and storage stuff
+        $uploaded_image_id = media_handle_sideload($file_array, $post_id, $image_name);
+
+        // If error storing permanently, unlink
+        if ( is_wp_error($uploaded_image_id) ) {
+            @unlink($file_array['tmp_name']);
+
+            return false;
+        }
+
+        $uploaded_image_url = wp_get_attachment_url($uploaded_image_id);
+
+        return $uploaded_image_url;
+    }
+
+    /**
+     * Search Old Images and Replace with new images in the content
+     *
+     * @param array     $old_images   Array of Old Images to be replaced
+     * @param array     $new_images   Array of New Images to replace with
+     * @param string    $content      Post Content
+     *
+     * @return string   $updated_content   Updated Post Content
+     */
+    private function search_replace_content_images($old_images, $new_images, $content)
+    {
+        $updated_content = str_replace($old_images, $new_images, $content);
+
+        return $updated_content;
     }
 
 }
