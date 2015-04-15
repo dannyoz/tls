@@ -187,7 +187,7 @@ class TlsPostImageImporter
             $post_content_images = $this->search_content($single_post->post_content);
             $new_post_content_images = array();
 
-            if (count($post_content_images['urls']) > 0) {
+            if (!empty($post_content_images['urls'])) {
                 $message .= "Post: {$single_post->post_title} (ID: {$single_post->ID}) has " . count($post_content_images['imgs']) . " external images <br />";
 
                 foreach ($post_content_images['urls'] as $old_content_image_url) {
@@ -234,16 +234,16 @@ class TlsPostImageImporter
         // Get all of the Inline Images
         preg_match_all("|<a(.+?)\/a>|mis", (string) $post_content, $content_a_tag_matches);
 
-        if (count($content_a_tag_matches[0]) > 0) {
+        if (!empty($content_a_tag_matches[0])) {
             foreach ($content_a_tag_matches[0] as $content_a_tag_match) {
                 preg_match_all("|<img(.+?)\/>|mis", (string) $content_a_tag_match, $content_a_tag_images_matches);
-                if (count($content_a_tag_images_matches[0]) > 0) {
+                if (!empty($content_a_tag_images_matches[0])) {
                     $content_images[] = $content_a_tag_match;
                 }
             }
         } else {
             preg_match_all("|<img(.+?)\/>|mis", (string) $post_content, $content_images_matches);
-            if (count($content_images_matches[0]) > 0) {
+            if (!empty($content_images_matches[0])) {
                 $content_images = $content_images_matches[0];
             }
         }
@@ -252,6 +252,10 @@ class TlsPostImageImporter
 
         $external_images_search = array();
         $external_images_urls = array();
+
+        if (empty($content_images)) {
+            return;
+        }
 
         foreach ($content_images as $content_image) {
 
@@ -265,12 +269,8 @@ class TlsPostImageImporter
             }
 
         }
-
-        if (!count($content_images) > 0) {
-            return;
-        }
-
-        if (!count($external_images_search) > 0) {
+        
+        if (empty($external_images_search)) {
             return;
         }
 
