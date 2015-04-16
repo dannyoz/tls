@@ -34,7 +34,7 @@
 	        <a ng-attr-href="{{data.category_url}}">{{data.category.title}}</a>
 	    </h3>
 		
-		<div ng-if="data.category.slug != 'listen'" class="grid-row padded">			
+		<div ng-if="data.category.slug != 'listen'" class="grid-row padded">
 			<div class="blog-avatar">
 				<a ng-href="{{data.url}}">
 					<img class="max circular" ng-attr-src="{{data.thumbnail}}"/>
@@ -45,8 +45,7 @@
 				<div class="inner">
 					<h4><a ng-href="{{data.url}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>
 					<p class="futura"><a ng-href="/author/{{data.author.slug}}">{{data.author.name}}</a></p>
-					<!-- <p ng-bind-html="data.excerpt"></p> -->
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+					 <p ng-bind-html="data.excerpt"></p>
 				</div>				
 			</div>
 		</div>	
@@ -54,8 +53,7 @@
 		<div ng-if="data.category.slug == 'listen'" class="padded">			
 			<div class="embed" ng-bind-html="sce.trustAsHtml(data.soundcloud);"></div>
 			<h4><a href="{{data.link}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>
-			<!-- <p ng-bind-html="data.excerpt"></p> -->
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+			 <p ng-if="data.excerpt != '...'" ng-bind-html="data.excerpt"></p>
 		</div>		
 
 	</div>

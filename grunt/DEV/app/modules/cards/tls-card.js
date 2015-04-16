@@ -133,7 +133,7 @@
 					break;
 
 					case 'blog':
-						
+						console.log(card);
 						if (!isUndefined(card.categories) &&
 							!isUndefined(card.categories[0])) {
 							card.category = {};
@@ -145,6 +145,8 @@
 						&& !isUndefined(card.custom_fields['soundcloud_embed_code'])) {
 							card.soundcloud =  card.custom_fields['soundcloud_embed_code'][0];
 						}
+
+                        card.excerpt = card.excerpt;
 
 					break;
 				}		

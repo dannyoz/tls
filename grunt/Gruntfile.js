@@ -82,7 +82,7 @@ module.exports = function(grunt) {
                 files:[
                     'DEV/app/**/*'
                 ],
-                tasks: ['copy']
+                tasks: ['copy', 'ngtemplates']
             },
 
             livereload: {
