@@ -133,7 +133,7 @@
 					break;
 
 					case 'blog':
-						console.log(card);
+
 						if (!isUndefined(card.categories) &&
 							!isUndefined(card.categories[0])) {
 							card.category = {};

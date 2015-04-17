@@ -44,7 +44,6 @@ function tls_blogs_archive_json_api_encode($response)
                     '_', $featured_post_category[0]->slug) . '_blog',
             'id' => $featured_post->ID,
             'title' => $featured_post->post_title,
-            'excerpt' => tls_make_post_excerpt($featured_post->post_content, 30),
             'link' => get_permalink($featured_post->ID),
             'images' => $images
         );
@@ -60,7 +59,6 @@ function tls_blogs_archive_json_api_encode($response)
             'type' => 'listen_blog',
             'id' => $spotlight_podcast->ID,
             'title' => $spotlight_podcast->post_title,
-            'excerpt' => tls_make_post_excerpt($spotlight_podcast->post_content, 30),
             'link' => get_permalink($spotlight_podcast->ID),
             'soundcloud' => $spotlight_podcast_custom_fields['soundcloud_embed_code'][0]
         );
@@ -94,7 +92,6 @@ function tls_blogs_archive_json_api_encode($response)
             $blog_post_custom_fields = get_post_custom($blog_post->id);
 
             $blog_post->soundcloud = $blog_post_custom_fields['soundcloud_embed_code'][0];
-            $blog_post->excerpt = tls_make_post_excerpt($blog_post->content, 30);
             $blog_post->category_url = get_term_link($categories[0]->term_id, $categories[0]->taxonomy);
 
             if ($categories[0]->slug == 'a-dons-life' || $categories[0]->slug == 'dons-life') {
@@ -107,6 +104,17 @@ function tls_blogs_archive_json_api_encode($response)
         $response['count'] = count($blogs_archive);
         $response['count_total'] = (int)$wp_query->found_posts;
         $response['pages'] = $wp_query->max_num_pages;
+    }
+
+    // If it is archive of blogs (post type 'post') create new excerpt
+    if ($response['posts']) {
+
+        foreach ($response['posts'] as $response_post) {
+            if ('post' == get_post_type($response_post->id)) {
+                $response_post->excerpt = tls_make_post_excerpt($response_post->content, 30);
+            }
+        }
+
     }
 
     return $response;

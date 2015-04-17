@@ -12,8 +12,6 @@
 			parent = href.indexOf('/blogs/') > -1,
 			url    = (parent) ?  '/?post_type[post]' : href;
 
-		console.log(url)
-
 		$scope.ready       = false;
 		$scope.page        = 1;
 		$scope.loading     = true;
@@ -34,8 +32,6 @@
 			$scope.pageCount = result.pages
 			$scope.firstPost = result.featured_post;
 			var posts        = result.posts;
-
-			console.log(result);
 
 			//Inserts Blogs Ads to cards
 			var mpuObj = [{
