@@ -44,6 +44,7 @@ function tls_blogs_archive_json_api_encode($response)
                     '_', $featured_post_category[0]->slug) . '_blog',
             'id' => $featured_post->ID,
             'title' => $featured_post->post_title,
+            'excerpt' => tls_make_post_excerpt($featured_post->post_content, 30),
             'link' => get_permalink($featured_post->ID),
             'images' => $images
         );

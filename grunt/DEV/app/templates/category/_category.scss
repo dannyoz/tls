@@ -2,6 +2,23 @@
 
 	height:auto;
 
+    #banner {
+
+      .container {
+
+        height: 100%;
+        position: relative;
+
+        .caption {
+
+          max-width: 100%;
+
+        }
+
+      }
+
+    }
+
 	#featured-post{
 
 		margin-bottom: 20px;
