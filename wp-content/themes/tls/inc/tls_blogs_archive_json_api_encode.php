@@ -87,19 +87,26 @@ function tls_blogs_archive_json_api_encode($response)
         $blogs_archive = $json_api->introspector->get_posts($wp_query->query);
 
         foreach ($blogs_archive as $blog_post) {
-            $response['posts'][] = $blog_post;
 
             $categories = wp_get_post_terms($blog_post->id, 'category');
             $blog_post_custom_fields = get_post_custom($blog_post->id);
+            $blog_post_thumb = wp_get_attachment_image_src(get_post_thumbnail_id($blog_post->id));
+
+            if (!empty($blog_post_thumb)) {
+                $blog_post->thumbnail = $blog_post_thumb[0];
+            }
 
             $blog_post->soundcloud = $blog_post_custom_fields['soundcloud_embed_code'][0];
             $blog_post->category_url = get_term_link($categories[0]->term_id, $categories[0]->taxonomy);
+
 
             if ($categories[0]->slug == 'a-dons-life' || $categories[0]->slug == 'dons-life') {
                 $blog_post->type = 'dons_life_blog';
             } else {
                 $blog_post->type = str_replace('-', '_', $categories[0]->slug) . '_blog';
             }
+
+            $response['posts'][] = $blog_post;
         }
 
         $response['count'] = count($blogs_archive);
