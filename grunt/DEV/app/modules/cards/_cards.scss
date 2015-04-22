@@ -4,6 +4,7 @@
 	margin-bottom:30px;
 	position:relative;
 	top:0;
+    word-wrap: break-word;
 	@include keyline(top right bottom left,$light-keyline);
 	@include animation(fadeIn,ease,0.3s);
 	@extend .transition-1;
