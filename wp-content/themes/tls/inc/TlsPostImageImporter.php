@@ -303,19 +303,20 @@ class TlsPostImageImporter
 
         $message = "Found " . $post_query->found_posts . " Posts with that Category <br /><br />";
         $posts_with_internal_images = 0;
+        $featured_images_set = 0;
 
         foreach ($post_query->posts as $single_post) {
             // Search for internal images. Needs to set second parameter as true
             $post_content_images = $this->search_content($single_post->post_content, true);
-
-            $featured_images_set = 0;
-
+            echo 'Post Content Images<br />';var_dump($post_content_images);echo '<br />';
             if (!empty($post_content_images['urls'])) {
-
+                echo 'Has Thumbnail<br />';var_dump(has_post_thumbnail($single_post->ID));echo '<br />';
                 if (!has_post_thumbnail($single_post->ID)) {
                     $first_internal_img = (string) $post_content_images['urls'][0];
+                    echo 'First Image<br />';var_dump($first_internal_img);echo '<br />';
 
                     $attached_images = get_attached_media('image', $single_post->ID);
+                    echo 'Attached Images<br />';var_dump($attached_images);echo '<br />';
 
                     foreach ($attached_images as $attached_image) {
                         if ($attached_image->guid == $first_internal_img) {
@@ -329,14 +330,13 @@ class TlsPostImageImporter
                     }
                 }
 
-                if ($featured_images_set == 0) {
-                    $message .= "All posts with images have Featured images set <br />";
-                }
-
                 $posts_with_internal_images++;
             }
         }
 
+        if (!$featured_images_set > 0) {
+            $message .= "All posts with images have Featured images set <br />";
+        }
 
         if (!$posts_with_internal_images > 0) {
             $message .= "No Local Images Found in any of the posts";
