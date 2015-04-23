@@ -381,7 +381,7 @@ class TlsPostImageImporter
         }
 
         $site_url = parse_url(site_url());
-
+        echo 'Site URL<br />';var_dump($site_url);echo '<br />';
         $external_images_search = array();
         $external_images_urls = array();
 
