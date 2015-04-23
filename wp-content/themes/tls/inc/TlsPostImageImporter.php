@@ -308,6 +308,8 @@ class TlsPostImageImporter
             // Search for internal images. Needs to set second parameter as true
             $post_content_images = $this->search_content($single_post->post_content, true);
 
+            $featured_images_set = 0;
+
             if (!empty($post_content_images['urls'])) {
 
                 if (!has_post_thumbnail($single_post->ID)) {
@@ -317,11 +319,18 @@ class TlsPostImageImporter
 
                     foreach ($attached_images as $attached_image) {
                         if ($attached_image->guid == $first_internal_img) {
-                            set_post_thumbnail($single_post->ID, $attached_image->ID);
+                            // Set Featured Image
+                            update_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
 
                             $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
+
+                            $featured_images_set++;
                         }
                     }
+                }
+
+                if ($featured_images_set == 0) {
+                    $message .= "All posts with images have Featured images set <br />";
                 }
 
                 $posts_with_internal_images++;
