@@ -23,7 +23,11 @@ class TlsPostImageImporter
 
         add_action('admin_footer', array($this, 'post_image_importer_action_ajax'));
 
+        add_action('admin_footer', array($this, 'post_featured_image_action_ajax'));
+
         add_action('wp_ajax_post_image_importer_action', array($this, 'post_image_importer_action_callback'));
+
+        add_action('wp_ajax_post_featured_image_action', array($this, 'post_featured_image_action_callback'));
     }
 
     /**
@@ -95,8 +99,15 @@ class TlsPostImageImporter
                                             </td>
                                         </tr>
                                         <tr valign="top">
-                                            <td>
-                                                <input class="button-primary left tls_post_image_importer_action" type="submit" name="post_image_importer_action" id="post_image_importer_action" value="Search And Import Images"/>
+                                            <td colspan="2">
+                                                <input class="button-primary tls_post_image_importer_action" type="submit" name="post_image_importer_action" id="post_image_importer_action" value="Search And Import Images"/>
+
+                                                <input class="button-primary tls_post_featured_image_action" type="submit" name="post_featured_image_action" id="post_featured_image_action" value="Search And Set Featured Image"/>
+                                                <p class="description">
+                                                    The <strong>"Search And Import Images"</strong> button will trigger an action that will find all external images inside Posts with the category selected and then download those images to WordPress.
+                                                    <br/>
+                                                    The <strong>"Search And Set Featured Image"</strong> will search for all images in Posts from the selected Category which are not external and will set the first one as the Featured Image.
+                                                </p>
                                             </td>
                                         </tr>
 
@@ -120,14 +131,14 @@ class TlsPostImageImporter
         <script type="text/javascript" >
             jQuery(document).ready(function($) {
 
-                jQuery('.tls_post_image_importer_action').click(function (e) {
+                jQuery('.tls_post_featured_image_action').click(function (e) {
 
                     e.preventDefault();
                     var ajax_message = jQuery('#ajax-message');
                     var show_loading_update = jQuery('#show_loading_update');
 
                     var data = {
-                        'action': 'post_image_importer_action',
+                        'action': 'post_featured_image_action',
                         'post_category': jQuery('#post_category').val()
                     };
 
@@ -193,7 +204,7 @@ class TlsPostImageImporter
                 foreach ($post_content_images['urls'] as $old_content_image_url) {
                     $message .= "Old Image URL: <a href=\"" . $old_content_image_url . "\" target=\"_blank\">" . $old_content_image_url . "</a><br />";
 
-                    $new_content_image_url = $this->download__images($old_content_image_url, $single_post->ID);
+                    $new_content_image_url = $this->download_images($old_content_image_url, $single_post->ID);
 
                     $new_post_content_images[] = '<img src="' . $new_content_image_url . '" alt="" />';
 
@@ -223,35 +234,150 @@ class TlsPostImageImporter
     }
 
     /**
-     * @param $post_content
+     * Ajax POST Action for Post Featured Image
+     */
+    public function post_featured_image_action_ajax()
+    {
+        ?>
+        <script type="text/javascript" >
+            jQuery(document).ready(function($) {
+
+                jQuery('.tls_post_image_importer_action').click(function (e) {
+
+                    e.preventDefault();
+                    var ajax_message = jQuery('#ajax-message');
+                    var show_loading_update = jQuery('#show_loading_update');
+
+                    var data = {
+                        'action': 'post_image_importer_action',
+                        'post_category': jQuery('#post_category').val()
+                    };
+
+                    ajax_message.css('display', 'none');
+                    ajax_message.removeClass('success');
+                    ajax_message.removeClass('fail');
+                    show_loading_update.css('display', 'block');
+
+                    $.post(ajaxurl, data, function (response) {
+                        show_loading_update.css('display', 'none');
+
+                        if (response == 'No Category') {
+                            ajax_message.addClass('fail').css('display', 'block');
+                            ajax_message.html('Sorry no category found! Please select a category.');
+                        } else {
+                            ajax_message.addClass('success').css('display', 'block');
+                            ajax_message.html(response);
+                        }
+                    });
+
+                });
+
+            });
+        </script>
+    <?php
+    }
+
+    /**
+     * Post Featured Images Ajax Callback Method
+     */
+    public function post_featured_image_action_callback()
+    {
+        $category_term_id = (isset($_POST['post_category'])) ? intval($_POST['post_category']) : null;
+
+        if ($category_term_id == null) {
+            echo 'No Category';
+            wp_die();
+        }
+
+        $post_query = new WP_Query(array(
+            'post_type'         => 'post',
+            'posts_per_page'    => '-1',
+            'tax_query'         => array(
+                array(
+                    'taxonomy'  => 'category',
+                    'field'     => 'term_id',
+                    'terms'     => (int) $category_term_id
+                )
+            )
+        ));
+
+        $message = "Found " . $post_query->found_posts . " Posts with that Category <br /><br />";
+        $posts_with_internal_images = 0;
+
+        foreach ($post_query->posts as $single_post) {
+            // Search for internal images. Needs to set second parameter as true
+            $post_content_images = $this->search_content($single_post->post_content, true);
+
+            if (!empty($post_content_images['urls'])) {
+
+                if (!has_post_thumbnail($single_post->ID)) {
+                    $first_internal_img = (string) $post_content_images['urls'][0];
+
+                    $attached_images = get_attached_media('image', $single_post->ID);
+
+                    foreach ($attached_images as $attached_image) {
+                        if ($attached_image->guid == $first_internal_img) {
+                            set_post_thumbnail($single_post->ID, $attached_image->ID);
+
+                            $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
+                        }
+                    }
+                }
+
+                $posts_with_internal_images++;
+            }
+        }
+
+
+        if (!$posts_with_internal_images > 0) {
+            $message .= "No Local Images Found in any of the posts";
+        }
+
+        echo $message;
+        wp_die();
+    }
+
+    /**
+     * Search Content for Images
+     *
+     * @param string    $post_content   Post's Content Text
+     * @param bool      $internal       Search for internal images or not
      *
      * @return array|void
      */
-    private function search_content($post_content)
+    private function search_content($post_content, $internal = false)
     {
-        $content_images = '';
+        $content_images = array();
 
-        // Get all of the Inline Images
+        // Get all of the <a> tags
         preg_match_all("|<a(.+?)\/a>|mis", (string) $post_content, $content_a_tag_matches);
 
-        if (!empty($content_a_tag_matches[0])) {
+        if (!empty($content_a_tag_matches[0])) { // If there are <a> tags
             foreach ($content_a_tag_matches[0] as $content_a_tag_match) {
+                // Search for <img> tags inside the <a> tags
                 preg_match_all("|<img(.+?)\/>|mis", (string) $content_a_tag_match, $content_a_tag_images_matches);
-                if (!empty($content_a_tag_images_matches[0])) {
+                if (!empty($content_a_tag_images_matches[0])) { // If
                     $content_images[] = $content_a_tag_match;
                 }
             }
-        } else {
-            preg_match_all("|<img(.+?)\/>|mis", (string) $post_content, $content_images_matches);
-            if (!empty($content_images_matches[0])) {
-                $content_images = $content_images_matches[0];
-            }
+        }
+
+        if (!empty($content_images)) {
+            $post_content = str_replace($content_images, '', (string) $post_content);
+        }
+
+        preg_match_all("|<img(.+?)\/>|mis", (string) $post_content, $content_images_matches);
+        if (!empty($content_images_matches[0])) {
+            $content_images = array_merge($content_images, $content_images_matches[0]);
         }
 
         $site_url = parse_url(site_url());
 
         $external_images_search = array();
         $external_images_urls = array();
+
+        $internal_images_search = array();
+        $internal_images_urls = array();
 
         if (empty($content_images)) {
             return;
@@ -266,10 +392,24 @@ class TlsPostImageImporter
             if (!strpos($image_url, $site_url['host'])) {
                 $external_images_search[] = $content_image;
                 $external_images_urls[] = $image_url;
+            } else {
+                $internal_images_search[] = $content_image;
+                $internal_images_urls[] = $image_url;
             }
 
         }
-        
+
+        if ($internal === true && empty($internal_images_search)) {
+            return;
+        }
+
+        if ($internal === true && !empty($internal_images_search)) {
+            return array(
+                'urls' => $internal_images_urls,
+                'imgs' => $internal_images_search
+            );
+        }
+
         if (empty($external_images_search)) {
             return;
         }
@@ -288,7 +428,7 @@ class TlsPostImageImporter
      *
      * @return bool|string
      */
-    private function download__images($image_url, $post_id)
+    private function download_images($image_url, $post_id)
     {
         $tmp = download_url( $image_url );
 
