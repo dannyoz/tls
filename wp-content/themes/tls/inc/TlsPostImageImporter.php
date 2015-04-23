@@ -316,12 +316,12 @@ class TlsPostImageImporter
                     echo 'First Image<br />';var_dump($first_internal_img);echo '<br />';
 
                     $attached_images = get_attached_media('image', $single_post->ID);
-                    echo 'Attached Images<br />';var_dump($attached_images);echo '<br />';
 
                     foreach ($attached_images as $attached_image) {
-                        if ($attached_image->guid == $first_internal_img) {
+                        echo 'Attached Image<br />';var_dump($attached_image);echo '<br />';
+                        if ((string) $attached_image->guid == $first_internal_img) {
                             // Set Featured Image
-                            update_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
+                            add_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
 
                             $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
 
