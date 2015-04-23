@@ -311,7 +311,7 @@ class TlsPostImageImporter
             echo 'Post Content Images<br />';var_dump($post_content_images);echo '<br />';
             if (!empty($post_content_images['urls'])) {
                 echo 'Has Thumbnail<br />';var_dump(has_post_thumbnail($single_post->ID));echo '<br />';
-                if (!has_post_thumbnail($single_post->ID)) {
+                if (has_post_thumbnail($single_post->ID) === false) {
                     $first_internal_img = (string) $post_content_images['urls'][0];
                     echo 'First Image<br />';var_dump($first_internal_img);echo '<br />';
 
