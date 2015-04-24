@@ -125,10 +125,7 @@
 							}
 						}
 
-						//Excerpt
-						if(!card.excerpt && card.text){
-							card.excerpt = card.text[0]
-						}
+                        card.excerpt = card.excerpt;
 
 					break;
 

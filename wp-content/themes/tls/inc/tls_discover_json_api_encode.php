@@ -101,7 +101,7 @@ function tls_discover_json_api_encode($response)
             'id' => $spotlight_article->ID,
             'url' => get_permalink($spotlight_article->ID),
             'title' => $spotlight_article->post_title,
-            'excerpt' => tls_make_post_excerpt($spotlight_article, 30),
+            'excerpt' => tls_make_post_excerpt($spotlight_article->post_content, 30),
             'author' => array(
                 'name' => get_the_author_meta('display_name', $spotlight_article->post_author),
                 'slug' => get_the_author_meta('slug', $spotlight_article->post_author),
@@ -157,6 +157,9 @@ function tls_discover_json_api_encode($response)
                 $top_section_article_custom_fields = get_post_custom($top_section_article->ID);
                 // Get Specific Custom Fields from the Custom Fields
                 $top_section_article_teaser = $top_section_article_custom_fields['teaser_summary'][0];
+                if (empty($top_section_article_teaser)) {
+                    $top_section_article_teaser = tls_make_post_excerpt($top_section_article->post_content, 30);
+                }
                 $top_section_full_image = get_field('field_54e4d4a5b009b', $top_section_article->ID);
                 $top_section_thumbnail_image = get_field('field_54e4d481b009a', $top_section_article->ID);
                 $top_section_image = '';
@@ -232,7 +235,7 @@ function tls_discover_json_api_encode($response)
                 $article_post_image = $article_post_full_image['url'];
             }
             $article_post->custom_fields->thumbnail_image_url = $article_post_image;
-            $article_post->custom_fields->teaser_summary = (!empty($article_custom_fields['teaser_summary'][0])) ?: tls_make_post_excerpt($article_post->content, 30); // Teaser Summary;
+            $article_post->excerpt = (!empty($article_custom_fields['teaser_summary'][0])) ?: tls_make_post_excerpt($article_post->content, 30); // Teaser Summary
             $article_post->type = 'article';
             $article_post->taxonomy_article_section_url = get_term_link($article_section_terms[0]->term_id,
                 $article_section_terms[0]->taxonomy);
