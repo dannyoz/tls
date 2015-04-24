@@ -312,25 +312,30 @@ class TlsPostImageImporter
             if (!empty($post_content_images['urls'])) {
 
                 if (has_post_thumbnail($single_post->ID) === false) {
-                    $first_internal_img_array = explode('/', (string) $post_content_images['urls'][0]);
-                    $first_internal_img_name = explode('.', array_pop($first_internal_img_array));
+                    $first_internal_img_array = explode('/', (string) $post_content_images['urls'][0]); var_dump($first_internal_img_array);echo '<br />';
+                    $first_internal_img_name = array_pop($first_internal_img_array); var_dump($first_internal_img_name);echo '<br />';
 
-                    $attached_image_query = new WP_Query(array(
-                        'post_type'     => 'attachment',
-                        'post_parent'   => (int) $single_post->ID,
-                        'name'    => $first_internal_img_name[0]
-                    ));
+                    $attached_images = get_attached_media('image', $single_post->ID);
 
-                    if ($attached_image_query->found_posts > 0) {
+                    foreach ($attached_images as $attached_image) {
+                        $attached_image_url_array = explode('/', $attached_image->guid); var_dump($attached_image_url_array);echo '<br />';
+                        $attached_image_name = array_pop($attached_image_url_array); var_dump($attached_image_name);echo '<br />';
 
-                        add_post_meta($single_post->ID, '_thumbnail_id', $attached_image_query->posts[0]->ID);
+                        $attached_image_bool = (bool) ($attached_image_name === $first_internal_img_name);
+                        var_dump($attached_image); echo '<br />';
 
-                        $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
+                        if ($attached_image_bool === true) {
+                            var_dump($attached_image_bool); echo '<br />';
+                            echo 'time to set featured image <br />';
+                            // Set Featured Image
+                            add_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
 
-                        $featured_images_set++;
+                            $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
 
+                            $featured_images_set++;
+                            break;
+                        }
                     }
-
                 }
 
                 $posts_with_internal_images++;
