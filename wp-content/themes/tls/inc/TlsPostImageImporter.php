@@ -308,29 +308,29 @@ class TlsPostImageImporter
         foreach ($post_query->posts as $single_post) {
             // Search for internal images. Needs to set second parameter as true
             $post_content_images = $this->search_content($single_post->post_content, true);
-            echo 'Post Content Images<br />';var_dump($post_content_images);echo '<br />';
+
             if (!empty($post_content_images['urls'])) {
-                echo 'Has Thumbnail<br />';var_dump(has_post_thumbnail($single_post->ID));echo '<br />';
+
                 if (has_post_thumbnail($single_post->ID) === false) {
-                    $first_internal_img = (string) $post_content_images['urls'][0];
-                    echo 'First Image<br />';var_dump($first_internal_img);echo '<br />';
+                    $first_internal_img_array = explode('/', (string) $post_content_images['urls'][0]);
+                    $first_internal_img_name = explode('.', array_pop($first_internal_img_array));
 
-                    $attached_images = get_attached_media('image', $single_post->ID);
+                    $attached_image_query = new WP_Query(array(
+                        'post_type'     => 'attachment',
+                        'post_parent'   => (int) $single_post->ID,
+                        'name'    => $first_internal_img_name[0]
+                    ));
 
-                    foreach ($attached_images as $attached_image) {
-                        echo 'Attached Image<br />';var_dump($attached_image);echo '<br />';
-                        $attached_image_bool = (bool) ((string) $attached_image->guid === $first_internal_img);
-                        echo 'Is First Image and current attached image the same? - ' . $attached_image_bool . '<br />';
-                        if ($attached_image_bool === true) {
-                            echo 'time to set featured image';
-                            // Set Featured Image
-                            add_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
+                    if ($attached_image_query->found_posts > 0) {
 
-                            $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
+                        add_post_meta($single_post->ID, '_thumbnail_id', $attached_image_query->posts[0]->ID);
 
-                            $featured_images_set++;
-                        }
+                        $message .= "Featured image set for the Post: <a href=\"" . get_permalink($single_post->ID) . "\" target=\"_blank\">" . $single_post->post_title . "</a><br />";
+
+                        $featured_images_set++;
+
                     }
+
                 }
 
                 $posts_with_internal_images++;
@@ -384,7 +384,7 @@ class TlsPostImageImporter
         }
 
         $site_url = parse_url(site_url());
-        echo 'Site URL<br />';var_dump($site_url);echo '<br />';
+
         $external_images_search = array();
         $external_images_urls = array();
 
