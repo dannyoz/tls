@@ -312,21 +312,18 @@ class TlsPostImageImporter
             if (!empty($post_content_images['urls'])) {
 
                 if (has_post_thumbnail($single_post->ID) === false) {
-                    $first_internal_img_array = explode('/', (string) $post_content_images['urls'][0]); var_dump($first_internal_img_array);echo '<br />';
-                    $first_internal_img_name = array_pop($first_internal_img_array); var_dump($first_internal_img_name);echo '<br />';
+                    $first_internal_img_array = explode('/', (string) $post_content_images['urls'][0]);
+                    $first_internal_img_name = array_pop($first_internal_img_array);
 
                     $attached_images = get_attached_media('image', $single_post->ID);
 
                     foreach ($attached_images as $attached_image) {
-                        $attached_image_url_array = explode('/', $attached_image->guid); var_dump($attached_image_url_array);echo '<br />';
-                        $attached_image_name = array_pop($attached_image_url_array); var_dump($attached_image_name);echo '<br />';
+                        $attached_image_url_array = explode('/', $attached_image->guid);
+                        $attached_image_name = array_pop($attached_image_url_array);
 
                         $attached_image_bool = (bool) ($attached_image_name === $first_internal_img_name);
-                        var_dump($attached_image); echo '<br />';
 
                         if ($attached_image_bool === true) {
-                            var_dump($attached_image_bool); echo '<br />';
-                            echo 'time to set featured image <br />';
                             // Set Featured Image
                             add_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
 
