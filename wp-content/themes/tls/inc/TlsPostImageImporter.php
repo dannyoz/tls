@@ -319,7 +319,10 @@ class TlsPostImageImporter
 
                     foreach ($attached_images as $attached_image) {
                         echo 'Attached Image<br />';var_dump($attached_image);echo '<br />';
-                        if ((string) $attached_image->guid == $first_internal_img) {
+                        $attached_image_bool = (bool) ((string) $attached_image->guid === $first_internal_img);
+                        echo 'Is First Image and current attached image the same? - ' . $attached_image_bool . '<br />';
+                        if ($attached_image_bool === true) {
+                            echo 'time to set featured image';
                             // Set Featured Image
                             add_post_meta($single_post->ID, '_thumbnail_id', $attached_image->ID);
 
