@@ -71,7 +71,7 @@
 	<img class="max" ng-if="data.image_url" ng-attr-src="{{data.image_url}}" />						
 	
 	<div class="padded">
-		<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>		
+		<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>
 		<p ng-bind-html="data.excerpt"></p>
 	</div>
 
@@ -92,11 +92,11 @@
 		Then and now
 		<i ng-if="data.visibility == 'private'" class="icon icon-key"></i>
 	</h3>
-	
-	<img class="max" ng-if="data.image_url" ng-attr-src="{{data.image_url}}" />						
-	
+
+	<img class="max" ng-if="data.image_url" ng-attr-src="{{data.image_url}}" />
+
 	<div class="padded">
-		<h4><a ng-if="data.url" ng-attr-href="{{data.url}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>		
+		<h4><a ng-if="data.link" ng-attr-href="{{data.link}}" ng-click="tealiumTag(data);" ng-bind-html="data.title"></a></h4>
 		<p ng-bind-html="data.excerpt"></p>
 	</div>
 
