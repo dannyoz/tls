@@ -29517,7 +29517,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					break;
 
 					case 'blog':
-                        
+
 						if (!isUndefined(card.categories) &&
 							!isUndefined(card.categories[0])) {
 							card.category = {};
