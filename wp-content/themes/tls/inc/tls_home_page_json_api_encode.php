@@ -19,17 +19,17 @@ function tls_home_page_json_api_encode($response)
         $featured_article = get_field('featured_article', $home_page_id);
 
         $images = array(
-            'hero_image' => get_field('hero_image_url', $featured_article->ID),
-            'full_image' => get_field('full_image_url', $featured_article->ID),
-            'thumbnail_image' => get_field('thumbnail_image_url', $featured_article->ID)
+            'hero_image' => get_field('hero_image_url', $featured_article[0]->ID),
+            'full_image' => get_field('full_image_url', $featured_article[0]->ID),
+            'thumbnail_image' => get_field('thumbnail_image_url', $featured_article[0]->ID)
         );
 
         $response['featured_article'] = array(
-            'id' => $featured_article->ID,
-            'title' => $featured_article->post_title,
-            'author' => get_the_author_meta('display_name', $featured_article->post_author),
-            'text' => tls_make_post_excerpt($featured_article, 15),
-            'link' => get_permalink($featured_article->ID),
+            'id' => $featured_article[0]->ID,
+            'title' => $featured_article[0]->post_title,
+            'author' => get_the_author_meta('display_name', $featured_article[0]->post_author),
+            'text' => tls_make_post_excerpt($featured_article[0]->post_content, 30),
+            'link' => get_permalink($featured_article[0]->ID),
             'images' => $images
         );
 
@@ -72,7 +72,7 @@ function tls_home_page_json_api_encode($response)
             // Variable that grabs Card Type from Custom fields
             $card_type = $home_page_card['card_type'];
             // Variable that gets the post for the Card Type and adds _post to match the Post Object Custom field in the backend
-            $card_post = $home_page_card[$card_type . '_post'];
+            $card_post = $home_page_card[$card_type . '_post'][0];
 
             // If Card Type is Article the create variable $section with the article-section taxonomy otherwise use the taxonomy category
             if ($card_type == 'article') {
@@ -92,7 +92,7 @@ function tls_home_page_json_api_encode($response)
             if (!empty($teaserSummary)) {
                 $articleText = $teaserSummary;
             } else {
-                $articleText = tls_make_post_excerpt($card_post, 30);
+                $articleText = tls_make_post_excerpt($card_post->post_content, 30);
             }
 
             if (!empty($card_post_custom_fields['thumbnail_image_url'][0])) {
@@ -107,7 +107,7 @@ function tls_home_page_json_api_encode($response)
                 'id' => $card_post->ID,
                 'title' => $card_post->post_title,
                 'author' => get_the_author_meta('display_name', $card_post->post_author),
-                'text' => $articleText,
+                'excerpt' => $articleText,
                 'link' => get_permalink($card_post->ID),
                 'section' => array(
                     'name' => $section[0]->name,

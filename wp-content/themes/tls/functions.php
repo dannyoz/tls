@@ -206,8 +206,50 @@ function tls_unregister_post_tag_taxonomy()
 {
     global $wp_taxonomies;
     $taxonomy = 'post_tag';
-    if ( taxonomy_exists( $taxonomy ) )
-        unset( $wp_taxonomies[ $taxonomy ] );
+    if ( taxonomy_exists( $taxonomy ) ) {
+        unset($wp_taxonomies[$taxonomy]);
+    }
+
+    // If "A Don's Life" does not exist in "Category" then create it
+    if (!term_exists("A Don's Life", "category")) {
+        wp_insert_term("A Don's Life", "category");
+    }
+
+    // If "Listen" does not exist in "Category" then create it
+    if (!term_exists("Listen", "category")) {
+        wp_insert_term("Listen", "category");
+    }
+
+    // If "TLS Blogs" does not exist in "Category" then create it
+    if (!term_exists("TLS Blogs", "category")) {
+        wp_insert_term("TLS Blogs", "category");
+    }
+
+    // If "Public" does not exist in "Article Visibility" then create it
+    if (!term_exists("Public", "article_visibility")) {
+        wp_insert_term("Public", "article_visibility");
+    }
+
+    // If "Private" does not exist in "Article Visibility" then create it
+    if (!term_exists("Private", "article_visibility")) {
+        wp_insert_term("Private", "article_visibility");
+    }
+
+    // If "Then And Now" does not exist in "Article Section" then create it
+    if (!term_exists("Then And Now", "article_section")) {
+        wp_insert_term("Then And Now", "article_section");
+    }
+
+    // If "Poem Of The Week" does not exist in "Article Section" then create it
+    if (!term_exists("Poem Of The Week", "article_section")) {
+        wp_insert_term("Poem Of The Week", "article_section");
+    }
+
+    // If "Wall Street Journal" does not exist in "Article Section" then create it
+    if (!term_exists("Wall Street Journal", "article_section")) {
+        wp_insert_term("Wall Street Journal", "article_section");
+    }
+
 }
 
 add_action( 'init', 'tls_unregister_post_tag_taxonomy' );
@@ -392,5 +434,26 @@ function acf_load_spotlight_category_choices( $field )
     return $field;
 
 }
-
 add_filter( 'acf/load_field/name=spotlight_category', 'acf_load_spotlight_category_choices' );
+
+/**
+ * Function to query ACF Relationship Fields and sort all the posts by date in descending order
+ *
+ * @param $args
+ * @param $field
+ * @param $post
+ *
+ * @return mixed $args
+ */
+function acf_load_relationship_fields_query($args, $field, $post)
+{
+    // increase the posts per page
+    $args['post_status'] = 'publish';
+    $args['orderby'] = 'date';
+    $args['order'] = 'DESC';
+
+    return $args;
+}
+
+// filter for every field
+add_filter('acf/fields/relationship/query', 'acf_load_relationship_fields_query', 10, 3);
