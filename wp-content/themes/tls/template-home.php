@@ -12,7 +12,7 @@ get_header(); ?>
 	if ( have_posts() ) :
 		while ( have_posts() ) : the_post();
 	?>
-		<div id="banner" ng-attr-style="background-image:url({{featured.images.hero_image}})">
+		<div id="banner" ng-attr-style="background-image:url({{featured.hero_image}})">
 
 			<div class="container">
 

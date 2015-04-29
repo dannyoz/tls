@@ -18,11 +18,14 @@ function tls_home_page_json_api_encode($response)
         // Get Featured Post Details
         $featured_article = get_field('featured_article', $home_page_id);
 
-        $images = array(
-            'hero_image' => get_field('hero_image_url', $featured_article[0]->ID),
-            'full_image' => get_field('full_image_url', $featured_article[0]->ID),
-            'thumbnail_image' => get_field('thumbnail_image_url', $featured_article[0]->ID)
-        );
+        $hero_image_url = '';
+        if (get_field('hero_image_url', $featured_article[0]->ID)) {
+            $hero_image = get_field('hero_image_url', $featured_article[0]->ID);
+            $hero_image_url = $hero_image['url'];
+        } else if (get_field('full_image_url', $featured_article[0]->ID)) {
+            $hero_image = get_field('full_image_url', $featured_article[0]->ID);
+            $hero_image_url = $hero_image['url'];
+        }
 
         $response['featured_article'] = array(
             'id' => $featured_article[0]->ID,
@@ -30,7 +33,7 @@ function tls_home_page_json_api_encode($response)
             'author' => get_the_author_meta('display_name', $featured_article[0]->post_author),
             'text' => tls_make_post_excerpt($featured_article[0]->post_content, 30),
             'link' => get_permalink($featured_article[0]->ID),
-            'images' => $images
+            'hero_image' => esc_url($hero_image_url)
         );
 
         /**
