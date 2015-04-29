@@ -14,6 +14,9 @@ function tls_blogs_archive_json_api_encode($response)
         // Globals to be used with many of the specific searches
         global $json_api, $wp_query;
 
+        // Page ID
+        $page_id = $response['page']->id;
+
         /**
          * ===========================================
          *              Featured Blog Post
@@ -21,32 +24,22 @@ function tls_blogs_archive_json_api_encode($response)
          */
 
         // Get Featured Post Details
-        $featured_post = get_post($response['page']->custom_fields->featured_blog_post[0]);
-
-        // Get Post Thumbnail and all it's different sizes as URLs for Featured Blog
-        $sizes = get_intermediate_image_sizes();
-        $attachment_id = get_post_thumbnail_id($featured_post->ID);
+        $featured_post = get_field('featured_blog_post', $page_id);
 
         // Get Featured Post Category
-        $featured_post_category = wp_get_post_terms($featured_post->ID, 'category');
+        $featured_post_category = wp_get_post_terms($featured_post[0]->ID, 'category');
 
-        // Teaser Summary
-        $featured_post_teaser = get_field('teaser_summary', $featured_post->ID);
-
-        $images = array();
-        foreach ($sizes as $size) {
-            $images[$size] = wp_get_attachment_image_src($attachment_id, $size);
-        }
-        $images['full'] = wp_get_attachment_image_src($attachment_id, 'full');
+        $attachment_id = get_post_thumbnail_id($featured_post[0]->ID);
+        $featured_post_hero_image = wp_get_attachment_image_src($attachment_id, 'full');
 
         $response['featured_post'] = array(
             'type' => ($featured_post_category[0]->slug == 'a-dons-life' || $featured_post_category[0]->slug == 'dons-life') ? 'dons_life_blog' : str_replace('-',
                     '_', $featured_post_category[0]->slug) . '_blog',
-            'id' => $featured_post->ID,
-            'title' => $featured_post->post_title,
-            'excerpt' => tls_make_post_excerpt($featured_post->post_content, 30),
-            'link' => get_permalink($featured_post->ID),
-            'images' => $images
+            'id' => $featured_post[0]->ID,
+            'title' => $featured_post[0]->post_title,
+            'excerpt' => tls_make_post_excerpt($featured_post[0]->post_content, 30),
+            'link' => get_permalink($featured_post[0]->ID),
+            'hero_image' => esc_url($featured_post_hero_image[0])
         );
 
         /**
@@ -54,13 +47,13 @@ function tls_blogs_archive_json_api_encode($response)
          *              Spotlight Podcast
          * ===========================================
          */
-        $spotlight_podcast = get_post($response['page']->custom_fields->spotlight_podcast[0]);
-        $spotlight_podcast_custom_fields = get_post_custom($spotlight_podcast->ID);
+        $spotlight_podcast = get_field('spotlight_podcast', $page_id);
+        $spotlight_podcast_custom_fields = get_post_custom($spotlight_podcast[0]->ID);
         $response['posts'][] = array(
             'type' => 'listen_blog',
-            'id' => $spotlight_podcast->ID,
-            'title' => $spotlight_podcast->post_title,
-            'link' => get_permalink($spotlight_podcast->ID),
+            'id' => $spotlight_podcast[0]->ID,
+            'title' => $spotlight_podcast[0]->post_title,
+            'link' => get_permalink($spotlight_podcast[0]->ID),
             'soundcloud' => $spotlight_podcast_custom_fields['soundcloud_embed_code'][0]
         );
 
@@ -78,8 +71,8 @@ function tls_blogs_archive_json_api_encode($response)
             'order' => 'DESC',
             'paged' => $paged,
             'post__not_in' => array(
-                $featured_post->ID,
-                $spotlight_podcast->ID
+                $featured_post[0]->ID,
+                $spotlight_podcast[0]->ID
             ),
         );
 

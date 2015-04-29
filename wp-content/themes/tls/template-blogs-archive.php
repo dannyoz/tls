@@ -10,7 +10,7 @@ get_header(); ?>
 
 <section id="category" ng-controller="category" ng-class="{loading:loading}">
 
-	<div id="banner" ng-if="firstPost" ng-attr-style="background-image:url({{firstPost.images.full[0]}})">
+	<div id="banner" ng-if="firstPost" ng-attr-style="background-image:url({{firstPost.hero_image}})">
 
 		<div class="container">
 				
