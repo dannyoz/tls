@@ -63,11 +63,11 @@ function tls_search_results_json_api_encode($response)
          * ===========================================================
          */
 
+        $current_query = (isset($_GET['date_filter']) && $_GET['date_filter'] != '') ? array_merge((array)$current_query, $date_posts_archive_args) : $current_query;
+
         /**
          * Public Articles Taxonomy Term Filter
          */
-        $public_visibility = get_term_by('slug', 'public', 'article_visibility');
-        $public_visibility_id = (int)$public_visibility->term_id;
         $public_articles_args = array('article_visibility' => 'public');
         $public_articles_query = array_merge((array)$current_query, $public_articles_args);
         $public_articles = new WP_Query($public_articles_query);
@@ -83,8 +83,7 @@ function tls_search_results_json_api_encode($response)
          * Reviews (Articles) Post Type
          */
         $reviews_args = array(
-            'post_type' => 'tls_articles',
-            'posts_per_page' => 1
+            'post_type' => 'tls_articles'
         );
         $reviews_query = array_merge((array)$current_query, $reviews_args);
         $reviews = new WP_Query($reviews_query);
@@ -100,8 +99,7 @@ function tls_search_results_json_api_encode($response)
          * TLS Blogs Post Type
          */
         $blogs_args = array(
-            'post_type' => 'post',
-            'posts_per_page' => 1
+            'post_type' => 'post'
         );
         $blogs_query = array_merge((array)$current_query, $blogs_args);
         $blogs = new WP_Query($blogs_query);

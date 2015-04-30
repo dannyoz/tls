@@ -160,7 +160,7 @@
                         $scope.dateRange
                     )
                     .then(function (results) {
-                    
+
                         $scope.loadResults = false
                         $scope.results = results
                         $scope.contentType = results.content_type_filters
@@ -237,29 +237,29 @@
 	        if (query) {
 
 	        	// Index of filter in filters array
-	            var index = $scope.filters.indexOf(query);
+	            var index = activeFilters['category'].indexOf(query);
 
 	            // Filter clicked not in array
 	            if (index == -1) {
 	            	// Add filter to array
-	                $scope.filters.push(query);
-	                activeFilters['category'].push(key);	                   
+                    activeFilters['category'].push(key);
 	                tealium.filtering('add',typeName,term);
 	            } else {
-	                $scope.filters.splice(index,1);
 	                activeFilters['category'].splice(index,1);
 	                tealium.filtering('remove',typeName,term);
 	            }
 
+
 	            $scope.loadResults = true;              
 
 	            // Refactor filters string for API call
-	            var filters = 'article_section=' + $scope.filters.toString();	    
+                $scope.filters.splice('article_section=' + activeFilters['category'],1);
+                $scope.filters.push('article_section=' + activeFilters['category']);
 
 	            api.getSearchResults(
 	                    url,
 	                    1,
-	                    filters,
+                        $scope.filters,
 	                    $scope.order,
 	                    $scope.dateRange
 	                )
