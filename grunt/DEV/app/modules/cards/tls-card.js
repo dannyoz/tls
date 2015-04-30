@@ -27,6 +27,10 @@
 				}
 			}
 
+            if (card.type == "blog_post") {
+                card.type = "blog";
+            }
+
 			if(card.type == "tls_articles"){
 				card.type  = "article"
 			}

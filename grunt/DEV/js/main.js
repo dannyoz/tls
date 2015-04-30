@@ -28769,8 +28769,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         },
         getSearchResults : function(path,page,filters,ord,date,contentFilters) {
 
-            //console.log(filters);
-
             var defer     = $q.defer(),
                 page      = (!page) ? 1 : page,
                 filt      = (filters.length == 0) ? "" : "&"+filters,
@@ -28816,7 +28814,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         getArticleList : function(page){
 
             var defer = $q.defer(),
-                path  = '/api/get_posts/?post_type=tls_articles&page=' + page;
+                path  = '/discover/page/' + page + '?json=1';
 
             $http.get(path).success(function (data){
                 //simulate server delay
@@ -29415,6 +29413,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					title: "Listen"
 				}
 			}
+
+            if (card.type == "blog_post") {
+                card.type = "blog";
+            }
 
 			if(card.type == "tls_articles"){
 				card.type  = "article"
@@ -30581,11 +30583,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
         // Helper function
         // Checks if clicked filter exists in array
-        $scope.inFiltersArray = function(value, type) {        	
+        $scope.inFiltersArray = function(value, type) {      	
+
             var inFilter = false;
             if (type) {
-            	if (activeFilters[type].indexOf(value) != -1) inFilter = true;	
-            }            
+            	if (activeFilters[type].indexOf(value) !== -1) inFilter = true;	
+            }                
             return inFilter;
         };
 
@@ -30656,8 +30659,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         // =====================
         $scope.contentFilter = function(term,query,key) {
 
-            console.log(activeFilters['category']);
-
         	var list = $scope.contentType,
                 typeName = 'content type';
 
@@ -30671,8 +30672,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                 // to force searching one filter at a time
                 $scope.filters.splice(index,1);
 
+                // Check in activeFilters array
+                var indexActive = activeFilters['contentType'].indexOf(key);
+
                 // Filter clicked not in array
-                if (index == -1) {                	
+                if (indexActive == -1) {                	
                     // Clear active filters array 
                     // (force to filter one at a time)
                     activeFilters['contentType'] = [];
@@ -30696,7 +30700,15 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                 // Refactor filters string for API call
                 var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
                 var converted = filtersArr.toString().replace(/,/g,'&');
-                var filters = (filtersArr.length == 0) ? "" : "&"+converted;
+                var filters = (filtersArr.length == 0) ? "" : converted;
+
+                // if category filters have been selected add them in the request
+                if (activeFilters['category'].length > 0) {
+
+                    $scope.filters.splice('article_section=' + activeFilters['category'],1);
+                    $scope.filters.push('article_section=' + activeFilters['category']);
+                    filters = $scope.filters + '&' + filters;
+                }                
 
                 api.getSearchResults(
                         url,
