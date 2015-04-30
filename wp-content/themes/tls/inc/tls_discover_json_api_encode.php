@@ -235,7 +235,7 @@ function tls_discover_json_api_encode($response)
                 $article_post_image = $article_post_full_image['url'];
             }
             $article_post->custom_fields->thumbnail_image_url = $article_post_image;
-            $article_post->excerpt = (!empty($article_custom_fields['teaser_summary'][0])) ?: tls_make_post_excerpt($article_post->content, 30); // Teaser Summary
+            $article_post->excerpt = (empty($article_custom_fields['teaser_summary'][0])) ? tls_make_post_excerpt($article_post->content, 30) : wp_strip_all_tags($article_custom_fields['teaser_summary'][0]); // Teaser Summary
             $article_post->type = 'article';
             $article_post->taxonomy_article_section_url = get_term_link($article_section_terms[0]->term_id,
                 $article_section_terms[0]->taxonomy);
