@@ -37,11 +37,12 @@
 
         // Helper function
         // Checks if clicked filter exists in array
-        $scope.inFiltersArray = function(value, type) {        	
+        $scope.inFiltersArray = function(value, type) {      	
+
             var inFilter = false;
             if (type) {
-            	if (activeFilters[type].indexOf(value) != -1) inFilter = true;	
-            }            
+            	if (activeFilters[type].indexOf(value) !== -1) inFilter = true;	
+            }                
             return inFilter;
         };
 
@@ -125,8 +126,11 @@
                 // to force searching one filter at a time
                 $scope.filters.splice(index,1);
 
+                // Check in activeFilters array
+                var indexActive = activeFilters['contentType'].indexOf(key);
+
                 // Filter clicked not in array
-                if (index == -1) {                	
+                if (indexActive == -1) {                	
                     // Clear active filters array 
                     // (force to filter one at a time)
                     activeFilters['contentType'] = [];
@@ -150,7 +154,15 @@
                 // Refactor filters string for API call
                 var filtersArr   = (!$scope.filters) ? [] : $scope.filters;                	
                 var converted = filtersArr.toString().replace(/,/g,'&');
-                var filters = (filtersArr.length == 0) ? "" : "&"+converted;
+                var filters = (filtersArr.length == 0) ? "" : converted;
+
+                // if category filters have been selected add them in the request
+                if (activeFilters['category'].length > 0) {
+
+                    $scope.filters.splice('article_section=' + activeFilters['category'],1);
+                    $scope.filters.push('article_section=' + activeFilters['category']);
+                    filters = $scope.filters + '&' + filters;
+                }                
 
                 api.getSearchResults(
                         url,
