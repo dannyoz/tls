@@ -133,7 +133,7 @@
 										<div class="grid-8">
 											
 											<div class="form-subtitle futura">To read the full article, please login</div>
-											<form novalidate name="loginForm" class="form">
+											<form novalidate name="loginForm" class="form" method="post" action="https://login.the-tls.co.uk/">
                                                 <input type="hidden" name="gotoUrl" id="gotoUrl" value="<?php echo esc_url(get_permalink(get_the_ID())); ?>">
 
 												<div class="form-item">
@@ -156,7 +156,7 @@
 										</div>
 										<div class="grid-4 subscribe-col">
 											<div class="form-subtitle futura">Not a subscriber?</div>
-											<button ng-click="subscribe();" class="button subscribe">Subscribe</button>
+                                            <a href="http://tlssubs.imbmsubs.com/"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
 										</div>
 									</div>
 											

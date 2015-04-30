@@ -245,6 +245,16 @@ function tls_unregister_post_tag_taxonomy()
         wp_insert_term("Poem Of The Week", "article_section");
     }
 
+    // If "Letters To The Editor" does not exist in "Article Section" then create it
+    if (!term_exists("Letters To The Editor", "article_section")) {
+        wp_insert_term("Letters To The Editor", "article_section");
+    }
+
+    // If "NB" does not exist in "Article Section" then create it
+    if (!term_exists("NB", "article_section")) {
+        wp_insert_term("NB", "article_section");
+    }
+
     // If "Wall Street Journal" does not exist in "Article Section" then create it
     if (!term_exists("Wall Street Journal", "article_section")) {
         wp_insert_term("Wall Street Journal", "article_section");
