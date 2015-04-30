@@ -120,8 +120,8 @@ get_header(); ?>
 				<?php endif; ?>
 
 				<div class="cta-buttons">
-					<button class="button subscribe" ng-click="subscribe();">Subcribe</button>
-					<button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button>
+                    <a href="http://tlssubs.imbmsubs.com/"><button class="button subscribe" ng-click="subscribe();">Subcribe</button></a>
+                    <a href="https://login.the-tls.co.uk/"><button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button></a>
 				</div>
 
 			</div>
