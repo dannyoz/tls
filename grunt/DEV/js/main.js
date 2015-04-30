@@ -28769,6 +28769,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         },
         getSearchResults : function(path,page,filters,ord,date,contentFilters) {
 
+            //console.log(filters);
+
             var defer     = $q.defer(),
                 page      = (!page) ? 1 : page,
                 filt      = (filters.length == 0) ? "" : "&"+filters,
@@ -28787,7 +28789,6 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
                 //simulate server delay
                 $timeout(function(){
                     defer.resolve(data)
-                    console.log(data);
                 },delay)
             })
             return defer.promise
@@ -30654,6 +30655,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
         // Content Type filter
         // =====================
         $scope.contentFilter = function(term,query,key) {
+
+            console.log(activeFilters['category']);
 
         	var list = $scope.contentType,
                 typeName = 'content type';
