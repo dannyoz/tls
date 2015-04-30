@@ -124,7 +124,7 @@
         getArticleList : function(page){
 
             var defer = $q.defer(),
-                path  = '/api/get_posts/?post_type=tls_articles&page=' + page;
+                path  = '/discover/page/' + page + '?json=1';
 
             $http.get(path).success(function (data){
                 //simulate server delay
