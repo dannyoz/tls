@@ -1,4 +1,4 @@
-/* line 5, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../Ruby21/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -1356,7 +1356,41 @@ p.author, h4.author {
     line-height: 22px;
   }
 }
-/* line 20, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 22, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #banner .container {
+  height: 100%;
+  position: relative;
+}
+/* line 29, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #banner .container .caption a {
+  color: white;
+  -webkit-animation-name: slideUp;
+  animation-name: slideUp;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-iteration-count: 0.7s;
+  animation-iteration-count: 0.7s;
+}
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
+#home #banner .container .caption a:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+/* line 19, ../../../../grunt/DEV/app/global/sass-globals/mixins/_animations.scss */
+#home #banner .container .caption a:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+/* line 34, ../../../../grunt/DEV/app/templates/home/_home.scss */
+#home #banner .container .caption a:hover {
+  color: white;
+  text-decoration: none;
+}
+/* line 43, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber {
   float: left;
   width: 100%;
@@ -1365,11 +1399,11 @@ p.author, h4.author {
   margin-top: 40px;
   padding-bottom: 40px;
 }
-/* line 28, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 51, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .container {
   overflow: hidden;
 }
-/* line 32, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 55, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber h2 {
   text-align: center;
   font-size: 24px;
@@ -1381,18 +1415,18 @@ p.author, h4.author {
   line-height: 115px;
 }
 @media (max-width: 450px) {
-  /* line 32, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 55, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber h2 {
     font-size: 18px;
   }
 }
-/* line 48, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .title-icon {
   position: relative;
   height: 125px;
   padding: 30px 0 10px 0;
 }
-/* line 54, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 77, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .icon-border {
   width: 66px;
   height: 90px;
@@ -1401,7 +1435,7 @@ p.author, h4.author {
   left: 50%;
   margin-left: -33px;
 }
-/* line 62, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 85, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .icon-border:before {
   font-size: 36px;
   position: absolute;
@@ -1409,32 +1443,32 @@ p.author, h4.author {
   top: 0;
   color: #706d73;
 }
-/* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 94, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .subscribe-grid {
   float: left;
   position: relative;
   width: 23.125%;
   margin-right: 2.5%;
 }
-/* line 75, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 98, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .subscribe-grid:last-child {
   margin-right: 0;
 }
 @media screen and (max-width: 840px) {
-  /* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 94, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid {
     float: left;
     position: relative;
     width: 48.75%;
     margin-right: 2.5%;
   }
-  /* line 84, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 107, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid:nth-of-type(even) {
     margin-right: 0;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 71, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 94, ../../../../grunt/DEV/app/templates/home/_home.scss */
   #home #subscriber .subscribe-grid {
     float: left;
     position: relative;
@@ -1442,20 +1476,20 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
-/* line 95, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 118, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .subscribe-grid .card {
   background-color: transparent;
   border-color: #bfbfbf;
 }
-/* line 101, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 124, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber.locked {
   background-color: #e6e6e6;
 }
-/* line 105, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 128, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber.locked .card {
   border-color: #c4c4c4;
 }
-/* line 111, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 134, ../../../../grunt/DEV/app/templates/home/_home.scss */
 #home #subscriber .cta-buttons {
   clear: both;
   overflow: hidden;
@@ -1463,35 +1497,35 @@ p.author, h4.author {
 }
 
 @media screen and (max-width: 450px) {
-  /* line 121, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 144, ../../../../grunt/DEV/app/templates/home/_home.scss */
   .blog-item.card {
     padding: 20px;
   }
 }
-/* line 127, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
 .blog-item.card h4 {
   margin-bottom: 2px;
 }
 @media screen and (max-width: 450px) {
-  /* line 131, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 154, ../../../../grunt/DEV/app/templates/home/_home.scss */
   .blog-item.card h3 {
     padding: 0;
     margin-bottom: 10px;
   }
 }
-/* line 138, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 161, ../../../../grunt/DEV/app/templates/home/_home.scss */
 .blog-item.card p.futura {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 10px;
   margin-bottom: 8px;
 }
 @media screen and (max-width: 450px) {
-  /* line 144, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 167, ../../../../grunt/DEV/app/templates/home/_home.scss */
   .blog-item.card .padded {
     padding: 0;
   }
 }
-/* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 173, ../../../../grunt/DEV/app/templates/home/_home.scss */
 .blog-item.card .blog-avatar {
   float: left;
   position: relative;
@@ -1499,7 +1533,7 @@ p.author, h4.author {
   margin-right: 2.5%;
 }
 @media screen and (max-width: 450px) {
-  /* line 150, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 173, ../../../../grunt/DEV/app/templates/home/_home.scss */
   .blog-item.card .blog-avatar {
     float: left;
     position: relative;
@@ -1507,7 +1541,7 @@ p.author, h4.author {
     margin-right: 2.5%;
   }
 }
-/* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 183, ../../../../grunt/DEV/app/templates/home/_home.scss */
 .blog-item.card .blog-data {
   float: left;
   position: relative;
@@ -1515,7 +1549,7 @@ p.author, h4.author {
   margin-right: 0;
 }
 @media screen and (max-width: 450px) {
-  /* line 160, ../../../../grunt/DEV/app/templates/home/_home.scss */
+  /* line 183, ../../../../grunt/DEV/app/templates/home/_home.scss */
   .blog-item.card .blog-data {
     float: left;
     position: relative;
@@ -1523,7 +1557,7 @@ p.author, h4.author {
     margin-right: 0;
   }
 }
-/* line 168, ../../../../grunt/DEV/app/templates/home/_home.scss */
+/* line 191, ../../../../grunt/DEV/app/templates/home/_home.scss */
 .blog-item.card .blog-data .inner {
   padding-left: 5px;
 }
