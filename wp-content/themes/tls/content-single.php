@@ -133,22 +133,23 @@
 										<div class="grid-8">
 											
 											<div class="form-subtitle futura">To read the full article, please login</div>
-											<form novalidate name="login-form" class="form">	
+											<form novalidate name="loginForm" class="form">
+                                                <input type="hidden" name="gotoUrl" id="gotoUrl" value="<?php echo esc_url(get_permalink(get_the_ID())); ?>">
 
 												<div class="form-item">
-													<label for="akamaiEmail" class="label">Email address</label>
-													<input name="akamaiEmail" type="email" ng-model="lg.akamaiEmail" required />													
+													<label for="username" class="label">Email address</label>
+													<input name="username" type="email" ng-model="lg.akamaiEmail" required />
 												</div>										
 												<div class="form-item">
-													<label for="akamaiPassword" class="label">Password</label>
-													<input name="akamaiPassword" type="password" ng-model="lg.akamaiPassword" required />													
+													<label for="password" class="label">Password</label>
+													<input name="password" type="password" ng-model="lg.akamaiPassword" required />
 												</div>
 												<div class="form-item">												
-													<input name="akamaiKeepme" type="checkbox" ng-model="lg.akamaiKeepme" />
-													<label for="akamaiKeepme" class="label inline">Keep me logged in</label>	
+													<input name="rememberMe" type="checkbox" ng-model="lg.akamaiKeepme" />
+													<label for="rememberMe" class="label inline">Keep me logged in</label>
 												</div>
 												<div class="form-item">
-													<button ng-click="login(lg);" class="button clear login"><i class="icon icon-login"></i> Login</button>
+													<button name="Submit" ng-click="login(lg);" class="button clear login"><i class="icon icon-login"></i> Login</button>
 												</div>																					
 
 											</form>
