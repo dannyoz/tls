@@ -120,8 +120,12 @@ get_header(); ?>
 				<?php endif; ?>
 
 				<div class="cta-buttons">
-                    <a href="http://tlssubs.imbmsubs.com/"><button class="button subscribe" ng-click="subscribe();">Subcribe</button></a>
-                    <a href="https://login.the-tls.co.uk/"><button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button></a>
+                    <?php if (isset($_COOKIE['acs-tls'])) : ?>
+                        <a href="https://login.the-tls.co.uk/user/logout"><button ng-click="logout();" class="button clear login"><i class="icon icon-login"></i> Logout</button></a>
+                    <?php else : ?>
+                        <a href="http://tlssubs.imbmsubs.com/"><button class="button subscribe" ng-click="subscribe();">Subcribe</button></a>
+                        <a href="https://login.the-tls.co.uk/"><button class="button clear login" ng-click="login();"><i class="icon icon-login"></i> Login</button></a>
+                    <?php endif; ?>
 				</div>
 
 			</div>
