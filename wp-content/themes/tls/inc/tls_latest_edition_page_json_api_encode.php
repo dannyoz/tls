@@ -10,29 +10,6 @@
 function tls_latest_edition_page_json_api_encode($response)
 {
 
-    /*if ($response['post']->type == 'tls_editions') {
-        
-         $latest_edition = new WP_Query( array(
-            'post_type'         => 'tls_editions',
-            'post_status'       => 'publish',
-            'posts_per_page'    => 1,
-            'orderby '          => 'date'
-        ) ); wp_reset_query();
-        $latest_edition = $latest_edition->posts[0];
-
-        global $post;
-        $oldGlobal = $post;
-        $post = get_post( $latest_edition->ID );
-        // $response['debug'] = get_previous_post();
-
-        $response['latest_edition'] = array(
-            'id'        => $latest_edition->ID,
-            'title'     => $latest_edition->post_title,
-            'url'       => get_permalink($latest_edition->ID),
-
-        );
-    }*/
-
     if ((isset($response['page_template_slug']) && $response['page_template_slug'] == "template-latest-edition.php") || isset($response['post']) && $response['post']->type == 'tls_editions') {
 
         if ((isset($response['page_template_slug']) && $response['page_template_slug'] == "template-latest-edition.php")) {
@@ -119,17 +96,16 @@ function tls_latest_edition_page_json_api_encode($response)
         }
 
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
-        while (have_rows('edition_regular_articles', $latest_edition->ID)) {
-            the_row();
-            $article_type = get_sub_field('regular_article_type');
-            $regular_article = get_sub_field('regular_article');
-            $postAuthor = get_field('article_author_name', $value->ID);
+        $regular_articles = get_field('edition_regular_articles', $latest_edition->ID);
+        foreach ($regular_articles as $regular_article)
+        {
+            $postAuthor = get_field('article_author_name', $regular_article->ID);
 
             $section = wp_get_post_terms($regular_article->ID, 'article_section');
-            $artile_section = wp_get_post_terms($regular_article->ID, 'article_visibility');
+            $article_section = wp_get_post_terms($regular_article->ID, 'article_visibility');
 
             $response['latest_edition']['content']['regulars']['articles'][$regular_article->post_name] = array(
-                'type' => $article_type,
+                'type' => 'article',
                 'id' => $regular_article->ID,
                 'author' => $postAuthor,
                 'title' => $regular_article->post_title,
@@ -137,7 +113,7 @@ function tls_latest_edition_page_json_api_encode($response)
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
                 ),
-                'taxonomy_article_visibility' => $artile_section,
+                'taxonomy_article_visibility' => $article_section,
                 'url' => get_permalink($regular_article->ID),
             );
 
