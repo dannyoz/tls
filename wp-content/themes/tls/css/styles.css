@@ -641,6 +641,11 @@ section, article {
   text-align: left;
 }
 
+/* line 171, ../../../../grunt/DEV/app/global/sass-globals/_core.scss */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 /* line 1, ../../../../grunt/DEV/app/global/sass-globals/_links.scss */
 a, button, input {
   cursor: pointer;
