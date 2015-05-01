@@ -97,6 +97,7 @@ $mobile_article: 560px;
 	.share-bar{
 
 		padding: 30px 0;
+		clear: left;
 
 		@media screen and (max-width: $mobile_article) {
 			display: none;
