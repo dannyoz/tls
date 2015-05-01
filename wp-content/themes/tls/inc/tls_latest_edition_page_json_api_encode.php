@@ -76,31 +76,30 @@ function tls_latest_edition_page_json_api_encode($response)
 
 
         $response['latest_edition']['content']['public']['title'] = 'Public content';
+        $public_articles = get_field('public_articles', $latest_edition->ID);
+        foreach ($public_articles as $public_article) {
 
-        foreach ($latest_edition_articles['public_articles'] as $key => $value) {
+            $section = wp_get_post_terms($public_article->ID, 'article_section');
+            $postAuthor = get_field('field_54e4d3b1b0094', $public_article->ID);
 
-            $section = wp_get_post_terms($value->ID, 'article_section');
-
-            $postAuthor = get_fields($value->ID);
-            $response['latest_edition']['content']['public']['articles'][$value->post_name] = array(
-                'id' => $value->ID,
-                'author' => $postAuthor['article_author_name'],
-                'title' => $value->post_title,
+            $response['latest_edition']['content']['public']['articles'][$public_article->post_name] = array(
+                'id' => $public_article->ID,
+                'author' => $postAuthor,
+                'title' => $public_article->post_title,
                 'section' => array(
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
                 ),
-                'url' => get_permalink($value->ID),
+                'url' => get_permalink($public_article->ID),
 
             );
         }
 
         $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
         $regular_articles = get_field('edition_regular_articles', $latest_edition->ID);
-        foreach ($regular_articles as $regular_article)
-        {
-            $postAuthor = get_field('article_author_name', $regular_article->ID);
+        foreach ($regular_articles as $regular_article) {
 
+            $postAuthor = get_field('field_54e4d3b1b0094', $regular_article->ID);
             $section = wp_get_post_terms($regular_article->ID, 'article_section');
             $article_section = wp_get_post_terms($regular_article->ID, 'article_visibility');
 
@@ -121,23 +120,24 @@ function tls_latest_edition_page_json_api_encode($response)
 
 
         $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
-        foreach ($latest_edition_articles['subscriber_only_articles'] as $key => $value) {
+        $subscriber_only_articles = get_field('subscriber_only_articles', $latest_edition->ID);
+        foreach ($subscriber_only_articles as $subscriber_only_article) {
 
-            $section = wp_get_post_terms($value->ID, 'article_section');
+            $section = wp_get_post_terms($subscriber_only_article->ID, 'article_section');
+            $postAuthor = get_field('field_54e4d3b1b0094', $subscriber_only_article->ID);
 
-            $postAuthor = get_fields($value->ID);
             $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['section']->name = $section[0]->name;
             $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['section']->link = get_term_link($section[0]->term_id,
                 $section[0]->taxonomy);
-            $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['posts'][$value->post_name] = array(
-                'id' => $value->ID,
-                'author' => $postAuthor['article_author_name'],
-                'title' => $value->post_title,
+            $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['posts'][$subscriber_only_article->post_name] = array(
+                'id' => $subscriber_only_article->ID,
+                'author' => $postAuthor,
+                'title' => $subscriber_only_article->post_title,
                 'section' => array(
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
                 ),
-                'url' => get_permalink($value->ID),
+                'url' => get_permalink($subscriber_only_article->ID),
 
             );
         }
