@@ -57,7 +57,7 @@ Template Name: Latest Edition Page Template
 							<h2>{{publicObj.title}}</h2>
 							<div class="edition-item" ng-repeat="public in publicObj.articles">
 								<div class="padded">
-									<h3 class="futura"><a href="{{public.section.link}}" ng-bind="public.section.name"></a></h3>
+									<h3 class="futura"><a href="{{public.section.link}}" ng-bind-html="public.section.name"></a></h3>
 									<p class="title-small" ng-bind="public.author"></p>
 									<h4><a href="{{public.url}}" ng-bind-html="public.title"></a></h4>
 								</div>								
@@ -95,7 +95,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-4" ng-repeat="column in col3">								
 
 					<div class="card-flat" ng-repeat="card in column">	
-						<h3 class="futura"><a href="{{card.section.link}}">{{card.section.name}}</a></h3>
+						<h3 class="futura"><a href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{::post.author}}</p>
@@ -113,7 +113,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-6" ng-repeat="column in col2">										
 					
 					<div class="card-flat" ng-repeat="card in column">						
-						<h3 class="futura"><a href="{{card.section.link}}">{{card.section.name}}</a></h3>
+						<h3 class="futura"><a href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{post.author}}</p>
