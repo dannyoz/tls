@@ -210,7 +210,7 @@ class TlsPostImageImporter
 
                     $message .= "New Image: <a href=\"" . $new_content_image_url . "\" target=\"_blank\">" . $new_content_image_url . "</a><br />";
                 }
-
+                die(exit());
                 $updated_content = $this->search_replace_content_images($post_content_images['imgs'], $new_post_content_images, $single_post->post_content);
 
                 wp_update_post( array(
@@ -466,7 +466,11 @@ class TlsPostImageImporter
             @unlink($file_array['tmp_name']);
             $file_array['tmp_name'] = '';
 
-            return false;
+            var_dump($tmp);
+            return array(
+                'status'    => 'error',
+                'message'   => $tmp->get_error_message()
+            );
         }
 
         // do the validation and storage stuff
@@ -476,7 +480,11 @@ class TlsPostImageImporter
         if ( is_wp_error($uploaded_image_id) ) {
             @unlink($file_array['tmp_name']);
 
-            return false;
+            var_dump($uploaded_image_id);
+            return array(
+                'status'    => 'error',
+                'message'   => $uploaded_image_id->get_error_message()
+            );
         }
 
         $uploaded_image_url = wp_get_attachment_url($uploaded_image_id);
