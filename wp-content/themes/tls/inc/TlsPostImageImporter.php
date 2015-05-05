@@ -206,11 +206,21 @@ class TlsPostImageImporter
 
                     $new_content_image_url = $this->download_images($old_content_image_url, $single_post->ID);
 
+                    if (is_array($new_content_image_url) && $new_content_image_url['status'] == 'error') {
+                        $new_content_image_url = $old_content_image_url;
+                    }
+
                     $new_post_content_images[] = '<img src="' . $new_content_image_url . '" alt="" />';
 
-                    $message .= "New Image: <a href=\"" . $new_content_image_url . "\" target=\"_blank\">" . $new_content_image_url . "</a><br />";
+                    if (is_array($new_content_image_url) && $new_content_image_url['status'] == 'error') {
+                        $message .= "Image Could Could not be downloaded. Image is still: <a href=\"" . $new_content_image_url . "\" target=\"_blank\">" . $new_content_image_url . "</a><br />";
+                    } else {
+                        $message .= "New Image: <a href=\"" . $new_content_image_url . "\" target=\"_blank\">" . $new_content_image_url . "</a><br />";
+                    }
+
+
                 }
-                die(exit());
+                
                 $updated_content = $this->search_replace_content_images($post_content_images['imgs'], $new_post_content_images, $single_post->post_content);
 
                 wp_update_post( array(
