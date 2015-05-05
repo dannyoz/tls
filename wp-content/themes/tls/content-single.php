@@ -54,7 +54,7 @@
 						<div class="col-wide article-section title-small">
 							<div class="grid-6" ng-bind-html="post.taxonomy_article_section[0].title"></div>
 							<div class="grid-6" ng-if="!post.taxonomy_article_section" ng-bind="post.categories[0].title"></div>
-							<div class="grid-6 article-date title-small right-align" ng-bind="format(post.modified)" ng-if="size != 'mobile'"></div>
+							<div class="grid-6 article-date title-small right-align" ng-bind="format(post.date)" ng-if="size != 'mobile'"></div>
 						</div>
 					</div>
 
@@ -78,7 +78,7 @@
 							<div class="article-meta grid-12">
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length > 0"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length == 0"><h4 class="author" ng-bind="post.author.name"></h4></div>
-								<div class="grid-12 article-date title-small" ng-bind="format(post.modified)" ng-if="size == 'mobile'"></div>
+								<div class="grid-12 article-date title-small" ng-bind="format(post.date)" ng-if="size == 'mobile'"></div>
 							</div>
 
 							<div class="grid-12 article-summary folded-corner" ng-if="post.books">
