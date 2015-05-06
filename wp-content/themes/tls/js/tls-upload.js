@@ -1,15 +1,25 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($){
+    var _custom_media = true,
+        _orig_send_attachment = wp.media.editor.send.attachment;
 
-    jQuery('#upload_classifieds_button').click(function() {
+    $('#upload_classifieds_button').click(function(e) {
+        var send_attachment_bkp = wp.media.editor.send.attachment;
+        var button = $(this);
+        var id = button.attr('id').replace('_button', '');
+        _custom_media = true;
+        wp.media.editor.send.attachment = function(props, attachment){
+            if ( _custom_media ) {
+                $("#"+id).val(attachment.url);
+            } else {
+                return _orig_send_attachment.apply( this, [props, attachment] );
+            };
+        }
 
-        window.send_to_editor = function(html) {
-            var classifieds_pdf_url = jQuery(html).attr('href');
-            jQuery('#classifieds_pdf_url').val(classifieds_pdf_url);
-            tb_remove();
-        };
-
-        tb_show('Upload a Classifieds PDF', 'media-upload.php?referer=tls_theme_options&type=file&TB_iframe=true&post_id=0', false);
+        wp.media.editor.open(button);
         return false;
     });
 
+    $('.add_media').on('click', function(){
+        _custom_media = false;
+    });
 });

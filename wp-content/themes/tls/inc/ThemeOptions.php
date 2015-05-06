@@ -63,6 +63,8 @@ class ThemeOptions
 
         }
 
+        wp_enqueue_media();
+
     }
 
     /**
@@ -284,7 +286,7 @@ class ThemeOptions
         $options = (array)get_option('theme_options_settings');
         $classifieds_pdf = (isset($options['classifieds_pdf'])) ? $options['classifieds_pdf'] : '';
         ?>
-        <input type="text" id="classifieds_pdf_url" name="theme_options_settings[classifieds_pdf]"
+        <input type="text" id="upload_classifieds" name="theme_options_settings[classifieds_pdf]"
                value="<?php echo esc_url($classifieds_pdf); ?>"/>
         <input id="upload_classifieds_button" type="button" class="button"
                value="<?php _e('Upload Classifieds', 'tls'); ?>"/>
