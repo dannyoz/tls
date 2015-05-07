@@ -50,8 +50,11 @@
             <div id="results" class="transition-1" ng-class="{shift:showFilters,loading:loadResults}">
 
                 <button id="show-filters" class="tablet-show clear small" ng-click="showFilters = true">Filters <i class="icon icon-plus"></i></button>
-
-                <h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . get_search_query() . '"</span>' ); ?></h2>
+                <?php
+                $search_query_var = get_search_query(true);
+                $search_query = (empty($search_query_var)) ? 'All Results' : $search_query_var;
+                ?>
+                <h2><span ng-bind="results.count_total"></span> results for: <?php printf( __( '%s', 'tls' ), '<span class="term">"' . $search_query . '"</span>' ); ?></h2>
 
                 <div class="grid-row">
 

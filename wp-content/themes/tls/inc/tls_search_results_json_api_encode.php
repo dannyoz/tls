@@ -13,13 +13,31 @@ function tls_search_results_json_api_encode($response)
     global $json_api, $wp_query;
 
     /**
+     * Display Everything search var is empty
+     */
+    $search_query = get_search_query(true);
+    if ($wp_query->is_search == true && empty($search_query)) {
+        $response['status'] = 'ok';
+        unset($response['error']);
+        $empty_search_archive_query = array(
+            'post_type' => array('post', 'tls_faqs', 'tls_articles')
+        );
+
+        $empty_search_archive = $json_api->introspector->get_posts($empty_search_archive_query);
+        $response['count'] = count($empty_search_archive);
+        $response['count_total'] = (int)$wp_query->found_posts;
+        $response['pages'] = $wp_query->max_num_pages;
+        $response['posts'] = $empty_search_archive;
+    }
+
+    /**
      * Search Page Specific
      */
     if (isset($response['posts']) && $wp_query->is_search == true) {
 
         // URL parsing to use with custom JSON API queries
         $url = parse_url($_SERVER['REQUEST_URI']);
-        $url_query = wp_parse_args($url['query']);
+        $url_query = wp_parse_args($url['query']); $response['url_query'] = $url_query;
 
         // Get Search Query to be used in all the queries
         $search_query = get_search_query();
