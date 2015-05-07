@@ -75,12 +75,13 @@
 		<p ng-bind-html="data.excerpt"></p>
 	</div>
 
-	<footer>
+	<footer ng-if="data.books">
 		<!--<p ng-if="data.author != '' && data.custom_fields.book_title == null && !data.books" class="futura" ng-bind="data.author"></p>	-->
-		<div ng-if="data.books">
+		<div>
 			<div class="book summary-wrapper" ng-repeat="book in data.books">
-				<p class="book-title futura" ng-bind-html="book.book_title"></p>
-				<p class="futura" ng-bind-html="book.book_author"></p>
+				<p class="book-title futura" ng-if="book.book_title" ng-bind-html="book.book_title"></p>
+				<p class="futura" ng-if="book.book_author" ng-bind-html="book.book_author"></p>
+                <p class="futura" ng-if="book.book_title == '' || book.book_author == ''" ng-bind-html="book.book_info"></p>
 			</div>
 		</div>
 	</footer>
@@ -100,12 +101,13 @@
 		<p ng-bind-html="data.excerpt"></p>
 	</div>
 
-	<footer>
+	<footer ng-if="data.books">
 		<!--<p ng-if="data.author != '' && data.custom_fields.book_title == null && !data.books" class="futura" ng-bind="data.author"></p>	-->
-		<div ng-if="data.books">
+		<div>
 			<div class="book summary-wrapper" ng-repeat="book in data.books">
-				<p class="book-title futura" ng-bind-html="book.book_title"></p>
-				<p class="futura" ng-bind-html="book.book_author"></p>
+                <p class="book-title futura" ng-if="book.book_title" ng-bind-html="book.book_title"></p>
+                <p class="futura" ng-if="book.book_author" ng-bind-html="book.book_author"></p>
+                <p class="futura" ng-if="book.book_title == '' || book.book_author == ''" ng-bind-html="book.book_info"></p>
 			</div>
 		</div>
 	</footer>
