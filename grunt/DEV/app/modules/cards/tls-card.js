@@ -1,4 +1,4 @@
-.directive('tlsCard',['$sce','tealium',function ($sce,tealium) {
+.directive('tlsCard',['$sce','tealium', '$window', function ($sce,tealium, $window) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -154,7 +154,7 @@
 
 			}(card);
 
-			scope.tealiumTag = function(card){
+			scope.tealiumTag = function(card, urlKey){
 
 				var cat   = (card.section) ? card.section.name : card.category.title,
 					title = card.title,
@@ -162,6 +162,13 @@
 					restr = (state == "Public") ? "public" : "restricted";
 
 				tealium.cardLink(cat,title,restr);
+
+				// If url is passed then redirect page to that page				
+				if (urlKey) {					
+					if (card.hasOwnProperty(urlKey)) {
+						$window.location.href = card[urlKey];	
+					}					
+				}
 			}
 		}
 	}
