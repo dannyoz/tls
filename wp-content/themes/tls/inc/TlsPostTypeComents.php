@@ -191,17 +191,19 @@ class TlsPostTypeComments
 
         $posts_comments_status_changed = 0;
         foreach ($post_type_comments_query->posts as $single_post) {
-            $comments_on = wp_update_post(array(
-                'ID'                => (int) $single_post->ID,
-                'comment_status'    => 'open'
-            ), true);
+            if ('closed' == $single_post->comment_status) {
+                $comments_on = wp_update_post(array(
+                    'ID' => (int)$single_post->ID,
+                    'comment_status' => 'open'
+                ), true);
 
-            if (!is_wp_error($comments_on)) {
-                $posts_comments_status_changed++;
+                if (!is_wp_error($comments_on)) {
+                    $posts_comments_status_changed++;
+                }
             }
         }
 
-        $message .= "Comments Are Open for " . $posts_comments_status_changed . " from Post Type: " . $post_type_name;
+        $message .= "Comments Open for " . $posts_comments_status_changed . " out of " . $post_type_comments_query->found_posts ." posts from Post Type: " . $post_type_name ;
 
         echo $message;
 
@@ -281,17 +283,20 @@ class TlsPostTypeComments
 
         $posts_comments_status_changed = 0;
         foreach ($post_type_comments_query->posts as $single_post) {
-            $comments_on = wp_update_post(array(
-                'ID'                => (int) $single_post->ID,
-                'comment_status'    => 'closed'
-            ), true);
 
-            if (!is_wp_error($comments_on)) {
-                $posts_comments_status_changed++;
+            if ('open' == $single_post->comment_status) {
+                $comments_on = wp_update_post(array(
+                    'ID' => (int)$single_post->ID,
+                    'comment_status' => 'closed'
+                ), true);
+
+                if (!is_wp_error($comments_on)) {
+                    $posts_comments_status_changed++;
+                }
             }
         }
 
-        $message .= "Comments Are Closed for " . $posts_comments_status_changed . " from Post Type: " . $post_type_name;
+        $message .= "Comments Closed for " . $posts_comments_status_changed . " out of " . $post_type_comments_query->found_posts ." posts from Post Type: " . $post_type_name ;
 
         echo $message;
 
