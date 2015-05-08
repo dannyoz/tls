@@ -116,8 +116,8 @@ Template Name: Latest Edition Page Template
 						<h3 class="futura"><a href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
-								<p class="title-small">{{post.author}}</p>
-								<h4><a ng-href="{{::post.url}}">{{post.title}}</a></h4>
+								<p class="title-small">{{::post.author}}</p>
+								<h4><a ng-href="{{::post.url}}">{{::post.title}}</a></h4>
 							</div>								
 						</div>
 
