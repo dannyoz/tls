@@ -10,7 +10,7 @@
 
 					<div ng-if="post && size != 'mobile' && !post.akamai_teaser" class="col-wide share-bar">
 
-						<a ng-click="printPage();" class="share-print button clear small">
+						<a ng-if="size == 'desktop'" ng-click="printPage();" class="share-print button clear small">
 							<i class="icon icon-print"></i>						
 							<span ng-if="size == 'desktop'">Print</span> 							
 						</a>
