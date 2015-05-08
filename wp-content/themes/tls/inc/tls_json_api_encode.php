@@ -81,6 +81,27 @@ function tls_json_api_encode($response)
             'comment_author_email' => $comment_author_email
         );
 
+        /**
+         * Subscribe Section
+         */
+        $theme_options = get_option('theme_options_settings');
+        $subscribe_url = $theme_options['subscribe_link'];
+        $subscribe_text = $theme_options['subscribe_text'];
+
+        $latest_edition = new WP_Query(array(
+            'post_type' => 'tls_editions',
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'orderby ' => 'date'
+        ));
+        $featured_image = get_field('field_54ad3f64b4697', $latest_edition->posts[0]->ID);
+
+        $response['post']->subscribe_section = array(
+            'image_url'         => esc_url($featured_image['url']),
+            'subscribe_link'    => esc_url($subscribe_url),
+            'subscribe_text'    => wp_strip_all_tags($subscribe_text)
+        );
+
 
     }
 

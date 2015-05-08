@@ -49,11 +49,17 @@
 				</div>
 
 				<div id="user" class="centre-y" ng-class="{tablet:size == 'tablet'}">
+                    <?php
+                    $theme_options = get_option('theme_options_settings');
+                    $subscribe_url = $theme_options['subscribe_link'];
+                    $login_url = $theme_options['login_link'];
+                    $logout_url = $theme_options['logout_link'];
+                    ?>
                     <?php if (isset($_COOKIE['acs-tls'])) : ?>
-                        <a href="https://login.the-tls.co.uk/user/logout"><button ng-click="logout();" class="button clear login"><i class="icon icon-login"></i> Logout</button></a>
+                        <a href="<?php echo esc_url($logout_url); ?>"><button ng-click="logout();" class="button clear login"><i class="icon icon-login"></i> Logout</button></a>
                     <?php else : ?>
-                        <a href="http://tlssubs.imbmsubs.com/"><button ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
-                        <a href="https://login.the-tls.co.uk/"><button ng-click="login();" class="button clear login"><i class="icon icon-login"></i> Login</button></a>
+                        <a href="<?php echo esc_url($subscribe_url); ?>"><button ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
+                        <a href="<?php echo esc_url($login_url); ?>"><button ng-click="login();" class="button clear login"><i class="icon icon-login"></i> Login</button></a>
                     <?php endif; ?>
 				</div>
 			</div>
