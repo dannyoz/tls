@@ -14,7 +14,11 @@
 							<i class="icon icon-print"></i>						
 							<span ng-if="size == 'desktop'">Print</span> 							
 						</a>
-						<a ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="share-email button clear small">
+						<a ng-if="size != 'desktop'" ng-attr-href="{{emailLink();}}" class="share-email button clear small">
+							<i class="icon icon-email"></i>
+							<span ng-if="size == 'desktop'">Email</span> 							
+						</a>
+						<a ng-if="size == 'desktop'" ng-attr-href="{{emailLink();}}" ng-click="tealium.socialLink('email')" class="share-email button clear small">
 							<i class="icon icon-email"></i>
 							<span ng-if="size == 'desktop'">Email</span> 							
 						</a>
