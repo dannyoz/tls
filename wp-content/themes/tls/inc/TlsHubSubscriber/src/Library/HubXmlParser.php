@@ -158,7 +158,7 @@ class HubXmlParser implements FeedParser
             // The user ID number of the author. Default is the current user ID.
             'ping_status' => 'closed',
             // Pingbacks or trackbacks allowed. Default is the option 'default_ping_status'.
-            'comment_status' => 'closed',
+            'comment_status' => 'open',
             // Default is the option 'default_comment_status', or 'closed'.
         );
 
