@@ -8,6 +8,10 @@
 	ul{
 
 		margin-bottom: 40px;
+		
+		@media screen and (min-width: $mobile + 1) {
+			padding-right: 70px;	
+		}
 
 		li{
 
@@ -16,6 +20,10 @@
 			margin-right:15px;
 			margin-bottom:10px;
 			border-right: 2px solid white;
+
+			@media screen and (max-width: $mobile) {
+				margin-right: 5px;
+			}
 
 			a{
 
@@ -27,6 +35,13 @@
 					family:$futura;
 					size:0.778em;
 					weight:700;
+				}
+
+				@media screen and (max-width: $mobile) {
+					font:{
+						size:0.750em;
+						weight:500;
+					}
 				}
 
 				&:hover{

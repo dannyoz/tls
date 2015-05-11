@@ -1306,7 +1306,13 @@ p.author, h4.author {
 #site-footer ul {
   margin-bottom: 40px;
 }
-/* line 12, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+@media screen and (min-width: 451px) {
+  /* line 8, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+  #site-footer ul {
+    padding-right: 70px;
+  }
+}
+/* line 16, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li {
   display: inline-block;
   padding-right: 15px;
@@ -1314,7 +1320,13 @@ p.author, h4.author {
   margin-bottom: 10px;
   border-right: 2px solid white;
 }
-/* line 20, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+@media screen and (max-width: 450px) {
+  /* line 16, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+  #site-footer ul li {
+    margin-right: 5px;
+  }
+}
+/* line 28, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li a {
   text-transform: uppercase;
   color: white;
@@ -1323,29 +1335,36 @@ p.author, h4.author {
   font-size: 0.778em;
   font-weight: 700;
 }
-/* line 32, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+@media screen and (max-width: 450px) {
+  /* line 28, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+  #site-footer ul li a {
+    font-size: 0.750em;
+    font-weight: 500;
+  }
+}
+/* line 47, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li a:hover {
   color: #d73f2b;
 }
-/* line 38, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 53, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer ul li:last-child {
   padding-right: 0;
   margin-right: 0;
   border-right: none;
 }
-/* line 47, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 62, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer .copyright {
   padding-right: 85px;
   font-family: "futura-pt", "Arial", sans-serif;
   font-size: 0.7em;
 }
-/* line 56, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+/* line 71, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
 #site-footer .container {
   background: url("../images/footer-logo.jpg") right 0 no-repeat;
   min-height: 175px;
 }
 @media screen and (max-width: 450px) {
-  /* line 56, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
+  /* line 71, ../../../../grunt/DEV/app/global/app-footer/_footer.scss */
   #site-footer .container {
     background-position: right bottom;
   }
