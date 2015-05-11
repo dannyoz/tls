@@ -13,7 +13,7 @@ get_header(); ?>
 		<div class="grid-row">
 
 			<div class="article-body">
-				<h1 ng-bind="page.title" class="padded"></h1>
+				<h1 ng-bind-html="page.title" class="padded"></h1>
 				<p class="date" ng-bind="format(page.date);"></p>
 				<div ng-bind-html="page.content"></div>
 				<div ng-if="page.accordion_items.length > 0" tls-accordian="page.accordion_items"></div>

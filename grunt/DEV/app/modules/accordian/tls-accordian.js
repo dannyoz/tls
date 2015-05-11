@@ -7,10 +7,10 @@
 		},
 		link : function (scope){
 
-			angular.forEach(scope.items,function(obj,i){
-				var bool = (i == 0)? true : false;
-				obj.isOpen = bool
-			})
+			// angular.forEach(scope.items,function(obj,i){
+			// 	var bool = (i == 0)? true : false;
+			// 	obj.isOpen = bool
+			// })
 
 			scope.toggleOpen = function (i){
 
