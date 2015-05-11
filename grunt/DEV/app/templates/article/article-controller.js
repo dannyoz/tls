@@ -123,11 +123,10 @@
 			return emailPath
 
 		}
-
-		$scope.socialLink = function(path,platform){
-
+		$scope.socialLink = function(path, title, platform) {
+			
 			var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
-				twLink = "https://twitter.com/home?status=" + path,
+				twLink = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(title)+ "&amp;url=" + path,
 				link   = (platform == 'facebook') ? fbLink : twLink,
 				params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
