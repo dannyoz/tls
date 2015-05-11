@@ -160,7 +160,11 @@
 										</div>
 										<div class="grid-4 subscribe-col">
 											<div class="form-subtitle futura">Not a subscriber?</div>
-                                            <a href="http://tlssubs.imbmsubs.com/"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
+                                            <?php
+                                            $theme_options = get_option('theme_options_settings');
+                                            $subscribe_url = $theme_options['subscribe_link'];
+                                            ?>
+                                            <a href="<?php echo esc_url($subscribe_url); ?>"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
 										</div>
 									</div>
 											

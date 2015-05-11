@@ -197,6 +197,50 @@ class ThemeOptions
             'theme_options_section'                                // The section to which setting is added
         );
 
+        // Define Facebook URL Setting Field
+        add_settings_field('tls_subscribe_link',      // The ID (or the name) of the field
+            'Subscribe Link URL',                        // The text used for the label of the field
+            array(
+                $this,
+                'tls_subscribe_link_display'
+            ),                // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
+            'theme_options_section'                                // The section to which setting is added
+        );
+
+        // Define Facebook URL Setting Field
+        add_settings_field('tls_login_link',      // The ID (or the name) of the field
+            'Login Link URL',       // The text used for the label of the field
+            array(
+                $this,
+                'tls_login_link_display'
+            ),                // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
+            'theme_options_section'                                // The section to which setting is added
+        );
+
+        // Define Facebook URL Setting Field
+        add_settings_field('tls_logout_link',      // The ID (or the name) of the field
+            'Logout Link URL',       // The text used for the label of the field
+            array(
+                $this,
+                'tls_logout_link_display'
+            ),                // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
+            'theme_options_section'                                // The section to which setting is added
+        );
+
+        // Define Facebook URL Setting Field
+        add_settings_field('tls_subscribe_text',                                        // The ID (or the name) of the field
+            'Subscribe Text',                        // The text used for the label of the field
+            array(
+                $this,
+                'tls_subscribe_text_display'
+            ),                // The callback function used to render the field
+            'tls_theme_options',// The ID (or slug) of the page on which this field is rendered
+            'theme_options_section'                                // The section to which setting is added
+        );
+
         // Register the 'facebook_url' setting with the 'General' section
         register_setting('theme_options_section',// Name of section to which setting is registered to
             'theme_options_settings',                            // Name of the field setting,
@@ -318,6 +362,54 @@ class ThemeOptions
         </select>
     <?php
     } // End of tls_tealium_display
+
+    /**
+     * Render the input field for the 'Subscribe Link URL' setting in the 'General Settings' section
+     */
+    function tls_subscribe_link_display()
+    {
+
+        $options = (array)get_option('theme_options_settings');
+        $subscribe_link = (isset($options['subscribe_link'])) ? $options['subscribe_link'] : '';
+
+        echo '<input type="text" name="theme_options_settings[subscribe_link]" id="theme_options_settings_subscribe_link" value="' . $subscribe_link . '">';
+    } // End of tls_subscribe_link_display
+
+    /**
+     * Render the input field for the 'Login Link URL' setting in the 'General Settings' section
+     */
+    function tls_login_link_display()
+    {
+
+        $options = (array)get_option('theme_options_settings');
+        $login_link = (isset($options['login_link'])) ? $options['login_link'] : '';
+
+        echo '<input type="text" name="theme_options_settings[login_link]" id="theme_options_settings_login_link" value="' . $login_link . '">';
+    } // End of tls_login_link_display
+
+    /**
+     * Render the input field for the 'Logout Link URL' setting in the 'General Settings' section
+     */
+    function tls_logout_link_display()
+    {
+
+        $options = (array)get_option('theme_options_settings');
+        $logout_link = (isset($options['logout_link'])) ? $options['logout_link'] : '';
+
+        echo '<input type="text" name="theme_options_settings[logout_link]" id="theme_options_settings_logout_link" value="' . $logout_link . '">';
+    } // End of tls_logout_link_display
+
+    /**
+     * Render the input field for the 'Facebook URL' setting in the 'General Settings' section
+     */
+    function tls_subscribe_text_display()
+    {
+
+        $options = (array)get_option('theme_options_settings');
+        $subscribe_text = (isset($options['subscribe_text'])) ? $options['subscribe_text'] : '';
+
+        echo '<textarea cols="30" rows="7" type="text" name="theme_options_settings[subscribe_text]" id="theme_options_settings_subscribe_text">'.$subscribe_text.'</textarea>';
+    } // End of tls_subscribe_text_display
 
     /**
      * Sanitise all Options
