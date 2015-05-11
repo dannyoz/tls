@@ -128,7 +128,7 @@
 
 							</div>	
 
-							<div id="subscribe-form-wrapper" class="grid-12" ng-if="post.akamai_teaser">
+							<div id="subscribe-form-wrapper" class="grid-12 subscribe-block" ng-if="post.akamai_teaser">
 
 								<div class="inner">
 
@@ -168,10 +168,24 @@
 
 							</div>
 
+							<div id="subscribe-block" class="grid-12 subscribe-block">
+								<div class="inner">
+									<div class="grid-row">
+										<div class="grid-10">
+											<div class="futura">We hope you enjoy this free piece from the TLS; available every Thursday, online in print and via the TLS app.</div>
+											<a href="http://tlssubs.imbmsubs.com/"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>	
+										</div>
+										<div class="grid-2">
+											<img src="http://tls.localhost/wp-content/uploads/2015/01/cover.jpg">
+										</div>
+									</div>	
+								</div>
+							</div>
+
 						</div>
 					</div>
 
-				</div>
+				</div>				
 
 			</div>
 
