@@ -1088,7 +1088,7 @@ p.author, h4.author {
   border-style: solid;
   border-color: #d9d9d9;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 840px) {
   /* line 161, ../../../../grunt/DEV/app/global/app-header/_header.scss */
   #main-header nav .container {
     padding: 0;
@@ -1197,10 +1197,15 @@ p.author, h4.author {
   right: 20px;
   bottom: auto;
   left: 20px;
-  display: block;
-  content: "";
 }
-/* line 274, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+@media (min-width: 840px) {
+  /* line 264, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+  #main-header nav .search .search-wrapper:before {
+    display: block;
+    content: "";
+  }
+}
+/* line 277, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search button {
   position: absolute;
   top: 0;
@@ -1216,7 +1221,7 @@ p.author, h4.author {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
-/* line 289, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 292, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint {
   position: absolute;
   top: 52px;
@@ -1224,13 +1229,13 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 293, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 296, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .hint p {
   padding: 0 70px 0 20px;
   font-size: 0.9em;
   letter-spacing: 0;
 }
-/* line 301, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 304, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav .search .open-search {
   z-index: 9999;
   cursor: pointer;
@@ -1240,24 +1245,24 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 311, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 314, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet ul {
   width: 82%;
 }
-/* line 317, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 320, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search {
   position: absolute;
   right: 0;
   width: 18%;
   left: 82%;
 }
-/* line 324, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 327, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.tablet .search.open {
   left: 1px;
   right: 0;
   width: auto;
 }
-/* line 335, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 338, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile ul {
   width: auto;
   position: absolute;
@@ -1266,29 +1271,29 @@ p.author, h4.author {
   bottom: 0;
   left: 0;
 }
-/* line 340, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 343, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search {
   position: absolute;
   right: 0;
   width: 50px;
 }
-/* line 346, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 349, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.mobile .search.open {
   width: 100%;
 }
-/* line 353, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 356, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting {
   height: 95px;
 }
-/* line 357, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 360, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li {
   height: 95px;
 }
-/* line 361, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 364, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting ul li a {
   height: 95px;
 }
-/* line 368, ../../../../grunt/DEV/app/global/app-header/_header.scss */
+/* line 371, ../../../../grunt/DEV/app/global/app-header/_header.scss */
 #main-header nav.hinting .search {
   height: 95px;
 }
