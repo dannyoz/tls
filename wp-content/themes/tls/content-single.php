@@ -22,10 +22,10 @@
 							<i class="icon icon-email"></i>
 							<span ng-if="size == 'desktop'">Email</span> 							
 						</a>
-						<a ng-click="socialLink(post.url,'facebook')" class="share-fb button clear small">
+						<a ng-click="socialLink(post.url, post.title, 'facebook')" class="share-fb button clear small">
 							<i class="icon icon-facebook"></i>
 						</a>
-						<a ng-click="socialLink(post.url,'twitter')" class="share-twitter button clear small">
+						<a ng-click="socialLink(post.url, post.title, 'twitter')" class="share-twitter button clear small">
 							<i class="icon icon-twitter"></i>
 						</a>
 
@@ -119,10 +119,10 @@
 									<i class="icon icon-email"></i>
 									<span ng-if="size == 'desktop'">Email</span> 	
 								</a>
-								<a ng-click="socialLink(post.url,'facebook')" class="share-fb button clear small">
+								<a ng-click="socialLink(post.url, post.title, 'facebook')" class="share-fb button clear small">
 									<i class="icon icon-facebook"></i>
 								</a>
-								<a ng-click="socialLink(post.url,'twitter')" class="share-twitter button clear small">
+								<a ng-click="socialLink(post.url, post.title, 'twitter')" class="share-twitter button clear small">
 									<i class="icon icon-twitter"></i>
 								</a>
 
