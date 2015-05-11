@@ -29,9 +29,11 @@
 							<i class="icon icon-twitter"></i>
 						</a>
 
+                        <?php if(comments_open()) : ?>
 						<p class="commentlink futura">
-							<a href="#comments">Comments (<span ng-bind="post.comment_count"></span>)</a>
+							<a href="javascript:void(0);" ng-click="scrollTo('comments')">Comments (<span ng-bind="post.comment_count"></span>)</a>
 						</p>
+                        <?php endif; ?>
 
 					</div>
 
@@ -39,7 +41,7 @@
 
 				<div class="article-links">
 					<div class="inner">
-						<a href="javascript:;" ng-if="prev" ng-click="chooseArticle('next',prev,post.previous_post_info.title)" class="article-nav prev-article">
+						<a href="javascript:void(0);" ng-if="prev" ng-click="chooseArticle('next',prev,post.previous_post_info.title)" class="article-nav prev-article">
 							<div class="icon icon-left-arrow">
 								<span ng-bind-html="post.previous_post_info.title"></span>
 							</div>

@@ -3,6 +3,7 @@
 	'$sce',
 	'$location',
 	'$timeout',
+    '$anchorScroll',
 	'api',
 	'mpu',
 	'commentApi',
@@ -10,7 +11,7 @@
 	'niceDate',
 	'tealium',
 	'books',
-	function ($scope,$sce,$location,$timeout,api, mpu, commentApi,columns,niceDate,tealium,books){
+	function ($scope,$sce,$location,$timeout, $anchorScroll, api, mpu, commentApi,columns,niceDate,tealium,books){
 
 		$scope.ready      = false;
 		$scope.tealium    = tealium;
@@ -292,5 +293,10 @@
 			}
 
 		}
+
+        $scope.scrollTo = function(id) {
+            $location.hash(id);
+            $anchorScroll();
+        }
 
 }])

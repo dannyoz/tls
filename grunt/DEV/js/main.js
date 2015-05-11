@@ -28562,7 +28562,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-accordian-column.html',
-    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
+    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section.name></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
   );
 
 
@@ -28572,7 +28572,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-card.html',
-    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a href={{blog.link}} ng-click=tealiumTag(blog);>{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href={{data.url}}><img class=\"max circular\" ng-attr-src=\"{{data.thumbnail}}\"></a></div><div class=blog-data><div class=inner><h4><a ng-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><p ng-bind-html=data.excerpt></p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a href={{data.link}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-if=\"data.excerpt.length > 4\" ng-bind-html=data.excerpt></p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-href={{data.section.link}} ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-attr-href={{data.url}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer ng-if=data.books><!--<p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=\"futura\" ng-bind=\"data.author\"></p>\t--><div><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-if=book.book_title ng-bind-html=book.book_title></p><p class=futura ng-if=book.book_author ng-bind-html=book.book_author></p><p class=futura ng-if=\"book.book_title == '' || book.book_author == ''\" ng-bind-html=book.book_info></p></div></div></footer></div><div class=card ng-if=\"data.type == 'then_and_now'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura>Then and now <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.link ng-attr-href={{data.link}} ng-click=tealiumTag(data); ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer ng-if=data.books><!--<p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=\"futura\" ng-bind=\"data.author\"></p>\t--><div><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-if=book.book_title ng-bind-html=book.book_title></p><p class=futura ng-if=book.book_author ng-bind-html=book.book_author></p><p class=futura ng-if=\"book.book_title == '' || book.book_author == ''\" ng-bind-html=book.book_info></p></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad={{data.id}}></div></div>"
+    "<div ng-if=\"data.type == 'blog_homepage'\"><div class=\"blog-item card\" ng-repeat=\"blog in data\"><h3 class=futura><a ng-attr-href={{blog.section.link}}>{{blog.section.name}}</a></h3><div class=\"grid-row padded\"><div class=blog-avatar><a ng-href=/author/{{blog.author.slug}}><img class=\"max circular\" ng-if=\"blog.section.name == 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/mary.jpg\"> <img class=\"max circular\" ng-if=\"blog.section.name != 'A Don\\'s life'\" src=\"/wp-content/themes/tls/images/grey-logo.jpg\"></a></div><div class=blog-data><div class=inner><h4><a ng-click=\"tealiumTag(blog, 'link');\">{{blog.title}}</a></h4><p class=futura><a ng-href=/author/{{blog.author.slug}}>{{blog.author}}</a></p><p ng-bind-html=blog.text></p></div></div></div></div></div><div ng-if=\"data.type == 'blog'\"><div class=\"blog-item card\"><h3 class=futura><a ng-attr-href={{data.category_url}}>{{data.category.title}}</a></h3><div ng-if=\"data.category.slug != 'listen'\" class=\"grid-row padded\"><div class=blog-avatar><a ng-href={{data.url}}><img class=\"max circular\" ng-attr-src=\"{{data.thumbnail}}\"></a></div><div class=blog-data><div class=inner><h4><a ng-click=\"tealiumTag(data, 'url');\" ng-bind-html=data.title></a></h4><p class=futura><a ng-href=/author/{{data.author.slug}}>{{data.author.name}}</a></p><p ng-bind-html=data.excerpt></p></div></div></div><div ng-if=\"data.category.slug == 'listen'\" class=padded><div class=embed ng-bind-html=sce.trustAsHtml(data.soundcloud);></div><h4><a ng-click=\"tealiumTag(data, 'link');\" ng-bind-html=data.title></a></h4><p ng-if=\"data.excerpt.length > 4\" ng-bind-html=data.excerpt></p></div></div></div><div class=card ng-if=\"data.type == 'article'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura><a ng-if=data.section.name ng-href={{data.section.link}} ng-bind-html=data.section.name></a><!-- <a ng-attr-href=\"{{data.section.link}}\" ng-if=\"data.section.name\" ng-bind-html=\"data.section.name\"></a>\t\t\t --> <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.url ng-click=\"tealiumTag(data, 'url');\" ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer ng-if=data.books><!--<p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=\"futura\" ng-bind=\"data.author\"></p>\t--><div><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-if=book.book_title ng-bind-html=book.book_title></p><p class=futura ng-if=book.book_author ng-bind-html=book.book_author></p><p class=futura ng-if=\"book.book_title == '' || book.book_author == ''\" ng-bind-html=book.book_info></p></div></div></footer></div><div class=card ng-if=\"data.type == 'then_and_now'\" ng-class=\"{private:data.visibility == 'private'}\"><h3 class=futura>Then and now <i ng-if=\"data.visibility == 'private'\" class=\"icon icon-key\"></i></h3><img class=max ng-if=data.image_url ng-attr-src=\"{{data.image_url}}\"><div class=padded><h4><a ng-if=data.link ng-click=\"tealiumTag(data, 'link');\" ng-bind-html=data.title></a></h4><p ng-bind-html=data.excerpt></p></div><footer ng-if=data.books><!--<p ng-if=\"data.author != '' && data.custom_fields.book_title == null && !data.books\" class=\"futura\" ng-bind=\"data.author\"></p>\t--><div><div class=\"book summary-wrapper\" ng-repeat=\"book in data.books\"><p class=\"book-title futura\" ng-if=book.book_title ng-bind-html=book.book_title></p><p class=futura ng-if=book.book_author ng-bind-html=book.book_author></p><p class=futura ng-if=\"book.book_title == '' || book.book_author == ''\" ng-bind-html=book.book_info></p></div></div></footer></div><div class=\"card mpu\" ng-if=\"data.type == 'mpu'\"><div data-ng-dfp-ad={{data.id}}></div></div>"
   );
 
 
@@ -28649,7 +28649,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.focus = true
 	}
 
-	$scope.subscribe = function(){
+	$scope.subscribe = function(){		
 		tealium.subscribe('header');
 	}
 
@@ -29385,7 +29385,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 	}
 })
-.directive('tlsCard',['$sce','tealium',function ($sce,tealium) {
+.directive('tlsCard',['$sce','tealium', '$window', function ($sce,tealium, $window) {
 	return{
 		restrict:"A",
 		templateUrl : "tls-card.html",
@@ -29541,7 +29541,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			}(card);
 
-			scope.tealiumTag = function(card){
+			scope.tealiumTag = function(card, urlKey){
 
 				var cat   = (card.section) ? card.section.name : card.category.title,
 					title = card.title,
@@ -29549,6 +29549,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 					restr = (state == "Public") ? "public" : "restricted";
 
 				tealium.cardLink(cat,title,restr);
+
+				// If url is passed then redirect page to that page				
+				if (urlKey) {					
+					if (card.hasOwnProperty(urlKey)) {
+						$window.location.href = card[urlKey];	
+					}					
+				}
 			}
 		}
 	}
@@ -29665,6 +29672,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'$sce',
 	'$location',
 	'$timeout',
+    '$anchorScroll',
 	'api',
 	'mpu',
 	'commentApi',
@@ -29672,7 +29680,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'niceDate',
 	'tealium',
 	'books',
-	function ($scope,$sce,$location,$timeout,api, mpu, commentApi,columns,niceDate,tealium,books){
+	function ($scope,$sce,$location,$timeout, $anchorScroll, api, mpu, commentApi,columns,niceDate,tealium,books){
 
 		$scope.ready      = false;
 		$scope.tealium    = tealium;
@@ -29784,11 +29792,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			return emailPath
 
 		}
-
-		$scope.socialLink = function(path,platform){
-
+		$scope.socialLink = function(path, title, platform) {
+			
 			var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
-				twLink = "https://twitter.com/home?status=" + path,
+				twLink = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(title)+ "&amp;url=" + path,
 				link   = (platform == 'facebook') ? fbLink : twLink,
 				params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
 
@@ -29955,6 +29962,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 
 		}
+
+        $scope.scrollTo = function(id) {
+            $location.hash(id);
+            $anchorScroll();
+        }
 
 }])
 .controller('category', [
@@ -30499,7 +30511,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		api.getArticle(path).then(function (result) {		
 			$scope.setCurrentEditionObj(result);	
 
-			console.log(result);		
+			//console.log(result);		
 		});
 
 
