@@ -83,7 +83,7 @@
 							<h2 ng-bind-html="post.title"></h2>
 							<div class="article-meta grid-12">
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length > 0"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
-								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length == 0"><h4 class="author" ng-bind="post.author.name"></h4></div>
+								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length == 0 && post.type == 'post'"><h4 class="author" ng-bind="post.author.name"></h4></div>
 								<div class="grid-12 article-date title-small" ng-bind="format(post.date)" ng-if="size == 'mobile'"></div>
 							</div>
 
