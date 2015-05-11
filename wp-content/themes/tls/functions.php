@@ -53,10 +53,9 @@ $TlsHubSubscriberWP = new Tls\TlsHubSubscriber\TlsHubSubscriberWP();
 $TlsPostImageImporter = new Tls\TlsPostImageImporter();
 
 /**
- * TlsPostImageImporter - Import Images from Post Content
+ * TlsPostTypeComments - Turn On or Off Comments for a Post Type
  */
 $TlsPostTypeComments = new Tls\TlsPostTypeComments();
-
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
