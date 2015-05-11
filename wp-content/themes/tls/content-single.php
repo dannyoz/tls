@@ -164,7 +164,7 @@
                                             $theme_options = get_option('theme_options_settings');
                                             $subscribe_url = $theme_options['subscribe_link'];
                                             ?>
-                                            <a href="<?php echo esc_url($subscribe_url); ?>"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>
+                                            <a ng-href="{{::post.subscribe_section.subscribe_link}}" class="button subscribe">Subscribe</a>                                            
 										</div>
 									</div>
 											
@@ -172,20 +172,21 @@
 
 							</div>
 
-							<div id="subscribe-block" class="grid-12 subscribe-block">
-								<div class="inner">
-									<div class="grid-row">
-										<div class="grid-10">
-											<div class="futura">We hope you enjoy this free piece from the TLS; available every Thursday, online in print and via the TLS app.</div>
-											<a href="http://tlssubs.imbmsubs.com/"><button type="submit" ng-click="subscribe();" class="button subscribe">Subscribe</button></a>	
-										</div>
-										<div class="grid-2">
-											<img src="http://tls.localhost/wp-content/uploads/2015/01/cover.jpg">
-										</div>
-									</div>	
+							<?php if (!isset($_COOKIE['acs-tls'])) : ?>
+								<div id="subscribe-block" class="grid-12 subscribe-block" ng-if="!post.akamai_teaser">
+									<div class="inner">
+										<div class="grid-row">
+											<div class="grid-10">										
+												<div class="futura">{{::post.subscribe_section.subscribe_text}}</div>												
+												<a ng-href="{{::post.subscribe_section.subscribe_link}}" class="button subscribe">Subscribe</a>                                   
+											</div>
+											<div class="grid-2">
+												<img ng-src="{{::post.subscribe_section.image_url}}">
+											</div>
+										</div>	
+									</div>
 								</div>
-							</div>
-
+							<?php endif; ?>	
 						</div>
 					</div>
 

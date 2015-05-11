@@ -475,6 +475,18 @@ $mobile_article: 560px;
 			line-height: 1.3em;
 		}
 
+		.button {
+
+			&.subscribe {
+			
+				color: white;
+			
+				&:hover {
+					color: white;
+				}			
+			}			
+		}
+
 		img {
 			float: none;
 			margin: 0;
@@ -535,6 +547,8 @@ $mobile_article: 560px;
 
 		.subscribe-col {
 
+			text-align: center;
+
 			@media screen and (max-width: $mobile_article) {
 				margin-top: 20px;
 			}
@@ -545,16 +559,9 @@ $mobile_article: 560px;
 					text-align: center;
 				}
 
-				.button {
-					margin: auto;
-					display: block;
-				}	
 			}			
 		}		
 	}
-
-	
-
 }
 
 .article-links {

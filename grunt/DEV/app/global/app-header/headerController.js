@@ -33,7 +33,7 @@
 		$scope.focus = true
 	}
 
-	$scope.subscribe = function(){
+	$scope.subscribe = function(){		
 		tealium.subscribe('header');
 	}
 
