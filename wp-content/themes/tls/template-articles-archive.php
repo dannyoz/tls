@@ -63,7 +63,7 @@ get_header();
 
 			</div>
 
-			<div id="infinite-scroll" ng-if="infinite">
+			<div id="infinite-scroll" ng-if="ready && infinite">
 
 				<h5 class="centred-heading grid-row">More articles</h5>
 

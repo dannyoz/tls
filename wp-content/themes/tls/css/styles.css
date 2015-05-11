@@ -3281,15 +3281,14 @@ p.author, h4.author {
 /* line 221, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 {
   background-color: #d73f2b;
-  margin-bottom: 0;
   padding-bottom: 12px;
 }
-/* line 227, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 226, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .spotlight .card h3 a {
   color: white;
 }
 
-/* line 233, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+/* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
 .card-flat {
   margin-bottom: 30px;
   position: relative;
@@ -3361,13 +3360,13 @@ p.author, h4.author {
   animation-delay: 1s;
 }
 @media screen and (max-width: 840px) {
-  /* line 233, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     margin-bottom: 20px;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 233, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
+  /* line 232, ../../../../grunt/DEV/app/modules/cards/_cards.scss */
   .card-flat {
     padding: 20px 30px;
     margin-bottom: 15px;

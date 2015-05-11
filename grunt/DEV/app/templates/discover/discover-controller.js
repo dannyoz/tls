@@ -9,7 +9,7 @@
 
 		var url = window.location.href;
 
-		$scope.test = true
+		$scope.test = true;
 		$scope.ready       = false;
 		$scope.pageNumber  = 1;
 		$scope.loading     = true;
@@ -63,7 +63,7 @@
 				$scope.ready = true
 			})
 
-			console.log(result)
+			//console.log(result);
 
 		})
 
@@ -97,7 +97,7 @@
 						var posts = result.posts;
 						$scope.scrollState = "on";
 
-						console.log(posts);
+						//console.log(posts);
 
 						columns.divide(posts).then(function (cols){
 
