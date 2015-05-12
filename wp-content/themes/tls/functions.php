@@ -215,8 +215,8 @@ function tls_unregister_post_tag_taxonomy()
     }
 
     // If "A Don's Life" does not exist in "Category" then create it
-    if (!term_exists("A Don's Life", "category")) {
-        wp_insert_term("A Don's Life", "category");
+    if (!term_exists("A Don’s Life", "category")) {
+        wp_insert_term("A Don’s Life", "category");
     }
 
     // If "Listen" does not exist in "Category" then create it
