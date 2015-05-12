@@ -168,7 +168,7 @@ class TlsPostTypeComments
      */
     public function post_type_comments_on_action_callback()
     {
-        $post_type = (isset($_POST['post_type'])) ? wp_strip_all_tags($_POST['post_type']) : null;
+        $post_type = (isset($_POST['post_type'])) ? filter_var($_POST['post_type'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
         switch ($post_type) {
             case 'post':
                 $post_type_name = 'Blog Posts';
@@ -183,7 +183,7 @@ class TlsPostTypeComments
         }
 
         $post_type_comments_query = new WP_Query(array(
-            'post_type'         => $post_type,
+            'post_type'         => wp_strip_all_tags($post_type),
             'posts_per_page'    => '-1'
         ));
 
@@ -260,7 +260,7 @@ class TlsPostTypeComments
      */
     public function post_type_comments_off_action_callback()
     {
-        $post_type = (isset($_POST['post_type'])) ? wp_strip_all_tags($_POST['post_type']) : null;
+        $post_type = (isset($_POST['post_type'])) ? filter_var($_POST['post_type'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
         switch ($post_type) {
             case 'post':
                 $post_type_name = 'Blog Posts';
@@ -275,7 +275,7 @@ class TlsPostTypeComments
         }
 
         $post_type_comments_query = new WP_Query(array(
-            'post_type'         => $post_type,
+            'post_type'         => wp_strip_all_tags($post_type),
             'posts_per_page'    => '-1'
         ));
 

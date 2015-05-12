@@ -128,40 +128,6 @@ class HubSubscriber
      */
     public function handleRequest()
     {
-
-        // Allow for manual pull method for Debugging ONLY
-        // TODO: Remove this before going live
-        if (isset($_GET['tls_hub_debug']) && $_GET['tls_hub_debug'] == true) {
-            if (isset($_GET['manual_pull']) && isset($_GET['pull_url'])) {
-                $feed = file_get_contents(esc_url($_GET['pull_url']));
-                $feedParser = new HubXmlParser($this->option_name, $this->current_options);
-                $feedParser->parseFeed($feed);
-                header('HTTP/1.1 200 "Found"', null, 200);
-                exit();
-            }
-
-            // Make sure the request is POST
-            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                header('HTTP/1.1 404 "Not Found"', null, 404);
-                exit();
-            }
-
-            switch ($_GET['HTTP_X_AMZ_SNS_MESSAGE_TYPE']) {
-
-                case "SubscriptionConfirmation":
-                    $this->verifySubscription();
-                    break;
-
-                case "Notification":
-                    $this->receive();
-                    break;
-
-                default:
-                    header('HTTP/1.1 404 "Not Found"', null, 404);
-                    break;
-            }
-        } // END of Debugging section that needs to be removed before going live
-
         // Make sure the request is POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('HTTP/1.1 404 "Not Found"', null, 404);
