@@ -48,19 +48,6 @@ function tls_json_api_encode($response)
             }
         }
 
-        // Books
-        $response['post']->books = get_field('field_54edde1e60d80', $response['post']->id);
-
-        // Images
-        $hero_image = get_field('field_54e4d4b3b009c', $response['post']->id);
-        $response['post']->custom_fields->hero_image_url = $hero_image['url'];
-
-        $full_image = get_field('field_54e4d4a5b009b', $response['post']->id);
-        $response['post']->custom_fields->full_image_url = $full_image['url'];
-
-        $thumbnail_image = get_field('field_54e4d481b009a', $response['post']->id);
-        $response['post']->custom_fields->thumbnail_image_url = $thumbnail_image['url'];
-
         /**
          * Single Blog Post
          */
@@ -102,6 +89,43 @@ function tls_json_api_encode($response)
             'subscribe_text'    => wp_strip_all_tags($subscribe_text)
         );
 
+        // Books
+        $response['post']->books = get_field('field_54edde1e60d80', $response['post']->id);
+
+        // Images
+        $hero_image = get_field('field_54e4d4b3b009c', $response['post']->id);
+        $response['post']->custom_fields->hero_image_url = $hero_image['url'];
+
+        $full_image = get_field('field_54e4d4a5b009b', $response['post']->id);
+        $response['post']->custom_fields->full_image_url = $full_image['url'];
+
+        $thumbnail_image = get_field('field_54e4d481b009a', $response['post']->id);
+        $response['post']->custom_fields->thumbnail_image_url = $thumbnail_image['url'];
+
+    }
+
+    /**
+     * Posts Archive (get_posts) from JSON API - Especially when getting
+     * Related Articles through the API
+     */
+    if (isset($response['posts'])) {
+        $response['posts']->test = 'Hello';
+        foreach ($response['posts'] as $response_post) {
+            if ($response_post->type == 'tls_articles') {
+                // Books
+                $response_post->books = get_field('field_54edde1e60d80', $response_post->id);
+
+                // Images
+                $hero_image = get_field('field_54e4d4b3b009c', $response_post->id);
+                $response_post->custom_fields->hero_image_url = $hero_image['url'];
+
+                $full_image = get_field('field_54e4d4a5b009b', $response_post->id);
+                $response_post->custom_fields->full_image_url = $full_image['url'];
+
+                $thumbnail_image = get_field('field_54e4d481b009a', $response_post->id);
+                $response_post->custom_fields->thumbnail_image_url = $thumbnail_image['url'];
+            }
+        }
 
     }
 
