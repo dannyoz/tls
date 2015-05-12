@@ -159,7 +159,7 @@
 		@include keyline(top bottom,$light-keyline);
 
 		.container {
-			@media screen and (max-width: $mobile) {
+			@media screen and (max-width: $tablet) {
 				padding: 0;
 			}
 		}		
@@ -267,7 +267,10 @@
 					background-color:$light-keyline;
 					z-index: 999;
 					@include fitParent("", 40px,20px,auto,20px);
-					@include afterBefore;
+					
+					@media (min-width: $tablet) {
+						@include afterBefore;	
+					}					
 				}
 			}
 
