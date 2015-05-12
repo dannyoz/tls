@@ -382,7 +382,7 @@ function tls_make_post_excerpt( $content, $word_length = 55 )
     $excerpt_length = apply_filters( 'excerpt_length', $word_length );
     $excerpt_more = apply_filters( 'excerpt_more', '' );
     $text = wp_trim_words( $text, $excerpt_length, '' );
-    $text = $text . " ...";
+    $text = $text . "...";
 
     return $text;
 }
@@ -406,7 +406,7 @@ function tls_limit_content( $text, $limit = 50 )
     // If the content is longer or equal to the limit
     if ( count( $content ) >= $limit ) {
         array_pop( $content );
-        $content = implode( " ", $content ) . ' ...';
+        $content = implode( " ", $content ) . '...';
     } else {
         $content = implode( " ", $content );
     }
