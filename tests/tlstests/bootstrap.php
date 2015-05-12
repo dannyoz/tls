@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname( dirname( __FILE__ ) ) . '/includes/functions.php';
+require_once dirname(dirname(__FILE__)) . '/includes/functions.php';
 
 function _manually_load_environment() {
 
@@ -18,4 +18,4 @@ function _manually_load_environment() {
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_environment' );
 
-require dirname( dirname( __FILE__ ) ) . '/includes/bootstrap.php';
+require dirname(dirname(__FILE__)) . '/includes/bootstrap.php';

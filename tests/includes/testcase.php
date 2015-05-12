@@ -1,7 +1,7 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/factory.php';
-require_once dirname( __FILE__ ) . '/trac.php';
+require_once dirname(__FILE__) . '/factory.php';
+require_once dirname(__FILE__) . '/trac.php';
 
 class WP_UnitTestCase extends PHPUnit_Framework_TestCase {
 

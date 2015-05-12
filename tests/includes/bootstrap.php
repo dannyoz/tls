@@ -47,7 +47,7 @@ if ( "1" == getenv( 'WP_MULTISITE' ) ||
 }
 
 // Override the PHPMailer
-require_once( dirname( __FILE__ ) . '/mock-mailer.php' );
+require_once(dirname(__FILE__) . '/mock-mailer.php');
 $phpmailer = new MockPHPMailer();
 
 system( WP_PHP_BINARY . ' ' . escapeshellarg( dirname( __FILE__ ) . '/install.php' ) . ' ' . escapeshellarg( $config_file_path ) . ' ' . $multisite );
@@ -62,7 +62,7 @@ if ( $multisite ) {
 }
 unset( $multisite );
 
-require_once dirname( __FILE__ ) . '/functions.php';
+require_once dirname(__FILE__) . '/functions.php';
 
 $GLOBALS['_wp_die_disabled'] = false;
 // Allow tests to override wp_die
@@ -87,12 +87,12 @@ require_once ABSPATH . '/wp-settings.php';
 // Delete any default posts & related data
 _delete_all_posts();
 
-require dirname( __FILE__ ) . '/testcase.php';
-require dirname( __FILE__ ) . '/testcase-xmlrpc.php';
-require dirname( __FILE__ ) . '/testcase-ajax.php';
-require dirname( __FILE__ ) . '/testcase-canonical.php';
-require dirname( __FILE__ ) . '/exceptions.php';
-require dirname( __FILE__ ) . '/utils.php';
+require dirname(__FILE__) . '/testcase.php';
+require dirname(__FILE__) . '/testcase-xmlrpc.php';
+require dirname(__FILE__) . '/testcase-ajax.php';
+require dirname(__FILE__) . '/testcase-canonical.php';
+require dirname(__FILE__) . '/exceptions.php';
+require dirname(__FILE__) . '/utils.php';
 
 /**
  * A child class of the PHP test runner.
