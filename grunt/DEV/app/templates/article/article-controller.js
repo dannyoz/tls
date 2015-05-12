@@ -77,7 +77,7 @@
 				$scope.orginalList = $scope.tags;
 				$scope.loadingTags = true;
 
-				api.getRelatedContent($scope.tags).then(function (result){
+				api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 
 					$scope.loadingTags = false
 					
@@ -196,7 +196,7 @@
 
 						$scope.orginalList = $scope.tags
 
-						api.getRelatedContent($scope.tags).then(function (result){
+						api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 							var posts = result.posts;
 
 							columns.divide(posts).then(function (cols){
@@ -248,7 +248,7 @@
 
 				$scope.loadingTags = true
 			
-				api.getRelatedContent($scope.tags).then(function (result){
+				api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 
 					$scope.loadingTags = false
 					

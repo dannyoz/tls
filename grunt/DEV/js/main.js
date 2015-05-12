@@ -28746,13 +28746,13 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
             return defer.promise
 
         },
-        getRelatedContent : function(tags){
+        getRelatedContent : function(tags, exclude_post_id){
 
             var defer  = $q.defer(),
                 parse  = tags.toString(),
                 path1  = "/tag/"+parse+"/?json=1",
                 path2  = "/?tag="+parse+"&json=1",
-                url    = "/api/get_posts/?article_tags=" + parse;
+                url    = "/api/get_posts/?article_tags=" + parse + "&exclude_post=" + exclude_post_id;
 
             //expose url for testing
             defer.promise.url = url
@@ -29750,7 +29750,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				$scope.orginalList = $scope.tags;
 				$scope.loadingTags = true;
 
-				api.getRelatedContent($scope.tags).then(function (result){
+				api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 
 					$scope.loadingTags = false
 					
@@ -29869,7 +29869,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 						$scope.orginalList = $scope.tags
 
-						api.getRelatedContent($scope.tags).then(function (result){
+						api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 							var posts = result.posts;
 
 							columns.divide(posts).then(function (cols){
@@ -29921,7 +29921,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 				$scope.loadingTags = true
 			
-				api.getRelatedContent($scope.tags).then(function (result){
+				api.getRelatedContent($scope.tags, $scope.post.id).then(function (result){
 
 					$scope.loadingTags = false
 					

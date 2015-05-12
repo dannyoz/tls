@@ -108,8 +108,22 @@ function tls_json_api_encode($response)
      * Posts Archive (get_posts) from JSON API - Especially when getting
      * Related Articles through the API
      */
-    if (isset($response['posts'])) {
-        $response['posts']->test = 'Hello';
+    if (isset($response['posts']) && $wp_query->is_search == false) {
+        if (isset($_GET['exclude_post']) && intval($_GET['exclude_post'])) {
+            $current_query = $wp_query->query;
+
+            $exclude_post_args = array(
+                'post__not_in'  => array((int) $_GET['exclude_post'])
+            );
+            $exclude_post_archive_query = array_merge($current_query, $exclude_post_args);
+
+            $exclude_post_archive = $json_api->introspector->get_posts($exclude_post_archive_query);
+            $response['count'] = count($exclude_post_archive);
+            $response['count_total'] = (int)$wp_query->found_posts;
+            $response['pages'] = $wp_query->max_num_pages;
+            $response['posts'] = $exclude_post_archive;
+        }
+
         foreach ($response['posts'] as $response_post) {
             if ($response_post->type == 'tls_articles') {
                 // Books

@@ -56,13 +56,13 @@
             return defer.promise
 
         },
-        getRelatedContent : function(tags){
+        getRelatedContent : function(tags, exclude_post_id){
 
             var defer  = $q.defer(),
                 parse  = tags.toString(),
                 path1  = "/tag/"+parse+"/?json=1",
                 path2  = "/?tag="+parse+"&json=1",
-                url    = "/api/get_posts/?article_tags=" + parse;
+                url    = "/api/get_posts/?article_tags=" + parse + "&exclude_post=" + exclude_post_id;
 
             //expose url for testing
             defer.promise.url = url
