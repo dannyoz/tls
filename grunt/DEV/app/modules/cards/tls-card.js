@@ -81,7 +81,11 @@
 						if (!isUndefined(card.custom_fields)) {
 							if (card.custom_fields.thumbnail_image_url != '') {
 								card.image = card.custom_fields.thumbnail_image_url;
-							}							
+							}
+
+                            if (card.custom_fields.full_image_url != '') {
+                                card.image = card.custom_fields.full_image_url;
+                            }
 						}
 
 						// Section name and section link						
