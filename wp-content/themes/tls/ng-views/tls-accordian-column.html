@@ -1,7 +1,7 @@
 <div class="accordian-column">
 	<div class="accordian-item card-flat" ng-repeat="item in items">
 		<div class="accordian-title" ng-click="toggleOpen($index);" ng-class="{open:item.isOpen}">
-			<h3 class="futura" ng-bind="item.section.name"></h3>
+			<h3 class="futura"><a ng-href="{{item.section.link}}" ng-bind-html="item.section.name"></a></h3>
 			<div class="toggler">
 				<i class="icon icon-plus transition-2" ng-if="!item.isOpen"></i>
 				<i class="icon icon-minus transition-2" ng-if="item.isOpen"></i>

@@ -95,7 +95,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-4" ng-repeat="column in col3">								
 
 					<div class="card-flat" ng-repeat="card in column">	
-						<h3 class="futura"><a href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
+						<h3 class="futura"><a ng-href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{::post.author}}</p>
@@ -113,7 +113,7 @@ Template Name: Latest Edition Page Template
 				<div  class="grid-6" ng-repeat="column in col2">										
 					
 					<div class="card-flat" ng-repeat="card in column">						
-						<h3 class="futura"><a href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
+						<h3 class="futura"><a ng-href="{{card.section.link}}" ng-bind-html="card.section.name"></a></h3>
 						<div class="edition-item" ng-repeat="post in card.posts">
 							<div class="padded">							
 								<p class="title-small">{{::post.author}}</p>
