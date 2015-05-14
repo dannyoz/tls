@@ -28605,12 +28605,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
     "<ul class=pagination><li ng-if=\"config.currentPage>1\"><a ng-click=switchPage(config.currentPage-1)>Prev</a></li><li class=desktop-only ng-if=\"config.currentPage>1\">...</li><li class=desktop-only ng-if=\"config.currentPage-2>0\"><a ng-click=switchPage(config.currentPage-2)>{{config.currentPage-2}}</a></li><li class=desktop-only ng-if=\"config.currentPage-1>0\"><a ng-click=switchPage(config.currentPage-1)>{{config.currentPage-1}}</a></li><li class=current><a ng-click=switchPage(config.currentPage)>{{config.currentPage}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+1) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+1)>{{config.currentPage+1}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+2) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+2)>{{config.currentPage+2}}</a></li><li class=desktop-only ng-if=\"config.currentPage < config.pageCount\">...</li><li ng-if=\"config.currentPage < config.pageCount\"><a ng-click=switchPage(config.currentPage+1)>Next</a></li></ul>"
   );
 }])
-.controller('footer',['$scope','tealium', function ($scope, tealium){
+.controller('footer',['$scope','tealium', '$window', function ($scope, tealium, $window){
 
 	$scope.tealium = tealium;
 
 	$scope.classifieds = function(pdf){
 		tealium.classified(pdf);
+	}
+
+	$scope.archive = function(url) {
+
+		tealium.archive();
+
+		// If url is passed then redirect page to that page				
+		if (url) {					
+			$window.location.href = $window.location.href + url;				
+		}
 	}
 
 }])

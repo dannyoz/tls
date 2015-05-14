@@ -14,7 +14,7 @@
 		
 		<ul>
 
-		<li><a href="/?s=" ng-click="tealium.archive();">Archive</a></li>
+		<li><a ng-click="archive('/?s=');">Archive</a></li>
 		<?php 
 		   /**
 			* Displays a navigation menu
