@@ -210,6 +210,12 @@ $mobile_article: 560px;
 		@include shift("push",3);
 		@include grid-col-last(6);
 
+		p {
+			a {
+				text-decoration: underline;	
+			}			
+		}
+
 		img {
 			height: auto;
 		}
