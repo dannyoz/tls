@@ -292,7 +292,7 @@ function tls_articles_visibility_permalink( $post_link, $id = 0, $leavename = fa
     if ( !empty( $terms ) ) {
         $visibility_slug = $terms[ 0 ]->slug;
     }
-    if ( !$terms )
+    if ( !$terms || $terms[ 0 ]->slug == 'private' )
         return str_replace( '%article_visibility%/', '', $post_link );
 
     return str_replace( '%article_visibility%', $visibility_slug, $post_link );
