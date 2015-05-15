@@ -254,6 +254,7 @@
 				}
 				@include boxSizing(16px 0 16px 100px);
 				@extend .futura;
+				-webkit-appearance: none;
 
   				@media (min-width: $tablet + 1) and (max-width: 1105px) {
 					font-size: .6em;
