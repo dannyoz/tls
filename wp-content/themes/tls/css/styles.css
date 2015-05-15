@@ -1315,8 +1315,8 @@ p.author, h4.author {
   float: left;
   width: 100%;
   clear: both;
-  -webkit-animation-name: fadeInSection;
-  animation-name: fadeInSection;
+  -webkit-animation-name: fadeInElement;
+  animation-name: fadeInElement;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -webkit-animation-timing-function: ease;
@@ -2334,30 +2334,41 @@ p.author, h4.author {
   display: block;
   position: relative;
   height: 100px;
+  opacity: 0;
+  -webkit-animation-name: fadeInElement;
+  animation-name: fadeInElement;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
 }
-/* line 39, ../../../../grunt/DEV/app/templates/category/_category.scss */
+/* line 41, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category .intro, #discover .intro {
   padding-top: 50px;
   padding-bottom: 50px;
 }
-/* line 44, ../../../../grunt/DEV/app/templates/category/_category.scss */
+/* line 46, ../../../../grunt/DEV/app/templates/category/_category.scss */
 #category .intro p, #discover .intro p {
   font-style: italic;
   font-size: 1.2em;
 }
 @media screen and (max-width: 840px) {
-  /* line 54, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  /* line 56, ../../../../grunt/DEV/app/templates/category/_category.scss */
   #category .intro p, #discover .intro p {
     font-size: 1em;
   }
 }
 @media screen and (max-width: 450px) {
-  /* line 39, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  /* line 41, ../../../../grunt/DEV/app/templates/category/_category.scss */
   #category .intro, #discover .intro {
     padding-top: 30px;
     padding-bottom: 20px;
   }
-  /* line 64, ../../../../grunt/DEV/app/templates/category/_category.scss */
+  /* line 66, ../../../../grunt/DEV/app/templates/category/_category.scss */
   #category .intro p, #discover .intro p {
     font-size: 0.85em;
   }
@@ -4409,7 +4420,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     background-color: white;
   }
 }
-@keyframes fadeInSection {
+@keyframes fadeInElement {
   0% {
     opacity: 0;
   }
@@ -4417,7 +4428,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     opacity: 1;
   }
 }
-@-webkit-keyframes fadeInSection {
+@-webkit-keyframes fadeInElement {
   0% {
     opacity: 0;
   }
@@ -4425,7 +4436,7 @@ EXAMPLES OF DEFINING KEYFRAMES USING MIXINS -----
     opacity: 1;
   }
 }
-@-moz-keyframes fadeInSection {
+@-moz-keyframes fadeInElement {
   0% {
     opacity: 0;
   }
