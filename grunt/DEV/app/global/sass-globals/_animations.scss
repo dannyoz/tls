@@ -165,3 +165,20 @@ $pageShade : #fff;
 	90%  {transform:translateX(0) rotate3d(0, 1, 0, -12deg)  }
   	100% {transform:translateX(0) rotate3d(0, 1, 0, 0deg);background-color:white;}
 }
+
+
+@keyframes fadeInSection {
+	0%   { opacity: 0; }
+  	100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeInSection {
+	0%   { opacity: 0; }
+  	100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeInSection {
+	0%   { opacity: 0; }
+  	100% { opacity: 1; }
+}
+
