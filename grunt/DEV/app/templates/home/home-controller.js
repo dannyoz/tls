@@ -6,7 +6,8 @@
 	'columns',
 	'objToArr',
 	'tealium',
-	function ($scope, $sce, api, mpu, columns, objToArr, tealium){
+	'$window',
+	function ($scope, $sce, api, mpu, columns, objToArr, tealium, $window){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -15,7 +16,7 @@
 
 	api.getHomePage(url).then(function (result){
 
-		console.log(result);	
+		//console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
@@ -61,6 +62,16 @@
 
 	$scope.login = function(){
 		tealium.user('login');
+	}
+
+	$scope.viewEdition = function(url) {
+		
+		tealium.viewEdition();
+
+		// If url is passed then redirect page to that page				
+		if (url) {					
+			$window.location.href = url;				
+		}
 	}
 
 }])

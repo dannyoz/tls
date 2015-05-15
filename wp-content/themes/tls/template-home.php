@@ -157,7 +157,10 @@ get_header(); ?>
 								<p>
 									<?php the_field( 'this_weeks_text' ); ?>
 								</p>
-								<a ng-click="tealium.viewEdition();" href="<?php the_field( 'this_weeks_link_to_page' ) ?>"><button><?php _e( 'View edition', 'tls'); ?></button></a>
+								<?php 
+									$latestURL = get_field( 'this_weeks_link_to_page' );
+								?>
+								<a ng-click="viewEdition('<?php echo $latestURL; ?>');"><button><?php _e( 'View edition', 'tls'); ?></button></a>
 							</div>
 
 							<div class="grid-6">

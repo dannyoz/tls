@@ -28562,7 +28562,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 
   $templateCache.put('tls-accordian-column.html',
-    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura ng-bind=item.section.name></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
+    "<div class=accordian-column><div class=\"accordian-item card-flat\" ng-repeat=\"item in items\"><div class=accordian-title ng-click=toggleOpen($index); ng-class={open:item.isOpen}><h3 class=futura><a ng-href={{item.section.link}} ng-bind-html=item.section.name></a></h3><div class=toggler><i class=\"icon icon-plus transition-2\" ng-if=!item.isOpen></i> <i class=\"icon icon-minus transition-2\" ng-if=item.isOpen></i></div></div><div class=accordian-body ng-class={open:item.isOpen}><div class=edition-item ng-repeat=\"post in item.posts\"><div class=padded><p class=title-small>{{post.author}}</p><h4><a href=#>{{post.title}}</a></h4></div></div></div></div></div>"
   );
 
 
@@ -28605,12 +28605,22 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
     "<ul class=pagination><li ng-if=\"config.currentPage>1\"><a ng-click=switchPage(config.currentPage-1)>Prev</a></li><li class=desktop-only ng-if=\"config.currentPage>1\">...</li><li class=desktop-only ng-if=\"config.currentPage-2>0\"><a ng-click=switchPage(config.currentPage-2)>{{config.currentPage-2}}</a></li><li class=desktop-only ng-if=\"config.currentPage-1>0\"><a ng-click=switchPage(config.currentPage-1)>{{config.currentPage-1}}</a></li><li class=current><a ng-click=switchPage(config.currentPage)>{{config.currentPage}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+1) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+1)>{{config.currentPage+1}}</a></li><li class=desktop-only ng-if=\"(config.currentPage+2) < (config.pageCount+1)\"><a ng-click=switchPage(config.currentPage+2)>{{config.currentPage+2}}</a></li><li class=desktop-only ng-if=\"config.currentPage < config.pageCount\">...</li><li ng-if=\"config.currentPage < config.pageCount\"><a ng-click=switchPage(config.currentPage+1)>Next</a></li></ul>"
   );
 }])
-.controller('footer',['$scope','tealium', function ($scope, tealium){
+.controller('footer',['$scope','tealium', '$window', function ($scope, tealium, $window){
 
 	$scope.tealium = tealium;
 
 	$scope.classifieds = function(pdf){
 		tealium.classified(pdf);
+	}
+
+	$scope.archive = function(url) {
+
+		tealium.archive();
+
+		// If url is passed then redirect page to that page				
+		if (url) {					
+			$window.location.href = $window.location.href + url;				
+		}
 	}
 
 }])
@@ -29788,10 +29798,10 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		}
 
 		$scope.emailLink = function(){
-
+		
 			var subject   = 'TLS article',
 				emailBody = 'I thought you might be interested in this article from the Times Literary Supplement ' + $scope.post.url,
-				emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+				emailPath = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(emailBody)
 			
 			return emailPath
 
@@ -30398,7 +30408,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 	'columns',
 	'objToArr',
 	'tealium',
-	function ($scope, $sce, api, mpu, columns, objToArr, tealium){
+	'$window',
+	function ($scope, $sce, api, mpu, columns, objToArr, tealium, $window){
 
 	var url = '/api/get_page/?id=' + home_page_id
 
@@ -30407,7 +30418,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	api.getHomePage(url).then(function (result){
 
-		console.log(result);	
+		//console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article
@@ -30453,6 +30464,16 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.login = function(){
 		tealium.user('login');
+	}
+
+	$scope.viewEdition = function(url) {
+		
+		tealium.viewEdition();
+
+		// If url is passed then redirect page to that page				
+		if (url) {					
+			$window.location.href = url;				
+		}
 	}
 
 }])
