@@ -115,10 +115,10 @@
 		}
 
 		$scope.emailLink = function(){
-
+		
 			var subject   = 'TLS article',
 				emailBody = 'I thought you might be interested in this article from the Times Literary Supplement ' + $scope.post.url,
-				emailPath = "mailto:&subject="+subject+"&body=" + emailBody
+				emailPath = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(emailBody)
 			
 			return emailPath
 
