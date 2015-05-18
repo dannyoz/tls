@@ -75,7 +75,7 @@ function tls_latest_edition_page_json_api_encode($response)
         );
 
 
-        $response['latest_edition']['content']['public']['title'] = 'Public content';
+        $response['latest_edition']['content']['public']['title'] = __('Public content', 'tls');
         $public_articles = get_field('public_articles', $latest_edition->ID);
         foreach ($public_articles as $public_article) {
 
@@ -95,7 +95,7 @@ function tls_latest_edition_page_json_api_encode($response)
             );
         }
 
-        $response['latest_edition']['content']['regulars']['title'] = 'Regulars';
+        $response['latest_edition']['content']['regulars']['title'] = __('Regular Features', 'tls');
         $regular_articles = get_field('edition_regular_articles', $latest_edition->ID);
         foreach ($regular_articles as $regular_article) {
 
@@ -119,7 +119,7 @@ function tls_latest_edition_page_json_api_encode($response)
         }
 
 
-        $response['latest_edition']['content']['subscribers']['title'] = 'Subscriber Exclusive';
+        $response['latest_edition']['content']['subscribers']['title'] = __('Subscriber Exclusive');
         $subscriber_only_articles = get_field('subscriber_only_articles', $latest_edition->ID);
         foreach ($subscriber_only_articles as $subscriber_only_article) {
 

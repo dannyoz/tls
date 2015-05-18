@@ -70,7 +70,8 @@ Template Name: Latest Edition Page Template
 								<div class="padded" ng-class="{ 'private' : regular.taxonomy_article_visibility[0].slug == 'private'}">
                                     <h3 class="futura" ng-show="regular.type == 'then_and_now'" ><a href="javascript:void(0)" >Then And Now</a><i class="icon icon-key-after" ng-if="regular.taxonomy_article_visibility[0].slug == 'private'"></i></h3>
 									<h3 class="futura" ng-hide="regular.type == 'then_and_now'"><a href="{{regular.section.link}}" ng-bind="regular.section.name"></a><i class="icon icon-key-after" ng-if="regular.taxonomy_article_visibility[0].slug == 'private'"></i></h3>
-									<p class="title-small"><a href="{{regular.url}}" ng-bind="regular.title"></a></p>
+                                    <p class="title-small" ng-bind="regular.author"></p>
+                                    <h4><a href="{{regular.url}}" ng-bind="regular.title"></a></h4>
 								</div>
 							</div>
 						</div>

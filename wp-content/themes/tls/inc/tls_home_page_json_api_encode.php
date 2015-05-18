@@ -52,7 +52,10 @@ function tls_home_page_json_api_encode($response)
                 'type' => 'blog',
                 'id' => $blog_card->ID,
                 'title' => $blog_card->post_title,
-                'author' => get_the_author_meta('display_name', $blog_card->post_author),
+                'author' => array(
+                    'name'  => get_the_author_meta('display_name', $blog_card->post_author),
+                    'slug'  => get_the_author_meta('user_nicename', $blog_card->post_author)
+                ),
                 'text' => tls_make_post_excerpt($blog_card, 15),
                 'link' => get_permalink($blog_card->ID),
                 'section' => array(

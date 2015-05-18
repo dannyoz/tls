@@ -188,11 +188,14 @@ $mobile_article: 560px;
 	}
 
 	.article-section {
-		color: $primary-orange;
 		padding: 12px 0;	
 		font-weight: 500;
 
-		@include keyline(top,$light-keyline);	
+		@include keyline(top,$light-keyline);
+
+        div a {
+          color: $primary-orange;
+        }
 	}
 
 	.article-date {

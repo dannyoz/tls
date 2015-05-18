@@ -175,6 +175,13 @@ class HubXmlParser implements FeedParser
             $article_data['post_modified_gmt'] = $article_entry_updated->toDateTimeString(); // Updated Date GMT
 
             $article_id = $this->saveArticleData($article_data);
+
+            $teaser_summary_custom_field = array(
+                // Teaser Summary
+                'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
+            );
+            $this->saveArticleCustomFields($teaser_summary_custom_field, $article_id);
+
             $import_type = 'import';
         } else {
 
@@ -215,8 +222,6 @@ class HubXmlParser implements FeedParser
             'field_54eb50af14d87' => (string)$article_entry_updated->toDateTimeString(),
             // Author Name
             'field_54e4d3b1b0094' => (string)$cpiNamespace->byline,
-            // Teaser Summary
-            'field_54e4d3c3b0095' => tls_make_post_excerpt($cpiNamespace->copy, 30),
         );
         // Send Custom Fields Data to saveArticleCustomFields method to be saved
         // using the $article_id that came out of the saving or updating method

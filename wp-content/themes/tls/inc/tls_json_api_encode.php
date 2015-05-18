@@ -49,6 +49,23 @@ function tls_json_api_encode($response)
         }
 
         /**
+         * Taxonomy Section
+         */
+        if ($response['post']->type == 'tls_articles') {
+            $article_section_terms = wp_get_post_terms($response['post']->id, 'article_section');
+            $response['post']->section = array(
+                'name'  => $article_section_terms[0]->name,
+                'link'  => get_term_link($article_section_terms[0]->term_id, $article_section_terms[0]->taxonomy)
+            );
+        } else if ($response['post']->type == 'post') {
+            $post_category_terms = wp_get_post_terms($response['post']->id, 'category');
+            $response['post']->category = array(
+                'name'  => $post_category_terms[0]->name,
+                'link'  => get_term_link($post_category_terms[0]->term_id, $post_category_terms[0]->taxonomy)
+            );
+        }
+
+        /**
          * Single Blog Post
          */
         // Commenter Information
