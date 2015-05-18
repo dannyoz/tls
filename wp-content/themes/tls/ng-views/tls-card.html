@@ -62,7 +62,7 @@
 
 <div class="card" ng-if="data.type == 'article'" ng-class="{private:data.visibility == 'private'}">
 	
-	<h3 class="futura">
+	<h3 class="futura"> 
 		<a ng-if="data.section.name" ng-href="{{data.section.link}}" ng-bind-html="data.section.name"></a>			
 		<!-- <a ng-attr-href="{{data.section.link}}" ng-if="data.section.name" ng-bind-html="data.section.name"></a>			 -->
 		<i ng-if="data.visibility == 'private'" class="icon icon-key"></i>
