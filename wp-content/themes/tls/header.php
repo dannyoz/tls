@@ -34,7 +34,7 @@
 
 		<div id="cookies" class="transition-2" ng-class="{show:!hasCookie}">
 			<div class="container">
-				<p class="futura">By continuing to use the site, you agree to the use of cookies. You can change this and find out more by following <a href="http://www.newsprivacy.co.uk/single/">this link</a></p>
+				<p class="futura">By continuing to use the site, you agree to the use of cookies. You can change this and find out more by following <a href="http://www.newsprivacy.co.uk/single/" target="_blank">this link</a></p>
 				<a class="accept futura" ng-click="acceptCookies();">Accept cookies</a>
 			</div>
 		</div>

@@ -41,7 +41,7 @@
                         <div class="img-wrapper">
                             <img class="max" ng-attr-src="{{currentEdition.featured.image_url}}">
                         </div>
-                        <div class="title-small" ng-bind="currentEdition.featured.issue_no"></div>
+                        <div class="title-small">No. <span ng-bind="currentEdition.featured.issue_no"></span></div>
                     </div>
 
                     <div class="editions-top-right fadeIn">

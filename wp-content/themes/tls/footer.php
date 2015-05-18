@@ -44,11 +44,11 @@
 				<?php }
 
 				if ( $facebook_url != '' || $facebook_url != null ) { ?>
-					<li><a href="<?php echo $facebook_url; ?>" ng-click="tealium.exitLink('facebook')"><i class="icon icon-facebook"></i></a></li>
+					<li><a ng-click="exitLink('facebook', '<?php echo $facebook_url; ?>')"><i class="icon icon-facebook"></i></a></li>
 				<?php }
 
 				if ( $twitter_url != '' || $twitter_url != null ) { ?>
-					<li><a href="<?php echo $twitter_url ?>" ng-click="tealium.exitLink('twitter')"><i class="icon icon-twitter"></i></a></li>
+					<li><a ng-click="exitLink('twitter', '<?php echo $twitter_url; ?>')"><i class="icon icon-twitter"></i></a></li>
 				<?php }
 
 			}

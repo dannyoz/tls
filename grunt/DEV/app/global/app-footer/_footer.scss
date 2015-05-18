@@ -5,7 +5,7 @@
 	padding:40px 0 30px 0;
 	opacity: 0;
 	@include stack;
-	@include animation(fadeInSection, ease, 1s, "", 2s);
+	@include animation(fadeInElement, ease, 1s, "", 2s);
 
 	ul{
 
