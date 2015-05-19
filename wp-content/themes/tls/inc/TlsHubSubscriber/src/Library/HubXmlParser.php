@@ -65,10 +65,10 @@ class HubXmlParser implements FeedParser
         $articles = ($articlesResult['articleCount'] == 1) ? 'article' : 'articles';
 
         echo 'It took ' . number_format($execution_time, 2) . ' seconds to '
-            . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles;
+            . $articlesResult['import_type'] . ' Article ID: ' . $articlesResult['original_article_id'] . ' & Title: ' . $articlesResult['original_article_title'];
 
         HubLogger::log('It took ' . number_format($execution_time, 2) . ' seconds to '
-            . $articlesResult['import_type'] . ' ' . $articlesResult['articleCount'] . ' ' . $articles);
+            . $articlesResult['import_type'] . ' Article ID: ' . $articlesResult['original_article_id'] . ' & Title: ' . $articlesResult['original_article_title']);
 
     }
 
@@ -177,7 +177,7 @@ class HubXmlParser implements FeedParser
             $article_data['post_modified'] = $article_entry_updated->toDateTimeString(); // Updated Date
             $article_data['post_modified_gmt'] = $article_entry_updated->toDateTimeString(); // Updated Date GMT
 
-            $article_id = $this->saveArticleData($article_data);
+            $article_id = $this->saveArticleData($article_data, $article_entry_id);
 
             $teaser_summary_custom_field = array(
                 // Teaser Summary
@@ -191,7 +191,7 @@ class HubXmlParser implements FeedParser
             if ($article_entry_updated->toDayDateTimeString() > $last_updated_date->toDayDateTimeString()) {
 
                 $article_data['ID'] = (int)$articleMatches->posts[0]->ID;
-                $article_id = $this->saveArticleData($article_data, true);
+                $article_id = $this->saveArticleData($article_data, $article_entry_id, true);
                 $import_type = 'update';
             }
 
@@ -269,7 +269,7 @@ class HubXmlParser implements FeedParser
                 'post_content'  => $content_with_inline_images
             );
 
-            $this->saveArticleData($inline_images_updated_article_data, true);
+            $this->saveArticleData($inline_images_updated_article_data, $article_entry_id, true);
 
         }
 
@@ -287,8 +287,10 @@ class HubXmlParser implements FeedParser
         // Returns the number of articles parsed back into the parseFeed method
         // to add a log of how many articles were imported
         return array(
-            'import_type' => $import_type,
-            'articleCount' => $articleCount
+            'import_type'               => $import_type,
+            'articleCount'              => $articleCount,
+            'original_article_id'       => (string) $article_entry_id,
+            'original_article_title'    => wp_strip_all_tags($cpiNamespace->headline)
         );
     }
 
@@ -296,11 +298,12 @@ class HubXmlParser implements FeedParser
      * Method to save the Article Data and in case there is a WP_Error that comes out an error log will be written
      *
      * @param      $article_data
+     * @param      $original_article_id
      * @param bool $update
      *
      * @return int|\WP_Error
      */
-    private function saveArticleData($article_data, $update = false)
+    private function saveArticleData($article_data, $original_article_id, $update = false)
     {
 
         /*
@@ -320,7 +323,7 @@ class HubXmlParser implements FeedParser
          */
         if (is_wp_error($article_id)) {
             $errors = $article_id->get_error_messages();
-            $error_msg = "Failed Importing Article" . $article_data['post_title'] . " \n";
+            $error_msg = "Failed Importing Article - Article ID: " . $original_article_id . " & Title: " . $article_data['post_title'] . " \n";
             foreach ($errors as $error) {
                 $error_msg .= "\t" . $error;
             }
@@ -395,7 +398,7 @@ class HubXmlParser implements FeedParser
             $article = get_post($article_id); // Get Article to use its Title in the Error Message
 
             $errors = $tax_terms_ids->get_error_messages();
-            $error_msg = "Failed setting Article Section for article: " . $article->post_title . "\n";
+            $error_msg = "Failed setting Article Section for WordPress Article: " . $article->post_title . "\n";
             foreach ($errors as $error) {
                 $error_msg .= "\t" . $error;
             }
