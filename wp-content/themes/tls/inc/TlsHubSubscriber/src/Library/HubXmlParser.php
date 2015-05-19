@@ -38,7 +38,7 @@ class HubXmlParser implements FeedParser
         $start_time = microtime(true);
 
         // Replace & with the HTML entity of &amp; which was causing an error to load the string
-        $feed = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $feed);
+        //$feed = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $feed);
         // Turn on Simple XML Internal Errors to catch any errors that appear
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($feed, null, LIBXML_NOCDATA);
@@ -50,6 +50,7 @@ class HubXmlParser implements FeedParser
                 $error_msg .= "\t" . $error->message;
             }
             HubLogger::error($error_msg);
+            exit();
         }
 
         // Parse the article entries [Separate method so this method doesn't become extremely long]
@@ -139,7 +140,9 @@ class HubXmlParser implements FeedParser
             if ($link->attributes()->rel == 'related') {
 
                 $image = $this->handleImageUpload($link->attributes()->href);
-                $related_images += $image;
+                if ($image != false || $image != null) {
+                    $related_images += $image;
+                }
 
             }
         }
@@ -437,6 +440,14 @@ class HubXmlParser implements FeedParser
 
         // Image XML
         $image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
+        if ($image_xml === false) {
+            $error_msg = "Failed loading Image XML\n";
+            foreach (libxml_get_errors() as $error) {
+                $error_msg .= "\t" . $error->message;
+            }
+            HubLogger::error($error_msg);
+            return false;
+        }
         $imageCpiNamespace = $image_xml->children('cpi', true);
 
         $image_url = (string) $image_xml->link->attributes()->href;
