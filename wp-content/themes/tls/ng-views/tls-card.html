@@ -75,7 +75,7 @@
 		<p ng-bind-html="data.excerpt"></p>
 	</div>
 
-	<footer ng-if="data.books">
+	<footer ng-if="data.books.length > 0">
 		<!--<p ng-if="data.author != '' && data.custom_fields.book_title == null && !data.books" class="futura" ng-bind="data.author"></p>	-->
 		<div>
 			<div class="book summary-wrapper" ng-repeat="book in data.books">
