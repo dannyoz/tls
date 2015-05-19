@@ -40,7 +40,7 @@ function tls_latest_edition_page_json_api_encode($response)
 
         $response['latest_edition'] = array(
             'id' => $latest_edition->ID,
-            'title' => $latest_edition->post_title,
+            'title' => get_the_title($latest_edition->ID),
             'url' => get_permalink($latest_edition->ID),
 
         );
@@ -50,7 +50,7 @@ function tls_latest_edition_page_json_api_encode($response)
             $response['latest_edition']['previous_post_info'] = array(
                 'previous' => $previousPost,
                 'id' => $previousPost->ID,
-                'title' => $previousPost->post_title,
+                'title' => get_the_title($previousPost->ID),
                 'url' => get_permalink($previousPost->ID),
             );
         }
@@ -60,7 +60,7 @@ function tls_latest_edition_page_json_api_encode($response)
             $response['latest_edition']['next_post_info'] = array(
                 'next' => $nextPost,
                 'id' => $nextPost->ID,
-                'title' => $nextPost->post_title,
+                'title' => get_the_title($nextPost->ID),
                 'url' => get_permalink($nextPost->ID),
             );
         }
@@ -85,7 +85,7 @@ function tls_latest_edition_page_json_api_encode($response)
             $response['latest_edition']['content']['public']['articles'][$public_article->post_name] = array(
                 'id' => $public_article->ID,
                 'author' => $postAuthor,
-                'title' => $public_article->post_title,
+                'title' => get_the_title($public_article->ID),
                 'section' => array(
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
@@ -107,7 +107,7 @@ function tls_latest_edition_page_json_api_encode($response)
                 'type' => 'article',
                 'id' => $regular_article->ID,
                 'author' => $postAuthor,
-                'title' => $regular_article->post_title,
+                'title' => get_the_title($regular_article->ID),
                 'section' => array(
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)
@@ -132,7 +132,7 @@ function tls_latest_edition_page_json_api_encode($response)
             $response['latest_edition']['content']['subscribers']['articles'][$section[0]->name]['posts'][$subscriber_only_article->post_name] = array(
                 'id' => $subscriber_only_article->ID,
                 'author' => $postAuthor,
-                'title' => $subscriber_only_article->post_title,
+                'title' => get_the_title($subscriber_only_article->ID),
                 'section' => array(
                     'name' => $section[0]->name,
                     'link' => get_term_link($section[0]->term_id, $section[0]->taxonomy)

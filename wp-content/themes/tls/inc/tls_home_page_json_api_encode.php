@@ -29,7 +29,7 @@ function tls_home_page_json_api_encode($response)
 
         $response['featured_article'] = array(
             'id' => $featured_article[0]->ID,
-            'title' => $featured_article[0]->post_title,
+            'title' => get_the_title($featured_article[0]->ID),
             'author' => get_the_author_meta('display_name', $featured_article[0]->post_author),
             'text' => tls_make_post_excerpt($featured_article[0]->post_content, 30),
             'link' => get_permalink($featured_article[0]->ID),
@@ -51,7 +51,7 @@ function tls_home_page_json_api_encode($response)
             $response['home_page_cards']['card_0'][] = array(
                 'type' => 'blog',
                 'id' => $blog_card->ID,
-                'title' => $blog_card->post_title,
+                'title' => get_the_title($blog_card->ID),
                 'author' => array(
                     'name'  => get_the_author_meta('display_name', $blog_card->post_author),
                     'slug'  => get_the_author_meta('user_nicename', $blog_card->post_author)
@@ -111,7 +111,7 @@ function tls_home_page_json_api_encode($response)
             $response['home_page_cards']['card_' . $home_page_card_count] = array(
                 'type' => $card_type,
                 'id' => $card_post->ID,
-                'title' => $card_post->post_title,
+                'title' => get_the_title($card_post->ID),
                 'author' => get_the_author_meta('display_name', $card_post->post_author),
                 'excerpt' => $articleText,
                 'link' => get_permalink($card_post->ID),

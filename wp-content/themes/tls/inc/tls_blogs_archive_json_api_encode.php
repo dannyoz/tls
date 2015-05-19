@@ -36,7 +36,7 @@ function tls_blogs_archive_json_api_encode($response)
             'type' => ($featured_post_category[0]->slug == 'a-dons-life' || $featured_post_category[0]->slug == 'dons-life') ? 'dons_life_blog' : str_replace('-',
                     '_', $featured_post_category[0]->slug) . '_blog',
             'id' => $featured_post[0]->ID,
-            'title' => $featured_post[0]->post_title,
+            'title' => get_the_title($featured_post[0]->ID),
             'excerpt' => tls_make_post_excerpt($featured_post[0]->post_content, 30),
             'link' => get_permalink($featured_post[0]->ID),
             'hero_image' => esc_url($featured_post_hero_image[0])
@@ -52,7 +52,7 @@ function tls_blogs_archive_json_api_encode($response)
         $response['posts'][] = array(
             'type' => 'listen_blog',
             'id' => $spotlight_podcast[0]->ID,
-            'title' => $spotlight_podcast[0]->post_title,
+            'title' => get_the_title($spotlight_podcast[0]->ID),
             'link' => get_permalink($spotlight_podcast[0]->ID),
             'soundcloud' => $spotlight_podcast_custom_fields['soundcloud_embed_code'][0]
         );

@@ -100,7 +100,7 @@ function tls_discover_json_api_encode($response)
             'type' => 'article',
             'id' => $spotlight_article->ID,
             'url' => get_permalink($spotlight_article->ID),
-            'title' => $spotlight_article->post_title,
+            'title' => get_the_title($spotlight_article->ID),
             //'excerpt' => tls_make_post_excerpt($spotlight_article->post_content, 30),
             'author' => array(
                 'name' => get_the_author_meta('display_name', $spotlight_article->post_author),
@@ -174,7 +174,7 @@ function tls_discover_json_api_encode($response)
                     'type' => 'article',
                     'id' => $top_section_article->ID,
                     'url' => get_permalink($top_section_article->ID),
-                    'title' => $top_section_article->post_title,
+                    'title' => get_the_title($top_section_article->ID),
                     //'excerpt' => $top_section_article_teaser,
                     'author' => array(
                         'name' => get_the_author_meta('display_name', $top_section_article->post_author),
