@@ -16,6 +16,7 @@ function tls_search_results_json_api_encode($response)
      * Display Everything search var is empty
      */
     $search_query = get_search_query(true);
+    $search_query = filter_var(wp_strip_all_tags($search_query), FILTER_SANITIZE_STRING);
     if ($wp_query->is_search == true && empty($search_query)) {
         $response['status'] = 'ok';
         unset($response['error']);
@@ -36,11 +37,14 @@ function tls_search_results_json_api_encode($response)
     if (isset($response['posts']) && $wp_query->is_search == true) {
 
         // URL parsing to use with custom JSON API queries
-        $url = parse_url($_SERVER['REQUEST_URI']);
-        $url_query = wp_parse_args($url['query']); $response['url_query'] = $url_query;
+        $request_uri = filter_var(wp_strip_all_tags($_SERVER['REQUEST_URI']), FILTER_SANITIZE_URL);
+        $url = parse_url($request_uri);
+        $url_query = wp_parse_args(wp_strip_all_tags($url['query']));
+        $response['url_query'] = $url_query;
 
         // Get Search Query to be used in all the queries
-        $search_query = get_search_query();
+        $search_query = get_search_query(true);
+        $search_query = filter_var(wp_strip_all_tags($search_query), FILTER_SANITIZE_STRING);
         $response['search_query'] = $search_query;
 
         // Get Current Page and add it to the response
@@ -61,7 +65,7 @@ function tls_search_results_json_api_encode($response)
                 'date_query' => array(
                     array(
                         'column' => 'post_date',
-                        'after' => $url_query['date_filter'],
+                        'after' => filter_var($url_query['date_filter'], FILTER_SANITIZE_STRING),
                         'inclusive' => true
                     ),
                 ),

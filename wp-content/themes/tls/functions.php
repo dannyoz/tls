@@ -345,6 +345,7 @@ function dont_search_post_content( $search_sql )
     if ( !is_admin() && is_search() ) {
         global $wpdb, $wp_query;
         $search_query = $wp_query->query_vars[ 's' ];
+        $search_query = wp_strip_all_tags($search_query);
         //var_dump($wp_query);
         if ( strpos( $search_sql, 'post_content LIKE' ) ) {
             $search_sql = preg_replace( "/OR \({$wpdb->posts}.post_content LIKE '\%{$search_query}\%'\)/", '', $search_sql );
