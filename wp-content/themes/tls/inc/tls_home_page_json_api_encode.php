@@ -101,10 +101,13 @@ function tls_home_page_json_api_encode($response)
                 $articleText = tls_make_post_excerpt($card_post->post_content, 30);
             }
 
-            if (!empty($card_post_custom_fields['thumbnail_image_url'][0])) {
-                $thumbnail_image = wp_get_attachment_url($card_post_custom_fields['thumbnail_image_url'][0]);
-            } else if (!empty($card_post_custom_fields['full_image_url'][0])) {
-                $thumbnail_image = wp_get_attachment_url($card_post_custom_fields['full_image_url'][0]);
+            $card_post_full_image = get_field('field_54e4d4a5b009b', $card_post->ID);
+            $card_post_thumbnail_image = get_field('field_54e4d481b009a', $card_post->ID);
+            $thumbnail_image = '';
+            if ($card_post_thumbnail_image) {
+                $thumbnail_image = $card_post_thumbnail_image['url'];
+            } else if ($card_post_full_image) {
+                $thumbnail_image = $card_post_full_image['url'];
             }
 
             // Add Cards to the JSON Response in the specific count slot
@@ -123,6 +126,7 @@ function tls_home_page_json_api_encode($response)
                 'custom_fields' => array(
                     'thumbnail_image_url' => $thumbnail_image,
                 ),
+                'image_url' => $thumbnail_image,
                 'books' => get_field('field_54edde1e60d80', $card_post->ID),
                 'taxonomy_article_visibility' => $visibility
             );

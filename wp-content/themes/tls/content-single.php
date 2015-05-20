@@ -64,13 +64,13 @@
 						</div>
 					</div>
 
-					<div class="grid-row" ng-if="!post.custom_fields.hero_image_url && post.custom_fields.full_image_url">
+					<div class="grid-row" ng-if="post.custom_fields.full_image_url">
 						<div class="col-wide">
 							<img class="max" ng-attr-src="{{post.custom_fields.full_image_url}}">
 						</div>
 					</div>
 
-					<div class="grid-row" ng-if="post.custom_fields.hero_image_url">
+					<div class="grid-row" ng-if="!post.custom_fields.full_image_url && post.custom_fields.hero_image_url">
 						<div class="col-wide">
 							<img class="max" ng-attr-src="{{post.custom_fields.hero_image_url}}">
 						</div>
