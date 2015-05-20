@@ -313,6 +313,23 @@
 				cursor: pointer;
 				@include fitParent;
 			}
+
+			.close-search {
+				position: absolute;
+				right: 10px;
+				bottom: 15px;
+				font-size: 1em;
+				width: 30px;
+				height: 30px;
+				display: block;
+				text-align: center;
+				line-height: 30px;
+				display: none;
+
+				&:hover {
+					text-decoration: none;
+				}
+			}
 		}
 
 		&.tablet{
@@ -377,6 +394,10 @@
 			.search{
 
 				height: $hint-height;
+			}
+
+			.close-search {
+				display: block;
 			}
 		}
 	}

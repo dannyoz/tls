@@ -66,7 +66,7 @@
 
 		</div>
 
-		<nav class="transition-1" ng-mouseleave="hint = false" ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile', hinting : hint}">
+		<nav class="transition-1" ng-class="{desktop : size == 'desktop', tablet : size == 'tablet',mobile : size == 'mobile', hinting : hint}">
 			
 			<div class="container">
 
@@ -75,6 +75,7 @@
 					<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
 
 					<div class="search transition-1" ng-click="searchFocus();" ng-class="[size];{open : searchOpen}">
+						
 						<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="search-wrapper">
 								<label class="screen-reader-text" for="s" ng-if="size == 'desktop' || searchOpen">Search:</label>
@@ -86,9 +87,12 @@
 						</form>
 
 						<div class="hint">
-							<p class="futura">Search by author, title, reviewer or keyword</p>
-						</div>
-					</div>
+							<p class="futura">Search by author, title, reviewer or keyword</p>							
+						</div>				
+
+						<a class="futura close-search" ng-click="hideSearch($event);">X</a>
+
+					</div>					
 
 				</div>	
 
