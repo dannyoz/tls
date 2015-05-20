@@ -78,12 +78,12 @@
 						}
 
 						// Thumbnail image
-						if (!isUndefined(card.custom_fields)) {
-							if (card.custom_fields.thumbnail_image_url != '') {
+						if (!isUndefined(card.custom_fields)) {					
+							if (card.custom_fields.thumbnail_image_url != null) {								
 								card.image = card.custom_fields.thumbnail_image_url;
 							}
 
-                            if (card.custom_fields.full_image_url != '') {
+                            if (card.custom_fields.full_image_url != null) {
                                 card.image = card.custom_fields.full_image_url;
                             }
 						}
