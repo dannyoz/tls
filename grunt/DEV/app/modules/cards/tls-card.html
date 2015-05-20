@@ -68,7 +68,9 @@
 		<i ng-if="data.visibility == 'private'" class="icon icon-key"></i>
 	</h3>
 	
-	<img class="max" ng-if="data.image" ng-attr-src="{{data.image}}" />						
+	<a ng-click="tealiumTag(data, 'url');">
+		<img class="max" ng-if="data.image" ng-attr-src="{{data.image}}" />						
+	</a>	
 	
 	<div class="padded">
 		<h4><a ng-if="data.url" ng-click="tealiumTag(data, 'url');" ng-bind-html="data.title"></a></h4>
