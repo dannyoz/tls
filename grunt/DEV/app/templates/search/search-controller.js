@@ -325,7 +325,9 @@
             tealium.sortOrder(orderName)
         }
 
-        $scope.clearFilters = function(filters){
+        $scope.clearFilters = function(filters) {
+
+            tealium.filtering('remove','filters', 'clear all');
 
             $scope.filters         = [];
             activeFilters   = {

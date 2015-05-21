@@ -28609,8 +28609,23 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	$scope.tealium = tealium;
 
-	$scope.classifieds = function(pdf){
-		tealium.classified(pdf);
+	$scope.classifieds = function(pdf) {
+
+		var pathExploded = [];
+
+		if (pdf) {
+			
+			// Get PDF file name from path
+			pathExploded = pdf.split('/');
+			var l = pathExploded.length;
+
+			if (l > 1) {
+				var pdfName = pathExploded[l - 1];				
+				tealium.classified(pdfName);	
+			}
+			
+		}
+		
 	}
 
 	$scope.exitLink = function(type, url) {
@@ -29980,18 +29995,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 			commentApi.post('/api/submit_comment/?post_id='+$scope.post.id+'&name='+author+'&email='+email+'&content='+content)
 				.then(function(data){
+
+					tealium.engagement('leave comment');
+					
 					$scope.successCommentMessage = true;
 					var commentContent = document.getElementById('comment');
 					commentContent.value = '';
+
 				}, function (error) {
+					
 					$scope.errorCommentMessage = true;
 					$scope.errorMessage = error;
 				});
-
-			if ($scope.success == true) {
-				$scope.commentContent = '';
-			}
-
 		}
 
         $scope.scrollTo = function(id) {
@@ -30935,7 +30950,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
             tealium.sortOrder(orderName)
         }
 
-        $scope.clearFilters = function(filters){
+        $scope.clearFilters = function(filters) {
+
+            tealium.filtering('remove','filters', 'clear all');
 
             $scope.filters         = [];
             activeFilters   = {

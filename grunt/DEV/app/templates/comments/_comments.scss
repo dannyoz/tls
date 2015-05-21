@@ -1,4 +1,4 @@
-#comments{
+#comments {
 
 	padding-bottom:50px;
 
@@ -112,6 +112,17 @@
 			.comment-content {
 				margin-top: 15px;
 			}
+		}
+	}
+
+	.comment-msg {		
+		padding: 10px;
+		text-align: center;
+		font-size: 90%;
+
+		&.error {
+			color: #A01616;
+			background-color: #FDEEEE;
 		}
 	}
 }
