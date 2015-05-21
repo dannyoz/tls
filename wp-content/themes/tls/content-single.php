@@ -41,12 +41,12 @@
 
 				<div class="article-links">
 					<div class="inner">
-						<a href="javascript:void(0);" ng-if="prev" ng-click="chooseArticle('next',prev,post.previous_post_info.title)" class="article-nav prev-article">
+						<a href="javascript:void(0);" ng-if="prev" ng-click="chooseArticle('prev', prev, post.previous_post_info.title)" class="article-nav prev-article">
 							<div class="icon icon-left-arrow">
 								<span ng-bind-html="post.previous_post_info.title"></span>
 							</div>
 						</a>
-						<a href="javascript:;" ng-if="next" ng-click="chooseArticle('prev',next,post.next_post_info.title)" class="article-nav next-article">
+						<a href="javascript:;" ng-if="next" ng-click="chooseArticle('next', next, post.next_post_info.title)" class="article-nav next-article">
 							<div class="icon icon-right-arrow">
 								<span ng-bind-html="post.next_post_info.title"></span>
 							</div>

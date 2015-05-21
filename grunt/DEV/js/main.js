@@ -29849,6 +29849,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 					if(dir == 'prev'){
 
+						tealium.paging('previous article',pageTitle);
+
 						$scope.oldPost  = $scope.post;
 						$scope.post     = result.post
 						$scope.prev     = result.previous_url
@@ -29862,12 +29864,12 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 						$timeout(function(){
 							$scope.pageTurn = false
-						},duration);
-
-						tealium.paging('previous article',pageTitle);						
+						},duration);												
 					}
 
 					if(dir == 'next'){
+
+						tealium.paging('next article',pageTitle);
 
 						$scope.oldPost  = result.post;
 						$scope.dir      = dir
@@ -29878,9 +29880,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 							$scope.post     = result.post
 							$scope.prev     = result.previous_url
 							$scope.next     = result.next_url
-						},duration)
-
-						tealium.paging('next article',pageTitle);
+						},duration)						
 
 					}
 
