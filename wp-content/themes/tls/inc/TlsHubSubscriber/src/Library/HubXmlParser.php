@@ -17,12 +17,17 @@ use WP_Query;
  */
 class HubXmlParser implements FeedParser
 {
+    /**
+     * @var string $admin_email
+     */
+    private $admin_email;
 
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->admin_email = get_option('admin_email');
     }
 
     /**
@@ -45,11 +50,16 @@ class HubXmlParser implements FeedParser
 
         // If there are errors then add them to the error logs
         if ($xml === false) {
-            $error_msg = "Failed loading XML\n";
+            $error_msg = "Failed loading Article XML\n";
             foreach (libxml_get_errors() as $error) {
                 $error_msg .= "\t" . $error->message;
             }
             HubLogger::error($error_msg);
+
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed Loading Article XML";
+            wp_mail($this->admin_email, $email_subject, $error_msg);
+
             exit();
         }
 
@@ -328,6 +338,10 @@ class HubXmlParser implements FeedParser
                 $error_msg .= "\t" . $error;
             }
             HubLogger::error($error_msg);
+
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed Importing Article \"" . $article_data['post_title'] . "\"";
+            wp_mail($this->admin_email, $email_subject, $error_msg);
         }
 
         return $article_id; // Returns the ID of the post that was inserted/updated
@@ -404,6 +418,10 @@ class HubXmlParser implements FeedParser
             }
             HubLogger::error($error_msg);
 
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed setting Article Section for WordPress Article: \"" . $article->post_title . "\"";
+            wp_mail($this->admin_email, $email_subject, $error_msg);
+
             return false;
         }
 
@@ -449,6 +467,11 @@ class HubXmlParser implements FeedParser
                 $error_msg .= "\t" . $error->message;
             }
             HubLogger::error($error_msg);
+
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed loading Image XML";
+            wp_mail($this->admin_email, $email_subject, $error_msg);
+
             return false;
         }
         $imageCpiNamespace = $image_xml->children('cpi', true);
@@ -478,6 +501,10 @@ class HubXmlParser implements FeedParser
             }
             HubLogger::error($error_msg);
 
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed downloading image from url: " . $image_url;
+            wp_mail($this->admin_email, $email_subject, $error_msg);
+
         }
 
         // Sideload Image to Media
@@ -494,6 +521,10 @@ class HubXmlParser implements FeedParser
                 $error_msg .= "\t" . $error;
             }
             HubLogger::error($error_msg);
+
+            // Send Email to admin
+            $email_subject = "TLS Article Importer Error - Failed downloading image: " . $image_url;
+            wp_mail($this->admin_email, $email_subject, $error_msg);
         }
 
         if ($inline_image === false && empty($image_option)) {
