@@ -80,7 +80,7 @@
 						
 						<div class="article-body">
 
-							<h2 ng-bind-html="post.title"></h2>
+							<h1 ng-bind-html="post.title"></h1>
 							<div class="article-meta grid-12">
 								<div class="grid-12" ng-if="post.custom_fields.article_author_name[0].length > 0"><h4 class="author" ng-bind="post.custom_fields.article_author_name[0]"></h4></div>
 								<div class="grid-12" ng-if="post.type == 'post'"><h4 class="author" ng-bind="post.author.name"></h4></div>

@@ -28636,11 +28636,11 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 }])
 .controller('header',['$scope','tealium', function ($scope,tealium){
 
-	$scope.ready       = true
-	$scope.hint        = false
+	$scope.ready       = true;
+	$scope.hint        = false;
 	$scope.placeholder = "Tls archive, blogs and website";
-	$scope.searchOpen  = false
-	$scope.hasCookie   = true
+	$scope.searchOpen  = false;
+	$scope.hasCookie   = true;
 
 	$scope.checkCookies = function(){
 		
@@ -28649,9 +28649,9 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			index   = cookies.indexOf(val);
 
 		if(index > -1){
-			$scope.hasCookie = true
+			$scope.hasCookie = true;
 		} else {
-			$scope.hasCookie = false
+			$scope.hasCookie = false;
 		}
 
 	}();
@@ -28662,11 +28662,18 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		$scope.searchOpen  = true;
 	}
 
+	$scope.hideSearch  = function(e){
+		
+		$scope.searchOpen  = false;
+		$scope.hint = false;
+		e.stopPropagation();
+	}
+
 	$scope.searchFocus = function(){
 
-		$scope.hint = true
+		$scope.hint = true;
 		$scope.placeholder = ''; 
-		$scope.focus = true
+		$scope.focus = true;
 	}
 
 	$scope.subscribe = function(){		
@@ -28688,7 +28695,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			cookie = val + "; " + expiry + "; " + path;
 
 		document.cookie  = cookie;
-		$scope.hasCookie = true
+		$scope.hasCookie = true;
 	}
 	
 }])
@@ -29821,7 +29828,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			var fbLink = "https://www.facebook.com/sharer/sharer.php?u=" + path,
 				twLink = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(title)+ "&amp;url=" + path,
 				link   = (platform == 'facebook') ? fbLink : twLink,
-				params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=300,width=500";
+				params =   "scrollbars=no,toolbar=no,location=no,menubar=no,left=200,top=200,height=400,width=500";
 
 			window.open(link,"_blank",params);
 			tealium.socialLink(platform);

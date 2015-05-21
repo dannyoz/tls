@@ -223,7 +223,7 @@ $mobile_article: 560px;
 			height: auto;
 		}
 
-		h2 {
+		h1 {
 
 			font-size: 2.222em;
 			line-height: 50px;
@@ -272,10 +272,18 @@ $mobile_article: 560px;
 			}
 		}
 
-		ol,ul{
+		figcaption {
+			font-style: italic;
+			clear: left;
+			margin-bottom: 1em;
+		}
+
+		ol,
+		ul {
 
 			margin-bottom:2em;
 			padding-left:20px;
+			display: inline-block;
 
 			li{
 
