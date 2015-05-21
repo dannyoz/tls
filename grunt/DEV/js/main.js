@@ -29321,6 +29321,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 				"event_engagement_action" : "engagement",
 				"event_engagement_name" : "classifieds:" + filename,
 				"event_engagement_browsing_method" : "click",
+				"event_download_type" :"pdf file",
 				"event_download_action" :"download",
 				"event_download_name" : "classifieds:" + filename
 			}
