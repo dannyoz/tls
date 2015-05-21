@@ -8,7 +8,8 @@
 	'niceDate', 
 	'objToArr',
 	'tealium',
-	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr, tealium) {
+	'$window',
+	function ($scope, $sce, $location, $timeout, api, columns, niceDate, objToArr, tealium, $window) {
 
 		$scope.ready   = false;
 		$scope.loading = true;
@@ -61,7 +62,7 @@
 		});
 
 
-		$scope.chooseEdition = function(dir, path, title){
+		$scope.chooseEdition = function(dir, path, title) {
 
 			//Only turn page if path is defined
 			if (path) {
@@ -98,7 +99,16 @@
 					}					
 
 				})
-
 			}
 		}
+
+		$scope.nextPrevEdition = function(direction, title, url) {
+
+			tealium.paging(direction + ' edition', title);		
+			// If url is passed then redirect page to that page				
+			if (url) {					
+				$window.location.href = url;				
+			}
+			
+		};
 }])

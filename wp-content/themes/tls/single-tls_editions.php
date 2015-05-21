@@ -7,10 +7,10 @@
             <!-- Desktop Pagination -->
             <div class="article-links" ng-if="size == 'desktop'">
                 <div class="inner">
-                    <a ng-href="{{::nextEdition.url}}" ng-if="nextEdition.title != null" class="article-nav next-article">
+                    <a ng-click="nextPrevEdition('next', nextEdition.title, nextEdition.url)" ng-if="nextEdition.title != null" class="article-nav next-article">
                         <div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
                     </a>
-                    <a ng-href="{{::previousEdition.url}}" ng-if="previousEdition.title != null" class="article-nav prev-article">
+                    <a ng-click="nextPrevEdition('previous', previousEdition.title, previousEdition.url)" ng-if="previousEdition.title != null" class="article-nav prev-article">
                         <div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
                     </a>
                 </div>
@@ -29,10 +29,10 @@
                         <h1 ng-if="size != 'desktop'" ng-bind="latestEdition.title"></h1>
                         <div class="article-links" ng-if="size != 'desktop'">
                             <div class="inner">
-                                <a ng-href="{{::nextEdition.url}}" ng-if="nextEdition.url" class="article-nav next-article">
+                                <a ng-click="nextPrevEdition('next', nextEdition.title, nextEdition.url)" ng-if="nextEdition.url" class="article-nav next-article">
                                     <div class="icon icon-right-arrow"><span ng-bind="nextEdition.title"></span></div>
                                 </a>
-                                <a ng-href="{{::previousEdition.url}}" ng-if="previousEdition.url" class="article-nav prev-article">
+                                <a ng-click="nextPrevEdition('previous', previousEdition.title, previousEdition.url)" ng-if="previousEdition.url" class="article-nav prev-article">
                                     <div class="icon icon-left-arrow"><span ng-bind="previousEdition.title"></span></div>
                                 </a>
                             </div>
