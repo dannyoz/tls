@@ -2562,6 +2562,17 @@ p.author, h4.author {
 #comments .comment-wrap .comment .comment-content {
   margin-top: 15px;
 }
+/* line 118, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-msg {
+  padding: 10px;
+  text-align: center;
+  font-size: 90%;
+}
+/* line 123, ../../../../grunt/DEV/app/templates/comments/_comments.scss */
+#comments .comment-msg.error {
+  color: #A01616;
+  background-color: #FDEEEE;
+}
 
 /* line 1, ../../../../grunt/DEV/app/templates/search/_search.scss */
 #search-results {
