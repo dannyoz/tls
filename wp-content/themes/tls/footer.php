@@ -40,7 +40,7 @@
 				$classifieds_pdf = $theme_options_settings['classifieds_pdf'];
 
 				if ( $classifieds_pdf != '' || $classifieds_pdf != null ) { ?>
-					<li><a ng-click="classifieds('<?php echo $classifieds_pdf ?>')">Classifieds</a></li>
+					<li><a href="<?php echo $classifieds_pdf ?>" ng-click="classifieds('<?php echo $classifieds_pdf ?>')">Classifieds</a></li>
 				<?php }
 
 				if ( $facebook_url != '' || $facebook_url != null ) { ?>
