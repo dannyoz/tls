@@ -525,7 +525,7 @@ function clear_log_error_messages()
     update_option(\Tls\TlsHubSubscriber\TlsHubSubscriberWP::get_option_name(), $current_options);
 
 }
-add_action('clear_log_error_messages_action', 'clear_log_error_messages');
+add_action('clear_log_error_messages_hook', 'clear_log_error_messages');
 
 /**
  * Activate the Clear Logs Schedule
