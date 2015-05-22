@@ -510,9 +510,9 @@ function clear_log_error_messages()
      */
     $admin_email = get_option('admin_email');
     $email_subject = 'TLS Logs being cleared';
-    $email_body = "The TLS Log Messages and Error Messages are being cleared now.\n Here are your previous Log and Error Messages to keep as a backup.\n";
-    $email_body .= "Log Messages:\n" . $current_options['log_messages'] . "\n";
-    $email_body .= "Error Messages:\n" . $current_options['error_messages'] . "\n";
+    $email_body = "The TLS Log Messages and Error Messages are being cleared now.\n Here are your previous Log and Error Messages to keep as a backup.\n\n";
+    $email_body .= "Log Messages:\n" . $current_options['log_messages'] . "\n\n\n";
+    $email_body .= "Error Messages:\n" . $current_options['error_messages'] . "\n\n\n";
     wp_mail($admin_email, $email_subject, $email_body); // Send Email
 
     // Get Current Date
