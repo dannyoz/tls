@@ -89,19 +89,18 @@ class TlsHubSubscriberFE
      */
     public function tls_hub_callback_parser(&$wp)
     {
-        if (array_key_exists('subscription_id', $wp->query_vars) && preg_match("/^[0-9]+$/",
-                $wp->query_vars['subscription_id'])
-        ) {
+        $pushfeed_url = $_SERVER['REQUEST_URI'];
+        $pushfeed_url_array = explode('/', $pushfeed_url);
+        $subscription_id = array_pop($pushfeed_url_array);
 
-            // Make sure the subscription ID matches the one in the database otherwise service 404
-            if ($this->current_options['subscription_id'] != $wp->query_vars['subscription_id']) {
-                header('HTTP/1.1 404 "Not Found"', null, 404);
-                exit();
-            }
-
-            $this->hubSubscriber->handleRequest();
+         //Make sure the subscription ID matches the one in the database otherwise service 404
+        if ($this->current_options['subscription_id'] != $subscription_id) {
+            header('HTTP/1.1 404 "Not Found"', null, 404);
             exit();
         }
+
+        $this->hubSubscriber->handleRequest();
+        exit();
     }
 
     /**
