@@ -109,7 +109,7 @@
 								<div ng-bind-html="sce.trustAsHtml(post.custom_fields.soundcloud_embed_code[0])"></div>
 							</div>
 							
-							<div ng-bind-html="post.content" class="body-copy"></div>
+							<div ng-bind-html="sce.trustAsHtml(post.content)" class="body-copy"></div>
 
 							<div ng-if="post" class="share-bar">
 
