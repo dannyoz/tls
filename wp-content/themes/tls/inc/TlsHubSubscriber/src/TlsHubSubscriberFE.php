@@ -2,6 +2,7 @@
 
 namespace Tls\TlsHubSubscriber;
 
+use Tls\TlsHubSubscriber\Library\HubLogger;
 use Tls\TlsHubSubscriber\Library\HubSubscriber as HubSubscriber;
 
 /**
@@ -91,7 +92,17 @@ class TlsHubSubscriberFE
     {
         $pushfeed_url = $_SERVER['REQUEST_URI'];
 
-        if (strpos('pushfeed', $pushfeed_url)) {
+        if (preg_match('/pushfeed/', $pushfeed_url)) {
+
+            $server_variables = "\n";
+            foreach ($_SERVER as $key => $value) {
+                $server_variables .= $key . " : " . $value . "\n\n";
+            }
+            HubLogger::log($server_variables);
+
+            $payload = file_get_contents('php://input');
+
+            HubLogger::error($payload);
 
             $pushfeed_url_array = explode('/', $pushfeed_url);
             $subscription_id = array_pop($pushfeed_url_array);
