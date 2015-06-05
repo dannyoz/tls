@@ -94,16 +94,6 @@ class TlsHubSubscriberFE
 
         if (preg_match('/pushfeed/', $pushfeed_url)) {
 
-            $server_variables = "\n";
-            foreach ($_SERVER as $key => $value) {
-                $server_variables .= $key . " : " . $value . "\n\n";
-            }
-            HubLogger::log($server_variables);
-
-            $payload = file_get_contents('php://input');
-
-            HubLogger::error($payload);
-
             $pushfeed_url_array = explode('/', $pushfeed_url);
             $subscription_id = array_pop($pushfeed_url_array);
 
