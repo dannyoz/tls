@@ -472,3 +472,59 @@ function acf_load_relationship_fields_query($args, $field, $post)
 
 // filter for every field
 add_filter('acf/fields/relationship/query', 'acf_load_relationship_fields_query', 10, 3);
+
+/**
+ * TLS Cron Definer
+ * Define new Cron
+ *
+ * @param $schedules
+ *
+ * @return mixed
+ */
+//function tls_cron_definer($schedules)
+//{
+//    $schedules['every_14_days'] = array(
+//        'interval'=> 1209600,
+//        'display'=>  __('Every 14 Days')
+//    );
+//
+//    return $schedules;
+//}
+//add_filter('cron_schedules','tls_cron_definer');
+
+/**
+ * Function to clear logs and send logs via email to Admin before clearing them
+ */
+//function clear_log_error_messages()
+//{
+//    // Get Current Options
+//    $current_options = get_option(Tls\TlsHubSubscriber\TlsHubSubscriberWP::get_option_name());
+//
+//    /*
+//     * Send Email To Admin with the old Log and Error Messages before clearing them
+//     */
+//    $admin_email = get_option('admin_email');
+//    $email_subject = 'TLS Logs being cleared';
+//    $email_body = "The TLS Log Messages and Error Messages are being cleared now.\n Here are your previous Log and Error Messages to keep as a backup.\n";
+//    $email_body .= "Log Messages:\n" . $current_options['log_messages'] . "\n";
+//    $email_body .= "Error Messages:\n" . $current_options['error_messages'] . "\n";
+//    wp_mail($admin_email, $email_subject, $email_body); // Send Email
+//
+//    // Clear Log & Error Messages
+//    $current_options['log_messages'] = '';
+//    $current_options['error_messages'] = '';
+//
+//    update_option(\Tls\TlsHubSubscriber\TlsHubSubscriberWP::get_option_name(), $current_options);
+//
+//}
+//add_action('clear_log_error_messages_action', 'clear_log_error_messages');
+
+/**
+ * Activate the Clear Logs Schedule
+ */
+//function activate_clear_logs_schedule() {
+//    if ( !wp_next_scheduled( 'clear_log_error_messages_hook' ) ) {
+//        wp_schedule_event(current_time('timestamp'),'every_14_days','clear_log_error_messages_hook');
+//    }
+//}
+//add_action('wp_head', 'activate_clear_logs_schedule');

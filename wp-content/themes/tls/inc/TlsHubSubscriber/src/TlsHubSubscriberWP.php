@@ -27,7 +27,9 @@ class TlsHubSubscriberWP
         'hub_url' => '',
         'log_messages' => '',
         'error_messages' => '',
-        'subscription_status' => 'Unsubscribed'
+        'subscription_status' => 'Unsubscribed',
+//        'log_messages_switch' => 1,
+//        'error_messages_switch' => 1
     );
 
     /**
@@ -219,6 +221,26 @@ class TlsHubSubscriberWP
                                                     ?></textarea>
                                             </td>
                                         </tr>
+<!--                                        <tr valign="top">-->
+<!--                                            <th scope="row">Log Messages Activate Switch:-->
+<!--                                                <p class="description">Choose to whether you want Log messages to be logged or not</p></th>-->
+<!--                                            <td>-->
+<!--                                                <input type="radio" name="--><?php //echo self::$option_name;
+//                                                ?><!--[log_messages_switch]" value="1" --><?php //echo (isset($this->current_options['log_messages_switch']) && $this->current_options['log_messages_switch'] == 1) ? 'checked' : ''; ?><!--/> On |-->
+<!--                                                <input type="radio" name="--><?php //echo self::$option_name;
+//                                                ?><!--[log_messages_switch]" value="0" --><?php //echo (isset($this->current_options['log_messages_switch']) && $this->current_options['log_messages_switch'] == 0) ? 'checked' : ''; ?><!--/> Off-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr valign="top">-->
+<!--                                            <th scope="row">Error Messages Activate Switch:-->
+<!--                                                <p class="description">Choose to whether you want Error messages to be logged or not</p></th>-->
+<!--                                            <td>-->
+<!--                                                <input type="radio" name="--><?php //echo self::$option_name;
+//                                                ?><!--[error_messages_switch]" value="1" --><?php //echo (isset($this->current_options['log_messages_switch']) && $this->current_options['error_messages_switch'] == 1) ? 'checked' : ''; ?><!--/> On |-->
+<!--                                                <input type="radio" name="--><?php //echo self::$option_name;
+//                                                ?><!--[error_messages_switch]" value="0" --><?php //echo (isset($this->current_options['log_messages_switch']) && $this->current_options['error_messages_switch'] == 0) ? 'checked' : ''; ?><!--/> Off-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
 
                                     </table>
                                     <p class="description">NOTE: Make sure you have all the settings saved first before
@@ -289,6 +311,18 @@ class TlsHubSubscriberWP
         } else {
             $valid['subscription_status'] = $this->current_options['subscription_status'];
         }
+
+//        if (isset($input['log_messages_switch']) && filter_var($input['log_messages_switch'], FILTER_VALIDATE_INT) === 0 || !filter_var($input['log_messages_switch'], FILTER_VALIDATE_INT) === false) {
+//            $valid['log_messages_switch'] = $input['log_messages_switch'];
+//        } else {
+//            $valid['log_messages_switch'] = $this->data['log_messages_switch'];
+//        }
+//
+//        if (isset($input['error_messages_switch']) && filter_var($input['error_messages_switch'], FILTER_VALIDATE_INT) === 0 || !filter_var($input['error_messages_switch'], FILTER_VALIDATE_INT) === false) {
+//            $valid['error_messages_switch'] = $input['error_messages_switch'];
+//        } else {
+//            $valid['error_messages_switch'] = $this->data['error_messages_switch'];
+//        }
 
         return $valid;
     }

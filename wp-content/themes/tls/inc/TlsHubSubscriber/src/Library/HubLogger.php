@@ -36,6 +36,10 @@ class HubLogger implements Logger
     {
         $current_options = get_option(TlsHubSubscriberWP::get_option_name());
 
+//        if (isset($current_options['log_messages_switch']) && $current_options['log_messages_switch'] != 1) {
+//            return;
+//        }
+
         $logMessage = self::logs_date_time() . $msg . "\n";
 
         if ($code != null) {
@@ -58,6 +62,10 @@ class HubLogger implements Logger
     public static function error($msg, $code = null)
     {
         $current_options = get_option(TlsHubSubscriberWP::get_option_name());
+
+//        if (isset($current_options['error_messages_switch']) && $current_options['log_messages_switch'] != 1) {
+//            return;
+//        }
 
         $errorMessage = self::logs_date_time() . $msg . "\n";
 
