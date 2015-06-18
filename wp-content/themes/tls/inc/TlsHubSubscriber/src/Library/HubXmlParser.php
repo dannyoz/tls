@@ -471,18 +471,29 @@ class HubXmlParser implements FeedParser
         curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
         curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt( $ch, CURLOPT_TIMEOUT, 15 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 35);
         $returned = curl_exec( $ch );
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if( $returned === false ){
+            $curl_error = 'CURL ERROR: ' . curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
+        }
         curl_close( $ch );
         // check $image_xml === False on failure
         $image_xml = simplexml_load_string( $returned, 'SimpleXMLElement', LIBXML_NOCDATA );
 
+        // Send Debug Email
+        $message = 'XML URL: '.$path."\n\n"."XML Data From CURL:\n".$returned."\n\nCURL_ERROR: ".$curl_error;
+        $email_subject = "TLS Article Importer Image Data";
+        wp_mail('walter.barcelos@madebypartners.com', $email_subject, $message);
+
         if ($image_xml === false) {
             $error_msg = "Failed loading Image XML\n";
+            $error_msg .= "\tDATA: ".$returned."\n";
             foreach (libxml_get_errors() as $error) {
                 $error_msg .= "\t" . $error->message;
             }
-            HubLogger::error($error_msg);
+            HubLogger::error($error_msg."\n\n".$message);
 
             // Send Email to admin
             $email_subject = "TLS Article Importer Error - Failed loading Image XML";
