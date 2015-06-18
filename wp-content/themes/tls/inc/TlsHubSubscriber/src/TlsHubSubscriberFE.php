@@ -91,11 +91,16 @@ class TlsHubSubscriberFE
     public function tls_hub_callback_parser(&$wp)
     {
         $pushfeed_url = $_SERVER['REQUEST_URI'];
-
-        if (preg_match('/pushfeed/', $pushfeed_url)) {
+        // Check if pushfeed is in the URL
+        if ( strpos( $pushfeed_url, 'pushfeed' ) || ( preg_match( '/pushfeed/', $pushfeed_url) ) ){
 
             $pushfeed_url_array = explode('/', $pushfeed_url);
+
+            // Get subscription_id from the URL
             $subscription_id = array_pop($pushfeed_url_array);
+            if( empty( $subscription_id ) ){
+                $subscription_id = array_pop($pushfeed_url_array);
+            }
 
             //Make sure the subscription ID matches the one in the database otherwise service 404
             if ($this->current_options['subscription_id'] != $subscription_id) {

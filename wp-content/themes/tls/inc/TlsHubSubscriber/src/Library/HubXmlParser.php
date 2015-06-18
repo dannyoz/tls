@@ -461,7 +461,22 @@ class HubXmlParser implements FeedParser
         }
 
         // Image XML
-        $image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
+
+        // Originally done directly with simplexml_load_file, but due to server problems, it's now with curl
+        // $image_xml = simplexml_load_file((string) $href, null, LIBXML_NOCDATA);
+
+        $path = $href; // URL which contains an XML with the image info
+        $ch = curl_init();
+        curl_setopt( $ch, CURLOPT_URL, $path );
+        curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt( $ch, CURLOPT_TIMEOUT, 15 );
+        $returned = curl_exec( $ch );
+        curl_close( $ch );
+        // check $image_xml === False on failure
+        $image_xml = simplexml_load_string( $returned, 'SimpleXMLElement', LIBXML_NOCDATA );
+
         if ($image_xml === false) {
             $error_msg = "Failed loading Image XML\n";
             foreach (libxml_get_errors() as $error) {
