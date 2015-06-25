@@ -29730,8 +29730,8 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 		link : function(scope, element){
 
 			// Breakpoint vars
-			var tabletBP  = 840,
-				mobileBP  = 450;
+			var tabletBP  = 1020,
+				mobileBP  = 677;
 
 			scope.viewport = function(size){
 
