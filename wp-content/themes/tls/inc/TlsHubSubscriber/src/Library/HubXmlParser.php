@@ -433,8 +433,8 @@ class HubXmlParser implements FeedParser
         try{
 
             $uploaddir = wp_upload_dir();
-            $tmp_dir = $uploaddir['path'] . '/tmp/' . $filename;
-            $uploadfile = $uploaddir['path'] . '/' . $filename;
+            $tmp_dir = $uploaddir['basedir'] . '/tmp/' . $filename;
+            //$uploadfile = $uploaddir['path'] . '/' . $filename;
 
             if( $using_curl ){
 
@@ -485,7 +485,7 @@ class HubXmlParser implements FeedParser
                 'type'      => (string) $wp_filetype['type'],
                 'tmp_name'  => $tmp_dir,
                 'error'     => 0,
-                'size'      => filesize($filename),
+                //'size'      => filesize($filename),
             );
 
             return $file_array;
@@ -584,7 +584,7 @@ class HubXmlParser implements FeedParser
         $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
 
-        /*
+
         $temp_file = download_url($image_url, 500);
 
         $file_array = array(
@@ -612,9 +612,9 @@ class HubXmlParser implements FeedParser
         }
 
         // Sideload Image to Media
-        $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
-        $image_upload_id = media_handle_sideload($file_array, 0, $image_title);
-        */
+        //$image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
+        //$image_upload_id = media_handle_sideload($file_array, 0, $image_title);
+
 
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         if( empty( $image_title ) ){
@@ -625,7 +625,7 @@ class HubXmlParser implements FeedParser
         //NO USE CURL
         //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
         //USE CURL
-        $file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
+        //$file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
         $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
 
         // Check for handle sideload errors.
