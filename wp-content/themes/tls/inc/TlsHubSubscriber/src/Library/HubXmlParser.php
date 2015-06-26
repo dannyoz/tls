@@ -470,17 +470,29 @@ class HubXmlParser implements FeedParser
             fclose( $savefile );
 
             $wp_filetype = wp_check_filetype(basename($filename), null );
-
+    /*
             $attachment = array(
                 'post_mime_type' => $wp_filetype['type'],
                 'post_title' => $filename,
                 'post_content' => '',
                 'post_status' => 'inherit'
             );
+*/
+            $file_array = array(
+                'name'      => $filename,
+                'type'      => (string) $wp_filetype['type'],
+                'tmp_name'  => $filename,
+                'error'     => 0,
+                'size'      => filesize($filename),
+            );
 
-            $attach_id = wp_insert_attachment( $attachment, $uploadfile );
+            return $file_array;
 
-            return $attach_id;
+            //$image_upload_id = media_handle_sideload($file_array, 0, $image_title);
+
+            //$attach_id = wp_insert_attachment( $attachment, $uploadfile );
+
+            //return $attach_id;
 
         }catch( Exception $e){
 
@@ -609,17 +621,18 @@ class HubXmlParser implements FeedParser
         //NO USE CURL
         //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
         //USE CURL
-        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
+        $file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
+        $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
 
         // Check for handle sideload errors.
         if ( empty( $image_upload_id) || is_wp_error( $image_upload_id ) ) {
             //@unlink( $file_array['tmp_name'] );
 
-            //$errors = $image_upload_id->get_error_messages();
+            $errors = $image_upload_id->get_error_messages();
             $error_msg = "Failed downloading image: " . $image_url . "\n";
-            //foreach ($errors as $error) {
-            //    $error_msg .= "\t" . $error;
-            //}
+            foreach ($errors as $error) {
+                $error_msg .= "\t" . $error;
+            }
             HubLogger::error($error_msg);
 
             // Send Email to admin
