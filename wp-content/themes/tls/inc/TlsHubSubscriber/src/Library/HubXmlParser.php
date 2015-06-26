@@ -431,7 +431,9 @@ class HubXmlParser implements FeedParser
 
     private function tls_get_remote_img( $url, $filename, $using_curl=false ){
         try{
+
             $uploaddir = wp_upload_dir();
+            $tmp_dir = $uploaddir['path'] . '/tmp/' . $filename;
             $uploadfile = $uploaddir['path'] . '/' . $filename;
 
             if( $using_curl ){
@@ -447,7 +449,7 @@ class HubXmlParser implements FeedParser
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 35);
 
-                $contents=curl_exec($ch);
+                $contents = curl_exec($ch);
 
                 $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
@@ -461,11 +463,11 @@ class HubXmlParser implements FeedParser
                 $contents= file_get_contents( $url );
             }
 
-            if(file_exists($uploadfile)){
-                unlink($uploadfile);
+            if(file_exists($tmp_dir)){
+                unlink($tmp_dir);
             }
 
-            $savefile = fopen( $uploadfile, 'w' );
+            $savefile = fopen( $tmp_dir, 'w' );
             fwrite( $savefile, $contents );
             fclose( $savefile );
 
@@ -481,7 +483,7 @@ class HubXmlParser implements FeedParser
             $file_array = array(
                 'name'      => $filename,
                 'type'      => (string) $wp_filetype['type'],
-                'tmp_name'  => $filename,
+                'tmp_name'  => $tmp_dir,
                 'error'     => 0,
                 'size'      => filesize($filename),
             );
@@ -576,6 +578,8 @@ class HubXmlParser implements FeedParser
         $imageCpiNamespace = $image_xml->children('cpi', true);
 
         $image_url = (string) $image_xml->link->attributes()->href;
+
+
 
         $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
