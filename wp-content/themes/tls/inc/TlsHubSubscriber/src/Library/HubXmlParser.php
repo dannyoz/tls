@@ -601,6 +601,11 @@ class HubXmlParser implements FeedParser
         */
 
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
+        if( empty( $image_type ) ){
+            $length = 10;
+            $image_title = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+        }
+        
         //NO USE CURL
         //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
         //USE CURL
