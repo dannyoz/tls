@@ -435,7 +435,7 @@ class HubXmlParser implements FeedParser
             $uploadfile = $uploaddir['path'] . '/' . $filename;
 
             if( $using_curl ){
- 
+
                 $ch = curl_init();
                 curl_setopt( $ch, CURLOPT_URL, $url );
                 curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -448,13 +448,23 @@ class HubXmlParser implements FeedParser
                 curl_setopt($ch, CURLOPT_TIMEOUT, 35);
 
                 $contents=curl_exec($ch);
-                curl_close ($ch);
-                if(file_exists($uploadfile)){
-                    unlink($uploadfile);
+
+                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+                if( $contents === false ){
+                    $curl_error = curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
+                    HubLogger::error('CURL IMAGE ERROR: '.$curl_error);
                 }
+                curl_close ($ch);
+
             }else{
                 $contents= file_get_contents( $url );
             }
+
+            if(file_exists($uploadfile)){
+                unlink($uploadfile);
+            }
+
             $savefile = fopen( $uploadfile, 'w' );
             fwrite( $savefile, $contents );
             fclose( $savefile );
@@ -592,9 +602,9 @@ class HubXmlParser implements FeedParser
 
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         //NO USE CURL
-        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
+        //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
         //USE CURL
-        //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, true );
+        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, true );
 
         // Check for handle sideload errors.
         if ( empty( $image_upload_id) || is_wp_error( $image_upload_id ) ) {
