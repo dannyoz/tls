@@ -604,7 +604,7 @@ class HubXmlParser implements FeedParser
         //NO USE CURL
         //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
         //USE CURL
-        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, true );
+        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
 
         // Check for handle sideload errors.
         if ( empty( $image_upload_id) || is_wp_error( $image_upload_id ) ) {
