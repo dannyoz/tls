@@ -429,6 +429,56 @@ class HubXmlParser implements FeedParser
         return true;
     }
 
+    private function tls_get_remote_img( $url, $filename, $using_curl=false ){
+        try{
+            $uploaddir = wp_upload_dir();
+            $uploadfile = $uploaddir['path'] . '/' . $filename;
+
+            if( $using_curl ){
+ 
+                $ch = curl_init();
+                curl_setopt( $ch, CURLOPT_URL, $url );
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+                curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
+                curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+                curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 35);
+
+                $contents=curl_exec($ch);
+                curl_close ($ch);
+                if(file_exists($uploadfile)){
+                    unlink($uploadfile);
+                }
+            }else{
+                $contents= file_get_contents( $url );
+            }
+            $savefile = fopen( $uploadfile, 'w' );
+            fwrite( $savefile, $contents );
+            fclose( $savefile );
+
+            $wp_filetype = wp_check_filetype(basename($filename), null );
+
+            $attachment = array(
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title' => $filename,
+                'post_content' => '',
+                'post_status' => 'inherit'
+            );
+
+            $attach_id = wp_insert_attachment( $attachment, $uploadfile );
+
+            return $attach_id;
+
+        }catch( Exception $e){
+
+            HubLogger::error('ERROR NEW FUNCTION: '.$e->getMessage());
+            return null;
+        }
+    }
+
     /**
      * Download Images from URL
      *
@@ -476,7 +526,7 @@ class HubXmlParser implements FeedParser
         $returned = curl_exec( $ch );
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if( $returned === false ){
-            $curl_error = 'CURL ERROR: ' . curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
+            $curl_error = curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
         }
         curl_close( $ch );
         // check $image_xml === False on failure
@@ -508,7 +558,9 @@ class HubXmlParser implements FeedParser
         $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
 
+        /*
         $temp_file = download_url($image_url, 500);
+
         $file_array = array(
             'name'      => $image_xml->title . '.' . $image_extension,
             'type'      => (string) $image_xml->link->attributes()->type,
@@ -527,7 +579,6 @@ class HubXmlParser implements FeedParser
                 $error_msg .= "\t" . $error;
             }
             HubLogger::error($error_msg);
-
             // Send Email to admin
             $email_subject = "TLS Article Importer Error - Failed downloading image from url: " . $image_url;
             wp_mail($this->admin_email, $email_subject, $error_msg);
@@ -537,16 +588,23 @@ class HubXmlParser implements FeedParser
         // Sideload Image to Media
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         $image_upload_id = media_handle_sideload($file_array, 0, $image_title);
+        */
+
+        $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
+        //NO USE CURL
+        $image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
+        //USE CURL
+        //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, true );
 
         // Check for handle sideload errors.
-        if ( is_wp_error( $image_upload_id ) ) {
-            @unlink( $file_array['tmp_name'] );
+        if ( empty( $image_upload_id) || is_wp_error( $image_upload_id ) ) {
+            //@unlink( $file_array['tmp_name'] );
 
-            $errors = $image_upload_id->get_error_messages();
+            //$errors = $image_upload_id->get_error_messages();
             $error_msg = "Failed downloading image: " . $image_url . "\n";
-            foreach ($errors as $error) {
-                $error_msg .= "\t" . $error;
-            }
+            //foreach ($errors as $error) {
+            //    $error_msg .= "\t" . $error;
+            //}
             HubLogger::error($error_msg);
 
             // Send Email to admin
