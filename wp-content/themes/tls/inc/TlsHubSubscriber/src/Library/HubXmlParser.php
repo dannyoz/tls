@@ -429,14 +429,14 @@ class HubXmlParser implements FeedParser
         return true;
     }
 
-    private function tls_get_remote_img( $url, $filename, $using_curl=false ){
+    private function tls_get_remote_img( $url, $filename ){
         try{
 
             $uploaddir = wp_upload_dir();
             $tmp_dir = $uploaddir['basedir'] . '/tmp/' . $filename;
             //$uploadfile = $uploaddir['path'] . '/' . $filename;
 
-            if( $using_curl ){
+
 
                 $ch = curl_init();
                 curl_setopt( $ch, CURLOPT_URL, $url );
@@ -459,9 +459,7 @@ class HubXmlParser implements FeedParser
                 }
                 curl_close ($ch);
 
-            }else{
-                $contents= file_get_contents( $url );
-            }
+
 
             if(file_exists($tmp_dir)){
                 unlink($tmp_dir);
@@ -472,14 +470,7 @@ class HubXmlParser implements FeedParser
             fclose( $savefile );
 
             $wp_filetype = wp_check_filetype(basename($filename), null );
-    /*
-            $attachment = array(
-                'post_mime_type' => $wp_filetype['type'],
-                'post_title' => $filename,
-                'post_content' => '',
-                'post_status' => 'inherit'
-            );
-*/
+
             $file_array = array(
                 'name'      => $filename,
                 'type'      => (string) $wp_filetype['type'],
@@ -489,12 +480,6 @@ class HubXmlParser implements FeedParser
             );
 
             return $file_array;
-
-            //$image_upload_id = media_handle_sideload($file_array, 0, $image_title);
-
-            //$attach_id = wp_insert_attachment( $attachment, $uploadfile );
-
-            //return $attach_id;
 
         }catch( Exception $e){
 
@@ -622,10 +607,9 @@ class HubXmlParser implements FeedParser
             $image_title = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
         }
 
-        //NO USE CURL
-        //$image_upload_id = $this->tls_get_remote_img( $image_url, $image_xml->title . '.' . $image_extension, false );
+
         //USE CURL
-        //$file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension, true );
+        //$file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension );
         $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
 
         // Check for handle sideload errors.
