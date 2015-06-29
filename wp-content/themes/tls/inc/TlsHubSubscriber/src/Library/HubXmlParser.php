@@ -432,53 +432,51 @@ class HubXmlParser implements FeedParser
     private function tls_get_remote_img( $url, $filename ){
         try{
 
-            $uploaddir = wp_upload_dir();
-            $tmp_name = get_temp_dir(). '/' . $filename;//$uploaddir['basedir'] . '/tmp/' . $filename;
+            $tmp_name = get_temp_dir(). '/' . $filename;
 
             $ch = curl_init();
             curl_setopt( $ch, CURLOPT_URL, $url );
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+            curl_setopt( $ch, CURLOPT_HEADER, 0 );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt( $ch, CURLOPT_BINARYTRANSFER,1 );
             curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
             curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 35);
+            curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 35 );
+            curl_setopt( $ch, CURLOPT_TIMEOUT, 35 );
 
-            $contents = curl_exec($ch);
+            $contents = curl_exec( $ch );
 
-            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
 
             if( $contents === false ){
-                $curl_error = curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
-                HubLogger::error('CURL IMAGE ERROR: '.$curl_error);
+                $curl_error = curl_error( $ch ) . "\nHTTP_CODE: " . $httpcode . "\n\n";
+                HubLogger::error( 'CURL IMAGE ERROR: '.$curl_error );
             }
-            curl_close ($ch);
+            curl_close ( $ch );
 
-            if(file_exists($tmp_name)){
-                unlink($tmp_name);
+            if( file_exists( $tmp_name ) ){
+                unlink( $tmp_name );
             }
 
             $savefile = fopen( $tmp_name, 'w' );
             fwrite( $savefile, $contents );
             fclose( $savefile );
 
-            $wp_filetype = wp_check_filetype(basename($filename), null );
+            $wp_filetype = wp_check_filetype( basename( $filename ), null );
 
             $file_array = array(
                 'name'      => $filename,
                 'type'      => (string) $wp_filetype['type'],
                 'tmp_name'  => $tmp_name,
                 'error'     => 0,
-                //'size'      => filesize($filename),
             );
 
             return $file_array;
 
-        }catch( Exception $e){
+        }catch( Exception $e ){
 
-            HubLogger::error('ERROR NEW FUNCTION: '.$e->getMessage());
+            HubLogger::error( 'ERROR NEW FUNCTION: '.$e->getMessage() );
             return null;
         }
     }
@@ -536,18 +534,13 @@ class HubXmlParser implements FeedParser
         // check $image_xml === False on failure
         $image_xml = simplexml_load_string( $returned, 'SimpleXMLElement', LIBXML_NOCDATA );
 
-        // Send Debug Email
-        $message = 'XML URL: '.$path."\n\n"."XML Data From CURL:\n".$returned."\n\nCURL_ERROR: ".$curl_error;
-        $email_subject = "TLS Article Importer Image Data";
-        wp_mail('walter.barcelos@madebypartners.com', $email_subject, $message);
-
         if ($image_xml === false) {
             $error_msg = "Failed loading Image XML\n";
             $error_msg .= "\tDATA: ".$returned."\n";
             foreach (libxml_get_errors() as $error) {
                 $error_msg .= "\t" . $error->message;
             }
-            HubLogger::error($error_msg."\n\n".$message);
+            HubLogger::error($error_msg);
 
             // Send Email to admin
             $email_subject = "TLS Article Importer Error - Failed loading Image XML";
@@ -559,50 +552,15 @@ class HubXmlParser implements FeedParser
 
         $image_url = (string) $image_xml->link->attributes()->href;
 
-
-
         $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
-
-        /*
-        $temp_file = download_url($image_url, 500);
-
-        $file_array = array(
-            'name'      => $image_xml->title . '.' . $image_extension,
-            'type'      => (string) $image_xml->link->attributes()->type,
-            'tmp_name'  => $temp_file,
-            'error'     => 0,
-            'size'      => filesize($temp_file),
-        );
-
-        // Check for download errors
-        if ( is_wp_error( $temp_file ) ) {
-            @unlink( $file_array[ 'tmp_name' ] );
-
-            $errors = $temp_file->get_error_messages();
-            $error_msg = "Failed downloading image from url: " . $image_url . "\n";
-            foreach ($errors as $error) {
-                $error_msg .= "\t" . $error;
-            }
-            HubLogger::error($error_msg);
-            // Send Email to admin
-            $email_subject = "TLS Article Importer Error - Failed downloading image from url: " . $image_url;
-            wp_mail($this->admin_email, $email_subject, $error_msg);
-
-        }
-
-        // Sideload Image to Media
-        //$image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
-        //$image_upload_id = media_handle_sideload($file_array, 0, $image_title);
-        */
 
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         if( empty( $image_title ) ){
             $length = 10;
             $image_title = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
         }
-
-
+        
         //USE CURL
         $file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension );
         $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
