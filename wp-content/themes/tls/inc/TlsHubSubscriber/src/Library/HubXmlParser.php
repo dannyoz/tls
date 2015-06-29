@@ -433,39 +433,34 @@ class HubXmlParser implements FeedParser
         try{
 
             $uploaddir = wp_upload_dir();
-            $tmp_dir = $uploaddir['basedir'] . '/tmp/' . $filename;
-            //$uploadfile = $uploaddir['path'] . '/' . $filename;
+            $tmp_name = get_temp_dir(). '/' . $filename;//$uploaddir['basedir'] . '/tmp/' . $filename;
 
+            $ch = curl_init();
+            curl_setopt( $ch, CURLOPT_URL, $url );
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+            curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
+            curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 35);
 
+            $contents = curl_exec($ch);
 
-                $ch = curl_init();
-                curl_setopt( $ch, CURLOPT_URL, $url );
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-                curl_setopt( $ch, CURLOPT_FAILONERROR, 1 );
-                curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
-                curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 35);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 35);
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-                $contents = curl_exec($ch);
+            if( $contents === false ){
+                $curl_error = curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
+                HubLogger::error('CURL IMAGE ERROR: '.$curl_error);
+            }
+            curl_close ($ch);
 
-                $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-                if( $contents === false ){
-                    $curl_error = curl_error($ch)."\nHTTP_CODE: ".$httpcode."\n\n";
-                    HubLogger::error('CURL IMAGE ERROR: '.$curl_error);
-                }
-                curl_close ($ch);
-
-
-
-            if(file_exists($tmp_dir)){
-                unlink($tmp_dir);
+            if(file_exists($tmp_name)){
+                unlink($tmp_name);
             }
 
-            $savefile = fopen( $tmp_dir, 'w' );
+            $savefile = fopen( $tmp_name, 'w' );
             fwrite( $savefile, $contents );
             fclose( $savefile );
 
@@ -474,7 +469,7 @@ class HubXmlParser implements FeedParser
             $file_array = array(
                 'name'      => $filename,
                 'type'      => (string) $wp_filetype['type'],
-                'tmp_name'  => $tmp_dir,
+                'tmp_name'  => $tmp_name,
                 'error'     => 0,
                 //'size'      => filesize($filename),
             );
@@ -569,7 +564,7 @@ class HubXmlParser implements FeedParser
         $image_type = explode('/', $image_xml->link->attributes()->type);
         $image_extension = array_pop($image_type);
 
-
+        /*
         $temp_file = download_url($image_url, 500);
 
         $file_array = array(
@@ -599,7 +594,7 @@ class HubXmlParser implements FeedParser
         // Sideload Image to Media
         //$image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         //$image_upload_id = media_handle_sideload($file_array, 0, $image_title);
-
+        */
 
         $image_title = (!empty($image_xml->title)) ? (string) $image_xml->title : (string) $imageCpiNamespace->description;
         if( empty( $image_title ) ){
@@ -609,7 +604,7 @@ class HubXmlParser implements FeedParser
 
 
         //USE CURL
-        //$file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension );
+        $file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension );
         $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
 
         // Check for handle sideload errors.
