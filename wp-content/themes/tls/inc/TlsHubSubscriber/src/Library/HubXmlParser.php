@@ -102,8 +102,13 @@ class HubXmlParser implements FeedParser
         $article_id_url = explode('/', $article->id);
         $article_entry_id = trim(array_pop($article_id_url));
 
-        $article_entry_published = new Carbon($article->published);
-        $article_entry_updated = new Carbon($article->updated);
+        // Add try catch in order to show possible date format erros on CMS Log
+        try{
+            $article_entry_published = new Carbon($article->published);
+            $article_entry_updated = new Carbon($article->updated);
+        }catch( Exception $e ){
+            HubLogger::error( 'ArticleID: ' .$article->id. ' Date Published: '. $article->published . ' Date Updated: '. $article->updated . "\t" . 'Date Error: ' . $e->getMessage() );
+        }
 
         $article_content_copy = html_entity_decode(htmlspecialchars_decode($cpiNamespace->copy), ENT_QUOTES, 'UTF-8');
         $article_content_copy = trim(preg_replace('/\s+/', ' ', $article_content_copy));
@@ -560,7 +565,7 @@ class HubXmlParser implements FeedParser
             $length = 10;
             $image_title = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
         }
-        
+
         //USE CURL
         $file_array = $this->tls_get_remote_img( $image_url, $image_title . '.' . $image_extension );
         $image_upload_id = media_handle_sideload( $file_array, 0, $image_title );
