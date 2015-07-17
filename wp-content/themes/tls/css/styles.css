@@ -83,7 +83,7 @@ body {
 @media screen and (max-width: 677px) {
   /* line 22, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
   .container {
-    padding: 0 15px;
+    padding: 0 8px;
   }
 }
 /* line 32, ../../../../grunt/DEV/app/global/sass-globals/mixins/_core.scss */
@@ -2019,7 +2019,7 @@ p.author, h4.author {
   padding-top: 10px;
   border-top: 1px solid #d9d9d9;
 }
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1120px) {
   /* line 206, ../../../../grunt/DEV/app/templates/article/_article.scss */
   .single-post-template .article-body {
     margin-left: 17.08333%;
