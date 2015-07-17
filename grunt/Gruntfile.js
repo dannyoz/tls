@@ -106,7 +106,7 @@ module.exports = function(grunt) {
                     sassDir: 'DEV/app',
                     cssDir: '../wp-content/themes/tls/css',
                     noLineComments : false,
-                    environment: 'development'
+                    environment: 'production'
                 }
             }
         },
