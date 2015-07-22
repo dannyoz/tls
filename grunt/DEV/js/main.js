@@ -28689,7 +28689,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 		// If url is passed then redirect page to that page				
 		if (url) {					
-			$window.location.href = $window.location.href + url;				
+			$window.location.href = url;				
 		}
 	}
 
