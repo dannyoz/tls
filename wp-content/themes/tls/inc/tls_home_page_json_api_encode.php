@@ -27,11 +27,17 @@ function tls_home_page_json_api_encode($response)
             $hero_image_url = $hero_image['url'];
         }
 
+        if(get_field('teaser_summary', $featured_article[0]->ID)){
+            $text = get_field('teaser_summary', $featured_article[0]->ID);
+        } else {
+            $text = tls_make_post_excerpt($featured_article[0]->post_content, 30);
+        }
+
         $response['featured_article'] = array(
             'id' => $featured_article[0]->ID,
             'title' => get_the_title($featured_article[0]->ID),
             'author' => get_the_author_meta('display_name', $featured_article[0]->post_author),
-            'text' => tls_make_post_excerpt($featured_article[0]->post_content, 30),
+            'text' => $text,
             'link' => get_permalink($featured_article[0]->ID),
             'hero_image' => esc_url($hero_image_url)
         );
