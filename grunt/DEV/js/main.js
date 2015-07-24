@@ -29489,18 +29489,21 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			var typeAttr = scope.type; // passed as attribute
 			card.hasCopy = (scope.copy == undefined) ? true : scope.copy; 
 
+
+
 			// Function to check value is undefined
 			var isUndefined = function(val) {							
 				return angular.isUndefined(val);
 			}
 
-			if (card.type == "listen_blog") {
+			if (card.soundcloud) {
 				card.type  = "blog"
 				card.category = {
 					slug: "listen",
 					title: "Listen"
 				}
 			}
+
 
             if (card.type == "blog_post") {
                 card.type = "blog";
@@ -29858,7 +29861,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 			}
 
 			$scope.loadingPg = false;
-			console.log(result)
+			//console.log(result)
 
 		})
 
@@ -30496,7 +30499,7 @@ var app = angular.module('tls', ['ngTouch','ngRoute','ngSanitize','ngDfp'])
 
 	api.getHomePage(url).then(function (result){
 
-		//console.log(result);	
+		console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article

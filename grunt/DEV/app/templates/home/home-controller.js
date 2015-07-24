@@ -16,7 +16,7 @@
 
 	api.getHomePage(url).then(function (result){
 
-		//console.log(result);	
+		console.log(result);	
 
 		$scope.page     = result.page
 		$scope.featured = result.featured_article

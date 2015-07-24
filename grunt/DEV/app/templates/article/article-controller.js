@@ -97,7 +97,7 @@
 			}
 
 			$scope.loadingPg = false;
-			console.log(result)
+			//console.log(result)
 
 		})
 
