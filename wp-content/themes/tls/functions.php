@@ -119,17 +119,18 @@ function tls_head_cleanup()
     remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
     // WP version
     remove_action( 'wp_head', 'wp_generator' );
-    // remove WP version from css
-    add_filter( 'style_loader_src', 'tls_remove_wp_ver_css_js', 9999 );
-    // remove Wp version from scripts
-    add_filter( 'script_loader_src', 'tls_remove_wp_ver_css_js', 9999 );
+    // remove WP version from css - removed as version required on css and js
+    //add_filter( 'style_loader_src', 'tls_remove_wp_ver_css_js', 9999 );
+    // remove Wp version from scripts - removed as version required on css and js
+    //add_filter( 'script_loader_src', 'tls_remove_wp_ver_css_js', 9999 );
 
 } /* end head cleanup */
 
 // remove WP version from RSS
 function tls_rss_version() { return ''; }
 
-// remove WP version from scripts
+// remove WP version from scripts - removed as version required on css and js
+/*
 function tls_remove_wp_ver_css_js( $src )
 {
     if ( strpos( $src, 'ver=' ) )
@@ -137,19 +138,20 @@ function tls_remove_wp_ver_css_js( $src )
 
     return $src;
 }
-
+*/
 
 /**
  * Enqueue scripts and styles.
  */
 function tls_scripts_and_styles()
 {
-    // Enqueue Styles
-    wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/style.css', array(), '', 'all' );
 
-    // Enqueue Scripts
+    // Enqueue Styles - now including file modified date as the version number in an attempt to prevent broswer caching
+    wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/styles.css', array(), filemtime( get_stylesheet_directory() . '/css/styles.css' ), 'all' );
+
+    // Enqueue Scripts - now including file modified date as the version number in an attempt to prevent broswer caching
     wp_enqueue_script( 'tls-typekit', '//use.typekit.net/zvh7bpe.js', array(), '', false );
-    wp_enqueue_script( 'tls-scripts', TLS_THEME_URI . '/js/main.min.js', array(), '', true );
+    wp_enqueue_script( 'tls-scripts', TLS_THEME_URI . '/js/main.min.js', array(), filemtime( get_stylesheet_directory() . '/js/main.min.js' ), true );
 
     if ( !is_admin() ) {
         wp_dequeue_script( 'jquery' );
