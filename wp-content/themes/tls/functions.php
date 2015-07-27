@@ -147,7 +147,7 @@ function tls_scripts_and_styles()
 {
 
     // Enqueue Styles - now including file modified date as the version number in an attempt to prevent broswer caching
-    wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/styles.css', array(), filemtime( get_stylesheet_directory() . '/css/styles.css' ), 'all' );
+    wp_enqueue_style( 'tls-styles', TLS_THEME_URI . '/style.css', array(), filemtime( get_stylesheet_directory() . '/css/styles.css' ), 'all' );
 
     // Enqueue Scripts - now including file modified date as the version number in an attempt to prevent broswer caching
     wp_enqueue_script( 'tls-typekit', '//use.typekit.net/zvh7bpe.js', array(), '', false );
