@@ -307,10 +307,11 @@ $mobile_article: 560px;
 			list-style: initial;
 		}
 
-		blockquote{
+		blockquote,p.quote{
 
 			margin: 0 -13% 1em -13%;
 			text-align:center;
+			font-size:1.2em;
 		}
 
 		img{
