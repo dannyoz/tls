@@ -11,6 +11,7 @@ module.exports = function(grunt) {
                     bootstrap: function(module, script) {
                         return '.run(["$templateCache", function($templateCache) {' + script + '}])';
                     },
+                    
                     htmlmin: {
                         collapseBooleanAttributes:      true,
                         collapseWhitespace:             true,
